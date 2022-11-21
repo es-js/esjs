@@ -1,2 +1,2 @@
-declare module '@esvue/esjs/dist/index'
-declare module '@esvue/esvue'
+declare module '@es-js/transpiler/dist/index'
+declare module '@es-js/esvue'

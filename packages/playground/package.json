@@ -1,5 +1,5 @@
 {
-  "name": "@esvue/playground",
+  "name": "@es-js/playground",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
@@ -7,8 +7,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@esvue/esjs": "workspace:0.0.4",
-    "@esvue/esvue": "workspace:0.0.13",
+    "@es-js/transpiler": "workspace:*",
+    "@es-js/esvue": "workspace:*",
     "@mdi/font": "5.9.55",
     "monaco-editor": "~0.29.1",
     "roboto-fontface": "*",

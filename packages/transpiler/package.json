@@ -1,6 +1,6 @@
 {
-  "name": "@esvue/esjs",
-  "version": "0.0.5",
+  "name": "@es-js/transpiler",
+  "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {

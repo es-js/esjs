@@ -1,4 +1,4 @@
 packages:
-  - packages/esjs
+  - packages/transpiler
   - packages/esvue
 #  - packages/playground

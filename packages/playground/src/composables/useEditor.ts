@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import { transpile } from '@esvue/esjs/dist/index'
-import { usarConsola } from '@esvue/esvue'
+import { transpile } from '@es-js/transpiler/dist/index'
+import { usarConsola } from '@es-js/esvue'
 import { importsRegex, pureRegex, replace } from '@/utils/format'
 
 const consola = usarConsola()
