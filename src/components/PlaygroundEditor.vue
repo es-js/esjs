@@ -26,28 +26,30 @@ monaco.languages.register({ id: 'esjs' })
 monaco.languages.setMonarchTokensProvider('esjs', esjsSyntax)
 
 onMounted(() => {
-  const monacoEditor = monaco.editor.create(document.getElementById('monacoEditor'), {
-    value: INITIAL_CODE,
-    automaticLayout: true,
-    vertical: 'visible',
-    horizontal: 'visible',
-    theme: 'vs-dark',
-    fontFamily: 'Fira Code',
-    fontSize: 16,
-    language: 'esjs',
-    renderWhitespace: 'all',
-    roundedSelection: true,
-  })
+  const monacoEditorElement = document.getElementById('monacoEditorElement')
 
-  editor.setCode(monacoEditor.getValue())
-  editor.execute()
+  if (monacoEditorElement) {
+    const monacoEditor = monaco.editor.create(monacoEditorElement, {
+      value: INITIAL_CODE,
+      automaticLayout: true,
+      theme: 'vs-dark',
+      fontFamily: 'Fira Code',
+      fontSize: 16,
+      language: 'esjs',
+      renderWhitespace: 'all',
+      roundedSelection: true,
+    })
 
-  monacoEditor.onDidChangeModelContent(() => {
     editor.setCode(monacoEditor.getValue())
-  })
+    editor.execute()
+
+    monacoEditor.onDidChangeModelContent(() => {
+      editor.setCode(monacoEditor.getValue())
+    })
+  }
 })
 </script>
 
 <template>
-  <div id="monacoEditor" ref="monacoEditor" class="w-full h-full overflow-hidden" />
+  <div id="monacoEditorElement" ref="monacoEditor" class="w-full h-full overflow-hidden" />
 </template>

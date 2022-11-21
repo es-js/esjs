@@ -1,13 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-import { registerPlugins } from '@/plugins'
+import { loadFonts } from '@/plugins/webfontloader'
 
 import 'uno.css'
 
 const app = createApp(App)
 
-registerPlugins(app)
+loadFonts()
 
 app
   .use(vuetify)

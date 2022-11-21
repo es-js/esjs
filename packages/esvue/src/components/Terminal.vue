@@ -11,7 +11,7 @@ onMounted(() => {
   consola.setupTerminal()
   consola.terminal.value.open(terminalDocument.value)
   consola.fitAddon.fit()
-  consola.terminal.value.onData(data => consola.terminal.value.write(data))
+  consola.terminal.value.onData((data: any) => consola.terminal.value.write(data))
 })
 </script>
 

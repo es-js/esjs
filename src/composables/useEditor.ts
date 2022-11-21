@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import esjs from 'https://unpkg.com/@esvue/esjs@0.0.3/dist/index.js'
+import { transpile } from '@esvue/esjs/dist/index'
 import { usarConsola } from '@esvue/esvue'
 import { importsRegex, pureRegex, replace } from '@/utils/format'
 
@@ -23,7 +23,7 @@ export const useEditor = () => {
     cleanPreviousExecution()
 
     setTimeout(() => {
-      output.value = esjs.transpile(code.value)
+      output.value = transpile(code.value)
     })
   }
 

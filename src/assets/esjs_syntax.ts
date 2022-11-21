@@ -1,3 +1,6 @@
+import { languages } from 'monaco-editor'
+import IMonarchLanguage = languages.IMonarchLanguage
+
 export default {
   // Set defaultToken to invalid to see what you do not tokenize yet
   // defaultToken: 'invalid',
@@ -128,4 +131,4 @@ export default {
       [/#.*$/, 'comment'],
     ],
   },
-};
+} as IMonarchLanguage

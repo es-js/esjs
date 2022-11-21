@@ -12,7 +12,7 @@ import presetWind from '@unocss/preset-wind'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import monacoEditorPlugin from 'vite-plugin-monaco-editor'
-import esjs from './lib/vite-plugin-esjs'
+// import esjs from './lib/vite-plugin-esjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -33,7 +33,7 @@ export default defineConfig({
       ],
     }),
 
-    esjs(),
+    // esjs(),
 
     Components({ /* options */ }),
 

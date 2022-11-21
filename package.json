@@ -7,10 +7,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@esvue/esjs": "workspace:^0.0.2",
+    "@esvue/esjs": "workspace:^0.0.3",
     "@esvue/esvue": "workspace:^0.0.12",
     "@mdi/font": "5.9.55",
-    "monaco-editor": "0.29",
+    "monaco-editor": "~0.29.1",
     "roboto-fontface": "*",
     "vue": "^3.2.45",
     "vuetify": "^3.0.1",
@@ -26,6 +26,8 @@
     "@babel/helper-validator-identifier": "^7.19.1",
     "@babel/parser": "^7.20.3",
     "@babel/standalone": "^7.20.4",
+    "@types/node": "^18.11.9",
+    "@types/webfontloader": "^1.6.35",
     "@unocss/preset-wind": "^0.46.5",
     "@unocss/vite": "^0.46.5",
     "@vitejs/plugin-vue": "^3.2.0",

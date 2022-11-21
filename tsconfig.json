@@ -17,6 +17,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "skipLibCheck": true,
+    "allowJs": true,
+    "strictNullChecks": true
   },
   "include": [
     "src/**/*.ts",
@@ -24,5 +27,6 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts"
-  ]
+  ],
+  "exclude": ["dist", "node_modules"]
 }

@@ -8,13 +8,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppBar: typeof import('./src/components/AppBar.vue')['default']
-    AppWrapper: typeof import('./src/components/AppWrapper.vue')['default']
-    EsConsole: typeof import('./src/components/EsConsole.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     OutputIframe: typeof import('./src/components/OutputIframe.vue')['default']
     Playground: typeof import('./src/components/Playground.vue')['default']
     PlaygroundEditor: typeof import('./src/components/PlaygroundEditor.vue')['default']
-    PlaygroundWrapper: typeof import('./src/components/PlaygroundWrapper.vue')['default']
-    Terminal: typeof import('./packages/esvue/components/Terminal.vue')['default']
   }
 }

@@ -22,7 +22,7 @@ export const usarConsola = () => {
   async function leer() {
     let buffer = ''
     return new Promise((resolve) => {
-      terminal.value.onData((data) => {
+      terminal.value.onData((data: any) => {
         if (data === '\r') {
           terminal.value.writeln('')
           resolve(buffer)
