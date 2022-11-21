@@ -7,7 +7,7 @@ const editor = useEditor()
 <template>
   <div class="w-full h-full grid grid-cols-3">
     <div class="flex flex-row items-center p-2">
-      <span class="text-xl">EsJs</span>
+      <span class="text-xl">EsJS</span>
     </div>
 
     <div>

@@ -15,7 +15,7 @@ function updateIframe(code: string, sourceCode: string) {
         "imports": {
           "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
           "uno.css": "https://cdn.jsdelivr.net/npm/@unocss/runtime",
-          "@esvue/esvue": "https://unpkg.com/@esvue/esvue@0.0.12/dist/esvue.es.js"
+          "@esvue/esvue": "https://unpkg.com/@esvue/esvue@0.0.14/dist/esvue.es.js"
         }
       }
     <\/script>
@@ -43,7 +43,7 @@ function updateIframe(code: string, sourceCode: string) {
     app.mount('#app');
     <\/script>
 
-    <link rel="stylesheet" href="https://unpkg.com/@esvue/esvue@0.0.12/dist/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/@esvue/esvue@0.0.14/dist/style.css" type="text/css" />
   </html>
   `
 

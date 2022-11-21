@@ -6,7 +6,14 @@ import { useEditor } from '@/composables/useEditor'
 
 const editor = useEditor()
 
-const INITIAL_CODE = `mientras (verdadero) {
+const INITIAL_CODE = `/**
+  EsJS: JavaScript en Español.
+
+  Este código será transpilado a JavaScript, y ejecutado
+  en modo Consola.
+*/
+
+mientras (verdadero) {
   consola.escribir("Ingresa tu edad:");
 
   const edad = esperar consola.leer();
@@ -19,7 +26,8 @@ const INITIAL_CODE = `mientras (verdadero) {
   }
 }
 
-consola.escribir("--- Fin ---")`
+consola.escribir('--- Fin ---')
+`
 
 monaco.languages.register({ id: 'esjs' })
 
