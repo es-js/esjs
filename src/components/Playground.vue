@@ -1,26 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import OutputIframe from '@/components/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
-
+import PlaygroundEditor from '@/components/PlaygroundEditor.vue'
 const editor = useEditor()
-
-onMounted(() => {
-  editor.code.value = `
-const fecha = crear Fecha();
-
-consola.escribir("Hola Mundo, desde EsJs!", fecha);
-`
-})
 </script>
 
 <template>
-  <AppWrapper>
-    <template #esjs>
-      <pre>{{ editor.code.value }}</pre>
-    </template>
+  <div class="min-h-full grid grid-cols-2">
+    <div class="overflow-y-auto">
+      <PlaygroundEditor />
+    </div>
 
-    <template #js>
-      <pre>{{ editor.output.value }}</pre>
-    </template>
-  </AppWrapper>
+    <div class="overflow-hidden">
+      <OutputIframe v-if="editor.output.value" />
+    </div>
+  </div>
 </template>

@@ -1,23 +1,24 @@
 // Plugins
-import vue from '@vitejs/plugin-vue'
+import { URL, fileURLToPath } from 'node:url'
 import vuetify from 'vite-plugin-vuetify'
 
 // Utilities
-import {defineConfig} from 'vite'
-import {fileURLToPath, URL} from 'node:url'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
 import Inspect from 'vite-plugin-inspect'
-import esjs from './lib/vite-plugin-esjs'
 import Unocss from 'unocss/vite'
-import presetWind from "@unocss/preset-wind";
+import presetWind from '@unocss/preset-wind'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import monacoEditorPlugin from 'vite-plugin-monaco-editor'
+import esjs from './lib/vite-plugin-esjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue({
-      include: [/\.vue$/, /\.esjs$/]
+      include: [/\.vue$/, /\.esjs$/],
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
@@ -38,11 +39,14 @@ export default defineConfig({
 
     AutoImport({ /* options */ }),
 
+    monacoEditorPlugin({
+      languageWorkers: ['editorWorkerService'],
+    }),
   ],
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
     extensions: [
       '.js',

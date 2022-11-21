@@ -1,15 +1,19 @@
 import { ref } from 'vue'
-import esjs from 'https://unpkg.com/@esvue/esjs@0.0.0/dist/index.js'
+import esjs from 'https://unpkg.com/@esvue/esjs@0.0.3/dist/index.js'
 import { usarConsola } from '@esvue/esvue'
 import { importsRegex, pureRegex, replace } from '@/utils/format'
 
 const consola = usarConsola()
 
-const code = ref('consola.escribir("Hola mundo desde EsJs!")')
+const code = ref('')
 
 const output = ref()
 
 export const useEditor = () => {
+  function setCode(value: string) {
+    code.value = value
+  }
+
   function cleanPreviousExecution() {
     consola.limpiar()
     output.value = null
@@ -48,5 +52,6 @@ export const useEditor = () => {
     output,
     execute,
     transpileCode,
+    setCode,
   }
 }
