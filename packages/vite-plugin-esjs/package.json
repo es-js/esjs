@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-esjs",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "",
   "scripts": {
     "build": "unbuild",
@@ -15,8 +15,8 @@
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/parser": "^7.20.3",
-    "@es-js/esvue": "workspace:^0.0.0",
-    "@es-js/transpiler": "workspace:^0.0.0",
+    "@es-js/esvue": "workspace:0.0.2",
+    "@es-js/transpiler": "workspace:0.0.0",
     "@types/node": "^18.11.9",
     "typescript": "^4.9.3",
     "unbuild": "^1.0.1",

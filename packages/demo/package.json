@@ -1,0 +1,27 @@
+{
+  "name": "@es-js/demo",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@es-js/esvue": "workspace:0.0.2",
+    "@es-js/transpiler": "workspace:0.0.0",
+    "vite-plugin-esjs": "workspace:0.0.1",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.31.0",
+    "@types/node": "^18.11.9",
+    "@unocss/preset-wind": "^0.46.5",
+    "@unocss/vite": "^0.46.5",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "eslint": "8.22.0",
+    "typescript": "^4.9.3",
+    "unocss": "^0.46.5",
+    "vite": "^3.2.4",
+    "vue-tsc": "^1.0.9"
+  }
+}
