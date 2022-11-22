@@ -8,7 +8,7 @@ export default defineBuildConfig({
   declaration: true,
   externals: [
     'vite',
-    '@es-js/transpiler/dist/index'
+    '@es-js/transpiler'
   ],
   rollup: {
     emitCJS: true,

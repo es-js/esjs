@@ -1,5 +1,5 @@
 import { parse } from '@babel/parser'
-import { transpile } from '@es-js/transpiler/dist/index'
+import { transpile } from '@es-js/transpiler'
 
 export default function EsJS() {
   return {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import 'xterm/css/xterm.css'
 import { onMounted, ref } from 'vue'
 import { usarConsola } from '../composables/usarConsola'
 
@@ -18,3 +17,7 @@ onMounted(() => {
 <template>
   <div ref="terminalElement" class="w-full min-h-full overflow-hidden" />
 </template>
+
+<style>
+@import 'xterm/css/xterm.css';
+</style>

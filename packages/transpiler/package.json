@@ -1,17 +1,28 @@
 {
   "name": "@es-js/transpiler",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf dist && tsc"
+    "build": "unbuild"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "unbuild": "^1.0.1",
     "@types/node": "^18.11.9",
     "typescript": "^4.9.3"
-  }
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
 }

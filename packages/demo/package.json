@@ -7,9 +7,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@es-js/esvue": "workspace:0.0.2",
-    "@es-js/transpiler": "workspace:0.0.0",
-    "vite-plugin-esjs": "workspace:0.0.1",
+    "@es-js/esvue": "workspace:0.0.3",
+    "@es-js/transpiler": "workspace:0.0.1",
+    "vite-plugin-esjs": "workspace:0.0.3",
     "vue": "^3.2.45"
   },
   "devDependencies": {
