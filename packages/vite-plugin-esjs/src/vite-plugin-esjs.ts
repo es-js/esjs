@@ -1,6 +1,6 @@
 import * as babel from '@babel/core'
 import type { Plugin } from 'vite'
-import EsJs from './babel-plugin-esjs'
+import EsJS from './babel-plugin-esjs'
 
 export default (): Plugin => ({
   name: 'vite-plugin-esjs',
@@ -13,7 +13,7 @@ export default (): Plugin => ({
       babelrc: false,
       ast: true,
       plugins: [
-        EsJs(),
+        EsJS(),
       ],
       sourceFileName: id,
       configFile: false,
@@ -21,8 +21,7 @@ export default (): Plugin => ({
 
     return `
 <script setup lang="ts">
-import { Terminal } from "esvue";
-import { usarConsola } from "esvue";
+import { Terminal, usarConsola } from "@es-js/esvue";
 
 const consola = usarConsola();
 
@@ -33,6 +32,11 @@ const consola = usarConsola();
 
 <template>
 <Terminal />
-</template>`
+</template>
+
+<style>
+@import "https://unpkg.com/@es-js/esvue@0.0.0/dist/style.css"
+</style>
+`
   },
 })

@@ -1,4 +1,5 @@
 packages:
   - packages/transpiler
   - packages/esvue
+  - packages/vite-plugin-esjs
 #  - packages/playground
