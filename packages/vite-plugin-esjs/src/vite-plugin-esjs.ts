@@ -1,5 +1,6 @@
 import * as babel from '@babel/core'
 import type { Plugin } from 'vite'
+import { splitCodeImports } from '@es-js/transpiler'
 import EsJS from './babel-plugin-esjs'
 
 export default (): Plugin => ({
@@ -19,6 +20,8 @@ export default (): Plugin => ({
       configFile: false,
     })
 
+    const output = splitCodeImports(result.code)
+
     return `
 <script setup lang="ts">
 import { Terminal, usarConsola } from "@es-js/esvue";
@@ -26,7 +29,7 @@ import { Terminal, usarConsola } from "@es-js/esvue";
 const consola = usarConsola();
 
 (async () => {
-  ${result.code}
+  ${output.codeWithoutImports}
 })();
 </script>
 
