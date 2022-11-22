@@ -3,18 +3,18 @@ import 'xterm/css/xterm.css'
 import { onMounted, ref } from 'vue'
 import { usarConsola } from '../composables/usarConsola'
 
-const terminalDocument = ref()
+const terminalElement = ref()
 
 const consola = usarConsola()
 
 onMounted(() => {
   consola.setupTerminal()
-  consola.terminal.value.open(terminalDocument.value)
+  consola.terminal.value.open(terminalElement.value)
   consola.fitAddon.fit()
   consola.terminal.value.onData((data: any) => consola.terminal.value.write(data))
 })
 </script>
 
 <template>
-  <div id="terminalDocument" ref="terminalDocument" class="resize relative w-full h-full overflow-hidden" />
+  <div ref="terminalElement" class="w-full min-h-full overflow-hidden" />
 </template>
