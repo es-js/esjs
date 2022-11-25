@@ -1,7 +1,7 @@
 import * as babel from '@babel/core'
 import type { Plugin } from 'vite'
 import { splitCodeImports } from '@es-js/transpiler'
-import EsJS from './babel-plugin-esjs'
+import EsJSBabel from './babel-plugin-esjs'
 
 export default (): Plugin => ({
   name: 'vite-plugin-esjs',
@@ -14,13 +14,16 @@ export default (): Plugin => ({
       babelrc: false,
       ast: true,
       plugins: [
-        EsJS(),
+        EsJSBabel(),
       ],
       sourceFileName: id,
       configFile: false,
     })
 
-    const output = splitCodeImports(result.code)
+    if (!result)
+      throw new Error('Cant transpile')
+
+    const output = splitCodeImports(String(result.code))
 
     return `
 <script setup lang="ts">

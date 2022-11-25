@@ -71,6 +71,7 @@ importers:
       '@babel/parser': ^7.20.3
       '@es-js/esvue': workspace:0.0.4
       '@es-js/transpiler': workspace:0.0.2
+      '@types/babel__core': ^7.1.20
       '@types/node': ^18.11.9
       typescript: ^4.9.3
       unbuild: ^1.0.1
@@ -81,6 +82,7 @@ importers:
       '@babel/parser': 7.20.3
       '@es-js/esvue': link:../esvue
       '@es-js/transpiler': link:../transpiler
+      '@types/babel__core': 7.1.20
       '@types/node': 18.11.9
       typescript: 4.9.3
       unbuild: 1.0.1
@@ -582,6 +584,35 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 3.4.0
+    dev: true
+
+  /@types/babel__core/7.1.20:
+    resolution: {integrity: sha512-PVb6Bg2QuscZ30FvOU7z4guG6c926D9YRvOxEaelzndpMsvP+YM74Q/dAFASpg2l6+XLalxSGxcq/lrgYWZtyQ==}
+    dependencies:
+      '@babel/parser': 7.20.3
+      '@babel/types': 7.20.2
+      '@types/babel__generator': 7.6.4
+      '@types/babel__template': 7.4.1
+      '@types/babel__traverse': 7.18.2
+    dev: true
+
+  /@types/babel__generator/7.6.4:
+    resolution: {integrity: sha512-tFkciB9j2K755yrTALxD44McOrk+gfpIpvC3sxHjRawj6PfnQxrse4Clq5y/Rq+G3mrBurMax/lG8Qn2t9mSsg==}
+    dependencies:
+      '@babel/types': 7.20.2
+    dev: true
+
+  /@types/babel__template/7.4.1:
+    resolution: {integrity: sha512-azBFKemX6kMg5Io+/rdGT0dkGreboUVR0Cdm3fz9QJWpaQGJRQXl7C+6hOTCZcMll7KFyEQpgbYI2lHdsS4U7g==}
+    dependencies:
+      '@babel/parser': 7.20.3
+      '@babel/types': 7.20.2
+    dev: true
+
+  /@types/babel__traverse/7.18.2:
+    resolution: {integrity: sha512-FcFaxOr2V5KZCviw1TnutEMVUVsGt4D2hP1TAfXZAMKuHYW3xQhe3jTxNPWutgCJ3/X1c5yX8ZoGVEItxKbwBg==}
+    dependencies:
+      '@babel/types': 7.20.2
     dev: true
 
   /@types/estree/1.0.0:

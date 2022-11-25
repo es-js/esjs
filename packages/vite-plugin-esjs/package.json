@@ -17,6 +17,7 @@
     "@babel/parser": "^7.20.3",
     "@es-js/esvue": "workspace:0.0.4",
     "@es-js/transpiler": "workspace:0.0.2",
+    "@types/babel__core": "^7.1.20",
     "@types/node": "^18.11.9",
     "typescript": "^4.9.3",
     "unbuild": "^1.0.1",

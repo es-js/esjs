@@ -1,7 +1,7 @@
 import { parse } from '@babel/parser'
 import { transpile } from '@es-js/transpiler'
 
-export default function EsJS() {
+export default function () {
   return {
     name: 'esjs',
     parserOverride(code: string, options = {}) {
