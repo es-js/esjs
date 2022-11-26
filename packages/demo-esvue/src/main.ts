@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from '@/app.esjs'
+import App from '@/App.esvue'
 
 const app = createApp(App)
 

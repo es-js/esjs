@@ -1,6 +1,9 @@
 packages:
-  - packages/transpiler
-  - packages/esvue
+  - packages/core
+  - packages/consola
+  - packages/babel-plugin-esjs
   - packages/vite-plugin-esjs
-  - packages/demo
+  - packages/vite-plugin-esvue
+  - packages/demo-esjs
+  - packages/demo-esvue
 

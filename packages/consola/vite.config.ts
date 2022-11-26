@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/main.ts'),
-      name: 'EsVue',
-      fileName: format => `esvue.${format}.js`,
+      name: 'EsConsola',
+      fileName: format => `consola.${format}.js`,
     },
     rollupOptions: {
       external: ['vue'],
@@ -19,5 +19,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()]
+  plugins: [vue()],
 })

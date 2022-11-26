@@ -1,7 +1,6 @@
 {
   "name": "@es-js/consola",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -23,13 +22,16 @@
     "xterm-addon-fit": "^0.5.0",
     "xterm-addon-web-links": "^0.5.1"
   },
-  "main": "./dist/esvue.umd.js",
-  "module": "./dist/esvue.es.js",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/consola.umd.js",
+  "module": "./dist/consola.es.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/esvue.es.js",
-      "require": "./dist/esvue.umd.js"
+      "import": "./dist/consola.es.js",
+      "require": "./dist/consola.umd.js"
     },
     "./style.css": {
       "import": "./dist/style.css",
