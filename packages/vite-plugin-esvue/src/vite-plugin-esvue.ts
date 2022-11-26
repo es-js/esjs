@@ -1,5 +1,5 @@
 import * as babel from '@babel/core'
-import { splitCodeImports } from '@es-js/core'
+import { splitCodeImports, splitScriptTemplate } from '@es-js/core'
 import { BabelPluginEsjs } from '@es-js/babel-plugin-esjs'
 import type { Plugin } from 'vite'
 
@@ -7,10 +7,12 @@ export default (): Plugin => ({
   name: 'vite-plugin-esjs',
   enforce: 'pre',
   transform(raw: string, id: string) {
-    if (!/\.esjs$/.test(id))
+    if (!/\.esvue$/.test(id))
       return
 
-    const result = babel.transformSync(raw, {
+    const { script, template } = splitScriptTemplate(raw)
+
+    const result = babel.transformSync(script, {
       babelrc: false,
       ast: true,
       plugins: [
@@ -26,7 +28,7 @@ export default (): Plugin => ({
     const scriptTranspiled = splitCodeImports(String(result.code))
 
     return `
-<script>
+<script setup lang="ts">
 import { usarConsola } from "@es-js/consola";
 ${scriptTranspiled.imports}
 
@@ -34,6 +36,10 @@ const consola = usarConsola();
 
 ${scriptTranspiled.codeWithoutImports}
 </script>
+
+<template>
+  ${template}
+</template>
 `
   },
 })

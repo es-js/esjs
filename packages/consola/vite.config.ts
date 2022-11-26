@@ -6,8 +6,8 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   build: {
     lib: {
-      name: 'EsVue',
       entry: path.resolve(__dirname, 'src/main.ts'),
+      name: 'EsVue',
       fileName: format => `esvue.${format}.js`,
     },
     rollupOptions: {
@@ -19,5 +19,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()],
+  plugins: [vue()]
 })
