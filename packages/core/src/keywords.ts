@@ -13,7 +13,7 @@ export const keywords = new Map([
   ['de', 'of'],
   ['defecto', 'default'],
   ['depurador', 'debugger'],
-  ['desde', 'for'],
+  ['desde', 'from'],
   ['elegir', 'switch'],
   ['eliminar', 'delete'],
   ['esperar', 'await'],

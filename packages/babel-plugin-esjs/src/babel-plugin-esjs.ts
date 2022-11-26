@@ -1,5 +1,5 @@
 import { parse } from '@babel/parser'
-import { transpile } from '@es-js/transpiler'
+import { transpile } from '@es-js/core'
 
 export default function () {
   return {

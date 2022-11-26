@@ -1,3 +1,5 @@
+const importsRegex = /import(?:["'\s]*([\w*{}\n\r\t, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
+
 export function splitCodeImports(code: string) {
   const codeWithoutImports = replace(code, importsRegex)
 
@@ -11,10 +13,6 @@ export function splitCodeImports(code: string) {
     hasImports,
   }
 }
-
-const importsRegex = /import(?:["'\s]*([\w*{}\n\r\t, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
-
-const pureRegex = /\/\*#__PURE__\*\//g
 
 function replace(string: string, regex: RegExp, value = ''): string {
   return string.replace(regex, value).trim()
