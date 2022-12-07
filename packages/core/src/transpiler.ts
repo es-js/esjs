@@ -85,7 +85,7 @@ function isWhitespace(char: string) {
 }
 
 function isTick(char: string) {
-  return ['"', '"', '`'].includes(char)
+  return ['"', "'", '`'].includes(char)
 }
 
 function isBracket(char: string) {

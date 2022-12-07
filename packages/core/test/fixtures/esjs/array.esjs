@@ -1,0 +1,9 @@
+const lista = []
+
+lista.agregar('test')
+
+si (lista.incluye('test')) {
+  lista.sacar()
+}
+
+lista.longitud
