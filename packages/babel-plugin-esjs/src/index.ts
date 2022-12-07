@@ -1,1 +1,1 @@
-export { default as BabelPluginEsjs } from './babel-plugin-esjs'
+export { default as BabelPluginEsJS } from './babel-plugin-esjs'
