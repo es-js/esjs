@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { ResizeObserver } from 'vue-resize'
-import { usarConsola } from '../composables/usarConsola'
 import 'xterm/css/xterm.css'
 import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
+import { usarConsola } from '../composables/usarConsola'
 
 const terminalElement = ref()
 

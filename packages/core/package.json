@@ -1,6 +1,6 @@
 {
   "name": "@es-js/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
     "build": "unbuild",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.10",
     "typescript": "^4.9.3",
     "unbuild": "^1.0.1",
     "vite": "^3.2.4",
