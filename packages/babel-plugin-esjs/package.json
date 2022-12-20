@@ -1,9 +1,11 @@
 {
   "name": "@es-js/babel-plugin-esjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "scripts": {
-    "build": "unbuild"
+    "build": "unbuild",
+    "release": "bumpp",
+    "release:patch": "bumpp patch -y --no-verify"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
+    "bumpp": "^8.2.1",
     "typescript": "^4.9.3",
     "unbuild": "^1.0.2"
   },
