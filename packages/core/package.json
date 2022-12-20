@@ -1,17 +1,20 @@
 {
   "name": "@es-js/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "scripts": {
     "build": "unbuild",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "release": "bumpp",
+    "release:patch": "bumpp patch -y"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.11.11",
+    "bumpp": "^8.2.1",
     "typescript": "^4.9.3",
     "unbuild": "^1.0.2",
     "vite": "^3.2.5",
