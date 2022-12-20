@@ -1,8 +1,8 @@
-const keywordsVueRef = new Map([
+export const vueRef = new Map([
   ['valor', 'value'],
 ])
 
-const keywordsArray = new Map([
+export const arrayMethods = new Map([
   ['posicion', 'at'],
   ['concatenar', 'concat'],
   ['copiarDentro', 'copyWithin'],
@@ -41,58 +41,86 @@ const keywordsArray = new Map([
   ['valores', 'values'],
 ])
 
-export const keywords = new Map([
-  ['Fecha', 'Date'],
-  ['NeN', 'isNaN'],
-  ['async', 'async'],
+export const keywordControl = new Map([
   ['capturar', 'catch'],
   ['caso', 'case'],
-  ['clase', 'class'],
   ['con', 'with'],
-  ['const', 'const'],
-  ['constructor', 'constructor'],
   ['continuar', 'continue'],
   ['crear', 'new'],
-  ['de', 'of'],
-  ['porDefecto', 'default'],
-  ['depurador', 'debugger'],
   ['desde', 'from'],
   ['elegir', 'switch'],
-  ['eliminar', 'delete'],
   ['esperar', 'await'],
-  ['en', 'in'],
-  ['establecer', 'set'],
-  ['este', 'this'],
   ['exportar', 'export'],
-  ['extiende', 'extends'],
-  ['falso', 'false'],
-  ['finalmente', 'finally'],
-  ['funcion', 'function'],
-  ['global', 'var'],
   ['hacer', 'do'],
   ['importar', 'import'],
-  ['indefinido', 'undefined'],
+  ['mientras', 'while'],
+  ['para', 'for'],
+  ['retornar', 'return'],
+  ['sino', 'else'],
+  ['osi', 'else if'],
+  ['si', 'if'],
+  ['constructor', 'constructor'],
+  ['eliminar', 'delete'],
+  ['extiende', 'extends'],
+  ['finalmente', 'finally'],
   ['instanciaDe', 'instanceof'],
   ['intentar', 'try'],
   ['lanzar', 'throw'],
   ['longitud', 'length'],
-  ['mientras', 'while'],
-  ['nulo', 'null'],
-  ['obtener', 'get'],
-  ['osi', 'else if'],
-  ['para', 'for'],
-  ['retornar', 'return'],
   ['romper', 'break'],
-  ['si', 'if'],
   ['simbolo', 'symbol'],
-  ['sino', 'else'],
-  ['super', 'super'],
   ['subcadena', 'substr'],
   ['tipoDe', 'typeof'],
   ['vacio', 'void'],
-  ['var', 'let'],
-  ['verdadero', 'true'],
   ['yield', 'yield'],
-  ...keywordsArray,
-  ...keywordsVueRef,
+])
+
+export const constantLanguage = new Map([
+  ['falso', 'false'],
+  ['nulo', 'null'],
+  ['verdadero', 'true'],
+  ['indefinido', 'undefined'],
+]);
+
+export const variableLanguage = new Map([
+  ['este', 'this'],
+  ['super', 'super'],
+]);
+
+export const storageType = new Map([
+  ['async', 'async'],
+  ['clase', 'class'],
+  ['const', 'const'],
+  ['global', 'var'],
+  ['var', 'let'],
+  ['porDefecto', 'default'],
+  ['obtener', 'get'],
+  ['establecer', 'set'],
+  ['funcion', 'function'],
+]);
+
+export const metaVariable = new Map([
+  ['de', 'of'],
+  ['en', 'in'],
+]);
+
+export const supportFunction = new Map([
+  ['Fecha', 'Date'],
+  ['NeN', 'isNaN'],
+  ['depurador', 'debugger'],
+  ['establecerTemporizador', 'setTimeout'],
+]);
+
+// export const keywordsControl = new Map([]);
+
+export const keywords = new Map([
+  ...keywordControl,
+  ...constantLanguage,
+  ...variableLanguage,
+  ...storageType,
+  ...metaVariable,
+  ...supportFunction,
+
+  ...arrayMethods,
+  ...vueRef,
 ])

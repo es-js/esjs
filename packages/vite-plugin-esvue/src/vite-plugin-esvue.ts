@@ -1,6 +1,6 @@
 import * as babel from '@babel/core'
 import { splitCodeImports, splitScriptTemplate } from '@es-js/core'
-import { BabelPluginEsJS } from '@es-js/babel-plugin-esjs'
+import BabelPluginEsJS from '@es-js/babel-plugin-esjs'
 import type { Plugin } from 'vite'
 
 export default (): Plugin => ({
