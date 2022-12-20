@@ -37,9 +37,7 @@ const consola = usarConsola();
 ${scriptTranspiled.codeWithoutImports}
 </script>
 
-<template>
-  ${template}
-</template>
+${template}
 `
   },
 })
