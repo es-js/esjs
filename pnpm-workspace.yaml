@@ -4,6 +4,4 @@ packages:
   - packages/babel-plugin-esjs
   - packages/vite-plugin-esjs
   - packages/vite-plugin-esvue
-  - packages/demo-esjs
-  - packages/demo-esvue
 

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm --stream -r run build",
+    "release": "pnpm --stream -r run release:patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
