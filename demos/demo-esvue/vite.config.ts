@@ -1,7 +1,7 @@
 import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { EsVue } from 'vite-plugin-esvue'
+import EsVue from 'vite-plugin-esvue'
 
 export default defineConfig({
   plugins: [
