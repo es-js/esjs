@@ -3,9 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.20.7
   '@babel/parser': ^7.20.7
-  '@es-js/babel-plugin-esjs': workspace:^0.0.2
-  '@es-js/consola': workspace:^0.0.8
-  '@es-js/core': workspace:0.0.4
+  '@es-js/babel-plugin-esjs': workspace:^0.0.3
+  '@es-js/consola': workspace:^0.0.9
+  '@es-js/core': workspace:0.0.5
   '@types/babel__core': ^7.1.20
   '@types/node': ^18.11.17
   bumpp: ^8.2.1

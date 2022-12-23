@@ -7,13 +7,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@es-js/core": "workspace:^0.0.4",
-    "vite-plugin-esvue": "workspace:^0.0.5",
+    "@es-js/core": "workspace:^0.0.5",
+    "vite-plugin-esvue": "workspace:^0.0.6",
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
-    "@es-js/consola": "workspace:0.0.8",
+    "@es-js/consola": "workspace:0.0.9",
     "@types/node": "^18.11.17",
     "@vitejs/plugin-vue": "^3.2.0",
     "eslint": "8.22.0",

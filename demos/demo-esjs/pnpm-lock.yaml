@@ -1,14 +1,14 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@es-js/consola': workspace:^0.0.8
-  '@es-js/core': workspace:0.0.4
+  '@es-js/consola': workspace:^0.0.9
+  '@es-js/core': workspace:0.0.5
   '@unocss/vite': ^0.46.5
   '@vitejs/plugin-vue': ^1.10.2
   '@vue/compiler-sfc': ^3.2.45
   unocss: ^0.46.5
   vite: ^2.9.15
-  vite-plugin-esjs: workspace:^0.0.7
+  vite-plugin-esjs: workspace:^0.0.8
   vue: ^3.2.45
 
 dependencies:
