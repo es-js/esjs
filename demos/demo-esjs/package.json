@@ -1,0 +1,22 @@
+{
+  "name": "@es-js/demo-esjs",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.10.2",
+    "@vue/compiler-sfc": "^3.2.45",
+    "vite": "^2.9.15"
+  },
+  "dependencies": {
+    "@es-js/consola": "workspace:^0.0.8",
+    "@es-js/core": "workspace:0.0.4",
+    "@unocss/vite": "^0.46.5",
+    "unocss": "^0.46.5",
+    "vite-plugin-esjs": "workspace:^0.0.7",
+    "vue": "^3.2.45"
+  }
+}

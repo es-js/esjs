@@ -1,0 +1,3 @@
+const fecha = crear Fecha();
+
+consola.escribir("Hola Mundo, desde EsJS!", fecha);
