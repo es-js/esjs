@@ -1,7 +1,2 @@
 packages:
-  - packages/core
-  - packages/consola
-  - packages/babel-plugin-esjs
-  - packages/vite-plugin-esjs
-  - packages/vite-plugin-esvue
-
+  - packages/*

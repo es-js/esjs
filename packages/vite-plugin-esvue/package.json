@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/parser": "^7.20.5",
+    "@babel/core": "^7.20.7",
+    "@babel/parser": "^7.20.7",
     "@es-js/babel-plugin-esjs": "workspace:^0.0.2",
     "@es-js/consola": "workspace:^0.0.8",
     "@es-js/core": "workspace:0.0.4",

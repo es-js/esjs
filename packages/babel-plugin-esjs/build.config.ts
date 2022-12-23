@@ -6,10 +6,7 @@ export default defineBuildConfig({
   ],
   clean: false,
   declaration: true,
-  // externals: [
-  //   '@babel/parser',
-  //   '@es-js/core',
-  // ],
+  externals: [],
   rollup: {
     emitCJS: true,
     inlineDependencies: true,
