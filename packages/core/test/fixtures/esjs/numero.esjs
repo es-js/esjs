@@ -1,0 +1,3 @@
+const numero = Numero.aEntero('123');
+
+const numero2 = aEntero('456');

@@ -15,16 +15,16 @@ export const arrayMethods = new Map([
   ['buscarUltimo', 'findLast'],
   ['buscarUltimoIndice', 'findLastIndex'],
   ['plano', 'flat'],
-  ['planoMapeo', 'flatMap'],
+  ['planoMapear', 'flatMap'],
   ['paraCada', 'forEach'],
   ['grupo', 'group'],
-  ['grupoAMapeo', 'groupToMap'],
+  ['grupoAMapear', 'groupToMap'],
   ['incluye', 'includes'],
   ['indiceDe', 'indexOf'],
   ['juntar', 'join'],
   ['claves', 'keys'],
   ['ultimoIndiceDe', 'lastIndexOf'],
-  ['mapeo', 'map'],
+  ['mapear', 'map'],
   ['sacar', 'pop'],
   ['agregar', 'push'],
   ['reducir', 'reduce'],
@@ -39,6 +39,122 @@ export const arrayMethods = new Map([
   ['aCadena', 'toString'],
   ['agregarInicio', 'unshift'],
   ['valores', 'values'],
+])
+
+export const mathMethods = new Map([
+  ['absoluto', 'abs'],
+  ['arcocoseno', 'acos'],
+  ['arcocosenoHiperbolico', 'acosh'],
+  ['arcoseno', 'asin'],
+  ['arcosenoHiperbolico', 'asinh'],
+  ['arcotangente', 'atan'],
+  ['arcotangente2', 'atan2'],
+  ['arcotangenteHiperbolica', 'atanh'],
+  ['raizCubica', 'cbrt'],
+  ['redondearHaciaArriba', 'ceil'],
+  ['cerosALaIzquierdaEn32Bits', 'clz32'],
+  ['coseno', 'cos'],
+  ['cosenoHiperbolico', 'cosh'],
+  ['exponencial', 'exp'],
+  ['exponencialMenos1', 'expm1'],
+  ['redondearHaciaAbajo', 'floor'],
+  ['redondearAComaFlotante', 'fround'],
+  ['hipotenusa', 'hypot'],
+  ['multiplicacionEntera', 'imul'],
+  ['logaritmo', 'log'],
+  ['logaritmoBase10', 'log10'],
+  ['logaritmoDe1Mas', 'log1p'],
+  ['logaritmoBase2', 'log2'],
+  ['maximo', 'max'],
+  ['minimo', 'min'],
+  ['potencia', 'pow'],
+  ['aleatorio', 'random'],
+  ['redondear', 'round'],
+  ['signo', 'sign'],
+  ['seno', 'sin'],
+  ['senoHiperbolico', 'sinh'],
+  ['raizCuadrada', 'sqrt'],
+  ['tangente', 'tan'],
+  ['tangenteHiperbolica', 'tanh'],
+  ['truncar', 'trunc'],
+])
+
+export const numberMethods = new Map([
+  ['esFinito', 'isFinite'],
+  ['esEntero', 'isInteger'],
+  ['NeN', 'isNaN'],
+  ['esEnteroSeguro', 'isSafeInteger'],
+  ['aDecimal', 'parseFloat'],
+  ['aEntero', 'parseInt'],
+  ['aExponencial', 'toExponential'],
+  ['fijarDecimales', 'toFixed'],
+  ['aCadenaLocalizada', 'toLocaleString'],
+  ['aPrecision', 'toPrecision'],
+  ['aCadena', 'toString'],
+  ['valorDe', 'valueOf'],
+])
+
+export const consoleMethods = new Map([
+  ['afirmar', 'assert'],
+  ['limpiar', 'clear'],
+  ['contar', 'count'],
+  ['reiniciarContador', 'countReset'],
+  ['depurar', 'debug'],
+  ['listar', 'dir'],
+  ['listarXml', 'dirxml'],
+  ['error', 'error'],
+  ['agrupar', 'group'],
+  ['agruparColapsado', 'groupCollapsed'],
+  ['finalizarAgrupacion', 'groupEnd'],
+  ['info', 'info'],
+  ['escribir', 'log'],
+  ['perfil', 'profile'],
+  ['finalizarPerfil', 'profileEnd'],
+  ['tabla', 'table'],
+  ['tiempo', 'time'],
+  ['finalizarTiempo', 'timeEnd'],
+  ['registrarTiempo', 'timeLog'],
+  ['marcaDeTiempo', 'timeStamp'],
+  ['rastrear', 'trace'],
+  ['advertencia', 'warn'],
+])
+
+export const stringMethods = new Map([
+  ['enPosicion', 'at'],
+  ['caracterEn', 'charAt'],
+  ['codigoDeCaracterEn', 'charCodeAt'],
+  ['puntoDeCodigoEn', 'codePointAt'],
+  ['concatenar', 'concat'],
+  ['terminaCon', 'endsWith'],
+  ['desdeCodigoDeCaracter', 'fromCharCode'],
+  ['desdePuntoDeCodigo', 'fromCodePoint'],
+  ['incluye', 'includes'],
+  ['indiceDe', 'indexOf'],
+  ['ultimoIndiceDe', 'lastIndexOf'],
+  ['compararLocalizada', 'localeCompare'],
+  ['coincidir', 'match'],
+  ['coincidirTodo', 'matchAll'],
+  ['normalizar', 'normalize'],
+  ['rellenarAlFinal', 'padEnd'],
+  ['rellenarAlComienzo', 'padStart'],
+  ['crudo', 'raw'],
+  ['repetir', 'repeat'],
+  ['reemplazar', 'replace'],
+  ['reemplazarTodo', 'replaceAll'],
+  ['buscar', 'search'],
+  ['recortar', 'slice'],
+  ['dividir', 'split'],
+  ['comienzaCon', 'startsWith'],
+  ['subcadena', 'substring'],
+  ['convertirAMinusculasLocalizada', 'toLocaleLowerCase'],
+  ['convertirAMayusculasLocalizada', 'toLocaleUpperCase'],
+  ['convertirAMinusculas', 'toLowerCase'],
+  ['convertirAString', 'toString'],
+  ['convertirAMayusculas', 'toUpperCase'],
+  ['recortarEspacios', 'trim'],
+  ['recortarEspaciosAlFinal', 'trimEnd'],
+  ['recortarEspaciosAlComienzo', 'trimStart'],
+  ['valorDe', 'valueOf'],
 ])
 
 export const keywordControl = new Map([
@@ -72,7 +188,12 @@ export const keywordControl = new Map([
   ['subcadena', 'substr'],
   ['tipoDe', 'typeof'],
   ['vacio', 'void'],
-  ['yield', 'yield'],
+  ['producir', 'yield'],
+
+  ...numberMethods,
+  ...mathMethods,
+  ...consoleMethods,
+  ...stringMethods,
 ])
 
 export const constantLanguage = new Map([
@@ -80,15 +201,18 @@ export const constantLanguage = new Map([
   ['nulo', 'null'],
   ['verdadero', 'true'],
   ['indefinido', 'undefined'],
-]);
+  ['Infinito', 'Infinity'],
+  ['NuN', 'NaN'],
+  ['esteGlobal', 'globalThis'],
+])
 
 export const variableLanguage = new Map([
   ['este', 'this'],
   ['super', 'super'],
-]);
+])
 
 export const storageType = new Map([
-  ['async', 'async'],
+  ['asincrono', 'async'],
   ['clase', 'class'],
   ['const', 'const'],
   ['global', 'var'],
@@ -97,21 +221,25 @@ export const storageType = new Map([
   ['obtener', 'get'],
   ['establecer', 'set'],
   ['funcion', 'function'],
-]);
+])
 
 export const metaVariable = new Map([
   ['de', 'of'],
   ['en', 'in'],
-]);
+])
 
 export const supportFunction = new Map([
-  ['Fecha', 'Date'],
-  ['NeN', 'isNaN'],
+  ['consola', 'console'],
   ['depurador', 'debugger'],
   ['establecerTemporizador', 'setTimeout'],
-]);
-
-// export const keywordsControl = new Map([]);
+  ['Fecha', 'Date'],
+  ['Numero', 'Number'],
+  ['Mate', 'Math'],
+  ['Lista', 'Array'],
+  ['Booleano', 'Boolean'],
+  ['Cadena', 'String'],
+  ['Funcion', 'Function'],
+])
 
 export const keywords = new Map([
   ...keywordControl,

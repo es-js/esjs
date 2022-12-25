@@ -1,4 +1,4 @@
-const lista = []
+const lista = Lista.de([])
 
 lista.agregar('test')
 

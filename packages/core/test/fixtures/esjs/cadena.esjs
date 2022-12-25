@@ -1,0 +1,3 @@
+const foo = crear Cadena('bar');
+
+retornar foo.caracterEn(0);

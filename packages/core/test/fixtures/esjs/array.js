@@ -1,4 +1,4 @@
-const lista = []
+const lista = Array.of([])
 
 lista.push('test')
 
