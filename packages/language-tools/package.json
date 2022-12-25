@@ -1,0 +1,38 @@
+{
+  "name": "@es-js/language-tools",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/generate-esjs-syntax.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.31.1",
+    "@es-js/core": "workspace:^0.0.6",
+    "eslint": "8.22.0"
+  },
+  "exports": {
+    "./esjs.tmLanguage.json": {
+      "import": "./dist/esjs.tmLanguage.json",
+      "require": "./dist/esjs.tmLanguage.json"
+    },
+    "./esvue.tmLanguage.json": {
+      "import": "./dist/esvue.tmLanguage.json",
+      "require": "./dist/esvue.tmLanguage.json"
+    },
+    "./esjs-language-configuration.json": {
+      "import": "./dist/esjs-language-configuration.json",
+      "require": "./dist/esjs-language-configuration.json"
+    },
+    "./esvue-language-configuration.json": {
+      "import": "./dist/esvue-language-configuration.json",
+      "require": "./dist/esvue-language-configuration.json"
+    }
+  }
+}

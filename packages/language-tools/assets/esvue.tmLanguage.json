@@ -1,0 +1,36 @@
+{
+  "fileTypes": [".esvue"],
+  "name": "EsVue",
+  "scopeName": "source.esvue",
+  "patterns": [
+    {
+      "include": "#frontmatter"
+    },
+    {
+      "include": "source.vue"
+    }
+  ],
+  "repository": {
+    "frontmatter": {
+      "comment": "The frontmatter is treated as comments in order to get the \"faded\" look",
+      "begin": "\\A(-{3})\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "comment"
+        }
+      },
+      "contentName": "source.esjs",
+      "patterns": [
+        {
+          "include": "source.esjs"
+        }
+      ],
+      "end": "(^|\\G)(-{3})|\\.{3}\\s*$",
+      "endCaptures": {
+        "2": {
+          "name": "comment"
+        }
+      }
+    }
+  }
+}
