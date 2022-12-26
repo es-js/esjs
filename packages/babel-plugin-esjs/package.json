@@ -1,6 +1,6 @@
 {
   "name": "@es-js/babel-plugin-esjs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "scripts": {
     "build": "unbuild",
@@ -12,10 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@babel/parser": "^7.20.7",
-    "@es-js/core": "workspace:^0.0.5"
+    "@es-js/core": "workspace:^0.0.6"
   },
   "devDependencies": {
-    "@types/node": "^18.11.17",
+    "@types/node": "^18.11.18",
     "bumpp": "^8.2.1",
     "typescript": "^4.9.4",
     "unbuild": "^1.0.2"

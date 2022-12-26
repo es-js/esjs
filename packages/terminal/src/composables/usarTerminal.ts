@@ -2,16 +2,16 @@ import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import { WebLinksAddon } from 'xterm-addon-web-links'
 
-const terminal = new Terminal({
+const xterm = new Terminal({
   cursorBlink: true,
 })
 const fitAddon = new FitAddon()
-terminal.loadAddon(fitAddon)
-terminal.loadAddon(new WebLinksAddon())
+xterm.loadAddon(fitAddon)
+xterm.loadAddon(new WebLinksAddon())
 
-export const usarConsola = () => {
+export const usarTerminal = () => {
   function setupTerminal(terminalElement: HTMLElement) {
-    terminal.open(terminalElement)
+    xterm.open(terminalElement)
     fitTerminal()
   }
 
@@ -20,15 +20,15 @@ export const usarConsola = () => {
   }
 
   function escribir(...args: any[]) {
-    args.map(arg => terminal.writeln(String(arg)))
+    args.map(arg => xterm.writeln(String(arg)))
   }
 
   async function leer() {
-    let buffer = ''
     return new Promise((resolve) => {
-      terminal.onData((data: any) => {
+      let buffer = ''
+      xterm.onData((data: any) => {
         if (data === '\r') {
-          terminal.writeln('')
+          xterm.writeln('')
           resolve(buffer)
         }
 
@@ -38,16 +38,18 @@ export const usarConsola = () => {
   }
 
   function limpiar() {
-    terminal.write('\x1Bc')
+    xterm.write('\x1Bc')
   }
 
   return {
-    terminal,
+    xterm,
     fitAddon,
     escribir,
+    log: escribir,
     leer,
     setupTerminal,
     fitTerminal,
     limpiar,
+    clear: limpiar,
   }
 }

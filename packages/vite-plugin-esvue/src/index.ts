@@ -30,10 +30,7 @@ export default function EsVue(): Plugin {
 
       return `
 <script setup lang="ts">
-import { usarConsola } from "@es-js/consola";
 ${scriptTranspiled.imports}
-
-const consola = usarConsola();
 
 ${scriptTranspiled.codeWithoutImports}
 </script>

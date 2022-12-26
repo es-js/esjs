@@ -28,10 +28,10 @@ export default function EsJS(options = {}): Plugin {
 
       return `
 <script>
-import { usarConsola } from "@es-js/consola";
+import { usarTerminal } from "@es-js/terminal";
 ${scriptTranspiled.imports}
 
-const consola = usarConsola();
+const Terminal = usarTerminal();
 
 ${scriptTranspiled.codeWithoutImports}
 </script>

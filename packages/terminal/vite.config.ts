@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/main.ts'),
-      name: 'EsConsola',
-      fileName: format => `consola.${format}.js`,
+      name: 'EsTerminal',
+      fileName: format => `terminal.${format}.js`,
     },
     rollupOptions: {
       external: ['vue'],

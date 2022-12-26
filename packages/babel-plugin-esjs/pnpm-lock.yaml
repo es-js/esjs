@@ -2,8 +2,8 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/parser': ^7.20.7
-  '@es-js/core': workspace:^0.0.5
-  '@types/node': ^18.11.17
+  '@es-js/core': workspace:^0.0.6
+  '@types/node': ^18.11.18
   bumpp: ^8.2.1
   typescript: ^4.9.4
   unbuild: ^1.0.2
@@ -13,7 +13,7 @@ dependencies:
   '@es-js/core': link:../core
 
 devDependencies:
-  '@types/node': 18.11.17
+  '@types/node': 18.11.18
   bumpp: 8.2.1
   typescript: 4.9.4
   unbuild: 1.0.2
@@ -405,8 +405,8 @@ packages:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
-  /@types/node/18.11.17:
-    resolution: {integrity: sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==}
+  /@types/node/18.11.18:
+    resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
     dev: true
 
   /@types/resolve/1.20.2:

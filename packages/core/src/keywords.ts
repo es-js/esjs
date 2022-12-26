@@ -185,7 +185,7 @@ export const keywordControl = new Map([
   ['longitud', 'length'],
   ['romper', 'break'],
   ['simbolo', 'symbol'],
-  ['subcadena', 'substr'],
+  ['subcad', 'substr'],
   ['tipoDe', 'typeof'],
   ['vacio', 'void'],
   ['producir', 'yield'],

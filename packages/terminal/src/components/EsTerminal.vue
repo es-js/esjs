@@ -4,27 +4,27 @@ import { ResizeObserver } from 'vue-resize'
 import 'xterm/css/xterm.css'
 import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
-import { usarConsola } from '../composables/usarConsola'
+import { usarTerminal } from '../composables/usarTerminal'
 
 const terminalElement = ref()
 
-const consola = usarConsola()
+const terminal = usarTerminal()
 
 const onResizeDebounced = debounce(() => {
-  consola.fitTerminal()
+  terminal.fitTerminal()
 }, 10)
 
 onMounted(() => {
-  consola.setupTerminal(terminalElement.value)
+  terminal.setupTerminal(terminalElement.value)
 
-  consola.terminal.onData((data: any) => consola.terminal.write(data))
+  terminal.xterm.onData((data: any) => terminal.xterm.write(data))
 
   setTimeout(() => onResizeDebounced(), 10)
 })
 </script>
 
 <template>
-  <div ref="terminalElement" class="w-full min-h-full overflow-hidden">
+  <div ref="terminalElement" style="width: 100%; height: 100%; overflow: hidden;">
     <ResizeObserver @notify="onResizeDebounced" />
   </div>
 </template>

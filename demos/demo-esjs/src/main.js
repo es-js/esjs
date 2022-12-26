@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import { EsConsola } from '@es-js/consola'
-import '@es-js/consola/style.css'
-import App from './app.esjs'
+import { EsTerminal } from '@es-js/terminal'
+import '@es-js/terminal/style.css'
+import './app.esjs'
 
-createApp(EsConsola).mount('#app')
+createApp(EsTerminal).mount('#app')
