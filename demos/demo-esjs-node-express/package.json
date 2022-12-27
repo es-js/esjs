@@ -1,0 +1,18 @@
+{
+  "name": "@es-js/demo-esjs-node-express",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --ssr --mode=production",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@es-js/core": "workspace:0.0.6",
+    "vavite": "^1.5.2",
+    "vite": "^2.9.15",
+    "vite-plugin-esjs": "workspace:^0.0.10"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

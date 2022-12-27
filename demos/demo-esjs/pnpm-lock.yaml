@@ -6,7 +6,7 @@ specifiers:
   '@vitejs/plugin-vue': ^1.10.2
   '@vue/compiler-sfc': ^3.2.45
   vite: ^2.9.15
-  vite-plugin-esjs: workspace:^0.0.9
+  vite-plugin-esjs: workspace:^0.0.10
   vue: ^3.2.45
 
 dependencies:

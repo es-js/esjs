@@ -1,7 +1,7 @@
 import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 import EsJS from 'vite-plugin-esjs'
+import vavite from "vavite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,8 +9,9 @@ export default defineConfig({
     // https://github.com/es-js/esjs
     EsJS(),
 
-    vue({
-      include: [/\.vue$/],
+    // https://github.com/cyco130/vavite
+    vavite({
+      serverEntry: './src/app.esjs',
     }),
   ],
   resolve: {
@@ -24,11 +25,7 @@ export default defineConfig({
       '.mjs',
       '.ts',
       '.tsx',
-      '.vue',
       '.esjs',
     ],
-  },
-  server: {
-    port: 3000,
   },
 })

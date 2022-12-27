@@ -14,7 +14,7 @@
   "dependencies": {
     "@es-js/core": "workspace:0.0.6",
     "@es-js/terminal": "workspace:^0.0.1",
-    "vite-plugin-esjs": "workspace:^0.0.9",
+    "vite-plugin-esjs": "workspace:^0.0.10",
     "vue": "^3.2.45"
   }
 }

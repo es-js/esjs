@@ -26,16 +26,9 @@ export default function EsJS(options = {}): Plugin {
 
       const scriptTranspiled = splitCodeImports(String(result.code))
 
-      return `
-<script>
-import { usarTerminal } from "@es-js/terminal";
-${scriptTranspiled.imports}
+      return `${scriptTranspiled.imports}
 
-const Terminal = usarTerminal();
-
-${scriptTranspiled.codeWithoutImports}
-</script>
-`
+${scriptTranspiled.codeWithoutImports}`
     },
   }
 }

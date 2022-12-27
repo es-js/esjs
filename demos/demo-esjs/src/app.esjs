@@ -1,3 +1,7 @@
+importar { usarTerminal } desde '@es-js/terminal'
+
+const Terminal = usarTerminal()
+
 const fecha = crear Fecha();
 
-usarTerminal().escribir("Hola Mundo, desde EsJS!", fecha);
+Terminal.escribir("Hola Mundo, desde EsJS!", fecha);
