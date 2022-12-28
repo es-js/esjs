@@ -8,7 +8,6 @@ export default defineBuildConfig({
   declaration: true,
   externals: [
     'vite',
-    '@babel/core',
   ],
   rollup: {
     emitCJS: true,

@@ -1,4 +1,4 @@
-import * as babel from '@babel/core'
+import { transformSync } from '@babel/core'
 import { splitCodeImports } from '@es-js/core'
 import BabelPluginEsJS from '@es-js/babel-plugin-esjs'
 import type { Plugin } from 'vite'
@@ -11,7 +11,7 @@ export default function EsJS(options = {}): Plugin {
       if (!/\.esjs$/.test(id))
         return
 
-      const result = babel.transformSync(raw, {
+      const result = transformSync(raw, {
         babelrc: false,
         ast: true,
         plugins: [
