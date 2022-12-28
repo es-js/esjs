@@ -13,6 +13,6 @@
   "dependencies": {
     "@es-js/core": "workspace:0.0.6",
     "@es-js/terminal": "workspace:^0.0.2",
-    "vite-plugin-esjs": "workspace:^0.0.10"
+    "@es-js/vite-plugin-esjs": "workspace:^0.0.1"
   }
 }

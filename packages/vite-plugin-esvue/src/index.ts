@@ -5,7 +5,7 @@ import type { Plugin } from 'vite'
 
 export default function EsVue(): Plugin {
   return {
-    name: 'vite-plugin-esjs',
+    name: 'vite-plugin-esvue',
     enforce: 'pre',
     transform(raw: string, id: string) {
       if (!/\.esvue$/.test(id))

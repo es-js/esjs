@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@es-js/core": "workspace:^0.0.6",
-    "vite-plugin-esvue": "workspace:^0.0.8",
+    "@es-js/vite-plugin-esvue": "workspace:^0.0.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {
