@@ -1,6 +1,4 @@
-importar { usarTerminal } desde '@es-js/terminal'
-
-const Terminal = usarTerminal()
+importar { Terminal } desde '@es-js/terminal'
 
 const fecha = crear Fecha();
 

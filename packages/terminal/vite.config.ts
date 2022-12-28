@@ -1,4 +1,4 @@
-import * as path from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/main.ts'),
+      entry: resolve(__dirname, 'src/main.ts'),
       name: 'EsTerminal',
       fileName: format => `terminal.${format}.js`,
     },
@@ -21,7 +21,14 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue(),
+    vue({
+      customElement: true,
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag: string) => tag.includes('es-terminal')
+        }
+      }
+    }),
     dts({
       staticImport: true,
       skipDiagnostics: false,

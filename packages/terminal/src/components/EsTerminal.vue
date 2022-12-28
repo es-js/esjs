@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { ResizeObserver } from 'vue-resize'
-import 'xterm/css/xterm.css'
-import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
 import { usarTerminal } from '../composables/usarTerminal'
 
@@ -28,3 +26,8 @@ onMounted(() => {
     <ResizeObserver @notify="onResizeDebounced" />
   </div>
 </template>
+
+<style>
+@import 'xterm/css/xterm.css';
+@import 'vue-resize/dist/vue-resize.css';
+</style>

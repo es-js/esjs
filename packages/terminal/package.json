@@ -1,6 +1,6 @@
 {
   "name": "@es-js/terminal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.7",
+    "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^3.2.0",
     "bumpp": "^8.2.1",
     "lodash.debounce": "^4.0.8",

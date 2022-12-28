@@ -1,6 +1,5 @@
 import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 import EsJS from 'vite-plugin-esjs'
 
 // https://vitejs.dev/config/
@@ -8,10 +7,6 @@ export default defineConfig({
   plugins: [
     // https://github.com/es-js/esjs
     EsJS(),
-
-    vue({
-      include: [/\.vue$/],
-    }),
   ],
   resolve: {
     alias: {

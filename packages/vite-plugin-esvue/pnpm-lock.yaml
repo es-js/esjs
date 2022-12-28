@@ -5,7 +5,6 @@ specifiers:
   '@babel/parser': ^7.20.7
   '@es-js/babel-plugin-esjs': workspace:^0.0.4
   '@es-js/core': workspace:0.0.6
-  '@es-js/terminal': workspace:^0.0.1
   '@types/babel__core': ^7.1.20
   '@types/node': ^18.11.18
   bumpp: ^8.2.1
@@ -19,7 +18,6 @@ dependencies:
   '@babel/parser': 7.20.7
   '@es-js/babel-plugin-esjs': link:../babel-plugin-esjs
   '@es-js/core': link:../core
-  '@es-js/terminal': link:../terminal
   vite: 3.2.5_@types+node@18.11.18
 
 devDependencies:

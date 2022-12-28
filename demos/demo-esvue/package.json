@@ -1,6 +1,7 @@
 {
   "name": "@es-js/demo-esvue",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
@@ -13,7 +14,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
-    "@es-js/terminal": "workspace:0.0.1",
     "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^3.2.0",
     "eslint": "8.22.0",

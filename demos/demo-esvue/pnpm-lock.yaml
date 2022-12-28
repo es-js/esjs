@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.31.1
   '@es-js/core': workspace:^0.0.6
-  '@es-js/terminal': workspace:0.0.1
   '@types/node': ^18.11.18
   '@vitejs/plugin-vue': ^3.2.0
   eslint: 8.22.0
@@ -20,7 +19,6 @@ dependencies:
 
 devDependencies:
   '@antfu/eslint-config': 0.31.1_sq327paf6wzcma7omk5wjhfcfa
-  '@es-js/terminal': link:../../packages/terminal
   '@types/node': 18.11.18
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.5+vue@3.2.45
   eslint: 8.22.0

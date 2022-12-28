@@ -1,6 +1,7 @@
 {
   "name": "@es-js/demo-esjs-node-express",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build --ssr --mode=production",

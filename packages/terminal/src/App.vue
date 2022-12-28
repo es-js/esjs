@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import EsTerminal from './components/EsTerminal.vue'
-import {usarTerminal} from "./main";
-import {onMounted} from "vue";
+import { usarTerminal } from "./main";
+import { onMounted } from "vue";
+import EsTerminal from "./components/EsTerminal.vue";
 
-const terminal = usarTerminal();
+const Terminal = usarTerminal();
 
 onMounted(async () => {
-  terminal.escribir('Ingresa tu nombre:');
+  Terminal.escribir('Ingresa tu nombre:');
 
-  const nombre = await terminal.leer();
+  const nombre = await Terminal.leer();
 
-  terminal.escribir(`¡Hola ${nombre}!`);
+  Terminal.escribir(`¡Hola ${nombre}!`);
 })
 </script>
 
 <template>
-  <EsTerminal />
+  <es-terminal></es-terminal>
 </template>
 
