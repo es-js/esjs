@@ -37,10 +37,6 @@
       "types": "./dist/terminal.es.d.ts",
       "import": "./dist/terminal.es.js",
       "require": "./dist/terminal.umd.js"
-    },
-    "./style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
     }
   }
 }
