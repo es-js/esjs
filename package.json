@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm --stream -r run build",
-    "release": "pnpm --stream -r run release:patch",
+    "release": "bumpp packages/**/package.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "bumpp": "^8.2.1"
+  }
 }
