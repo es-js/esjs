@@ -1,6 +1,6 @@
 {
   "name": "@es-js/language-tools",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "",
   "main": "src/generate-esjs-syntax.js",
   "type": "module",
