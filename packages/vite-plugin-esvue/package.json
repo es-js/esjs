@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "unbuild",
-    "release": "bumpp",
-    "release:patch": "bumpp patch -y --no-verify"
+    "build": "unbuild"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +18,6 @@
   "devDependencies": {
     "@types/babel__core": "^7.1.20",
     "@types/node": "^18.11.18",
-    "bumpp": "^8.2.1",
     "typescript": "^4.9.4",
     "unbuild": "^1.0.2",
     "vue-tsc": "^1.0.18"

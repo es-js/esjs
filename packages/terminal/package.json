@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "release": "bumpp",
-    "release:patch": "bumpp patch -y"
+    "preview": "vite preview"
   },
   "dependencies": {
     "vue": "^3.2.45"
@@ -16,7 +14,6 @@
     "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^3.2.0",
-    "bumpp": "^8.2.1",
     "lodash.debounce": "^4.0.8",
     "typescript": "^4.9.4",
     "vite": "^3.2.5",
