@@ -6,7 +6,7 @@ import EsVue from '@es-js/vite-plugin-esvue'
 export default defineConfig({
   plugins: [
     vue({
-        include: [/\.vue$/, /\.esjs$/, /\.esvue$/],
+        include: [/\.vue$/, /\.esvue$/],
     }),
     EsVue(),
   ],
