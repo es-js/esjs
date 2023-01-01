@@ -8,3 +8,5 @@ declare module '*.vue' {
 
 declare module 'vue-resize'
 declare module 'lodash.debounce'
+declare module 'is-number'
+declare module 'string.ify'

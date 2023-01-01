@@ -1,5 +1,22 @@
 importar { Terminal } desde '@es-js/terminal'
 
-const fecha = crear Fecha();
+asincrono funcion inicio() {
+	Terminal.limpiar()
 
-Terminal.escribir("Hola Mundo, desde EsJS!", fecha);
+	Terminal.escribir('Ingresa un valor:')
+
+	const resultado = esperar Terminal.leer()
+
+	Terminal.escribir({
+		Resultado: resultado,
+		Tipo: typeof resultado,
+	})
+
+	Terminal.escribir('Presiona ENTER para volver a iniciar')
+
+	esperar Terminal.leerEnter()
+
+	esperar inicio()
+}
+
+inicio()
