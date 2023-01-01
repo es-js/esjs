@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-esvue",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "scripts": {
     "build": "unbuild"
@@ -11,8 +11,8 @@
   "dependencies": {
     "@babel/core": "^7.20.7",
     "@babel/parser": "^7.20.7",
-    "@es-js/babel-plugin-esjs": "workspace:^0.0.6",
-    "@es-js/core": "workspace:0.0.6",
+    "@es-js/babel-plugin-esjs": "workspace:^0.0.7",
+    "@es-js/core": "workspace:0.0.7",
     "vite": "^3.2.5"
   },
   "devDependencies": {

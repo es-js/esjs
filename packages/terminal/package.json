@@ -1,6 +1,6 @@
 {
   "name": "@es-js/terminal",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "dev": "vite --host",

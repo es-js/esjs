@@ -9,7 +9,7 @@ asincrono funcion inicio() {
 
 	Terminal.escribir({
 		Resultado: resultado,
-		Tipo: typeof resultado,
+		Tipo: tipoDe resultado,
 	})
 
 	Terminal.escribir('Presiona ENTER para volver a iniciar')
