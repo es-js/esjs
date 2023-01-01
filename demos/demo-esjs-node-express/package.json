@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@es-js/core": "workspace:0.0.6",
-    "@es-js/vite-plugin-esjs": "workspace:^0.0.3",
+    "@es-js/vite-plugin-esjs": "workspace:^0.0.6",
     "vavite": "^1.5.2",
     "vite": "^2.9.15"
   },
