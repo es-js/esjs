@@ -1,65 +1,17 @@
 # EsJS: JavaScript en Español
 
-EsJS transpila el código escrito con una sintaxis en Español, a JavaScript (en Inglés).
+EsJS es un transpilador que convierte código escrito en una sintaxis en Español a código JavaScript equivalente. Esto permite a personas hispanohablantes escribir código de manera más familiar y accesible, sin renunciar al poder y versatilidad de JavaScript.
 
-[ Playground ](https://esjs.vercel.app/)
+Más información en: https://esjs.dev/.
 
-[ StackBlitz ⚡️](https://stackblitz.com/github/es-js/demo?file=src/app.esjs)
+## Documentación
 
-## Uso
+Visita la sección de documentación en https://esjs.dev/ para obtener más información sobre cómo usar EsJS.
 
-La manera más fácil de comenzar con EsJS es a partir de una plantilla que dispone de todo lo necesario. Existen diversas plantillas, para diferentes propósitos:
+## Playground
 
-### EsJS Terminal App ([Ejemplo](https://demo-esjs-terminal.vercel.app/))
+Puedes probar EsJS en línea en https://editor.esjs.dev.
 
-Crear una app con EsJS que sólo muestra una Terminal como interfaz.
+## Licencia
 
-```
-# Creamos el proyecto a partir de la plantilla
-npx degit es-js/crear/terminal-app mi-esjs-terminal-app
-
-# Ingresamos al proyecto
-cd mi-esjs-terminal-app
-
-# Instalamos dependencias
-pnpm i
-
-# Iniciamos el servidor de desarrollo
-pnpm run dev
-```
-
-### EsVue App ([Ejemplo](https://demo-esvue.vercel.app/))
-
-Crear una app con EsJS + [Vue](https://vuejs.org/), con una sintaxis similar a [Astro](https://astro.build/).
-
-```
-# Creamos el proyecto a partir de la plantilla
-npx degit es-js/crear/esvue-app mi-esvue-app
-
-# Ingresamos al proyecto
-cd mi-esvue-app
-
-# Instalamos dependencias
-pnpm i
-
-# Iniciamos el servidor de desarrollo
-pnpm run dev
-```
-
-### EsJS Node Express ([Ejemplo](https://demo-esjs-express.vercel.app/))
-
-Crear una app con EsJS que se ejecuta del lado del servidor.
-
-```
-# Creamos el proyecto a partir de la plantilla
-npx degit es-js/crear/express-app mi-esjs-express-app
-
-# Ingresamos al proyecto
-cd mi-esjs-express-app
-
-# Instalamos dependencias
-pnpm i
-
-# Iniciamos el servidor de desarrollo
-pnpm run dev
-```
+EsJS está licenciado bajo la [Licencia MIT](LICENSE).
