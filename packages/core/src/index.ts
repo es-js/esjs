@@ -1,4 +1,18 @@
 export { transpile } from './transpiler'
-export { keywords, constantLanguage, keywordControl, variableLanguage, metaVariable, storageType, supportFunction, vueRef, arrayMethods } from './keywords'
+export {
+  vueRef,
+  arrayMethods,
+  mathMethods,
+  numberMethods,
+  consoleMethods,
+  stringMethods,
+  keywordControl,
+  constantLanguage,
+  variableLanguage,
+  storageType,
+  metaVariable,
+  supportFunction,
+  keywords,
+} from './keywords'
 export { splitCodeImports } from './split-code-imports'
 export { splitScriptTemplate } from './split-script-template'
