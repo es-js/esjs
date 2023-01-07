@@ -232,6 +232,7 @@ export const supportFunction = new Map([
   ['consola', 'console'],
   ['depurador', 'debugger'],
   ['establecerTemporizador', 'setTimeout'],
+  ['establecerIntervalo', 'setInterval'],
   ['Fecha', 'Date'],
   ['Numero', 'Number'],
   ['Mate', 'Math'],
@@ -239,6 +240,7 @@ export const supportFunction = new Map([
   ['Booleano', 'Boolean'],
   ['Cadena', 'String'],
   ['Funcion', 'Function'],
+  ['Promesa', 'Promise'],
 ])
 
 export const keywords = new Map([

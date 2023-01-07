@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-esjs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "scripts": {
     "build": "unbuild"
@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.20.7",
-    "@es-js/babel-plugin-esjs": "workspace:^0.0.7",
-    "@es-js/core": "workspace:0.0.7",
-    "vite": "^3.2.5"
+    "@babel/core": "^7.20.12",
+    "@es-js/babel-plugin-esjs": "workspace:^0.0.8",
+    "@es-js/core": "workspace:0.0.11",
+    "vite": "^4.0.4"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.20",
