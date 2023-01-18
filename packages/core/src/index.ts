@@ -12,6 +12,7 @@ export {
   storageType,
   metaVariable,
   supportFunction,
+  promiseMethods,
   keywords,
 } from './keywords'
 export { splitCodeImports } from './split-code-imports'

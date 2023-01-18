@@ -84,8 +84,8 @@ export const numberMethods = new Map([
   ['esEntero', 'isInteger'],
   ['NeN', 'isNaN'],
   ['esEnteroSeguro', 'isSafeInteger'],
-  ['aDecimal', 'parseFloat'],
-  ['aEntero', 'parseInt'],
+  ['interpretarDecimal', 'parseFloat'],
+  ['interpretarEntero', 'parseInt'],
   ['aExponencial', 'toExponential'],
   ['fijarDecimales', 'toFixed'],
   ['aCadenaLocalizada', 'toLocaleString'],
@@ -146,11 +146,11 @@ export const stringMethods = new Map([
   ['dividir', 'split'],
   ['comienzaCon', 'startsWith'],
   ['subcadena', 'substring'],
-  ['convertirAMinusculasLocalizada', 'toLocaleLowerCase'],
-  ['convertirAMayusculasLocalizada', 'toLocaleUpperCase'],
-  ['convertirAMinusculas', 'toLowerCase'],
-  ['convertirAString', 'toString'],
-  ['convertirAMayusculas', 'toUpperCase'],
+  ['aMinusculasLocalizada', 'toLocaleLowerCase'],
+  ['aMayusculasLocalizada', 'toLocaleUpperCase'],
+  ['aMinusculas', 'toLowerCase'],
+  ['aMayusculas', 'toUpperCase'],
+  ['aCadena', 'toString'],
   ['recortarEspacios', 'trim'],
   ['recortarEspaciosAlFinal', 'trimEnd'],
   ['recortarEspaciosAlComienzo', 'trimStart'],
@@ -236,11 +236,24 @@ export const supportFunction = new Map([
   ['Fecha', 'Date'],
   ['Numero', 'Number'],
   ['Mate', 'Math'],
-  ['Lista', 'Array'],
+  ['Matriz', 'Array'],
+  ['Arreglo', 'Array'],
   ['Booleano', 'Boolean'],
   ['Cadena', 'String'],
   ['Funcion', 'Function'],
   ['Promesa', 'Promise'],
+])
+
+export const promiseMethods = new Map([
+  ['todos', 'all'],
+  ['todosTerminados', 'allSettled'],
+  ['cualquiera', 'any'],
+  ['capturar', 'catch'],
+  ['finalmente', 'finally'],
+  ['carrera', 'race'],
+  ['rechaza', 'reject'],
+  ['resuelve', 'resolve'],
+  ['luego', 'then'],
 ])
 
 export const keywords = new Map([
@@ -250,7 +263,7 @@ export const keywords = new Map([
   ...storageType,
   ...metaVariable,
   ...supportFunction,
-
   ...arrayMethods,
+  ...promiseMethods,
   ...vueRef,
 ])
