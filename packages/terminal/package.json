@@ -1,6 +1,6 @@
 {
   "name": "@es-js/terminal",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -23,7 +23,7 @@
     "vite": "^4.0.4",
     "vite-plugin-dts": "^1.7.1",
     "vue-resize": "2.0.0-alpha.1",
-    "vue-tsc": "^1.0.22",
+    "vue-tsc": "^1.0.24",
     "xterm": "^5.1.0",
     "xterm-addon-fit": "^0.7.0",
     "xterm-addon-web-links": "^0.8.0"

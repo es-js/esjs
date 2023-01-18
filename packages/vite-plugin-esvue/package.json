@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-esvue",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "scripts": {
     "build": "unbuild"
@@ -12,15 +12,15 @@
     "@babel/core": "^7.20.12",
     "@babel/parser": "^7.20.7",
     "@es-js/babel-plugin-esjs": "workspace:^0.0.8",
-    "@es-js/core": "workspace:0.0.11",
+    "@es-js/core": "workspace:0.0.12",
     "vite": "^4.0.4"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.20",
     "@types/node": "^18.11.18",
     "typescript": "^4.9.4",
-    "unbuild": "^1.0.2",
-    "vue-tsc": "^1.0.22"
+    "unbuild": "^1.1.1",
+    "vue-tsc": "^1.0.24"
   },
   "type": "module",
   "exports": {
