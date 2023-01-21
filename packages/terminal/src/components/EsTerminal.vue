@@ -15,7 +15,12 @@ const onResizeDebounced = debounce(() => {
 onMounted(() => {
   terminal.setupTerminal(terminalElement.value)
 
-  terminal.xterm.onData((data: any) => terminal.xterm.write(data))
+  terminal.xterm.onData((data: any) => {
+    if (data && data[0] === '\x7F')
+      return
+
+    terminal.xterm.write(data)
+  })
 
   setTimeout(() => onResizeDebounced(), 10)
 })
