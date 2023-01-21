@@ -1,9 +1,9 @@
-const lista = Lista.de([])
+const matriz = Matriz.de([])
 
-lista.agregar('test')
+matriz.agregar('test')
 
-si (lista.incluye('test')) {
-  lista.sacar()
+si (matriz.incluye('test')) {
+  matriz.sacar()
 }
 
-lista.longitud
+matriz.longitud

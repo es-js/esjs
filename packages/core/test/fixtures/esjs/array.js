@@ -1,9 +1,9 @@
-const lista = Array.of([])
+const matriz = Array.of([])
 
-lista.push('test')
+matriz.push('test')
 
-if (lista.includes('test')) {
-  lista.pop()
+if (matriz.includes('test')) {
+  matriz.pop()
 }
 
-lista.length
+matriz.length
