@@ -203,11 +203,11 @@ export const constantLanguage = new Map([
   ['indefinido', 'undefined'],
   ['Infinito', 'Infinity'],
   ['NuN', 'NaN'],
-  ['esteGlobal', 'globalThis'],
+  ['ambienteGlobal', 'globalThis'],
 ])
 
 export const variableLanguage = new Map([
-  ['este', 'this'],
+  ['ambiente', 'this'],
   ['super', 'super'],
 ])
 
