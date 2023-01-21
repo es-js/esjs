@@ -8,8 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@es-js/core": "workspace:^0.0.12",
-    "@es-js/vite-plugin-esvue": "workspace:^0.0.9",
+    "@es-js/core": "workspace:^0.0.13",
+    "@es-js/vite-plugin-esvue": "workspace:^0.0.13",
     "vue": "^3.2.45"
   },
   "devDependencies": {

@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.20.12",
-    "@es-js/babel-plugin-esjs": "workspace:^0.0.9",
-    "@es-js/core": "workspace:0.0.12",
+    "@es-js/babel-plugin-esjs": "workspace:^0.0.13",
+    "@es-js/core": "workspace:0.0.13",
     "vite": "^4.0.4"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.31.1
-  '@es-js/core': workspace:^0.0.12
+  '@es-js/core': workspace:^0.0.13
   eslint: 8.22.0
 
 devDependencies:
