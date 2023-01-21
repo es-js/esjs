@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-esvue",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "description": "",
   "scripts": {
     "build": "unbuild"
