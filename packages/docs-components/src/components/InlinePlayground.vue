@@ -6,19 +6,19 @@ import {EDITOR_BASE_URL} from '../constants/Constants.ts'
 
 const props = defineProps({
   onlyPlayground: {
-    type: Boolean,
+    type: [Boolean, String],
     default: false,
   },
   hidePreview: {
-    type: Boolean,
+    type: [Boolean, String],
     default: true,
   },
   hideConsole: {
-    type: Boolean,
+    type: [Boolean, String],
     default: false,
   },
   hideOptions: {
-    type: Boolean,
+    type: [Boolean, String],
     default: true,
   },
   layout: {

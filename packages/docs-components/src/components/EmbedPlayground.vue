@@ -3,7 +3,7 @@ import { EDITOR_BASE_URL } from '../constants/Constants.ts'
 
 const props = defineProps({
   src: {
-    type: String,
+    type: [String, URL],
     default: EDITOR_BASE_URL,
   },
   height: {
