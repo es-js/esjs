@@ -37,5 +37,9 @@
       "import": "./dist/docs-components.es.js"
     },
     "./dist/style.css": "./dist/style.css"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^0.31.1",
+    "eslint": "8.22.0"
   }
 }

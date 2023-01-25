@@ -1,5 +1,5 @@
-<script setup>
-import { EDITOR_BASE_URL } from '../constants/Constants.ts'
+<script setup lang="ts">
+import { EDITOR_BASE_URL } from '../constants/Constants'
 
 const props = defineProps({
   src: {
@@ -15,8 +15,8 @@ const props = defineProps({
 
 <template>
   <ClientOnly>
-    <div class="w-full relative" :style="{height: props.height}">
-      <iframe :src="props.src" class="w-full h-full border-0 rounded-[8px] bg-gray-800"></iframe>
+    <div class="w-full relative" :style="{ height: props.height }">
+      <iframe :src="String(props.src)" class="w-full h-full border-0 rounded-[8px] bg-gray-800" />
     </div>
   </ClientOnly>
 </template>
