@@ -1,15 +1,12 @@
 {
   "name": "@es-js/core",
   "version": "0.0.13",
-  "description": "",
+  "type": "module",
   "scripts": {
     "build": "unbuild",
     "test": "vitest",
     "test:run": "vitest run"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
     "@types/node": "^18.11.18",
@@ -19,7 +16,6 @@
     "vite": "^4.0.4",
     "vitest": "^0.25.8"
   },
-  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
