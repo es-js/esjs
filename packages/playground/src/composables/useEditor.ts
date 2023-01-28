@@ -43,6 +43,9 @@ const output = ref()
 
 export const useEditor = () => {
   function setCode(value: string) {
+    if (!value.endsWith('\n'))
+      value += '\n'
+
     code.value = value
   }
 
