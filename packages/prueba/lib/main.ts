@@ -1,9 +1,5 @@
 import { isEqual } from './isEqual'
 
-interface Prueba {
-  [key: string]: () => void
-}
-
 class PruebaError extends Error {
   constructor(public pruebaNombre: string, public error: Error, public dontWarn = true) {
     super(error.message)
