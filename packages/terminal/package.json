@@ -1,6 +1,17 @@
 {
   "name": "@es-js/terminal",
   "version": "0.0.13",
+  "keywords": [
+    "esjs",
+    "terminal",
+    "xterm",
+    "vue"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/es-js/esjs"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -39,5 +50,6 @@
       "import": "./dist/terminal.es.js",
       "require": "./dist/terminal.umd.js"
     }
-  }
+  },
+  "types": "./dist/terminal.es.d.ts"
 }
