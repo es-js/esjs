@@ -20,7 +20,7 @@ module.exports = {
           { text: 'InlinePlayground', link: '/components/inline-playground' },
           { text: 'EmbedPlayground', link: '/components/embed-playground' },
         ],
-      }
+      },
     ],
   },
   vite: {
@@ -29,13 +29,13 @@ module.exports = {
         scan: {
           dirs: ['./', '../src'],
         },
-      })
+      }),
     ],
     resolve: {
       alias: {
         '@es-js/docs-components': resolve(__dirname, '../../src'),
       },
       dedupe: ['vue'], // avoid error when using dependencies that also use Vue
-    }
-  }
+    },
+  },
 }
