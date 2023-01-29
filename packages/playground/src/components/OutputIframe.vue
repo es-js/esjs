@@ -23,8 +23,8 @@ function updateIframe(options: UpdateIframeOptions) {
     <script type="importmap">
       {
         "imports": {
-          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js",
-          "@es-js/terminal": "https://unpkg.com/@es-js/terminal@latest/dist/terminal.es.js",
+          "vue": "https://cdn.jsdelivr.net/npm/vue@3/dist/vue.esm-browser.prod.js",
+          "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/terminal.es.js",
           "@es-js/prueba": "https://cdn.skypack.dev/@es-js/prueba"
         }
       }
