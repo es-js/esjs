@@ -10,14 +10,22 @@ const iframe = ref()
 
 const settings = useSettings().settings
 
-function updateIframe(codeWithoutImports: string, imports: string, options: any = {}) {
+interface UpdateIframeOptions {
+  code: string
+  imports: string
+  hideConsole: boolean
+  hidePreview: boolean
+}
+
+function updateIframe(options: UpdateIframeOptions) {
   const source = `
   <html>
     <script type="importmap">
       {
         "imports": {
           "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js",
-          "@es-js/terminal": "https://unpkg.com/@es-js/terminal@latest/dist/terminal.es.js"
+          "@es-js/terminal": "https://unpkg.com/@es-js/terminal@latest/dist/terminal.es.js",
+          "@es-js/prueba": "https://unpkg.com/@es-js/prueba@latest/dist/esjs-prueba.es.js"
         }
       }
     <\/script>
@@ -115,9 +123,13 @@ function updateIframe(codeWithoutImports: string, imports: string, options: any 
     <\/script>
 
     <script async type="module">
-    ${imports}
+    ${options.imports}
 
     function _handleException(error) {
+        if (error && error.dontWarn) {
+            return;
+        }
+
         return _previewException(error.toString());
     }
 
@@ -126,7 +138,13 @@ function updateIframe(codeWithoutImports: string, imports: string, options: any 
         console.error(error.toString());
     }
 
-    ${codeWithoutImports}
+    (async function() {
+      try {
+        ${options.code}
+      } catch (error) {
+        _handleException(error);
+      }
+    })();
     <\/script>
 </html>
   `
@@ -137,13 +155,7 @@ function updateIframe(codeWithoutImports: string, imports: string, options: any 
 onMounted(() => {
   const { codeWithoutImports, imports } = editor.transpileCode(editor.output.value)
 
-  let code = `(async function() {
-try {
-  ${codeWithoutImports}
-} catch (error) {
-  _handleException(error);
-}
-})();`
+  let code = codeWithoutImports
 
   try {
     code = addInfiniteLoopProtection(code)
@@ -152,7 +164,9 @@ try {
     console.error(['InfiniteLoopProtection', error])
   }
 
-  updateIframe(code, imports, {
+  updateIframe({
+    code,
+    imports,
     hidePreview: settings.value.hidePreview,
     hideConsole: settings.value.hideConsole,
   })
