@@ -30,7 +30,8 @@ export function pruebas(tests: any) {
     }
   }
 
-  mostrarResultados(tests, failures)
+  // eslint-disable-next-line no-console
+  console.log(obtenerResumen(tests, failures))
 
   if (failures > 0)
     throw new PruebasError()
@@ -97,11 +98,12 @@ export function afirmarObjetosSimilares(objetoEsperado: any, objetoActual: any, 
   }
 }
 
-export function mostrarResultados(tests: Prueba[], failures: number) {
+export function obtenerResumen(tests: any, failures: number) {
   const numberOfTests = Object.keys(tests).length
   const successes = numberOfTests - failures
-  const summaryString = `Se ejecutaron ${numberOfTests} pruebas: \n ${successes} exitosas \n ${failures} fallidas`
+  const executedTestsString = numberOfTests === 1 ? 'Se ejecutó 1 prueba' : `Se ejecutaron ${numberOfTests} pruebas`
+  const numberOfSuccessesString = successes === 1 ? '1 exitosa' : `${successes} exitosas`
+  const numberOfFailuresString = failures === 1 ? '1 fallida' : `${failures} fallidas`
 
-  // eslint-disable-next-line no-console
-  console.log(summaryString)
+  return `${executedTestsString}: \n ${numberOfSuccessesString} \n ${numberOfFailuresString}`
 }

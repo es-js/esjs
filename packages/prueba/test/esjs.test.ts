@@ -4,7 +4,7 @@ import {
   afirmarIguales,
   afirmarMatricesIguales, afirmarMatricesSimilares,
   afirmarObjetosIguales, afirmarObjetosSimilares,
-  afirmarSimilares,
+  afirmarSimilares, obtenerResumen,
   prueba,
   pruebas,
 } from '../lib/main'
@@ -242,5 +242,44 @@ describe('pruebas', () => {
         },
       }),
     ).toThrowError()
+  })
+})
+
+describe('obtenerResumen', () => {
+  it('works for 1 test', () => {
+    expect(
+      obtenerResumen({
+        basica: () => {
+          afirmar(true)
+        },
+      }, 0),
+    ).toEqual('Se ejecutó 1 prueba: \n 1 exitosa \n 0 fallidas')
+  })
+
+  it('works for many tests', () => {
+    expect(
+      obtenerResumen({
+        basica: () => {
+          afirmar(true)
+        },
+        falla: () => {
+          afirmar(false)
+        },
+      }, 1),
+    ).toEqual('Se ejecutaron 2 pruebas: \n 1 exitosa \n 1 fallida')
+
+    expect(
+      obtenerResumen({
+        basica: () => {
+          afirmar(true)
+        },
+        basica2: () => {
+          afirmar(true)
+        },
+        basica3: () => {
+          afirmar(true)
+        },
+      }, 0),
+    ).toEqual('Se ejecutaron 3 pruebas: \n 3 exitosas \n 0 fallidas')
   })
 })
