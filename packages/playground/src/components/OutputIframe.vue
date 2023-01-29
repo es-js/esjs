@@ -25,7 +25,7 @@ function updateIframe(options: UpdateIframeOptions) {
         "imports": {
           "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js",
           "@es-js/terminal": "https://unpkg.com/@es-js/terminal@latest/dist/terminal.es.js",
-          "@es-js/prueba": "https://unpkg.com/@es-js/prueba@latest/dist/esjs-prueba.es.js"
+          "@es-js/prueba": "https://cdn.skypack.dev/@es-js/prueba"
         }
       }
     <\/script>
@@ -40,12 +40,12 @@ function updateIframe(options: UpdateIframeOptions) {
         </div>
     </body>
 
-    <script src='https://unpkg.com/nprogress@0.2.0/nprogress.js'><\/script>
-    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css'/>
-
-    <script src="//cdn.jsdelivr.net/npm/eruda"><\/script>
+    <link rel='stylesheet' href='https://cdn.skypack.dev/nprogress/nprogress.css'/>
 
     <script type="module">
+    import NProgress from 'https://cdn.skypack.dev/nprogress';
+    import eruda from 'https://cdn.skypack.dev/eruda';
+
     NProgress.start();
 
     window.addEventListener('message', async ({ data }) => {
