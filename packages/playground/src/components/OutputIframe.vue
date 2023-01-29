@@ -42,11 +42,10 @@ function updateIframe(options: UpdateIframeOptions) {
 
     <link rel='stylesheet' href='https://cdn.skypack.dev/nprogress/nprogress.css'/>
 
-    <script type="module">
+    <script async type="module">
     import NProgress from 'https://cdn.skypack.dev/nprogress';
     import eruda from 'https://cdn.skypack.dev/eruda';
-
-    NProgress.start();
+    ${options.imports}
 
     window.addEventListener('message', async ({ data }) => {
       const { event, value } = data;
@@ -60,11 +59,13 @@ function updateIframe(options: UpdateIframeOptions) {
       }
     })
 
-    function _init() {
-        _initEruda()
-        _hidePreview(${options.hidePreview})
-        _hideConsole(${options.hideConsole})
-        NProgress.done();
+    async function _init() {
+      NProgress.start();
+      await _initEruda();
+      _hidePreview(${options.hidePreview});
+      _hideConsole(${options.hideConsole});
+      NProgress.done();
+      _runCode();
     }
 
     function _initEruda() {
@@ -119,12 +120,6 @@ function updateIframe(options: UpdateIframeOptions) {
         console.error(error);
     }
 
-    _init()
-    <\/script>
-
-    <script async type="module">
-    ${options.imports}
-
     function _handleException(error) {
         if (error && error.dontWarn) {
             return;
@@ -138,13 +133,17 @@ function updateIframe(options: UpdateIframeOptions) {
         console.error(error.toString());
     }
 
-    (async function() {
-      try {
-        ${options.code}
-      } catch (error) {
-        _handleException(error);
-      }
-    })();
+    function _runCode() {
+      (async function() {
+        try {
+          ${options.code}
+        } catch (error) {
+          _handleException(error);
+        }
+      })();
+    }
+
+    await _init()
     <\/script>
 </html>
   `
