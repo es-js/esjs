@@ -27,38 +27,8 @@ features:
 
 <div class="w-full h-8" />
 
-
-
-
-<div class="w-full max-w-7xl mx-auto px-4 2xl:px-0">
-
-<InlinePlayground only-playground layout="horizontal">
-
-```esjs
-// Muestra los 10 primeros números de 
-// la serie de Fibonacci.
-
-fibonacci(10)
-
-funcion fibonacci(n) {
-  var a = 0
-  consola.escribir(a)
-
-  var b = 1
-  consola.escribir(b)
-
-  var contador = 2
-  
-  mientras (contador < n) {
-    var c = a + b
-    consola.escribir(c)
-    a = b
-    b = c
-    contador++
-  }
-}
-```
-
-</InlinePlayground>
-
-</div>
+<ClientOnly>
+  <div class="w-full max-w-7xl mx-auto px-4 2xl:px-0">
+    <EmbedPlayground src="https://editor.esjs.dev/JYWwDg9gTgLghlABAb0WKBXApgIzgZwBpE4AzYKEBASQHMM4AbLfRAX0QBMXvEByAAIsAtACt8AenTY8fAFByJExABEsAN2yN1WRBgB2cRFRhRgAL0QBjCPsSMIrO+lBYojxPoBfINx96MRvhuwLq8AGLAOLZwVlbAAHRypAbxtojk0YZxwAAU+gCUKHKIiOoIiMFmugC8iADaALoKpeVIRnUADCWVIVgJcLRQWLQIuXAFLWUVOIh1AIw9VaEDQyNjOJM9bda28JzQc4gATD09IKH6pgSIuTZXcAdIADyeRcg9rRVWR0YA1IgcJ9etVVsNRlA7pNSqUOoDgbM6lZgfd9tA-n8emwpsMYNBDEhllg5Ni5Pd8BBAgkWFYzDgKLkenwADIeeadNBmXzuJw+PysAJGADKfS4ukiWVi8UqtgAXHxiAklZkYjlcuzJltpLgCLkPqU+OzOa4eZ4+Ty+LKMqlgOlcu9gWQKFQoHQGMx8IyYTD6p1iPN-cRjsQAMzEACsxAAHP6wycA4gQwAWRqEYGlFXZeLqzrQmF57FsSZAA?hidePreview=true&hideOptions=true"  />
+  </div>
+</ClientOnly>
