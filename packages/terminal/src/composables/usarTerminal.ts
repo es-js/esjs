@@ -117,6 +117,19 @@ export const usarTerminal = () => {
           break
         }
 
+        case 'v': {
+          if (event.domEvent.ctrlKey) {
+            try {
+              const text = await window?.navigator?.clipboard?.readText()
+              innerBuffer += text
+              xterm.write(text)
+            }
+            catch (error) {}
+          }
+
+          break
+        }
+
         case 'l': {
           if (event.domEvent.ctrlKey)
             limpiar()
