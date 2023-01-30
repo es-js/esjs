@@ -23,7 +23,7 @@ function updateIframe(options: UpdateIframeOptions) {
     <script type="importmap">
       {
         "imports": {
-          "@es-js/terminal": "https://esm.run/@es-js/terminal@latest/dist/terminal.es.js",
+          "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/terminal.es.js/+esm",
           "@es-js/prueba": "https://cdn.skypack.dev/@es-js/prueba"
         }
       }
