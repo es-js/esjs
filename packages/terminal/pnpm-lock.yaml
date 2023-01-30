@@ -8,7 +8,6 @@ specifiers:
   eslint: 8.22.0
   is-number: ^7.0.0
   lodash.debounce: ^4.0.8
-  string.ify: ^1.0.64
   typescript: ^4.9.4
   vite: ^4.0.4
   vite-plugin-dts: ^1.7.1
@@ -30,7 +29,6 @@ devDependencies:
   eslint: 8.22.0
   is-number: 7.0.0
   lodash.debounce: 4.0.8
-  string.ify: 1.0.64
   typescript: 4.9.4
   vite: 4.0.4_@types+node@18.11.18
   vite-plugin-dts: 1.7.1_vite@4.0.4
@@ -2514,10 +2512,6 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /printable-characters/1.0.42:
-    resolution: {integrity: sha512-dKp+C4iXWK4vVYZmYSd0KBH5F/h1HoZRsbJ82AVKRO3PEo8L4lBS/vLwhVtpwwuYcoIsVY+1JYKR268yn480uQ==}
-    dev: true
-
   /punycode/2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
@@ -2723,19 +2717,6 @@ packages:
   /string-argv/0.3.1:
     resolution: {integrity: sha512-a1uQGz7IyVy9YwhqjZIZu1c8JO8dNIe20xBmSS6qu9kv++k3JGzCVmprbNN5Kn+BgzD5E7YYwg1CcjuJMRNsvg==}
     engines: {node: '>=0.6.19'}
-    dev: true
-
-  /string.bullet/1.0.12:
-    resolution: {integrity: sha512-6+tQyad/ux52N+7wUcjmxeK5TfdeykBBLHQPk8MxUVrk9JwHzJnuxsJzjjpWAuz0x3EmnVGCg0ibMHqez1l/qQ==}
-    dependencies:
-      printable-characters: 1.0.42
-    dev: true
-
-  /string.ify/1.0.64:
-    resolution: {integrity: sha512-4Aa5yndnuOhE1GV2W3ht4rQ08XHq46JLXmSOv0jeUWEzqliBvm8lAXvt+66np+J9DkoCZikFzTzjXVLRR0F/Xw==}
-    dependencies:
-      printable-characters: 1.0.42
-      string.bullet: 1.0.12
     dev: true
 
   /string.prototype.trimend/1.0.6:

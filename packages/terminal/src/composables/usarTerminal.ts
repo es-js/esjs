@@ -4,12 +4,12 @@ import { WebLinksAddon } from 'xterm-addon-web-links'
 import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
 import isNumber from 'is-number'
-import stringify from 'string.ify'
 import { clearLine, handleBackspace, isPrintableKeyCode, prompt } from '../utils/xtermUtils'
 
 const xterm = new Terminal({
   cursorBlink: true,
   disableStdin: true,
+  convertEol: true,
 })
 const fitAddon = new FitAddon()
 xterm.loadAddon(fitAddon)
@@ -45,7 +45,7 @@ export const usarTerminal = () => {
 
       switch (type) {
         case 'object':
-          return writeOnXterm(stringify.configure({ pretty: false })(arg))
+          return writeOnXterm(JSON.stringify(arg, null, 2))
 
         default:
           return writeOnXterm(String(arg))
