@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useSettings } from '@/composables/useSettings'
 import { addInfiniteLoopProtection } from '@/composables/utils'
@@ -9,6 +10,8 @@ const editor = useEditor()
 const iframe = ref()
 
 const settings = useSettings().settings
+
+const bus = useEventBus('editor')
 
 interface UpdateIframeOptions {
   code: string
@@ -157,9 +160,14 @@ onMounted(() => {
 
   try {
     code = addInfiniteLoopProtection(code)
+    bus.emit('clear-decorations')
   }
   catch (error) {
-    console.error(['InfiniteLoopProtection', error])
+    bus.emit('decorate-error', {
+      line: error.lineNumber || 1,
+      column: error.index || 1,
+    })
+    code = ''
   }
 
   updateIframe({

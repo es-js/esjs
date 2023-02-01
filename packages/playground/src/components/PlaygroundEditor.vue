@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Registry } from 'monaco-textmate'
 import { wireTmGrammars } from 'monaco-editor-textmate'
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json'
@@ -13,6 +13,8 @@ const editor = useEditor()
 const bus = useEventBus('editor')
 
 let monacoEditor = null
+
+const decorations = ref([])
 
 onMounted(async () => {
   await setupMonaco()
@@ -37,6 +39,7 @@ async function setupMonaco() {
     language: 'esjs',
     renderWhitespace: 'all',
     roundedSelection: true,
+    glyphMargin: true,
   })
 
   await setupMonacoGrammar()
@@ -116,15 +119,38 @@ async function setupMonacoCommands() {
   })
 }
 
+async function decorateError(line: number, column: number) {
+  decorations.value = monacoEditor.deltaDecorations(
+    decorations.value,
+    [
+      {
+        range: new monaco.Range(line, column, line, column + 1),
+        options: {
+          className: 'bg-red-900',
+          glyphMarginClassName: 'bg-red-500',
+        },
+      },
+    ],
+  )
+}
+
+function clearDecorations() {
+  decorations.value = monacoEditor.deltaDecorations(decorations.value, [])
+}
+
 function focusEditor() {
   monacoEditor.focus()
 }
 
 function setupBusCommands() {
-  bus.on((event: string) => {
+  bus.on((event: string, payload?: any) => {
     switch (event) {
       case 'focus':
         return focusEditor()
+      case 'decorate-error':
+        return decorateError(payload.line, payload.column)
+      case 'clear-decorations':
+        return clearDecorations()
       default:
         return null
     }
