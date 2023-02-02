@@ -14,6 +14,7 @@ export {
   supportFunction,
   promiseMethods,
   keywords,
+  dateMethods,
 } from './keywords'
 export { splitCodeImports } from './split-code-imports'
 export { splitScriptTemplate } from './split-script-template'

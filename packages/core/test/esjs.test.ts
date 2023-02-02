@@ -5,15 +5,24 @@ import { transpile } from '../src/index'
 
 const esjsFixtures = import.meta.glob('./fixtures/esjs/*.esjs')
 
+const readFixture = (filepath: string) => {
+  const esjsCode = readFileSync(resolve(`${__dirname}/${filepath}`), 'utf-8')
+  const jsCode = readFileSync(resolve(`${__dirname}/${filepath.replace('.esjs', '.js')}`), 'utf-8')
+
+  return {
+    esjsCode,
+    jsCode,
+  }
+}
+
 describe('transform', () => {
   it('transforms esjs', () => {
     const fixtureKeys = Object.keys(esjsFixtures)
 
     expect(fixtureKeys.length).toBeGreaterThan(0)
 
-    for (const esjsFixture of fixtureKeys) {
-      const esjsCode = readFileSync(resolve(`${__dirname}/${esjsFixture}`), 'utf-8')
-      const jsCode = readFileSync(resolve(`${__dirname}/${esjsFixture.replace('.esjs', '.js')}`), 'utf-8')
+    for (const fixture of fixtureKeys) {
+      const { esjsCode, jsCode } = readFixture(fixture)
 
       const esjsCodeTranspiled = transpile(esjsCode)
 
@@ -21,3 +30,14 @@ describe('transform', () => {
     }
   })
 })
+
+describe('particular fixture', () => {
+  it('transforms esjs', () => {
+    const { esjsCode, jsCode } = readFixture('./fixtures/esjs/fecha.esjs')
+
+    const esjsCodeTranspiled = transpile(esjsCode)
+
+    expect(esjsCodeTranspiled).toEqual(jsCode)
+  })
+})
+
