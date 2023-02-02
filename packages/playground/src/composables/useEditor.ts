@@ -62,7 +62,7 @@ export const useEditor = () => {
       }
       catch (error) {
         const escapedErrorMessage = escapeQuotes(error?.toString())
-        output.value = `_previewException("${escapedErrorMessage}");`
+        output.value = `window._previewException("${escapedErrorMessage}");`
       }
     })
   }

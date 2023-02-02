@@ -117,32 +117,26 @@ function updateIframe(options: UpdateIframeOptions) {
         }
     }
 
-    function _handleInfiniteLoopException(error) {
+    window._handleInfiniteLoopException = function (error) {
         console.warn('¡Advertencia!: Se ha detectado un bucle infinito');
         console.error(error);
     }
 
-    function _handleException(error) {
+    window._handleException = function (error) {
         if (error && error.dontWarn) {
             return;
         }
 
-        return _previewException(error.toString());
+        return window._previewException(error.toString());
     }
 
-    function _previewException(error) {
+    window._previewException = function (error) {
         console.warn('¡Advertencia!: Se ha producido una excepción');
         console.error(error.toString());
     }
 
     function _runCode() {
-      (async function() {
-        try {
-          ${options.code}
-        } catch (error) {
-          _handleException(error);
-        }
-      })();
+      ${options.code}
     }
 
     await _init()
@@ -156,18 +150,26 @@ function updateIframe(options: UpdateIframeOptions) {
 onMounted(() => {
   const { codeWithoutImports, imports } = editor.transpileCode(editor.output.value)
 
-  let code = codeWithoutImports
+  let code = `(async function() {
+  try {
+    ${codeWithoutImports}
+  } catch (error) {
+    window._handleException(error);
+  }
+})();`
 
   try {
     code = addInfiniteLoopProtection(code)
     bus.emit('clear-decorations')
   }
-  catch (error) {
+  catch (error: any) {
+    const line = error.lineNumber || 1
+    const column = error.index || 1
+    code = `throw new Error('Línea ${line}: "${error.description}"');`
     bus.emit('decorate-error', {
-      line: error.lineNumber || 1,
-      column: error.index || 1,
+      line,
+      column,
     })
-    code = ''
   }
 
   updateIframe({

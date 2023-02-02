@@ -10,7 +10,7 @@ export function addInfiniteLoopProtection(code: string, { timeout } = { timeout:
   const patches = []
   const varPrefix = '_wmloopvar'
   const varStr = 'var %d = Date.now();\n'
-  const checkStr = `\nif (Date.now() - %d > ${timeout}) { _handleInfiniteLoopException(new Error("Bucle infinito")); break;}\n`
+  const checkStr = `\nif (Date.now() - %d > ${timeout}) { window._handleInfiniteLoopException(new Error("Bucle infinito")); break;}\n`
 
   esprima.parse(
     code,
