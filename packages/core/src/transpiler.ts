@@ -77,7 +77,7 @@ export function transpile(input: string) {
 }
 
 function isAlpha(char: string) {
-  return /[a-zA-Z]/.test(char)
+  return /^[\p{L}\p{Nl}$_][\p{L}\p{Nl}\p{Nd}$\u200C\u200D_]*$/u.test(char)
 }
 
 function isWhitespace(char: string) {
