@@ -1,4 +1,5 @@
 import { isEqual } from './isEqual'
+import logSymbols from 'log-symbols';
 
 class PruebaError extends Error {
   constructor(public pruebaNombre: string, public error: Error, public dontWarn = true) {
@@ -38,11 +39,11 @@ export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
     pruebaFuncion()
 
     // eslint-disable-next-line no-console
-    console.log(`%c${pruebaNombre}`, 'color: green;')
+    console.log(`%c${logSymbols.success} ${pruebaNombre}`, 'color: #14b8a6; font-size: 14px; padding: 2px 4px;')
   }
   catch (error: any) {
     // eslint-disable-next-line no-console
-    console.groupCollapsed(`%c${pruebaNombre}`, 'color: red;')
+    console.groupCollapsed(`%c${logSymbols.error} ${pruebaNombre}`, 'color: #f43f5e; font-size: 14px; padding: 2px 4px;')
     console.error(error?.stack)
     // eslint-disable-next-line no-console
     console.groupEnd()
@@ -54,7 +55,7 @@ export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
 export function afirmar(valor: boolean, mensaje?: string) {
   if (!valor) {
     mensaje = mensaje ?? 'afirmar(): Se esperaba "verdadero", pero se recibió "falso"'
-    throw new Error(`afirmar(): ${mensaje}`)
+    throw new Error(mensaje)
   }
 }
 
