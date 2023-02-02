@@ -12,7 +12,7 @@
     "@babel/core": "^7.20.12",
     "@babel/parser": "^7.20.13",
     "@es-js/babel-plugin-esjs": "workspace:^0.0.13",
-    "@es-js/core": "workspace:0.0.13",
+    "@es-js/core": "workspace:0.0.14",
     "vite": "^4.0.4"
   },
   "devDependencies": {
