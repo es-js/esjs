@@ -12,7 +12,6 @@ specifiers:
   vite: ^4.0.4
   vite-plugin-dts: ^1.7.2
   vue: ^3.2.45
-  vue-resize: 2.0.0-alpha.1
   vue-tsc: ^1.0.24
   xterm: ^5.1.0
   xterm-addon-fit: ^0.7.0
@@ -32,7 +31,6 @@ devDependencies:
   typescript: 4.9.5
   vite: 4.0.4_@types+node@18.11.18
   vite-plugin-dts: 1.7.2_dwc45emffwupjr7rjuagt6pgri
-  vue-resize: 2.0.0-alpha.1_vue@3.2.45
   vue-tsc: 1.0.24_typescript@4.9.5
   xterm: 5.1.0
   xterm-addon-fit: 0.7.0_xterm@5.1.0
@@ -2993,14 +2991,6 @@ packages:
       semver: 7.3.8
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /vue-resize/2.0.0-alpha.1_vue@3.2.45:
-    resolution: {integrity: sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      vue: 3.2.45
     dev: true
 
   /vue-template-compiler/2.7.14:

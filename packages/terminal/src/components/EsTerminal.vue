@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { ResizeObserver } from 'vue-resize'
+import { onMounted, onUnmounted, ref } from 'vue'
 import debounce from 'lodash.debounce'
 import { usarTerminal } from '../composables/usarTerminal'
 
@@ -23,16 +22,19 @@ onMounted(() => {
   })
 
   setTimeout(() => onResizeDebounced(), 10)
+
+  window.addEventListener('resize', onResizeDebounced)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', onResizeDebounced)
 })
 </script>
 
 <template>
-  <div ref="terminalElement" style="width: 100%; height: 100%; overflow: hidden;">
-    <ResizeObserver @notify="onResizeDebounced" />
-  </div>
+  <div ref="terminalElement" style="width: 100%; height: 100%; overflow: hidden;" />
 </template>
 
 <style>
 @import 'xterm/css/xterm.css';
-@import 'vue-resize/dist/vue-resize.css';
 </style>
