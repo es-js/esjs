@@ -9,8 +9,6 @@ import PlaygroundOutput from '@/components/PlaygroundOutput.vue'
 const editor = useEditor()
 
 const settings = useSettings().settings
-
-const view = 'horizontal'
 </script>
 
 <template>
