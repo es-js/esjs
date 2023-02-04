@@ -51,6 +51,7 @@ function shareCode() {
             v-if="!settings.settings.value.hideOptions"
             icon="mdi:share"
             :text="grid.lg ? 'Compartir código' : 'Compartir'"
+            :icon-only="!grid.sm"
             color="teal"
             @click="shareCode"
           />
@@ -63,6 +64,7 @@ function shareCode() {
         v-if="!settings.settings.value.hideOptions"
         icon="mdi:play"
         text="Ejecutar"
+        :icon-only="!grid.sm"
         @click="editor.execute()"
       />
     </div>

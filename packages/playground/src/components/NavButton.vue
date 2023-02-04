@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { useGrid } from 'vue-screen'
 
 const props = defineProps({
   text: String,
@@ -10,25 +9,24 @@ const props = defineProps({
     type: String,
     default: 'indigo',
   },
+  iconOnly: Boolean,
 })
 
 const emit = defineEmits(['click'])
-
-const grid = useGrid('tailwind')
 </script>
 
 <template>
   <button
-    class="flex flex-row items-center py-1.5 px-2 space-x-1 text-xs "
+    class="flex flex-row justify-center items-center text-xs"
     :class="{
       'bg-indigo-500 hover:bg-indigo-400 text-white': 'indigo' === props.color,
       'bg-teal-800 hover:bg-teal-700 text-white': 'teal' === props.color,
-      'rounded': grid.sm,
-      'w-8 h-8 rounded-full': !grid.sm,
+      'py-1.5 px-2 space-x-1 rounded': !props.iconOnly,
+      'py-0.5 px-1 w-7.5 h-7.5 rounded-full': props.iconOnly,
     }"
     @click="emit('click')"
   >
     <Icon :icon="props.icon" class="w-4 h-4" />
-    <span v-if="grid.sm">{{ props.text }}</span>
+    <span v-if="!props.iconOnly">{{ props.text }}</span>
   </button>
 </template>
