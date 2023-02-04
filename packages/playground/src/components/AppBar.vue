@@ -5,6 +5,7 @@ import { useSettings } from '@/composables/useSettings'
 import { useShare } from '@/composables/useShare'
 import { useEditor } from '@/composables/useEditor'
 import NavCircleButton from '@/components/NavCircleButton.vue'
+import { useNotification } from '@/composables/useNotification'
 
 const settings = useSettings()
 
@@ -13,6 +14,8 @@ const share = useShare()
 const editor = useEditor()
 
 const grid = useGrid('tailwind')
+
+const notification = useNotification()
 
 function shareCode() {
   const url = share.getSharedUrl(editor.code.value)
@@ -24,6 +27,8 @@ function shareCode() {
   })
 
   clipboard.copy()
+
+  notification.success('Se copió la URL al portapapeles')
 }
 </script>
 

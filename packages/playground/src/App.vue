@@ -4,6 +4,7 @@ import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
+import AppNotifications from '@/components/AppNotifications.vue'
 
 const editor = useEditor()
 
@@ -50,6 +51,8 @@ function initSharedUrl() {
       <Playground />
     </div>
   </div>
+
+  <AppNotifications />
 </template>
 
 <style>
