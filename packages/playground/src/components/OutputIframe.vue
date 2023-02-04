@@ -47,6 +47,7 @@ function updateIframe(options: UpdateIframeOptions) {
     <script async type="module">
     import NProgress from 'https://cdn.skypack.dev/nprogress';
     import eruda from 'https://cdn.skypack.dev/eruda';
+    import { usarTerminal } from '@es-js/terminal';
     ${options.imports}
 
     window.addEventListener('message', async ({ data }) => {
@@ -98,6 +99,7 @@ function updateIframe(options: UpdateIframeOptions) {
           consoleElement.style.display = 'flex';
           consoleElement.style.flex = '1 1 0';
         }
+        usarTerminal().fitTerminal()
     }
 
     function _hidePreview(value) {
