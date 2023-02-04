@@ -26,6 +26,7 @@ module.exports = {
   vite: {
     plugins: [
       WindiCSS({
+        config: resolve(__dirname, '../../windi.config.ts'),
         scan: {
           dirs: ['./', '../src'],
         },

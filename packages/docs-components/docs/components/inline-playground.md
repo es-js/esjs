@@ -8,17 +8,23 @@ Componente que tiene un slot para insertar Código Markdown, e inserta dicho có
 
 <!--@include: ./demo/InlinePlayground/Basic.md-->
 
+Source:
+
 <<< @/components/demo/InlinePlayground/Basic.md
 
 ### With Preview
 
 <!--@include: ./demo/InlinePlayground/WithPreview.md-->
 
+Source:
+
 <<< @/components/demo/InlinePlayground/WithPreview.md
 
 ### OnlyPlayground
 
 <!--@include: ./demo/InlinePlayground/OnlyPlayground.md-->
+
+Source:
 
 <<< @/components/demo/InlinePlayground/OnlyPlayground.md
 

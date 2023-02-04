@@ -55,18 +55,6 @@ function stop() {
   running.value = false
 }
 
-const openEditorUrl = computed(
-  () => {
-    if (!sharedCode.value)
-      return
-
-    const url = new URL(EDITOR_BASE_URL)
-    url.pathname = sharedCode.value
-
-    return url
-  },
-)
-
 const playgroundUrl = computed(
   () => {
     if (!sharedCode.value)
@@ -92,7 +80,7 @@ const playgroundUrl = computed(
       <slot />
     </div>
 
-    <div v-if="!props.onlyPlayground" class="relative flex flex-row justify-center items-center">
+    <div v-if="!props.onlyPlayground" class="relative flex flex-row justify-center items-center print:hidden">
       <div class="absolute flex flex-row justify-center z-10 -mt-4">
         <button
           class="flex flex-row items-center space-x-1 px-2 py-1 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white"
@@ -104,24 +92,8 @@ const playgroundUrl = computed(
       </div>
     </div>
 
-    <div v-if="running" class="flex flex-col">
-      <EmbedPlayground
-        v-if="running"
-        :src="playgroundUrl"
-        height="50vh"
-      />
-
-      <div class="flex flex-row justify-center -mt-2 z-10">
-        <a
-          v-if="openEditorUrl"
-          :href="String(openEditorUrl)"
-          target="_blank"
-          class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400"
-        >
-          <Icon icon="mdi:open-in-new" class="w-4 h-4 text-white" />
-          <span class="text-white text-sm">Abrir Editor</span>
-        </a>
-      </div>
+    <div v-if="running" class="flex flex-col print:hidden">
+      <EmbedPlayground :src="playgroundUrl" height="50vh" show-open-button />
     </div>
   </div>
 </template>
