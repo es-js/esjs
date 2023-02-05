@@ -1,9 +1,9 @@
+import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { splitCodeImports, transpile } from '@es-js/core'
-import { useShare } from '@/composables/useShare'
 import { escapeQuotes } from '@/composables/utils'
 
-const INITIAL_CODE = `/**
+export const INITIAL_CODE = `/**
   EsJS: JavaScript en Español.
 
   Este código será transpilado a JavaScript, y ejecutado junto a una Terminal.
@@ -35,9 +35,7 @@ asincrono funcion inicio() {
 inicio()
 `
 
-const { code: sharedCode } = useShare().decompressSharedUrl()
-
-const code = ref(sharedCode || INITIAL_CODE)
+const code: Ref<string> = ref(INITIAL_CODE)
 
 const output = ref()
 

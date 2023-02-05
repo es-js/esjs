@@ -107,7 +107,6 @@ async function setupMonacoCompletion() {
 }
 
 async function setupMonacoSynchronization() {
-  editor.setCode(monacoEditor.getValue())
   monacoEditor.onDidChangeModelContent(() => {
     editor.setCode(monacoEditor.getValue())
   })
@@ -120,6 +119,9 @@ async function setupMonacoCommands() {
 }
 
 async function decorateError(line: number, column: number) {
+  if (!monacoEditor || !monacoEditor.deltaDecorations)
+    return
+
   decorations.value = monacoEditor.deltaDecorations(
     decorations.value,
     [
@@ -135,6 +137,9 @@ async function decorateError(line: number, column: number) {
 }
 
 function clearDecorations() {
+  if (!monacoEditor || !monacoEditor.deltaDecorations)
+    return
+
   decorations.value = monacoEditor.deltaDecorations(decorations.value, [])
 }
 
