@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { splitCodeImports, transpile } from '@es-js/core'
-import { escapeQuotes } from '@/composables/utils'
+import { escapeQuotes, sanitizeCode } from '@/composables/utils'
 
 export const INITIAL_CODE = `/**
   EsJS: JavaScript en Español.
@@ -35,16 +35,21 @@ asincrono funcion inicio() {
 inicio()
 `
 
+const DEFAULT_IMPORTS = 'import { pruebas, afirmar, afirmarIguales } from \'@es-js/prueba\''
+
 const code: Ref<string> = ref(INITIAL_CODE)
+
+const testsCode: Ref<string> = ref('')
 
 const output = ref()
 
 export const useEditor = () => {
   function setCode(value: string) {
-    if (!value.endsWith('\n'))
-      value += '\n'
+    code.value = sanitizeCode(value)
+  }
 
-    code.value = value
+  function setTestsCode(value: string) {
+    testsCode.value = sanitizeCode(value)
   }
 
   function cleanPreviousExecution() {
@@ -55,25 +60,37 @@ export const useEditor = () => {
     cleanPreviousExecution()
 
     setTimeout(() => {
-      try {
-        output.value = transpile(code.value)
-      }
-      catch (error) {
-        const escapedErrorMessage = escapeQuotes(error?.toString())
-        output.value = `window._previewException("${escapedErrorMessage}");`
-      }
+      output.value = getTranspiledCode()
     })
   }
 
-  function transpileCode(code: string) {
-    return splitCodeImports(code)
+  function getTranspiledCode() {
+    try {
+      const transpiledCode = transpile(code.value)
+      const splittedCode = splitCodeImports(transpiledCode)
+      const transpiledTestsCode = transpile(testsCode.value)
+      const splittedTestsCode = splitCodeImports(transpiledTestsCode)
+
+      return {
+        defaultImports: DEFAULT_IMPORTS,
+        codeImports: splittedCode.imports,
+        codeWithoutImports: splittedCode.codeWithoutImports,
+        testsCodeImports: splittedTestsCode.imports,
+        testsCodeWithoutImports: splittedTestsCode.codeWithoutImports,
+      }
+    }
+    catch (error) {
+      const escapedErrorMessage = escapeQuotes(error?.toString())
+      output.value = `window._previewException("${escapedErrorMessage}");`
+    }
   }
 
   return {
     code,
+    testsCode,
     output,
     execute,
-    transpileCode,
     setCode,
+    setTestsCode,
   }
 }

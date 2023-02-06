@@ -1,5 +1,12 @@
 import * as esprima from 'esprima'
 
+export function sanitizeCode(code: string) {
+  if (!code.endsWith('\n'))
+    code += '\n'
+
+  return code
+}
+
 /**
  * Agrega un límite de tiempo de ejecución para cada bucle.
  * @author Ariya Hidayat.

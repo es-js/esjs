@@ -6,6 +6,7 @@ const settings = ref({
   hideEditor: false,
   hidePreview: false,
   hideConsole: false,
+  hideTests: true,
   autoCompile: true,
 })
 
@@ -30,6 +31,10 @@ export const useSettings = () => {
     settings.value.hideConsole = hideConsole
   }
 
+  function setHideTests(hideTests: boolean) {
+    settings.value.hideTests = hideTests
+  }
+
   function setAutoCompile(autoCompile: boolean) {
     settings.value.autoCompile = autoCompile
   }
@@ -41,6 +46,7 @@ export const useSettings = () => {
     setHideEditor,
     setHidePreview,
     setHideConsole,
+    setHideTests,
     setAutoCompile,
   }
 }

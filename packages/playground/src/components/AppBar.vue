@@ -18,7 +18,7 @@ const grid = useGrid('tailwind')
 const notification = useNotification()
 
 function shareCode() {
-  const url = share.getSharedUrl(editor.code.value)
+  const url = share.getSharedUrl(editor.code.value, editor.testsCode.value)
 
   window.history.replaceState('', '', url)
 

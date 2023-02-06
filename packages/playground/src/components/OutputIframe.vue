@@ -150,11 +150,18 @@ function updateIframe(options: UpdateIframeOptions) {
 }
 
 onMounted(() => {
-  const { codeWithoutImports, imports } = editor.transpileCode(editor.output.value)
+  const {
+    defaultImports,
+    codeImports,
+    codeWithoutImports,
+    testsCodeImports,
+    testsCodeWithoutImports,
+  } = editor.output.value
 
   let code = `(async function() {
   try {
     ${codeWithoutImports}
+    ${testsCodeWithoutImports}
   } catch (error) {
     window._handleException(error);
   }
@@ -176,7 +183,7 @@ onMounted(() => {
 
   updateIframe({
     code,
-    imports,
+    imports: `${defaultImports} \n ${codeImports} \n ${testsCodeImports}`,
     hidePreview: settings.value.hidePreview,
     hideConsole: settings.value.hideConsole,
   })

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
 import AppNotifications from '@/components/AppNotifications.vue'
+import AppFooter from '@/components/AppFooter.vue'
 
 const bus = useEventBus('editor')
 
@@ -14,12 +15,15 @@ const settings = useSettings()
 
 const editor = useEditor()
 
+const loading = ref(true)
+
 onMounted(async () => {
   window.addEventListener('keyup', handleWindowKeyup)
 
   setSettingsFromUrl()
   await setCodeFromUrl()
   await editor.execute()
+  loading.value = false
 })
 
 function handleWindowKeyup($event) {
@@ -28,24 +32,28 @@ function handleWindowKeyup($event) {
 }
 
 async function setCodeFromUrl() {
-  const { pathname } = share.decodeSharedUrl()
+  const { pathname, tests } = share.decodeSharedUrl()
 
   const code = await share.getCodeFromPathname(pathname)
 
   editor.setCode(code)
+
+  if (tests)
+    editor.setTestsCode(tests)
 }
 
 function setSettingsFromUrl() {
   if (window.location.pathname === '/')
     return
 
-  const { layout, hideOptions, hideEditor, hidePreview, hideConsole } = share.decodeSharedUrl()
+  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests } = share.decodeSharedUrl()
 
   settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
   settings.setHideOptions(hideOptions === 'true')
   settings.setHideEditor(hideEditor === 'true')
   settings.setHidePreview(hidePreview === 'true')
   settings.setHideConsole(hideConsole === 'true')
+  settings.setHideTests(hideTests === 'true')
 }
 </script>
 
@@ -56,7 +64,7 @@ function setSettingsFromUrl() {
     </div>
 
     <div class="flex flex-1">
-      <Playground v-if="editor.code.value" />
+      <Playground v-if="!loading" />
     </div>
   </div>
 

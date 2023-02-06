@@ -6,12 +6,17 @@ import { useNotification } from '@/composables/useNotification'
 const settings = useSettings()
 
 export const useShare = () => {
-  function getSharedUrl(code: string) {
+  function getSharedUrl(code: string, testsCode: string | null = null): URL {
     const url = new URL(lzs.compressToEncodedURIComponent(code), window.location.origin)
+
+    if (testsCode)
+      url.searchParams.set('tests', lzs.compressToEncodedURIComponent(testsCode))
+
     url.searchParams.set('layout', settings.settings.value.layout)
     url.searchParams.set('hidePreview', String(settings.settings.value.hidePreview))
     url.searchParams.set('hideEditor', String(settings.settings.value.hideEditor))
     url.searchParams.set('hideConsole', String(settings.settings.value.hideConsole))
+    url.searchParams.set('hideTests', String(settings.settings.value.hideTests))
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
     return url
   }
@@ -21,11 +26,13 @@ export const useShare = () => {
 
     return {
       pathname: url.pathname,
+      tests: lzs.decompressFromEncodedURIComponent(url.searchParams.get('tests') ?? ''),
       layout: url.searchParams.get('layout'),
       hideOptions: url.searchParams.get('hideOptions'),
       hideEditor: url.searchParams.get('hideEditor'),
       hidePreview: url.searchParams.get('hidePreview'),
       hideConsole: url.searchParams.get('hideConsole'),
+      hideTests: url.searchParams.get('hideTests'),
     }
   }
 
