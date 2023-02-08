@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import WindiCSS from 'vite-plugin-windicss'
 
-module.exports = {
+export default {
   title: 'EsJS Docs Components',
   description: 'Componentes para la documentación de EsJS',
   themeConfig: {

@@ -1,12 +1,13 @@
 {
   "name": "@es-js/docs-components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "build": "rimraf dist && vue-tsc && vite build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
   },
+  "type": "module",
   "peerDependencies": {
     "@iconify/vue": "^4.0.2",
     "lz-string": "^1.4.4",
@@ -33,6 +34,7 @@
     "dist"
   ],
   "types": "./dist/types/index.d.ts",
+  "main": "./dist/docs-components.es.js",
   "module": "./dist/docs-components.es.js",
   "exports": {
     ".": {
