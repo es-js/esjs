@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { computed } from 'vue'
 import { EDITOR_BASE_URL } from '../constants/Constants'
 
 const props = defineProps({
@@ -21,6 +22,16 @@ const props = defineProps({
     default: false,
   },
 })
+
+const defaultOpenSrc = computed(
+  () => {
+    const url = new URL(props.src)
+
+    url.search = ''
+
+    return url.toString()
+  },
+)
 </script>
 
 <template>
@@ -34,7 +45,7 @@ const props = defineProps({
     <div class="flex flex-row justify-center -mt-2 z-10 print:hidden">
       <a
         v-if="showOpenButton"
-        :href="props.openSrc || String(props.src)"
+        :href="props.openSrc || defaultOpenSrc"
         target="_blank"
         class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400"
       >
