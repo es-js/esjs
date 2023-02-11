@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import { EDITOR_BASE_URL } from '../constants/Constants'
 
@@ -7,6 +6,10 @@ const props = defineProps({
   src: {
     type: [String, URL],
     default: EDITOR_BASE_URL,
+  },
+  openSrc: {
+    type: [String, URL],
+    default: null,
   },
   height: {
     type: String,
@@ -17,17 +20,6 @@ const props = defineProps({
     default: false,
   },
 })
-
-const openEditorUrl = computed(
-  (): string | null => {
-    if (!props.src)
-      return null
-
-    const url = new URL(props.src)
-
-    return url.pathname
-  },
-)
 </script>
 
 <template>
@@ -40,8 +32,8 @@ const openEditorUrl = computed(
 
     <div class="flex flex-row justify-center -mt-2 z-10 print:hidden">
       <a
-        v-if="showOpenButton && openEditorUrl"
-        :href="openEditorUrl"
+        v-if="showOpenButton"
+        :href="props.openSrc || props.src"
         target="_blank"
         class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400"
       >

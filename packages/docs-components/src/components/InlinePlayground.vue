@@ -72,6 +72,18 @@ const playgroundUrl = computed(
     return url
   },
 )
+
+const openPlaygroundUrl = computed(
+  (): string | null => {
+    if (!sharedCode.value)
+      return
+
+    const url = new URL(EDITOR_BASE_URL)
+    url.pathname = sharedCode.value
+
+    return url
+  },
+)
 </script>
 
 <template>
@@ -93,7 +105,7 @@ const playgroundUrl = computed(
     </div>
 
     <div v-if="running" class="flex flex-col print:hidden">
-      <EmbedPlayground :src="playgroundUrl" height="50vh" show-open-button />
+      <EmbedPlayground :src="playgroundUrl" :open-src="openPlaygroundUrl" height="50vh" show-open-button />
     </div>
   </div>
 </template>
