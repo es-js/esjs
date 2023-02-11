@@ -13,7 +13,7 @@
     "@es-js/core": "workspace:^0.0.14"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.13.0",
     "typescript": "^4.9.5",
     "unbuild": "^1.1.1"
   },

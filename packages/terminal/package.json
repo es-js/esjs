@@ -24,7 +24,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
     "@types/lodash.debounce": "^4.0.7",
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.13.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "8.22.0",
     "is-number": "^7.0.0",
