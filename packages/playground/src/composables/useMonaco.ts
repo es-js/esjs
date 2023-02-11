@@ -11,7 +11,7 @@ export const useMonaco = () => {
     monaco.editor.defineTheme('vs-code-dark-converted', vsCodeDarkConverted)
     return monaco.editor.create(monacoEditorElement, {
       value: code,
-      automaticLayout: true,
+      automaticLayout: false,
       theme: 'vs-code-dark-converted',
       fontFamily: 'Fira Code',
       fontSize: 16,

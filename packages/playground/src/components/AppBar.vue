@@ -50,7 +50,7 @@ function shareCode() {
           <NavButton
             v-if="!settings.settings.value.hideOptions"
             icon="mdi:share"
-            text="Compartir"
+            :text="grid.lg ? 'Compartir código' : 'Compartir'"
             :icon-only="!grid.sm"
             color="teal"
             @click="shareCode"

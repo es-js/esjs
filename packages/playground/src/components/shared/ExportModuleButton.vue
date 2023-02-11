@@ -31,7 +31,6 @@ function shareModule() {
 
 <template>
   <NavButton
-    v-if="!settings.settings.value.hideOptions"
     icon="mdi:publish"
     text="Exportar módulo"
     :icon-only="!grid.sm"

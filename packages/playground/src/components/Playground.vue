@@ -13,7 +13,12 @@ const settings = useSettings().settings
   <div class="flex flex-row w-full h-full">
     <VueSplitView :direction="settings.layout" :a-max="settings.hideEditor ? 0 : undefined" class="overflow-hidden">
       <template v-if="!settings.hideEditor" #A>
-        <VueSplitView direction="vertical" :a-min="settings.hideTests ? 'calc(100% - 40px)' : '50%'" :a-max="settings.hideTests ? 'calc(100% - 40px)' : '50%'" class="overflow-hidden">
+        <VueSplitView
+          direction="vertical"
+          :a-min="settings.hideTests ? 'calc(100% - 40px)' : '50%'"
+          :a-max="settings.hideTests ? 'calc(100% - 40px)' : '50%'"
+          class="overflow-hidden"
+        >
           <template v-if="!settings.hideEditor" #A>
             <PlaygroundEditor class="w-full h-full overflow-hidden" />
           </template>

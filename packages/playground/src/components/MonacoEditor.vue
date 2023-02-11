@@ -3,7 +3,10 @@ import type { editor } from 'monaco-editor'
 import * as monaco from 'monaco-editor'
 import { onMounted, ref } from 'vue'
 import { useEventBus } from '@vueuse/core'
+import { ResizeObserver } from 'vue-resize'
 import { useMonaco } from '@/composables/useMonaco'
+import 'vue-resize/dist/vue-resize.css'
+import debounce from 'lodash.debounce'
 
 const props = defineProps({
   value: {
@@ -88,8 +91,14 @@ function setupBusCommands() {
     }
   })
 }
+
+const onResizeDebounced = debounce(() => {
+  monacoInstance?.layout()
+}, 10)
 </script>
 
 <template>
-  <div :id="props.elementId" />
+  <div :id="props.elementId">
+    <ResizeObserver @notify="onResizeDebounced" />
+  </div>
 </template>

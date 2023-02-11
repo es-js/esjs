@@ -37,6 +37,7 @@
     "vite-plugin-wasm": "^3.2.1",
     "vue": "^3.2.47",
     "vue-gtag": "^2.0.1",
+    "vue-resize": "2.0.0-alpha.1",
     "vue-screen": "2.1.0-beta.1",
     "vue-split-view": "^1.0.0",
     "vue-tsc": "^1.0.24",

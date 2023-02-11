@@ -5,7 +5,6 @@ import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
 import AppNotifications from '@/components/AppNotifications.vue'
-import AppFooter from '@/components/AppFooter.vue'
 
 const bus = useEventBus('editor')
 
