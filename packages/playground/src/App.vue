@@ -45,14 +45,14 @@ function setSettingsFromUrl() {
   if (window.location.pathname === '/')
     return
 
-  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests } = share.decodeSharedUrl()
+  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests } = share.decodeSharedUrl()
 
   settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
   settings.setHideOptions(hideOptions === 'true')
   settings.setHideEditor(hideEditor === 'true')
   settings.setHidePreview(hidePreview === 'true')
   settings.setHideConsole(hideConsole === 'true')
-  settings.setHideTests(hideTests !== 'false')
+  settings.setHideTests(hideTests === 'true' || tests === null)
 }
 </script>
 

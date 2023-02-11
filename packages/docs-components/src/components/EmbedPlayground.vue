@@ -25,9 +25,14 @@ const props = defineProps({
 
 const defaultOpenSrc = computed(
   () => {
+    const srcUrl = new URL(props.src)
     const url = new URL(props.src)
 
     url.search = ''
+
+    if (srcUrl.searchParams.has('tests')) {
+      url.searchParams.set('tests', srcUrl.searchParams.get('tests'))
+    }
 
     return url.toString()
   },
