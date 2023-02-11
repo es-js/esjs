@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.34.2
-  '@es-js/docs-components': workspace:0.0.7
+  '@es-js/docs-components': workspace:0.0.8
   '@es-js/language-tools': workspace:0.0.13
   '@iconify/vue': ^4.1.0
   eslint: ^8.34.0
