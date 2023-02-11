@@ -53,7 +53,7 @@ function setSettingsFromUrl() {
   settings.setHideEditor(hideEditor === 'true')
   settings.setHidePreview(hidePreview === 'true')
   settings.setHideConsole(hideConsole === 'true')
-  settings.setHideTests(hideTests === 'true')
+  settings.setHideTests(hideTests !== 'false')
 }
 </script>
 

@@ -69,7 +69,7 @@ function shareCode() {
       />
     </div>
 
-    <div class="flex flex-row justify-end items-center px-2 space-x-2">
+    <div class="grid-col-span-3 flex flex-row justify-end items-center px-2 space-x-2">
       <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
         <NavCircleButton icon="mdi:view-split-vertical" :active="'horizontal' === settings.settings.value.layout" @click="settings.setLayout('horizontal')" />
 
