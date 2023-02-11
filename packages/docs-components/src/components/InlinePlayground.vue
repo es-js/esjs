@@ -76,12 +76,12 @@ const playgroundUrl = computed(
 const openPlaygroundUrl = computed(
   (): string | null => {
     if (!sharedCode.value)
-      return
+      return null
 
     const url = new URL(EDITOR_BASE_URL)
     url.pathname = sharedCode.value
 
-    return url
+    return String(url)
   },
 )
 </script>

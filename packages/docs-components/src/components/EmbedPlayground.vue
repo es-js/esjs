@@ -8,8 +8,9 @@ const props = defineProps({
     default: EDITOR_BASE_URL,
   },
   openSrc: {
-    type: [String, URL],
+    type: String,
     default: null,
+    nullable: true,
   },
   height: {
     type: String,
@@ -33,7 +34,7 @@ const props = defineProps({
     <div class="flex flex-row justify-center -mt-2 z-10 print:hidden">
       <a
         v-if="showOpenButton"
-        :href="props.openSrc || props.src"
+        :href="props.openSrc || String(props.src)"
         target="_blank"
         class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400"
       >
