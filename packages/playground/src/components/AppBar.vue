@@ -33,8 +33,8 @@ function shareCode() {
 </script>
 
 <template>
-  <div class="w-full h-full grid grid-cols-3">
-    <div class="flex flex-shrink">
+  <div class="w-full h-full grid grid-cols-7">
+    <div class="grid-col-span-3 flex">
       <div class="flex flex-row items-center space-x-2">
         <div class="flex flex-row items-center px-2 space-x-1">
           <div class="flex flex-shrink">
@@ -46,11 +46,11 @@ function shareCode() {
 
         <div class="w-px h-full bg-gray-800" />
 
-        <div class="flex flex-row items-center px-2">
+        <div class="flex flex-row items-center px-2 space-x-2">
           <NavButton
             v-if="!settings.settings.value.hideOptions"
             icon="mdi:share"
-            :text="grid.lg ? 'Compartir código' : 'Compartir'"
+            text="Compartir"
             :icon-only="!grid.sm"
             color="teal"
             @click="shareCode"
