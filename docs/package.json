@@ -14,7 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.2",
-    "@es-js/docs-components": "workspace:0.0.10",
+    "@es-js/docs-components": "workspace:0.0.11",
     "@es-js/language-tools": "workspace:0.0.13",
     "@iconify/vue": "^4.1.0",
     "eslint": "^8.34.0",
