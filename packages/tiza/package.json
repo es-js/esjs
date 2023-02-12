@@ -1,0 +1,41 @@
+{
+  "name": "@es-js/tiza",
+  "version": "0.0.2",
+  "description": "Librería para colorear/estilizar texto en la consola",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "keywords": [
+    "esjs",
+    "tiza",
+    "chalk",
+    "consola",
+    "colorear",
+    "estilizar"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.35.2",
+    "chalk": "^5.2.0",
+    "eslint": "^8.34.0",
+    "path": "^0.12.7",
+    "vite": "^4.1.1",
+    "vitest": "^0.25.8"
+  },
+  "eslintConfig": {
+    "extends": "@antfu/eslint-config"
+  },
+  "main": "./dist/tiza.es.js",
+  "module": "./dist/tiza.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/tiza.es.js",
+      "require": "./dist/tiza.umd.js"
+    }
+  },
+  "files": [
+    "/dist"
+  ]
+}
