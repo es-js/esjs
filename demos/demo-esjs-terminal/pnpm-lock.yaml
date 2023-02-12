@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@es-js/core': workspace:0.0.14
-  '@es-js/terminal': workspace:^0.0.17
+  '@es-js/terminal': workspace:^0.0.18
   '@es-js/vite-plugin-esjs': workspace:^0.0.13
   vite: ^4.1.1
 
