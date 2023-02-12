@@ -5,7 +5,7 @@ import { useNotification } from '@/composables/useNotification'
 
 const settings = useSettings()
 
-const ESJS_CDN = import.meta.env.MODE === 'development' ? 'http://localhost:5175' : 'https://cdn.esjs.dev'
+const ESJS_CDN = import.meta.env.MODE === 'development' ? 'http://localhost:1337' : 'https://cdn.esjs.dev'
 
 export const useShare = () => {
   function getSharedUrl(code: string, testsCode: string | null = null): URL {
@@ -24,7 +24,7 @@ export const useShare = () => {
   }
 
   function getSharedModuleUrl(code: string): URL {
-    return new URL(`/esjs/${lzs.compressToEncodedURIComponent(code)}`, ESJS_CDN)
+    return new URL(`/${lzs.compressToEncodedURIComponent(code)}`, ESJS_CDN)
   }
 
   function decodeSharedUrl() {
