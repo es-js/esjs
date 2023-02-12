@@ -30,9 +30,8 @@ const defaultOpenSrc = computed(
 
     url.search = ''
 
-    if (srcUrl.searchParams.has('tests')) {
-      url.searchParams.set('tests', srcUrl.searchParams.get('tests'))
-    }
+    if (srcUrl.searchParams.has('tests'))
+      url.searchParams.set('tests', srcUrl.searchParams.get('tests') || '')
 
     return url.toString()
   },
