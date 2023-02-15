@@ -12,7 +12,7 @@ export function sanitizeCode(code: string) {
  * @author Ariya Hidayat.
  * @see https://github.com/chinchang/web-maker/blob/master/src/utils.js#L122
  */
-export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 75 }) {
+export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 3500 }) {
   let loopId = 1
   const patches = []
   const varPrefix = '_wmloopvar'

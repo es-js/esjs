@@ -35,7 +35,7 @@ asincrono funcion inicio() {
 inicio()
 `
 
-const DEFAULT_IMPORTS = 'import { pruebas, afirmar, afirmarIguales } from \'@es-js/prueba\''
+const DEFAULT_IMPORTS = 'import { pruebas, afirmar, assert, afirmarIguales } from \'@es-js/prueba\''
 
 const code: Ref<string> = ref(INITIAL_CODE)
 
