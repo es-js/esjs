@@ -1,4 +1,4 @@
-import * as esprima from 'esprima'
+import * as espree from 'espree'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -12,59 +12,58 @@ export function sanitizeCode(code: string) {
  * @author Ariya Hidayat.
  * @see https://github.com/chinchang/web-maker/blob/master/src/utils.js#L122
  */
-export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 3500 }) {
+export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 5000 }) {
   let loopId = 1
   const patches = []
   const varPrefix = '_wmloopvar'
   const varStr = 'var %d = Date.now();\n'
   const checkStr = `\nif (Date.now() - %d > ${timeout}) { window._handleInfiniteLoopException(new Error("Bucle infinito")); break;}\n`
 
-  esprima.parse(
-    code,
-    {
-      tolerant: true,
-      range: true,
-      jsx: true,
-    },
-    (node) => {
-      switch (node.type) {
-        case 'DoWhileStatement':
-        case 'ForStatement':
-        case 'ForInStatement':
-        case 'ForOfStatement':
-        case 'WhileStatement':
-          var start = 1 + node.body.range[0]
-          var end = node.body.range[1]
-          var prolog = checkStr.replace('%d', varPrefix + loopId)
-          var epilog = ''
+  espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  }).body.forEach((node) => {
+    switch (node.type) {
+      case 'DoWhileStatement':
+      case 'ForStatement':
+      case 'ForInStatement':
+      case 'ForOfStatement':
+      case 'WhileStatement':
+        var start = 1 + node.body.range[0]
+        var end = node.body.range[1]
+        var prolog = checkStr.replace('%d', varPrefix + loopId)
+        var epilog = ''
 
-          if (node.body.type !== 'BlockStatement') {
-            // `while(1) doThat()` becomes `while(1) {doThat()}`
-            prolog = `{${prolog}`
-            epilog = '}'
-            --start
-          }
+        if (node.body.type !== 'BlockStatement') {
+          // `while(1) doThat()` becomes `while(1) {doThat()}`
+          prolog = `{${prolog}`
+          epilog = '}'
+          --start
+        }
 
-          patches.push({
-            pos: start,
-            str: prolog,
-          })
-          patches.push({
-            pos: end,
-            str: epilog,
-          })
-          patches.push({
-            pos: node.range[0],
-            str: varStr.replace('%d', varPrefix + loopId),
-          })
-          ++loopId
-          break
+        patches.push({
+          pos: start,
+          str: prolog,
+        })
+        patches.push({
+          pos: end,
+          str: epilog,
+        })
+        patches.push({
+          pos: node.range[0],
+          str: varStr.replace('%d', varPrefix + loopId),
+        })
+        ++loopId
+        break
 
-        default:
-          break
-      }
-    },
-  )
+      default:
+        break
+    }
+  })
 
   patches
     .sort((a, b) => {
@@ -83,4 +82,36 @@ export function addInfiniteLoopProtection(code: string, { timeout } = { timeout:
  */
 export function escapeQuotes(str) {
   return str.replace(/\\([\s\S])|(")/g, '\\$1$2')
+}
+
+export function unifyImports(imports) {
+  const importMap = new Map()
+  let output = ''
+
+  imports.split('\n')
+    .map(line => line.trim())
+    .forEach((line) => {
+      const importMatch = line.match(/^import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*$/)
+
+      if (!importMatch) {
+        output += `${line}\n`
+        return
+      }
+
+      const [matchedText, namedImports, moduleSpecifier] = importMatch
+
+      if (!importMap.has(moduleSpecifier))
+        importMap.set(moduleSpecifier, new Set())
+
+      namedImports.split(/\s*,\s*/g).forEach((namedImport) => {
+        importMap.get(moduleSpecifier).add(namedImport.trim())
+      })
+    })
+
+  importMap.forEach((namedImports, moduleSpecifier) => {
+    const sortedImports = [...namedImports].sort()
+    output += `import { ${sortedImports.join(', ')} } from '${moduleSpecifier}'\n`
+  })
+
+  return output
 }

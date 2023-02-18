@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useSettings } from '@/composables/useSettings'
-import { addInfiniteLoopProtection } from '@/composables/utils'
+import { addInfiniteLoopProtection, unifyImports } from '@/composables/utils'
 
 const editor = useEditor()
 
@@ -68,7 +68,12 @@ function updateIframe(options: UpdateIframeOptions) {
       _hidePreview(${options.hidePreview});
       _hideConsole(${options.hideConsole});
       NProgress.done();
-      _runCode();
+
+      try {
+        await _runCode();
+      } catch (error) {
+        window._handleException(error);
+      }
     }
 
     function _initEruda() {
@@ -137,7 +142,7 @@ function updateIframe(options: UpdateIframeOptions) {
         console.error(error.toString());
     }
 
-    function _runCode() {
+    async function _runCode() {
       ${options.code}
     }
 
@@ -158,14 +163,17 @@ onMounted(() => {
     testsCodeWithoutImports,
   } = editor.output.value
 
-  let code = `(async function() {
-  try {
-    ${codeWithoutImports}
-    ${testsCodeWithoutImports}
-  } catch (error) {
-    window._handleException(error);
-  }
-})();`
+  updateIframe({
+    code: parseCode(codeWithoutImports, testsCodeWithoutImports),
+    imports: parseImports(defaultImports, codeImports, testsCodeImports),
+    hidePreview: settings.value.hidePreview,
+    hideConsole: settings.value.hideConsole,
+  })
+})
+
+function parseCode(codeWithoutImports, testsCodeWithoutImports) {
+  let code = `${codeWithoutImports}
+${testsCodeWithoutImports}`
 
   try {
     code = addInfiniteLoopProtection(code)
@@ -181,13 +189,14 @@ onMounted(() => {
     })
   }
 
-  updateIframe({
-    code,
-    imports: `${defaultImports} \n ${codeImports} \n ${testsCodeImports}`,
-    hidePreview: settings.value.hidePreview,
-    hideConsole: settings.value.hideConsole,
-  })
-})
+  return code
+}
+
+function parseImports(defaultImports, codeImports, testsCodeImports) {
+  const imports = `${defaultImports} \n ${codeImports} \n ${testsCodeImports}`
+
+  return unifyImports(imports)
+}
 
 watch(
   () => settings.value.hidePreview,
