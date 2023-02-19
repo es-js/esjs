@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
@@ -17,6 +17,7 @@ const editor = useEditor()
 const loading = ref(true)
 
 onMounted(async () => {
+  window.addEventListener('beforeunload', handleWindowClose)
   window.addEventListener('keyup', handleWindowKeyup)
 
   setSettingsFromUrl()
@@ -25,9 +26,24 @@ onMounted(async () => {
   loading.value = false
 })
 
-function handleWindowKeyup($event) {
+onBeforeUnmount(() => {
+  window.removeEventListener('beforeunload', handleWindowClose)
+  window.removeEventListener('keyup', handleWindowKeyup)
+})
+
+function handleWindowKeyup($event: any) {
   if ($event.key === 'Escape')
     bus.emit('focus')
+}
+
+function handleWindowClose($event: any) {
+  if (import.meta.env.MODE === 'development')
+    return
+
+  // Cancelar el cierre de la ventana
+  $event.preventDefault()
+  // Chrome requiere que se establezca la propiedad returnValue en una cadena vacía
+  $event.returnValue = ''
 }
 
 async function setCodeFromUrl() {
