@@ -11,6 +11,6 @@
     "@es-js/core": "workspace:0.0.15",
     "@es-js/terminal": "workspace:^0.0.18",
     "@es-js/vite-plugin-esjs": "workspace:^0.0.13",
-    "vite": "^4.1.2"
+    "vite": "^4.1.3"
   }
 }
