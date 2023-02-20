@@ -2,14 +2,14 @@
   "publisher": "enzonotario",
   "name": "vscode-esjs",
   "displayName": "EsJS (JavaScript en Español)",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "packageManager": "pnpm@7.8.0",
   "description": "Sintaxis y configuraciones para EsJS",
   "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/es-js/vscode-esjs"
+    "url": "https://github.com/es-js/esjs"
   },
   "categories": [
     "Other"
