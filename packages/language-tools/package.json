@@ -33,6 +33,10 @@
     "./esvue-language-configuration.json": {
       "import": "./dist/esvue-language-configuration.json",
       "require": "./dist/esvue-language-configuration.json"
+    },
+    "./esjs.code-snippets.json": {
+      "import": "./dist/esjs.code-snippets.json",
+      "require": "./dist/esjs.code-snippets.json"
     }
   }
 }
