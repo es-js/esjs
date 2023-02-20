@@ -1,0 +1,167 @@
+{
+  "publisher": "enzonotario",
+  "name": "vscode-esjs",
+  "displayName": "EsJS (JavaScript en Español)",
+  "version": "0.0.11",
+  "packageManager": "pnpm@7.8.0",
+  "description": "Sintaxis y configuraciones para EsJS",
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/es-js/vscode-esjs"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "browser": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --external vscode",
+    "build:grammar": "ts-node scripts/generate-grammars-configurations.ts",
+    "dev": "nr build --watch",
+    "lint": "eslint .",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish --no-dependencies",
+    "pack": "vsce package --no-dependencies",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp && nr publish"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.25.2",
+    "@antfu/ni": "^0.17.2",
+    "@es-js/core": "^0.0.10",
+    "@types/node": "^18.6.4",
+    "@types/vscode": "^1.74.0",
+    "@vscode/test-electron": "^2.2.1",
+    "axios": "^1.2.1",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.21.0",
+    "esno": "^0.16.3",
+    "pnpm": "^7.8.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "tsup": "^6.2.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.4",
+    "vitest": "^0.21.0",
+    "vsce": "^2.10.0",
+    "vscode": "^1.1.37",
+    "vscode-languageclient": "^8.0.2",
+    "vscode-languageserver": "^8.0.2"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:esvue",
+    "onLanguage:esjs"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "esvue",
+        "extensions": [
+          ".esvue"
+        ],
+        "configuration": "./languages/esvue-language-configuration.json"
+      },
+      {
+        "id": "esjs",
+        "extensions": [
+          ".esjs"
+        ],
+        "configuration": "./languages/esjs-language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "esvue",
+        "scopeName": "source.esvue",
+        "path": "./syntaxes/esvue.tmLanguage.json",
+        "embeddedLanguages": {
+          "source.esjs": "esjs",
+          "source.esvue": "esvue",
+          "text.html.basic": "html",
+          "text.html.vue-html": "vue-html",
+          "text.jade.slm": "slm",
+          "text.pug": "jade",
+          "text.haml": "haml",
+          "text.slim": "slim",
+          "text.html.liquid": "liquid",
+          "source.css": "css",
+          "source.css.scss": "scss",
+          "source.css.less": "less",
+          "source.css.postcss": "vue-postcss",
+          "source.css.sugarss": "vue-sugarss",
+          "source.sass": "sass",
+          "source.stylus": "stylus",
+          "source.js": "javascript",
+          "source.ts": "typescript",
+          "source.coffee": "coffeescript",
+          "text.html.markdown": "md",
+          "source.yaml": "yaml",
+          "source.json": "json",
+          "source.php": "php",
+          "source.graphql": "graphql"
+        }
+      },
+      {
+        "language": "esjs",
+        "scopeName": "source.esjs",
+        "path": "./syntaxes/esjs.tmLanguage.json"
+      }
+    ],
+    "semanticTokenScopes": [
+      {
+        "language": "esjs",
+        "scopes": {
+          "variable": [
+            "variable.language.esjs"
+          ],
+          "variable.readonly": [
+            "constant.language.esjs"
+          ],
+          "function.defaultLibrary": [
+            "support.function.esjs"
+          ]
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "esjs",
+        "path": "./snippets/esjs.code-snippets.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "EsJS configuration",
+      "properties": {
+        "esjs.maxNumberOfProblems": {
+          "scope": "resource",
+          "type": "number",
+          "default": 100,
+          "description": "Controls the maximum number of problems produced by the server."
+        },
+        "esjs.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    }
+  }
+}
