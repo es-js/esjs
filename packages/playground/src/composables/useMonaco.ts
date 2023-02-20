@@ -1,10 +1,21 @@
 import { Registry } from 'monaco-textmate'
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json'
 import * as monaco from 'monaco-editor'
-import { editor } from 'monaco-editor'
+import { editor, languages } from 'monaco-editor'
 import { wireTmGrammars } from 'monaco-editor-textmate'
+import snippets from '@es-js/language-tools/esjs.code-snippets.json'
+import {
+  constantLanguage,
+  keywordControl,
+  metaVariable,
+  storageType,
+  supportFunction,
+  variableLanguage,
+} from '@es-js/core'
 import vsCodeDarkConverted from '@/assets/vscode-dark-converted.json'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
+import ProviderResult = languages.ProviderResult
+import CompletionList = languages.CompletionList
 
 export const useMonaco = () => {
   function createMonacoInstance(monacoEditorElement: HTMLElement, code: string): IStandaloneCodeEditor {
@@ -44,7 +55,7 @@ export const useMonaco = () => {
     monaco.languages.registerCompletionItemProvider('esjs',
       {
         triggerCharacters: ['>'],
-        provideCompletionItems: (model, position) => {
+        provideCompletionItems: (model, position): ProviderResult<CompletionList> => {
           // TODO: Implementar https://github.com/microsoft/monaco-editor/issues/221#issuecomment-1085787520.
           const codePre: string = model.getValueInRange({
             startLineNumber: position.lineNumber,
@@ -78,6 +89,40 @@ export const useMonaco = () => {
           }
         },
       })
+
+    monaco.languages.registerCompletionItemProvider('esjs', {
+      provideCompletionItems: (): ProviderResult<CompletionList> => {
+        const suggestions = []
+
+        // Agrega sugerencias para los tokens de control de flujo del lenguaje EsJS
+        for (const [esjsKeyword, jsKeyword] of [
+          ...keywordControl,
+          ...constantLanguage,
+          ...variableLanguage,
+          ...storageType,
+          ...metaVariable,
+          ...supportFunction,
+        ]) {
+          suggestions.push({
+            label: esjsKeyword,
+            kind: monaco.languages.CompletionItemKind.Keyword,
+            insertText: esjsKeyword,
+          })
+        }
+
+        for (const [key, value] of Object.entries(snippets)) {
+          suggestions.push({
+            label: key,
+            kind: monaco.languages.CompletionItemKind.Snippet,
+            insertText: value.body.join('\n'),
+            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            documentation: value.description,
+          })
+        }
+
+        return { suggestions }
+      },
+    })
   }
 
   async function setupMonacoSynchronization(monacoInstance: IStandaloneCodeEditor, callback: (value: string) => void) {

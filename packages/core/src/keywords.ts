@@ -189,11 +189,6 @@ export const keywordControl = new Map([
   ['tipoDe', 'typeof'],
   ['vacio', 'void'],
   ['producir', 'yield'],
-
-  ...numberMethods,
-  ...mathMethods,
-  ...consoleMethods,
-  ...stringMethods,
 ])
 
 export const constantLanguage = new Map([
@@ -318,5 +313,9 @@ export const keywords = new Map([
   ...arrayMethods,
   ...promiseMethods,
   ...dateMethods,
+  ...numberMethods,
+  ...mathMethods,
+  ...consoleMethods,
+  ...stringMethods,
   ...vueRef,
 ])
