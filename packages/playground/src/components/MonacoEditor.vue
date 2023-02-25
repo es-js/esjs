@@ -9,6 +9,10 @@ import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
 
 const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
   value: {
     type: String,
     required: true,
@@ -21,13 +25,17 @@ const props = defineProps({
 
 const emit = defineEmits(['update:value', 'execute'])
 
-const bus = useEventBus('editor')
+const bus = useEventBus(`editor_${props.name}`)
 
 const monacoHelper = useMonaco()
 
 let monacoInstance: editor.IStandaloneCodeEditor | null = null
 
 const decorations = ref([])
+
+const onResizeDebounced = debounce(() => {
+  monacoInstance?.layout()
+}, 10)
 
 onMounted(async () => {
   await setupMonaco()
@@ -86,15 +94,13 @@ function setupBusCommands() {
         return decorateError(payload.line, payload.column)
       case 'clear-decorations':
         return clearDecorations()
+      case 'fit':
+        return onResizeDebounced()
       default:
         return null
     }
   })
 }
-
-const onResizeDebounced = debounce(() => {
-  monacoInstance?.layout()
-}, 10)
 </script>
 
 <template>

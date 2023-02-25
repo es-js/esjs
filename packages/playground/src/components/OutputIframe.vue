@@ -11,7 +11,7 @@ const iframe = ref()
 
 const settings = useSettings().settings
 
-const bus = useEventBus('editor')
+const bus = useEventBus('editor_code')
 
 interface UpdateIframeOptions {
   code: string

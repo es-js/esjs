@@ -6,7 +6,7 @@ import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
 import AppNotifications from '@/components/AppNotifications.vue'
 
-const bus = useEventBus('editor')
+const bus = useEventBus('editor_code')
 
 const share = useShare()
 

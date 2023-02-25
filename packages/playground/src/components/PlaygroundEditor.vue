@@ -7,5 +7,10 @@ const editor = useEditor()
 </script>
 
 <template>
-  <MonacoEditor element-id="monacoCodeEditor" :value="editor.code.value" @update:value="editor.setCode($event)" />
+  <MonacoEditor
+    element-id="monacoCodeEditor"
+    name="code"
+    :value="editor.code.value"
+    @update:value="editor.setCode($event)"
+  />
 </template>
