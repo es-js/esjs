@@ -97,6 +97,7 @@ function updateIframe(options: UpdateIframeOptions) {
 
     function _hideConsole(value) {
         const consoleElement = document.getElementById('console-container');
+
         if (value) {
           consoleElement.style.display = 'none';
           consoleElement.style.flex = '0 0 0';
@@ -104,6 +105,7 @@ function updateIframe(options: UpdateIframeOptions) {
           consoleElement.style.display = 'flex';
           consoleElement.style.flex = '1 1 0';
         }
+
         usarTerminal().fitTerminal()
     }
 
@@ -122,6 +124,8 @@ function updateIframe(options: UpdateIframeOptions) {
 
           erudaDevToolsElement[0].style.height = '50%';
         }
+
+        usarTerminal().fitTerminal()
     }
 
     window._handleInfiniteLoopException = function (error) {
