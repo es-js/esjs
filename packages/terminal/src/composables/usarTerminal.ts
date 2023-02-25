@@ -4,6 +4,7 @@ import { WebLinksAddon } from 'xterm-addon-web-links'
 import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
 import isNumber from 'is-number'
+import stripAnsi from 'strip-ansi'
 import { clearLine, handleBackspace, isPrintableKeyCode, prompt } from '../utils/xtermUtils'
 
 const xterm = new Terminal({
@@ -199,6 +200,69 @@ export const usarTerminal = () => {
     }
   }
 
+  function centrar(texto: string) {
+    const anchoTerminal = xterm.cols
+    const lineas = texto.trim().split('\n')
+    const espaciosPorLinea = lineas.map((linea) => {
+      const longitudLinea = stripAnsi(linea).length
+
+      if (longitudLinea >= anchoTerminal)
+        return ''
+
+      const espacios = anchoTerminal - longitudLinea
+
+      return ' '.repeat(Math.floor(espacios / 2))
+    })
+    const resultado = lineas.map((linea, i) => {
+      const espacios = espaciosPorLinea[i]
+      return espacios + linea + espacios
+    })
+    return resultado.join('\n')
+  }
+
+  function alinearIzquierda(texto: string) {
+    const anchoTerminal = xterm.cols
+    const lineas = texto.trim().split('\n')
+    const resultado = lineas.map((linea) => {
+      const longitudLinea = stripAnsi(linea).length
+      const espacios = anchoTerminal - longitudLinea
+      return linea + ' '.repeat(espacios)
+    })
+    return resultado.join('\n')
+  }
+
+  function alinearDerecha(texto: string) {
+    const anchoTerminal = xterm.cols
+    const lineas = texto.trim().split('\n')
+    const resultado = lineas.map((linea) => {
+      const longitudLinea = stripAnsi(linea).length
+      const espacios = anchoTerminal - longitudLinea
+      return ' '.repeat(espacios) + linea
+    })
+    return resultado.join('\n')
+  }
+
+  function justificar(texto: string) {
+    const anchoTerminal = xterm.cols
+    const lineas = texto.trim().split('\n')
+    const resultado = lineas.map((linea) => {
+      const palabras = linea.split(' ')
+      const longitudPalabras = palabras.map(palabra => stripAnsi(palabra).length)
+      const longitudTotal = longitudPalabras.reduce((a, b) => a + b, 0)
+      const espaciosFaltantes = anchoTerminal - longitudTotal
+      const cantidadEspacios = palabras.length - 1
+      const espaciosPorPalabra = cantidadEspacios > 0 ? Math.floor(espaciosFaltantes / cantidadEspacios) : 0
+      const espaciosExtra = cantidadEspacios > 0 ? espaciosFaltantes % cantidadEspacios : 0
+      const espaciosEntrePalabras = ' '.repeat(espaciosPorPalabra)
+      const resultadoPalabras = palabras.map((palabra, i) => {
+        const espaciosExtraPalabra = i < espaciosExtra ? 1 : 0
+        return palabra + espaciosEntrePalabras + ' '.repeat(espaciosExtraPalabra + espaciosPorPalabra)
+      })
+      return resultadoPalabras.join('')
+    })
+    return resultado.join('\n')
+  }
+
   return {
     xterm,
     fitAddon,
@@ -213,5 +277,9 @@ export const usarTerminal = () => {
     fitTerminal,
     limpiar,
     clear: limpiar,
+    centrar,
+    alinearIzquierda,
+    alinearDerecha,
+    justificar,
   }
 }
