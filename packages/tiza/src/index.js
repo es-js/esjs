@@ -43,4 +43,6 @@ export const tiza = {
   fondoMagentaBrillo: chalk.bgMagentaBright,
   fondoCianBrillo: chalk.bgCyanBright,
   fondoBlancoBrillo: chalk.bgWhiteBright,
+  limpiar: chalk.reset,
+  clear: chalk.reset,
 }

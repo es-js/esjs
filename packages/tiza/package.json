@@ -1,6 +1,6 @@
 {
   "name": "@es-js/tiza",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Librería para colorear/estilizar texto en la consola",
   "scripts": {
     "build": "vite build",
