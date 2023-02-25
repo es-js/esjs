@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 
-const tiza = {
+export const tiza = {
   reset: chalk.reset,
   negrita: chalk.bold,
   opaco: chalk.dim,
@@ -44,5 +44,3 @@ const tiza = {
   fondoCianBrillo: chalk.bgCyanBright,
   fondoBlancoBrillo: chalk.bgWhiteBright,
 }
-
-export default tiza
