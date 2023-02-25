@@ -27,7 +27,10 @@ function updateIframe(options: UpdateIframeOptions) {
       {
         "imports": {
           "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@0.0.18/dist/terminal.es.js/+esm",
-          "@es-js/prueba": "https://cdn.skypack.dev/@es-js/prueba"
+          "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.4/+esm",
+          "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@0.0.3/+esm",
+          "nprogress": "https://cdn.jsdelivr.net/npm/nprogress@0.2.0/+esm",
+          "eruda": "https://cdn.jsdelivr.net/npm/eruda@2.11.2/+esm"
         }
       }
     <\/script>
@@ -42,11 +45,11 @@ function updateIframe(options: UpdateIframeOptions) {
         </div>
     </body>
 
-    <link rel='stylesheet' href='https://cdn.skypack.dev/nprogress/nprogress.css'/>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css'/>
 
     <script async type="module">
-    import NProgress from 'https://cdn.skypack.dev/nprogress';
-    import eruda from 'https://cdn.skypack.dev/eruda';
+    import NProgress from 'nprogress';
+    import eruda from 'eruda';
     import { usarTerminal } from '@es-js/terminal';
     ${options.imports}
 
