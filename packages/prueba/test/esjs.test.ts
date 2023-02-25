@@ -1,10 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import {
   afirmar,
+  afirmarDistinto,
+  afirmarFalso,
   afirmarIguales,
-  afirmarMatricesIguales, afirmarMatricesSimilares,
-  afirmarObjetosIguales, afirmarObjetosSimilares,
-  afirmarSimilares, obtenerResumen,
+  afirmarMatricesIguales,
+  afirmarMatricesSimilares,
+  afirmarObjetosIguales,
+  afirmarObjetosSimilares,
+  afirmarSimilares,
+  afirmarVerdadero,
+  obtenerResultado,
+  obtenerResumen,
   prueba,
   pruebas,
 } from '../lib/main'
@@ -338,5 +345,47 @@ describe('obtenerResultado', () => {
       exitosas: 3,
       fallidas: 0,
     })
+  })
+})
+
+describe('afirmarVerdadero', () => {
+  it('can assert true', () => {
+    expect(
+      () => afirmarVerdadero(true),
+    ).not.toThrowError()
+  })
+
+  it('fails if cant assert true', () => {
+    expect(
+      () => afirmarVerdadero(false),
+    ).toThrowError()
+  })
+})
+
+describe('afirmarFalso', () => {
+  it('can assert false', () => {
+    expect(
+      () => afirmarFalso(false),
+    ).not.toThrowError()
+  })
+
+  it('fails if cant assert false', () => {
+    expect(
+      () => afirmarFalso(true),
+    ).toThrowError()
+  })
+})
+
+describe('afirmarDistinto', () => {
+  it('can assert different', () => {
+    expect(
+      () => afirmarDistinto(1, 2),
+    ).not.toThrowError()
+  })
+
+  it('fails if cant assert different', () => {
+    expect(
+      () => afirmarDistinto(1, 1),
+    ).toThrowError()
   })
 })

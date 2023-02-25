@@ -1,5 +1,5 @@
+import logSymbols from 'log-symbols'
 import { isEqual } from './isEqual'
-import logSymbols from 'log-symbols';
 
 interface Resultado {
   numeroPruebas: number
@@ -122,4 +122,16 @@ export function obtenerResultado(pruebas: any, fallidas: number): Resultado {
     exitosas,
     fallidas,
   } as Resultado
+}
+
+export function afirmarVerdadero(valor: boolean, mensaje?: string) {
+  return afirmarIguales(true, valor, mensaje ?? 'afirmarVerdadero(): Se esperaba "verdadero", pero se recibió "falso"')
+}
+
+export function afirmarFalso(valor: boolean, mensaje?: string) {
+  return afirmarIguales(false, valor, mensaje ?? 'afirmarFalso(): Se esperaba "falso", pero se recibió "verdadero"')
+}
+
+export function afirmarDistinto(esperado: any, actual: any, mensaje?: string) {
+  return afirmar(!isEqual(esperado, actual, true), mensaje ?? `afirmarDistinto(): "${esperado}" === "${actual}"`)
 }
