@@ -1,6 +1,12 @@
 import { isEqual } from './isEqual'
 import logSymbols from 'log-symbols';
 
+interface Resultado {
+  numeroPruebas: number
+  exitosas: number
+  fallidas: number
+}
+
 class PruebaError extends Error {
   constructor(public pruebaNombre: string, public error: Error, public dontWarn = true) {
     super(error.message)
@@ -13,11 +19,11 @@ class PruebasError extends Error {
   }
 }
 
-export function pruebas(tests: any) {
+export function pruebas(pruebas: any) {
   let failures = 0
 
-  for (const pruebaNombre in tests) {
-    const pruebaFuncion = tests[pruebaNombre]
+  for (const pruebaNombre in pruebas) {
+    const pruebaFuncion = pruebas[pruebaNombre]
 
     try {
       prueba(pruebaNombre, pruebaFuncion)
@@ -27,11 +33,15 @@ export function pruebas(tests: any) {
     }
   }
 
+  const result = obtenerResultado(pruebas, failures)
+
   // eslint-disable-next-line no-console
-  console.log(obtenerResumen(tests, failures))
+  console.log(obtenerResumen(result))
 
   if (failures > 0)
     throw new PruebasError()
+
+  return result
 }
 
 export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
@@ -95,12 +105,21 @@ export function afirmarObjetosSimilares(objetoEsperado: any, objetoActual: any, 
   }
 }
 
-export function obtenerResumen(tests: any, failures: number) {
-  const numberOfTests = Object.keys(tests).length
-  const successes = numberOfTests - failures
-  const executedTestsString = numberOfTests === 1 ? 'Se ejecutó 1 prueba' : `Se ejecutaron ${numberOfTests} pruebas`
-  const numberOfSuccessesString = successes === 1 ? '1 exitosa' : `${successes} exitosas`
-  const numberOfFailuresString = failures === 1 ? '1 fallida' : `${failures} fallidas`
+export function obtenerResumen(result: Resultado) {
+  const executedTestsString = result.numeroPruebas === 1 ? 'Se ejecutó 1 prueba' : `Se ejecutaron ${result.numeroPruebas} pruebas`
+  const numberOfSuccessesString = result.exitosas === 1 ? '1 exitosa' : `${result.exitosas} exitosas`
+  const numberOfFailuresString = result.fallidas === 1 ? '1 fallida' : `${result.fallidas} fallidas`
 
   return `${executedTestsString}: \n ${numberOfSuccessesString} \n ${numberOfFailuresString}`
+}
+
+export function obtenerResultado(pruebas: any, fallidas: number): Resultado {
+  const numeroPruebas = Object.keys(pruebas).length
+  const exitosas = numeroPruebas - fallidas
+
+  return {
+    numeroPruebas,
+    exitosas,
+    fallidas,
+  } as Resultado
 }

@@ -248,17 +248,66 @@ describe('pruebas', () => {
 describe('obtenerResumen', () => {
   it('works for 1 test', () => {
     expect(
-      obtenerResumen({
-        basica: () => {
-          afirmar(true)
-        },
-      }, 0),
+      obtenerResumen(
+        obtenerResultado({
+          basica: () => {
+            afirmar(true)
+          },
+        }, 0),
+      ),
     ).toEqual('Se ejecutó 1 prueba: \n 1 exitosa \n 0 fallidas')
   })
 
   it('works for many tests', () => {
     expect(
-      obtenerResumen({
+      obtenerResumen(
+        obtenerResultado({
+          basica: () => {
+            afirmar(true)
+          },
+          falla: () => {
+            afirmar(false)
+          },
+        }, 1),
+      ),
+    ).toEqual('Se ejecutaron 2 pruebas: \n 1 exitosa \n 1 fallida')
+
+    expect(
+      obtenerResumen(
+        obtenerResultado({
+          basica: () => {
+            afirmar(true)
+          },
+          basica2: () => {
+            afirmar(true)
+          },
+          basica3: () => {
+            afirmar(true)
+          },
+        }, 0),
+      ),
+    ).toEqual('Se ejecutaron 3 pruebas: \n 3 exitosas \n 0 fallidas')
+  })
+})
+
+describe('obtenerResultado', () => {
+  it('works for 1 test', () => {
+    expect(
+      obtenerResultado({
+        basica: () => {
+          afirmar(true)
+        },
+      }, 0),
+    ).toEqual({
+      numeroPruebas: 1,
+      exitosas: 1,
+      fallidas: 0,
+    })
+  })
+
+  it('works for many tests', () => {
+    expect(
+      obtenerResultado({
         basica: () => {
           afirmar(true)
         },
@@ -266,10 +315,14 @@ describe('obtenerResumen', () => {
           afirmar(false)
         },
       }, 1),
-    ).toEqual('Se ejecutaron 2 pruebas: \n 1 exitosa \n 1 fallida')
+    ).toEqual({
+      numeroPruebas: 2,
+      exitosas: 1,
+      fallidas: 1,
+    })
 
     expect(
-      obtenerResumen({
+      obtenerResultado({
         basica: () => {
           afirmar(true)
         },
@@ -280,6 +333,10 @@ describe('obtenerResumen', () => {
           afirmar(true)
         },
       }, 0),
-    ).toEqual('Se ejecutaron 3 pruebas: \n 3 exitosas \n 0 fallidas')
+    ).toEqual({
+      numeroPruebas: 3,
+      exitosas: 3,
+      fallidas: 0,
+    })
   })
 })
