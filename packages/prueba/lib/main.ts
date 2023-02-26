@@ -102,49 +102,6 @@ function onPruebaError(pruebaNombre: string, error: any) {
   throw new PruebaError(pruebaNombre, error)
 }
 
-export function afirmar(valor: boolean, mensaje?: string) {
-  if (!valor) {
-    mensaje = mensaje ?? 'afirmar(): Se esperaba "verdadero", pero se recibió "falso"'
-    throw new Error(mensaje)
-  }
-}
-
-export const assert = afirmar
-
-export function afirmarIguales(esperado: any, actual: any, mensaje?: string) {
-  return afirmar(isEqual(esperado, actual, true), mensaje ?? `afirmarIguales(): "${esperado}" !== "${actual}"`)
-}
-
-export function afirmarSimilares(esperado: any, actual: any, mensaje?: string) {
-  // eslint-disable-next-line eqeqeq
-  if (esperado != actual) {
-    mensaje = mensaje ?? `afirmarSimilares(): "${esperado}" != "${actual}"`
-    throw new Error(mensaje)
-  }
-}
-
-export function afirmarMatricesIguales(matrizEsperada: Array<any>, matrizActual: Array<any>) {
-  return afirmarIguales(matrizEsperada, matrizActual, `afirmarMatricesIguales(): "${matrizEsperada}" != "${matrizActual}"`)
-}
-
-export function afirmarObjetosIguales(objetoEsperado: any, objetoActual: any) {
-  return afirmarIguales(objetoEsperado, objetoActual, `afirmarObjetosIguales(): "${objetoEsperado}" != "${objetoActual}"`)
-}
-
-export function afirmarMatricesSimilares(matrizEsperada: Array<any>, matrizActual: Array<any>, mensaje?: string) {
-  if (!isEqual(matrizEsperada, matrizActual, false)) {
-    mensaje = mensaje ?? `afirmarMatricesSimilares(): "${matrizEsperada}" != "${matrizActual}"`
-    throw new Error(mensaje)
-  }
-}
-
-export function afirmarObjetosSimilares(objetoEsperado: any, objetoActual: any, mensaje?: string) {
-  if (!isEqual(objetoEsperado, objetoActual, false)) {
-    mensaje = mensaje ?? `afirmarObjetosSimilares(): "${objetoEsperado}" != "${objetoActual}"`
-    throw new Error(mensaje)
-  }
-}
-
 export function obtenerResumen(result: Resultado) {
   const executedTestsString = result.numeroPruebas === 1 ? 'Se ejecutó 1 prueba' : `Se ejecutaron ${result.numeroPruebas} pruebas`
   const numberOfSuccessesString = result.exitosas === 1 ? '1 exitosa' : `${result.exitosas} exitosas`
@@ -162,6 +119,40 @@ export function obtenerResultado(pruebas: any, fallidas: number): Resultado {
     exitosas,
     fallidas,
   } as Resultado
+}
+
+export function afirmar(valor: boolean, mensaje?: string) {
+  if (!valor) {
+    mensaje = mensaje ?? 'afirmar(): Se esperaba "verdadero", pero se recibió "falso"'
+    throw new Error(mensaje)
+  }
+}
+
+export const assert = afirmar
+
+export function afirmarIguales(esperado: any, actual: any, mensaje?: string) {
+  return afirmar(isEqual(esperado, actual, true), mensaje ?? `afirmarIguales(): "${esperado}" !== "${actual}"`)
+}
+
+export function afirmarSimilares(esperado: any, actual: any, mensaje?: string) {
+  // eslint-disable-next-line eqeqeq
+  return afirmar(esperado == actual, mensaje ?? `afirmarSimilares(): "${esperado}" != "${actual}"`)
+}
+
+export function afirmarMatricesIguales(matrizEsperada: Array<any>, matrizActual: Array<any>) {
+  return afirmarIguales(matrizEsperada, matrizActual, `afirmarMatricesIguales(): "${matrizEsperada}" != "${matrizActual}"`)
+}
+
+export function afirmarObjetosIguales(objetoEsperado: any, objetoActual: any) {
+  return afirmarIguales(objetoEsperado, objetoActual, `afirmarObjetosIguales(): "${objetoEsperado}" != "${objetoActual}"`)
+}
+
+export function afirmarMatricesSimilares(matrizEsperada: Array<any>, matrizActual: Array<any>, mensaje?: string) {
+  return afirmar(isEqual(matrizEsperada, matrizActual, false), mensaje ?? `afirmarMatricesSimilares(): "${matrizEsperada}" != "${matrizActual}"`)
+}
+
+export function afirmarObjetosSimilares(objetoEsperado: any, objetoActual: any, mensaje?: string) {
+  return afirmar(isEqual(objetoEsperado, objetoActual, false), mensaje ?? `afirmarObjetosSimilares(): "${objetoEsperado}" != "${objetoActual}"`)
 }
 
 export function afirmarVerdadero(valor: boolean, mensaje?: string) {
