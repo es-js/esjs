@@ -9,6 +9,16 @@ interface Resultado {
   fallidas: number
 }
 
+interface Prueba {
+  [pruebaNombre: string]: () => void
+}
+
+interface PruebaAsincrona {
+  [pruebaNombre: string]: () => Promise<void>
+}
+
+type Pruebas = Prueba | PruebaAsincrona
+
 class PruebaError extends Error {
   constructor(public pruebaNombre: string, public error: Error, public dontWarn = true) {
     super(error.message)
@@ -21,24 +31,22 @@ class PruebasError extends Error {
   }
 }
 
-export function pruebas(pruebas: any) {
+export function pruebas(pruebas: Pruebas) {
   let failures = 0
 
-  for (const pruebaNombre in pruebas) {
-    const pruebaFuncion = pruebas[pruebaNombre]
-
+  Object.entries(pruebas).forEach(([pruebaNombre, pruebaFuncion]) => {
     try {
       prueba(pruebaNombre, pruebaFuncion)
     }
-    catch (e) {
+    catch (error: any) {
       failures++
     }
-  }
+  })
 
   return onPruebasFinished(pruebas, failures)
 }
 
-export async function pruebasAsincronas(pruebas: any) {
+export async function pruebasAsincronas(pruebas: PruebaAsincrona) {
   let failures = 0
 
   await Promise.all(
@@ -55,7 +63,7 @@ export async function pruebasAsincronas(pruebas: any) {
   return onPruebasFinished(pruebas, failures)
 }
 
-function onPruebasFinished(pruebas: any, failures = 0) {
+function onPruebasFinished(pruebas: Pruebas, failures = 0) {
   const result = obtenerResultado(pruebas, failures)
 
   // eslint-disable-next-line no-console
@@ -76,7 +84,7 @@ export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
     return onPruebaSuccess(pruebaNombre, afirmaciones)
   }
   catch (error: any) {
-    onPruebaError(pruebaNombre, error)
+    return onPruebaError(pruebaNombre, error)
   }
 }
 
@@ -89,7 +97,7 @@ export async function pruebaAsincrona(pruebaNombre: string, pruebaFuncion: () =>
     onPruebaSuccess(pruebaNombre, afirmaciones)
   }
   catch (error: any) {
-    onPruebaError(pruebaNombre, error)
+    return onPruebaError(pruebaNombre, error)
   }
 }
 
@@ -128,7 +136,7 @@ export function obtenerResumen(result: Resultado) {
   return `${executedTestsString}: \n ${numberOfSuccessesString} \n ${numberOfFailuresString}`
 }
 
-export function obtenerResultado(pruebas: any, fallidas: number): Resultado {
+export function obtenerResultado(pruebas: Pruebas, fallidas: number): Resultado {
   const numeroPruebas = Object.keys(pruebas).length
   const exitosas = numeroPruebas - fallidas
 
