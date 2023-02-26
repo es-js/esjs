@@ -33,6 +33,27 @@ export function pruebas(pruebas: any) {
     }
   }
 
+  onPruebasFinished(pruebas, failures)
+}
+
+export async function pruebasAsincronas(pruebas: any) {
+  let failures = 0
+
+  await Promise.all(
+    Object.entries(pruebas).map(async ([pruebaNombre, pruebaFuncion]) => {
+      try {
+        await pruebaAsincrona(pruebaNombre, pruebaFuncion)
+      }
+      catch (error: any) {
+        failures++
+      }
+    }),
+  )
+
+  onPruebasFinished(pruebas, failures)
+}
+
+function onPruebasFinished(pruebas: any, failures = 0) {
   const result = obtenerResultado(pruebas, failures)
 
   // eslint-disable-next-line no-console
@@ -48,18 +69,37 @@ export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
   try {
     pruebaFuncion()
 
-    // eslint-disable-next-line no-console
-    console.log(`%c${logSymbols.success} ${pruebaNombre}`, 'color: #14b8a6; font-size: 14px; padding: 2px 4px;')
+    onPruebaSuccess(pruebaNombre)
   }
   catch (error: any) {
-    // eslint-disable-next-line no-console
-    console.groupCollapsed(`%c${logSymbols.error} ${pruebaNombre}`, 'color: #f43f5e; font-size: 14px; padding: 2px 4px;')
-    console.error(error?.stack)
-    // eslint-disable-next-line no-console
-    console.groupEnd()
-
-    throw new PruebaError(pruebaNombre, error)
+    onPruebaError(pruebaNombre, error)
   }
+}
+
+export async function pruebaAsincrona(pruebaNombre: string, pruebaFuncion: () => Promise<void>) {
+  try {
+    await pruebaFuncion()
+
+    onPruebaSuccess(pruebaNombre)
+  }
+  catch (error: any) {
+    onPruebaError(pruebaNombre, error)
+  }
+}
+
+function onPruebaSuccess(pruebaNombre: string) {
+  // eslint-disable-next-line no-console
+  console.log(`%c${logSymbols.success} ${pruebaNombre}`, 'color: #14b8a6; font-size: 14px; padding: 2px 4px;')
+}
+
+function onPruebaError(pruebaNombre: string, error: any) {
+  // eslint-disable-next-line no-console
+  console.groupCollapsed(`%c${logSymbols.error} ${pruebaNombre}`, 'color: #f43f5e; font-size: 14px; padding: 2px 4px;')
+  console.error(error?.stack)
+  // eslint-disable-next-line no-console
+  console.groupEnd()
+
+  throw new PruebaError(pruebaNombre, error)
 }
 
 export function afirmar(valor: boolean, mensaje?: string) {
