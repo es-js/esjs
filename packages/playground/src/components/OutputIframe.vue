@@ -27,7 +27,7 @@ function updateIframe(options: UpdateIframeOptions) {
       {
         "imports": {
           "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@0.0.19/dist/terminal.es.js/+esm",
-          "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.4/+esm",
+          "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.5/+esm",
           "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@0.0.5/+esm",
           "nprogress": "https://cdn.jsdelivr.net/npm/nprogress@0.2.0/+esm",
           "eruda": "https://cdn.jsdelivr.net/npm/eruda@2.11.2/+esm"
