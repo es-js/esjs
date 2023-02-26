@@ -1,6 +1,8 @@
 import logSymbols from 'log-symbols'
 import { isEqual } from './isEqual'
 
+let afirmaciones = 0
+
 interface Resultado {
   numeroPruebas: number
   exitosas: number
@@ -33,7 +35,7 @@ export function pruebas(pruebas: any) {
     }
   }
 
-  onPruebasFinished(pruebas, failures)
+  return onPruebasFinished(pruebas, failures)
 }
 
 export async function pruebasAsincronas(pruebas: any) {
@@ -50,7 +52,7 @@ export async function pruebasAsincronas(pruebas: any) {
     }),
   )
 
-  onPruebasFinished(pruebas, failures)
+  return onPruebasFinished(pruebas, failures)
 }
 
 function onPruebasFinished(pruebas: any, failures = 0) {
@@ -66,10 +68,12 @@ function onPruebasFinished(pruebas: any, failures = 0) {
 }
 
 export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
+  afirmaciones = 0
+
   try {
     pruebaFuncion()
 
-    onPruebaSuccess(pruebaNombre)
+    return onPruebaSuccess(pruebaNombre, afirmaciones)
   }
   catch (error: any) {
     onPruebaError(pruebaNombre, error)
@@ -77,19 +81,33 @@ export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
 }
 
 export async function pruebaAsincrona(pruebaNombre: string, pruebaFuncion: () => Promise<void>) {
+  afirmaciones = 0
+
   try {
     await pruebaFuncion()
 
-    onPruebaSuccess(pruebaNombre)
+    onPruebaSuccess(pruebaNombre, afirmaciones)
   }
   catch (error: any) {
     onPruebaError(pruebaNombre, error)
   }
 }
 
-function onPruebaSuccess(pruebaNombre: string) {
-  // eslint-disable-next-line no-console
-  console.log(`%c${logSymbols.success} ${pruebaNombre}`, 'color: #14b8a6; font-size: 14px; padding: 2px 4px;')
+function onPruebaSuccess(pruebaNombre: string, afirmaciones = 0) {
+  if (afirmaciones > 0) {
+    const assertionsString = afirmaciones === 1 ? '1 afirmación' : `${afirmaciones} afirmaciones`
+
+    // eslint-disable-next-line no-console
+    console.log(`%c${logSymbols.success} ${pruebaNombre}: ${assertionsString}`, 'color: #14b8a6; font-size: 14px; padding: 2px 4px;')
+  }
+  else {
+    // eslint-disable-next-line no-console
+    console.log(`%c${logSymbols.warning} ${pruebaNombre}: No se ejecutó ninguna afirmación`, 'color: #f59e0b; font-size: 14px; padding: 2px 4px;')
+  }
+
+  return {
+    afirmaciones,
+  }
 }
 
 function onPruebaError(pruebaNombre: string, error: any) {
@@ -122,6 +140,8 @@ export function obtenerResultado(pruebas: any, fallidas: number): Resultado {
 }
 
 export function afirmar(valor: boolean, mensaje?: string) {
+  afirmaciones += 1
+
   if (!valor) {
     mensaje = mensaje ?? 'afirmar(): Se esperaba "verdadero", pero se recibió "falso"'
     throw new Error(mensaje)

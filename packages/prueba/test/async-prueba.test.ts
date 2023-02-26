@@ -11,7 +11,7 @@ describe('pruebas', () => {
           afirmarIguales(2, 2)
         },
       }),
-    ).toEqual({
+    ).toStrictEqual({
       numeroPruebas: 1,
       exitosas: 1,
       fallidas: 0,

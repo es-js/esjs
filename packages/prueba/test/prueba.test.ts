@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, test } from 'vitest'
 import {
   afirmar,
   afirmarDistinto,
@@ -387,5 +387,29 @@ describe('afirmarDistinto', () => {
     expect(
       () => afirmarDistinto(1, 1),
     ).toThrowError()
+  })
+})
+
+describe('prueba assertions', () => {
+  test('0 assertions', () => {
+    expect(
+      prueba('basica', () => {}),
+    ).toStrictEqual({
+      afirmaciones: 0,
+    })
+  })
+
+  test('many assertions', () => {
+    expect(
+      prueba('basica', () => {
+        afirmar(true)
+        afirmarIguales(1, 1)
+        afirmarSimilares(1, '1')
+        afirmarDistinto(1, 2)
+        afirmarVerdadero(true)
+      }),
+    ).toStrictEqual({
+      afirmaciones: 5,
+    })
   })
 })
