@@ -36,7 +36,7 @@ function updateIframe(options: UpdateIframeOptions) {
     <\/script>
 
     <body style="width: 100%; height: 100vh; margin: 0; padding: 0; background-color: #1f2937; display: flex; flex-direction: column;">
-        <div id="terminal-container" style="display: flex; flex: 1 1 0; position: relative;">
+        <div id="preview-container" style="display: flex; flex: 1 1 0; position: relative;">
               <es-terminal style="width: 100%; height: 100%; position: absolute; top: 0; right: 0; bottom: 0; left: 0;"></es-terminal>
         </div>
 
@@ -113,17 +113,17 @@ function updateIframe(options: UpdateIframeOptions) {
     }
 
     function _hidePreview(value) {
-        const terminalElement = document.getElementById('terminal-container');
+        const previewElement = document.getElementById('preview-container');
         const erudaDevToolsElement = eruda._$el[0].getElementsByClassName('eruda-dev-tools');
 
         if (value) {
-          terminalElement.style.display = 'none';
-          terminalElement.style.flex = '0 0 0';
+          previewElement.style.display = 'none';
+          previewElement.style.flex = '0 0 0';
 
           erudaDevToolsElement[0].style.height = '100%';
         } else {
-          terminalElement.style.display = 'flex';
-          terminalElement.style.flex = '1 1 0';
+          previewElement.style.display = 'flex';
+          previewElement.style.flex = '1 1 0';
 
           erudaDevToolsElement[0].style.height = '50%';
         }
