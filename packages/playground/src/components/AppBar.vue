@@ -4,7 +4,6 @@ import { useGrid } from 'vue-screen'
 import { useSettings } from '@/composables/useSettings'
 import { useShare } from '@/composables/useShare'
 import { useEditor } from '@/composables/useEditor'
-import NavCircleButton from '@/components/NavCircleButton.vue'
 import { useNotification } from '@/composables/useNotification'
 
 const settings = useSettings()
@@ -47,10 +46,11 @@ function shareCode() {
         <div class="w-px h-full bg-gray-800" />
 
         <div class="flex flex-row items-center px-2 space-x-2">
-          <NavButton
+          <AppButton
             v-if="!settings.settings.value.hideOptions"
             icon="mdi:share"
             :text="grid.lg ? 'Compartir código' : 'Compartir'"
+            description="Genera una URL con el código actual y la copia al portapapeles"
             :icon-only="!grid.sm"
             color="teal"
             @click="shareCode"
@@ -60,33 +60,70 @@ function shareCode() {
     </div>
 
     <div class="flex flex-row justify-center items-center px-2">
-      <NavButton
+      <AppButton
         v-if="!settings.settings.value.hideOptions"
         icon="mdi:play"
         text="Ejecutar"
         :icon-only="!grid.sm"
+        color="indigo"
         @click="editor.execute()"
       />
     </div>
 
     <div class="grid-col-span-3 flex flex-row justify-end items-center px-2 space-x-2">
       <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
-        <NavCircleButton icon="mdi:view-split-vertical" :active="'horizontal' === settings.settings.value.layout" @click="settings.setLayout('horizontal')" />
+        <AppButton
+          icon="mdi:view-split-vertical"
+          :active="'horizontal' === settings.settings.value.layout"
+          description="Orientación horizontal"
+          @click="settings.setLayout('horizontal')"
+        />
 
-        <NavCircleButton icon="mdi:view-split-horizontal" :active="'vertical' === settings.settings.value.layout" @click="settings.setLayout('vertical')" />
+        <AppButton
+          icon="mdi:view-split-horizontal"
+          :active="'vertical' === settings.settings.value.layout"
+          description="Orientación vertical"
+          @click="settings.setLayout('vertical')"
+        />
       </div>
 
       <div v-if="grid.md && !settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
-        <NavCircleButton icon="mdi:autorenew" :active="settings.settings.value.autoCompile" @click="settings.setAutoCompile(!settings.settings.value.autoCompile)" />
+        <AppButton
+          icon="mdi:autorenew"
+          :active="settings.settings.value.autoCompile"
+          description="Ejecutar automáticamente"
+          @click="settings.setAutoCompile(!settings.settings.value.autoCompile)"
+        />
 
-        <NavCircleButton icon="mdi:code" :active="!settings.settings.value.hideEditor" @click="settings.setHideEditor(!settings.settings.value.hideEditor)" />
+        <AppButton
+          icon="mdi:code"
+          :active="!settings.settings.value.hideEditor"
+          description="Mostrar editor"
+          @click="settings.setHideEditor(!settings.settings.value.hideEditor)"
+        />
 
-        <NavCircleButton icon="mdi:eye" :active="!settings.settings.value.hidePreview" @click="settings.setHidePreview(!settings.settings.value.hidePreview)" />
+        <AppButton
+          icon="mdi:eye"
+          :active="!settings.settings.value.hidePreview"
+          description="Mostrar vista previa"
+          @click="settings.setHidePreview(!settings.settings.value.hidePreview)"
+        />
 
-        <NavCircleButton icon="mdi:console" :active="!settings.settings.value.hideConsole" @click="settings.setHideConsole(!settings.settings.value.hideConsole)" />
+        <AppButton
+          icon="mdi:console"
+          :active="!settings.settings.value.hideConsole"
+          description="Mostrar consola"
+          @click="settings.setHideConsole(!settings.settings.value.hideConsole)"
+        />
       </div>
 
-      <NavCircleButton v-if="grid.md" icon="mdi:dots-horizontal" :active="!settings.settings.value.hideOptions" @click="settings.setHideOptions(!settings.settings.value.hideOptions)" />
+      <AppButton
+        v-if="grid.md"
+        icon="mdi:dots-horizontal"
+        :active="!settings.settings.value.hideOptions"
+        description="Mostrar opciones"
+        @click="settings.setHideOptions(!settings.settings.value.hideOptions)"
+      />
     </div>
   </div>
 </template>

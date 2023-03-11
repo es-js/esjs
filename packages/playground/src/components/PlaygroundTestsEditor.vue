@@ -4,7 +4,6 @@ import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import MonacoEditor from '@/components/MonacoEditor.vue'
 import { useSettings } from '@/composables/useSettings'
-import NavButton from '@/components/NavButton.vue'
 import ExportModuleButton from '@/components/shared/ExportModuleButton.vue'
 
 const editor = useEditor()
@@ -25,7 +24,7 @@ function toggleTestsEditor() {
       class="flex flex-row items-center px-2 py-1 space-x-2"
       :class="{ 'flex-grow': settings.settings.value.hideTests }"
     >
-      <NavButton
+      <AppButton
         text="Pruebas" icon="mdi:test-tube" color="teal" @click="toggleTestsEditor"
       />
 

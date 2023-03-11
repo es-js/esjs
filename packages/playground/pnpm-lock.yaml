@@ -14,6 +14,7 @@ specifiers:
   eslint: 8.22.0
   espree: ^9.4.1
   esprima: ^4.0.1
+  floating-vue: 2.0.0-beta.20
   lodash.debounce: ^4.0.8
   lz-string: ^1.4.4
   monaco-editor: ~0.35.0
@@ -51,6 +52,7 @@ devDependencies:
   eslint: 8.22.0
   espree: 9.4.1
   esprima: 4.0.1
+  floating-vue: 2.0.0-beta.20_vue@3.2.47
   lodash.debounce: 4.0.8
   lz-string: 1.4.4
   monaco-editor: 0.35.0
@@ -472,6 +474,16 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@floating-ui/core/0.3.1:
+    resolution: {integrity: sha512-ensKY7Ub59u16qsVIFEo2hwTCqZ/r9oZZFh51ivcLGHfUwTn8l1Xzng8RJUe91H/UP8PeqeBronAGx0qmzwk2g==}
+    dev: true
+
+  /@floating-ui/dom/0.1.10:
+    resolution: {integrity: sha512-4kAVoogvQm2N0XE0G6APQJuCNuErjOfPW8Ux7DFxh8+AfugWflwVJ5LDlHOwrwut7z/30NUvdtHzQ3zSip4EzQ==}
+    dependencies:
+      '@floating-ui/core': 0.3.1
     dev: true
 
   /@humanwhocodes/config-array/0.10.7:
@@ -2292,6 +2304,16 @@ packages:
 
   /flatted/3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
+    dev: true
+
+  /floating-vue/2.0.0-beta.20_vue@3.2.47:
+    resolution: {integrity: sha512-N68otcpp6WwcYC7zP8GeJqNZVdfvS7tEY88lwmuAHeqRgnfWx1Un8enzLxROyVnBDZ3TwUoUdj5IFg+bUT7JeA==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@floating-ui/dom': 0.1.10
+      vue: 3.2.47
+      vue-resize: 2.0.0-alpha.1_vue@3.2.47
     dev: true
 
   /for-each/0.3.3:

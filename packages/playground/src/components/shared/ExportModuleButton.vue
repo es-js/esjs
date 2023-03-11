@@ -30,7 +30,7 @@ function shareModule() {
 </script>
 
 <template>
-  <NavButton
+  <AppButton
     icon="mdi:publish"
     text="Exportar módulo"
     :icon-only="!grid.sm"

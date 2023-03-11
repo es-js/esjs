@@ -24,6 +24,7 @@
     "eslint": "8.22.0",
     "espree": "^9.4.1",
     "esprima": "^4.0.1",
+    "floating-vue": "2.0.0-beta.20",
     "lodash.debounce": "^4.0.8",
     "lz-string": "^1.4.4",
     "monaco-editor": "~0.35.0",

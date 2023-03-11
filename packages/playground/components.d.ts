@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppBar: typeof import('./src/components/AppBar.vue')['default']
+    AppButton: typeof import('./src/components/AppButton.vue')['default']
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
     AppNotifications: typeof import('./src/components/AppNotifications.vue')['default']
     ExportModuleButton: typeof import('./src/components/shared/ExportModuleButton.vue')['default']
