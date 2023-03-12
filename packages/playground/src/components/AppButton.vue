@@ -23,7 +23,7 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
 </script>
 
 <template>
-  <VTooltip>
+  <VTooltip :disabled="!props.description">
     <button
       class="flex flex-row justify-center items-center text-xs"
       :class="{

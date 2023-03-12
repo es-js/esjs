@@ -30,28 +30,33 @@ function updateIframe(options: UpdateIframeOptions) {
           "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.5/+esm",
           "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@0.0.5/+esm",
           "nprogress": "https://cdn.jsdelivr.net/npm/nprogress@0.2.0/+esm",
-          "eruda": "https://cdn.jsdelivr.net/npm/eruda@2.11.2/+esm"
+          "eruda": "https://cdn.jsdelivr.net/npm/eruda@2.11.2/+esm",
+          "@arrow-js/core": "https://cdn.jsdelivr.net/npm/@arrow-js/core/+esm"
         }
       }
     <\/script>
 
-    <body style="width: 100%; height: 100vh; margin: 0; padding: 0; background-color: #1f2937; display: flex; flex-direction: column;">
-        <div id="preview-container" style="display: flex; flex: 1 1 0; position: relative;">
-              <es-terminal style="width: 100%; height: 100%; position: absolute; top: 0; right: 0; bottom: 0; left: 0;"></es-terminal>
+    <body id="body" class="w-full h-[100vh] m-0 p-0 flex flex-col bg-gray-900">
+        <div id="preview-container" class="relative flex-1">
+              <div id="app" class="w-full h-full absolute inset-0"></div>
         </div>
 
-        <div id="console-container" style="display: flex; flex: 1 1 0; position: relative;">
+        <div id="console-container" class="relative flex-1">
               <div id="eruda-container"></div>
         </div>
     </body>
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css'/>
 
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"><\/script>
+
     <script async type="module">
     import NProgress from 'nprogress';
     import eruda from 'eruda';
     import { usarTerminal } from '@es-js/terminal';
     ${options.imports}
+
+    var _html = null;
 
     window.addEventListener('message', async ({ data }) => {
       const { event, value } = data;
@@ -74,6 +79,8 @@ function updateIframe(options: UpdateIframeOptions) {
 
       try {
         await _runCode();
+
+        _render()
       } catch (error) {
         window._handleException(error);
       }
@@ -102,11 +109,9 @@ function updateIframe(options: UpdateIframeOptions) {
         const consoleElement = document.getElementById('console-container');
 
         if (value) {
-          consoleElement.style.display = 'none';
-          consoleElement.style.flex = '0 0 0';
+            consoleElement.classList.add('hidden');
         } else {
-          consoleElement.style.display = 'flex';
-          consoleElement.style.flex = '1 1 0';
+            consoleElement.classList.remove('hidden');
         }
 
         usarTerminal().fitTerminal()
@@ -151,6 +156,35 @@ function updateIframe(options: UpdateIframeOptions) {
 
     async function _runCode() {
       ${options.code}
+    }
+
+    function _render() {
+      if (_html == null) {
+         _setDefaultTemplate()
+      } else {
+        _resetBodyColor()
+      }
+
+      _html(document.getElementById('app'))
+    }
+
+    function _setDefaultTemplate() {
+      _setBodyColor('bg-gray-900')
+     _html = html\`
+      <es-terminal class="w-full h-full absolute inset-0"></es-terminal>
+      \`
+    }
+
+    function _resetBodyColor() {
+      const bodyElement = document.getElementById('body');
+      bodyElement.classList.remove('bg-gray-900');
+      bodyElement.classList.add('bg-white');
+    }
+
+    function _setBodyColor(color) {
+      const bodyElement = document.getElementById('body');
+      bodyElement.classList.remove('bg-white');
+      bodyElement.classList.add(color);
     }
 
     await _init()
