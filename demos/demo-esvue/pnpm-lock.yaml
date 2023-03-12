@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.31.1
-  '@es-js/core': workspace:^0.0.16
+  '@es-js/core': workspace:^0.0.17
   '@es-js/vite-plugin-esvue': workspace:^0.0.13
   '@types/node': ^18.15.0
   '@vitejs/plugin-vue': ^4.0.0

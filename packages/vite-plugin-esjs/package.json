@@ -11,7 +11,7 @@
   "dependencies": {
     "@babel/core": "^7.21.0",
     "@es-js/babel-plugin-esjs": "workspace:^0.0.13",
-    "@es-js/core": "workspace:0.0.16",
+    "@es-js/core": "workspace:0.0.17",
     "vite": "^4.1.4"
   },
   "devDependencies": {
