@@ -11,12 +11,12 @@
   "dependencies": {
     "@babel/core": "^7.21.0",
     "@es-js/babel-plugin-esjs": "workspace:^0.0.13",
-    "@es-js/core": "workspace:0.0.15",
-    "vite": "^4.1.3"
+    "@es-js/core": "workspace:0.0.16",
+    "vite": "^4.1.4"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.0",
-    "@types/node": "^18.14.0",
+    "@types/node": "^18.15.0",
     "typescript": "^4.9.5",
     "unbuild": "^1.1.2"
   },

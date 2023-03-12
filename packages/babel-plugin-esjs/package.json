@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/parser": "^7.21.0",
-    "@es-js/core": "workspace:^0.0.15"
+    "@babel/parser": "^7.21.2",
+    "@es-js/core": "workspace:^0.0.16"
   },
   "devDependencies": {
-    "@types/node": "^18.14.0",
+    "@types/node": "^18.15.0",
     "typescript": "^4.9.5",
     "unbuild": "^1.1.2"
   },
