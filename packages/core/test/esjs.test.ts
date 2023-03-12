@@ -33,7 +33,7 @@ describe('transform', () => {
 
 describe('particular fixture', () => {
   it('transforms esjs', () => {
-    const { esjsCode, jsCode } = readFixture('./fixtures/esjs/fecha.esjs')
+    const { esjsCode, jsCode } = readFixture('./fixtures/esjs/templateLiterals.esjs')
 
     const esjsCodeTranspiled = transpile(esjsCode)
 

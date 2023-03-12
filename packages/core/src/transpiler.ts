@@ -28,11 +28,11 @@ export function transpile(input: string) {
     return translation || chars
   }
 
-  function finishStringLiteral() {
+  function finishStringLiteral(tick: string) {
     let value = input[current]
     current++
 
-    while (input[current] && !isTick(input[current])) {
+    while (input[current] && input[current] !== tick) {
       value += input[current]
       current++
     }
@@ -56,7 +56,7 @@ export function transpile(input: string) {
     }
 
     if (isTick(currentChar)) {
-      output += finishStringLiteral()
+      output += finishStringLiteral(currentChar)
     }
     else if (isAlpha(currentChar)) {
       output += finishIdentifier()
