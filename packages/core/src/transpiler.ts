@@ -6,7 +6,7 @@ export function transpile(input: string) {
 
   function finishIdentifier() {
     let name = ''
-    while (!isWhitespace(input[current]) && !isSpecialCharacter(input[current]) && !isBracket(input[current])) {
+    while (!isWhitespace(input[current]) && !isSpecialCharacter(input[current]) && !isBracket(input[current]) && !isTick(input[current])) {
       name += input[current]
       current++
     }
