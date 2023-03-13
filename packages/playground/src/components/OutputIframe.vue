@@ -78,9 +78,10 @@ function updateIframe(options: UpdateIframeOptions) {
       NProgress.done();
 
       try {
+        _render()
+
         await _runCode();
 
-        _render()
       } catch (error) {
         window._handleException(error);
       }
