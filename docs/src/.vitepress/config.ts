@@ -87,6 +87,12 @@ export default async () => {
           message: 'Publicado bajo licencia MIT.',
           copyright: 'Copyright © 2022-presente Enzo Notario',
         },
+
+        algolia: {
+          appId: 'JXOQXAM65O',
+          apiKey: '7545f38dfa3c4f435bbad0de83ec7189',
+          indexName: 'esjs',
+        },
       },
     },
   )
