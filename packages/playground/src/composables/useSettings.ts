@@ -8,6 +8,7 @@ const settings = ref({
   hideConsole: false,
   hideTests: true,
   autoCompile: true,
+  customHtml: false,
 })
 
 export const useSettings = () => {
@@ -39,6 +40,10 @@ export const useSettings = () => {
     settings.value.autoCompile = autoCompile
   }
 
+  function setCustomHtml(customHtml: boolean) {
+    settings.value.customHtml = customHtml
+  }
+
   return {
     settings,
     setLayout,
@@ -48,5 +53,6 @@ export const useSettings = () => {
     setHideConsole,
     setHideTests,
     setAutoCompile,
+    setCustomHtml,
   }
 }

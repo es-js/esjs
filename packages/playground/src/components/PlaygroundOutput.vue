@@ -9,7 +9,7 @@ const editor = useEditor()
 const settings = useSettings().settings
 
 watch(
-  [editor.code, editor.testsCode],
+  [editor.code, editor.testsCode, () => settings.value.customHtml],
   () => {
     if (!settings.value.autoCompile)
       return

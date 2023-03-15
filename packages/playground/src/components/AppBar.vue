@@ -115,6 +115,13 @@ function shareCode() {
           description="Mostrar consola"
           @click="settings.setHideConsole(!settings.settings.value.hideConsole)"
         />
+
+        <AppButton
+          icon="mdi:language-html5"
+          :active="settings.settings.value.customHtml"
+          description="HTML personalizado"
+          @click="settings.setCustomHtml(!settings.settings.value.customHtml)"
+        />
       </div>
 
       <AppButton

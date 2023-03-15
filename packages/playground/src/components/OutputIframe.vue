@@ -18,6 +18,7 @@ interface UpdateIframeOptions {
   imports: string
   hideConsole: boolean
   hidePreview: boolean
+  customHtml: boolean
 }
 
 function updateIframe(options: UpdateIframeOptions) {
@@ -38,7 +39,7 @@ function updateIframe(options: UpdateIframeOptions) {
 
     <body id="body" class="w-full h-[100vh] m-0 p-0 flex flex-col bg-gray-900">
         <div id="preview-container" class="relative flex-1">
-              <div id="app" class="w-full h-full absolute inset-0"></div>
+            ${options.customHtml ? '<div id="app" class="w-full h-full absolute inset-0"></div>' : '<es-terminal class="w-full h-full absolute inset-0"></es-terminal>'}
         </div>
 
         <div id="console-container" class="relative flex-1">
@@ -56,7 +57,7 @@ function updateIframe(options: UpdateIframeOptions) {
     import { usarTerminal } from '@es-js/terminal';
     ${options.imports}
 
-    var _html = null;
+    var _app = document.getElementById('app');
 
     window.addEventListener('message', async ({ data }) => {
       const { event, value } = data;
@@ -75,11 +76,10 @@ function updateIframe(options: UpdateIframeOptions) {
       await _initEruda();
       _hidePreview(${options.hidePreview});
       _hideConsole(${options.hideConsole});
+      if (${options.customHtml}) _resetBodyColor()
       NProgress.done();
 
       try {
-        _render()
-
         await _runCode();
 
       } catch (error) {
@@ -159,33 +159,10 @@ function updateIframe(options: UpdateIframeOptions) {
       ${options.code}
     }
 
-    function _render() {
-      if (_html == null) {
-         _setDefaultTemplate()
-      } else {
-        _resetBodyColor()
-      }
-
-      _html(document.getElementById('app'))
-    }
-
-    function _setDefaultTemplate() {
-      _setBodyColor('bg-gray-900')
-     _html = html\`
-      <es-terminal class="w-full h-full absolute inset-0"></es-terminal>
-      \`
-    }
-
     function _resetBodyColor() {
       const bodyElement = document.getElementById('body');
       bodyElement.classList.remove('bg-gray-900');
       bodyElement.classList.add('bg-white');
-    }
-
-    function _setBodyColor(color) {
-      const bodyElement = document.getElementById('body');
-      bodyElement.classList.remove('bg-white');
-      bodyElement.classList.add(color);
     }
 
     await _init()
@@ -210,6 +187,7 @@ onMounted(() => {
     imports: parseImports(defaultImports, codeImports, testsCodeImports),
     hidePreview: settings.value.hidePreview,
     hideConsole: settings.value.hideConsole,
+    customHtml: settings.value.customHtml,
   })
 })
 
