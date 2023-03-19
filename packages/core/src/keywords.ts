@@ -82,7 +82,7 @@ export const mathMethods = new Map([
 export const numberMethods = new Map([
   ['esFinito', 'isFinite'],
   ['esEntero', 'isInteger'],
-  ['NeN', 'isNaN'],
+  ['esNuN', 'isNaN'],
   ['esEnteroSeguro', 'isSafeInteger'],
   ['interpretarDecimal', 'parseFloat'],
   ['interpretarEntero', 'parseInt'],
