@@ -66,6 +66,36 @@ export default async () => {
           },
 
           {
+            text: 'Sintaxis',
+            items: [
+              { text: 'Comentarios', link: '/sintaxis/comentarios' },
+              { text: 'Variables', link: '/sintaxis/variables' },
+              { text: 'Constantes', link: '/sintaxis/constantes' },
+              { text: 'Operadores', link: '/sintaxis/operadores' },
+              { text: 'Condición si ... sino', link: '/sintaxis/condicion-si' },
+              { text: 'Declaración elegir', link: '/sintaxis/elegir' },
+              { text: 'Bucle para', link: '/sintaxis/para' },
+              { text: 'Bucle mientras', link: '/sintaxis/mientras' },
+              { text: 'Bucle hacer ... mientras', link: '/sintaxis/hacer-mientras' },
+              { text: 'Módulos', link: '/sintaxis/modulos' },
+            ],
+          },
+
+          {
+            text: 'Tipos de datos',
+            items: [
+              { text: 'Booleano', link: '/tipos-de-datos/booleano' },
+              { text: 'nulo', link: '/tipos-de-datos/nulo' },
+              { text: 'Numero', link: '/tipos-de-datos/numero' },
+              { text: 'Cadena', link: '/tipos-de-datos/cadena' },
+              { text: 'Objeto', link: '/tipos-de-datos/objeto' },
+              { text: 'Matriz', link: '/tipos-de-datos/matriz' },
+              { text: 'funcion', link: '/tipos-de-datos/funcion' },
+              { text: 'Simbolo', link: '/tipos-de-datos/simbolo' },
+            ],
+          },
+
+          {
             text: 'Avanzado',
             items: [
               { text: 'Elevación', link: '/avanzado/elevacion' },

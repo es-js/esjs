@@ -46,30 +46,7 @@ Por ejemplo, `x > 0 ? '+' : '-'`.
 
 ### Operadores de asignación
 
-Un operador de asignación asigna un valor a su operando izquierdo basándose en el valor de su operando derecho. 
-
-El operador de asignación simple es representado por el símbolo "igual" (`=`), que asigna el valor de su operando derecho a su operando izquierdo. Es decir, `x = y` asigna el valor de `y` a `x`.
-
-También hay operadores de asignación compuestos que son una abreviatura de las operaciones enumeradas en la siguiente tabla:
-
-| Nombre | Operador abreviado | Significado |
-| --- | --- | --- |
-| `Asignación` | `x = y` | `x = y` |
-| `Asignación de adición` | `x += y` | `x = x + y` |
-| `Asignación de resta` | `x -= y` | `x = x - y` |
-| `Asignación de multiplicación` | `x *= y` | `x = x * y` |
-| `Asignación de división` | `x /= y` | `x = x / y` |
-| `Asignación de residuo` | `x %= y` | `x = x % y` |
-| `Asignación de exponenciación` | `x **= y` | `x = x ** y` |
-| `Asignación de desplazamiento a la izquierda` | `x <<= y` | `x = x << y` |
-| `Asignación de desplazamiento a la derecha` | `x >>= y` | `x = x >> y` |
-| `Asignación de desplazamiento a la derecha sin signo` | `x >>>= y` | `x = x >>> y` |
-| `Asignación AND bit a bit` | `x &= y` | `x = x & y` |
-| `Asignación XOR bit a bit` | `x ^= y` | `x = x ^ y` |
-| `Asignación OR bit a bit` | `x \|= y` | `x = x \| y` |
-| `Asignación AND lógico` | `x &&= y` | `x && (x = y)` |
-| `Asignación OR lógico` | `x \|\|= y` | `x \|\| (x = y)` |
-| `Asignación de anulación lógica` | `x ??= y` | `x ?? (x = y)` |
+<!--@include: ../operadores/operadores-asignacion.md-->
 
 #### Valor de retorno y encadenamiento
 
@@ -124,25 +101,7 @@ console.escribir(uno, dos, tres);
 
 ### Operadores de comparación
 
-Un operador de comparación compara sus operandos y devuelve un valor lógico en función de si la comparación es verdadera (`verdadero`) o falsa (`falso`). Los operandos pueden ser valores numéricos, de cadena, lógicos u objetos. Las cadenas se comparan según el orden lexicográfico estándar, utilizando valores Unicode. En la mayoría de los casos, si los dos operandos no son del mismo tipo, EsJS intenta convertirlos a un tipo apropiado para la comparación. Este comportamiento generalmente resulta en comparar los operandos numéricamente. Las únicas excepciunos a la conversión de tipos dentro de las comparaciunos involucran a los operadores `===` y `!==`, que realizan comparaciones estrictas de igualdad y desigualdad. Estos operadores no intentan convertir los operandos a tipos compatibles antes de verificar la igualdad. La siguiente tabla describe los operadores de comparación en términos de este código de ejemplo:
-
-```esjs
-var var1 = 3;
-var var2 = 4;
-```
-
-| Operador                       | Descripción                                                                                                                                                                                                      | Ejemplos que devuelven `verdadero`     |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| `Igual` (`==`)                 | Devuelve `verdadero` si los operandos son iguales.                                                                                                                                                               | `3 == var1`  `"3" == var1`  `3 == '3'` |
-| `No es igual` (`!=`)           | Devuelve `verdadero` si los operandos _no_ son iguales.                                                                                                                                                          | `var1 != 4` `var2 != "3"`              |
-| `Estrictamente igual` (`===`)  | Devuelve `verdadero` si los operandos son iguales y del mismo tipo. Consulta también [`Object.is`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Object/is) y `similitud en JS`. | `3 === var1`                           |
-| `Desigualdad estricta` (`!==`) | Devuelve `verdadero` si los operandos son del mismo tipo pero no iguales, o son de diferente tipo.                                                                                                               | `var1 !== "3` `3 !== '3`               |
-| `Mayor que` (`>`)              | Devuelve `verdadero` si el operando izquierdo es mayor que el operando derecho.                                                                                                                                  | `var2 > var1 "12" > 2`                 |
-| `Mayor o igual que` (`>=`)     | Devuelve `verdadero` si el operando izquierdo es mayor o igual que el operando derecho.                                                                                                                          | `var2 >= var1 var1 >= 3`               |
-| `Menor que` (`<`)              | Devuelve `verdadero` si el operando izquierdo es menor que el operando derecho.                                                                                                                                  | `var1 < var2` `"2" < 12`               |
-| `Menor o igual` (`<=`)         | Devuelve `verdadero` si el operando izquierdo es menor o igual que el operando derecho.                                                                                                                          | `var1 <= var2 var2 <= 5`               |
-
-> **Nota:** `=>` no es un operador, sino la notación para `Funciones Flecha`.
+<!--@include: ../operadores/operadores-comparacion.md-->
 
 ### Operadores aritméticos
 
@@ -222,47 +181,7 @@ Los operadores de desplazamiento se enumeran en la siguiente tabla.
 
 ### Operadores lógicos
 
-Los operadores lógicos se utilizan normalmente con valores booleanos (lógicos); cuando lo son, devuelven un valor booleano. Sin embargo, los operadores `&&` y `||` en realidad devuelven el valor de uno de los operandos especificados, por lo que si estos operadores se utilizan con valores no booleanos, pueden devolver un valor no booleano. Los operadores lógicos se describen en la siguiente tabla.
-
-| Operador            | Uso              | Descripción                                                                                                                                                                                                                              |
-|---------------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `AND Lógico` (`&&`) | `expr1 && expr2` | Devuelve `expr1` si se puede convertir a `falso`; de lo contrario, devuelve `expr2`. Por lo tanto, cuando se usa con valores booleanos, `&&` devuelve `verdadero` si ambos operandos son `verdadero`; de lo contrario, devuelve `falso`. |
-| `OR lógico` (`\|\|`)               | `expr1 \|\| expr2` | Devuelve `expr1` si se puede convertir a `verdadero`; de lo contrario, devuelve `expr2`. Por lo tanto, cuando se usa con valores booleanos, `||` devuelve `true` si alguno de los operandos es `true`; si ambos son falsos, devuelve `falso`. |
-| `NOT lógico` (`!`)  | `!expr`          | Devuelve `falso` si su único operando se puede convertir a `true`; de lo contrario, devuelve `true`.                                                                                                                                      |
-
-Ejemplos de expresiones que se pueden convertir a `falso` son aquellos que se evalúan como `null`, 0, `NaN`, la cadena vacía ("") o `undefined`.
-
-El siguiente código muestra ejemplos del operador `&&` (`AND` lógico).
-
-```esjs
-var a1 =  true && true;     // t && t devuelve true
-var a2 =  true && falso;    // t && f devuelve falso
-var a3 = falso && true;     // f && t devuelve falso
-var a4 = falso && (3 == 4); // f && f devuelve falso
-var a5 = 'Cat' && 'Dog';    // t && t devuelve Dog
-var a6 = falso && 'Cat';    // f && t devuelve falso
-var a7 = 'Cat' && falso;    // t && f devuelve falso
-```
-
-El siguiente código muestra ejemplos del operador || (`OR` lógico).
-
-```esjs
-var o1 =  true || true;     // t || t devuelve true
-var o2 = falso || true;     // f || t devuelve true
-var o3 =  true || falso;    // t || f devuelve true
-var o4 = falso || (3 == 4); // f || f devuelve falso
-var o5 = 'Cat' || 'Dog';    // t || t devuelve Cat
-var o6 = falso || 'Cat';    // f || t devuelve Cat
-var o7 = 'Cat' || falso;    // t || f devuelve Cat
-```
-
-El siguiente código muestra ejemplos de el operador ! (`NOT` lógico).
-
-```esjs
-var n1 = !true;  // !t devuelve falso
-var n2 = !falso; // !f devuelve true
-var n3 = !'Cat'; // !t devuelve falso
-```
+<!--@include ../operadores/operadores-logicos.md-->
 
 #### Evaluación de cortocircuito
 
@@ -277,47 +196,11 @@ Ten en cuenta que para el segundo caso, en el código moderno puedes usar el cre
 
 ### Operadores de cadena
 
-Además de los operadores de comparación, que se pueden usar en valores de cadena, el operador de concatenación (+) concatena dos valores de cadena, devolviendo otra cadena que es la unión de los dos operandos de cadena.
-
-Por ejemplo,
-
-```esjs
-consola.escribir('mi ' + 'cadena'); // la consola registra la cadena "mi cadena".
-```
-
-El operador de asignación abreviada `+=` también se puede utilizar para concatenar cadenas.
-
-Por ejemplo,
-
-```esjs
-var miCadena = 'alfa';
-miCadena += 'beto'; // se evalúa como "alfabeto" y asigna este valor a miCadena.
-```
+<!--@include ../operadores/operadores-cadena.md-->
 
 ### Operador condicional (ternario)
 
-El `operador condicional` es el único operador de EsJS que toma tres operandos. El operador puede tener uno de dos valores según una condición. La sintaxis es:
-
-```esjs
-condicion ? valor1 : valor2
-```
-
-Si `condicion` es `verdadero`, el operador tiene el valor de `valor1`. De lo contrario, tiene el valor de `valor2`. Puedes utilizar el operador condicional en cualquier lugar donde normalmente utilizas un operador estándar.
-
-Por ejemplo:
-
-<InlinePlayground>
-
-```esjs
-var edad = 20;
-var estado = (edad >= 18) ? 'Mayor de edad' : 'Menor de edad';
-
-consola.escribir(estado);
-```
-
-</InlinePlayground>
-
-Esta declaración asigna el valor "`Mayor de edad`" a la variable `estado` si `edad` es de dieciocho años o más. De lo contrario, asigna el valor "`Menor de edad`" a `estado`.
+<!--@include ../operadores/operador-condicional-ternario.md-->
 
 ### Operador coma
 
