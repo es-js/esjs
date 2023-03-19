@@ -20,7 +20,7 @@
     "eslint": "^8.36.0",
     "lz-string": "^1.5.0",
     "shiki": "^0.12.1",
-    "vite": "^4.1.4",
+    "vite": "^4.2.0",
     "vite-plugin-windicss": "^1.8.10",
     "vitepress": "1.0.0-alpha.38",
     "vue": "^3.2.47",
