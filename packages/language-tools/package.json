@@ -15,7 +15,8 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
     "@es-js/core": "workspace:^0.0.18",
-    "eslint": "8.22.0"
+    "eslint": "8.22.0",
+    "markdown-table": "^3.0.3"
   },
   "exports": {
     "./esjs.tmLanguage.json": {
@@ -37,6 +38,10 @@
     "./esjs.code-snippets.json": {
       "import": "./dist/esjs.code-snippets.json",
       "require": "./dist/esjs.code-snippets.json"
+    },
+    "./reserved-words.md": {
+      "import": "./dist/reserved-words.md",
+      "require": "./dist/reserved-words.md"
     }
   }
 }

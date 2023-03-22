@@ -4,11 +4,13 @@ specifiers:
   '@antfu/eslint-config': ^0.31.1
   '@es-js/core': workspace:^0.0.18
   eslint: 8.22.0
+  markdown-table: ^3.0.3
 
 devDependencies:
   '@antfu/eslint-config': 0.31.1_eslint@8.22.0
   '@es-js/core': link:../core
   eslint: 8.22.0
+  markdown-table: 3.0.3
 
 packages:
 
@@ -1613,6 +1615,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: true
+
+  /markdown-table/3.0.3:
+    resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
     dev: true
 
   /mdast-util-from-markdown/0.8.5:

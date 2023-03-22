@@ -68,6 +68,7 @@ export default async () => {
           {
             text: 'Sintaxis',
             items: [
+              { text: 'Palabras reservadas', link: '/sintaxis/palabras-reservadas' },
               { text: 'Comentarios', link: '/sintaxis/comentarios' },
               { text: 'Variables', link: '/sintaxis/variables' },
               { text: 'Constantes', link: '/sintaxis/constantes' },
