@@ -4,7 +4,7 @@ import { splitCodeImports, transpile } from '@es-js/core'
 import { escapeQuotes, sanitizeCode } from '@/composables/utils'
 
 export const INITIAL_CODE = `/**
-  EsJS: JavaScript en Español.
+  EsJS: JavaScript con sintaxis en Español.
 
   Este código será transpilado a JavaScript, y ejecutado junto a una Terminal.
 */

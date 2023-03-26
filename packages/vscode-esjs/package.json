@@ -1,7 +1,7 @@
 {
   "publisher": "enzonotario",
   "name": "vscode-esjs",
-  "displayName": "EsJS (JavaScript en Español)",
+  "displayName": "EsJS (JavaScript con sintaxis en Español)",
   "version": "0.0.12",
   "packageManager": "pnpm@7.8.0",
   "description": "Sintaxis y configuraciones para EsJS",

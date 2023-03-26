@@ -608,7 +608,7 @@ Los siguientes son ejemplos de cadenas literales:
 "bar"
 '1234'
 "una linea \n otra linea"
-"EsJS: JavaScript en Español"
+"EsJS: JavaScript con sintaxis en Español"
 ```
 
 Puedes llamar a cualquiera de los métodos del objeto [`Cadena`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String) en un valor de cadena literal. EsJS automáticamente convierte la cadena literal en un objeto `Cadena` temporal, llama al método y luego descarta el objeto `Cadena` temporal. También puedes usar la propiedad `String.longitud` con una cadena literal:
@@ -617,7 +617,7 @@ Puedes llamar a cualquiera de los métodos del objeto [`Cadena`](https://develop
 
 ```esjs
 // Imprimirá el número de caracteres en la cadena, incluidos los espacios en blanco.
-consola.escribir("EsJS: JavaScript en Español".longitud)  // 27.
+consola.escribir("EsJS: JavaScript con sintaxis en Español".longitud)  // 27.
 ```
 
 </InlinePlayground>
