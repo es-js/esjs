@@ -91,7 +91,7 @@ export function unifyImports(imports) {
   imports.split('\n')
     .map(line => line.trim())
     .forEach((line) => {
-      const importMatch = line.match(/^import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*$/)
+      const importMatch = line.match(/^import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*(;)?$/)
 
       if (!importMatch) {
         output += `${line}\n`

@@ -1,5 +1,5 @@
-async inicio = () => {
-	retornar true
+asincrono inicio = () => {
+	retornar verdadero
 }
 
 inicio()

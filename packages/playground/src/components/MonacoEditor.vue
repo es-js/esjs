@@ -7,6 +7,7 @@ import { ResizeObserver } from 'vue-resize'
 import { useMonaco } from '@/composables/useMonaco'
 import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
+import { useEditor } from '@/composables/useEditor'
 
 const props = defineProps({
   name: {
@@ -96,10 +97,26 @@ function setupBusCommands() {
         return clearDecorations()
       case 'fit':
         return onResizeDebounced()
+      case 'format':
+        return formatCode()
       default:
         return null
     }
   })
+}
+
+async function formatCode() {
+  if (!monacoInstance)
+    return
+
+  const model = monacoInstance.getModel()
+
+  if (!model)
+    return
+
+  const formattedCode = useEditor().formatCode(model.getValue())
+
+  monacoInstance.setValue(formattedCode)
 }
 </script>
 

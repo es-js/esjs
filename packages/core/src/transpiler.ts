@@ -1,8 +1,17 @@
 import { keywords } from './keywords'
 
-export function transpile(input: string) {
+function invertMap(map: Map<string, string>) {
+  const invertedMap = new Map()
+  for (const [key, value] of map.entries())
+    invertedMap.set(value, key)
+
+  return invertedMap
+}
+
+export function transpile(input: string, reverse = false) {
   let current = 0
   let output = ''
+  const dictionary = reverse ? invertMap(keywords) : keywords
 
   function finishIdentifier() {
     let name = ''
@@ -11,7 +20,7 @@ export function transpile(input: string) {
       current++
     }
 
-    const translation = keywords.get(name)
+    const translation = dictionary.get(name)
 
     return translation || name
   }
@@ -23,7 +32,7 @@ export function transpile(input: string) {
       current++
     }
 
-    const translation = keywords.get(chars)
+    const translation = dictionary.get(chars)
 
     return translation || chars
   }

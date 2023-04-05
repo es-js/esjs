@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { editor } from 'monaco-editor'
 import { useEventBus } from '@vueuse/core'
+import { useGrid } from 'vue-screen'
 import { useEditor } from '@/composables/useEditor'
 import MonacoEditor from '@/components/MonacoEditor.vue'
 import { useSettings } from '@/composables/useSettings'
@@ -10,10 +11,16 @@ const editor = useEditor()
 
 const settings = useSettings()
 
+const grid = useGrid('tailwind')
+
 function toggleTestsEditor() {
   settings.setHideTests(!settings.settings.value.hideTests)
 
   useEventBus('editor_code').emit('fit')
+}
+
+function formatCode() {
+  useEventBus('editor_code').emit('format')
 }
 </script>
 
@@ -29,6 +36,17 @@ function toggleTestsEditor() {
       />
 
       <ExportModuleButton />
+
+      <div class="flex flex-grow" />
+
+      <AppButton
+        icon="mdi:code-braces"
+        :text="grid.lg ? 'Formatear código' : 'Formatear'"
+        description="Formatea el código actual"
+        :icon-only="!grid.sm"
+        color="teal"
+        @click="formatCode"
+      />
     </div>
     <div v-if="!settings.settings.value.hideTests" class="flex flex-grow">
       <MonacoEditor

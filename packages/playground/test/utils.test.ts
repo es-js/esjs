@@ -47,4 +47,15 @@ import { tirarPapeles } from 'https://cdn.esjs.dev/JYWwDg9gTgLgBAYwgOwGYFMY2HVUI
 
     expect(unifyImports(imports).trim()).toBe(expected)
   })
+
+  it('unify imports with semicolon', () => {
+    const imports = `import { pruebas, afirmar, assert, afirmarIguales } from '@es-js/prueba';
+import { Terminal } from '@es-js/terminal';
+import { afirmarObjetosIguales } from '@es-js/prueba';`
+
+    const expected = `import { afirmar, afirmarIguales, afirmarObjetosIguales, assert, pruebas } from '@es-js/prueba'
+import { Terminal } from '@es-js/terminal'`
+
+    expect(unifyImports(imports).trim()).toBe(expected)
+  })
 })

@@ -29,6 +29,20 @@ describe('transform', () => {
       expect(esjsCodeTranspiled).toEqual(jsCode)
     }
   })
+
+  it('transforms js to esjs', () => {
+    const fixtureKeys = Object.keys(esjsFixtures)
+
+    expect(fixtureKeys.length).toBeGreaterThan(0)
+
+    for (const fixture of fixtureKeys) {
+      const { esjsCode, jsCode } = readFixture(fixture)
+
+      const transpiledCode = transpile(jsCode, true)
+
+      expect(transpiledCode).toEqual(esjsCode)
+    }
+  })
 })
 
 describe('particular fixture', () => {

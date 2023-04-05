@@ -1,6 +1,8 @@
 import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { splitCodeImports, transpile } from '@es-js/core'
+import prettier from 'prettier/standalone'
+import parserBabel from 'prettier/parser-babel'
 import { escapeQuotes, sanitizeCode } from '@/composables/utils'
 
 export const INITIAL_CODE = `/**
@@ -66,6 +68,18 @@ export const useEditor = () => {
     })
   }
 
+  function formatCode(code: string) {
+    const transpiled = transpile(code)
+
+    const formatted = prettier.format(transpiled, {
+      parser: 'babel',
+      plugins: [parserBabel],
+      semi: false,
+    })
+
+    return transpile(formatted, true)
+  }
+
   function getTranspiledCode() {
     try {
       const transpiledCode = transpile(code.value)
@@ -94,5 +108,6 @@ export const useEditor = () => {
     execute,
     setCode,
     setTestsCode,
+    formatCode,
   }
 }
