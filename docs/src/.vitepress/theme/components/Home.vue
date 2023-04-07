@@ -87,9 +87,15 @@ html:not(.dark) .accent,
   @apply px-4 xl:px-5 py-2 xl:py-2.5 inline-block text-center text-gray-900 font-bold rounded-3xl bg-gray-100 border border-gray-300;
 }
 .action.primary {
-  border-color: var(--vp-button-brand-border);
+  border-color: var(--vp-c-brand-dark);
   color: var(--vp-button-brand-text);
-  background-color: var(--vp-button-brand-bg);
+  background-color: var(--vp-c-brand);
+}
+
+.dark .action.primary {
+  border-color: var(--vp-c-brand);
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-c-brand-darker);
 }
 
 .features {
@@ -97,12 +103,12 @@ html:not(.dark) .accent,
 }
 
 .feature {
-  @apply flex flex-col py-6 px-6 space-y-2 bg-gray-50 rounded-xl;
+  @apply flex flex-col py-6 px-6 space-y-2 bg-gray-50 dark:bg-gray-800 rounded-xl;
 }
 .feature h1 {
   @apply text-xl font-bold;
 }
 .feature p {
-  @apply text-gray-700;
+  @apply text-gray-700 dark:text-gray-200;
 }
 </style>
