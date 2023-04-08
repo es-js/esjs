@@ -7,7 +7,6 @@ import { ResizeObserver } from 'vue-resize'
 import { useMonaco } from '@/composables/useMonaco'
 import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
-import { useEditor } from '@/composables/useEditor'
 
 const props = defineProps({
   name: {
@@ -55,6 +54,7 @@ async function setupMonaco() {
   await monacoHelper.setupMonacoCompletion()
   await monacoHelper.setupMonacoSynchronization(monacoInstance, value => emit('update:value', value))
   await monacoHelper.setupMonacoCommands(monacoInstance, () => emit('execute'))
+  await monacoHelper.setupMonacoFormat()
 }
 
 async function decorateError(line: number, column: number) {
@@ -106,17 +106,7 @@ function setupBusCommands() {
 }
 
 async function formatCode() {
-  if (!monacoInstance)
-    return
-
-  const model = monacoInstance.getModel()
-
-  if (!model)
-    return
-
-  const formattedCode = useEditor().formatCode(model.getValue())
-
-  monacoInstance.setValue(formattedCode)
+  return monacoInstance?.getAction('editor.action.formatDocument')?.run()
 }
 </script>
 
