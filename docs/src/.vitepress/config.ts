@@ -8,6 +8,68 @@ const gtagId = process.env.NODE_ENV === 'production' ? 'G-0XH36H9K3M' : 'G-TEST'
 export default async () => {
   const highlighter = await getHighlighter()
 
+  const defaultSidebar = [
+    {
+      text: 'Introducción',
+      items: [
+        { text: '¿Por qué usar EsJS?', link: '/guia/por-que-usar-esjs' },
+        { text: 'Empezando', link: '/guia/empezando' },
+      ],
+    },
+
+    {
+      text: 'Guía EsJS',
+      items: [
+        { text: 'Introducción', link: '/guia/introduccion' },
+        { text: 'Gramática y Tipos', link: '/guia/gramatica-y-tipos' },
+        { text: 'Control del flujo y manejo de errores', link: '/guia/control-del-flujo-y-manejo-de-errores' },
+        { text: 'Bucles e iteración', link: '/guia/bucles-e-iteracion' },
+        { text: 'Funciones', link: '/guia/funciones' },
+        { text: 'Expresiones y operadores', link: '/guia/expresiones-y-operadores' },
+        { text: 'Números y fechas', link: '/guia/numeros-y-fechas' },
+        { text: 'Formato de texto', link: '/guia/formato-de-texto' },
+      ],
+    },
+
+    {
+      text: 'Sintaxis',
+      items: [
+        { text: 'Palabras reservadas', link: '/sintaxis/palabras-reservadas' },
+        { text: 'Comentarios', link: '/sintaxis/comentarios' },
+        { text: 'Variables', link: '/sintaxis/variables' },
+        { text: 'Constantes', link: '/sintaxis/constantes' },
+        { text: 'Operadores', link: '/sintaxis/operadores' },
+        { text: 'Condición si ... sino', link: '/sintaxis/condicion-si' },
+        { text: 'Declaración elegir', link: '/sintaxis/elegir' },
+        { text: 'Bucle para', link: '/sintaxis/para' },
+        { text: 'Bucle mientras', link: '/sintaxis/mientras' },
+        { text: 'Bucle hacer ... mientras', link: '/sintaxis/hacer-mientras' },
+        { text: 'Módulos', link: '/sintaxis/modulos' },
+      ],
+    },
+
+    {
+      text: 'Tipos de datos',
+      items: [
+        { text: 'Booleano', link: '/tipos-de-datos/booleano' },
+        { text: 'nulo', link: '/tipos-de-datos/nulo' },
+        { text: 'Numero', link: '/tipos-de-datos/numero' },
+        { text: 'Cadena', link: '/tipos-de-datos/cadena' },
+        { text: 'Objeto', link: '/tipos-de-datos/objeto' },
+        { text: 'Matriz', link: '/tipos-de-datos/matriz' },
+        { text: 'funcion', link: '/tipos-de-datos/funcion' },
+        { text: 'Simbolo', link: '/tipos-de-datos/simbolo' },
+      ],
+    },
+
+    {
+      text: 'Avanzado',
+      items: [
+        { text: 'Elevación', link: '/avanzado/elevacion' },
+      ],
+    },
+  ]
+
   return defineConfigWithTheme(
     {
       lang: metaData.lang,
@@ -39,70 +101,30 @@ export default async () => {
 
         nav: [
           { text: 'Guía', link: '/guia/empezando' },
+          { text: 'Ecosistema', link: '/ecosistema/' },
           { text: 'Ejemplos', link: '/ejemplos' },
         ],
 
-        sidebar: [
-          {
-            text: 'Introducción',
-            items: [
-              { text: '¿Por qué usar EsJS?', link: '/guia/por-que-usar-esjs' },
-              { text: 'Empezando', link: '/guia/empezando' },
-            ],
-          },
+        sidebar: {
+          '/guia/': defaultSidebar,
 
-          {
-            text: 'Guía EsJS',
-            items: [
-              { text: 'Introducción', link: '/guia/introduccion' },
-              { text: 'Gramática y Tipos', link: '/guia/gramatica-y-tipos' },
-              { text: 'Control del flujo y manejo de errores', link: '/guia/control-del-flujo-y-manejo-de-errores' },
-              { text: 'Bucles e iteración', link: '/guia/bucles-e-iteracion' },
-              { text: 'Funciones', link: '/guia/funciones' },
-              { text: 'Expresiones y operadores', link: '/guia/expresiones-y-operadores' },
-              { text: 'Números y fechas', link: '/guia/numeros-y-fechas' },
-              { text: 'Formato de texto', link: '/guia/formato-de-texto' },
-            ],
-          },
+          '/sintaxis/': defaultSidebar,
 
-          {
-            text: 'Sintaxis',
-            items: [
-              { text: 'Palabras reservadas', link: '/sintaxis/palabras-reservadas' },
-              { text: 'Comentarios', link: '/sintaxis/comentarios' },
-              { text: 'Variables', link: '/sintaxis/variables' },
-              { text: 'Constantes', link: '/sintaxis/constantes' },
-              { text: 'Operadores', link: '/sintaxis/operadores' },
-              { text: 'Condición si ... sino', link: '/sintaxis/condicion-si' },
-              { text: 'Declaración elegir', link: '/sintaxis/elegir' },
-              { text: 'Bucle para', link: '/sintaxis/para' },
-              { text: 'Bucle mientras', link: '/sintaxis/mientras' },
-              { text: 'Bucle hacer ... mientras', link: '/sintaxis/hacer-mientras' },
-              { text: 'Módulos', link: '/sintaxis/modulos' },
-            ],
-          },
+          '/tipos-de-datos/': defaultSidebar,
 
-          {
-            text: 'Tipos de datos',
-            items: [
-              { text: 'Booleano', link: '/tipos-de-datos/booleano' },
-              { text: 'nulo', link: '/tipos-de-datos/nulo' },
-              { text: 'Numero', link: '/tipos-de-datos/numero' },
-              { text: 'Cadena', link: '/tipos-de-datos/cadena' },
-              { text: 'Objeto', link: '/tipos-de-datos/objeto' },
-              { text: 'Matriz', link: '/tipos-de-datos/matriz' },
-              { text: 'funcion', link: '/tipos-de-datos/funcion' },
-              { text: 'Simbolo', link: '/tipos-de-datos/simbolo' },
-            ],
-          },
+          '/avanzado/': defaultSidebar,
 
-          {
-            text: 'Avanzado',
-            items: [
-              { text: 'Elevación', link: '/avanzado/elevacion' },
-            ],
-          },
-        ],
+          '/ecosistema/': [
+            {
+              text: 'Ecosistema',
+              items: [
+                { text: 'Prueba', link: '/ecosistema/prueba' },
+                { text: 'Terminal', link: '/ecosistema/terminal' },
+                { text: 'Tiza', link: '/ecosistema/tiza' },
+              ],
+            },
+          ],
+        },
 
         editLink: {
           pattern: 'https://github.com/enzonotario/esjs.dev/edit/main/src/:path',
