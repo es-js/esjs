@@ -32,7 +32,7 @@ function shareModule() {
 <template>
   <AppButton
     icon="mdi:publish"
-    text="Exportar módulo"
+    :text="grid.lg ? 'Exportar módulo' : 'Exportar'"
     :icon-only="!grid.sm"
     color="gray"
     @click="shareModule"
