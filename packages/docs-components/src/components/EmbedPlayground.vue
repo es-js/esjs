@@ -42,7 +42,7 @@ const defaultOpenSrc = computed(
   <div class="flex flex-col">
     <ClientOnly>
       <div class="w-full relative" :style="{ height: props.height }">
-        <iframe :src="String(props.src)" class="w-full h-full border-0 rounded-[8px] bg-gray-800" />
+        <iframe :src="String(props.src)" allow="clipboard-read; clipboard-write" class="w-full h-full border-0 rounded-[8px] bg-gray-800" />
       </div>
     </ClientOnly>
 
