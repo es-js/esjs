@@ -1,8 +1,8 @@
-import {Registry} from 'monaco-textmate'
+import { Registry } from 'monaco-textmate'
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json'
 import * as monaco from 'monaco-editor'
-import {editor, languages} from 'monaco-editor'
-import {wireTmGrammars} from 'monaco-editor-textmate'
+import { editor, languages } from 'monaco-editor'
+import { wireTmGrammars } from 'monaco-editor-textmate'
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
 import {
   constantLanguage,
@@ -13,10 +13,11 @@ import {
   variableLanguage,
 } from '@es-js/core'
 import vsCodeDarkConverted from '@/assets/vscode-dark-converted.json'
-import {useEditor} from '@/composables/useEditor'
-import IStandaloneCodeEditor = editor.IStandaloneCodeEditor;
-import ProviderResult = languages.ProviderResult;
-import CompletionList = languages.CompletionList;
+import { useEditor } from '@/composables/useEditor'
+import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
+import ProviderResult = languages.ProviderResult
+import CompletionList = languages.CompletionList
+import { formatCode } from '@/composables/utils'
 
 export const useMonaco = () => {
   function createMonacoInstance(monacoEditorElement: HTMLElement, code: string): IStandaloneCodeEditor {
@@ -142,7 +143,7 @@ export const useMonaco = () => {
     monaco.languages.registerDocumentFormattingEditProvider('esjs', {
       provideDocumentFormattingEdits: (model, options, token): ProviderResult<monaco.languages.TextEdit[]> => {
         const code = model.getValue()
-        const formattedCode = useEditor().formatCode(code)
+        const formattedCode = formatCode(code)
         return [
           {
             text: formattedCode,

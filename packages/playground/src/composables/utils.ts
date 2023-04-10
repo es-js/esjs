@@ -1,4 +1,7 @@
 import * as espree from 'espree'
+import { transpile } from '@es-js/core'
+import prettier from 'prettier/standalone'
+import parserBabel from 'prettier/parser-babel'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -114,4 +117,16 @@ export function unifyImports(imports) {
   })
 
   return output
+}
+
+export function formatCode(code: string) {
+  const transpiled = transpile(code)
+
+  const formatted = prettier.format(transpiled, {
+    parser: 'babel',
+    plugins: [parserBabel],
+    semi: false,
+  })
+
+  return transpile(formatted, true)
 }
