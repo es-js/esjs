@@ -10,6 +10,7 @@ import {
   metaVariable,
   storageType,
   supportFunction,
+  transpile,
   variableLanguage,
 } from '@es-js/core'
 import vsCodeDarkConverted from '@/assets/vscode-dark-converted.json'
@@ -142,11 +143,13 @@ export const useMonaco = () => {
   async function setupMonacoFormat() {
     monaco.languages.registerDocumentFormattingEditProvider('esjs', {
       provideDocumentFormattingEdits: (model, options, token): ProviderResult<monaco.languages.TextEdit[]> => {
-        const code = model.getValue()
-        const formattedCode = formatCode(code)
+        const esjsCode = model.getValue()
+        const jsCode = transpile(esjsCode)
+        const formattedJsCode = formatCode(jsCode)
+        const formattedEsJsCode = transpile(formattedJsCode, true)
         return [
           {
-            text: formattedCode,
+            text: formattedEsJsCode,
             range: model.getFullModelRange(),
           },
         ]

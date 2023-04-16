@@ -1,0 +1,233 @@
+<html>
+<script type="importmap"><!--IMPORT_MAP--></script>
+
+<body id="body" class="w-full h-[100vh] m-0 p-0 flex flex-col bg-gray-900">
+<div id="preview-container" class="relative flex-1">
+    <es-terminal class="w-full h-full absolute inset-0"></es-terminal>
+</div>
+
+<div id="console-container" class="relative flex-1">
+    <div id="eruda-container"></div>
+</div>
+</body>
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css'/>
+
+<script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+
+<script type="module">
+    import NProgress from 'nprogress';
+    import eruda from "eruda";
+    import { usarTerminal } from '@es-js/terminal';
+
+    (async () => {
+        let scriptEls = []
+
+        window.process = { env: {} }
+        window.__modules__ = {}
+
+        window.__export__ = (mod, key, get) => {
+            Object.defineProperty(mod, key, {
+                enumerable: true,
+                configurable: true,
+                get
+            })
+        }
+
+        window.__dynamic_import__ = key => {
+            return Promise.resolve(window.__modules__[key])
+        }
+
+        async function handle_message(ev) {
+            let { action, cmd_id, args } = ev.data;
+
+            const send_message = (payload) => parent.postMessage( { ...payload }, ev.origin);
+            const send_reply = (payload) => send_message({ ...payload, cmd_id });
+            const send_ok = () => send_reply({ action: 'cmd_ok' });
+            const send_error = (message, stack) => send_reply({ action: 'cmd_error', message, stack });
+
+            if (action === 'eval') {
+                try {
+                    if (scriptEls.length) {
+                        scriptEls.forEach(el => {
+                            document.head.removeChild(el)
+                        })
+                        scriptEls.length = 0
+                    }
+
+                    let { script: scripts } = ev.data.args
+
+                    if (typeof scripts === 'string') scripts = [scripts]
+
+                    for (const script of scripts) {
+                        const scriptEl = document.createElement('script')
+                        scriptEl.setAttribute('type', 'module')
+                        // send ok in the module script to ensure sequential evaluation
+                        // of multiple proxy.eval() calls
+                        const done = new Promise((resolve) => {
+                            window.__next__ = resolve
+                        })
+                        scriptEl.innerHTML = script + `\nwindow.__next__()`
+                        document.head.appendChild(scriptEl)
+                        scriptEl.onerror = err => send_error(err.message, err.stack)
+                        // console.debug(['scriptEl', scriptEl])
+                        scriptEls.push(scriptEl)
+                        await done
+                    }
+                    send_ok()
+                } catch (e) {
+                    send_error(e.message, e.stack);
+                }
+            } else if (action === 'HIDE_PREVIEW') {
+                _hidePreview(args)
+            } else if (action === 'HIDE_CONSOLE') {
+                _hideConsole(args)
+            } else if (action === 'previewException') {
+                window._previewException(...args)
+            }
+        }
+
+        window.addEventListener('message', handle_message, false);
+
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            // ignore errors from import map polyfill - these are necessary for
+            // it to detect browser support
+            if (msg.includes('module specifier “vue”')) {
+                // firefox only error, ignore
+                return false
+            }
+            if (msg.includes('Module specifier, \'vue')) {
+                // Safari only
+                return false
+            }
+            try {
+                parent.postMessage({ action: 'error', value: error }, '*');
+            } catch (e) {
+                parent.postMessage({ action: 'error', value: msg }, '*');
+            }
+        }
+
+        window.addEventListener("unhandledrejection", event => {
+            if (event.reason.message.includes('Cross-origin')) {
+                event.preventDefault()
+                return
+            }
+            try {
+                parent.postMessage({ action: 'unhandledrejection', value: event.reason }, '*');
+            } catch (e) {
+                parent.postMessage({ action: 'unhandledrejection', value: event.reason.message }, '*');
+            }
+        });
+
+        // async function _init() {
+        //     // NProgress.start();
+        //     // await _initEruda();
+        //     // _hidePreview(${options.hidePreview});
+        //     // _hideConsole(${options.hideConsole});
+        //     // if (${options.customHtml}) _resetBodyColor()
+        //     // NProgress.done();
+        //
+        //     // try {
+        //     //     // await _runCode();
+        //     //
+        //     // } catch (error) {
+        //     //     window._handleException(error);
+        //     // }
+        // }
+
+        function _initEruda() {
+            const erudaContainerElement = document.getElementById('eruda-container')
+
+            const style = Object.assign(document.createElement('link'), {
+                rel: 'stylesheet',
+                href: `/eruda.css`
+            });
+
+            eruda.init({
+                container: erudaContainerElement,
+                tool: ['console'],
+            });
+
+            eruda.show();
+            eruda._shadowRoot.appendChild(style);
+            eruda._devTools.config.set('theme', 'Material Oceanic');
+            eruda._$el[0].style.colorScheme = 'dark';
+        }
+
+        function _hideConsole(value) {
+            const consoleElement = document.getElementById('console-container');
+
+            if (value) {
+                consoleElement.classList.add('hidden');
+            } else {
+                consoleElement.classList.remove('hidden');
+            }
+
+            usarTerminal().fitTerminal()
+        }
+
+        function _hidePreview(value) {
+            const previewElement = document.getElementById('preview-container');
+            const erudaDevToolsElement = eruda._$el[0].getElementsByClassName('eruda-dev-tools');
+
+            if (value) {
+                previewElement.style.display = 'none';
+                previewElement.style.flex = '0 0 0';
+
+                erudaDevToolsElement[0].style.height = '100%';
+            } else {
+                previewElement.style.display = 'flex';
+                previewElement.style.flex = '1 1 0';
+
+                erudaDevToolsElement[0].style.height = '50%';
+            }
+
+            usarTerminal().fitTerminal()
+        }
+
+        // var _app = document.getElementById('app');
+
+        // window.addEventListener('message', async ({data}) => {
+        //     const {event, value} = data;
+        //
+        //     if ('HIDE_CONSOLE' === event) {
+        //         return _hideConsole(value);
+        //     }
+        //
+        //     if ('HIDE_PREVIEW' === event) {
+        //         return _hidePreview(value);
+        //     }
+        // })
+
+        window._handleInfiniteLoopException = function (error) {
+            console.warn('¡Advertencia!: Se ha detectado un bucle infinito');
+            console.error(error);
+        }
+
+        // window._handleException = function (error) {
+        //     if (error && error.dontWarn) {
+        //         return;
+        //     }
+        //
+        //     return window._previewException(error.toString());
+        // }
+
+        window._previewException = function (line, column, message) {
+            console.warn(`¡Advertencia!: Se ha detectado un error en la línea ${line}`);
+            // console.error(error.toString());
+        }
+
+        // async function _runCode() {
+        //     ${options.code}
+        // }
+
+        // function _resetBodyColor() {
+        //     const bodyElement = document.getElementById('body');
+        //     bodyElement.classList.remove('bg-gray-900');
+        //     bodyElement.classList.add('bg-white');
+        // }
+
+        await _initEruda()
+    })()
+</script>
+</html>

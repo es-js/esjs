@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { unifyImports } from '../src/composables/utils'
+import { addExportToFunctions, formatCode, generateImportStatement, unifyImports } from '../src/composables/utils'
 
 describe('utils', () => {
   it('unify duplicated imports', () => {
@@ -57,5 +57,28 @@ import { afirmarObjetosIguales } from '@es-js/prueba';`
 import { Terminal } from '@es-js/terminal'`
 
     expect(unifyImports(imports).trim()).toBe(expected)
+  })
+
+  it('adds export to function', () => {
+    const code = formatCode(`function foo() {
+return 'foo';
+}
+`)
+    const expected = formatCode(`export function foo() {
+return 'foo';
+}
+`)
+
+    expect(formatCode(addExportToFunctions(code))).toBe(expected)
+  })
+
+  it('generates import statement', () => {
+    const code = formatCode(`function foo() {
+return 'foo';
+}`)
+
+    const expected = formatCode('import { foo } from \'./foo.js\'')
+
+    expect(formatCode(generateImportStatement(addExportToFunctions(code), './foo.js'))).toBe(expected)
   })
 })

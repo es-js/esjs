@@ -2,6 +2,7 @@ import * as espree from 'espree'
 import { transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
+import escodegen from 'escodegen'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -12,10 +13,11 @@ export function sanitizeCode(code: string) {
 
 /**
  * Agrega un límite de tiempo de ejecución para cada bucle.
- * @author Ariya Hidayat.
+ * @author Ariya Hidayat (versión esprima)
+ * @author Enzo Notario (versión espree)
  * @see https://github.com/chinchang/web-maker/blob/master/src/utils.js#L122
  */
-export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 5000 }) {
+export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 70 }) {
   let loopId = 1
   const patches = []
   const varPrefix = '_wmloopvar'
@@ -80,6 +82,68 @@ export function addInfiniteLoopProtection(code: string, { timeout } = { timeout:
 }
 
 /**
+ * Agrega `export` a las funciones declaradas.
+ * @param code
+ */
+export function addExportToFunctions(code: string) {
+  const ast = espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  })
+
+  ast.body.forEach((node) => {
+    if (node.type === 'FunctionDeclaration') {
+      // Crear el nodo de exportación
+      const exportNode = {
+        type: 'ExportNamedDeclaration',
+        declaration: node,
+        source: null,
+        specifiers: [],
+      }
+
+      // Reemplazar el nodo de la función con el nodo de exportación
+      const index = ast.body.indexOf(node)
+      ast.body[index] = exportNode
+    }
+  })
+
+  return escodegen.generate(ast)
+}
+
+/**
+ * Genera los imports a partir de las funciones exportadas.
+ * @param code
+ * @param modulePath
+ */
+export function generateImportStatement(code: string, modulePath: string) {
+  const ast = espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  })
+
+  const namedExports = ast.body.filter(
+    node =>
+      node.type === 'ExportNamedDeclaration'
+      && node.declaration?.type === 'FunctionDeclaration',
+  )
+
+  const imports = namedExports.map(
+    node =>
+      `import { ${node.declaration?.id?.name} } from '${modulePath}'`,
+  )
+
+  return imports.join('\n')
+}
+
+/**
  * @author @slevithan
  * @param str
  */
@@ -120,13 +184,9 @@ export function unifyImports(imports) {
 }
 
 export function formatCode(code: string) {
-  const transpiled = transpile(code)
-
-  const formatted = prettier.format(transpiled, {
+  return prettier.format(code, {
     parser: 'babel',
     plugins: [parserBabel],
     semi: false,
   })
-
-  return transpile(formatted, true)
 }
