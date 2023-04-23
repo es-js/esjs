@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { splitCodeImports, transpile } from '@es-js/core'
-import { escapeQuotes, sanitizeCode } from '@/composables/utils'
+import { escapeQuotes, obfuscateCode, sanitizeCode } from '@/composables/utils'
 
 export const INITIAL_CODE = `/**
   EsJS: JavaScript con sintaxis en Español.
@@ -87,6 +87,38 @@ export const useEditor = () => {
     }
   }
 
+  function getObfuscatedCode() {
+    const transpiledCode = getTranspiledCode()
+
+    if (!transpiledCode)
+      return
+
+    const obfuscatedCode = obfuscateCode(transpiledCode.codeWithoutImports)
+
+    if (!obfuscatedCode)
+      return
+
+    return `${transpiledCode.codeImports}
+
+${obfuscatedCode.getObfuscatedCode()}`
+  }
+
+  function getObfuscatedTestsCode() {
+    const transpiledCode = getTranspiledCode()
+
+    if (!transpiledCode)
+      return
+
+    const obfuscatedCode = obfuscateCode(transpiledCode.testsCodeWithoutImports)
+
+    if (!obfuscatedCode)
+      return
+
+    return `${transpiledCode.testsCodeImports}
+
+${obfuscatedCode.getObfuscatedCode()}`
+  }
+
   return {
     code,
     testsCode,
@@ -94,5 +126,7 @@ export const useEditor = () => {
     execute,
     setCode,
     setTestsCode,
+    getObfuscatedCode,
+    getObfuscatedTestsCode,
   }
 }

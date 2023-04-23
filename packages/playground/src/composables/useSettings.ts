@@ -9,6 +9,7 @@ const settings = ref({
   hideTests: true,
   autoCompile: true,
   customHtml: false,
+  showAdvanced: false,
 })
 
 export const useSettings = () => {
@@ -44,6 +45,10 @@ export const useSettings = () => {
     settings.value.customHtml = customHtml
   }
 
+  function setShowAdvanced(showAdvanced: boolean) {
+    settings.value.showAdvanced = showAdvanced
+  }
+
   return {
     settings,
     setLayout,
@@ -54,5 +59,6 @@ export const useSettings = () => {
     setHideTests,
     setAutoCompile,
     setCustomHtml,
+    setShowAdvanced,
   }
 }

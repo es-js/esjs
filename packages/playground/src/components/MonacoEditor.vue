@@ -7,6 +7,8 @@ import { ResizeObserver } from 'vue-resize'
 import { useMonaco } from '@/composables/useMonaco'
 import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
+import { obfuscateCode } from '@/composables/utils'
+import { useEditor } from '@/composables/useEditor'
 
 const props = defineProps({
   name: {
@@ -99,6 +101,8 @@ function setupBusCommands() {
         return onResizeDebounced()
       case 'format':
         return formatCode()
+      case 'obfuscate':
+        return obfuscate()
       default:
         return null
     }
@@ -107,6 +111,22 @@ function setupBusCommands() {
 
 async function formatCode() {
   return monacoInstance?.getAction('editor.action.formatDocument')?.run()
+}
+
+async function obfuscate() {
+  let obfuscatedCode: string
+  switch (props.name) {
+    case 'code':
+      obfuscatedCode = useEditor().getObfuscatedCode() ?? ''
+      break
+    case 'tests':
+      obfuscatedCode = useEditor().getObfuscatedTestsCode() ?? ''
+      break
+    default:
+      return null
+  }
+
+  return monacoInstance?.setValue(obfuscatedCode)
 }
 </script>
 

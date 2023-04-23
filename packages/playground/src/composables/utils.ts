@@ -2,6 +2,7 @@ import * as espree from 'espree'
 import { transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
+import { obfuscate } from 'javascript-obfuscator'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -129,4 +130,11 @@ export function formatCode(code: string) {
   })
 
   return transpile(formatted, true)
+}
+
+export function obfuscateCode(code: string) {
+  return obfuscate(code, {
+    compact: true,
+    simplify: false,
+  })
 }

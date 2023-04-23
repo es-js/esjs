@@ -61,7 +61,7 @@ function setSettingsFromUrl() {
   if (window.location.pathname === '/')
     return
 
-  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests } = share.decodeSharedUrl()
+  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced } = share.decodeSharedUrl()
 
   settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
   settings.setHideOptions(hideOptions === 'true')
@@ -69,6 +69,8 @@ function setSettingsFromUrl() {
   settings.setHidePreview(hidePreview === 'true')
   settings.setHideConsole(hideConsole === 'true')
   settings.setHideTests(hideTests === 'true' || tests === null)
+  settings.setHideTests(hideTests === 'true' || tests === null)
+  settings.setShowAdvanced(showAdvanced === 'true')
 }
 </script>
 

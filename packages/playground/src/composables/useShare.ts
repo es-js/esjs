@@ -39,6 +39,7 @@ export const useShare = () => {
       hidePreview: url.searchParams.get('hidePreview'),
       hideConsole: url.searchParams.get('hideConsole'),
       hideTests: url.searchParams.get('hideTests'),
+      showAdvanced: url.searchParams.get('showAdvanced'),
     }
   }
 
