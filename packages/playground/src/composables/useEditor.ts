@@ -35,7 +35,7 @@ asincrono funcion inicio() {
 inicio()
 `
 
-const DEFAULT_IMPORTS = `import { pruebas, pruebasAsincronas, afirmar, assert, afirmarIguales } from '@es-js/prueba'
+const DEFAULT_IMPORTS = `import { prueba, pruebas, pruebasAsincronas, afirmar, assert, afirmarIguales, afirmarSimilares, afirmarMatricesIguales, afirmarObjetosIguales, afirmarMatricesSimilares, afirmarObjetosSimilares, afirmarVerdadero, afirmarFalso, afirmarDistinto } from '@es-js/prueba'
 import { Terminal } from '@es-js/terminal'
 import { html } from '@arrow-js/core'`
 
