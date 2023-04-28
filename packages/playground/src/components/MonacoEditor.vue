@@ -7,7 +7,6 @@ import { ResizeObserver } from 'vue-resize'
 import { useMonaco } from '@/composables/useMonaco'
 import 'vue-resize/dist/vue-resize.css'
 import debounce from 'lodash.debounce'
-import { obfuscateCode } from '@/composables/utils'
 import { useEditor } from '@/composables/useEditor'
 
 const props = defineProps({

@@ -1,8 +1,10 @@
 import * as espree from 'espree'
+import * as escodegen from 'escodegen'
 import { transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
 import { obfuscate } from 'javascript-obfuscator'
+import type { Options } from 'prettier'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -88,7 +90,7 @@ export function escapeQuotes(str) {
   return str.replace(/\\([\s\S])|(")/g, '\\$1$2')
 }
 
-export function unifyImports(imports) {
+export function unifyImports(imports: string) {
   const importMap = new Map()
   let output = ''
 
@@ -120,13 +122,14 @@ export function unifyImports(imports) {
   return output
 }
 
-export function formatCode(code: string) {
+export function formatCode(code: string, options?: Partial<Options>) {
   const transpiled = transpile(code)
 
   const formatted = prettier.format(transpiled, {
     parser: 'babel',
     plugins: [parserBabel],
     semi: false,
+    ...options,
   })
 
   return transpile(formatted, true)
@@ -137,4 +140,50 @@ export function obfuscateCode(code: string) {
     compact: true,
     simplify: false,
   })
+}
+
+export function escapeTemplateLiteral(code: string) {
+  return code.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
+}
+
+export function removeTopLevelAwaits(code: string) {
+  const ast = espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  })
+
+  const topLevelAwaits = ast.body.filter((node) => {
+    if (node.type === 'AwaitExpression')
+      return true
+
+    if (
+      node.type === 'ExpressionStatement'
+      && node.expression.type === 'AwaitExpression'
+    )
+      return true
+
+    return false
+  })
+
+  topLevelAwaits.forEach((node) => {
+    const index = ast.body.indexOf(node)
+    ast.body.splice(index, 1)
+  })
+
+  return escodegen.generate(ast)
+}
+
+export function getFlowchartCode(code: string) {
+  try {
+    code = escapeTemplateLiteral(removeTopLevelAwaits(code))
+  }
+  catch (error) {
+    code = ''
+  }
+
+  return code
 }

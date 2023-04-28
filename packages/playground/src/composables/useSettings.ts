@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const settings = ref({
   layout: 'horizontal',
@@ -10,6 +10,15 @@ const settings = ref({
   autoCompile: true,
   customHtml: false,
   showAdvanced: false,
+  preview: {
+    terminal: true,
+    flowchart: false,
+    html: false,
+  },
+})
+
+const activePreview = computed((): 'terminal' | 'flowchart' | 'html' => {
+  return Object.keys(settings.value.preview).find(key => settings.value.preview[key as keyof typeof settings.value.preview]) as 'terminal' | 'flowchart' | 'html'
 })
 
 export const useSettings = () => {
@@ -49,6 +58,25 @@ export const useSettings = () => {
     settings.value.showAdvanced = showAdvanced
   }
 
+  function setPreview(preview: { terminal: boolean; flowchart: boolean; html: boolean }) {
+    settings.value.preview = {
+      terminal: preview.terminal || false,
+      flowchart: preview.flowchart || false,
+      html: preview.html || false,
+    }
+
+    if (!preview.terminal && !preview.flowchart && !preview.html)
+      settings.value.preview.terminal = true
+  }
+
+  function setActivePreview(preview: 'terminal' | 'flowchart' | 'html') {
+    settings.value.preview = {
+      terminal: preview === 'terminal',
+      flowchart: preview === 'flowchart',
+      html: preview === 'html',
+    }
+  }
+
   return {
     settings,
     setLayout,
@@ -60,5 +88,8 @@ export const useSettings = () => {
     setAutoCompile,
     setCustomHtml,
     setShowAdvanced,
+    setPreview,
+    setActivePreview,
+    activePreview,
   }
 }

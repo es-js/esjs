@@ -12,6 +12,7 @@ specifiers:
   '@unocss/reset': ^0.48.5
   '@vitejs/plugin-vue': ^4.1.0
   '@vueuse/core': ^9.13.0
+  escodegen: ^2.0.0
   eslint: 8.22.0
   espree: ^9.5.1
   esprima: ^4.0.1
@@ -53,6 +54,7 @@ devDependencies:
   '@unocss/reset': 0.48.5
   '@vitejs/plugin-vue': 4.1.0_vite@4.2.1+vue@3.2.47
   '@vueuse/core': 9.13.0_vue@3.2.47
+  escodegen: 2.0.0
   eslint: 8.22.0
   espree: 9.5.1
   esprima: 4.0.1
@@ -1729,6 +1731,19 @@ packages:
   /escape-string-regexp/5.0.0:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
+    dev: true
+
+  /escodegen/2.0.0:
+    resolution: {integrity: sha512-mmHKys/C8BFUGI+MAWNcSYoORYLMdPzjrknd2Vc+bUsjN5bXcr8EhrNB+UTqfL1y3I9c4fw2ihgtMPQLBRiQxw==}
+    engines: {node: '>=6.0'}
+    hasBin: true
+    dependencies:
+      esprima: 4.0.1
+      estraverse: 5.3.0
+      esutils: 2.0.3
+      optionator: 0.8.3
+    optionalDependencies:
+      source-map: 0.6.1
     dev: true
 
   /eslint-import-resolver-node/0.3.7:

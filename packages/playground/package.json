@@ -22,6 +22,7 @@
     "@unocss/reset": "^0.48.5",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vueuse/core": "^9.13.0",
+    "escodegen": "^2.0.0",
     "eslint": "8.22.0",
     "espree": "^9.5.1",
     "esprima": "^4.0.1",

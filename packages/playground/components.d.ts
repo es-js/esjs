@@ -7,9 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AppBar: typeof import('./src/components/AppBar.vue')['default']
-    AppButton: typeof import('./src/components/AppButton.vue')['default']
-    AppNotifications: typeof import('./src/components/AppNotifications.vue')['default']
+    AppBar: typeof import('./src/components/shared/AppBar.vue')['default']
+    AppButton: typeof import('./src/components/shared/AppButton.vue')['default']
+    AppNotifications: typeof import('./src/components/shared/AppNotifications.vue')['default']
+    AppTabButton: typeof import('./src/components/shared/AppTabButton.vue')['default']
     ExportModuleButton: typeof import('./src/components/shared/ExportModuleButton.vue')['default']
     MonacoEditor: typeof import('./src/components/MonacoEditor.vue')['default']
     OutputIframe: typeof import('./src/components/OutputIframe.vue')['default']
@@ -17,5 +18,6 @@ declare module '@vue/runtime-core' {
     PlaygroundEditor: typeof import('./src/components/PlaygroundEditor.vue')['default']
     PlaygroundOutput: typeof import('./src/components/PlaygroundOutput.vue')['default']
     PlaygroundTestsEditor: typeof import('./src/components/PlaygroundTestsEditor.vue')['default']
+    PreviewBar: typeof import('./src/components/shared/PreviewBar.vue')['default']
   }
 }

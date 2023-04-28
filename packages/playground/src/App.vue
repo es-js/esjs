@@ -4,7 +4,7 @@ import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
-import AppNotifications from '@/components/AppNotifications.vue'
+import AppNotifications from '@/components/shared/AppNotifications.vue'
 
 const bus = useEventBus('editor_code')
 
@@ -61,7 +61,7 @@ function setSettingsFromUrl() {
   if (window.location.pathname === '/')
     return
 
-  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced } = share.decodeSharedUrl()
+  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced, preview } = share.decodeSharedUrl()
 
   settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
   settings.setHideOptions(hideOptions === 'true')
@@ -71,6 +71,7 @@ function setSettingsFromUrl() {
   settings.setHideTests(hideTests === 'true' || tests === null)
   settings.setHideTests(hideTests === 'true' || tests === null)
   settings.setShowAdvanced(showAdvanced === 'true')
+  settings.setPreview(preview)
 }
 </script>
 

@@ -115,27 +115,6 @@ function obfuscateCode() {
           description="Mostrar editor"
           @click="settings.setHideEditor(!settings.settings.value.hideEditor)"
         />
-
-        <AppButton
-          icon="mdi:eye"
-          :active="!settings.settings.value.hidePreview"
-          description="Mostrar vista previa"
-          @click="settings.setHidePreview(!settings.settings.value.hidePreview)"
-        />
-
-        <AppButton
-          icon="mdi:console"
-          :active="!settings.settings.value.hideConsole"
-          description="Mostrar consola"
-          @click="settings.setHideConsole(!settings.settings.value.hideConsole)"
-        />
-
-        <AppButton
-          icon="mdi:language-html5"
-          :active="settings.settings.value.customHtml"
-          description="HTML personalizado"
-          @click="settings.setCustomHtml(!settings.settings.value.customHtml)"
-        />
       </div>
 
       <AppButton
