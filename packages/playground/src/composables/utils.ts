@@ -5,6 +5,7 @@ import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
 import { obfuscate } from 'javascript-obfuscator'
 import type { Options } from 'prettier'
+import { convertCodeToSvg } from 'js2flowchart'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -177,13 +178,18 @@ export function removeTopLevelAwaits(code: string) {
   return escodegen.generate(ast)
 }
 
-export function getFlowchartCode(code: string) {
+export function getFlowchartSvg(code: string): string {
   try {
-    code = escapeTemplateLiteral(removeTopLevelAwaits(code))
+    return escapeTemplateLiteral(
+      convertCodeToSvg(
+        removeTopLevelAwaits(code),
+      ),
+    )
   }
   catch (error) {
-    code = ''
+    return `<div class="w-full h-full flex flex-col justify-center items-center text-center text-red-700 text-2xl font-sans">
+    <p>¡Ups!</p>
+    <p>No se pudo generar el Diagrama de Flujo</p>
+</div>`
   }
-
-  return code
 }

@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useSettings } from '@/composables/useSettings'
-import { addInfiniteLoopProtection, getFlowchartCode, unifyImports } from '@/composables/utils'
+import { addInfiniteLoopProtection, getFlowchartSvg, removeTopLevelAwaits, unifyImports } from '@/composables/utils'
 import PreviewBar from '@/components/shared/PreviewBar.vue'
 
 const editor = useEditor()
@@ -20,7 +20,7 @@ interface UpdateIframeOptions {
   hideConsole: boolean
   hidePreview: boolean
   customHtml: boolean
-  flowchartCode: string
+  flowchartSvg: string
   preview: 'terminal' | 'flowchart' | 'html'
 }
 
@@ -35,8 +35,7 @@ function updateIframe(options: UpdateIframeOptions) {
           "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@0.0.5/+esm",
           "nprogress": "https://cdn.jsdelivr.net/npm/nprogress@0.2.0/+esm",
           "eruda": "https://cdn.jsdelivr.net/npm/eruda@2.11.2/+esm",
-          "@arrow-js/core": "https://cdn.jsdelivr.net/npm/@arrow-js/core/+esm",
-          "js2flowchart": "https://cdn.jsdelivr.net/npm/js2flowchart@1.3.4/+esm"
+          "@arrow-js/core": "https://cdn.jsdelivr.net/npm/@arrow-js/core/+esm"
         }
       }
     <\/script>
@@ -60,7 +59,6 @@ function updateIframe(options: UpdateIframeOptions) {
     import NProgress from 'nprogress';
     import eruda from 'eruda';
     import { usarTerminal } from '@es-js/terminal';
-    import * as js2flowchart from 'js2flowchart';
     ${options.imports}
 
     var _app = document.getElementById('app');
@@ -192,24 +190,12 @@ function updateIframe(options: UpdateIframeOptions) {
     function _previewFlowchart() {
         _setBodyColor('bg-white')
 
-        const code = \`${options.flowchartCode}\`
-        let template = ''
-
-        try {
-          const svg = js2flowchart.default.convertCodeToSvg(code);
-
-          template = \`\$\{svg\}\`
-        } catch (error) {
-          template = \`<div class="w-full h-full flex flex-col justify-center items-center text-center text-red-700 text-2xl font-sans">
-            <p>¡Ups!</p>
-            <p>No se pudo generar el Diagrama de Flujo</p>
-          </div>\`
-        }
+        const svg = \`${options.flowchartSvg}\`
 
         const app = document.getElementById('app');
         app.innerHTML = '';
 
-        app.innerHTML = template;
+        app.innerHTML = svg;
 
         app.classList.add('dragscroll', 'overflow-auto');
     }
@@ -256,7 +242,7 @@ onMounted(() => {
     testsCodeWithoutImports,
   } = editor.output.value
 
-  const flowchartCode = getFlowchartCode(codeWithoutImports)
+  const flowchartSvg = getFlowchartSvg(codeWithoutImports)
 
   updateIframe({
     code: parseCode(codeWithoutImports, testsCodeWithoutImports),
@@ -264,7 +250,7 @@ onMounted(() => {
     hidePreview: settings.value.hidePreview,
     hideConsole: settings.value.hideConsole,
     customHtml: settings.value.customHtml,
-    flowchartCode,
+    flowchartSvg,
     preview: useSettings().activePreview.value,
   })
 })
