@@ -12,7 +12,7 @@ elegir (expresion) {
     caso valor2:
         // código
         romper;
-    defecto:
+    porDefecto:
         // código
         romper;
 }
@@ -47,7 +47,7 @@ elegir (dia) {
     caso 7:
         consola.escribir('Domingo');
         romper;
-    defecto:
+    porDefecto:
         consola.escribir('Valor no válido');
         romper;
 }
