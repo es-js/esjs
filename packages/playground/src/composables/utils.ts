@@ -5,7 +5,7 @@ import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
 import { obfuscate } from 'javascript-obfuscator'
 import type { Options } from 'prettier'
-import { convertCodeToSvg } from 'js2flowchart'
+import { convertCodeToSvg } from '@es-js/esjs2flowchart'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))

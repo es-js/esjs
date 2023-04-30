@@ -1,0 +1,40 @@
+{
+  "name": "@es-js/esjs2flowchart",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.31.1",
+    "@babel/generator": "^7.5.5",
+    "@babel/parser": "^7.21.5",
+    "@babel/traverse": "^7.5.5",
+    "@es-js/core": "workspace:^0.0.18",
+    "@types/node": "^18.15.11",
+    "deepmerge": "^1.5.1",
+    "eslint": "8.22.0",
+    "node-stdlib-browser": "^1.2.0",
+    "string-width": "^2.1.1",
+    "typescript": "^4.9.5",
+    "vite": "^2.9.15",
+    "vite-plugin-node-stdlib-browser": "^0.2.1",
+    "vitest": "^0.25.8",
+    "xml-escape": "^1.1.0"
+  },
+  "main": "./dist/esjs2flowchart.umd.js",
+  "module": "./dist/esjs2flowchart.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esjs2flowchart.es.js",
+      "require": "./dist/esjs2flowchart.umd.js"
+    }
+  },
+  "types": "./types/main.d.ts",
+  "files": [
+    "/dist",
+    "/types"
+  ]
+}
