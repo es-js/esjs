@@ -10,6 +10,7 @@ import {
 import { TOKEN_KEYS, TOKEN_TYPES } from '@/shared/constants'
 import { getRhombus, getRoundedRectangle, getText } from '@/shared/utils/svgPrimitives'
 import { assignState } from '@/shared/utils/composition'
+import { translate } from '@/shared/utils/translate'
 
 const ENTITY_FIELD_NAME = 'ConditionRhombus'
 
@@ -71,7 +72,7 @@ export const setupConditionRhombusBehavior = state => ({
     const w = state.dimensions.w
     const node = state.node
 
-    const text = node.subType === TOKEN_TYPES.CONDITIONAL_EXPRESSION ? '?' : 'if'
+    const text = node.subType === TOKEN_TYPES.CONDITIONAL_EXPRESSION ? '?' : `${translate('if')}`
     const positive = '+'
     const alternative = '-'
 

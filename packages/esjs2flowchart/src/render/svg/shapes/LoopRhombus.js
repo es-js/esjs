@@ -10,15 +10,16 @@ import {
 import { getRhombus, getRoundedRectangle, getText } from '@/shared/utils/svgPrimitives'
 import { assignState } from '@/shared/utils/composition'
 import { TOKEN_TYPES } from '@/shared/constants'
+import { translate } from '@/shared/utils/translate'
 
 const ENTITY_FIELD_NAME = 'LoopRhombus'
 
 const LoopMarksMap = {
-  [TOKEN_TYPES.FOR_OF_STATEMENT]: 'for',
-  [TOKEN_TYPES.FOR_IN_STATEMENT]: 'for',
-  [TOKEN_TYPES.FOR_STATEMENT]: 'for',
-  [TOKEN_TYPES.WHILE_STATEMENT]: 'while',
-  [TOKEN_TYPES.DO_WHILE_STATEMENT]: 'while',
+  [TOKEN_TYPES.FOR_OF_STATEMENT]: `${translate('for')}`,
+  [TOKEN_TYPES.FOR_IN_STATEMENT]: `${translate('for')}`,
+  [TOKEN_TYPES.FOR_STATEMENT]: `${translate('for')}`,
+  [TOKEN_TYPES.WHILE_STATEMENT]: `${translate('while')}`,
+  [TOKEN_TYPES.DO_WHILE_STATEMENT]: `${translate('while')}`,
 }
 
 const calculateMidPoint = ({ position, dimensions }) => ({
@@ -55,7 +56,7 @@ const setupLoopRhombusBehavior = state => ({
     const theme = state.theme
     const { x, y } = state.position
     const R = state.dimensions.h
-    const text = state.prefixName || LoopMarksMap[state.node.subType] || 'for'
+    const text = state.prefixName || LoopMarksMap[state.node.subType] || `${translate('for')}`
 
     return getText(
       x + R / 2 - text.length * theme.symbolWidth / 2,

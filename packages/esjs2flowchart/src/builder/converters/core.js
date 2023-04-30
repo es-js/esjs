@@ -1,5 +1,6 @@
 import generate from '@babel/generator'
 import { CLASS_FUNCTION_KINDS, TOKEN_TYPES } from '@/shared/constants'
+import { translate } from '@/shared/utils/translate'
 
 export const idleConverter = (path) => {
   return generate(path.node).code
@@ -20,7 +21,7 @@ export const functionConverter = (path) => {
   let name = ''
 
   if (node.id) {
-    name = `${getAnonymousFunctionName(path)}function ${node.id.name}${paramsCode}`
+    name = `${getAnonymousFunctionName(path)}${translate('function')} ${node.id.name}${paramsCode}`
   }
   else if (node.type === TOKEN_TYPES.ARROW_FUNCTION_EXPRESSION) {
     name = `${getAnonymousFunctionName(path) + paramsCode} =>`
@@ -28,11 +29,11 @@ export const functionConverter = (path) => {
   else if (node.type === TOKEN_TYPES.CLASS_METHOD || node.type === TOKEN_TYPES.OBJECT_METHOD) {
     name
             = node.kind === CLASS_FUNCTION_KINDS.CONSTRUCTOR
-        ? `constructor${paramsCode}`
+        ? `${translate('constructor')}${paramsCode}`
         : node.key.name + paramsCode
   }
   else {
-    name = `${getAnonymousFunctionName(path)}function${paramsCode}`
+    name = `${getAnonymousFunctionName(path)}${translate('function')}${paramsCode}`
   }
 
   return { name, pathParentType: path.parent.type }
@@ -78,7 +79,7 @@ export const returnConverter = (path) => {
   )
     return 'return'
 
-  return path.node.argument ? `return ${generate(path.node.argument).code}` : 'return'
+  return path.node.argument ? `${translate('return')} ${generate(path.node.argument).code}` : `${translate('return')}`
 }
 /* end function */
 
@@ -88,7 +89,7 @@ export const loopConverter = ({ node }) => {
     return generate(node.test).code
 
   if (node.left && node.right) {
-    const innerPart = node.type === TOKEN_TYPES.FOR_OF_STATEMENT ? 'of' : 'in'
+    const innerPart = node.type === TOKEN_TYPES.FOR_OF_STATEMENT ? `${translate('of')}` : `${translate('in')}`
     const leftPart
             = node.left.type === TOKEN_TYPES.VARIABLE_DECLARATION
               ? getVariableDeclarations(node.left.declarations)
@@ -99,7 +100,7 @@ export const loopConverter = ({ node }) => {
 }
 
 export const continueConverter = (path) => {
-  return path.node.label ? `continue ${generate(path.node.label).code}` : 'continue'
+  return path.node.label ? `${translate('continue')} ${generate(path.node.label).code}` : `${translate('continue')}`
 }
 /* end loop */
 
@@ -109,11 +110,11 @@ export const conditionalConverter = (path) => {
 
 /* try-catch */
 export const tryConverter = (path) => {
-  return `try`
+  return `${translate('try')}`
 }
 
 export const catchConverter = (path) => {
-  return path.node.param ? `catch (${generate(path.node.param).code})` : '*catchConverter*'
+  return path.node.param ? `${translate('catch')} (${generate(path.node.param).code})` : '*catchConverter*'
 }
 
 export const finallyConverter = (path) => {
@@ -127,32 +128,32 @@ export const finallyConverter = (path) => {
 
 /* switch-case */
 export const switchStatementConverter = (path) => {
-  return `switch (${generate(path.node.discriminant).code})`
+  return `${translate('switch')} (${generate(path.node.discriminant).code})`
 }
 
 export const caseConverter = (path) => {
-  return path.node.test ? `case ${generate(path.node.test).code}:` : 'default:'
+  return path.node.test ? `${translate('case')} ${generate(path.node.test).code}:` : `${translate('default')}:`
 }
 
 export const breakConverter = (path) => {
-  return path.node.label ? `break ${generate(path.node.label).code}:` : 'break'
+  return path.node.label ? `${translate('break')} ${generate(path.node.label).code}:` : `${translate('break')}`
 }
 /* end switch - case */
 
 export const withStatementConverter = (path) => {
-  return `with (${generate(path.node.object).code})`
+  return `${translate('with')} (${generate(path.node.object).code})`
 }
 
 export const programConverter = (path) => {
-  return `${path.node.type}: source ${path.node.sourceType}`
+  return `${translate(path.node.type)}: ${translate('source')} ${translate(path.node.sourceType)}`
 }
 
 export const throwStatementConverter = (path) => {
-  return `throw ${generate(path.node.argument).code}`
+  return `${translate('throw')} ${generate(path.node.argument).code}`
 }
 
 export const debuggerConverter = (path) => {
-  return `debugger`
+  return `${translate('debugger')}`
 }
 
 export const getVariableDeclarations = variables =>
@@ -166,7 +167,7 @@ export const variableDeclaratorConverter = (path) => {
     node.init
         && (isNodeContainsFunc(node.init) || node.init.type === TOKEN_TYPES.CONDITIONAL_EXPRESSION)
   )
-    return `${parentKind} ${node.id.name} = `
+    return `${translate(parentKind)} ${node.id.name} = `
 
   let variableName = ''
   if (node.id.type === TOKEN_TYPES.OBJECT_PATTERN)
@@ -180,18 +181,18 @@ export const variableDeclaratorConverter = (path) => {
     node.init
         && [TOKEN_TYPES.CALL_EXPRESSION, TOKEN_TYPES.NEW_EXPRESSION].includes(node.init.type)
   )
-    return `${parentKind} ${variableName} = ${callExpressionConverter({ node: node.init })}`
+    return `${translate(parentKind)} ${variableName} = ${callExpressionConverter({ node: node.init })}`
 
   if (node.init && node.init.type === TOKEN_TYPES.OBJECT_EXPRESSION)
-    return `${parentKind} ${variableName} = ${objectExpressionConverter()}`
+    return `${translate(parentKind)} ${variableName} = ${objectExpressionConverter()}`
 
   if (node.id && node.id.type === TOKEN_TYPES.OBJECT_PATTERN)
-    return `${parentKind} {...} = ${node.init.name}`
+    return `${translate(parentKind)} {...} = ${node.init.name}`
 
   if (node.id && node.id.type === TOKEN_TYPES.ARRAY_PATTERN)
-    return `${parentKind} [...] = ${node.init.name}`
+    return `${translate(parentKind)} [...] = ${node.init.name}`
 
-  return `${parentKind} ${generate(node).code}`
+  return `${translate(parentKind)} ${generate(node).code}`
 }
 
 export const assignmentExpressionConverter = ({ node }) => {

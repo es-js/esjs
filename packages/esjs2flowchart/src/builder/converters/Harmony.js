@@ -1,12 +1,13 @@
 import generate from '@babel/generator'
 import { TOKEN_TYPES } from '@/shared/constants'
+import { translate } from '@/shared/utils/translate'
 
-export const importDeclarationConverter = ({ node }) => `import from${generate(node.source).code}`
+export const importDeclarationConverter = ({ node }) => `${translate('import')} ${translate('from')}${generate(node.source).code}`
 
-export const exportNamedDeclarationConverter = ({ node }) => `export${getExportedTokenName(node)}`
+export const exportNamedDeclarationConverter = ({ node }) => `${translate('export')}${getExportedTokenName(node)}`
 
 export const exportDefaultDeclarationConverter = ({ node }) =>
-    `export default ${getExportedTokenName(node)}`
+    `${translate('export')} ${translate('default')} ${getExportedTokenName(node)}`
 
 const getExportedTokenName = (path) => {
   const { declaration, specifiers } = path
@@ -24,7 +25,7 @@ const getExportDeclarations = (declaration) => {
   if (
     [TOKEN_TYPES.FUNCTION_DECLARATION, TOKEN_TYPES.ARROW_FUNCTION_EXPRESSION].includes(declaration.type)
   )
-    return declaration.id ? declaration.id.name : 'function'
+    return declaration.id ? declaration.id.name : `${translate('function')}`
 
   if (declaration.type === TOKEN_TYPES.VARIABLE_DECLARATION)
     return declaration.declarations[0].id.name
@@ -38,7 +39,7 @@ const getExportDeclarations = (declaration) => {
 
 export const classDeclarationConverter = ({ node }) => {
   return `class ${generate(node.id).code} ${
-        node.superClass ? ` extends ${generate(node.superClass).code}` : ''
+        node.superClass ? ` ${translate('extends')} ${generate(node.superClass).code}` : ''
     }`
 }
 

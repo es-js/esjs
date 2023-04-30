@@ -5,6 +5,7 @@ specifiers:
   '@babel/generator': ^7.5.5
   '@babel/parser': ^7.21.5
   '@babel/traverse': ^7.5.5
+  '@es-js/core': workspace:^0.0.18
   '@types/node': ^18.15.11
   deepmerge: ^1.5.1
   eslint: 8.22.0
@@ -21,6 +22,7 @@ devDependencies:
   '@babel/generator': 7.21.4
   '@babel/parser': 7.21.5
   '@babel/traverse': 7.21.4
+  '@es-js/core': link:../core
   '@types/node': 18.15.11
   deepmerge: 1.5.2
   eslint: 8.22.0
