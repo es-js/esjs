@@ -14,7 +14,7 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
 
 <template>
   <div class="flex flex-row w-full h-full">
-    <VueSplitView :direction="settings.layout" :a-max="settings.hideEditor ? 0 : undefined" :b-max="0" class="overflow-hidden">
+    <VueSplitView :direction="settings.layout" :a-max="settings.hideEditor ? '0' : undefined" :b-max="0" class="overflow-hidden">
       <template v-if="!settings.hideEditor" #A>
         <VueSplitView
           direction="vertical"

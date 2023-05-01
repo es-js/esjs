@@ -1,8 +1,10 @@
 import * as espree from 'espree'
-import { transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
 import escodegen from 'escodegen'
+import { obfuscate } from 'javascript-obfuscator'
+import type { Options } from 'prettier'
+import { convertCodeToSvg } from '@es-js/esjs2flowchart'
 
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
@@ -17,7 +19,7 @@ export function sanitizeCode(code: string) {
  * @author Enzo Notario (versión espree)
  * @see https://github.com/chinchang/web-maker/blob/master/src/utils.js#L122
  */
-export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 70 }) {
+export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 5000 }) {
   let loopId = 1
   const patches = []
   const varPrefix = '_wmloopvar'
@@ -82,6 +84,113 @@ export function addInfiniteLoopProtection(code: string, { timeout } = { timeout:
 }
 
 /**
+ * @author @slevithan
+ * @param str
+ */
+export function escapeQuotes(str) {
+  return str.replace(/\\([\s\S])|(")/g, '\\$1$2')
+}
+
+export function unifyImports(imports: string) {
+  const importMap = new Map()
+  let output = ''
+
+  imports.split('\n')
+    .map(line => line.trim())
+    .forEach((line) => {
+      const importMatch = line.match(/^import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*(;)?$/)
+
+      if (!importMatch) {
+        output += `${line}\n`
+        return
+      }
+
+      const [matchedText, namedImports, moduleSpecifier] = importMatch
+
+      if (!importMap.has(moduleSpecifier))
+        importMap.set(moduleSpecifier, new Set())
+
+      namedImports.split(/\s*,\s*/g).forEach((namedImport) => {
+        importMap.get(moduleSpecifier).add(namedImport.trim())
+      })
+    })
+
+  importMap.forEach((namedImports, moduleSpecifier) => {
+    const sortedImports = [...namedImports].sort()
+    output += `import { ${sortedImports.join(', ')} } from '${moduleSpecifier}'\n`
+  })
+
+  return output
+}
+
+export function formatCode(code: string, options?: Partial<Options>) {
+  return prettier.format(code, {
+    parser: 'babel',
+    plugins: [parserBabel],
+    semi: false,
+    ...options,
+  })
+}
+
+export function obfuscateCode(code: string) {
+  return obfuscate(code, {
+    compact: true,
+    simplify: false,
+  })
+}
+
+export function escapeTemplateLiteral(code: string) {
+  return code.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
+}
+
+export function removeTopLevelAwaits(code: string) {
+  const ast = espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  })
+
+  const topLevelAwaits = ast.body.filter((node) => {
+    if (node.type === 'AwaitExpression')
+      return true
+
+    if (
+      node.type === 'ExpressionStatement'
+      && node.expression.type === 'AwaitExpression'
+    )
+      return true
+
+    return false
+  })
+
+  topLevelAwaits.forEach((node) => {
+    const index = ast.body.indexOf(node)
+    ast.body.splice(index, 1)
+  })
+
+  return escodegen.generate(ast)
+}
+
+export function getFlowchartSvg(code: string): string {
+  try {
+    return escapeTemplateLiteral(
+      convertCodeToSvg(
+        removeTopLevelAwaits(code),
+      ),
+    )
+  }
+  catch (error) {
+    return `<div class="w-full h-full flex flex-col justify-center items-center text-center text-red-700 text-2xl font-sans">
+    <p>¡Ups!</p>
+    <p>No se pudo generar el Diagrama de Flujo</p>
+</div>`
+  }
+}
+
+/**
  * Agrega `export` a las funciones declaradas.
  * @param code
  */
@@ -141,52 +250,4 @@ export function generateImportStatement(code: string, modulePath: string) {
   )
 
   return imports.join('\n')
-}
-
-/**
- * @author @slevithan
- * @param str
- */
-export function escapeQuotes(str) {
-  return str.replace(/\\([\s\S])|(")/g, '\\$1$2')
-}
-
-export function unifyImports(imports) {
-  const importMap = new Map()
-  let output = ''
-
-  imports.split('\n')
-    .map(line => line.trim())
-    .forEach((line) => {
-      const importMatch = line.match(/^import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*(;)?$/)
-
-      if (!importMatch) {
-        output += `${line}\n`
-        return
-      }
-
-      const [matchedText, namedImports, moduleSpecifier] = importMatch
-
-      if (!importMap.has(moduleSpecifier))
-        importMap.set(moduleSpecifier, new Set())
-
-      namedImports.split(/\s*,\s*/g).forEach((namedImport) => {
-        importMap.get(moduleSpecifier).add(namedImport.trim())
-      })
-    })
-
-  importMap.forEach((namedImports, moduleSpecifier) => {
-    const sortedImports = [...namedImports].sort()
-    output += `import { ${sortedImports.join(', ')} } from '${moduleSpecifier}'\n`
-  })
-
-  return output
-}
-
-export function formatCode(code: string) {
-  return prettier.format(code, {
-    parser: 'babel',
-    plugins: [parserBabel],
-    semi: false,
-  })
 }

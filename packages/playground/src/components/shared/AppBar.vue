@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useClipboard } from '@vueuse/core'
+import { useClipboard, useEventBus } from '@vueuse/core'
 import { useGrid } from 'vue-screen'
 import { useSettings } from '@/composables/useSettings'
 import { useShare } from '@/composables/useShare'
@@ -29,6 +29,10 @@ function shareCode() {
 
   notification.success('Se copió la URL al portapapeles')
 }
+
+function obfuscateCode() {
+  useEventBus('editor_code').emit('obfuscate')
+}
 </script>
 
 <template>
@@ -54,6 +58,16 @@ function shareCode() {
             :icon-only="!grid.sm"
             color="teal"
             @click="shareCode"
+          />
+
+          <AppButton
+            v-if="settings.settings.value.showAdvanced"
+            icon="mdi:code-braces"
+            :text="grid.lg ? 'Ofuscar código' : 'Ofuscar'"
+            description="Ofusca el código"
+            :icon-only="!grid.sm"
+            color="stone"
+            @click="obfuscateCode"
           />
         </div>
       </div>
@@ -100,27 +114,6 @@ function shareCode() {
           :active="!settings.settings.value.hideEditor"
           description="Mostrar editor"
           @click="settings.setHideEditor(!settings.settings.value.hideEditor)"
-        />
-
-        <AppButton
-          icon="mdi:eye"
-          :active="!settings.settings.value.hidePreview"
-          description="Mostrar vista previa"
-          @click="settings.setHidePreview(!settings.settings.value.hidePreview)"
-        />
-
-        <AppButton
-          icon="mdi:console"
-          :active="!settings.settings.value.hideConsole"
-          description="Mostrar consola"
-          @click="settings.setHideConsole(!settings.settings.value.hideConsole)"
-        />
-
-        <AppButton
-          icon="mdi:language-html5"
-          :active="settings.settings.value.customHtml"
-          description="HTML personalizado"
-          @click="settings.setCustomHtml(!settings.settings.value.customHtml)"
         />
       </div>
 

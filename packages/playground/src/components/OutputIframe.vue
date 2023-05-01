@@ -2,19 +2,24 @@
 import type { WatchStopHandle } from 'vue'
 import { onMounted, onUnmounted, ref, watch, watchEffect } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import template from '@/output/template.html?raw'
 import { useEditor } from '@/composables/useEditor'
 import { useSettings } from '@/composables/useSettings'
 import {
   addExportToFunctions,
-  addInfiniteLoopProtection, formatCode,
+  addInfiniteLoopProtection,
+  formatCode,
   generateImportStatement,
+  getFlowchartSvg,
   unifyImports,
 } from '@/composables/utils'
 import { PreviewProxy } from '@/output/PreviewProxy'
 import { compileModulesForPreview } from '@/compiler/moduleCompiler'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '@/compiler/sfcCompiler'
 import { orchestrator } from '@/orchestrator'
+import PreviewBar from '@/components/shared/PreviewBar.vue'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import template from '@/output/template.html?raw'
 
 const editor = useEditor()
 
@@ -38,6 +43,8 @@ interface UpdateIframeOptions {
   hideConsole: boolean
   hidePreview: boolean
   customHtml: boolean
+  flowchartSvg: string
+  preview: 'terminal' | 'flowchart' | 'html'
   importMap: Record<string, string>
 }
 
@@ -55,6 +62,8 @@ onMounted(() => {
 
   const generatedCodeImports = unifyImports(generateImportStatement(code, './codigo.esjs'))
 
+  const flowchartSvg = getFlowchartSvg(codeWithoutImports)
+
   createSandbox({
     code,
     testsCode: parseCode(testsCodeWithoutImports),
@@ -64,6 +73,8 @@ onMounted(() => {
     hideConsole: settings.value.hideConsole,
     customHtml: settings.value.customHtml,
     importMap: JSON.parse(orchestrator.importMap) || {},
+    flowchartSvg,
+    preview: useSettings().activePreview.value,
   })
 })
 
@@ -98,7 +109,8 @@ function createSandbox(options: UpdateIframeOptions) {
   sandbox.setAttribute('height', '100%')
   sandbox.setAttribute('style', 'border: 0;')
 
-  const sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
+  let sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
+  sandboxSrc = sandboxSrc.replace(/<!--FLOWCHART_SVG-->/, options.flowchartSvg)
   sandbox.srcdoc = sandboxSrc
 
   container.value.appendChild(sandbox)
@@ -118,6 +130,8 @@ function createSandbox(options: UpdateIframeOptions) {
         hidePreview: options.hidePreview,
         customHtml: options.customHtml,
         importMap: options.importMap,
+        flowchartSvg: options.flowchartSvg,
+        preview: options.preview,
       })
     })
   })
@@ -142,6 +156,8 @@ function updateIframe(options: UpdateIframeOptions) {
     'const __modules__ = {};',
     ...modules,
   ])
+
+  proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
 }
 function parseCode(code: string) {
   try {
@@ -179,8 +195,23 @@ watch(
     proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
   },
 )
+
+watch(
+  () => settings.value.preview,
+  () => {
+    proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
+  },
+)
 </script>
 
 <template>
-  <div ref="container" class="w-full h-full b-0" />
+  <div class="flex flex-col h-full">
+    <div v-if="!settings.hideOptions" class="flex shrink h-10">
+      <PreviewBar />
+    </div>
+
+    <div class="flex flex-col grow">
+      <div ref="container" class="w-full h-full b-0" />
+    </div>
+  </div>
 </template>

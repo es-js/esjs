@@ -14,11 +14,10 @@ import {
   variableLanguage,
 } from '@es-js/core'
 import vsCodeDarkConverted from '@/assets/vscode-dark-converted.json'
-import { useEditor } from '@/composables/useEditor'
+import { formatCode } from '@/composables/utils'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
 import ProviderResult = languages.ProviderResult
 import CompletionList = languages.CompletionList
-import { formatCode } from '@/composables/utils'
 
 export const useMonaco = () => {
   function createMonacoInstance(monacoEditorElement: HTMLElement, code: string): IStandaloneCodeEditor {

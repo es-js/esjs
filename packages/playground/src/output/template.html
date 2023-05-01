@@ -2,13 +2,13 @@
 <script type="importmap"><!--IMPORT_MAP--></script>
 
 <body id="body" class="w-full h-[100vh] m-0 p-0 flex flex-col bg-gray-900">
-<div id="preview-container" class="relative flex-1">
-    <es-terminal class="w-full h-full absolute inset-0"></es-terminal>
-</div>
+    <div id="preview-container" class="relative flex-1">
+        <div id="app" class="w-full h-full absolute inset-0"></div>
+    </div>
 
-<div id="console-container" class="relative flex-1">
-    <div id="eruda-container"></div>
-</div>
+    <div id="console-container" class="relative flex-1">
+        <div id="eruda-container"></div>
+    </div>
 </body>
 
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css'/>
@@ -21,6 +21,8 @@
     import { usarTerminal } from '@es-js/terminal';
 
     (async () => {
+        var flowchartSvg = `<!--FLOWCHART_SVG-->`
+
         let scriptEls = []
 
         window.process = { env: {} }
@@ -84,6 +86,8 @@
                 _hideConsole(args)
             } else if (action === 'previewException') {
                 window._previewException(...args)
+            } else if (action === 'PREVIEW') {
+                window._preview(args)
             }
         }
 
@@ -226,6 +230,62 @@
         //     bodyElement.classList.remove('bg-gray-900');
         //     bodyElement.classList.add('bg-white');
         // }
+
+        window._preview = function(value) {
+            switch (value) {
+                case 'terminal':
+                    return _previewTerminal();
+                case 'flowchart':
+                    return _previewFlowchart();
+                case 'html':
+                    return _previewHtml();
+            }
+        }
+
+        function _previewTerminal() {
+            _setBodyColor('bg-gray-900')
+
+            const app = document.getElementById('app');
+            app.innerHTML = '';
+
+            const terminalElement = document.createElement('es-terminal');
+            terminalElement.classList.add('w-full', 'h-full', 'absolute', 'inset-0');
+            document.getElementById('app').appendChild(terminalElement);
+
+            usarTerminal().fitTerminal()
+        }
+
+        function _previewFlowchart() {
+            _setBodyColor('bg-white')
+
+            const app = document.getElementById('app');
+            app.innerHTML = '';
+
+            app.innerHTML = flowchartSvg;
+
+            app.classList.add('overflow-auto');
+        }
+
+        function _previewHtml() {
+            _setBodyColor('bg-white')
+
+            const app = document.getElementById('app');
+            app.innerHTML = '';
+
+            const htmlToInject = `${options.customHtml}`
+            const template = html`${htmlToInject}`
+            template(app)
+        }
+
+        function _setBodyColor(color) {
+            const bodyElement = document.getElementById('body');
+            bodyElement.classList.forEach((className) => {
+                if (className.startsWith('bg-')) {
+                    bodyElement.classList.remove(className);
+                }
+            })
+            bodyElement.classList.add(color);
+        }
 
         await _initEruda()
     })()

@@ -143,6 +143,12 @@ const initialPackages = [
     description: 'Librería para crear componentes reactivos',
     url: 'https://cdn.jsdelivr.net/npm/@arrow-js/core/+esm',
   },
+  {
+    name: '@es-js/esjs2flowchart',
+    source: 'jsdelivr',
+    description: 'Librería para crear componentes reactivos',
+    url: 'https://cdn.jsdelivr.net/npm/@es-js/esjs2flowchart',
+  },
 ]
 
 function loadInitialState() {

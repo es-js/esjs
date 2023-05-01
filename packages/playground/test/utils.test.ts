@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { addExportToFunctions, formatCode, generateImportStatement, unifyImports } from '../src/composables/utils'
+import {
+  addExportToFunctions,
+  escapeTemplateLiteral,
+  formatCode,
+  generateImportStatement,
+  removeTopLevelAwaits,
+  unifyImports,
+} from '../src/composables/utils'
 
 describe('utils', () => {
   it('unify duplicated imports', () => {
@@ -57,6 +64,47 @@ import { afirmarObjetosIguales } from '@es-js/prueba';`
 import { Terminal } from '@es-js/terminal'`
 
     expect(unifyImports(imports).trim()).toBe(expected)
+  })
+
+  it('escapes template literals', () => {
+    const code = 'consola.escribir(\`Hola ${nombre}\`)'
+
+    const expected = 'consola.escribir(\\`Hola \\${nombre}\\`)'
+
+    expect(escapeTemplateLiteral(code)).toBe(expected)
+  })
+
+  it('removes top level awaits', () => {
+    const code = `async function init() {
+      const response = await fetch('https://google.com')
+    }
+    await init()
+    `
+
+    const expected = `async function init() {
+      const response = await fetch('https://google.com')
+    }
+    `
+
+    expect(formatCode(removeTopLevelAwaits(code))).toBe(formatCode(expected))
+  })
+
+  it('removes top level awaits inside if', () => {
+    const code = `async function init() {
+      const response = await fetch('https://google.com')
+    }
+
+    if (true) {
+      await init()
+    }
+    `
+
+    const expected = `async function init() {
+      const response = await fetch('https://google.com')
+    }
+    `
+
+    expect(formatCode(removeTopLevelAwaits(code))).toBe(formatCode(expected))
   })
 
   it('adds export to function', () => {

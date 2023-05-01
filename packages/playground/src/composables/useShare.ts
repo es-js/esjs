@@ -20,6 +20,8 @@ export const useShare = () => {
     url.searchParams.set('hideConsole', String(settings.settings.value.hideConsole))
     url.searchParams.set('hideTests', String(settings.settings.value.hideTests))
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
+    url.searchParams.set('preview', JSON.stringify(settings.settings.value.preview))
+
     return url
   }
 
@@ -39,6 +41,8 @@ export const useShare = () => {
       hidePreview: url.searchParams.get('hidePreview'),
       hideConsole: url.searchParams.get('hideConsole'),
       hideTests: url.searchParams.get('hideTests'),
+      showAdvanced: url.searchParams.get('showAdvanced'),
+      preview: JSON.parse(url.searchParams.get('preview') ?? '{}'),
     }
   }
 

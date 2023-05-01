@@ -22,6 +22,10 @@ function toggleTestsEditor() {
 function formatCode() {
   useEventBus('editor_code').emit('format')
 }
+
+function obfuscateTestsCode() {
+  useEventBus('editor_tests').emit('obfuscate')
+}
 </script>
 
 <template>
@@ -38,6 +42,16 @@ function formatCode() {
       <ExportModuleButton />
 
       <div class="flex flex-grow" />
+
+      <AppButton
+        v-if="settings.settings.value.showAdvanced"
+        icon="mdi:code-braces"
+        :text="grid.lg ? 'Ofuscar pruebas' : 'Ofuscar'"
+        description="Ofusca el código de pruebas"
+        :icon-only="!grid.sm"
+        color="stone"
+        @click="obfuscateTestsCode"
+      />
 
       <AppButton
         icon="mdi:code-braces"

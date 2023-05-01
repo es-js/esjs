@@ -30,6 +30,7 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
         'bg-indigo-500 hover:bg-indigo-400 text-white': 'indigo' === props.color || props.active,
         'bg-teal-800 hover:bg-teal-700 text-white': 'teal' === props.color,
         'bg-gray-700 hover:bg-gray-600 text-white': 'gray' === props.color,
+        'bg-stone-500 hover:bg-stone-400 text-white': 'stone' === props.color,
         'py-1.5 px-2 space-x-1 rounded': !isIconOnly,
         'p-1 rounded-full': isIconOnly,
       }"
