@@ -14,7 +14,7 @@ import {
 } from '@/composables/utils'
 import { PreviewProxy } from '@/output/PreviewProxy'
 import { compileModulesForPreview } from '@/compiler/moduleCompiler'
-import { MAIN_FILE, MAIN_TESTS_FILE } from '@/compiler/sfcCompiler'
+import { MAIN_FILE, MAIN_TESTS_FILE, compileFile } from '@/compiler/sfcCompiler'
 import { orchestrator } from '@/orchestrator'
 import PreviewBar from '@/components/shared/PreviewBar.vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -33,7 +33,6 @@ const bus = useEventBus('editor_code')
 
 let sandbox: HTMLIFrameElement
 let proxy: PreviewProxy
-let stopUpdateWatcher: WatchStopHandle | undefined
 
 interface UpdateIframeOptions {
   code: string
@@ -60,15 +59,17 @@ onMounted(() => {
 
   const code = parseCode(codeWithoutImports)
 
+  const testsCode = parseCode(testsCodeWithoutImports)
+
   const generatedCodeImports = unifyImports(generateImportStatement(code, './codigo.esjs'))
 
   const flowchartSvg = getFlowchartSvg(codeWithoutImports)
 
   createSandbox({
     code,
-    testsCode: parseCode(testsCodeWithoutImports),
+    testsCode,
     imports: unifyImports(`${defaultImports} \n ${codeImports}`),
-    testsImports: unifyImports(`${defaultTestsImports} \n ${testsCodeImports} \n ${generatedCodeImports}`),
+    testsImports: unifyImports(`${defaultTestsImports} \n ${testsCodeImports} ${testsCode.trim() === '' ? '' : `\n ${generatedCodeImports}`}`),
     hidePreview: settings.value.hidePreview,
     hideConsole: settings.value.hideConsole,
     customHtml: settings.value.customHtml,
@@ -80,13 +81,11 @@ onMounted(() => {
 
 onUnmounted(() => {
   proxy.destroy()
-  stopUpdateWatcher && stopUpdateWatcher()
 })
 
 function createSandbox(options: UpdateIframeOptions) {
   if (sandbox) {
     proxy.destroy()
-    stopUpdateWatcher && stopUpdateWatcher()
     container.value.removeChild(sandbox)
   }
 
@@ -120,19 +119,17 @@ function createSandbox(options: UpdateIframeOptions) {
   proxy = new PreviewProxy(sandbox, {})
 
   sandbox.addEventListener('load', () => {
-    stopUpdateWatcher = watchEffect(() => {
-      updateIframe({
-        code: options.code,
-        testsCode: options.testsCode,
-        imports: options.imports,
-        testsImports: options.testsImports,
-        hideConsole: options.hideConsole,
-        hidePreview: options.hidePreview,
-        customHtml: options.customHtml,
-        importMap: options.importMap,
-        flowchartSvg: options.flowchartSvg,
-        preview: options.preview,
-      })
+    updateIframe({
+      code: options.code,
+      testsCode: options.testsCode,
+      imports: options.imports,
+      testsImports: options.testsImports,
+      hideConsole: options.hideConsole,
+      hidePreview: options.hidePreview,
+      customHtml: options.customHtml,
+      importMap: options.importMap,
+      flowchartSvg: options.flowchartSvg,
+      preview: options.preview,
     })
   })
 }
@@ -145,10 +142,14 @@ function updateIframe(options: UpdateIframeOptions) {
     ${code}
   `
 
+  compileFile(orchestrator.files[MAIN_FILE])
+
   orchestrator.files[MAIN_TESTS_FILE].script = `
     ${testsImports}
     ${testsCode}
   `
+
+  compileFile(orchestrator.files[MAIN_TESTS_FILE])
 
   const modules = compileModulesForPreview()
 

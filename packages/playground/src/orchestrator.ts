@@ -77,18 +77,6 @@ export const orchestrator: Orchestrator = reactive({
   },
 })
 
-/**
- * Setup Watchers
- */
-
-watchEffect(() => {
-  if (orchestrator.files[MAIN_FILE])
-    compileFile(orchestrator.files[MAIN_FILE])
-
-  if (orchestrator.files[MAIN_TESTS_FILE])
-    compileFile(orchestrator.files[MAIN_TESTS_FILE])
-})
-
 export function addFile(file: OrchestratorFile) {
   orchestrator.files = {
     ...orchestrator.files,
