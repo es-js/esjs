@@ -158,6 +158,8 @@ function updateIframe(options: UpdateIframeOptions) {
     ...modules,
   ])
 
+  proxy.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
+  proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
   proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
 }
 function parseCode(code: string) {
