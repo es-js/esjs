@@ -136,6 +136,8 @@ export function obfuscateCode(code: string) {
   return obfuscate(code, {
     compact: true,
     simplify: false,
+    controlFlowFlattening: false,
+    ignoreImports: true,
   })
 }
 

@@ -1,5 +1,4 @@
-import { reactive, watchEffect } from 'vue'
-import { MAIN_FILE, MAIN_TESTS_FILE, compileFile } from './compiler/sfcCompiler'
+import { reactive } from 'vue'
 
 export interface OrchestratorPackage {
   name: string
@@ -46,6 +45,8 @@ export interface Orchestrator {
   readonly importMap: string
 }
 
+export const MAIN_FILE = 'codigo.esjs'
+export const MAIN_TESTS_FILE = 'pruebas.esjs'
 /**
  * Main app orchestrator, handles all the files, import maps, and errors
  */
@@ -82,8 +83,6 @@ export function addFile(file: OrchestratorFile) {
     ...orchestrator.files,
     [file.filename]: file,
   }
-
-  compileFile(orchestrator.files[file.filename])
 }
 
 export function removeFile(name: string) {

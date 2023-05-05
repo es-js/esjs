@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { WatchStopHandle } from 'vue'
-import { onMounted, onUnmounted, ref, watch, watchEffect } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useSettings } from '@/composables/useSettings'
@@ -14,8 +13,7 @@ import {
 } from '@/composables/utils'
 import { PreviewProxy } from '@/output/PreviewProxy'
 import { compileModulesForPreview } from '@/compiler/moduleCompiler'
-import { MAIN_FILE, MAIN_TESTS_FILE, compileFile } from '@/compiler/sfcCompiler'
-import { orchestrator } from '@/orchestrator'
+import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
 import PreviewBar from '@/components/shared/PreviewBar.vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
@@ -61,7 +59,7 @@ onMounted(() => {
 
   const testsCode = parseCode(testsCodeWithoutImports)
 
-  const generatedCodeImports = unifyImports(generateImportStatement(code, './codigo.esjs'))
+  const generatedCodeImports = unifyImports(generateImportStatement(code, `./${MAIN_FILE}`))
 
   const flowchartSvg = getFlowchartSvg(codeWithoutImports)
 
@@ -69,7 +67,7 @@ onMounted(() => {
     code,
     testsCode,
     imports: unifyImports(`${defaultImports} \n ${codeImports}`),
-    testsImports: unifyImports(`${defaultTestsImports} \n ${testsCodeImports} ${testsCode.trim() === '' ? '' : `\n ${generatedCodeImports}`}`),
+    testsImports: unifyImports(`${defaultTestsImports} \n ${testsCodeImports} \n ${generatedCodeImports}`),
     hidePreview: settings.value.hidePreview,
     hideConsole: settings.value.hideConsole,
     customHtml: settings.value.customHtml,
@@ -141,15 +139,10 @@ function updateIframe(options: UpdateIframeOptions) {
     ${imports}
     ${code}
   `
-
-  compileFile(orchestrator.files[MAIN_FILE])
-
   orchestrator.files[MAIN_TESTS_FILE].script = `
     ${testsImports}
     ${testsCode}
   `
-
-  compileFile(orchestrator.files[MAIN_TESTS_FILE])
 
   const modules = compileModulesForPreview()
 

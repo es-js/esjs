@@ -1,13 +1,12 @@
 import { MagicString, babelParse, walk, walkIdentifiers } from '@vue/compiler-sfc'
 import type { ExportSpecifier, Identifier, Node, ObjectProperty } from '@babel/types'
-import type { OrchestratorFile as File } from '../orchestrator'
-import { orchestrator as store } from '../orchestrator'
-import { MAIN_FILE, MAIN_TESTS_FILE } from './sfcCompiler'
+import type { OrchestratorFile as File } from '@/orchestrator'
+import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
 
 export function compileModulesForPreview() {
   return [
-    ...processFile(store.files[MAIN_TESTS_FILE]),
-    ...processFile(store.files[MAIN_FILE]),
+    ...processFile(orchestrator.files[MAIN_TESTS_FILE]),
+    ...processFile(orchestrator.files[MAIN_FILE]),
   ].reverse()
 }
 
@@ -23,11 +22,9 @@ function processFile(file: File, seen = new Set<File>()) {
 
   seen.add(file)
 
-  const { js, css } = file.compiled
+  const s = new MagicString(file.script)
 
-  const s = new MagicString(js)
-
-  const ast = babelParse(js, {
+  const ast = babelParse(file.script, {
     sourceFilename: file.filename,
     sourceType: 'module',
   }).program.body
@@ -39,7 +36,7 @@ function processFile(file: File, seen = new Set<File>()) {
 
   function defineImport(node: Node, source: string) {
     const filename = source.replace(/^\.\/+/, '')
-    if (!(filename in store.files))
+    if (!(filename in orchestrator.files))
       throw new Error(`File "${filename}" does not exist.`)
 
     if (importedFiles.has(filename))
@@ -209,14 +206,10 @@ function processFile(file: File, seen = new Set<File>()) {
     },
   })
 
-  // append CSS injection code
-  if (css)
-    s.append(`\nwindow.__css__ += ${JSON.stringify(css)}`)
-
   const processed = [s.toString()]
   if (importedFiles.size) {
     for (const imported of importedFiles)
-      processed.push(...processFile(store.files[imported], seen))
+      processed.push(...processFile(orchestrator.files[imported], seen))
   }
 
   // return a list of files to further process

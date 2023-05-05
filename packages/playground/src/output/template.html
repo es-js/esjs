@@ -49,6 +49,7 @@
             const send_error = (message, stack) => send_reply({ action: 'cmd_error', message, stack });
 
             if (action === 'eval') {
+                NProgress.start()
                 try {
                     if (scriptEls.length) {
                         scriptEls.forEach(el => {
@@ -72,13 +73,14 @@
                         scriptEl.innerHTML = script + `\nwindow.__next__()`
                         document.head.appendChild(scriptEl)
                         scriptEl.onerror = err => send_error(err.message, err.stack)
-                        // console.debug(['scriptEl', scriptEl])
                         scriptEls.push(scriptEl)
                         await done
                     }
                     send_ok()
+                    NProgress.done()
                 } catch (e) {
                     send_error(e.message, e.stack);
+                    NProgress.done()
                 }
             } else if (action === 'HIDE_PREVIEW') {
                 _hidePreview(args)
@@ -122,22 +124,6 @@
                 parent.postMessage({ action: 'unhandledrejection', value: event.reason.message }, '*');
             }
         });
-
-        // async function _init() {
-        //     // NProgress.start();
-        //     // await _initEruda();
-        //     // _hidePreview(${options.hidePreview});
-        //     // _hideConsole(${options.hideConsole});
-        //     // if (${options.customHtml}) _resetBodyColor()
-        //     // NProgress.done();
-        //
-        //     // try {
-        //     //     // await _runCode();
-        //     //
-        //     // } catch (error) {
-        //     //     window._handleException(error);
-        //     // }
-        // }
 
         function _initEruda() {
             const erudaContainerElement = document.getElementById('eruda-container')
@@ -189,47 +175,15 @@
             usarTerminal().fitTerminal()
         }
 
-        // var _app = document.getElementById('app');
-
-        // window.addEventListener('message', async ({data}) => {
-        //     const {event, value} = data;
-        //
-        //     if ('HIDE_CONSOLE' === event) {
-        //         return _hideConsole(value);
-        //     }
-        //
-        //     if ('HIDE_PREVIEW' === event) {
-        //         return _hidePreview(value);
-        //     }
-        // })
-
         window._handleInfiniteLoopException = function (error) {
             console.warn('¡Advertencia!: Se ha detectado un bucle infinito');
             console.error(error);
         }
 
-        // window._handleException = function (error) {
-        //     if (error && error.dontWarn) {
-        //         return;
-        //     }
-        //
-        //     return window._previewException(error.toString());
-        // }
-
         window._previewException = function (line, column, message) {
             console.warn(`¡Advertencia!: Se ha detectado un error en la línea ${line}`);
             // console.error(error.toString());
         }
-
-        // async function _runCode() {
-        //     ${options.code}
-        // }
-
-        // function _resetBodyColor() {
-        //     const bodyElement = document.getElementById('body');
-        //     bodyElement.classList.remove('bg-gray-900');
-        //     bodyElement.classList.add('bg-white');
-        // }
 
         window._preview = function(value) {
             switch (value) {
@@ -256,7 +210,7 @@
         }
 
         function _previewFlowchart() {
-            _setBodyColor('bg-white')
+            _setBodyColor('bg-gray-200')
 
             const app = document.getElementById('app');
             app.innerHTML = '';
