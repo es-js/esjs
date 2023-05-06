@@ -21,6 +21,8 @@
     import { usarTerminal } from '@es-js/terminal';
 
     (async () => {
+        NProgress.start()
+
         var flowchartSvg = `<!--FLOWCHART_SVG-->`
 
         let scriptEls = []
@@ -49,7 +51,6 @@
             const send_error = (message, stack) => send_reply({ action: 'cmd_error', message, stack });
 
             if (action === 'eval') {
-                NProgress.start()
                 try {
                     if (scriptEls.length) {
                         scriptEls.forEach(el => {
@@ -76,11 +77,10 @@
                         scriptEls.push(scriptEl)
                         await done
                     }
+
                     send_ok()
-                    NProgress.done()
                 } catch (e) {
                     send_error(e.message, e.stack);
-                    NProgress.done()
                 }
             } else if (action === 'HIDE_PREVIEW') {
                 _hidePreview(args)
@@ -111,6 +111,10 @@
             } catch (e) {
                 parent.postMessage({ action: 'error', value: msg }, '*');
             }
+        }
+
+        window.onload = function () {
+            NProgress.done()
         }
 
         window.addEventListener("unhandledrejection", event => {
