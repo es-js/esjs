@@ -57,7 +57,7 @@ onMounted(() => {
 
   const code = parseCode(codeWithoutImports)
 
-  const testsCode = parseCode(testsCodeWithoutImports)
+  const testsCode = parseTestsCode(testsCodeWithoutImports)
 
   const generatedCodeImports = unifyImports(generateImportStatement(code, `./${MAIN_FILE}`))
 
@@ -114,7 +114,10 @@ function createSandbox(options: UpdateIframeOptions) {
 
   iframe.value = sandbox
 
-  proxy = new PreviewProxy(sandbox, {})
+  proxy = new PreviewProxy(sandbox, {
+    on_error: (error: any) => { },
+    on_unhandled_rejection: (error: any) => { },
+  })
 
   sandbox.addEventListener('load', () => {
     updateIframe({
@@ -156,17 +159,41 @@ function updateIframe(options: UpdateIframeOptions) {
   proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
 }
 function parseCode(code: string) {
+  bus.emit('clear-decorations')
+
   try {
     code = formatCode(code)
     code = addExportToFunctions(code)
     code = addInfiniteLoopProtection(code)
-    bus.emit('clear-decorations')
   }
   catch (error: SyntaxError | any) {
     const line = error?.loc?.start?.line || 1
     const column = error?.loc?.start?.column || 1
     const errorMessage = error.message
     bus.emit('decorate-error', {
+      line,
+      column,
+    })
+    code = `
+window._previewException(${line}, ${column}, ${JSON.stringify(errorMessage)});
+throw new Error(${JSON.stringify(errorMessage)});`
+  }
+
+  return code
+}
+
+function parseTestsCode(code: string) {
+  useEventBus('editor_tests').emit('clear-decorations')
+
+  try {
+    code = formatCode(code)
+    code = addInfiniteLoopProtection(code)
+  }
+  catch (error: SyntaxError | any) {
+    const line = error?.loc?.start?.line || 1
+    const column = error?.loc?.start?.column || 1
+    const errorMessage = error.message
+    useEventBus('editor_tests').emit('decorate-error', {
       line,
       column,
     })

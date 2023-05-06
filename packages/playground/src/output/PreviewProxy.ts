@@ -71,10 +71,10 @@ export class PreviewProxy {
         return this.handle_command_message(event.data)
       // case 'fetch_progress':
       //   return this.handlers.on_fetch_progress(args.remaining)
-      // case 'error':
-      //   return this.handlers.on_error(event.data)
-      // case 'unhandledrejection':
-      //   return this.handlers.on_unhandled_rejection(event.data)
+      case 'error':
+        return this.handlers.on_error(event.data)
+      case 'unhandledrejection':
+        return this.handlers.on_unhandled_rejection(event.data)
       // case 'console':
       //   return this.handlers.on_console(event.data)
       // case 'console_group':
