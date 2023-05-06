@@ -4,9 +4,10 @@ import type { OrchestratorFile as File } from '@/orchestrator'
 import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
 
 export function compileModulesForPreview() {
+  const seen = new Set<File>()
   return [
-    ...processFile(orchestrator.files[MAIN_TESTS_FILE]),
-    ...processFile(orchestrator.files[MAIN_FILE]),
+    ...processFile(orchestrator.files[MAIN_TESTS_FILE], seen),
+    ...processFile(orchestrator.files[MAIN_FILE], seen),
   ].reverse()
 }
 
