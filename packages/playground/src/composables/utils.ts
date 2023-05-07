@@ -1,8 +1,7 @@
 import * as espree from 'espree'
-import * as escodegen from 'escodegen'
-import { transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
+import escodegen from 'escodegen'
 import { obfuscate } from 'javascript-obfuscator'
 import type { Options } from 'prettier'
 import { convertCodeToSvg } from '@es-js/esjs2flowchart'
@@ -16,7 +15,8 @@ export function sanitizeCode(code: string) {
 
 /**
  * Agrega un límite de tiempo de ejecución para cada bucle.
- * @author Ariya Hidayat.
+ * @author Ariya Hidayat (versión esprima)
+ * @author Enzo Notario (versión espree)
  * @see https://github.com/chinchang/web-maker/blob/master/src/utils.js#L122
  */
 export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 5000 }) {
@@ -124,22 +124,20 @@ export function unifyImports(imports: string) {
 }
 
 export function formatCode(code: string, options?: Partial<Options>) {
-  const transpiled = transpile(code)
-
-  const formatted = prettier.format(transpiled, {
+  return prettier.format(code, {
     parser: 'babel',
     plugins: [parserBabel],
     semi: false,
     ...options,
   })
-
-  return transpile(formatted, true)
 }
 
 export function obfuscateCode(code: string) {
   return obfuscate(code, {
     compact: true,
     simplify: false,
+    controlFlowFlattening: false,
+    ignoreImports: true,
   })
 }
 
@@ -192,4 +190,66 @@ export function getFlowchartSvg(code: string): string {
     <p>No se pudo generar el Diagrama de Flujo</p>
 </div>`
   }
+}
+
+/**
+ * Agrega `export` a las funciones declaradas.
+ * @param code
+ */
+export function addExportToFunctions(code: string) {
+  const ast = espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  })
+
+  ast.body.forEach((node) => {
+    if (node.type === 'FunctionDeclaration') {
+      // Crear el nodo de exportación
+      const exportNode = {
+        type: 'ExportNamedDeclaration',
+        declaration: node,
+        source: null,
+        specifiers: [],
+      }
+
+      // Reemplazar el nodo de la función con el nodo de exportación
+      const index = ast.body.indexOf(node)
+      ast.body[index] = exportNode
+    }
+  })
+
+  return escodegen.generate(ast)
+}
+
+/**
+ * Genera los imports a partir de las funciones exportadas.
+ * @param code
+ * @param modulePath
+ */
+export function generateImportStatement(code: string, modulePath: string) {
+  const ast = espree.parse(code, {
+    range: true,
+    ecmaVersion: 'latest',
+    jsx: false,
+    loc: true,
+    tolerant: true,
+    sourceType: 'module',
+  })
+
+  const namedExports = ast.body.filter(
+    node =>
+      node.type === 'ExportNamedDeclaration'
+      && node.declaration?.type === 'FunctionDeclaration',
+  )
+
+  const imports = namedExports.map(
+    node =>
+      `import { ${node.declaration?.id?.name} } from '${modulePath}'`,
+  )
+
+  return imports.join('\n')
 }

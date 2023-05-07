@@ -6,7 +6,7 @@ import wasm from 'vite-plugin-wasm'
 import Unocss from 'unocss/vite'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import pluginRewriteAll from 'vite-plugin-rewrite-all';
+import pluginRewriteAll from 'vite-plugin-rewrite-all'
 
 // https://vitejs.dev/config/
 export default defineConfig({

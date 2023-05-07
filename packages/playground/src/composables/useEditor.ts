@@ -35,9 +35,11 @@ asincrono funcion inicio() {
 inicio()
 `
 
-const DEFAULT_IMPORTS = `import { prueba, pruebas, pruebasAsincronas, afirmar, assert, afirmarIguales, afirmarSimilares, afirmarMatricesIguales, afirmarObjetosIguales, afirmarMatricesSimilares, afirmarObjetosSimilares, afirmarVerdadero, afirmarFalso, afirmarDistinto } from '@es-js/prueba'
-import { Terminal } from '@es-js/terminal'
+const DEFAULT_IMPORTS = `import { Terminal } from '@es-js/terminal'
 import { html } from '@arrow-js/core'`
+
+const DEFAULT_TESTS_IMPORTS = `import { prueba, pruebas, pruebasAsincronas, afirmar, assert, afirmarIguales, afirmarSimilares, afirmarMatricesIguales, afirmarObjetosIguales, afirmarMatricesSimilares, afirmarObjetosSimilares, afirmarVerdadero, afirmarFalso, afirmarDistinto } from '@es-js/prueba'
+`
 
 const code: Ref<string> = ref(INITIAL_CODE)
 
@@ -75,6 +77,7 @@ export const useEditor = () => {
 
       return {
         defaultImports: DEFAULT_IMPORTS,
+        defaultTestsImports: DEFAULT_TESTS_IMPORTS,
         codeImports: splittedCode.imports,
         codeWithoutImports: splittedCode.codeWithoutImports,
         testsCodeImports: splittedTestsCode.imports,
@@ -83,7 +86,15 @@ export const useEditor = () => {
     }
     catch (error) {
       const escapedErrorMessage = escapeQuotes(error?.toString())
-      output.value = `window._previewException("${escapedErrorMessage}");`
+      return {
+        defaultImports: DEFAULT_IMPORTS,
+        defaultTestsImports: DEFAULT_TESTS_IMPORTS,
+        codeImports: '',
+        codeWithoutImports: `window._previewException(${error?.lineNumber || 1}, ${error.column || 1}, "${escapedErrorMessage}");
+        throw new Error("${escapedErrorMessage}")`,
+        testsCodeImports: '',
+        testsCodeWithoutImports: '',
+      }
     }
   }
 

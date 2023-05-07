@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { editor } from 'monaco-editor'
 import * as monaco from 'monaco-editor'
+import type { Ref } from 'vue'
 import { onMounted, ref } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { ResizeObserver } from 'vue-resize'
@@ -32,7 +33,7 @@ const monacoHelper = useMonaco()
 
 let monacoInstance: editor.IStandaloneCodeEditor | null = null
 
-const decorations = ref([])
+const decorations: Ref<any> = ref([])
 
 const onResizeDebounced = debounce(() => {
   monacoInstance?.layout()
