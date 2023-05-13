@@ -95,6 +95,14 @@
 
         window.addEventListener('message', handle_message, false);
 
+        window.addEventListener('esjs-prueba-success', (args) => {
+            parent.postMessage({ action: 'esjs-prueba-success', data: JSON.stringify(args.detail) }, '*');
+        })
+
+        window.addEventListener('esjs-prueba-error', (args) => {
+            parent.postMessage({ action: 'esjs-prueba-error', data: JSON.stringify(args.detail) }, '*');
+        })
+
         window.onerror = function (msg, url, lineNo, columnNo, error) {
             // ignore errors from import map polyfill - these are necessary for
             // it to detect browser support

@@ -117,6 +117,20 @@ function createSandbox(options: UpdateIframeOptions) {
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => { },
     on_unhandled_rejection: (error: any) => { },
+    on_prueba_success: (args: any) => {
+      window.parent.postMessage({
+        action: args.action,
+        data: args.data,
+        url: window.location.href,
+      }, '*')
+    },
+    on_prueba_error: (args: any) => {
+      window.parent.postMessage({
+        action: args.action,
+        data: args.data,
+        url: window.location.href,
+      }, '*')
+    },
   })
 
   sandbox.addEventListener('load', () => {

@@ -83,6 +83,10 @@ export class PreviewProxy {
       //   return this.handlers.on_console_group_collapsed(event.data)
       // case 'console_group_end':
       //   return this.handlers.on_console_group_end(event.data)
+      case 'esjs-prueba-success':
+        return this.handlers.on_prueba_success(event.data)
+      case 'esjs-prueba-error':
+        return this.handlers.on_prueba_error(event.data)
     }
   }
 

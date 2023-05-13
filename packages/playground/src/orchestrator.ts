@@ -104,7 +104,7 @@ const initialPackages = [
     name: '@es-js/prueba',
     source: 'jsdelivr',
     description: 'Librería para pruebas unitarias',
-    url: 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.5/+esm',
+    url: 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.6/+esm',
   },
   {
     name: '@es-js/tiza',
