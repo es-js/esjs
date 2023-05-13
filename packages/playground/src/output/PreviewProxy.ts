@@ -87,6 +87,8 @@ export class PreviewProxy {
         return this.handlers.on_prueba_success(event.data)
       case 'esjs-prueba-error':
         return this.handlers.on_prueba_error(event.data)
+      case 'esjs-pruebas-finished':
+        return this.handlers.on_pruebas_finished(event.data)
     }
   }
 

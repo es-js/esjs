@@ -131,6 +131,13 @@ function createSandbox(options: UpdateIframeOptions) {
         url: window.location.href,
       }, '*')
     },
+    on_pruebas_finished: (args: any) => {
+      window.parent.postMessage({
+        action: args.action,
+        data: args.data,
+        url: window.location.href,
+      }, '*')
+    },
   })
 
   sandbox.addEventListener('load', () => {

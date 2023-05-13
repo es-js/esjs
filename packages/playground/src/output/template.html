@@ -103,6 +103,10 @@
             parent.postMessage({ action: 'esjs-prueba-error', data: JSON.stringify(args.detail) }, '*');
         })
 
+        window.addEventListener('esjs-pruebas-finished', (args) => {
+            parent.postMessage({ action: 'esjs-pruebas-finished', data: JSON.stringify(args.detail) }, '*');
+        })
+
         window.onerror = function (msg, url, lineNo, columnNo, error) {
             // ignore errors from import map polyfill - these are necessary for
             // it to detect browser support
