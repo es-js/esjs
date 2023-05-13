@@ -107,6 +107,17 @@ function onPruebaSuccess(pruebaNombre: string, afirmaciones = 0) {
 
     // eslint-disable-next-line no-console
     console.log(`%c${logSymbols.success} ${pruebaNombre}: ${assertionsString}`, 'color: #14b8a6; font-size: 14px; padding: 2px 4px;')
+
+    if (window) {
+      const event = new CustomEvent('esjs-prueba-success', {
+        detail: {
+          pruebaNombre,
+          afirmaciones,
+        },
+      })
+
+      window.dispatchEvent(event)
+    }
   }
   else {
     // eslint-disable-next-line no-console
@@ -124,6 +135,17 @@ function onPruebaError(pruebaNombre: string, error: any) {
   console.error(error?.stack)
   // eslint-disable-next-line no-console
   console.groupEnd()
+
+  if (window) {
+    const event = new CustomEvent('esjs-prueba-error', {
+      detail: {
+        pruebaNombre,
+        error,
+      },
+    })
+
+    window.dispatchEvent(event)
+  }
 
   throw new PruebaError(pruebaNombre, error)
 }
