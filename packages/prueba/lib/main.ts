@@ -64,10 +64,20 @@ export async function pruebasAsincronas(pruebas: PruebaAsincrona) {
 }
 
 function onPruebasFinished(pruebas: Pruebas, failures = 0) {
-  const result = obtenerResultado(pruebas, failures)
+  const result: Resultado = obtenerResultado(pruebas, failures)
 
   // eslint-disable-next-line no-console
   console.log(obtenerResumen(result))
+
+  if (window) {
+    const event = new CustomEvent('esjs-pruebas-finished', {
+      detail: {
+        result,
+      },
+    })
+
+    window.dispatchEvent(event)
+  }
 
   if (failures > 0)
     throw new PruebasError()

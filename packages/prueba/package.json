@@ -1,13 +1,14 @@
 {
   "name": "@es-js/prueba",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "watch": "concurrently \"tsc --watch\" \"vite build --watch\"",
     "prepare": "npm run build",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "publish": "pnpm build && pnpm publish"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.2",
