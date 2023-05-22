@@ -40,9 +40,7 @@ function obfuscateCode() {
     <div class="grid-col-span-3 flex">
       <div class="flex flex-row items-center space-x-2">
         <div class="flex flex-row items-center px-2 space-x-1">
-          <div class="flex flex-shrink">
-            <img src="/favicon.ico" alt="EsJS Logo" class="w-8 h-8 rounded">
-          </div>
+          <img src="/favicon.ico" alt="EsJS Logo" class="w-8 h-8 rounded">
           <span class="text-md">EsJS</span>
           <span class="text-xs uppercase font-medium text-indigo-200">Editor</span>
         </div>
