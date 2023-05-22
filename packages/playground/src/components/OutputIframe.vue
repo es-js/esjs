@@ -105,6 +105,7 @@ function createSandbox(options: UpdateIframeOptions) {
   sandbox.setAttribute('width', '100%')
   sandbox.setAttribute('height', '100%')
   sandbox.setAttribute('style', 'border: 0;')
+  sandbox.setAttribute('title', 'sandbox')
 
   let sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
   sandboxSrc = sandboxSrc.replace(/<!--FLOWCHART_SVG-->/, options.flowchartSvg)
