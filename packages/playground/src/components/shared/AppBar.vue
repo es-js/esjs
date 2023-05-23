@@ -36,92 +36,94 @@ function obfuscateCode() {
 </script>
 
 <template>
-  <div class="w-full h-full grid grid-cols-7">
-    <div class="grid-col-span-3 flex">
-      <div class="flex flex-row items-center space-x-2">
-        <div class="flex flex-row items-center px-2 space-x-1">
-          <img src="/favicon.ico" alt="EsJS Logo" class="w-8 h-8 rounded">
-          <span class="text-md">EsJS</span>
-          <span class="text-xs uppercase font-medium text-indigo-200">Editor</span>
+  <div class="h-[46px] bg-gray-900 text-gray-50 border-b border-gray-800">
+    <div class="w-full h-full grid grid-cols-7">
+      <div class="grid-col-span-3 flex">
+        <div class="flex flex-row items-center space-x-2">
+          <div class="flex flex-row items-center px-2 space-x-1">
+            <img src="/favicon.ico" alt="EsJS Logo" class="w-8 h-8 rounded">
+            <span class="text-md">EsJS</span>
+            <span class="text-xs uppercase font-medium text-indigo-200">Editor</span>
+          </div>
+
+          <div class="w-px h-full bg-gray-800" />
+
+          <div class="flex flex-row items-center px-2 space-x-2">
+            <AppButton
+              v-if="!settings.settings.value.hideOptions"
+              icon="mdi:share"
+              :text="grid.lg ? 'Compartir código' : 'Compartir'"
+              description="Genera una URL con el código actual y la copia al portapapeles"
+              :icon-only="!grid.sm"
+              color="teal"
+              @click="shareCode"
+            />
+
+            <AppButton
+              v-if="settings.settings.value.showAdvanced"
+              icon="mdi:code-braces"
+              :text="grid.lg ? 'Ofuscar código' : 'Ofuscar'"
+              description="Ofusca el código"
+              :icon-only="!grid.sm"
+              color="stone"
+              @click="obfuscateCode"
+            />
+          </div>
         </div>
+      </div>
 
-        <div class="w-px h-full bg-gray-800" />
+      <div class="flex flex-row justify-center items-center px-2">
+        <AppButton
+          v-if="!settings.settings.value.hideOptions"
+          icon="mdi:play"
+          text="Ejecutar"
+          :icon-only="!grid.sm"
+          color="indigo"
+          @click="editor.execute()"
+        />
+      </div>
 
-        <div class="flex flex-row items-center px-2 space-x-2">
+      <div class="grid-col-span-3 flex flex-row justify-end items-center px-2 space-x-2">
+        <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
           <AppButton
-            v-if="!settings.settings.value.hideOptions"
-            icon="mdi:share"
-            :text="grid.lg ? 'Compartir código' : 'Compartir'"
-            description="Genera una URL con el código actual y la copia al portapapeles"
-            :icon-only="!grid.sm"
-            color="teal"
-            @click="shareCode"
+            icon="mdi:view-split-vertical"
+            :active="'horizontal' === settings.settings.value.layout"
+            description="Orientación horizontal"
+            @click="settings.setLayout('horizontal')"
           />
 
           <AppButton
-            v-if="settings.settings.value.showAdvanced"
-            icon="mdi:code-braces"
-            :text="grid.lg ? 'Ofuscar código' : 'Ofuscar'"
-            description="Ofusca el código"
-            :icon-only="!grid.sm"
-            color="stone"
-            @click="obfuscateCode"
+            icon="mdi:view-split-horizontal"
+            :active="'vertical' === settings.settings.value.layout"
+            description="Orientación vertical"
+            @click="settings.setLayout('vertical')"
           />
         </div>
-      </div>
-    </div>
 
-    <div class="flex flex-row justify-center items-center px-2">
-      <AppButton
-        v-if="!settings.settings.value.hideOptions"
-        icon="mdi:play"
-        text="Ejecutar"
-        :icon-only="!grid.sm"
-        color="indigo"
-        @click="editor.execute()"
-      />
-    </div>
+        <div v-if="grid.md && !settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
+          <AppButton
+            icon="mdi:autorenew"
+            :active="settings.settings.value.autoCompile"
+            description="Ejecutar automáticamente"
+            @click="settings.setAutoCompile(!settings.settings.value.autoCompile)"
+          />
 
-    <div class="grid-col-span-3 flex flex-row justify-end items-center px-2 space-x-2">
-      <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
-        <AppButton
-          icon="mdi:view-split-vertical"
-          :active="'horizontal' === settings.settings.value.layout"
-          description="Orientación horizontal"
-          @click="settings.setLayout('horizontal')"
-        />
+          <AppButton
+            icon="mdi:code"
+            :active="!settings.settings.value.hideEditor"
+            description="Mostrar editor"
+            @click="settings.setHideEditor(!settings.settings.value.hideEditor)"
+          />
+        </div>
 
         <AppButton
-          icon="mdi:view-split-horizontal"
-          :active="'vertical' === settings.settings.value.layout"
-          description="Orientación vertical"
-          @click="settings.setLayout('vertical')"
+          v-if="grid.md"
+          icon="mdi:dots-horizontal"
+          :active="!settings.settings.value.hideOptions"
+          description="Mostrar opciones"
+          @click="settings.setHideOptions(!settings.settings.value.hideOptions)"
         />
       </div>
-
-      <div v-if="grid.md && !settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
-        <AppButton
-          icon="mdi:autorenew"
-          :active="settings.settings.value.autoCompile"
-          description="Ejecutar automáticamente"
-          @click="settings.setAutoCompile(!settings.settings.value.autoCompile)"
-        />
-
-        <AppButton
-          icon="mdi:code"
-          :active="!settings.settings.value.hideEditor"
-          description="Mostrar editor"
-          @click="settings.setHideEditor(!settings.settings.value.hideEditor)"
-        />
-      </div>
-
-      <AppButton
-        v-if="grid.md"
-        icon="mdi:dots-horizontal"
-        :active="!settings.settings.value.hideOptions"
-        description="Mostrar opciones"
-        @click="settings.setHideOptions(!settings.settings.value.hideOptions)"
-      />
     </div>
   </div>
 </template>

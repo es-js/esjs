@@ -97,10 +97,28 @@ export const useShare = () => {
     return response.text()
   }
 
+  function setSettingsFromUrl() {
+    if (window.location.pathname === '/')
+      return
+
+    const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced, preview } = useShare().decodeSharedUrl()
+
+    settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
+    settings.setHideOptions(hideOptions === 'true')
+    settings.setHideEditor(hideEditor === 'true')
+    settings.setHidePreview(hidePreview === 'true')
+    settings.setHideConsole(hideConsole === 'true')
+    settings.setHideTests(hideTests === 'true' || tests === null)
+    settings.setHideTests(hideTests === 'true' || tests === null)
+    settings.setShowAdvanced(showAdvanced === 'true')
+    settings.setPreview(preview)
+  }
+
   return {
     getSharedUrl,
     getSharedModuleUrl,
     decodeSharedUrl,
     getCodeFromPathname,
+    setSettingsFromUrl,
   }
 }

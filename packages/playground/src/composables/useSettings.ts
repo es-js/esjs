@@ -1,4 +1,5 @@
 import { computed, ref } from 'vue'
+import { useShare } from '@/composables/useShare'
 
 const settings = ref({
   layout: 'horizontal',

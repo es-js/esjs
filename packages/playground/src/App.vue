@@ -20,7 +20,7 @@ onMounted(async () => {
   window.addEventListener('beforeunload', handleWindowClose)
   window.addEventListener('keyup', handleWindowKeyup)
 
-  setSettingsFromUrl()
+  share.setSettingsFromUrl()
   await setCodeFromUrl()
   await editor.execute()
   loading.value = false
@@ -56,34 +56,13 @@ async function setCodeFromUrl() {
   if (tests)
     editor.setTestsCode(tests)
 }
-
-function setSettingsFromUrl() {
-  if (window.location.pathname === '/')
-    return
-
-  const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced, preview } = share.decodeSharedUrl()
-
-  settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
-  settings.setHideOptions(hideOptions === 'true')
-  settings.setHideEditor(hideEditor === 'true')
-  settings.setHidePreview(hidePreview === 'true')
-  settings.setHideConsole(hideConsole === 'true')
-  settings.setHideTests(hideTests === 'true' || tests === null)
-  settings.setHideTests(hideTests === 'true' || tests === null)
-  settings.setShowAdvanced(showAdvanced === 'true')
-  settings.setPreview(preview)
-}
 </script>
 
 <template>
   <div class="w-full h-screen flex flex-col bg-gray-900">
-    <div class="h-[46px] bg-gray-900 text-gray-50 border-b border-gray-800">
-      <AppBar />
-    </div>
+    <AppBar />
 
-    <div class="flex flex-1">
-      <Playground v-if="!loading" />
-    </div>
+    <Playground v-if="!loading" class="flex flex-1" />
   </div>
 
   <AppNotifications />
