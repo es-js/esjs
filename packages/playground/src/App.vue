@@ -62,7 +62,7 @@ async function setCodeFromUrl() {
   <div class="w-full h-screen flex flex-col bg-gray-900">
     <AppBar />
 
-    <Playground v-if="!loading" class="flex flex-1" />
+    <PlaygroundView v-if="!loading" class="flex flex-1" />
   </div>
 
   <AppNotifications />
