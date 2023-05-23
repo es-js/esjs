@@ -106,7 +106,7 @@ funcion mapa(f, a) {
 
 funcion formatearMensaje(cadena) {
   consola.depurar(cadena);
-  retornar cadena.convertirAMayusculas();
+  retornar cadena.aMayusculas();
 }
 
 consola.escribir(
@@ -492,7 +492,7 @@ var crearMascota = funcion (nombre) {
     establecerSexo: funcion (nuevoSexo) {
       si (
         tipoDe nuevoSexo === "string" &&
-        (nuevoSexo.convertirAMinusculas() === "macho" || nuevoSexo.convertirAMinusculas() === "hembra")
+        (nuevoSexo.aMinusculas() === "macho" || nuevoSexo.aMinusculas() === "hembra")
       ) {
         sexo = nuevoSexo;
       }
