@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import VueSplitView from 'vue-split-view'
-import 'vue-split-view/dist/style.css'
+import 'vue-split-view/dist/style.css?inline'
 import { computed } from 'vue'
 import { useSettings } from '@/composables/useSettings'
 import PlaygroundEditor from '@/components/PlaygroundEditor.vue'
