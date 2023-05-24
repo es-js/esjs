@@ -4,8 +4,6 @@ import 'vue-split-view/dist/style.css?inline'
 import { computed, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import { useSettings } from '@/composables/useSettings'
-import PlaygroundEditor from '@/components/PlaygroundEditor.vue'
-import PlaygroundTestsEditor from '@/components/PlaygroundTestsEditor.vue'
 import OutputIframe from '@/output/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
 
@@ -41,10 +39,10 @@ watch(
           class="overflow-hidden"
         >
           <template v-if="!settings.hideEditor" #A>
-            <PlaygroundEditor class="w-full h-full overflow-hidden" />
+            <CodeEditor class="w-full h-full overflow-hidden" />
           </template>
           <template #B>
-            <PlaygroundTestsEditor class="w-full h-full overflow-hidden" />
+            <TestsEditor class="w-full h-full overflow-hidden" />
           </template>
         </VueSplitView>
       </template>

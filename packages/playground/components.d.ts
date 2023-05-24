@@ -11,12 +11,14 @@ declare module '@vue/runtime-core' {
     AppButton: typeof import('./src/components/shared/AppButton.vue')['default']
     AppNotifications: typeof import('./src/components/shared/AppNotifications.vue')['default']
     AppTabButton: typeof import('./src/components/shared/AppTabButton.vue')['default']
+    CodeEditor: typeof import('./src/components/editors/CodeEditor.vue')['default']
     ExportModuleButton: typeof import('./src/components/shared/ExportModuleButton.vue')['default']
     MonacoEditor: typeof import('./src/components/MonacoEditor.vue')['default']
-    PlaygroundEditor: typeof import('./src/components/PlaygroundEditor.vue')['default']
+    PlaygroundEditor: typeof import('./src/components/editors/PlaygroundEditor.vue')['default']
     PlaygroundOutput: typeof import('./src/components/PlaygroundOutput.vue')['default']
-    PlaygroundTestsEditor: typeof import('./src/components/PlaygroundTestsEditor.vue')['default']
+    PlaygroundTestsEditor: typeof import('./src/components/editors/PlaygroundTestsEditor.vue')['default']
     PlaygroundView: typeof import('./src/components/PlaygroundView.vue')['default']
     PreviewBar: typeof import('./src/components/shared/PreviewBar.vue')['default']
+    TestsEditor: typeof import('./src/components/editors/TestsEditor.vue')['default']
   }
 }
