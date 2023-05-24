@@ -14,7 +14,7 @@ import {
 import { PreviewProxy } from '@/output/PreviewProxy'
 import { compileModulesForPreview } from '@/compiler/moduleCompiler'
 import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
-import PreviewBar from '@/components/shared/PreviewBar.vue'
+import PreviewBar from '@/components/navigation/PreviewBar.vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import template from '@/output/template.html?raw'

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { editor } from 'monaco-editor'
 import { useEditor } from '@/composables/useEditor'
 import MonacoEditor from '@/components/MonacoEditor.vue'
 

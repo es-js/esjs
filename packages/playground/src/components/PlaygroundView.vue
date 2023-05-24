@@ -39,10 +39,15 @@ watch(
           class="overflow-hidden"
         >
           <template v-if="!settings.hideEditor" #A>
-            <CodeEditor class="w-full h-full overflow-hidden" />
+            <div class="w-full h-full overflow-hidden">
+              <CodeEditor class="w-full h-full" />
+            </div>
           </template>
           <template #B>
-            <TestsEditor class="w-full h-full overflow-hidden" />
+            <div class="w-full h-full overflow-hidden flex flex-col">
+              <TestsBar v-if="!settings.hideOptions || !settings.hideTests" :class="{ 'flex-grow': settings.hideTests }" />
+              <TestsEditor v-if="!settings.hideTests" class="flex flex-grow" />
+            </div>
           </template>
         </VueSplitView>
       </template>
