@@ -1,15 +1,33 @@
 <script setup lang="ts">
 import VueSplitView from 'vue-split-view'
 import 'vue-split-view/dist/style.css?inline'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
+import debounce from 'lodash.debounce'
 import { useSettings } from '@/composables/useSettings'
 import PlaygroundEditor from '@/components/PlaygroundEditor.vue'
-import PlaygroundOutput from '@/components/PlaygroundOutput.vue'
 import PlaygroundTestsEditor from '@/components/PlaygroundTestsEditor.vue'
+import OutputIframe from '@/output/OutputIframe.vue'
+import { useEditor } from '@/composables/useEditor'
 
 const settings = useSettings().settings
 
+const editor = useEditor()
+
+const onCodeChangeDebounced = debounce(() => {
+  editor.execute()
+}, 600)
+
 const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.value.hideTests ? '100%' : 'calc(100% - 40px)'))
+
+watch(
+  [editor.code, editor.testsCode, () => settings.value.customHtml],
+  () => {
+    if (!settings.value.autoCompile)
+      return
+
+    onCodeChangeDebounced()
+  },
+)
 </script>
 
 <template>
@@ -31,7 +49,9 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
         </VueSplitView>
       </template>
       <template #B>
-        <PlaygroundOutput class="w-full h-full overflow-hidden" />
+        <div class="w-full h-full overflow-hidden bg-gray-900">
+          <OutputIframe v-if="editor.output.value" />
+        </div>
       </template>
     </VueSplitView>
   </div>
