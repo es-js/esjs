@@ -19,6 +19,7 @@
     "@es-js/terminal": "workspace:^0.0.19",
     "@iconify/vue": "^4.1.1",
     "@mdi/font": "5.9.55",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^18.15.11",
     "@types/prettier": "^2.7.2",
     "@types/webfontloader": "^1.6.35",

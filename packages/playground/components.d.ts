@@ -13,8 +13,6 @@ declare module '@vue/runtime-core' {
     AppTabButton: typeof import('./src/components/shared/AppTabButton.vue')['default']
     ExportModuleButton: typeof import('./src/components/shared/ExportModuleButton.vue')['default']
     MonacoEditor: typeof import('./src/components/MonacoEditor.vue')['default']
-    OutputIframe: typeof import('./src/components/OutputIframe.vue')['default']
-    Playground: typeof import('./src/components/PlaygroundView.vue')['default']
     PlaygroundEditor: typeof import('./src/components/PlaygroundEditor.vue')['default']
     PlaygroundOutput: typeof import('./src/components/PlaygroundOutput.vue')['default']
     PlaygroundTestsEditor: typeof import('./src/components/PlaygroundTestsEditor.vue')['default']

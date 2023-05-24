@@ -9,6 +9,7 @@ specifiers:
   '@es-js/terminal': workspace:^0.0.19
   '@iconify/vue': ^4.1.1
   '@mdi/font': 5.9.55
+  '@types/lodash.debounce': ^4.0.7
   '@types/node': ^18.15.11
   '@types/prettier': ^2.7.2
   '@types/webfontloader': ^1.6.35
@@ -57,6 +58,7 @@ devDependencies:
   '@es-js/terminal': link:../terminal
   '@iconify/vue': 4.1.1_vue@3.2.47
   '@mdi/font': 5.9.55
+  '@types/lodash.debounce': 4.0.7
   '@types/node': 18.15.11
   '@types/prettier': 2.7.2
   '@types/webfontloader': 1.6.35
@@ -738,6 +740,16 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash.debounce/4.0.7:
+    resolution: {integrity: sha512-X1T4wMZ+gT000M2/91SYj0d/7JfeNZ9PeeOldSNoE/lunLeQXKvkmIumI29IaKMotU/ln/McOIvgzZcQ/3TrSA==}
+    dependencies:
+      '@types/lodash': 4.14.194
+    dev: true
+
+  /@types/lodash/4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
     dev: true
 
   /@types/mdast/3.0.11:
