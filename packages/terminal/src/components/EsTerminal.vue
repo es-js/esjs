@@ -32,13 +32,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="terminalElement" style="width: 100%; height: 100%; overflow: hidden;" />
+  <div ref="terminalElement" style="width: 100%; height: 100%" />
 </template>
 
 <style>
 @import 'xterm/css/xterm.css';
 .xterm {
-  padding: 4px;
   height: 100%;
+}
+.xterm-viewport {
+  border-radius: 0.25rem;
 }
 </style>
