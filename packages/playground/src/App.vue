@@ -75,7 +75,7 @@ watch(
 
 <template>
   <div class="w-full h-screen flex flex-col bg-white dark:bg-dark-900 dark:text-light-100">
-    <AppBar />
+    <AppBar class="flex flex-shrink-0" />
 
     <PlaygroundView v-if="!loading" class="flex flex-grow" />
   </div>

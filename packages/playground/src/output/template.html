@@ -1,17 +1,19 @@
 <html class="w-full h-full">
 <script type="importmap"><!--IMPORT_MAP--></script>
 
-<body id="body" class="w-full h-full m-0 p-0 flex flex-col">
-    <div class="flex flex-1">
-        <div id="preview-wrapper" class="flex flex-1 p-1 rounded">
-            <div id="preview-container" class="relative flex flex-1">
-                <div id="app" class="w-full h-full absolute inset-0"></div>
+<body id="body" class="w-full h-full m-0 p-0">
+    <div class="w-full h-full flex flex-col">
+        <div id="preview-container" class="flex-grow">
+            <div id="preview-background" class="flex flex-1 p-1 rounded">
+                <div class="relative flex flex-1">
+                    <div id="app" class="w-full h-full absolute inset-0"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="console-container" class="relative flex flex-1 pt-2">
-        <div id="eruda-container"></div>
+        <div id="console-container" class="flex-grow pt-2">
+            <div id="eruda-container"></div>
+        </div>
     </div>
 </body>
 
@@ -217,7 +219,7 @@
         }
 
         window._darkMode = function(isDark) {
-            const previewWrapperElement = document.getElementById('preview-wrapper');
+            const previewWrapperElement = document.getElementById('preview-background');
             if (previewWrapperElement) {
                 previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#fafafa';
                 previewWrapperElement.style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
