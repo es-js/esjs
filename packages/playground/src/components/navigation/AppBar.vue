@@ -92,16 +92,16 @@ function obfuscateCode() {
         <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-light-300 dark:bg-dark-800 rounded">
           <AppButton
             icon="mdi:view-split-vertical"
-            :active="'vertical' === settings.settings.value.layout"
+            :active="'horizontal' === settings.settings.value.layout"
             description="Orientación vertical"
-            @click="settings.setLayout('vertical')"
+            @click="settings.setLayout('horizontal')"
           />
 
           <AppButton
             icon="mdi:view-split-horizontal"
-            :active="'horizontal' === settings.settings.value.layout"
+            :active="'vertical' === settings.settings.value.layout"
             description="Orientación horizontal"
-            @click="settings.setLayout('horizontal')"
+            @click="settings.setLayout('vertical')"
           />
         </div>
 

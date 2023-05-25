@@ -22,7 +22,13 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
       <Pane v-if="!settings.hideEditor">
         <Splitpanes horizontal class="default-theme">
           <Pane v-if="!settings.hideEditor">
-            <div class="relative w-full h-full flex flex-col p-2">
+            <div
+              :class="{
+                'pl-2': settings.layout === 'horizontal',
+                'px-2': settings.layout === 'vertical',
+              }"
+              class="relative w-full h-full flex flex-col"
+            >
               <CodeEditor class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400" />
             </div>
           </Pane>
@@ -34,8 +40,18 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
           >
             <div class="relative w-full h-full flex flex-col">
               <TestsBar v-if="!settings.hideOptions || !settings.hideTests" :class="{ 'flex-grow': settings.hideTests }" />
-              <div v-if="!settings.hideTests" class="flex flex-grow p-2">
-                <TestsEditor class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400" />
+              <div
+                v-if="!settings.hideTests"
+                :class="{
+                  'pl-2 pb-2': settings.layout === 'horizontal',
+                  'px-2': settings.layout === 'vertical',
+                }"
+                class="flex flex-grow"
+              >
+                <TestsEditor
+
+                  class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400"
+                />
               </div>
             </div>
           </Pane>
