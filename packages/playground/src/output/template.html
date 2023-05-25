@@ -219,7 +219,8 @@
         window._darkMode = function(isDark) {
             const previewWrapperElement = document.getElementById('preview-wrapper');
             if (previewWrapperElement) {
-                previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#eaeaea';
+                previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#fafafa';
+                previewWrapperElement.style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
             }
 
             usarTerminal().xterm.options.theme = isDark ? {
@@ -244,7 +245,7 @@
                 "brightWhite": "#d9d9d9"
             } : {
                 "foreground": "#232322",
-                "background": "#eaeaea",
+                "background": "#fafafa",
                 "cursor": "#c7d2fe",
                 "black": "#212121",
                 "brightBlack": "#424242",
@@ -263,6 +264,10 @@
                 "white": "#efefef",
                 "brightWhite": "#d9d9d9"
             };
+
+            const erudaDevToolsElement = eruda._$el[0].getElementsByClassName('eruda-dev-tools');
+            erudaDevToolsElement[0].style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
+
             eruda._$el[0].style.colorScheme = isDark ? 'dark' : 'light';
             eruda._devTools.config.set('theme', isDark ? 'Atom One Dark' : 'Atom One Light');
         }

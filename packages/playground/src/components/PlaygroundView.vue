@@ -23,7 +23,7 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
         <Splitpanes horizontal class="default-theme">
           <Pane v-if="!settings.hideEditor">
             <div class="relative w-full h-full flex flex-col p-2">
-              <CodeEditor class="relative w-full h-full overflow-hidden rounded" />
+              <CodeEditor class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400" />
             </div>
           </Pane>
           <Pane
@@ -35,7 +35,7 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
             <div class="relative w-full h-full flex flex-col">
               <TestsBar v-if="!settings.hideOptions || !settings.hideTests" :class="{ 'flex-grow': settings.hideTests }" />
               <div v-if="!settings.hideTests" class="flex flex-grow p-2">
-                <TestsEditor class="relative w-full h-full overflow-hidden rounded" />
+                <TestsEditor class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400" />
               </div>
             </div>
           </Pane>
