@@ -5,6 +5,7 @@ import { useSettings } from '@/composables/useSettings'
 import { useShare } from '@/composables/useShare'
 import { useEditor } from '@/composables/useEditor'
 import { useNotification } from '@/composables/useNotification'
+import { isDark, toggleDark } from '@/composables/dark'
 
 const settings = useSettings()
 
@@ -36,17 +37,21 @@ function obfuscateCode() {
 </script>
 
 <template>
-  <div class="h-[46px] bg-gray-900 text-gray-50 border-b border-gray-800">
+  <div class="h-[46px]">
     <div class="w-full h-full grid grid-cols-7">
-      <div class="grid-col-span-3 flex">
+      <div class="col-span-3 flex">
         <div class="flex flex-row items-center space-x-2">
           <div class="flex flex-row items-center px-2 space-x-1">
             <img src="/favicon.ico" alt="EsJS Logo" class="w-8 h-8 rounded">
             <span class="text-md">EsJS</span>
-            <span class="text-xs uppercase font-medium text-indigo-200">Editor</span>
+            <span class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
           </div>
 
-          <div class="w-px h-full bg-gray-800" />
+          <AppButton
+            :icon="isDark ? 'mdi:weather-night' : 'mdi:weather-sunny'"
+            icon-only
+            @click="toggleDark()"
+          />
 
           <div class="flex flex-row items-center px-2 space-x-2">
             <AppButton
@@ -83,24 +88,24 @@ function obfuscateCode() {
         />
       </div>
 
-      <div class="grid-col-span-3 flex flex-row justify-end items-center px-2 space-x-2">
-        <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
+      <div class="col-span-3 flex flex-row justify-end items-center px-2 space-x-2">
+        <div v-if="!settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-light-300 dark:bg-dark-800 rounded">
           <AppButton
             icon="mdi:view-split-vertical"
-            :active="'horizontal' === settings.settings.value.layout"
-            description="Orientación horizontal"
-            @click="settings.setLayout('horizontal')"
-          />
-
-          <AppButton
-            icon="mdi:view-split-horizontal"
             :active="'vertical' === settings.settings.value.layout"
             description="Orientación vertical"
             @click="settings.setLayout('vertical')"
           />
+
+          <AppButton
+            icon="mdi:view-split-horizontal"
+            :active="'horizontal' === settings.settings.value.layout"
+            description="Orientación horizontal"
+            @click="settings.setLayout('horizontal')"
+          />
         </div>
 
-        <div v-if="grid.md && !settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-gray-800 rounded">
+        <div v-if="grid.md && !settings.settings.value.hideOptions" class="flex flex-row items-center py-1.5 px-2 space-x-2 bg-light-300 dark:bg-dark-800 rounded">
           <AppButton
             icon="mdi:autorenew"
             :active="settings.settings.value.autoCompile"

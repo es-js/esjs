@@ -13,19 +13,23 @@ import {
   transpile,
   variableLanguage,
 } from '@es-js/core'
-import vsCodeDarkConverted from '@/assets/vscode-dark-converted.json'
+import { watch } from 'vue'
+import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
+import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
 import { formatCode } from '@/composables/utils'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
 import ProviderResult = languages.ProviderResult
 import CompletionList = languages.CompletionList
-
+import { isDark } from '@/composables/dark'
 export const useMonaco = () => {
   function createMonacoInstance(monacoEditorElement: HTMLElement, code: string): IStandaloneCodeEditor {
-    monaco.editor.defineTheme('vs-code-dark-converted', vsCodeDarkConverted)
-    return monaco.editor.create(monacoEditorElement, {
+    monaco.editor.defineTheme('vitesse-dark', darktheme)
+    monaco.editor.defineTheme('vitesse-light', lightTheme)
+
+    const monacoInstance = monaco.editor.create(monacoEditorElement, {
       value: code,
       automaticLayout: false,
-      theme: 'vs-code-dark-converted',
+      theme: 'vitesse-dark',
       fontFamily: 'Fira Code',
       fontSize: 16,
       language: 'esjs',
@@ -33,6 +37,15 @@ export const useMonaco = () => {
       roundedSelection: true,
       glyphMargin: true,
     })
+
+    watch(isDark, () => {
+      if (isDark.value)
+        monaco.editor.setTheme('vitesse-dark')
+      else
+        monaco.editor.setTheme('vitesse-light')
+    }, { immediate: true })
+
+    return monacoInstance
   }
 
   async function setupMonacoGrammar(monacoInstance: IStandaloneCodeEditor) {

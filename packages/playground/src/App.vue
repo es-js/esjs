@@ -74,10 +74,10 @@ watch(
 </script>
 
 <template>
-  <div class="w-full h-screen flex flex-col bg-gray-900">
+  <div class="w-full h-screen flex flex-col dark:bg-dark-900 dark:text-light-100">
     <AppBar />
 
-    <PlaygroundView v-if="!loading" class="flex flex-1" />
+    <PlaygroundView v-if="!loading" class="flex flex-grow" />
   </div>
 
   <AppNotifications />

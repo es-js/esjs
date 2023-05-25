@@ -6,9 +6,10 @@ import FloatingVue from 'floating-vue'
 import App from './App.vue'
 import { loadFonts } from '@/plugins/webfontloader'
 
-import 'uno.css'
-import '@unocss/reset/tailwind.css'
+import 'virtual:windi.css'
 import 'floating-vue/dist/style.css'
+import 'splitpanes/dist/splitpanes.css'
+import '@/styles/main.css'
 
 const app = createApp(App)
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import VueSplitView from 'vue-split-view'
-import 'vue-split-view/dist/style.css?inline'
 import { computed } from 'vue'
+import { Pane, Splitpanes } from 'splitpanes'
 import { useSettings } from '@/composables/useSettings'
 import OutputIframe from '@/output/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
+import PreviewBar from '@/components/navigation/PreviewBar.vue'
 
 const settings = useSettings().settings
 
@@ -14,33 +14,44 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
 </script>
 
 <template>
-  <div class="flex flex-row w-full h-full">
-    <VueSplitView :direction="settings.layout" :a-max="settings.hideEditor ? '0' : undefined" :b-max="0" class="overflow-hidden">
-      <template v-if="!settings.hideEditor" #A>
-        <VueSplitView
-          direction="vertical"
-          :a-min="settings.hideTests ? `${codeEditorHeight}` : '50%'"
-          :a-max="settings.hideTests ? `${codeEditorHeight}` : '50%'"
-          class="overflow-hidden"
-        >
-          <template v-if="!settings.hideEditor" #A>
-            <div class="w-full h-full overflow-hidden">
-              <CodeEditor class="w-full h-full" />
+  <div class="flex flex-row w-full h-full ">
+    <Splitpanes
+      :horizontal="settings.layout === 'horizontal'"
+      class="default-theme overflow-hidden"
+    >
+      <Pane v-if="!settings.hideEditor">
+        <Splitpanes horizontal class="default-theme">
+          <Pane v-if="!settings.hideEditor">
+            <div class="relative w-full h-full flex flex-col p-2">
+              <CodeEditor class="relative w-full h-full overflow-hidden rounded" />
             </div>
-          </template>
-          <template #B>
-            <div class="w-full h-full overflow-hidden flex flex-col">
+          </Pane>
+          <Pane
+            v-if="!settings.hideOptions || !settings.hideTests"
+            :size="settings.hideTests ? 5 : 50"
+            min-size="8"
+            :max-size="settings.hideTests ? 5 : 50"
+          >
+            <div class="relative w-full h-full flex flex-col">
               <TestsBar v-if="!settings.hideOptions || !settings.hideTests" :class="{ 'flex-grow': settings.hideTests }" />
-              <TestsEditor v-if="!settings.hideTests" class="flex flex-grow" />
+              <div v-if="!settings.hideTests" class="flex flex-grow p-2">
+                <TestsEditor class="relative w-full h-full overflow-hidden rounded" />
+              </div>
             </div>
-          </template>
-        </VueSplitView>
-      </template>
-      <template #B>
-        <div class="w-full h-full overflow-hidden bg-gray-900">
-          <OutputIframe v-if="editor.output.value" />
+          </Pane>
+        </Splitpanes>
+      </Pane>
+      <Pane>
+        <div class="flex flex-col h-full">
+          <div v-if="!settings.hideOptions" class="h-10">
+            <PreviewBar />
+          </div>
+
+          <div class="flex flex-col flex-grow">
+            <OutputIframe v-if="editor.output.value" class="relative w-full px-2 pb-2 overflow-hidden" />
+          </div>
         </div>
-      </template>
-    </VueSplitView>
+      </Pane>
+    </Splitpanes>
   </div>
 </template>

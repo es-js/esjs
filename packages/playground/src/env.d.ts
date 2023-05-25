@@ -8,5 +8,4 @@ interface ImportMeta {
 
 declare module 'onigasm/lib/onigasm.wasm?url'
 declare module '@es-js/language-tools/esjs.tmLanguage.json'
-declare module 'vue-split-view'
 declare module 'lz-string'

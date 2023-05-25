@@ -1,12 +1,16 @@
-<html>
+<html class="w-full h-full">
 <script type="importmap"><!--IMPORT_MAP--></script>
 
-<body id="body" class="w-full h-[100vh] m-0 p-0 flex flex-col bg-gray-900">
-    <div id="preview-container" class="relative flex-1">
-        <div id="app" class="w-full h-full absolute inset-0"></div>
+<body id="body" class="w-full h-full m-0 p-0 flex flex-col">
+    <div class="flex flex-1">
+        <div id="preview-wrapper" class="flex flex-1 p-1 rounded">
+            <div id="preview-container" class="relative flex flex-1">
+                <div id="app" class="w-full h-full absolute inset-0"></div>
+            </div>
+        </div>
     </div>
 
-    <div id="console-container" class="relative flex-1">
+    <div id="console-container" class="relative flex flex-1 pt-2">
         <div id="eruda-container"></div>
     </div>
 </body>
@@ -90,6 +94,8 @@
                 window._previewException(...args)
             } else if (action === 'PREVIEW') {
                 window._preview(args)
+            } else if (action === 'DARK_MODE') {
+                window._darkMode(args)
             }
         }
 
@@ -156,8 +162,6 @@
 
             eruda.show();
             eruda._shadowRoot.appendChild(style);
-            eruda._devTools.config.set('theme', 'Material Oceanic');
-            eruda._$el[0].style.colorScheme = 'dark';
         }
 
         function _hideConsole(value) {
@@ -212,9 +216,58 @@
             }
         }
 
-        function _previewTerminal() {
-            _setBodyColor('bg-gray-900')
+        window._darkMode = function(isDark) {
+            const previewWrapperElement = document.getElementById('preview-wrapper');
+            if (previewWrapperElement) {
+                previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#eaeaea';
+            }
 
+            usarTerminal().xterm.options.theme = isDark ? {
+                "foreground": "#e5e5e5",
+                "background": "#121212",
+                "cursor": "#c7d2fe",
+                "black": "#212121",
+                "brightBlack": "#424242",
+                "red": "#b7141f",
+                "brightRed": "#e83b3f",
+                "green": "#457b24",
+                "brightGreen": "#7aba3a",
+                "yellow": "#f6981e",
+                "brightYellow": "#ffea2e",
+                "blue": "#134eb2",
+                "brightBlue": "#54a4f3",
+                "magenta": "#560088",
+                "brightMagenta": "#aa4dbc",
+                "cyan": "#0e717c",
+                "brightCyan": "#26bbd1",
+                "white": "#efefef",
+                "brightWhite": "#d9d9d9"
+            } : {
+                "foreground": "#232322",
+                "background": "#eaeaea",
+                "cursor": "#c7d2fe",
+                "black": "#212121",
+                "brightBlack": "#424242",
+                "red": "#b7141f",
+                "brightRed": "#e83b3f",
+                "green": "#457b24",
+                "brightGreen": "#7aba3a",
+                "yellow": "#f6981e",
+                "brightYellow": "#ffea2e",
+                "blue": "#134eb2",
+                "brightBlue": "#54a4f3",
+                "magenta": "#560088",
+                "brightMagenta": "#aa4dbc",
+                "cyan": "#0e717c",
+                "brightCyan": "#26bbd1",
+                "white": "#efefef",
+                "brightWhite": "#d9d9d9"
+            };
+            eruda._$el[0].style.colorScheme = isDark ? 'dark' : 'light';
+            eruda._devTools.config.set('theme', isDark ? 'Atom One Dark' : 'Atom One Light');
+        }
+
+        function _previewTerminal() {
             const app = document.getElementById('app');
             app.innerHTML = '';
 
@@ -226,8 +279,6 @@
         }
 
         function _previewFlowchart() {
-            _setBodyColor('bg-gray-200')
-
             const app = document.getElementById('app');
             app.innerHTML = '';
 

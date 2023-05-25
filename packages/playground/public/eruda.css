@@ -1,3 +1,15 @@
+.eruda-dev-tools {
+    border-radius: 0.25rem;
+}
+
+.eruda-tab {
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.eruda-tools {
+    border-radius: 0.25rem;
+}
+
 /* Floating button */
 .eruda-entry-btn {
     display: none !important;
@@ -10,53 +22,8 @@
 
 .luna-tab-slider {
     background: #6366F1;
-    height: 2px;
 }
 
 .eruda-console-container .eruda-js-input .eruda-icon-arrow-right {
     color: #818cf8;
-}
-
-/* Tabs */
-
-.luna-tab {
-    background: #1f2937;
-}
-
-.luna-tab-item {
-    font-size: 14px;
-}
-.luna-tab-item.luna-tab-selected {
-    background: transparent;
-    color: #818cf8;
-    font-weight: 500;
-}
-
-/* Settings */
-
-#eruda-settings .eruda-switch .eruda-checkbox .eruda-input:checked~.eruda-label {
-    background: #6366F1;
-}
-
-#eruda-settings .eruda-color .eruda-head, #eruda-settings .eruda-range .eruda-head, #eruda-settings .eruda-select .eruda-head, #eruda-settings .eruda-switch {
-    color: #e5e7eb;
-}
-
-#eruda-settings .eruda-text {
-    color: #818cf8;
-}
-
-/* Console */
-.eruda-console-container .eruda-control {
-    background: #1f2937;
-}
-
-.luna-console {
-    background: #111827;
-}
-.luna-console-log-item {
-    color: #f1f5f9;
-}
-.luna-console-debug {
-    color: #60a5fa;
 }

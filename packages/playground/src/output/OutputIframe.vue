@@ -18,6 +18,7 @@ import PreviewBar from '@/components/navigation/PreviewBar.vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import template from '@/output/template.html?raw'
+import { isDark } from "@/composables/dark";
 
 const editor = useEditor()
 
@@ -74,6 +75,10 @@ onMounted(() => {
     importMap: JSON.parse(orchestrator.importMap) || {},
     flowchartSvg,
     preview: useSettings().activePreview.value,
+  })
+
+  watch(isDark, () => {
+    proxy.iframe_command('DARK_MODE', isDark.value)
   })
 })
 
@@ -179,6 +184,7 @@ function updateIframe(options: UpdateIframeOptions) {
   proxy.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
   proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
   proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
+  proxy.iframe_command('DARK_MODE', isDark.value)
 }
 function parseCode(code: string) {
   bus.emit('clear-decorations')
@@ -250,13 +256,5 @@ watch(
 </script>
 
 <template>
-  <div class="flex flex-col h-full">
-    <div v-if="!settings.hideOptions" class="flex shrink h-10">
-      <PreviewBar />
-    </div>
-
-    <div class="flex flex-col grow">
-      <div ref="container" class="w-full h-full b-0" />
-    </div>
-  </div>
+  <div ref="container" class="w-full h-full" />
 </template>
