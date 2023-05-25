@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import VueSplitView from 'vue-split-view'
 import 'vue-split-view/dist/style.css?inline'
-import { computed, watch } from 'vue'
-import debounce from 'lodash.debounce'
+import { computed } from 'vue'
 import { useSettings } from '@/composables/useSettings'
 import OutputIframe from '@/output/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
@@ -11,21 +10,7 @@ const settings = useSettings().settings
 
 const editor = useEditor()
 
-const onCodeChangeDebounced = debounce(() => {
-  editor.execute()
-}, 600)
-
 const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.value.hideTests ? '100%' : 'calc(100% - 40px)'))
-
-watch(
-  [editor.code, editor.testsCode, () => settings.value.customHtml],
-  () => {
-    if (!settings.value.autoCompile)
-      return
-
-    onCodeChangeDebounced()
-  },
-)
 </script>
 
 <template>

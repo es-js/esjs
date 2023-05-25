@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
+import debounce from 'lodash.debounce'
 import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
@@ -56,6 +57,20 @@ async function setCodeFromUrl() {
   if (tests)
     editor.setTestsCode(tests)
 }
+
+const onCodeChangeDebounced = debounce(() => {
+  editor.execute()
+}, 600)
+
+watch(
+  [editor.code, editor.testsCode, settings.settings.value.customHtml],
+  () => {
+    if (!settings.settings.value.autoCompile)
+      return
+
+    onCodeChangeDebounced()
+  },
+)
 </script>
 
 <template>
