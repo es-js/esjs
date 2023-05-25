@@ -39,5 +39,6 @@ onUnmounted(() => {
 @import 'xterm/css/xterm.css';
 .xterm {
   padding: 4px;
+  height: 100%;
 }
 </style>
