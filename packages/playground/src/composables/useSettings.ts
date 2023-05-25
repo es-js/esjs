@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 
 const settings = ref({
-  layout: 'vertical',
+  layout: 'horizontal',
   hideOptions: false,
   hideEditor: false,
   hidePreview: false,

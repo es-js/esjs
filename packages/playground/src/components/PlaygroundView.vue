@@ -16,7 +16,7 @@ const codeEditorHeight = computed(() => (settings.value.hideOptions && settings.
 <template>
   <div class="flex flex-row w-full h-full ">
     <Splitpanes
-      :horizontal="settings.layout === 'horizontal'"
+      :horizontal="settings.layout === 'vertical'"
       class="default-theme overflow-hidden"
     >
       <Pane v-if="!settings.hideEditor">
