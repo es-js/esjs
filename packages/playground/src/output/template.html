@@ -221,7 +221,7 @@
         window._darkMode = function(isDark) {
             const previewWrapperElement = document.getElementById('preview-background');
             if (previewWrapperElement) {
-                previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#fafafa';
+                previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#ffffff';
                 previewWrapperElement.style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
             }
 
@@ -247,7 +247,7 @@
                 "brightWhite": "#d9d9d9"
             } : {
                 "foreground": "#232322",
-                "background": "#fafafa",
+                "background": "#ffffff",
                 "cursor": "#c7d2fe",
                 "black": "#212121",
                 "brightBlack": "#424242",
@@ -271,7 +271,7 @@
             erudaDevToolsElement[0].style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
 
             eruda._$el[0].style.colorScheme = isDark ? 'dark' : 'light';
-            eruda._devTools.config.set('theme', isDark ? 'Atom One Dark' : 'Atom One Light');
+            eruda._devTools.config.set('theme', isDark ? 'Material Darker' : 'Light');
         }
 
         function _previewTerminal() {

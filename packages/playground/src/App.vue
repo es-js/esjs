@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="w-full h-screen bg-white dark:bg-dark-900 dark:text-light-100">
+  <div class="w-full h-screen bg-gray-50 dark:bg-dark-900 dark:text-light-100">
     <AppBar class="h-[46px]" />
 
     <div class="h-playground">

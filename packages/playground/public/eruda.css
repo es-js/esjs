@@ -27,3 +27,7 @@
 .eruda-console-container .eruda-js-input .eruda-icon-arrow-right {
     color: #818cf8;
 }
+
+#eruda-console .eruda-js-input .eruda-icon-arrow-right {
+    color: #818cf8;
+}
