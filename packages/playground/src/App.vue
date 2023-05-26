@@ -74,10 +74,12 @@ watch(
 </script>
 
 <template>
-  <div class="w-full h-screen flex flex-col bg-white dark:bg-dark-900 dark:text-light-100">
-    <AppBar class="flex flex-shrink-0" />
+  <div class="w-full h-screen bg-white dark:bg-dark-900 dark:text-light-100">
+    <AppBar class="h-[46px]" />
 
-    <PlaygroundView v-if="!loading" class="flex flex-grow" />
+    <div class="h-playground">
+      <PlaygroundView v-if="!loading" />
+    </div>
   </div>
 
   <AppNotifications />
@@ -86,5 +88,9 @@ watch(
 <style>
 html {
   overflow: hidden !important;
+}
+
+.h-playground {
+  height: calc(100% - 46px);
 }
 </style>

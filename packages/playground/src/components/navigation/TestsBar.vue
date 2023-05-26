@@ -44,7 +44,7 @@ function shareModule() {
 </script>
 
 <template>
-  <div class="flex flex-row items-center px-2 py-1 space-x-2">
+  <div class="flex flex-row items-center py-1 space-x-2">
     <AppButton
       text="Pruebas" icon="mdi:test-tube" color="teal" @click="toggleTestsEditor"
     />
