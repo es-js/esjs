@@ -18,6 +18,7 @@ const editor = useEditor()
           v-if="!settings.hideEditor"
           :class="{
             'pl-2': settings.layout === 'horizontal',
+            'pb-2': settings.layout === 'horizontal' && settings.hideOptions,
             'px-2': settings.layout === 'vertical',
           }"
         >
