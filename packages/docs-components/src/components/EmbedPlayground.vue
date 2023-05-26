@@ -46,7 +46,7 @@ const defaultOpenSrc = computed(
       </div>
     </ClientOnly>
 
-    <div class="flex flex-row justify-center -mt-2 z-10 print:hidden">
+    <div class="flex flex-row justify-center z-10 print:hidden">
       <a
         v-if="showOpenButton"
         :href="props.openSrc || defaultOpenSrc"
