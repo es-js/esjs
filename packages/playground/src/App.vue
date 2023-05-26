@@ -17,21 +17,6 @@ const editor = useEditor()
 
 const loading = ref(true)
 
-onMounted(async () => {
-  window.addEventListener('beforeunload', handleWindowClose)
-  window.addEventListener('keyup', handleWindowKeyup)
-
-  share.setSettingsFromUrl()
-  await setCodeFromUrl()
-  await editor.execute()
-  loading.value = false
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('beforeunload', handleWindowClose)
-  window.removeEventListener('keyup', handleWindowKeyup)
-})
-
 function handleWindowKeyup($event: any) {
   if ($event.key === 'Escape')
     bus.emit('focus')
@@ -62,15 +47,29 @@ const onCodeChangeDebounced = debounce(() => {
   editor.execute()
 }, 600)
 
-watch(
-  [editor.code, editor.testsCode, settings.settings.value.customHtml],
-  () => {
-    if (!settings.settings.value.autoCompile)
-      return
+onMounted(async () => {
+  window.addEventListener('beforeunload', handleWindowClose)
+  window.addEventListener('keyup', handleWindowKeyup)
 
-    onCodeChangeDebounced()
-  },
-)
+  share.setSettingsFromUrl()
+  await setCodeFromUrl()
+  await editor.execute()
+  loading.value = false
+  watch(
+    [editor.code, editor.testsCode, settings.settings.value.customHtml],
+    () => {
+      if (!settings.settings.value.autoCompile)
+        return
+
+      onCodeChangeDebounced()
+    },
+  )
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('beforeunload', handleWindowClose)
+  window.removeEventListener('keyup', handleWindowKeyup)
+})
 </script>
 
 <template>
