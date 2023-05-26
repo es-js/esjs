@@ -10,8 +10,8 @@
   "devDependencies": {
     "@es-js/core": "workspace:0.0.18",
     "@es-js/vite-plugin-esjs": "workspace:^0.0.13",
-    "vavite": "^1.7.0",
-    "vite": "^4.2.1"
+    "vavite": "^1.8.1",
+    "vite": "^4.3.9"
   },
   "dependencies": {
     "express": "^4.18.2"

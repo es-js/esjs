@@ -14,16 +14,16 @@
   "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.2",
-    "@es-js/docs-components": "workspace:0.0.12",
+    "@es-js/docs-components": "workspace:0.0.13",
     "@es-js/language-tools": "workspace:0.0.14",
     "@iconify/vue": "^4.1.1",
-    "eslint": "^8.38.0",
+    "eslint": "^8.41.0",
     "lz-string": "^1.5.0",
     "shiki": "^0.12.1",
-    "vite": "^4.2.1",
-    "vite-plugin-windicss": "^1.8.10",
+    "vite": "^4.3.9",
+    "vite-plugin-windicss": "^1.9.0",
     "vitepress": "1.0.0-alpha.38",
-    "vue": "^3.2.47",
+    "vue": "^3.3.4",
     "windicss": "^3.5.6"
   }
 }

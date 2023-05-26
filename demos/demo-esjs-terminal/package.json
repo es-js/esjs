@@ -9,8 +9,8 @@
   },
   "devDependencies": {
     "@es-js/core": "workspace:0.0.18",
-    "@es-js/terminal": "workspace:^0.0.19",
+    "@es-js/terminal": "workspace:^0.0.22",
     "@es-js/vite-plugin-esjs": "workspace:^0.0.13",
-    "vite": "^4.2.1"
+    "vite": "^4.3.9"
   }
 }
