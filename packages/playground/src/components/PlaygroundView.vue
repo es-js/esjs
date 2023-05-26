@@ -42,10 +42,17 @@ const editor = useEditor()
     </Pane>
 
     <Pane class="flex flex-col h-full">
-      <PreviewBar v-if="!settings.hideOptions" class="h-10" />
+      <PreviewBar v-if="!settings.hideOptions" class="h-8 pb-1" />
 
       <div class="flex flex-col flex-grow">
-        <OutputIframe v-if="editor.output.value" class="relative w-full px-2 pb-2 overflow-hidden" />
+        <OutputIframe
+          v-if="editor.output.value"
+          :class="{
+            'px-2 pb-2': settings.layout === 'vertical',
+            'pb-2 pr-2': settings.layout === 'horizontal',
+          }"
+          class="relative w-full overflow-hidden"
+        />
       </div>
     </Pane>
   </Splitpanes>

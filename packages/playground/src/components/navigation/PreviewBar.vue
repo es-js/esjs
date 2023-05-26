@@ -26,7 +26,7 @@ function setActivePreview(preview: 'terminal' | 'flowchart' | 'html') {
       />
     </div>
 
-    <div class="h-full flex flex-row">
+    <div class="h-full flex flex-row space-x-1">
       <AppTabButton
         text="Terminal"
         icon="mdi:eye"
