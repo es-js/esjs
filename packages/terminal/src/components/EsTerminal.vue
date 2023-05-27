@@ -42,5 +42,6 @@ onUnmounted(() => {
 }
 .xterm-viewport {
   border-radius: 0.25rem;
+  overflow-y: auto !important;
 }
 </style>
