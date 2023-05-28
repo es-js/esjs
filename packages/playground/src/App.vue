@@ -56,7 +56,7 @@ onMounted(async () => {
   await editor.execute()
   loading.value = false
   watch(
-    [editor.code, editor.testsCode, settings.settings.value.customHtml],
+    [editor.code, editor.testsCode],
     () => {
       if (!settings.settings.value.autoCompile)
         return
@@ -73,12 +73,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="w-full h-screen bg-gray-50 dark:bg-dark-900 dark:text-light-100">
-    <AppBar class="h-[46px]" />
+  <div class="w-full h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100 flex flex-row">
+    <AppBar class="w-14" />
 
-    <div class="h-playground">
-      <PlaygroundView v-if="!loading" />
-    </div>
+    <PlaygroundView v-if="!loading" class="p-2" />
   </div>
 
   <AppNotifications />

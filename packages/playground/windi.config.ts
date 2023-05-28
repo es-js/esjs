@@ -4,11 +4,11 @@ import typography from 'windicss/plugin/typography'
 
 export default defineConfig({
   darkMode: 'class',
-  plugins: [
-    typography(),
-    require('windicss/plugin/line-clamp'),
-  ],
-  attributify: true,
+  // plugins: [
+  //   typography(),
+  //   require('windicss/plugin/line-clamp'),
+  // ],
+  attributify: false,
   theme: {
     extend: {
       typography: {

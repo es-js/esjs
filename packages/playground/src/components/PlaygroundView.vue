@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { Pane, Splitpanes } from 'splitpanes'
 import { computed } from 'vue'
+import { useEventBus } from '@vueuse/core'
+import { Icon } from '@iconify/vue'
 import { useSettings } from '@/composables/useSettings'
 import OutputIframe from '@/output/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
-import PreviewBar from '@/components/navigation/PreviewBar.vue'
+import AppContainer from '@/components/shared/AppContainer.vue'
 
 const settings = useSettings().settings
 
@@ -23,53 +25,74 @@ const testsPaneMinSize = computed(() => {
 
   return 20
 })
+
+function openFile(file: string) {
+  // editor.openFile(file)
+}
+
+function toggleTestsEditor() {
+  useSettings().setHideTests(!settings.value.hideTests)
+
+  useEventBus('editor_code').emit('fit')
+}
 </script>
 
 <template>
   <Splitpanes :horizontal="settings.layout === 'vertical'" class="default-theme">
     <Pane v-if="!settings.hideEditor">
       <Splitpanes horizontal class="default-theme">
-        <Pane
-          v-if="!settings.hideEditor"
-          :class="{
-            'pl-2': settings.layout === 'horizontal',
-            'pb-2': settings.layout === 'horizontal' && settings.hideOptions,
-            'px-2': settings.layout === 'vertical',
-          }"
-        >
-          <CodeEditor class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400" />
+        <Pane v-if="!settings.hideEditor">
+          <AppContainer>
+            <template #title>
+              <div class="flex flex-row items-center space-x-2">
+                <button class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl">
+                  <Icon icon="mdi:code-tags" class="w-4 h-4" />
+                  <span>codigo.esjs</span>
+                </button>
+
+                <div class="flex flex-grow" />
+              </div>
+            </template>
+
+            <template #default>
+              <CodeEditor class="relative w-full h-full overflow-hidden" />
+            </template>
+          </AppContainer>
         </Pane>
         <Pane
-          v-if="!settings.hideOptions || !settings.hideTests"
           :size="testsPaneSize"
           :min-size="testsPaneMinSize"
           :max-size="testsPaneSize"
           :class="{
-            'pl-2 pb-2': settings.layout === 'horizontal',
-            'px-2': settings.layout === 'vertical',
+            'min-h-[30px] max-h-[30px]': settings.hideTests,
           }"
           class="w-full h-full flex flex-col space-y-1"
         >
-          <TestsBar v-if="!settings.hideOptions || !settings.hideTests" :class="{ 'flex-grow': settings.hideTests }" />
-          <TestsEditor v-if="!settings.hideTests" class="relative w-full h-full overflow-hidden rounded border border-light-900 dark:border-dark-400" />
+          <AppContainer class="flex-grow">
+            <template #title>
+              <div class="flex flex-row items-center space-x-2">
+                <button
+                  class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl"
+                  @click="toggleTestsEditor"
+                >
+                  <Icon icon="mdi:test-tube" class="w-4 h-4" />
+                  <span>pruebas.esjs</span>
+                </button>
+
+                <div class="flex flex-grow" />
+              </div>
+            </template>
+
+            <template #default>
+              <TestsEditor v-if="!settings.hideTests" class="relative w-full h-full overflow-hidden" />
+            </template>
+          </appcontainer>
         </Pane>
       </Splitpanes>
     </Pane>
 
-    <Pane class="flex flex-col h-full">
-      <PreviewBar v-if="!settings.hideOptions" class="h-8 pb-1" />
-
-      <div class="flex flex-col flex-grow">
-        <OutputIframe
-          v-if="editor.output.value"
-          :class="{
-            'px-2 pb-2': settings.layout === 'vertical',
-            'pb-2 pr-2': settings.layout === 'horizontal',
-            'pl-2': settings.hideEditor,
-          }"
-          class="relative w-full overflow-hidden"
-        />
-      </div>
+    <Pane class="flex flex-col h-full space-y-1">
+      <OutputIframe v-if="editor.output.value" class="relative w-full h-full overflow-hidden" />
     </Pane>
   </Splitpanes>
 </template>

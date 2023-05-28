@@ -1,35 +1,45 @@
-<html class="w-full h-full">
+<html class="w-full h-full <!--COLOR_SCHEME-->" hidden>
 <script type="importmap"><!--IMPORT_MAP--></script>
 
 <body id="body" class="w-full h-full m-0 p-0">
-    <div class="w-full h-full flex flex-col">
+    <div class="w-full h-full flex flex-col space-y-2">
         <div id="preview-container" class="flex-grow">
-            <div id="preview-background" class="flex flex-1 p-1 rounded">
-                <div class="relative flex flex-1">
-                    <div id="app" class="w-full h-full absolute inset-0"></div>
+            <div  class="flex flex-1 flex-col border border-gray-300 dark:border-gray-800 rounded">
+                <div class="flex flex-row items-center bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-800 rounded-t">
+                    <div class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl cursor-pointer">
+                        <span>Terminal</span>
+                    </div>
+                </div>
+
+                <div id="preview-background" class="flex flex-grow p-1 bg-white dark:bg-[#121212]">
+                    <div class="relative flex flex-1">
+                        <es-terminal class="w-full h-full absolute inset-0"></es-terminal>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="console-container" class="flex-grow pt-2">
+        <div id="console-container" class="flex-grow">
             <div id="eruda-container"></div>
         </div>
     </div>
 </body>
 
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css'/>
-
-<script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+<link rel='stylesheet' href='/eruda.css'/>
 
 <script type="module">
     import NProgress from 'nprogress';
     import eruda from "eruda";
     import { usarTerminal } from '@es-js/terminal';
+    import { setup } from 'twind/shim'
 
     (async () => {
         NProgress.start()
 
         var flowchartSvg = `<!--FLOWCHART_SVG-->`
+        var activePreviewTab = `<!--ACTIVE_PREVIEW_TAB-->`
+        var erudaSize = 50
 
         let scriptEls = []
 
@@ -89,15 +99,17 @@
                     send_error(e.message, e.stack);
                 }
             } else if (action === 'HIDE_PREVIEW') {
-                _hidePreview(args)
+                _togglePreview(args)
             } else if (action === 'HIDE_CONSOLE') {
-                _hideConsole(args)
+                // _hideEruda()
             } else if (action === 'previewException') {
                 window._previewException(...args)
             } else if (action === 'PREVIEW') {
-                window._preview(args)
+                // console.warn(['----- DEPRECATED -----', 'Please use PREVIEW_TAB instead'])
+            } else if (action === 'PREVIEW_TAB') {
+                _previewTab(args)
             } else if (action === 'DARK_MODE') {
-                window._darkMode(args)
+                _darkMode(args)
             }
         }
 
@@ -149,49 +161,194 @@
             }
         });
 
+        function _initTwind() {
+            setup({
+                mode: 'silent',
+                darkMode: 'class',
+            })
+        }
+
         function _initEruda() {
             const erudaContainerElement = document.getElementById('eruda-container')
 
-            const style = Object.assign(document.createElement('link'), {
-                rel: 'stylesheet',
-                href: `/eruda.css`
-            });
+            if (!erudaContainerElement) {
+                return
+            }
 
             eruda.init({
                 container: erudaContainerElement,
                 tool: ['console'],
+                autoScale: true,
+                useShadowDom: false,
+                defaults: {
+                    displaySize: erudaSize,
+                    theme: 'Light',
+                    transparency: 100,
+                },
             });
 
+            eruda.add(function (eruda) {
+                class Flowchart extends eruda.Tool {
+                    constructor() {
+                        super()
+                        this.name = 'flowchart'
+                    }
+                    init($el) {
+                        super.init($el)
+                        $el.html(flowchartSvg)
+                    }
+                    show() {
+                        super.show()
+                    }
+                    hide() {
+                        super.hide()
+                    }
+                    destroy() {
+                        super.destroy()
+                    }
+                }
+
+                return new Flowchart();
+            });
+            eruda.remove('settings')
             eruda.show();
-            eruda._shadowRoot.appendChild(style);
+            renameErudaTabs()
+            setupErudaConsoleClickHandler()
+            setupErudaFlowchartClickHandler()
+
+           switch (activePreviewTab) {
+               case 'console':
+                   _openConsole()
+                   break;
+               case 'flowchart':
+                   _openFlowchart()
+                   break;
+               case 'hidden':
+                   _hideEruda()
+                   break;
+           }
         }
 
-        function _hideConsole(value) {
-            const consoleElement = document.getElementById('console-container');
+        function renameErudaTabs() {
+            const erudaTabs = document.querySelectorAll('.luna-tab-item');
 
-            if (value) {
-                consoleElement.classList.add('hidden');
-            } else {
-                consoleElement.classList.remove('hidden');
+            if (erudaTabs && erudaTabs.length) {
+                erudaTabs[0].innerHTML = 'Consola';
+                erudaTabs[1].innerHTML = 'Diagrama de flujo';
             }
+        }
+
+        function setupErudaConsoleClickHandler() {
+            const erudaConsoleTab = document.querySelector('.luna-tab-item[data-id="console"]');
+
+            if (!erudaConsoleTab) {
+                return;
+            }
+
+            erudaConsoleTab.addEventListener('click', handleErudaConsoleClick)
+        }
+
+        function setupErudaFlowchartClickHandler() {
+            const erudaFlowchartTab = document.querySelector('.luna-tab-item[data-id="flowchart"]');
+
+            if (!erudaFlowchartTab) {
+                return;
+            }
+
+            erudaFlowchartTab.addEventListener('click', handleErudaFlowchartClick)
+        }
+
+        function handleErudaConsoleClick() {
+            if (activePreviewTab === 'console') {
+                _hideEruda()
+            } else {
+                _openConsole()
+            }
+        }
+
+        function handleErudaFlowchartClick() {
+            if (activePreviewTab === 'flowchart') {
+                _hideEruda()
+            } else {
+                _openFlowchart()
+            }
+        }
+
+        function _openEruda() {
+            eruda.get().config.set('displaySize', erudaSize)
+
+            const consoleElement = document.getElementById('console-container');
+            consoleElement.classList.remove('h-eruda-tab');
+            consoleElement.classList.add('flex-grow');
+
+            const lunaTabSliderElement = document.querySelector('.luna-tab-slider');
+            lunaTabSliderElement.style.display = 'inline-block';
+        }
+
+        function _openConsole() {
+            activePreviewTab = 'console';
+            parent.postMessage({ action: 'activePreviewTab', data: 'console' }, '*');
+
+            eruda.show('console')
+            _openEruda()
+
+            const consoleElement = document.getElementById('console-container');
+            consoleElement.classList.remove('h-eruda-tab');
+            consoleElement.classList.add('flex-grow')
 
             usarTerminal().fitTerminal()
         }
 
-        function _hidePreview(value) {
+        function _openFlowchart() {
+            activePreviewTab = 'flowchart';
+            parent.postMessage({ action: 'activePreviewTab', data: 'flowchart' }, '*');
+
+            eruda.show('flowchart')
+            _openEruda()
+
+            const consoleElement = document.getElementById('console-container');
+            consoleElement.classList.remove('h-eruda-tab');
+            consoleElement.classList.add('flex-grow')
+
+            usarTerminal().fitTerminal()
+        }
+
+        function _hideEruda() {
+            activePreviewTab = 'hidden'
+            parent.postMessage({ action: 'activePreviewTab', data: 'hidden' }, '*');
+
+            eruda.get().config.set('displaySize', 1)
+
+            const consoleElement = document.getElementById('console-container');
+            consoleElement.classList.remove('flex-grow')
+            consoleElement.classList.add('h-eruda-tab');
+
+            const lunaTabsElements = document.querySelectorAll('.luna-tab-item');
+            lunaTabsElements.forEach((element) => {
+                element.classList.remove('luna-tab-selected')
+            })
+
+            const lunaTabSliderElement = document.querySelector('.luna-tab-slider');
+            lunaTabSliderElement.style.display = 'none';
+        }
+
+        function _togglePreview(value) {
             const previewElement = document.getElementById('preview-container');
-            const erudaDevToolsElement = eruda._$el[0].getElementsByClassName('eruda-dev-tools');
 
             if (value) {
                 previewElement.style.display = 'none';
                 previewElement.style.flex = '0 0 0';
 
-                erudaDevToolsElement[0].style.height = '100%';
+                erudaSize = 100
             } else {
                 previewElement.style.display = 'flex';
                 previewElement.style.flex = '1 1 0';
 
-                erudaDevToolsElement[0].style.height = '50%';
+                erudaSize = 50
+            }
+
+            if (activePreviewTab !== 'hidden') {
+                _openEruda()
             }
 
             usarTerminal().fitTerminal()
@@ -207,23 +364,39 @@
             // console.error(error.toString());
         }
 
-        window._preview = function(value) {
+        function _previewTab(value) {
+            if (value === activePreviewTab) {
+                return;
+            }
+
+            activePreviewTab = value;
+
             switch (value) {
-                case 'terminal':
-                    return _previewTerminal();
+                case 'console':
+                    return _openConsole();
                 case 'flowchart':
-                    return _previewFlowchart();
-                case 'html':
-                    return _previewHtml();
+                    return _openFlowchart();
+                case 'hidden':
+                    return _hideEruda();
             }
         }
 
-        window._darkMode = function(isDark) {
-            const previewWrapperElement = document.getElementById('preview-background');
-            if (previewWrapperElement) {
-                previewWrapperElement.style.backgroundColor = isDark ? '#121212' : '#ffffff';
-                previewWrapperElement.style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
+        function _darkMode(isDark) {
+            const htmlElement = document.getElementsByTagName('html')[0];
+            if (htmlElement) {
+                htmlElement.classList.remove(isDark ? 'light' : 'dark');
+                htmlElement.classList.add(isDark ? 'dark' : 'light');
             }
+
+            if (eruda && eruda.get()) {
+                eruda.get().config.set('theme', isDark ? 'Material Darker' : 'Light');
+            }
+
+            setTerminalTheme();
+        }
+
+        function setTerminalTheme() {
+            const isDark = document.getElementsByTagName('html')[0].classList.contains('dark');
 
             usarTerminal().xterm.options.theme = isDark ? {
                 "foreground": "#e5e5e5",
@@ -266,56 +439,16 @@
                 "white": "#efefef",
                 "brightWhite": "#d9d9d9"
             };
-
-            const erudaDevToolsElement = eruda._$el[0].getElementsByClassName('eruda-dev-tools');
-            erudaDevToolsElement[0].style.border = `1px solid ${isDark ? 'rgb(34, 34, 34)' : 'rgb(221, 225, 227)'}`
-
-            eruda._$el[0].style.colorScheme = isDark ? 'dark' : 'light';
-            eruda._devTools.config.set('theme', isDark ? 'Material Darker' : 'Light');
         }
 
-        function _previewTerminal() {
-            const app = document.getElementById('app');
-            app.innerHTML = '';
-
-            const terminalElement = document.createElement('es-terminal');
-            terminalElement.classList.add('w-full', 'h-full', 'absolute', 'inset-0');
-            document.getElementById('app').appendChild(terminalElement);
-
+        function _initTerminal() {
+            setTerminalTheme();
             usarTerminal().fitTerminal()
         }
 
-        function _previewFlowchart() {
-            const app = document.getElementById('app');
-            app.innerHTML = '';
-
-            app.innerHTML = flowchartSvg;
-
-            app.classList.add('overflow-auto');
-        }
-
-        function _previewHtml() {
-            _setBodyColor('bg-white')
-
-            const app = document.getElementById('app');
-            app.innerHTML = '';
-
-            const htmlToInject = `${options.customHtml}`
-            const template = html`${htmlToInject}`
-            template(app)
-        }
-
-        function _setBodyColor(color) {
-            const bodyElement = document.getElementById('body');
-            bodyElement.classList.forEach((className) => {
-                if (className.startsWith('bg-')) {
-                    bodyElement.classList.remove(className);
-                }
-            })
-            bodyElement.classList.add(color);
-        }
-
-        await _initEruda()
+        _initTwind();
+        _initTerminal();
+        await _initEruda();
     })()
 </script>
 </html>

@@ -15,6 +15,15 @@ const props = defineProps({
     default: 'gray',
   },
   active: Boolean,
+  href: {
+    type: String,
+    default: null,
+  },
+  tooltipPlacement: {
+    type: String,
+    default: 'top',
+  },
+  noRound: Boolean,
 })
 
 const emit = defineEmits(['click'])
@@ -23,15 +32,19 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
 </script>
 
 <template>
-  <VTooltip :disabled="!props.description">
-    <button
+  <VTooltip :disabled="!props.description" :placement="props.tooltipPlacement">
+    <component
+      :is="props.href ? 'a' : 'button'"
+      :href="props.href"
+      :target="props.href ? '_blank' : null"
       class="flex flex-row justify-center items-center text-xs"
       :class="{
         'bg-indigo-100 hover:bg-indigo-200 text-indigo-900 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white': 'indigo' === props.color || props.active,
         'bg-teal-100 hover:bg-teal-200 text-teal-900 dark:bg-teal-800 dark:hover:bg-teal-700 dark:text-white': 'teal' === props.color,
         'bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white': 'gray' === props.color && !props.active,
-        'dark:bg-stone-500 dark:hover:bg-stone-400 dark:text-white': 'stone' === props.color,
-        'py-1.5 px-2 space-x-1 rounded': !isIconOnly,
+        'bg-stone-100 hover:bg-stone-200 text-stone-900 dark:bg-stone-500 dark:hover:bg-stone-400 dark:text-white': 'stone' === props.color,
+        'py-1.5 px-2 space-x-1': !isIconOnly,
+        'rounded': !isIconOnly && !props.noRound,
         'p-1 rounded-full': isIconOnly,
       }"
       @click="emit('click')"
@@ -40,14 +53,14 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
         :icon="props.icon"
         :class="{
           'text-indigo-700 dark:text-white': 'indigo' === props.color || props.active,
-          'text-white': 'teal' === props.color,
+          'text-teal-800 dark:text-white': 'teal' === props.color,
           'text-gray-900 dark:text-white': 'gray' === props.color && !props.active,
-          'text-white': 'stone' === props.color,
+          'text-stone-800 dark:text-white': 'stone' === props.color,
         }"
         class="w-4 h-4"
       />
       <span v-if="!isIconOnly">{{ props.text }}</span>
-    </button>
+    </component>
 
     <template #popper>
       {{ props.description }}

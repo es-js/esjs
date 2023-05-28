@@ -7,20 +7,20 @@
 
 .splitpanes.default-theme .splitpanes__splitter::before,
 .splitpanes.default-theme .splitpanes__splitter::after {
-    @apply bg-dark-100 bg-opacity-50;
+    @apply bg-gray-400 bg-opacity-50;
 }
 
 .splitpanes.default-theme .splitpanes__splitter:hover::before,
 .splitpanes.default-theme .splitpanes__splitter:hover::after {
-    @apply bg-light-500 bg-opacity-50;
+    @apply bg-gray-400 bg-opacity-50;
 }
 
 .dark .splitpanes.default-theme .splitpanes__splitter::before,
 .dark .splitpanes.default-theme .splitpanes__splitter::after {
-    @apply bg-dark-100;
+    @apply bg-gray-600;
 }
 
 .dark .splitpanes.default-theme .splitpanes__splitter:hover::before,
 .dark .splitpanes.default-theme .splitpanes__splitter:hover::after {
-    @apply bg-dark-100;
+    @apply bg-gray-600;
 }

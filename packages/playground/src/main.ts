@@ -24,7 +24,16 @@ async function init() {
         id: import.meta.env.VITE_GTAG_ID,
       },
     })
-    .use(FloatingVue)
+    .use(FloatingVue, {
+      themes: {
+        dark: {
+          $extend: 'menu',
+          triggers: ['click'],
+          autoHide: true,
+          placement: 'bottom',
+        },
+      },
+    })
     .mount('#app')
 }
 

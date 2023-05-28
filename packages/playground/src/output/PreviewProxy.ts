@@ -75,20 +75,16 @@ export class PreviewProxy {
         return this.handlers.on_error(event.data)
       case 'unhandledrejection':
         return this.handlers.on_unhandled_rejection(event.data)
-      // case 'console':
-      //   return this.handlers.on_console(event.data)
-      // case 'console_group':
-      //   return this.handlers.on_console_group(event.data)
-      // case 'console_group_collapsed':
-      //   return this.handlers.on_console_group_collapsed(event.data)
-      // case 'console_group_end':
-      //   return this.handlers.on_console_group_end(event.data)
       case 'esjs-prueba-success':
         return this.handlers.on_prueba_success(event.data)
       case 'esjs-prueba-error':
         return this.handlers.on_prueba_error(event.data)
       case 'esjs-pruebas-finished':
         return this.handlers.on_pruebas_finished(event.data)
+      case 'activePreview':
+        return this.handlers.on_active_preview(event.data)
+      case 'activePreviewTab':
+        return this.handlers.on_active_preview_tab(event.data)
     }
   }
 

@@ -1,5 +1,15 @@
+.h-eruda-tab {
+    height: 28px;
+}
+
 .eruda-dev-tools {
     border-radius: 0.25rem;
+    padding-top: 28px !important;
+    border: 1px solid #d4d4d8;
+}
+
+.dark .eruda-dev-tools {
+    border: 1px solid #27272a;
 }
 
 .eruda-tab {
@@ -30,4 +40,20 @@
 
 #eruda-console .eruda-js-input .eruda-icon-arrow-right {
     color: #818cf8;
+}
+
+#eruda-flowchart {
+    overflow: auto;
+}
+
+.eruda-tab {
+    height: 28px;
+}
+.luna-tab-tabs-container {
+    height: 28px !important;
+}
+.luna-tab-item {
+    height: 27px !important;
+    line-height: 27px !important;
+    font-size: 0.875rem;
 }

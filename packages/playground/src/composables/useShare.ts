@@ -21,6 +21,7 @@ export const useShare = () => {
     url.searchParams.set('hideTests', String(settings.settings.value.hideTests))
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
     url.searchParams.set('preview', JSON.stringify(settings.settings.value.preview))
+    url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
 
     return url
   }
@@ -43,6 +44,7 @@ export const useShare = () => {
       hideTests: url.searchParams.get('hideTests'),
       showAdvanced: url.searchParams.get('showAdvanced'),
       preview: JSON.parse(url.searchParams.get('preview') ?? '{}'),
+      previewTab: JSON.parse(url.searchParams.get('previewTab') ?? '{}'),
     }
   }
 
@@ -98,10 +100,10 @@ export const useShare = () => {
   }
 
   function setSettingsFromUrl() {
-    if (window.location.pathname === '/')
-      return
+    // if (window.location.pathname === '/')
+    //   return
 
-    const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced, preview } = useShare().decodeSharedUrl()
+    const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced, preview, previewTab } = useShare().decodeSharedUrl()
 
     settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
     settings.setHideOptions(hideOptions === 'true')
@@ -112,6 +114,7 @@ export const useShare = () => {
     settings.setHideTests(hideTests === 'true' || tests === null)
     settings.setShowAdvanced(showAdvanced === 'true')
     settings.setPreview(preview)
+    settings.setPreviewTab(previewTab)
   }
 
   return {

@@ -32,9 +32,9 @@ watch(
     <div
       v-if="innerNotification"
       :class="{
-        'bg-green-900 text-green-50 border-green-700': innerNotification.type === 'success',
-        'bg-blue-900 text-blue-50 border-blue-700': innerNotification.type === 'info',
-        'bg-red-900 text-red-50 border-red-700': innerNotification.type === 'error',
+        'bg-green-50 text-green-800 dark:bg-green-900 dark:text-green-50 border-green-700': innerNotification.type === 'success',
+        'bg-blue-50 text-blue-800 dark:bg-blue-900 dark:text-blue-50 border-blue-700': innerNotification.type === 'info',
+        'bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-50 border-red-700': innerNotification.type === 'error',
       }"
       style="left: 50%; transform: translateX(-50%); bottom: 0.5rem;"
       class="fixed w-full max-w-sm mx-auto p-2 text-sm text-center rounded border z-50"

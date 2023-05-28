@@ -12,13 +12,20 @@ const settings = ref({
   showAdvanced: false,
   preview: {
     terminal: true,
+  },
+  previewTab: {
+    console: true,
     flowchart: false,
-    html: false,
+    hidden: false,
   },
 })
 
 const activePreview = computed((): 'terminal' | 'flowchart' | 'html' => {
   return Object.keys(settings.value.preview).find(key => settings.value.preview[key as keyof typeof settings.value.preview]) as 'terminal' | 'flowchart' | 'html'
+})
+
+const activePreviewTab = computed((): 'console' | 'flowchart' | 'hidden' => {
+  return Object.keys(settings.value.previewTab).find(key => settings.value.previewTab[key as keyof typeof settings.value.previewTab]) as 'console' | 'flowchart' | 'hidden'
 })
 
 export const useSettings = () => {
@@ -61,19 +68,34 @@ export const useSettings = () => {
   function setPreview(preview: { terminal: boolean; flowchart: boolean; html: boolean }) {
     settings.value.preview = {
       terminal: preview.terminal || false,
-      flowchart: preview.flowchart || false,
-      html: preview.html || false,
     }
 
     if (!preview.terminal && !preview.flowchart && !preview.html)
       settings.value.preview.terminal = true
   }
 
+  function setPreviewTab(previewTab: { console: boolean; flowchart: boolean; hidden: boolean }) {
+    settings.value.previewTab = {
+      console: previewTab.console || false,
+      flowchart: previewTab.flowchart || false,
+      hidden: !previewTab.console && !previewTab.flowchart,
+    }
+
+    if (!previewTab.console && !previewTab.flowchart && !previewTab.hidden)
+      settings.value.previewTab.console = true
+  }
+
   function setActivePreview(preview: 'terminal' | 'flowchart' | 'html') {
     settings.value.preview = {
       terminal: preview === 'terminal',
-      flowchart: preview === 'flowchart',
-      html: preview === 'html',
+    }
+  }
+
+  function setActivePreviewTab(previewTab: 'console' | 'flowchart' | 'hidden') {
+    settings.value.previewTab = {
+      console: previewTab === 'console',
+      flowchart: previewTab === 'flowchart',
+      hidden: previewTab === 'hidden',
     }
   }
 
@@ -89,7 +111,10 @@ export const useSettings = () => {
     setCustomHtml,
     setShowAdvanced,
     setPreview,
+    setPreviewTab,
     setActivePreview,
+    setActivePreviewTab,
     activePreview,
+    activePreviewTab,
   }
 }

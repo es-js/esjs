@@ -14,7 +14,6 @@ import {
 import { PreviewProxy } from '@/output/PreviewProxy'
 import { compileModulesForPreview } from '@/compiler/moduleCompiler'
 import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
-import PreviewBar from '@/components/navigation/PreviewBar.vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import template from '@/output/template.html?raw'
@@ -43,6 +42,7 @@ interface UpdateIframeOptions {
   customHtml: boolean
   flowchartSvg: string
   preview: 'terminal' | 'flowchart' | 'html'
+  previewTab: 'console' | 'flowchart' | 'hidden'
   importMap: Record<string, string>
 }
 
@@ -75,6 +75,7 @@ onMounted(() => {
     importMap: JSON.parse(orchestrator.importMap) || {},
     flowchartSvg,
     preview: useSettings().activePreview.value,
+    previewTab: useSettings().activePreviewTab.value,
   })
 
   watch(isDark, () => {
@@ -114,6 +115,8 @@ function createSandbox(options: UpdateIframeOptions) {
 
   let sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
   sandboxSrc = sandboxSrc.replace(/<!--FLOWCHART_SVG-->/, options.flowchartSvg)
+  sandboxSrc = sandboxSrc.replace(/<!--COLOR_SCHEME-->/, isDark.value ? 'dark' : 'light')
+  sandboxSrc = sandboxSrc.replace(/<!--ACTIVE_PREVIEW_TAB-->/, settings.value.hideConsole ? 'hidden' : options.previewTab)
   sandbox.srcdoc = sandboxSrc
 
   container.value.appendChild(sandbox)
@@ -144,6 +147,21 @@ function createSandbox(options: UpdateIframeOptions) {
         url: window.location.href,
       }, '*')
     },
+    on_active_preview: (args: any) => {
+      if (args.data === useSettings().activePreview.value) {
+        return
+      }
+
+      useSettings().setActivePreview(args.data)
+    },
+    on_active_preview_tab: (args: any) => {
+      if (args.data === useSettings().activePreviewTab.value) {
+        return
+      }
+
+      useSettings().setActivePreviewTab(args.data)
+      useSettings().setHideConsole(args.data === 'hidden')
+    },
   })
 
   sandbox.addEventListener('load', () => {
@@ -158,6 +176,7 @@ function createSandbox(options: UpdateIframeOptions) {
       importMap: options.importMap,
       flowchartSvg: options.flowchartSvg,
       preview: options.preview,
+      previewTab: options.previewTab,
     })
   })
 }
@@ -182,8 +201,9 @@ function updateIframe(options: UpdateIframeOptions) {
   ])
 
   proxy.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
-  proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
-  proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
+  // proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
+  // proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
+  // proxy.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
   proxy.iframe_command('DARK_MODE', isDark.value)
 }
 function parseCode(code: string) {
@@ -251,6 +271,13 @@ watch(
   () => settings.value.preview,
   () => {
     proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
+  },
+)
+
+watch(
+  () => settings.value.previewTab,
+  () => {
+    proxy.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
   },
 )
 </script>
