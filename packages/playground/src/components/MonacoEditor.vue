@@ -2,7 +2,7 @@
 import type { editor } from 'monaco-editor'
 import * as monaco from 'monaco-editor'
 import type { Ref } from 'vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { ResizeObserver } from 'vue-resize'
 import { useMonaco } from '@/composables/useMonaco'
@@ -22,6 +22,10 @@ const props = defineProps({
   elementId: {
     type: String,
     required: true,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -51,7 +55,9 @@ async function setupMonaco() {
   if (!monacoEditorElement)
     return
 
-  monacoInstance = monacoHelper.createMonacoInstance(monacoEditorElement, props.value)
+  monacoInstance = monacoHelper.createMonacoInstance(monacoEditorElement, props.value, {
+    readOnly: props.readonly,
+  })
   await monacoHelper.setupMonacoGrammar(monacoInstance)
   await monacoHelper.setupMonacoCompletion()
   await monacoHelper.setupMonacoSynchronization(monacoInstance, value => emit('update:value', value))
@@ -128,6 +134,18 @@ async function obfuscate() {
 
   return monacoInstance?.setValue(obfuscatedCode)
 }
+
+watch(
+  () => props.readonly,
+  async () => {
+    if (!monacoInstance)
+      return
+
+    monacoInstance.updateOptions({
+      readOnly: props.readonly,
+    })
+  },
+)
 </script>
 
 <template>

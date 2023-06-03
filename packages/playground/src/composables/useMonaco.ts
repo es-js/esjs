@@ -1,5 +1,6 @@
 import { Registry } from 'monaco-textmate'
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json'
+import type { IStandaloneEditorConstructionOptions } from 'monaco-editor'
 import * as monaco from 'monaco-editor'
 import { editor, languages } from 'monaco-editor'
 import { wireTmGrammars } from 'monaco-editor-textmate'
@@ -17,12 +18,13 @@ import { watch } from 'vue'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
 import { formatCode } from '@/composables/utils'
+import { isDark } from '@/composables/dark'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
 import ProviderResult = languages.ProviderResult
 import CompletionList = languages.CompletionList
-import { isDark } from '@/composables/dark'
+
 export const useMonaco = () => {
-  function createMonacoInstance(monacoEditorElement: HTMLElement, code: string): IStandaloneCodeEditor {
+  function createMonacoInstance(monacoEditorElement: HTMLElement, code: string, options?: IStandaloneEditorConstructionOptions): IStandaloneCodeEditor {
     monaco.editor.defineTheme('vitesse-dark', darktheme)
     monaco.editor.defineTheme('vitesse-light', lightTheme)
 
@@ -36,6 +38,7 @@ export const useMonaco = () => {
       renderWhitespace: 'all',
       roundedSelection: true,
       glyphMargin: true,
+      ...options,
     })
 
     watch(isDark, () => {

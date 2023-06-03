@@ -19,6 +19,7 @@ export const useShare = () => {
     url.searchParams.set('hideEditor', String(settings.settings.value.hideEditor))
     url.searchParams.set('hideConsole', String(settings.settings.value.hideConsole))
     url.searchParams.set('hideTests', String(settings.settings.value.hideTests))
+    url.searchParams.set('readonlyTests', String(settings.settings.value.readonlyTests))
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
     url.searchParams.set('preview', JSON.stringify(settings.settings.value.preview))
     url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
@@ -42,6 +43,7 @@ export const useShare = () => {
       hidePreview: url.searchParams.get('hidePreview'),
       hideConsole: url.searchParams.get('hideConsole'),
       hideTests: url.searchParams.get('hideTests'),
+      readonlyTests: url.searchParams.get('readonlyTests'),
       showAdvanced: url.searchParams.get('showAdvanced'),
       preview: JSON.parse(url.searchParams.get('preview') ?? '{}'),
       previewTab: JSON.parse(url.searchParams.get('previewTab') ?? '{}'),
@@ -103,7 +105,7 @@ export const useShare = () => {
     // if (window.location.pathname === '/')
     //   return
 
-    const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, tests, showAdvanced, preview, previewTab } = useShare().decodeSharedUrl()
+    const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, readonlyTests, tests, showAdvanced, preview, previewTab } = useShare().decodeSharedUrl()
 
     settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
     settings.setHideOptions(hideOptions === 'true')
@@ -111,7 +113,7 @@ export const useShare = () => {
     settings.setHidePreview(hidePreview === 'true')
     settings.setHideConsole(hideConsole === 'true')
     settings.setHideTests(hideTests === 'true' || tests === null)
-    settings.setHideTests(hideTests === 'true' || tests === null)
+    settings.setReadonlyTests(readonlyTests === 'true')
     settings.setShowAdvanced(showAdvanced === 'true')
     settings.setPreview(preview)
     settings.setPreviewTab(previewTab)

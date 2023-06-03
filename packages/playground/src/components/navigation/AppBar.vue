@@ -84,17 +84,6 @@ function shareModule() {
       />
 
       <AppButton
-        v-if="settings.settings.value.showAdvanced"
-        icon="mdi:code-braces"
-        :text="grid.lg ? 'Ofuscar código' : 'Ofuscar'"
-        description="Ofuscar código"
-        tooltip-placement="right"
-        icon-only
-        color="stone"
-        @click="obfuscateCode"
-      />
-
-      <AppButton
         icon="mdi:play"
         text="Ejecutar"
         description="Ejecutar código"
@@ -104,11 +93,45 @@ function shareModule() {
         @click="editor.execute()"
       />
 
+      <AppButton
+        v-if="settings.settings.value.showAdvanced"
+        icon="mdi:code-braces"
+        text="Ofuscar código"
+        description="Ofuscar código"
+        tooltip-placement="right"
+        icon-only
+        color="stone"
+        @click="obfuscateCode"
+      />
+
+      <AppButton
+        v-if="settings.settings.value.showAdvanced"
+        icon="mdi:code-braces"
+        text="Ofuscar pruebas"
+        description="Ofusca pruebas"
+        tooltip-placement="right"
+        icon-only
+        color="stone"
+        @click="obfuscateTestsCode"
+      />
+
+      <AppButton
+        v-if="settings.settings.value.showAdvanced"
+        :icon="settings.settings.value.readonlyTests ? 'mdi:test-tube-off' : 'mdi:test-tube'"
+        text="Pruebas de solo lectura"
+        description="Pruebas de solo lectura"
+        tooltip-placement="right"
+        icon-only
+        color="stone"
+        :active="settings.settings.value.readonlyTests"
+        @click="settings.setReadonlyTests(!settings.settings.value.readonlyTests)"
+      />
+
       <span class="flex-1" />
 
       <AppButton
         icon="mdi:code-braces"
-        :text="grid.lg ? 'Formatear código' : 'Formatear'"
+        text="Formatear código"
         description="Formatear código"
         tooltip-placement="right"
         icon-only
@@ -174,16 +197,6 @@ function shareModule() {
                 @click="shareModule"
               />
 
-              <AppButton
-                v-if="settings.settings.value.showAdvanced"
-                icon="mdi:code-braces"
-                :text="grid.lg ? 'Ofuscar pruebas' : 'Ofuscar'"
-                description="Ofusca el código de pruebas"
-                icon-only
-                color="stone"
-                @click="obfuscateTestsCode"
-              />
-
               <AppSeparator />
 
               <AppButton
@@ -191,6 +204,13 @@ function shareModule() {
                 :active="!settings.settings.value.hideOptions"
                 description="Mostrar opciones"
                 @click="settings.setHideOptions(!settings.settings.value.hideOptions)"
+              />
+
+              <AppButton
+                icon="mdi:cogs"
+                :active="settings.settings.value.showAdvanced"
+                description="Mostrar avanzado"
+                @click="settings.setShowAdvanced(!settings.settings.value.showAdvanced)"
               />
             </div>
           </template>
