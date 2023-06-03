@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useClipboard, useEventBus } from '@vueuse/core'
-import { useGrid } from 'vue-screen'
 import { useSettings } from '@/composables/useSettings'
 import { useShare } from '@/composables/useShare'
 import { useEditor } from '@/composables/useEditor'
@@ -13,8 +12,6 @@ const settings = useSettings()
 const share = useShare()
 
 const editor = useEditor()
-
-const grid = useGrid('tailwind')
 
 const notification = useNotification()
 
@@ -75,7 +72,7 @@ function shareModule() {
 
       <AppButton
         icon="mdi:share"
-        :text="grid.lg ? 'Compartir código' : 'Compartir'"
+        text="Compartir código"
         description="Compartir código"
         tooltip-placement="right"
         icon-only
@@ -190,7 +187,7 @@ function shareModule() {
 
               <AppButton
                 icon="mdi:publish"
-                :text="grid.lg ? 'Exportar módulo' : 'Exportar'"
+                text="Exportar módulo"
                 description="Genera una URL con el módulo actual y la copia al portapapeles"
                 icon-only
                 color="gray"

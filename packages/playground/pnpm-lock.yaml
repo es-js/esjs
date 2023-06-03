@@ -45,7 +45,6 @@ specifiers:
   vue: ^3.3.4
   vue-gtag: ^2.0.1
   vue-resize: 2.0.0-alpha.1
-  vue-screen: 2.1.0-beta.1
   vue-tsc: ^1.6.5
   webfontloader: ^1.6.28
   windicss: ^3.5.6
@@ -95,7 +94,6 @@ devDependencies:
   vue: 3.3.4
   vue-gtag: 2.0.1_vue@3.3.4
   vue-resize: 2.0.0-alpha.1_vue@3.3.4
-  vue-screen: 2.1.0-beta.1_vue@3.3.4
   vue-tsc: 1.6.5_typescript@4.9.5
   webfontloader: 1.6.28
   windicss: 3.5.6
@@ -3871,14 +3869,6 @@ packages:
 
   /vue-resize/2.0.0-alpha.1_vue@3.3.4:
     resolution: {integrity: sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      vue: 3.3.4
-    dev: true
-
-  /vue-screen/2.1.0-beta.1_vue@3.3.4:
-    resolution: {integrity: sha512-U1qpJ3vteECELCin8y6QTh/tDfvfn96ExzzcVY+gL4kLUiJk4rC/+vJaV9Zsd7iK33JKx8kn3wYhM1nmQmD7tQ==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
