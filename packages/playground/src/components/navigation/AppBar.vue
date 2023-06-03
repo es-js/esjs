@@ -90,6 +90,8 @@ function shareModule() {
         @click="editor.execute()"
       />
 
+      <AppSeparator v-if="settings.settings.value.showAdvanced" horizontal />
+
       <AppButton
         v-if="settings.settings.value.showAdvanced"
         icon="mdi:code-braces"
@@ -105,11 +107,25 @@ function shareModule() {
         v-if="settings.settings.value.showAdvanced"
         icon="mdi:code-braces"
         text="Ofuscar pruebas"
-        description="Ofusca pruebas"
+        description="Ofuscar pruebas"
         tooltip-placement="right"
         icon-only
         color="stone"
         @click="obfuscateTestsCode"
+      />
+
+      <AppSeparator v-if="settings.settings.value.showAdvanced" horizontal />
+
+      <AppButton
+        v-if="settings.settings.value.showAdvanced"
+        :icon="settings.settings.value.readonlyCode ? 'mdi:pen-off' : 'mdi:pen'"
+        text="Código de solo lectura"
+        description="Código de solo lectura"
+        tooltip-placement="right"
+        icon-only
+        color="stone"
+        :active="settings.settings.value.readonlyCode"
+        @click="settings.setReadonlyCode(!settings.settings.value.readonlyCode)"
       />
 
       <AppButton

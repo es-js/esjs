@@ -7,6 +7,7 @@ const settings = ref({
   hidePreview: false,
   hideConsole: false,
   hideTests: true,
+  readonlyCode: false,
   readonlyTests: false,
   autoCompile: true,
   customHtml: false,
@@ -52,6 +53,10 @@ export const useSettings = () => {
 
   function setHideTests(hideTests: boolean) {
     settings.value.hideTests = hideTests
+  }
+
+  function setReadonlyCode(readonlyCode: boolean) {
+    settings.value.readonlyCode = readonlyCode
   }
 
   function setReadonlyTests(readonlyTests: boolean) {
@@ -112,6 +117,7 @@ export const useSettings = () => {
     setHidePreview,
     setHideConsole,
     setHideTests,
+    setReadonlyCode,
     setReadonlyTests,
     setAutoCompile,
     setCustomHtml,
