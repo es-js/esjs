@@ -1,9 +1,10 @@
 import { Registry } from 'monaco-textmate'
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json'
-import type { IStandaloneEditorConstructionOptions } from 'monaco-editor'
 import * as monaco from 'monaco-editor'
 import { editor, languages } from 'monaco-editor'
 import { wireTmGrammars } from 'monaco-editor-textmate'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
 import {
   constantLanguage,
@@ -22,16 +23,32 @@ import { isDark } from '@/composables/dark'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
 import ProviderResult = languages.ProviderResult
 import CompletionList = languages.CompletionList
+import CompletionItem = languages.CompletionItem
+import IStandaloneEditorConstructionOptions = editor.IStandaloneEditorConstructionOptions
+
+interface Snippet {
+  prefix: string
+  body: string[]
+  description: string
+}
 
 export const useMonaco = () => {
+  function defineThemes() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    monaco.editor.defineTheme('dark', darktheme)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    monaco.editor.defineTheme('light', lightTheme)
+  }
+
   function createMonacoInstance(monacoEditorElement: HTMLElement, code: string, options?: IStandaloneEditorConstructionOptions): IStandaloneCodeEditor {
-    monaco.editor.defineTheme('vitesse-dark', darktheme)
-    monaco.editor.defineTheme('vitesse-light', lightTheme)
+    defineThemes()
 
     const monacoInstance = monaco.editor.create(monacoEditorElement, {
       value: code,
       automaticLayout: false,
-      theme: 'vitesse-dark',
+      theme: 'dark',
       fontFamily: 'Fira Code',
       fontSize: 16,
       language: 'esjs',
@@ -43,9 +60,9 @@ export const useMonaco = () => {
 
     watch(isDark, () => {
       if (isDark.value)
-        monaco.editor.setTheme('vitesse-dark')
+        monaco.editor.setTheme('dark')
       else
-        monaco.editor.setTheme('vitesse-light')
+        monaco.editor.setTheme('light')
     }, { immediate: true })
 
     return monacoInstance
@@ -109,11 +126,19 @@ export const useMonaco = () => {
       })
 
     monaco.languages.registerCompletionItemProvider('esjs', {
-      provideCompletionItems: (): ProviderResult<CompletionList> => {
-        const suggestions = []
+      provideCompletionItems: (model: monaco.editor.ITextModel, position: monaco.Position): monaco.languages.CompletionList => {
+        const suggestions: CompletionItem[] = []
+
+        const word = model.getWordUntilPosition(position)
+        const range = {
+          startLineNumber: position.lineNumber,
+          endLineNumber: position.lineNumber,
+          startColumn: word.startColumn,
+          endColumn: word.endColumn,
+        }
 
         // Agrega sugerencias para los tokens de control de flujo del lenguaje EsJS
-        for (const [esjsKeyword, jsKeyword] of [
+        for (const [esjsKeyword] of [
           ...keywordControl,
           ...constantLanguage,
           ...variableLanguage,
@@ -125,20 +150,24 @@ export const useMonaco = () => {
             label: esjsKeyword,
             kind: monaco.languages.CompletionItemKind.Keyword,
             insertText: esjsKeyword,
+            range,
           })
         }
 
-        for (const [key, value] of Object.entries(snippets)) {
+        (Object.entries(snippets) as [string, Snippet][]).forEach(([key, { body, description }]) => {
           suggestions.push({
             label: key,
             kind: monaco.languages.CompletionItemKind.Snippet,
-            insertText: value.body.join('\n'),
+            insertText: body.join('\n'),
             insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: value.description,
+            documentation: description,
+            range,
           })
-        }
+        })
 
-        return { suggestions }
+        return {
+          suggestions,
+        }
       },
     })
   }
@@ -157,7 +186,7 @@ export const useMonaco = () => {
 
   async function setupMonacoFormat() {
     monaco.languages.registerDocumentFormattingEditProvider('esjs', {
-      provideDocumentFormattingEdits: (model, options, token): ProviderResult<monaco.languages.TextEdit[]> => {
+      provideDocumentFormattingEdits: (model): ProviderResult<monaco.languages.TextEdit[]> => {
         const esjsCode = model.getValue()
         const jsCode = transpile(esjsCode)
         const formattedJsCode = formatCode(jsCode)
