@@ -27,7 +27,6 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts",
-    "src/assets/vscode-dark-converted.json"
   ],
   "exclude": ["dist", "node_modules"]
 }

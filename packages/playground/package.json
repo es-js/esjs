@@ -6,7 +6,6 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "build:theme": "npx monaco-vscode-textmate-theme-converter -i src/assets/vscode-dark.json -o src/assets/vscode-dark-converted.json",
     "test": "vitest",
     "test:run": "vitest --run"
   },
