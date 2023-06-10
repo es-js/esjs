@@ -4,14 +4,14 @@
 <body id="body" class="w-full h-full m-0 p-0">
     <div class="w-full h-full flex flex-col space-y-2">
         <div id="preview-container" class="flex-grow">
-            <div  class="flex flex-1 flex-col border border-gray-300 dark:border-gray-800 rounded">
+            <div id="preview-background" class="flex flex-1 flex-col border border-gray-300 dark:border-gray-800 rounded bg-white dark:bg-[#121212] ">
                 <div class="flex flex-row items-center bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-800 rounded-t">
                     <div class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl cursor-pointer">
                         <span>Terminal</span>
                     </div>
                 </div>
 
-                <div id="preview-background" class="flex flex-grow p-1 bg-white dark:bg-[#121212]">
+                <div  class="flex flex-grow p-1">
                     <div class="relative flex flex-1">
                         <es-terminal class="w-full h-full absolute inset-0"></es-terminal>
                     </div>
