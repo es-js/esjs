@@ -19,7 +19,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.3",
     "chalk": "^5.2.0",
-    "eslint": "^8.41.0",
+    "eslint": "^8.43.0",
     "path": "^0.12.7",
     "vite": "^4.3.9",
     "vitest": "^0.25.8"

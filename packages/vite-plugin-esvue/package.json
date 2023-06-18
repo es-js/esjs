@@ -9,18 +9,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.22.0",
-    "@babel/parser": "^7.22.0",
-    "@es-js/babel-plugin-esjs": "workspace:^0.0.13",
-    "@es-js/core": "workspace:0.0.18",
+    "@babel/core": "^7.22.5",
+    "@babel/parser": "^7.22.5",
+    "@es-js/babel-plugin-esjs": "workspace:^",
+    "@es-js/core": "workspace:*",
     "vite": "^4.3.9"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.1",
-    "@types/node": "^18.16.15",
+    "@types/node": "^18.16.18",
     "typescript": "^4.9.5",
     "unbuild": "^1.2.1",
-    "vue-tsc": "^1.6.5"
+    "vue-tsc": "^1.8.0"
   },
   "type": "module",
   "exports": {
