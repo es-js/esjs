@@ -13,10 +13,11 @@ declare module '@vue/runtime-core' {
     AppNotifications: typeof import('./src/components/shared/AppNotifications.vue')['default']
     AppSeparator: typeof import('./src/components/shared/AppSeparator.vue')['default']
     AppTabButton: typeof import('./src/components/shared/AppTabButton.vue')['default']
+    AppToggle: typeof import('./src/components/shared/AppToggle.vue')['default']
     CodeEditor: typeof import('./src/components/editors/CodeEditor.vue')['default']
     MonacoEditor: typeof import('./src/components/MonacoEditor.vue')['default']
     PlaygroundView: typeof import('./src/components/PlaygroundView.vue')['default']
-    PreviewBar: typeof import('./src/components/navigation/PreviewBar.vue')['default']
     TestsEditor: typeof import('./src/components/editors/TestsEditor.vue')['default']
+    TopBar: typeof import('./src/components/navigation/TopBar.vue')['default']
   }
 }

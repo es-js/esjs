@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import debounce from 'lodash.debounce'
+import { useDark } from '@vueuse/core'
 import { usarTerminal } from '../composables/usarTerminal'
 
 const terminalElement = ref()
@@ -12,13 +13,8 @@ const onResizeDebounced = debounce(() => {
 }, 10)
 
 onMounted(() => {
-  terminal.setupTerminal(terminalElement.value)
-
-  terminal.xterm.onData((data: any) => {
-    if (data && data[0] === '\x7F')
-      return
-
-    terminal.xterm.write(data)
+  terminal.setupTerminal(terminalElement.value, {
+    theme: terminal.getThemeConfig(useDark().value ? 'dark' : 'light'),
   })
 
   setTimeout(() => onResizeDebounced(), 10)
@@ -26,7 +22,9 @@ onMounted(() => {
   window.addEventListener('resize', onResizeDebounced)
 })
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
+  terminal.destroyTerminal()
+
   window.removeEventListener('resize', onResizeDebounced)
 })
 </script>

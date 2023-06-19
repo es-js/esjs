@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Pane, Splitpanes } from 'splitpanes'
 import { computed } from 'vue'
-import { useEventBus } from '@vueuse/core'
 import { Icon } from '@iconify/vue'
 import { useSettings } from '@/composables/useSettings'
 import OutputIframe from '@/output/OutputIframe.vue'
@@ -32,8 +31,6 @@ function openFile(file: string) {
 
 function toggleTestsEditor() {
   useSettings().setHideTests(!settings.value.hideTests)
-
-  useEventBus('editor_code').emit('fit')
 }
 </script>
 
@@ -47,7 +44,7 @@ function toggleTestsEditor() {
               <div class="flex flex-row items-center space-x-2">
                 <button class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl">
                   <Icon icon="mdi:code-tags" class="w-4 h-4" />
-                  <span>codigo.esjs</span>
+                  <span>{{ editor.language.value === 'esjs' ? 'codigo.esjs' : 'codigo.js' }}</span>
                 </button>
 
                 <div class="flex flex-grow" />
@@ -76,7 +73,7 @@ function toggleTestsEditor() {
                   @click="toggleTestsEditor"
                 >
                   <Icon icon="mdi:test-tube" class="w-4 h-4" />
-                  <span>pruebas.esjs</span>
+                  <span>{{ editor.language.value === 'esjs' ? 'pruebas.esjs' : 'pruebas.js' }}</span>
                 </button>
 
                 <div class="flex flex-grow" />

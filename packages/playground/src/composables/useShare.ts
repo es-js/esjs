@@ -1,6 +1,7 @@
 import * as lzs from 'lz-string'
+import { useClipboard } from '@vueuse/core'
 import { useSettings } from '@/composables/useSettings'
-import { INITIAL_CODE } from '@/composables/useEditor'
+import { INITIAL_CODE, useEditor } from '@/composables/useEditor'
 import { useNotification } from '@/composables/useNotification'
 
 const settings = useSettings()
@@ -8,6 +9,32 @@ const settings = useSettings()
 const ESJS_CDN = import.meta.env.MODE === 'development' ? 'http://localhost:1337' : 'https://cdn.esjs.dev'
 
 export const useShare = () => {
+  function shareCode() {
+    const url = getSharedUrl(useEditor().code.value, useEditor().testsCode.value)
+
+    window.history.replaceState('', '', url)
+
+    const clipboard = useClipboard({
+      source: window.location.href,
+    })
+
+    clipboard.copy()
+
+    useNotification().success('Se copió la URL al portapapeles')
+  }
+
+  function shareModule() {
+    const url = getSharedModuleUrl(useEditor().code.value)
+
+    const clipboard = useClipboard({
+      source: url.toString(),
+    })
+
+    clipboard.copy()
+
+    useNotification().success('Se copió la URL al portapapeles')
+  }
+
   function getSharedUrl(code: string, testsCode: string | null = null): URL {
     const url = new URL(lzs.compressToEncodedURIComponent(code), window.location.origin)
 
@@ -123,8 +150,8 @@ export const useShare = () => {
   }
 
   return {
-    getSharedUrl,
-    getSharedModuleUrl,
+    shareCode,
+    shareModule,
     decodeSharedUrl,
     getCodeFromPathname,
     setSettingsFromUrl,

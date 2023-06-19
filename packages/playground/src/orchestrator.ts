@@ -98,7 +98,7 @@ const initialPackages = [
     name: '@es-js/terminal',
     source: 'jsdelivr',
     description: 'Terminal para interactuar con el Usuario en el navegador',
-    url: 'https://cdn.jsdelivr.net/npm/@es-js/terminal@0.0.23/dist/terminal.es.js/+esm',
+    url: 'https://cdn.jsdelivr.net/npm/@es-js/terminal@0.0.30/dist/terminal.es.js/+esm',
   },
   {
     name: '@es-js/prueba',
@@ -111,12 +111,6 @@ const initialPackages = [
     source: 'jsdelivr',
     description: 'Librería para formatear texto en la Terminal',
     url: 'https://cdn.jsdelivr.net/npm/@es-js/tiza@0.0.5/+esm',
-  },
-  {
-    name: 'nprogress',
-    source: 'jsdelivr',
-    description: 'Componente de progreso',
-    url: 'https://cdn.jsdelivr.net/npm/nprogress@0.2.0/+esm',
   },
   {
     name: 'eruda',

@@ -4,10 +4,9 @@ import * as monaco from 'monaco-editor'
 import type { Ref } from 'vue'
 import { onMounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import { ResizeObserver } from 'vue-resize'
-import { useMonaco } from '@/composables/useMonaco'
-import 'vue-resize/dist/vue-resize.css'
+import { transpile } from '@es-js/core'
 import debounce from 'lodash.debounce'
+import { useMonaco } from '@/composables/useMonaco'
 import { useEditor } from '@/composables/useEditor'
 
 const props = defineProps({
@@ -55,14 +54,20 @@ async function setupMonaco() {
   if (!monacoEditorElement)
     return
 
-  monacoInstance = monacoHelper.createMonacoInstance(monacoEditorElement, props.value, {
+  await monacoHelper.extendJavaScriptLanguage()
+
+  if (props.name === 'code') {
+    monacoHelper.configureJavaScriptLanguage()
+    monacoHelper.setupMonacoCompletion()
+    monacoHelper.setupMonacoFormat()
+  }
+
+  monacoInstance = await monacoHelper.createMonacoInstance(monacoEditorElement, props.value, {
     readOnly: props.readonly,
   })
-  await monacoHelper.setupMonacoGrammar(monacoInstance)
-  await monacoHelper.setupMonacoCompletion()
-  await monacoHelper.setupMonacoSynchronization(monacoInstance, value => emit('update:value', value))
-  await monacoHelper.setupMonacoCommands(monacoInstance, () => emit('execute'))
-  await monacoHelper.setupMonacoFormat()
+
+  monacoHelper.setupMonacoSynchronization(monacoInstance, value => emit('update:value', value))
+  monacoHelper.setupMonacoCommands(monacoInstance, () => emit('execute'))
 }
 
 async function decorateError(line: number, column: number) {
@@ -91,6 +96,9 @@ function clearDecorations() {
 }
 
 function focusEditor() {
+  if (!monacoInstance)
+    return
+
   monacoInstance.focus()
 }
 
@@ -109,6 +117,8 @@ function setupBusCommands() {
         return formatCode()
       case 'obfuscate':
         return obfuscate()
+      case 'change-language':
+        return changeLanguage(payload)
       default:
         return null
     }
@@ -135,6 +145,17 @@ async function obfuscate() {
   return monacoInstance?.setValue(obfuscatedCode)
 }
 
+async function changeLanguage(language: 'javascript' | 'esjs') {
+  if (!monacoInstance)
+    return
+
+  const code = monacoInstance.getValue()
+
+  const formattedCode = transpile(code, language === 'esjs')
+
+  monacoInstance.setValue(formattedCode)
+}
+
 watch(
   () => props.readonly,
   async () => {
@@ -149,7 +170,5 @@ watch(
 </script>
 
 <template>
-  <div :id="props.elementId">
-    <ResizeObserver @notify="onResizeDebounced" />
-  </div>
+  <div :id="props.elementId" />
 </template>

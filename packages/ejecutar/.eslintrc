@@ -1,0 +1,8 @@
+{
+  "extends": "@antfu/eslint-config",
+  "rules": {
+    "curly": ["error", "all"],
+    "semi": [2, "never"],
+    "@typescript-eslint/semi": ["error", "never"]
+  }
+}

@@ -1,3 +1,4 @@
+import type { IDisposable, ITerminalInitOnlyOptions, ITerminalOptions, ITheme } from 'xterm'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import { WebLinksAddon } from 'xterm-addon-web-links'
@@ -5,21 +6,17 @@ import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
 import isNumber from 'is-number'
 import stripAnsi from 'strip-ansi'
+import PCancelable from 'p-cancelable'
 import { clearLine, handleBackspace, isPrintableKeyCode, prompt } from '../utils/xtermUtils'
 
-const xterm = new Terminal({
-  cursorBlink: true,
-  disableStdin: true,
-  convertEol: true,
-})
-const fitAddon = new FitAddon()
-xterm.loadAddon(fitAddon)
-xterm.loadAddon(new WebLinksAddon())
-
+let xterm: Terminal | null = null
+let fitAddon: FitAddon | null = null
 const buffer: Ref<string | null> = ref(null)
-
 const readingSecret: Ref<boolean> = ref(false)
 const readingEnter: Ref<boolean> = ref(false)
+const watchers: Ref<(() => void)[]> = ref([])
+const disposables: Ref<IDisposable[]> = ref([])
+const cancelablePromises: Ref<PCancelable<any>[]> = ref([])
 
 export enum ExpectedResult {
   porDefecto,
@@ -28,15 +25,60 @@ export enum ExpectedResult {
 }
 
 export const usarTerminal = () => {
-  function setupTerminal(terminalElement: HTMLElement) {
+  function setupTerminal(terminalElement: HTMLElement, options?: ITerminalOptions & ITerminalInitOnlyOptions) {
+    xterm = new Terminal({
+      cursorBlink: true,
+      disableStdin: true,
+      convertEol: true,
+      ...options,
+    })
+
+    disposables.value.push(xterm.onData(onDataHandler))
+
+    fitAddon = new FitAddon()
+    xterm.loadAddon(fitAddon)
+    xterm.loadAddon(new WebLinksAddon())
+
     xterm.open(terminalElement)
 
     fitTerminal()
 
-    xterm.onKey(onKeyHandler())
+    disposables.value.push(xterm.onKey(onKeyHandler()))
+  }
+
+  function onDataHandler(data: any) {
+    if (data && data[0] === '\x7F')
+      return
+
+    xterm?.write(data)
+  }
+
+  function destroyTerminal() {
+    watchers.value.map(unwatch => unwatch())
+    watchers.value = []
+
+    disposables.value.map(disposable => disposable.dispose())
+    disposables.value = []
+
+    cancelablePromises.value.map(cancelablePromise => cancelablePromise.cancel())
+
+    cancelablePromises.value = []
+
+    if (xterm) {
+      xterm.dispose()
+      xterm = null
+    }
+
+    if (fitAddon) {
+      fitAddon.dispose()
+      fitAddon = null
+    }
   }
 
   function fitTerminal() {
+    if (!fitAddon)
+      return
+
     fitAddon.fit()
   }
 
@@ -55,11 +97,30 @@ export const usarTerminal = () => {
   }
 
   function writeOnXterm(value: string): void {
+    if (!xterm)
+      return
+
     return xterm.writeln(value)
   }
 
+  function resetWriteBuffer() {
+    readingSecret.value = false
+    readingEnter.value = false
+
+    if (xterm)
+      xterm.options.disableStdin = true
+  }
+
   async function leer(tipo: ExpectedResult = ExpectedResult.porDefecto) {
-    return new Promise((resolve) => {
+    const promise = new PCancelable((resolve: any, reject: any, onCancel: any) => {
+      if (!xterm)
+        return
+
+      onCancel.shouldReject = false
+      onCancel(() => {
+        resetWriteBuffer()
+      })
+
       xterm.options.disableStdin = false
 
       buffer.value = null
@@ -70,17 +131,26 @@ export const usarTerminal = () => {
       const unwatch = watch(
         buffer,
         (value) => {
-          if (value === null)
+          if (value === null || !xterm)
             return
 
           resolve(handleResult(value, tipo))
-          xterm.options.disableStdin = true
-          readingSecret.value = false
-          readingEnter.value = false
+
+          resetWriteBuffer()
+
           unwatch()
+
+          watchers.value = watchers.value.filter(w => w !== unwatch)
+          cancelablePromises.value = cancelablePromises.value.filter(p => p !== promise)
         },
       )
+
+      watchers.value.push(unwatch)
     })
+
+    cancelablePromises.value.push(promise)
+
+    return promise
   }
 
   function leerCadena() {
@@ -102,6 +172,9 @@ export const usarTerminal = () => {
   }
 
   function limpiar() {
+    if (!xterm)
+      return
+
     xterm.write('\x1Bc') // TODO: Replace with `xterm.clear()` when EsJS Transpiler fixed.
   }
 
@@ -109,6 +182,9 @@ export const usarTerminal = () => {
     let innerBuffer = ''
 
     return async (event: { key: string; domEvent: KeyboardEvent }) => {
+      if (!xterm)
+        return
+
       switch (event.domEvent.key) {
         case 'c': {
           if (event.domEvent.ctrlKey) {
@@ -171,7 +247,7 @@ export const usarTerminal = () => {
         if (readingSecret.value) {
           setTimeout(() => {
             clearLine(xterm)
-            xterm.write(`> ${''.padStart(innerBuffer.length, '*')}`)
+            xterm?.write(`> ${''.padStart(innerBuffer.length, '*')}`)
           })
         }
         else if (readingEnter.value) {
@@ -201,7 +277,7 @@ export const usarTerminal = () => {
   }
 
   function centrar(texto: string) {
-    const anchoTerminal = xterm.cols
+    const anchoTerminal = xterm?.cols || 80
     const lineas = texto.trim().split('\n')
     const espaciosPorLinea = lineas.map((linea) => {
       const longitudLinea = stripAnsi(linea).length
@@ -221,7 +297,7 @@ export const usarTerminal = () => {
   }
 
   function alinearIzquierda(texto: string) {
-    const anchoTerminal = xterm.cols
+    const anchoTerminal = xterm?.cols || 80
     const lineas = texto.trim().split('\n')
     const resultado = lineas.map((linea) => {
       const longitudLinea = stripAnsi(linea).length
@@ -232,7 +308,7 @@ export const usarTerminal = () => {
   }
 
   function alinearDerecha(texto: string) {
-    const anchoTerminal = xterm.cols
+    const anchoTerminal = xterm?.cols || 80
     const lineas = texto.trim().split('\n')
     const resultado = lineas.map((linea) => {
       const longitudLinea = stripAnsi(linea).length
@@ -243,7 +319,7 @@ export const usarTerminal = () => {
   }
 
   function justificar(texto: string) {
-    const anchoTerminal = xterm.cols
+    const anchoTerminal = xterm?.cols || 80
     const lineas = texto.trim().split('\n')
     const resultado = lineas.map((linea) => {
       const palabras = linea.split(' ')
@@ -263,9 +339,60 @@ export const usarTerminal = () => {
     return resultado.join('\n')
   }
 
+  function setTheme(theme: ITheme) {
+    if (!xterm)
+      return
+
+    xterm.options.theme = theme
+  }
+
+  function getThemeConfig(theme: 'dark' | 'light') {
+    return theme === 'dark'
+      ? {
+          foreground: '#e5e5e5',
+          background: '#121212',
+          cursor: '#c7d2fe',
+          black: '#212121',
+          brightBlack: '#424242',
+          red: '#b7141f',
+          brightRed: '#e83b3f',
+          green: '#457b24',
+          brightGreen: '#7aba3a',
+          yellow: '#f6981e',
+          brightYellow: '#ffea2e',
+          blue: '#134eb2',
+          brightBlue: '#54a4f3',
+          magenta: '#560088',
+          brightMagenta: '#aa4dbc',
+          cyan: '#0e717c',
+          brightCyan: '#26bbd1',
+          white: '#efefef',
+          brightWhite: '#d9d9d9',
+        }
+      : {
+          foreground: '#232322',
+          background: '#ffffff',
+          cursor: '#c7d2fe',
+          black: '#212121',
+          brightBlack: '#424242',
+          red: '#b7141f',
+          brightRed: '#e83b3f',
+          green: '#457b24',
+          brightGreen: '#7aba3a',
+          yellow: '#f6981e',
+          brightYellow: '#ffea2e',
+          blue: '#134eb2',
+          brightBlue: '#54a4f3',
+          magenta: '#560088',
+          brightMagenta: '#aa4dbc',
+          cyan: '#0e717c',
+          brightCyan: '#26bbd1',
+          white: '#efefef',
+          brightWhite: '#d9d9d9',
+        }
+  }
+
   return {
-    xterm,
-    fitAddon,
     escribir,
     log: escribir,
     leer,
@@ -274,6 +401,7 @@ export const usarTerminal = () => {
     leerSecreto,
     leerEnter,
     setupTerminal,
+    destroyTerminal,
     fitTerminal,
     limpiar,
     clear: limpiar,
@@ -281,5 +409,7 @@ export const usarTerminal = () => {
     alinearIzquierda,
     alinearDerecha,
     justificar,
+    setTheme,
+    getThemeConfig,
   }
 }

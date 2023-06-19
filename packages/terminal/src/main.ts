@@ -2,7 +2,8 @@ import { defineCustomElement } from 'vue'
 import EsTerminal from './components/EsTerminal.vue'
 import { usarTerminal } from './composables/usarTerminal'
 
-customElements.define('es-terminal', defineCustomElement(EsTerminal))
+if (!window.customElements.get('es-terminal'))
+  customElements.define('es-terminal', defineCustomElement(EsTerminal))
 
 export { usarTerminal } from './composables/usarTerminal'
 

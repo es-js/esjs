@@ -8,7 +8,7 @@ import {
   addInfiniteLoopProtection,
   formatCode,
   generateImportStatement,
-  getFlowchartSvg,
+  // getFlowchartSvg,
   unifyImports,
 } from '@/composables/utils'
 import { PreviewProxy } from '@/output/PreviewProxy'
@@ -16,14 +16,11 @@ import { compileModulesForPreview } from '@/compiler/moduleCompiler'
 import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import template from '@/output/template.html?raw'
 import { isDark } from "@/composables/dark";
 
 const editor = useEditor()
 
 const container = ref()
-
-const iframe = ref()
 
 const settings = useSettings().settings
 
@@ -40,13 +37,29 @@ interface UpdateIframeOptions {
   hideConsole: boolean
   hidePreview: boolean
   customHtml: boolean
-  flowchartSvg: string
+  flowchartSvg?: string
   preview: 'terminal' | 'flowchart' | 'html'
   previewTab: 'console' | 'flowchart' | 'hidden'
   importMap: Record<string, string>
 }
 
 onMounted(() => {
+  createSandbox(getOptions())
+})
+
+onUnmounted(() => {
+  proxy.destroy()
+})
+
+watch(editor.output, () => {
+  updateSandbox(getOptions())
+})
+
+watch(isDark, () => {
+  proxy.iframe_command('DARK_MODE', isDark.value)
+})
+
+function getOptions(): UpdateIframeOptions {
   const {
     defaultImports,
     defaultTestsImports,
@@ -62,9 +75,9 @@ onMounted(() => {
 
   const generatedCodeImports = unifyImports(generateImportStatement(code, `./${MAIN_FILE}`))
 
-  const flowchartSvg = getFlowchartSvg(codeWithoutImports)
+  // const flowchartSvg = getFlowchartSvg(codeWithoutImports)
 
-  createSandbox({
+  return {
     code,
     testsCode,
     imports: unifyImports(`${defaultImports} \n ${codeImports}`),
@@ -73,19 +86,11 @@ onMounted(() => {
     hideConsole: settings.value.hideConsole,
     customHtml: settings.value.customHtml,
     importMap: JSON.parse(orchestrator.importMap) || {},
-    flowchartSvg,
+    // flowchartSvg,
     preview: useSettings().activePreview.value,
     previewTab: useSettings().activePreviewTab.value,
-  })
-
-  watch(isDark, () => {
-    proxy.iframe_command('DARK_MODE', isDark.value)
-  })
-})
-
-onUnmounted(() => {
-  proxy.destroy()
-})
+  }
+}
 
 function createSandbox(options: UpdateIframeOptions) {
   if (sandbox) {
@@ -113,15 +118,15 @@ function createSandbox(options: UpdateIframeOptions) {
   sandbox.setAttribute('style', 'border: 0;')
   sandbox.setAttribute('title', 'sandbox')
 
-  let sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
-  sandboxSrc = sandboxSrc.replace(/<!--FLOWCHART_SVG-->/, options.flowchartSvg)
-  sandboxSrc = sandboxSrc.replace(/<!--COLOR_SCHEME-->/, isDark.value ? 'dark' : 'light')
-  sandboxSrc = sandboxSrc.replace(/<!--ACTIVE_PREVIEW_TAB-->/, settings.value.hideConsole ? 'hidden' : options.previewTab)
-  sandbox.srcdoc = sandboxSrc
-
   container.value.appendChild(sandbox)
 
-  iframe.value = sandbox
+  // let sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
+  // // sandboxSrc = sandboxSrc.replace(/<!--FLOWCHART_SVG-->/, options.flowchartSvg)
+  // sandboxSrc = sandboxSrc.replace(/<!--COLOR_SCHEME-->/, isDark.value ? 'dark' : 'light')
+  // sandboxSrc = sandboxSrc.replace(/<!--ACTIVE_PREVIEW_TAB-->/, settings.value.hideConsole ? 'hidden' : options.previewTab)
+  // sandbox.srcdoc = sandboxSrc
+
+  sandbox.src = import.meta.env.MODE === 'development' ? 'http://localhost:5173/' : 'https://ejecutar.esjs.dev/'
 
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => { },
@@ -165,23 +170,15 @@ function createSandbox(options: UpdateIframeOptions) {
   })
 
   sandbox.addEventListener('load', () => {
-    updateIframe({
-      code: options.code,
-      testsCode: options.testsCode,
-      imports: options.imports,
-      testsImports: options.testsImports,
-      hideConsole: options.hideConsole,
-      hidePreview: options.hidePreview,
-      customHtml: options.customHtml,
-      importMap: options.importMap,
-      flowchartSvg: options.flowchartSvg,
-      preview: options.preview,
-      previewTab: options.previewTab,
-    })
+    updateSandbox(options)
   })
 }
 
-function updateIframe(options: UpdateIframeOptions) {
+function updateSandbox(options: UpdateIframeOptions) {
+  if (!proxy) {
+    return
+  }
+
   const { code, testsCode, imports, testsImports } = options
 
   orchestrator.files[MAIN_FILE].script = `
@@ -201,11 +198,10 @@ function updateIframe(options: UpdateIframeOptions) {
   ])
 
   proxy.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
-  // proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
-  // proxy.iframe_command('PREVIEW', useSettings().activePreview.value)
-  // proxy.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
-  proxy.iframe_command('DARK_MODE', isDark.value)
+  proxy.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
+  setTimeout(() => proxy.iframe_command('DARK_MODE', isDark.value)) // TODO: Try to remove timeout.
 }
+
 function parseCode(code: string) {
   bus.emit('clear-decorations')
 
@@ -257,13 +253,6 @@ watch(
   () => settings.value.hidePreview,
   () => {
     proxy.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
-  },
-)
-
-watch(
-  () => settings.value.hideConsole,
-  () => {
-    proxy.iframe_command('HIDE_CONSOLE', settings.value.hideConsole)
   },
 )
 

@@ -6,6 +6,7 @@ import { useEditor } from '@/composables/useEditor'
 import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
 import AppNotifications from '@/components/shared/AppNotifications.vue'
+import TopBar from '@/components/navigation/TopBar.vue'
 
 const bus = useEventBus('editor_code')
 
@@ -14,8 +15,6 @@ const share = useShare()
 const settings = useSettings()
 
 const editor = useEditor()
-
-const loading = ref(true)
 
 function handleWindowKeyup($event: any) {
   if ($event.key === 'Escape')
@@ -54,7 +53,6 @@ onMounted(async () => {
   share.setSettingsFromUrl()
   await setCodeFromUrl()
   await editor.execute()
-  loading.value = false
   watch(
     [editor.code, editor.testsCode],
     () => {
@@ -73,10 +71,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="w-full h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100 flex flex-row">
-    <AppBar class="w-14" />
+  <div class="w-full h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100 overflow-hidden">
+    <div class="flex flex-col w-full h-full">
+      <TopBar class="h-10" />
 
-    <PlaygroundView v-if="!loading" class="p-2" />
+      <div class="flex flex-row flex-grow px-2 pb-2">
+        <div class="relative flex flex-1">
+          <PlaygroundView class="absolute inset-0 w-full h-full" />
+        </div>
+      </div>
+    </div>
   </div>
 
   <AppNotifications />
@@ -85,9 +89,5 @@ onBeforeUnmount(() => {
 <style>
 html {
   overflow: hidden !important;
-}
-
-.h-playground {
-  height: calc(100% - 46px);
 }
 </style>

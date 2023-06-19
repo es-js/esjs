@@ -1,8 +1,5 @@
-import { Registry } from 'monaco-textmate'
-import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json'
 import * as monaco from 'monaco-editor'
 import { editor, languages } from 'monaco-editor'
-import { wireTmGrammars } from 'monaco-editor-textmate'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
@@ -20,9 +17,10 @@ import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
 import { formatCode } from '@/composables/utils'
 import { isDark } from '@/composables/dark'
+import { esjsTokenizer } from '@/composables/esjsTokenizer'
+import { useEditor } from '@/composables/useEditor'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
 import ProviderResult = languages.ProviderResult
-import CompletionList = languages.CompletionList
 import CompletionItem = languages.CompletionItem
 import IStandaloneEditorConstructionOptions = editor.IStandaloneEditorConstructionOptions
 
@@ -42,16 +40,16 @@ export const useMonaco = () => {
     monaco.editor.defineTheme('light', lightTheme)
   }
 
-  function createMonacoInstance(monacoEditorElement: HTMLElement, code: string, options?: IStandaloneEditorConstructionOptions): IStandaloneCodeEditor {
+  async function createMonacoInstance(monacoEditorElement: HTMLElement, code: string, options?: IStandaloneEditorConstructionOptions): IStandaloneCodeEditor {
     defineThemes()
 
     const monacoInstance = monaco.editor.create(monacoEditorElement, {
       value: code,
-      automaticLayout: false,
+      automaticLayout: true,
       theme: 'dark',
       fontFamily: 'Fira Code',
       fontSize: 16,
-      language: 'esjs',
+      language: 'javascript',
       renderWhitespace: 'all',
       roundedSelection: true,
       glyphMargin: true,
@@ -68,64 +66,89 @@ export const useMonaco = () => {
     return monacoInstance
   }
 
-  async function setupMonacoGrammar(monacoInstance: IStandaloneCodeEditor) {
-    const registry = new Registry({
-      getGrammarDefinition: async () => {
-        return {
-          format: 'json',
-          content: esjsSyntax,
+  /**
+   * @author Pranomvignesh (https://github.com/Pranomvignesh)
+   * @see https://github.com/Pranomvignesh/extend-monaco-language-tokenizer
+   */
+  async function extendJavaScriptLanguage() {
+    const allLangs = monaco.languages.getLanguages()
+    const { conf, language: jsLang } = await allLangs.find(({ id }) => id === 'javascript').loader()
+
+    for (const key in esjsTokenizer) {
+      const value = esjsTokenizer[key]
+      if (key === 'tokenizer') {
+        for (const category in value) {
+          const tokenDefs = value[category]
+          if (!jsLang.tokenizer.hasOwnProperty(category))
+            jsLang.tokenizer[category] = []
+
+          if (Array.isArray(tokenDefs))
+            jsLang.tokenizer[category].unshift.apply(jsLang.tokenizer[category], tokenDefs)
         }
-      },
-    })
+      }
+      else if (Array.isArray(value)) {
+        if (!jsLang.hasOwnProperty(key))
+          jsLang[key] = []
 
-    const grammars = new Map()
-    grammars.set('esjs', 'source.esjs')
-
-    monaco.languages.register({ id: 'esjs' })
-
-    await wireTmGrammars(monaco, registry, grammars, monacoInstance)
+        jsLang[key].unshift.apply(jsLang[key], value)
+      }
+    }
   }
 
-  async function setupMonacoCompletion() {
-    monaco.languages.registerCompletionItemProvider('esjs',
-      {
-        triggerCharacters: ['>'],
-        provideCompletionItems: (model, position): ProviderResult<CompletionList> => {
-          // TODO: Implementar https://github.com/microsoft/monaco-editor/issues/221#issuecomment-1085787520.
-          const codePre: string = model.getValueInRange({
-            startLineNumber: position.lineNumber,
-            startColumn: 1,
-            endLineNumber: position.lineNumber,
-            endColumn: position.column,
-          })
+  function configureJavaScriptLanguage() {
+    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+      lib: ['ESNext', 'ES2015'],
+      target: monaco.languages.typescript.ScriptTarget.ESNext,
+      allowNonTsExtensions: true,
+    })
 
-          const tag = codePre.match(/.*<(\w+)>$/)?.[1]
+    monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+      noSyntaxValidation: true,
+      noSemanticValidation: true,
+      noSuggestionDiagnostics: true,
+    })
+  }
 
-          if (!tag)
-            return
+  function setupMonacoCompletion() {
+    // monaco.languages.registerCompletionItemProvider('esjs',
+    //   {
+    //     triggerCharacters: ['>'],
+    //     provideCompletionItems: (model, position): ProviderResult<CompletionList> => {
+    //       // TODO: Implementar https://github.com/microsoft/monaco-editor/issues/221#issuecomment-1085787520.
+    //       const codePre: string = model.getValueInRange({
+    //         startLineNumber: position.lineNumber,
+    //         startColumn: 1,
+    //         endLineNumber: position.lineNumber,
+    //         endColumn: position.column,
+    //       })
+    //
+    //       const tag = codePre.match(/.*<(\w+)>$/)?.[1]
+    //
+    //       if (!tag)
+    //         return
+    //
+    //       const word = model.getWordUntilPosition(position)
+    //
+    //       return {
+    //         suggestions: [
+    //           {
+    //             label: `</${tag}>`,
+    //             kind: monaco.languages.CompletionItemKind.EnumMember,
+    //             insertText: `$1</${tag}>`,
+    //             insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+    //             range: {
+    //               startLineNumber: position.lineNumber,
+    //               endLineNumber: position.lineNumber,
+    //               startColumn: word.startColumn,
+    //               endColumn: word.endColumn,
+    //             },
+    //           },
+    //         ],
+    //       }
+    //     },
+    //   })
 
-          const word = model.getWordUntilPosition(position)
-
-          return {
-            suggestions: [
-              {
-                label: `</${tag}>`,
-                kind: monaco.languages.CompletionItemKind.EnumMember,
-                insertText: `$1</${tag}>`,
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                range: {
-                  startLineNumber: position.lineNumber,
-                  endLineNumber: position.lineNumber,
-                  startColumn: word.startColumn,
-                  endColumn: word.endColumn,
-                },
-              },
-            ],
-          }
-        },
-      })
-
-    monaco.languages.registerCompletionItemProvider('esjs', {
+    monaco.languages.registerCompletionItemProvider('javascript', {
       provideCompletionItems: (model: monaco.editor.ITextModel, position: monaco.Position): monaco.languages.CompletionList => {
         const suggestions: CompletionItem[] = []
 
@@ -149,6 +172,7 @@ export const useMonaco = () => {
           suggestions.push({
             label: esjsKeyword,
             kind: monaco.languages.CompletionItemKind.Keyword,
+            detail: esjsKeyword,
             insertText: esjsKeyword,
             range,
           })
@@ -172,28 +196,34 @@ export const useMonaco = () => {
     })
   }
 
-  async function setupMonacoSynchronization(monacoInstance: IStandaloneCodeEditor, callback: (value: string) => void) {
+  function setupMonacoSynchronization(monacoInstance: IStandaloneCodeEditor, callback: (value: string) => void) {
     monacoInstance.onDidChangeModelContent(() => {
       callback(monacoInstance.getValue())
     })
   }
 
-  async function setupMonacoCommands(monacoInstance: IStandaloneCodeEditor, callback: () => void) {
+  function setupMonacoCommands(monacoInstance: IStandaloneCodeEditor, callback: () => void) {
     monacoInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
       callback()
     })
   }
 
-  async function setupMonacoFormat() {
-    monaco.languages.registerDocumentFormattingEditProvider('esjs', {
+  function setupMonacoFormat() {
+    monaco.languages.registerDocumentFormattingEditProvider('javascript', {
       provideDocumentFormattingEdits: (model): ProviderResult<monaco.languages.TextEdit[]> => {
-        const esjsCode = model.getValue()
-        const jsCode = transpile(esjsCode)
-        const formattedJsCode = formatCode(jsCode)
-        const formattedEsJsCode = transpile(formattedJsCode, true)
+        let code = model.getValue()
+
+        if (useEditor().language.value === 'esjs')
+          code = transpile(code)
+
+        let formattedCode = formatCode(code)
+
+        if (useEditor().language.value === 'esjs')
+          formattedCode = transpile(formattedCode, true)
+
         return [
           {
-            text: formattedEsJsCode,
+            text: formattedCode,
             range: model.getFullModelRange(),
           },
         ]
@@ -202,8 +232,9 @@ export const useMonaco = () => {
   }
 
   return {
+    extendJavaScriptLanguage,
+    configureJavaScriptLanguage,
     createMonacoInstance,
-    setupMonacoGrammar,
     setupMonacoCompletion,
     setupMonacoSynchronization,
     setupMonacoCommands,

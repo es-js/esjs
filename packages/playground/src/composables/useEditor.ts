@@ -46,6 +46,8 @@ const testsCode: Ref<string> = ref('')
 
 const output = ref()
 
+const language: Ref<'esjs' | 'js'> = ref('esjs')
+
 export const useEditor = () => {
   function setCode(value: string) {
     code.value = sanitizeCode(value)
@@ -55,16 +57,8 @@ export const useEditor = () => {
     testsCode.value = sanitizeCode(value)
   }
 
-  function cleanPreviousExecution() {
-    output.value = null
-  }
-
   async function execute() {
-    cleanPreviousExecution()
-
-    setTimeout(() => {
-      output.value = getTranspiledCode()
-    })
+    output.value = getTranspiledCode()
   }
 
   function getTranspiledCode() {
@@ -129,6 +123,10 @@ ${obfuscatedCode.getObfuscatedCode()}`
 ${obfuscatedCode.getObfuscatedCode()}`
   }
 
+  function toggleLanguage() {
+    language.value = language.value === 'esjs' ? 'js' : 'esjs'
+  }
+
   return {
     code,
     testsCode,
@@ -138,5 +136,7 @@ ${obfuscatedCode.getObfuscatedCode()}`
     setTestsCode,
     getObfuscatedCode,
     getObfuscatedTestsCode,
+    toggleLanguage,
+    language,
   }
 }

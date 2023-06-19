@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
+import { useEventBus } from '@vueuse/core'
+import { useSettings } from '@/composables/useSettings'
 import { useEditor } from '@/composables/useEditor'
 import MonacoEditor from '@/components/MonacoEditor.vue'
-import { useSettings } from '@/composables/useSettings'
 
 const editor = useEditor()
 
 const readonly = computed(() => useSettings().settings.value.readonlyCode)
+
+watch(
+  editor.language,
+  () => {
+    useEventBus('editor_code').emit('change-language', editor.language.value)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

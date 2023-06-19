@@ -1,0 +1,15 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+	<title>Proyecto nuevo</title>
+	<style>
+		tspan { white-space:pre } 
+		.s0 { fill: #512da8 } 
+		.t1 { font-size: 97px;fill: #ffffff;font-weight: 700;font-family: "Inter-Bold", "Inter" } 
+		.t2 { font-size: 51px;fill: #ffffff;font-weight: 700;font-family: "Inter-Bold", "Inter" } 
+		.t3 { font-size: 51px;fill: #000000;font-weight: 400;font-family: "Neuton-Regular", "Neuton" } 
+	</style>
+	<path id="Forma 2" class="s0" d="m0 33c0-18.2 14.8-33 33-33h958c18.2 0 33 14.8 33 33v958c0 18.2-14.8 33-33 33h-958c-18.2 0-33-14.8-33-33z"/>
+	<text id="EsJS " style="transform: matrix(3.906,0,0,3.906,259.688,647.219)" >
+		<tspan x="0" y="70.7" class="t1">E</tspan><tspan  y="70.7" class="t1">s</tspan><tspan  y="70.7" class="t2">J</tspan><tspan  y="70.7" class="t2">S</tspan><tspan  y="70.7" class="t3">
+</tspan>
+	</text>
+</svg>
