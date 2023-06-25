@@ -75,7 +75,19 @@ export const useShare = () => {
       readonlyTests: url.searchParams.get('readonlyTests'),
       showAdvanced: url.searchParams.get('showAdvanced'),
       preview: JSON.parse(url.searchParams.get('preview') ?? '{}'),
-      previewTab: JSON.parse(url.searchParams.get('previewTab') ?? '{}'),
+      previewTab: decodePreviewTab(url),
+    }
+  }
+
+  function decodePreviewTab(url: URL) {
+    try {
+      return JSON.parse(url.searchParams.get('previewTab') || '')
+    }
+    catch (error) {
+      if (url.searchParams.get('hideConsole') === 'true')
+        return { console: false, flowchart: false, hidden: true }
+
+      return {}
     }
   }
 
