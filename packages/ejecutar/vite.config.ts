@@ -15,4 +15,21 @@ export default defineConfig({
       },
     ]),
   ],
+  build: {
+    rollupOptions: {
+      external: ['@es-js/terminal', '@es-js/prueba', '@es-js/tiza', 'eruda', 'twind/shim'],
+
+      output: {
+        assetFileNames: ({ name }) => {
+          if (/\.css$/.test(name ?? '')) {
+            return 'assets/[name][extname]'
+          }
+
+          // default value
+          // ref: https://rollupjs.org/guide/en/#outputassetfilenames
+          return 'assets/[name]-[hash][extname]'
+        },
+      },
+    },
+  },
 })
