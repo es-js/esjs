@@ -126,7 +126,7 @@ function createSandbox(options: UpdateIframeOptions) {
   // sandboxSrc = sandboxSrc.replace(/<!--ACTIVE_PREVIEW_TAB-->/, settings.value.hideConsole ? 'hidden' : options.previewTab)
   // sandbox.srcdoc = sandboxSrc
 
-  sandbox.src = import.meta.env.MODE === 'development' ? 'http://localhost:5173/' : 'https://ejecutar.esjs.dev/'
+  sandbox.src = import.meta.env.VITE_SANDBOX_URL
 
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => { },
