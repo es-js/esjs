@@ -89,7 +89,7 @@ function toggleTestsEditor() {
     </Pane>
 
     <Pane class="flex flex-col h-full space-y-1">
-      <OutputIframe v-if="editor.output.value" class="relative w-full h-full overflow-hidden" />
+      <OutputIframe class="relative w-full h-full overflow-hidden" />
     </Pane>
   </Splitpanes>
 </template>

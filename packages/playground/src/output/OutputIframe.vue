@@ -3,20 +3,12 @@ import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useEditor } from '@/composables/useEditor'
 import { useSettings } from '@/composables/useSettings'
-import {
-  addExportToFunctions,
-  addInfiniteLoopProtection,
-  formatCode,
-  generateImportStatement,
-  // getFlowchartSvg,
-  unifyImports,
-} from '@/composables/utils'
+import { compileModulesForPreview, prepareCode, prepareCodeAndTestsForPlayground } from '@es-js/compiler'
 import { PreviewProxy } from '@/output/PreviewProxy'
-import { compileModulesForPreview } from '@/compiler/moduleCompiler'
-import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator } from '@/orchestrator'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
+import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator, OrchestratorFile } from '@es-js/compiler/orchestrator'
 import { isDark } from "@/composables/dark";
+import lzs from "lz-string";
+import debounce from "lodash.debounce";
 
 const editor = useEditor()
 
@@ -29,70 +21,19 @@ const bus = useEventBus('editor_code')
 let sandbox: HTMLIFrameElement
 let proxy: PreviewProxy
 
-interface UpdateIframeOptions {
-  code: string
-  testsCode: string
-  imports: string
-  testsImports: string
-  hideConsole: boolean
-  hidePreview: boolean
-  customHtml: boolean
-  flowchartSvg?: string
-  preview: 'terminal' | 'flowchart' | 'html'
-  previewTab: 'console' | 'flowchart' | 'hidden'
-  importMap: Record<string, string>
-}
-
 onMounted(() => {
-  createSandbox(getOptions())
+  createSandbox()
 })
 
 onUnmounted(() => {
   proxy.destroy()
 })
 
-watch(editor.output, () => {
-  updateSandbox(getOptions())
-})
-
 watch(isDark, () => {
   proxy.iframe_command('DARK_MODE', isDark.value)
 })
 
-function getOptions(): UpdateIframeOptions {
-  const {
-    defaultImports,
-    defaultTestsImports,
-    codeImports,
-    codeWithoutImports,
-    testsCodeImports,
-    testsCodeWithoutImports,
-  } = editor.output.value
-
-  const code = parseCode(codeWithoutImports)
-
-  const testsCode = parseTestsCode(testsCodeWithoutImports)
-
-  const generatedCodeImports = unifyImports(generateImportStatement(code, `./${MAIN_FILE}`))
-
-  // const flowchartSvg = getFlowchartSvg(codeWithoutImports)
-
-  return {
-    code,
-    testsCode,
-    imports: unifyImports(`${defaultImports} \n ${codeImports}`),
-    testsImports: unifyImports(`${defaultTestsImports} \n ${testsCodeImports} \n ${generatedCodeImports}`),
-    hidePreview: settings.value.hidePreview,
-    hideConsole: settings.value.hideConsole,
-    customHtml: settings.value.customHtml,
-    importMap: JSON.parse(orchestrator.importMap) || {},
-    // flowchartSvg,
-    preview: useSettings().activePreview.value,
-    previewTab: useSettings().activePreviewTab.value,
-  }
-}
-
-function createSandbox(options: UpdateIframeOptions) {
+function createSandbox() {
   if (sandbox) {
     proxy.destroy()
     container.value.removeChild(sandbox)
@@ -117,16 +58,11 @@ function createSandbox(options: UpdateIframeOptions) {
   sandbox.setAttribute('height', '100%')
   sandbox.setAttribute('style', 'border: 0;')
   sandbox.setAttribute('title', 'sandbox')
+  sandbox.setAttribute('allow', 'clipboard-read; clipboard-write;')
 
   container.value.appendChild(sandbox)
 
-  // let sandboxSrc = template.replace(/<!--IMPORT_MAP-->/, JSON.stringify(options.importMap))
-  // // sandboxSrc = sandboxSrc.replace(/<!--FLOWCHART_SVG-->/, options.flowchartSvg)
-  // sandboxSrc = sandboxSrc.replace(/<!--COLOR_SCHEME-->/, isDark.value ? 'dark' : 'light')
-  // sandboxSrc = sandboxSrc.replace(/<!--ACTIVE_PREVIEW_TAB-->/, settings.value.hideConsole ? 'hidden' : options.previewTab)
-  // sandbox.srcdoc = sandboxSrc
-
-  sandbox.src = import.meta.env.VITE_SANDBOX_URL
+  sandbox.src = getSandboxUrl()
 
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => { },
@@ -169,48 +105,67 @@ function createSandbox(options: UpdateIframeOptions) {
     },
   })
 
-  sandbox.addEventListener('load', () => {
-    updateSandbox(options)
-  })
+  // sandbox.addEventListener('load', () => {
+  //   updateSandbox(options)
+  // })
 }
 
-function updateSandbox(options: UpdateIframeOptions) {
+function getSandboxUrl() {
+  const url = new URL('/', import.meta.env.VITE_SANDBOX_URL)
+  url.searchParams.set('code', lzs.compressToEncodedURIComponent(editor.code.value))
+  url.searchParams.set('tests', lzs.compressToEncodedURIComponent(editor.testsCode.value))
+  url.searchParams.set('options', lzs.compressToEncodedURIComponent(JSON.stringify({
+    theme: isDark.value ? 'dark' : 'light',
+    hidePreview: settings.value.hidePreview,
+    previewTab: useSettings().activePreviewTab.value,
+  })))
+  return url
+}
+
+const updateSandboxDebounced = debounce(updateSandbox, 500)
+
+async function updateSandbox() {
   if (!proxy) {
     return
   }
 
-  const { code, testsCode, imports, testsImports } = options
+  const code = parseCode(editor.code.value)
 
-  orchestrator.files[MAIN_FILE].script = `
-    ${imports}
-    ${code}
-  `
-  orchestrator.files[MAIN_TESTS_FILE].script = `
-    ${testsImports}
-    ${testsCode}
-  `
+  const testsCode = parseTestsCode(editor.testsCode.value)
 
-  const modules = compileModulesForPreview()
+  const result = prepareCodeAndTestsForPlayground(code, testsCode)
 
-  proxy.eval([
+  orchestrator.files[MAIN_FILE] = new OrchestratorFile(
+    MAIN_FILE,
+    '',
+    `${result.imports}\n${result.code}\n`,
+    '',
+  )
+
+  orchestrator.files[MAIN_TESTS_FILE] = new OrchestratorFile(
+    MAIN_TESTS_FILE,
+    '',
+    `${result.testsImports}\n${result.testsCode}\n`,
+    '',
+  )
+
+  const modules = compileModulesForPreview([
+    orchestrator.files[MAIN_TESTS_FILE],
+    orchestrator.files[MAIN_FILE],
+  ])
+
+  await proxy.eval([
     'const __modules__ = {};',
     ...modules,
   ])
-
-  proxy.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
-  proxy.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
-  setTimeout(() => proxy.iframe_command('DARK_MODE', isDark.value)) // TODO: Try to remove timeout.
 }
 
 function parseCode(code: string) {
   bus.emit('clear-decorations')
 
   try {
-    code = formatCode(code)
-    code = addExportToFunctions(code)
-    code = addInfiniteLoopProtection(code)
-  }
-  catch (error: SyntaxError | any) {
+    code = prepareCode(code)
+  } catch (error: SyntaxError | any) {
     const line = error?.loc?.start?.line || 1
     const column = error?.loc?.start?.column || 1
     const errorMessage = error.message
@@ -230,10 +185,8 @@ function parseTestsCode(code: string) {
   useEventBus('editor_tests').emit('clear-decorations')
 
   try {
-    code = formatCode(code)
-    code = addInfiniteLoopProtection(code)
-  }
-  catch (error: SyntaxError | any) {
+    code = prepareCode(code)
+  } catch (error: SyntaxError | any) {
     const line = error?.loc?.start?.line || 1
     const column = error?.loc?.start?.column || 1
     const errorMessage = error.message
@@ -267,6 +220,16 @@ watch(
   () => settings.value.previewTab,
   () => {
     proxy.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
+  },
+)
+
+watch(
+  [editor.code, editor.testsCode],
+  () => {
+    if (!settings.value.autoCompile)
+      return
+
+    updateSandboxDebounced()
   },
 )
 </script>

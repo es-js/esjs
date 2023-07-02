@@ -23,10 +23,11 @@ export function setupEruda() {
     useShadowDom: false,
     defaults: {
       displaySize: size,
-      theme: 'Light',
       transparency: 100,
     },
   })
+
+  eruda.get().config.set('theme', document.documentElement.classList.contains('dark') ? 'Material Darker' : 'Light')
 
   if (showFlowchart) {
     addFlowchartPlugin()

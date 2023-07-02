@@ -4,8 +4,38 @@ import parserBabel from 'prettier/parser-babel'
 import escodegen from 'escodegen'
 import { obfuscate } from 'javascript-obfuscator'
 import type { Options } from 'prettier'
-import { convertCodeToSvg } from '@es-js/esjs2flowchart'
+// import { convertCodeToSvg } from '@es-js/esjs2flowchart'
+import { splitCodeImports, transpile } from '@es-js/core'
+import { MAIN_FILE } from './orchestrator'
+import { DEFAULT_IMPORTS, DEFAULT_TESTS_IMPORTS } from './constants'
 
+class PrepareCodeError extends Error {
+  constructor(message: string, public line: number, public column: number) {
+    super(message)
+  }
+}
+
+export function prepareCode(code: string) {
+  try {
+    code = transpile(code)
+    code = formatCode(code) // TODO: Es necesario?.
+    code = addExportToFunctions(code)
+    code = addInfiniteLoopProtection(code)
+    return code
+  }
+  catch (error: SyntaxError | any) {
+    const errorMessage = error.message
+    const line = error?.loc?.start?.line || 1
+    const column = error?.loc?.start?.column || 1
+
+    throw new PrepareCodeError(errorMessage, line, column)
+  }
+}
+
+/**
+ * TODO: Eliminar.
+ * @param code
+ */
 export function sanitizeCode(code: string) {
   if (!code.endsWith('\n'))
     code += '\n'
@@ -177,19 +207,19 @@ export function removeTopLevelAwaits(code: string) {
 }
 
 export function getFlowchartSvg(code: string): string {
-  try {
-    return escapeTemplateLiteral(
-      convertCodeToSvg(
-        removeTopLevelAwaits(code),
-      ),
-    )
-  }
-  catch (error) {
-    return `<div class="w-full h-full flex flex-col justify-center items-center text-center text-red-700 text-2xl font-sans">
-    <p>¡Ups!</p>
-    <p>No se pudo generar el Diagrama de Flujo</p>
-</div>`
-  }
+//   try {
+//     return escapeTemplateLiteral(
+//       convertCodeToSvg(
+//         removeTopLevelAwaits(code),
+//       ),
+//     )
+//   }
+//   catch (error) {
+//     return `<div class="w-full h-full flex flex-col justify-center items-center text-center text-red-700 text-2xl font-sans">
+//     <p>¡Ups!</p>
+//     <p>No se pudo generar el Diagrama de Flujo</p>
+// </div>`
+//   }
 }
 
 /**
@@ -252,4 +282,24 @@ export function generateImportStatement(code: string, modulePath: string) {
   )
 
   return imports.join('\n')
+}
+
+export function prepareCodeAndTestsForPlayground(code: string, tests: string) {
+  const transpiledCode = transpile(prepareCode(code))
+  const splittedCode = splitCodeImports(transpiledCode)
+  const imports = unifyImports(`${DEFAULT_IMPORTS} \n ${splittedCode.imports}`)
+
+  const generatedCodeImports = unifyImports(generateImportStatement(splittedCode.codeWithoutImports, `./${MAIN_FILE}`))
+
+  const transpiledTestsCode = transpile(prepareCode(tests))
+  const splittedTestsCode = splitCodeImports(transpiledTestsCode)
+  const testsImports = unifyImports(`${DEFAULT_TESTS_IMPORTS} \n ${splittedTestsCode.imports} \n ${generatedCodeImports}`)
+
+  return {
+    imports,
+    code: splittedCode.codeWithoutImports,
+
+    testsImports,
+    testsCode: splittedTestsCode.codeWithoutImports,
+  }
 }

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="es" class="w-full h-full <!--COLOR_SCHEME-->" hidden>
+<html lang="es" class="w-full h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Ejecutar EsJS es una herramienta para ejecutar código EsJS en el navegador." />
     <link rel="icon" type="image/svg+xml" href="/esjs.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejecutar EsJS</title>
+    <link rel="stylesheet" href="/output.css" />
   </head>
 
-  <body id="body" class="w-full h-full m-0 p-0">
+  <body id="body" class="w-full h-full m-0 p-0 bg-white dark:bg-gray-900">
     <div class="w-full h-full flex flex-col space-y-2">
       <div id="preview-container" class="flex-grow">
         <div id="preview-background" class="w-full h-full flex flex-col bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-800 rounded">
@@ -31,8 +32,18 @@
       </div>
     </div>
 
+    <script>
+      (function () {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        const setting = localStorage.getItem('color-schema') || 'auto'
+        if (setting === 'dark' || (prefersDark && setting !== 'light')) {
+          document.documentElement.classList.toggle('dark', true)
+        }
+      })()
+    </script>
+
     <script type="module" src="/src/main.ts"></script>
 
-    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/style.css" />
   </body>
 </html>

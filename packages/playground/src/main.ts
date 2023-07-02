@@ -7,11 +7,14 @@ import { loadFonts } from '@/plugins/webfontloader'
 import '@/styles/main.css'
 import 'floating-vue/dist/style.css'
 import 'splitpanes/dist/splitpanes.css'
+import { useShare } from '@/composables/useShare'
 
 const app = createApp(App)
 
 async function init() {
   await loadFonts()
+  useShare().setSettingsFromUrl()
+  await useShare().setCodeFromUrl()
 
   app
     .use(VueGtag, {

@@ -1,16 +1,8 @@
 import './style.css'
-import {
-  init,
-  previewTab,
-  reset,
-  setupTheme,
-  togglePreview,
-} from './ejecutar.js'
+import { evalCode, hidePreview, init, previewTab, setupTheme } from './ejecutar.js'
 
 const flowchartSvg = '<!--FLOWCHART_SVG-->'
 const activePreviewTab = '<!--ACTIVE_PREVIEW_TAB-->'
-
-const scriptEls: HTMLScriptElement[] = []
 
 window.process = { env: {} }
 window.__modules__ = {}
@@ -36,36 +28,8 @@ async function handle_message(ev: any) {
   const send_error = (message: string, stack: string) => send_reply({ action: 'cmd_error', message, stack })
 
   if (action === 'eval') {
-    await reset()
-
     try {
-      if (scriptEls.length) {
-        scriptEls.forEach((el) => {
-          document.head.removeChild(el)
-        })
-        scriptEls.length = 0
-      }
-
-      let { script: scripts } = ev.data.args
-
-      if (typeof scripts === 'string') {
-        scripts = [scripts]
-      }
-
-      for (const script of scripts) {
-        const scriptEl = document.createElement('script')
-        scriptEl.setAttribute('type', 'module')
-        // send ok in the module script to ensure sequential evaluation
-        // of multiple proxy.eval() calls
-        const done = new Promise((resolve) => {
-          window.__next__ = resolve
-        })
-        scriptEl.innerHTML = `${script}\nwindow.__next__()`
-        document.head.appendChild(scriptEl)
-        scriptEl.onerror = (error: any) => send_error(error.message, error.stack)
-        scriptEls.push(scriptEl)
-        await done
-      }
+      await evalCode(args)
 
       send_ok()
     }
@@ -74,7 +38,7 @@ async function handle_message(ev: any) {
     }
   }
   else if (action === 'HIDE_PREVIEW') {
-    togglePreview(args)
+    hidePreview(args)
   }
   else if (action === 'previewException') {
     window._previewException(...args)
@@ -130,4 +94,6 @@ window.addEventListener('unhandledrejection', (event) => {
   }
 })
 
-init()
+window.addEventListener('load', async () => {
+  await init()
+})

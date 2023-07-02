@@ -1,54 +1,113 @@
-import { setup } from 'twind/shim'
 import { usarTerminal } from '@es-js/terminal'
+import { compileModulesForPreview, prepareCodeAndTestsForPlayground } from '@es-js/compiler'
+import { MAIN_FILE, MAIN_TESTS_FILE, OrchestratorFile, orchestrator } from '@es-js/compiler/orchestrator'
 import {
   changeSize,
   getActiveTab,
   openEruda,
-  setActiveTab,
-  setErudaTheme,
+  setActiveTab, setErudaTheme,
   setupEruda,
 } from './eruda'
+import { useShare } from './useShare.ts'
+
+const scriptEls: HTMLScriptElement[] = []
 
 export async function init() {
-  setupTwind()
-  setupTerminal()
+  const options = useShare().getOptionsFromUrl()
+
+  setDarkMode(options.theme === 'dark')
+
   await setupEruda()
+
+  hidePreview(options.hidePreview)
+
+  previewTab(options.previewTab)
+
+  await evalInitialCode()
 }
 
-export async function reset() {
-  return new Promise((resolve, reject) => {
-    const isDev = window.location.ancestorOrigins.item(0)?.startsWith('http://localhost:')
+export async function evalCode(args: any) {
+  setupTerminal()
+  clearConsole()
 
-    if (!isDev) {
-      console.clear()
+  if (scriptEls.length) {
+    scriptEls.forEach((el) => {
+      document.head.removeChild(el)
+    })
+    scriptEls.length = 0
+  }
+
+  let { script: scripts } = args
+
+  if (typeof scripts === 'string') {
+    scripts = [scripts]
+  }
+
+  for (const script of scripts) {
+    const scriptEl = document.createElement('script')
+    scriptEl.setAttribute('type', 'module')
+    // send ok in the module script to ensure sequential evaluation
+    // of multiple proxy.eval() calls
+    const done = new Promise((resolve) => {
+      window.__next__ = resolve
+    })
+    scriptEl.innerHTML = `${script}\nwindow.__next__()`
+    document.head.appendChild(scriptEl)
+    scriptEl.onerror = (error: any) => {
+      throw error
     }
+    scriptEls.push(scriptEl)
+    await done
+  }
 
-    const appElement = document.getElementById('app')
+  return true
+}
 
-    if (!appElement) {
-      reject(new Error('app element not found'))
-      return
-    }
+async function evalInitialCode() {
+  const code = useShare().getCodeFromUrl()
 
-    const esTerminalElement = document.getElementById('es-terminal')
+  const testsCode = useShare().getTestsCodeFromUrl()
 
-    if (esTerminalElement) {
-      usarTerminal().destroyTerminal()
-      appElement.removeChild(esTerminalElement)
-    }
+  const result = prepareCodeAndTestsForPlayground(code, testsCode)
 
-    setTimeout(() => {
-      const esTerminal = document.createElement('es-terminal')
-      esTerminal.id = 'es-terminal'
-      esTerminal.className = 'w-full h-full absolute inset-0'
-      appElement.appendChild(esTerminal)
+  orchestrator.files[MAIN_FILE] = new OrchestratorFile(
+    MAIN_FILE,
+    '',
+    `${result.imports}\n${result.code}\n`,
+    '',
+  )
 
-      resolve(true)
-    }, 0)
+  orchestrator.files[MAIN_TESTS_FILE] = new OrchestratorFile(
+    MAIN_TESTS_FILE,
+    '',
+    `${result.testsImports}\n${result.testsCode}\n`,
+    '',
+  )
+
+  const modules = compileModulesForPreview([
+    orchestrator.files[MAIN_TESTS_FILE],
+    orchestrator.files[MAIN_FILE],
+  ])
+
+  await evalCode({
+    script: [
+      'const __modules__ = {};',
+      ...modules,
+    ],
   })
 }
 
-export function togglePreview(value: boolean) {
+function clearConsole() {
+  const isDev = window.location.ancestorOrigins.length
+    ? window.location.ancestorOrigins.item(0)?.startsWith('http://localhost:')
+    : window.location.href.startsWith('http://localhost:')
+
+  if (!isDev) {
+    console.clear()
+  }
+}
+
+export function hidePreview(value: boolean) {
   const previewElement = document.getElementById('preview-container')
 
   if (!previewElement) {
@@ -82,12 +141,7 @@ export function previewTab(value: 'console' | 'flowchart' | 'hidden') {
 }
 
 export function setupTheme(theme: 'dark' | 'light') {
-  const htmlElement = document.getElementsByTagName('html')[0]
-
-  if (htmlElement) {
-    htmlElement.classList.remove(theme === 'dark' ? 'light' : 'dark')
-    htmlElement.classList.add(theme === 'dark' ? 'dark' : 'light')
-  }
+  setDarkMode(theme === 'dark')
 
   setErudaTheme(theme)
 
@@ -96,14 +150,35 @@ export function setupTheme(theme: 'dark' | 'light') {
   )
 }
 
-function setupTwind() {
-  setup({
-    mode: 'silent',
-    darkMode: 'class',
-  })
+function setDarkMode(value: boolean) {
+  const htmlElement = document.getElementsByTagName('html')[0]
+
+  htmlElement.classList.toggle('dark', value)
 }
 
 function setupTerminal() {
+  const appElement = document.getElementById('app')
+
+  if (!appElement) {
+    throw new Error('No se ha encontrado el elemento #app')
+  }
+
+  const currentEsTerminalElement = document.getElementById('es-terminal')
+
+  if (currentEsTerminalElement) {
+    usarTerminal().destroyTerminal()
+    appElement.removeChild(currentEsTerminalElement)
+  }
+
+  const newEsTerminalElement = document.createElement('div')
+  newEsTerminalElement.id = 'es-terminal'
+  newEsTerminalElement.className = 'w-full h-full absolute inset-0'
+  appElement.appendChild(newEsTerminalElement)
+
+  usarTerminal().setupTerminal(newEsTerminalElement, {
+    theme: usarTerminal().getThemeConfig(document.getElementsByTagName('html')[0].classList.contains('dark') ? 'dark' : 'light'),
+  })
+
   usarTerminal().fitTerminal()
 }
 

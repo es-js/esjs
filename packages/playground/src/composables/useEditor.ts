@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { splitCodeImports, transpile } from '@es-js/core'
-import { escapeQuotes, obfuscateCode, sanitizeCode } from '@/composables/utils'
+import { obfuscateCode, prepareCode } from '@es-js/compiler'
 
 export const INITIAL_CODE = `/**
   EsJS: JavaScript con sintaxis en Español.
@@ -35,90 +35,32 @@ asincrono funcion inicio() {
 inicio()
 `
 
-const DEFAULT_IMPORTS = 'import { Terminal } from \'@es-js/terminal\''
-
-const DEFAULT_TESTS_IMPORTS = `import { prueba, pruebas, pruebasAsincronas, afirmar, assert, afirmarIguales, afirmarSimilares, afirmarMatricesIguales, afirmarObjetosIguales, afirmarMatricesSimilares, afirmarObjetosSimilares, afirmarVerdadero, afirmarFalso, afirmarDistinto } from '@es-js/prueba'
-`
-
 const code: Ref<string> = ref(INITIAL_CODE)
 
 const testsCode: Ref<string> = ref('')
-
-const output = ref()
 
 const language: Ref<'esjs' | 'js'> = ref('esjs')
 
 export const useEditor = () => {
   function setCode(value: string) {
-    code.value = sanitizeCode(value)
+    code.value = value
   }
 
   function setTestsCode(value: string) {
-    testsCode.value = sanitizeCode(value)
+    testsCode.value = value
   }
 
-  async function execute() {
-    output.value = getTranspiledCode()
-  }
+  function getObfuscatedCode(code: string) {
+    const transpiledCode = transpile(prepareCode(code))
 
-  function getTranspiledCode() {
-    try {
-      const transpiledCode = transpile(code.value)
-      const splittedCode = splitCodeImports(transpiledCode)
-      const transpiledTestsCode = transpile(testsCode.value)
-      const splittedTestsCode = splitCodeImports(transpiledTestsCode)
+    const splittedCode = splitCodeImports(transpiledCode)
 
-      return {
-        defaultImports: DEFAULT_IMPORTS,
-        defaultTestsImports: DEFAULT_TESTS_IMPORTS,
-        codeImports: splittedCode.imports,
-        codeWithoutImports: splittedCode.codeWithoutImports,
-        testsCodeImports: splittedTestsCode.imports,
-        testsCodeWithoutImports: splittedTestsCode.codeWithoutImports,
-      }
-    }
-    catch (error) {
-      const escapedErrorMessage = escapeQuotes(error?.toString())
-      return {
-        defaultImports: DEFAULT_IMPORTS,
-        defaultTestsImports: DEFAULT_TESTS_IMPORTS,
-        codeImports: '',
-        codeWithoutImports: `window._previewException(${error?.lineNumber || 1}, ${error.column || 1}, "${escapedErrorMessage}");
-        throw new Error("${escapedErrorMessage}")`,
-        testsCodeImports: '',
-        testsCodeWithoutImports: '',
-      }
-    }
-  }
-
-  function getObfuscatedCode() {
-    const transpiledCode = getTranspiledCode()
-
-    if (!transpiledCode)
-      return
-
-    const obfuscatedCode = obfuscateCode(transpiledCode.codeWithoutImports)
+    const obfuscatedCode = obfuscateCode(splittedCode.codeWithoutImports)
 
     if (!obfuscatedCode)
       return
 
-    return `${transpiledCode.codeImports}
-
-${obfuscatedCode.getObfuscatedCode()}`
-  }
-
-  function getObfuscatedTestsCode() {
-    const transpiledCode = getTranspiledCode()
-
-    if (!transpiledCode)
-      return
-
-    const obfuscatedCode = obfuscateCode(transpiledCode.testsCodeWithoutImports)
-
-    if (!obfuscatedCode)
-      return
-
-    return `${transpiledCode.testsCodeImports}
+    return `${splittedCode.imports}
 
 ${obfuscatedCode.getObfuscatedCode()}`
   }
@@ -130,12 +72,9 @@ ${obfuscatedCode.getObfuscatedCode()}`
   return {
     code,
     testsCode,
-    output,
-    execute,
     setCode,
     setTestsCode,
     getObfuscatedCode,
-    getObfuscatedTestsCode,
     toggleLanguage,
     language,
   }

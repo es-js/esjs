@@ -1,0 +1,47 @@
+{
+  "name": "@es-js/compiler",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch": "concurrently \"tsc --watch\" \"vite build --watch\"",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "publish": "pnpm build && pnpm publish"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.34.2",
+    "@babel/types": "^7.22.5",
+    "@es-js/core": "workspace:^",
+    "@types/escodegen": "^0.0.7",
+    "@types/prettier": "^2.7.3",
+    "@vue/compiler-sfc": "^3.3.4",
+    "concurrently": "^8.2.0",
+    "escodegen": "^2.1.0",
+    "eslint": "^8.43.0",
+    "espree": "^9.6.0",
+    "javascript-obfuscator": "^4.0.2",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.6",
+    "vite": "^4.3.9",
+    "vitest": "^0.32.2"
+  },
+  "type": "module",
+  "main": "./dist/compiler.mjs",
+  "module": "./dist/compiler.js",
+  "types": "./types/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/compiler.js",
+      "require": "./dist/compiler.mjs"
+    },
+    "./orchestrator": {
+      "import": "./dist/orchestrator.js",
+      "require": "./dist/orchestrator.mjs"
+    }
+  },
+  "files": [
+    "/dist",
+    "/types"
+  ]
+}

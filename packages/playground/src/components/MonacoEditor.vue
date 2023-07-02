@@ -133,10 +133,10 @@ async function obfuscate() {
   let obfuscatedCode: string
   switch (props.name) {
     case 'code':
-      obfuscatedCode = useEditor().getObfuscatedCode() ?? ''
+      obfuscatedCode = useEditor().getObfuscatedCode(useEditor().code.value) ?? ''
       break
     case 'tests':
-      obfuscatedCode = useEditor().getObfuscatedTestsCode() ?? ''
+      obfuscatedCode = useEditor().getObfuscatedCode(useEditor().testsCode.value) ?? ''
       break
     default:
       return null

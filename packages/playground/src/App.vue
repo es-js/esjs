@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import debounce from 'lodash.debounce'
 import { useEditor } from '@/composables/useEditor'
-import { useShare } from '@/composables/useShare'
 import { useSettings } from '@/composables/useSettings'
 import AppNotifications from '@/components/shared/AppNotifications.vue'
 import TopBar from '@/components/navigation/TopBar.vue'
 
 const bus = useEventBus('editor_code')
-
-const share = useShare()
 
 const settings = useSettings()
 
@@ -31,37 +27,9 @@ function handleWindowClose($event: any) {
   $event.returnValue = ''
 }
 
-async function setCodeFromUrl() {
-  const { pathname, tests } = share.decodeSharedUrl()
-
-  const code = await share.getCodeFromPathname(pathname)
-
-  editor.setCode(code)
-
-  if (tests)
-    editor.setTestsCode(tests)
-}
-
-const onCodeChangeDebounced = debounce(() => {
-  editor.execute()
-}, 600)
-
 onMounted(async () => {
   window.addEventListener('beforeunload', handleWindowClose)
   window.addEventListener('keyup', handleWindowKeyup)
-
-  share.setSettingsFromUrl()
-  await setCodeFromUrl()
-  await editor.execute()
-  watch(
-    [editor.code, editor.testsCode],
-    () => {
-      if (!settings.settings.value.autoCompile)
-        return
-
-      onCodeChangeDebounced()
-    },
-  )
 })
 
 onBeforeUnmount(() => {

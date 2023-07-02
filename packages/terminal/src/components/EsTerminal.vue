@@ -34,12 +34,5 @@ onBeforeUnmount(() => {
 </template>
 
 <style>
-@import 'xterm/css/xterm.css';
-.xterm {
-  height: 100%;
-}
-.xterm-viewport {
-  border-radius: 0.25rem;
-  overflow-y: auto !important;
-}
+@import '../style.css';
 </style>

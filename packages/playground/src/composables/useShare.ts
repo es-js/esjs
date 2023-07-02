@@ -64,7 +64,7 @@ export const useShare = () => {
 
     return {
       pathname: url.pathname,
-      tests: lzs.decompressFromEncodedURIComponent(url.searchParams.get('tests') ?? ''),
+      tests: getTestsCodeFromUrl(),
       layout: url.searchParams.get('layout'),
       hideOptions: url.searchParams.get('hideOptions'),
       hideEditor: url.searchParams.get('hideEditor'),
@@ -91,7 +91,11 @@ export const useShare = () => {
     }
   }
 
-  async function getCodeFromPathname(pathname: string): Promise<string> {
+  async function getCodeFromUrl(): Promise<string> {
+    const url = new URL(window.location.href)
+
+    const { pathname } = url
+
     if (pathname === '/')
       return INITIAL_CODE
 
@@ -112,6 +116,12 @@ export const useShare = () => {
       useNotification().error(error.toString())
       return INITIAL_CODE
     }
+  }
+
+  function getTestsCodeFromUrl(): string | null {
+    const url = new URL(window.location.href)
+
+    return lzs.decompressFromEncodedURIComponent(url.searchParams.get('tests') ?? '')
   }
 
   async function getCodeFromGithub(githubUrl: string) {
@@ -161,11 +171,24 @@ export const useShare = () => {
     settings.setPreviewTab(previewTab)
   }
 
+  async function setCodeFromUrl() {
+    const code = await getCodeFromUrl()
+
+    const testsCode = getTestsCodeFromUrl()
+
+    useEditor().setCode(code)
+
+    if (testsCode)
+      useEditor().setTestsCode(testsCode)
+  }
+
   return {
     shareCode,
     shareModule,
     decodeSharedUrl,
-    getCodeFromPathname,
+    getCodeFromUrl,
+    getTestsCodeFromUrl,
     setSettingsFromUrl,
+    setCodeFromUrl,
   }
 }
