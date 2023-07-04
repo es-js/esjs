@@ -36,7 +36,10 @@ export const useShare = () => {
   }
 
   function getSharedUrl(code: string, testsCode: string | null = null): URL {
-    const url = new URL(lzs.compressToEncodedURIComponent(code), window.location.origin)
+    const url = new URL('/', window.location.origin)
+
+    if (code !== INITIAL_CODE)
+      url.searchParams.set('code', lzs.compressToEncodedURIComponent(code))
 
     if (testsCode)
       url.searchParams.set('tests', lzs.compressToEncodedURIComponent(testsCode))
@@ -96,8 +99,10 @@ export const useShare = () => {
 
     const { pathname } = url
 
-    if (pathname === '/')
-      return INITIAL_CODE
+    if (url.searchParams.get('code') !== null && url.searchParams.get('code') !== '') {
+      const code = url.searchParams.get('code')
+      return lzs.decompressFromEncodedURIComponent(code)
+    }
 
     try {
       if (pathname.includes('/github/')) {
@@ -110,7 +115,10 @@ export const useShare = () => {
         return await getCodeFromGist(gistUrl)
       }
 
-      return lzs.decompressFromEncodedURIComponent(pathname.substring(1))
+      if (pathname.length > 6)
+        return lzs.decompressFromEncodedURIComponent(pathname.substring(1))
+
+      return INITIAL_CODE
     }
     catch (error: any) {
       useNotification().error(error.toString())
