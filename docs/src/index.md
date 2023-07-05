@@ -1,7 +1,7 @@
 ---
 layout: home
 title: EsJS
-titleTemplate: JavaScript con sintaxis en Español
+titleTemplate: Lenguaje de programación con sintaxis en Español basado en JavaScript
 sidebar: false
 ---
 
