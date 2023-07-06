@@ -98,7 +98,7 @@ async function evalInitialCode() {
 }
 
 function clearConsole() {
-  const isDev = window.location.ancestorOrigins.length
+  const isDev = window && window.location && window.location.ancestorOrigins && window.location.ancestorOrigins.length
     ? window.location.ancestorOrigins.item(0)?.startsWith('http://localhost:')
     : window.location.href.startsWith('http://localhost:')
 
