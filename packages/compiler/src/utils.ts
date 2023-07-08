@@ -17,6 +17,9 @@ class PrepareCodeError extends Error {
 
 export function prepareCode(code: string) {
   try {
+    if (!code.endsWith('\n'))
+      code += '\n'
+
     code = transpile(code)
     code = formatCode(code) // TODO: Es necesario?.
     code = addExportToFunctions(code)
@@ -30,17 +33,6 @@ export function prepareCode(code: string) {
 
     throw new PrepareCodeError(errorMessage, line, column)
   }
-}
-
-/**
- * TODO: Eliminar.
- * @param code
- */
-export function sanitizeCode(code: string) {
-  if (!code.endsWith('\n'))
-    code += '\n'
-
-  return code
 }
 
 /**
