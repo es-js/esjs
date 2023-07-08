@@ -42,6 +42,8 @@ export const usarTerminal = () => {
 
     xterm.mount(terminalElement)
 
+    xterm.pause()
+
     xterm.on('data', async (data: any) => {
       if (!readingValue.value)
         return
@@ -129,6 +131,7 @@ export const usarTerminal = () => {
   }
 
   function resetWriteBuffer() {
+    xterm?.pause()
     readingValue.value = false
     readingSecret.value = false
     readingEnter.value = false
@@ -136,6 +139,8 @@ export const usarTerminal = () => {
   }
 
   async function leer(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
+    xterm?.resume()
+
     currentPrompt = pregunta
     readingValue.value = true
 
