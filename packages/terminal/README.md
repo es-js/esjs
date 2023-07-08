@@ -1,3 +1,3 @@
 # @es-js/terminal
 
-Componente que implementa XTerm.js y permite escribir/leer datos.
+Componente que renderiza una Terminal en el navegador, y permite escribir/leer datos. Basado en [xterminal](https://github.com/henryhale/xterminal).

@@ -44,7 +44,7 @@ function toggleTerminal() {
 }
 
 function updateTheme(theme: 'dark' | 'light') {
-  Terminal.setTheme(Terminal.getThemeConfig(theme))
+  Terminal.setTheme(theme)
 }
 
 watch(isDark, (value) => {

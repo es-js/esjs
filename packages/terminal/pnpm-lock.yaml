@@ -13,9 +13,6 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.31.1
     version: 0.31.1(eslint@8.22.0)(typescript@4.9.5)
-  '@types/lodash.debounce':
-    specifier: ^4.0.7
-    version: 4.0.7
   '@types/node':
     specifier: ^18.16.18
     version: 18.16.18
@@ -31,15 +28,9 @@ devDependencies:
   is-number:
     specifier: ^7.0.0
     version: 7.0.0
-  lodash.debounce:
-    specifier: ^4.0.8
-    version: 4.0.8
   p-cancelable:
     specifier: ^4.0.1
     version: 4.0.1
-  strip-ansi:
-    specifier: ^7.1.0
-    version: 7.1.0
   typescript:
     specifier: ^4.9.5
     version: 4.9.5
@@ -52,15 +43,9 @@ devDependencies:
   vue-tsc:
     specifier: ^1.8.1
     version: 1.8.1(typescript@4.9.5)
-  xterm:
-    specifier: ^5.2.1
-    version: 5.2.1
-  xterm-addon-fit:
-    specifier: ^0.7.0
-    version: 0.7.0(xterm@5.2.1)
-  xterm-addon-web-links:
-    specifier: ^0.8.0
-    version: 0.8.0(xterm@5.2.1)
+  xterminal:
+    specifier: ^2.0.0
+    version: 2.0.0
 
 packages:
 
@@ -581,16 +566,6 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/lodash.debounce@4.0.7:
-    resolution: {integrity: sha512-X1T4wMZ+gT000M2/91SYj0d/7JfeNZ9PeeOldSNoE/lunLeQXKvkmIumI29IaKMotU/ln/McOIvgzZcQ/3TrSA==}
-    dependencies:
-      '@types/lodash': 4.14.195
-    dev: true
-
-  /@types/lodash@4.14.195:
-    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==}
-    dev: true
-
   /@types/mdast@3.0.11:
     resolution: {integrity: sha512-Y/uImid8aAwrEA24/1tcRZwpxX3pIFTSilcNDKSPn+Y2iDywSEachzRuvgAYYLR3wpGXAsMbv5lvKLDZLeYPAw==}
     dependencies:
@@ -928,11 +903,6 @@ packages:
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
-    dev: true
-
-  /ansi-regex@6.0.1:
-    resolution: {integrity: sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==}
-    engines: {node: '>=12'}
     dev: true
 
   /ansi-styles@3.2.1:
@@ -2293,10 +2263,6 @@ packages:
       p-locate: 5.0.0
     dev: true
 
-  /lodash.debounce@4.0.8:
-    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-    dev: true
-
   /lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
     dev: true
@@ -2851,13 +2817,6 @@ packages:
       ansi-regex: 5.0.1
     dev: true
 
-  /strip-ansi@7.1.0:
-    resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      ansi-regex: 6.0.1
-    dev: true
-
   /strip-bom@3.0.0:
     resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
     engines: {node: '>=4'}
@@ -3191,24 +3150,9 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /xterm-addon-fit@0.7.0(xterm@5.2.1):
-    resolution: {integrity: sha512-tQgHGoHqRTgeROPnvmtEJywLKoC/V9eNs4bLLz7iyJr1aW/QFzRwfd3MGiJ6odJd9xEfxcW36/xRU47JkD5NKQ==}
-    peerDependencies:
-      xterm: ^5.0.0
-    dependencies:
-      xterm: 5.2.1
-    dev: true
-
-  /xterm-addon-web-links@0.8.0(xterm@5.2.1):
-    resolution: {integrity: sha512-J4tKngmIu20ytX9SEJjAP3UGksah7iALqBtfTwT9ZnmFHVplCumYQsUJfKuS+JwMhjsjH61YXfndenLNvjRrEw==}
-    peerDependencies:
-      xterm: ^5.0.0
-    dependencies:
-      xterm: 5.2.1
-    dev: true
-
-  /xterm@5.2.1:
-    resolution: {integrity: sha512-cs5Y1fFevgcdoh2hJROMVIWwoBHD80P1fIP79gopLHJIE4kTzzblanoivxTiQ4+92YM9IxS36H1q0MxIJXQBcA==}
+  /xterminal@2.0.0:
+    resolution: {integrity: sha512-9nxgQW42HykOYLv2DyO3hu2Pe5ztjLKDqYmC68xq9/rYrbO6RSgTSNn4B4cYAUbra1STl1BjdvPwPTvbTdltfA==}
+    engines: {node: '>=14'}
     dev: true
 
   /yallist@4.0.0:

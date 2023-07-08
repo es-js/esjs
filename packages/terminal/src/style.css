@@ -1,9 +1,11 @@
-@import 'xterm/css/xterm.css';
+@import 'xterminal/dist/xterminal.css';
 
-.xterm {
-    height: 100%;
+:root {
+    --xt-bg: #ffffff;
+    --xt-fg: #000000;
 }
-.xterm-viewport {
-    border-radius: 0.25rem;
-    overflow-y: auto !important;
+
+.dark {
+    --xt-bg: #121212;
+    --xt-fg: #efefef;
 }

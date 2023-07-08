@@ -12,10 +12,12 @@ import { useShare } from './useShare.ts'
 
 const scriptEls: HTMLScriptElement[] = []
 
+let theme: 'dark' | 'light' = 'dark'
+
 export async function init() {
   const options = useShare().getOptionsFromUrl()
 
-  setDarkMode(options.theme === 'dark')
+  setupTheme(options.theme)
 
   await setupEruda()
 
@@ -27,7 +29,7 @@ export async function init() {
 }
 
 export async function evalCode(args: any) {
-  setupTerminal()
+  setupEsJSTerminal()
   clearConsole()
 
   if (scriptEls.length) {
@@ -130,33 +132,27 @@ export function hidePreview(value: boolean) {
   if (getActiveTab() !== 'hidden') {
     openEruda()
   }
-
-  usarTerminal().fitTerminal()
 }
 
 export function previewTab(value: 'console' | 'flowchart' | 'hidden') {
   setActiveTab(value)
-
-  usarTerminal().fitTerminal()
 }
 
-export function setupTheme(theme: 'dark' | 'light') {
-  setDarkMode(theme === 'dark')
+export function setupTheme(value: 'dark' | 'light') {
+  theme = value || 'dark'
+
+  const htmlElement = document.getElementsByTagName('html')?.[0]
+
+  if (htmlElement) {
+    htmlElement.classList.toggle('dark', theme === 'dark')
+  }
 
   setErudaTheme(theme)
 
-  usarTerminal().setTheme(
-    usarTerminal().getThemeConfig(theme),
-  )
+  usarTerminal().setTheme(theme)
 }
 
-function setDarkMode(value: boolean) {
-  const htmlElement = document.getElementsByTagName('html')[0]
-
-  htmlElement.classList.toggle('dark', value)
-}
-
-function setupTerminal() {
+function setupEsJSTerminal() {
   const appElement = document.getElementById('app')
 
   if (!appElement) {
@@ -176,10 +172,8 @@ function setupTerminal() {
   appElement.appendChild(newEsTerminalElement)
 
   usarTerminal().setupTerminal(newEsTerminalElement, {
-    theme: usarTerminal().getThemeConfig(document.getElementsByTagName('html')[0].classList.contains('dark') ? 'dark' : 'light'),
+    theme,
   })
-
-  usarTerminal().fitTerminal()
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

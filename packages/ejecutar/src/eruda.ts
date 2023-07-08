@@ -8,6 +8,8 @@ let activePreviewTab: 'console' | 'flowchart' | 'hidden' = 'console'
 
 const flowchartSvg = ''
 
+let initialized = false
+
 export function setupEruda() {
   const erudaContainerElement = document.getElementById('eruda-container')
   const showFlowchart = false
@@ -44,6 +46,8 @@ export function setupEruda() {
   setActiveTab(activePreviewTab)
 
   fixDevToolsPadding()
+
+  initialized = true
 }
 
 export function changeSize(value: number) {
@@ -79,7 +83,7 @@ export function setActiveTab(value: 'console' | 'flowchart' | 'hidden') {
 }
 
 export function setErudaTheme(theme: 'dark' | 'light') {
-  if (!eruda || !eruda.get()) {
+  if (!initialized || !eruda || !eruda.get()) {
     return
   }
 

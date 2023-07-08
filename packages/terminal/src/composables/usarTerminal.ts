@@ -1,22 +1,22 @@
-import type { IDisposable, ITerminalInitOnlyOptions, ITerminalOptions, ITheme } from 'xterm'
-import { Terminal } from 'xterm'
-import { FitAddon } from 'xterm-addon-fit'
-import { WebLinksAddon } from 'xterm-addon-web-links'
 import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
 import isNumber from 'is-number'
-import stripAnsi from 'strip-ansi'
+import XTerminal from 'xterminal'
 import PCancelable from 'p-cancelable'
-import { clearLine, handleBackspace, isPrintableKeyCode, prompt } from '../utils/xtermUtils'
 
-let xterm: Terminal | null = null
-let fitAddon: FitAddon | null = null
+let xterm: XTerminal | null = null
+
+const innerBuffer: Ref<string | null> = ref(null)
 const buffer: Ref<string | null> = ref(null)
+
+const readingValue: Ref<boolean> = ref(false)
 const readingSecret: Ref<boolean> = ref(false)
 const readingEnter: Ref<boolean> = ref(false)
+
 const watchers: Ref<(() => void)[]> = ref([])
-const disposables: Ref<IDisposable[]> = ref([])
 const cancelablePromises: Ref<PCancelable<any>[]> = ref([])
+
+let terminalElement: HTMLElement | null = null
 
 export enum ExpectedResult {
   porDefecto,
@@ -24,62 +24,94 @@ export enum ExpectedResult {
   numero,
 }
 
+const PREGUNTA_POR_DEFECTO = '> '
+
+let currentPrompt: string = PREGUNTA_POR_DEFECTO
+
 export const usarTerminal = () => {
-  function setupTerminal(terminalElement: HTMLElement, options?: ITerminalOptions & ITerminalInitOnlyOptions) {
-    xterm = new Terminal({
-      cursorBlink: true,
-      disableStdin: true,
-      convertEol: true,
-      ...options,
-    })
+  function setupTerminal(elementOrId: HTMLElement | string, options: any = {}) {
+    if (typeof elementOrId === 'string')
+      elementOrId = document.querySelector(elementOrId) as HTMLElement
 
-    disposables.value.push(xterm.onData(onDataHandler))
-
-    fitAddon = new FitAddon()
-    xterm.loadAddon(fitAddon)
-    xterm.loadAddon(new WebLinksAddon())
-
-    xterm.open(terminalElement)
-
-    fitTerminal()
-
-    disposables.value.push(xterm.onKey(onKeyHandler()))
-  }
-
-  function onDataHandler(data: any) {
-    if (data && data[0] === '\x7F')
+    if (!elementOrId)
       return
 
-    xterm?.write(data)
+    terminalElement = elementOrId
+
+    xterm = new XTerminal()
+
+    xterm.mount(terminalElement)
+
+    xterm.on('data', async (data: any) => {
+      if (!readingValue.value)
+        return
+
+      if (readingEnter.value) {
+        buffer.value = Math.random().toString()
+      }
+      else if (readingSecret.value) {
+        if (data.trim() === '' && innerBuffer.value?.trim() === '') {
+          xterm?.writeln('')
+          await leer(currentPrompt)
+          return
+        }
+
+        buffer.value = innerBuffer.value
+        xterm?.writeln('')
+      }
+      else if (data.trim() === '') {
+        xterm?.writeln('')
+        await leer(currentPrompt)
+      }
+      else {
+        buffer.value = data
+        xterm?.writeln(data)
+      }
+    })
+
+    xterm.on('keypress', (event: any) => {
+      if (readingEnter.value) {
+        event.cancel()
+      }
+      else if (readingSecret.value) {
+        const key = event.key.toLowerCase()
+
+        if (key === 'backspace') {
+          event.cancel()
+
+          if (innerBuffer.value && innerBuffer.value.length > 0)
+            innerBuffer.value = innerBuffer.value.substr(0, innerBuffer.value.length - 1)
+
+          xterm?.clearLast()
+          xterm?.write(`${currentPrompt}${'*'.repeat(innerBuffer.value?.length || 1)}`)
+          return
+        }
+
+        const hasModifier = event.altKey || event.ctrlKey || event.metaKey
+
+        if (key.length !== 1 || hasModifier) {
+          event.cancel()
+          return
+        }
+
+        event.cancel()
+        xterm?.clearLast()
+        xterm?.write(`${currentPrompt}${'*'.repeat(innerBuffer.value?.length || 1)}`)
+        innerBuffer.value += event.key
+      }
+    })
+
+    setTheme(options.theme || 'dark')
   }
 
   function destroyTerminal() {
     watchers.value.map(unwatch => unwatch())
     watchers.value = []
 
-    disposables.value.map(disposable => disposable.dispose())
-    disposables.value = []
-
     cancelablePromises.value.map(cancelablePromise => cancelablePromise.cancel())
-
     cancelablePromises.value = []
 
-    if (xterm) {
-      xterm.dispose()
-      xterm = null
-    }
-
-    if (fitAddon) {
-      fitAddon.dispose()
-      fitAddon = null
-    }
-  }
-
-  function fitTerminal() {
-    if (!fitAddon)
-      return
-
-    fitAddon.fit()
+    xterm?.dispose()
   }
 
   function escribir(...args: any[]) {
@@ -88,64 +120,50 @@ export const usarTerminal = () => {
 
       switch (type) {
         case 'object':
-          return writeOnXterm(JSON.stringify(arg, null, 2))
+          return xterm?.writeln(JSON.stringify(arg, null, 2))
 
         default:
-          return writeOnXterm(String(arg))
+          return xterm?.writeln(String(arg))
       }
     })
   }
 
-  function writeOnXterm(value: string): void {
-    if (!xterm)
-      return
-
-    return xterm.writeln(value)
-  }
-
   function resetWriteBuffer() {
+    readingValue.value = false
     readingSecret.value = false
     readingEnter.value = false
-
-    if (xterm)
-      xterm.options.disableStdin = true
+    currentPrompt = PREGUNTA_POR_DEFECTO
   }
 
-  async function leer(tipo: ExpectedResult = ExpectedResult.porDefecto) {
+  async function leer(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
+    currentPrompt = pregunta
+    readingValue.value = true
+
     const promise = new PCancelable((resolve: any, reject: any, onCancel: any) => {
       if (!xterm)
-        return
+        return reject(new Error('Terminal not initialized'))
 
       onCancel.shouldReject = false
       onCancel(() => {
         resetWriteBuffer()
       })
 
-      xterm.options.disableStdin = false
+      xterm.write(pregunta)
+      xterm.focus()
 
-      buffer.value = null
+      const watcher = watch(buffer, (value) => {
+        watcher()
+        resetWriteBuffer()
+        watchers.value = watchers.value.filter(w => w !== watcher)
+        cancelablePromises.value = cancelablePromises.value.filter(p => p !== promise)
 
-      if (!readingEnter.value)
-        prompt(xterm)
+        if (readingEnter.value)
+          resolve(null)
+        else
+          resolve(handleResult(value ?? '', tipo))
+      })
 
-      const unwatch = watch(
-        buffer,
-        (value) => {
-          if (value === null || !xterm)
-            return
-
-          resolve(handleResult(value, tipo))
-
-          resetWriteBuffer()
-
-          unwatch()
-
-          watchers.value = watchers.value.filter(w => w !== unwatch)
-          cancelablePromises.value = cancelablePromises.value.filter(p => p !== promise)
-        },
-      )
-
-      watchers.value.push(unwatch)
+      watchers.value.push(watcher)
     })
 
     cancelablePromises.value.push(promise)
@@ -153,116 +171,33 @@ export const usarTerminal = () => {
     return promise
   }
 
-  function leerCadena() {
-    return leer(ExpectedResult.cadena)
+  function leerCadena(pregunta = PREGUNTA_POR_DEFECTO) {
+    return leer(pregunta, ExpectedResult.cadena)
   }
 
-  function leerNumero() {
-    return leer(ExpectedResult.numero)
+  function leerNumero(pregunta = PREGUNTA_POR_DEFECTO) {
+    return leer(pregunta, ExpectedResult.numero)
   }
 
-  function leerSecreto(tipo: ExpectedResult = ExpectedResult.porDefecto) {
+  function leerSecreto(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
+    innerBuffer.value = ''
     readingSecret.value = true
-    return leer(tipo)
+    return leer(pregunta, tipo)
   }
 
-  function leerEnter(tipo: ExpectedResult = ExpectedResult.porDefecto) {
+  function leerEnter(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
     readingEnter.value = true
-    return leer(tipo)
+    return leer(pregunta, tipo)
   }
 
   function limpiar() {
-    if (!xterm)
-      return
-
-    xterm.write('\x1Bc') // TODO: Replace with `xterm.clear()` when EsJS Transpiler fixed.
-  }
-
-  function onKeyHandler() {
-    let innerBuffer = ''
-
-    return async (event: { key: string; domEvent: KeyboardEvent }) => {
-      if (!xterm)
-        return
-
-      switch (event.domEvent.key) {
-        case 'c': {
-          if (event.domEvent.ctrlKey) {
-            prompt(xterm)
-            innerBuffer = ''
-          }
-          break
-        }
-
-        case 'v': {
-          if (event.domEvent.ctrlKey) {
-            try {
-              const text = await window?.navigator?.clipboard?.readText()
-              innerBuffer += text
-              xterm.write(text)
-            }
-            catch (error) {}
-          }
-
-          break
-        }
-
-        case 'l': {
-          if (event.domEvent.ctrlKey)
-            limpiar()
-
-          break
-        }
-
-        case 'Backspace': {
-          innerBuffer = handleBackspace(xterm, innerBuffer)
-          return
-        }
-
-        case 'Enter': {
-          innerBuffer = innerBuffer.trim()
-
-          if (innerBuffer.length === 0 && !readingEnter.value) {
-            innerBuffer = ''
-            return
-          }
-
-          buffer.value = innerBuffer
-
-          if (!readingEnter.value)
-            xterm.writeln('')
-
-          innerBuffer = ''
-        }
-      }
-
-      if (xterm.options.disableStdin)
-        return
-
-      const hasModifier = event.domEvent.altKey || event.domEvent.ctrlKey || event.domEvent.metaKey
-
-      if (!hasModifier && isPrintableKeyCode(event.domEvent.keyCode)) {
-        innerBuffer += event.key
-
-        if (readingSecret.value) {
-          setTimeout(() => {
-            clearLine(xterm)
-            xterm?.write(`> ${''.padStart(innerBuffer.length, '*')}`)
-          })
-        }
-        else if (readingEnter.value) {
-          setTimeout(() => {
-            clearLine(xterm)
-          })
-        }
-      }
-    }
+    xterm?.clear()
   }
 
   function handleResult(value: string, expectedResult: ExpectedResult): string | number {
     switch (expectedResult) {
       case ExpectedResult.cadena:
-        return String(value)
+        return String(value.trim())
 
       case ExpectedResult.numero:
         return Number(value)
@@ -272,124 +207,28 @@ export const usarTerminal = () => {
         if (isNumber(value))
           return handleResult(value, ExpectedResult.numero)
 
-        return value
+        return handleResult(value, ExpectedResult.cadena)
     }
   }
 
   function centrar(texto: string) {
-    const anchoTerminal = xterm?.cols || 80
-    const lineas = texto.trim().split('\n')
-    const espaciosPorLinea = lineas.map((linea) => {
-      const longitudLinea = stripAnsi(linea).length
-
-      if (longitudLinea >= anchoTerminal)
-        return ''
-
-      const espacios = anchoTerminal - longitudLinea
-
-      return ' '.repeat(Math.floor(espacios / 2))
-    })
-    const resultado = lineas.map((linea, i) => {
-      const espacios = espaciosPorLinea[i]
-      return espacios + linea + espacios
-    })
-    return resultado.join('\n')
+    return `<div style="text-align: center;">${texto}</div>`
   }
 
   function alinearIzquierda(texto: string) {
-    const anchoTerminal = xterm?.cols || 80
-    const lineas = texto.trim().split('\n')
-    const resultado = lineas.map((linea) => {
-      const longitudLinea = stripAnsi(linea).length
-      const espacios = anchoTerminal - longitudLinea
-      return linea + ' '.repeat(espacios)
-    })
-    return resultado.join('\n')
+    return `<div style="text-align: left;">${texto}</div>`
   }
 
   function alinearDerecha(texto: string) {
-    const anchoTerminal = xterm?.cols || 80
-    const lineas = texto.trim().split('\n')
-    const resultado = lineas.map((linea) => {
-      const longitudLinea = stripAnsi(linea).length
-      const espacios = anchoTerminal - longitudLinea
-      return ' '.repeat(espacios) + linea
-    })
-    return resultado.join('\n')
+    return `<div style="text-align: right;">${texto}</div>`
   }
 
   function justificar(texto: string) {
-    const anchoTerminal = xterm?.cols || 80
-    const lineas = texto.trim().split('\n')
-    const resultado = lineas.map((linea) => {
-      const palabras = linea.split(' ')
-      const longitudPalabras = palabras.map(palabra => stripAnsi(palabra).length)
-      const longitudTotal = longitudPalabras.reduce((a, b) => a + b, 0)
-      const espaciosFaltantes = anchoTerminal - longitudTotal
-      const cantidadEspacios = palabras.length - 1
-      const espaciosPorPalabra = cantidadEspacios > 0 ? Math.floor(espaciosFaltantes / cantidadEspacios) : 0
-      const espaciosExtra = cantidadEspacios > 0 ? espaciosFaltantes % cantidadEspacios : 0
-      const espaciosEntrePalabras = ' '.repeat(espaciosPorPalabra)
-      const resultadoPalabras = palabras.map((palabra, i) => {
-        const espaciosExtraPalabra = i < espaciosExtra ? 1 : 0
-        return palabra + espaciosEntrePalabras + ' '.repeat(espaciosExtraPalabra + espaciosPorPalabra)
-      })
-      return resultadoPalabras.join('')
-    })
-    return resultado.join('\n')
+    return `<div style="text-align: justify;">${texto}</div>`
   }
 
-  function setTheme(theme: ITheme) {
-    if (!xterm)
-      return
-
-    xterm.options.theme = theme
-  }
-
-  function getThemeConfig(theme: 'dark' | 'light') {
-    return theme === 'dark'
-      ? {
-          foreground: '#e5e5e5',
-          background: '#121212',
-          cursor: '#c7d2fe',
-          black: '#212121',
-          brightBlack: '#424242',
-          red: '#b7141f',
-          brightRed: '#e83b3f',
-          green: '#457b24',
-          brightGreen: '#7aba3a',
-          yellow: '#f6981e',
-          brightYellow: '#ffea2e',
-          blue: '#134eb2',
-          brightBlue: '#54a4f3',
-          magenta: '#560088',
-          brightMagenta: '#aa4dbc',
-          cyan: '#0e717c',
-          brightCyan: '#26bbd1',
-          white: '#efefef',
-          brightWhite: '#d9d9d9',
-        }
-      : {
-          foreground: '#232322',
-          background: '#ffffff',
-          cursor: '#c7d2fe',
-          black: '#212121',
-          brightBlack: '#424242',
-          red: '#b7141f',
-          brightRed: '#e83b3f',
-          green: '#457b24',
-          brightGreen: '#7aba3a',
-          yellow: '#f6981e',
-          brightYellow: '#ffea2e',
-          blue: '#134eb2',
-          brightBlue: '#54a4f3',
-          magenta: '#560088',
-          brightMagenta: '#aa4dbc',
-          cyan: '#0e717c',
-          brightCyan: '#26bbd1',
-          white: '#efefef',
-          brightWhite: '#d9d9d9',
-        }
+  function setTheme(theme: 'dark' | 'light') {
+    terminalElement?.classList.toggle('dark', theme === 'dark')
   }
 
   return {
@@ -402,7 +241,6 @@ export const usarTerminal = () => {
     leerEnter,
     setupTerminal,
     destroyTerminal,
-    fitTerminal,
     limpiar,
     clear: limpiar,
     centrar,
@@ -410,6 +248,5 @@ export const usarTerminal = () => {
     alinearDerecha,
     justificar,
     setTheme,
-    getThemeConfig,
   }
 }
