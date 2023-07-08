@@ -1,6 +1,6 @@
 {
   "name": "@es-js/tiza",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Librería para colorear/estilizar texto en la Terminal, basada en chalk-dom",
   "scripts": {
     "dev": "vite",

@@ -158,4 +158,4 @@ class Tiza {
   }
 }
 
-export default new Tiza()
+export const tiza = new Tiza()
