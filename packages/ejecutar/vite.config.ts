@@ -12,14 +12,14 @@ export default defineConfig({
               imports: {
                 '@es-js/terminal': 'http://localhost:5174/src/main.ts',
                 '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
-                '@es-js/tiza': 'http://localhost:5175/src/index.js',
+                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.1/+esm',
               },
             },
           ]
         : [
             {
               imports: {
-                '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.2/dist/terminal.es.js/+esm',
+                '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.3/dist/terminal.es.js/+esm',
                 '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
                 '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.1/+esm',
               },

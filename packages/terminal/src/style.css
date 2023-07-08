@@ -9,3 +9,13 @@
     --xt-bg: #121212;
     --xt-fg: #efefef;
 }
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.xt-cursor {
+    animation: blink 1s linear infinite;
+}
