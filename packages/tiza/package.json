@@ -20,8 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.3",
-    "eslint": "^8.43.0",
-    "vite": "^4.3.9",
+    "eslint": "^8.44.0",
+    "vite": "^4.4.2",
     "vitest": "^0.25.8"
   },
   "eslintConfig": {
