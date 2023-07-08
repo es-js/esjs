@@ -149,7 +149,6 @@ export const usarTerminal = () => {
       })
 
       xterm.write(pregunta)
-      xterm.focus()
 
       const watcher = watch(buffer, (value) => {
         watcher()
@@ -231,6 +230,10 @@ export const usarTerminal = () => {
     terminalElement?.classList.toggle('dark', theme === 'dark')
   }
 
+  function enfocar(): void {
+    xterm?.focus()
+  }
+
   return {
     escribir,
     log: escribir,
@@ -248,5 +251,6 @@ export const usarTerminal = () => {
     alinearDerecha,
     justificar,
     setTheme,
+    enfocar,
   }
 }
