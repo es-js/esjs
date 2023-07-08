@@ -1,8 +1,9 @@
 {
   "name": "@es-js/tiza",
-  "version": "0.0.5",
-  "description": "Librería para colorear/estilizar texto en la consola",
+  "version": "1.0.0-beta.1",
+  "description": "Librería para colorear/estilizar texto en la Terminal, basada en chalk-dom",
   "scripts": {
+    "dev": "vite",
     "build": "vite build",
     "test": "vitest",
     "test:run": "vitest run"
@@ -10,6 +11,7 @@
   "keywords": [
     "esjs",
     "tiza",
+    "chalk-dom",
     "chalk",
     "consola",
     "colorear",
@@ -18,9 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.3",
-    "chalk": "^5.2.0",
     "eslint": "^8.43.0",
-    "path": "^0.12.7",
     "vite": "^4.3.9",
     "vitest": "^0.25.8"
   },
