@@ -21,7 +21,7 @@ export default defineConfig({
               imports: {
                 '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.4/dist/terminal.es.js/+esm',
                 '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
-                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.2/+esm',
+                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.2',
               },
             },
           ]),
