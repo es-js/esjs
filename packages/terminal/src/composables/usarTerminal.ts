@@ -18,10 +18,10 @@ let cancelablePromises: PCancelable<any>[] = []
 
 let terminalElement: HTMLElement | null = null
 
-export enum ExpectedResult {
-  porDefecto,
-  cadena,
-  numero,
+export enum ResultadoEsperado {
+  porDefecto = 'porDefecto',
+  cadena = 'cadena',
+  numero = 'numero',
 }
 
 const PREGUNTA_POR_DEFECTO = '> '
@@ -138,7 +138,7 @@ export const usarTerminal = () => {
     currentPrompt = PREGUNTA_POR_DEFECTO
   }
 
-  async function leer(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
+  async function leer(pregunta = PREGUNTA_POR_DEFECTO, tipo: ResultadoEsperado = ResultadoEsperado.porDefecto) {
     xterm?.resume()
 
     currentPrompt = pregunta
@@ -176,20 +176,20 @@ export const usarTerminal = () => {
   }
 
   function leerCadena(pregunta = PREGUNTA_POR_DEFECTO) {
-    return leer(pregunta, ExpectedResult.cadena)
+    return leer(pregunta, ResultadoEsperado.cadena)
   }
 
   function leerNumero(pregunta = PREGUNTA_POR_DEFECTO) {
-    return leer(pregunta, ExpectedResult.numero)
+    return leer(pregunta, ResultadoEsperado.numero)
   }
 
-  function leerSecreto(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
+  function leerSecreto(pregunta = PREGUNTA_POR_DEFECTO, tipo: ResultadoEsperado = ResultadoEsperado.porDefecto) {
     innerBuffer.value = ''
     readingSecret = true
     return leer(pregunta, tipo)
   }
 
-  function leerEnter(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
+  function leerEnter(pregunta = PREGUNTA_POR_DEFECTO, tipo: ResultadoEsperado = ResultadoEsperado.porDefecto) {
     readingEnter = true
     return leer(pregunta, tipo)
   }
@@ -198,20 +198,20 @@ export const usarTerminal = () => {
     xterm?.clear()
   }
 
-  function handleResult(value: string, expectedResult: ExpectedResult): string | number {
+  function handleResult(value: string, expectedResult: ResultadoEsperado): string | number {
     switch (expectedResult) {
-      case ExpectedResult.cadena:
+      case ResultadoEsperado.cadena:
         return String(value.trim())
 
-      case ExpectedResult.numero:
+      case ResultadoEsperado.numero:
         return Number(value)
 
-      case ExpectedResult.porDefecto:
+      case ResultadoEsperado.porDefecto:
       default:
         if (isNumber(value))
-          return handleResult(value, ExpectedResult.numero)
+          return handleResult(value, ResultadoEsperado.numero)
 
-        return handleResult(value, ExpectedResult.cadena)
+        return handleResult(value, ResultadoEsperado.cadena)
     }
   }
 
