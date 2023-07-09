@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
@@ -11,24 +10,8 @@ export default defineConfig({
       name: 'EsTerminal',
       fileName: format => `terminal.${format}.js`,
     },
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue',
-        },
-      },
-    },
   },
   plugins: [
-    vue({
-      customElement: true,
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag: string) => tag.includes('es-terminal'),
-        },
-      },
-    }),
     dts({
       staticImport: true,
       skipDiagnostics: false,

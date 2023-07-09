@@ -1,20 +1,20 @@
-import type { Ref } from 'vue'
-import { ref, watch } from 'vue'
 import isNumber from 'is-number'
 import XTerminal from 'xterminal'
 import PCancelable from 'p-cancelable'
+import type { Ref } from './reactive'
+import { ref, watch } from './reactive'
 
 let xterm: XTerminal | null = null
 
 const innerBuffer: Ref<string | null> = ref(null)
 const buffer: Ref<string | null> = ref(null)
 
-const readingValue: Ref<boolean> = ref(false)
-const readingSecret: Ref<boolean> = ref(false)
-const readingEnter: Ref<boolean> = ref(false)
+let readingValue = false
+let readingSecret = false
+let readingEnter = false
 
-const watchers: Ref<(() => void)[]> = ref([])
-const cancelablePromises: Ref<PCancelable<any>[]> = ref([])
+let watchers: any[] = []
+let cancelablePromises: PCancelable<any>[] = []
 
 let terminalElement: HTMLElement | null = null
 
@@ -45,13 +45,13 @@ export const usarTerminal = () => {
     xterm.pause()
 
     xterm.on('data', async (data: any) => {
-      if (!readingValue.value)
+      if (!readingValue)
         return
 
-      if (readingEnter.value) {
+      if (readingEnter) {
         buffer.value = Math.random().toString()
       }
-      else if (readingSecret.value) {
+      else if (readingSecret) {
         if (data.trim() === '' && innerBuffer.value?.trim() === '') {
           xterm?.writeln('')
           await leer(currentPrompt)
@@ -72,10 +72,10 @@ export const usarTerminal = () => {
     })
 
     xterm.on('keypress', (event: any) => {
-      if (readingEnter.value) {
+      if (readingEnter) {
         event.cancel()
       }
-      else if (readingSecret.value) {
+      else if (readingSecret) {
         const key = event.key.toLowerCase()
 
         if (key === 'backspace') {
@@ -107,11 +107,11 @@ export const usarTerminal = () => {
   }
 
   function destroyTerminal() {
-    watchers.value.map(unwatch => unwatch())
-    watchers.value = []
+    watchers.map(unwatch => unwatch())
+    watchers = []
 
-    cancelablePromises.value.map(cancelablePromise => cancelablePromise.cancel())
-    cancelablePromises.value = []
+    cancelablePromises.map(cancelablePromise => cancelablePromise.cancel())
+    cancelablePromises = []
 
     xterm?.dispose()
   }
@@ -132,9 +132,9 @@ export const usarTerminal = () => {
 
   function resetWriteBuffer() {
     xterm?.pause()
-    readingValue.value = false
-    readingSecret.value = false
-    readingEnter.value = false
+    readingValue = false
+    readingSecret = false
+    readingEnter = false
     currentPrompt = PREGUNTA_POR_DEFECTO
   }
 
@@ -142,7 +142,7 @@ export const usarTerminal = () => {
     xterm?.resume()
 
     currentPrompt = pregunta
-    readingValue.value = true
+    readingValue = true
 
     const promise = new PCancelable((resolve: any, reject: any, onCancel: any) => {
       if (!xterm)
@@ -155,22 +155,22 @@ export const usarTerminal = () => {
 
       xterm.write(pregunta)
 
-      const watcher = watch(buffer, (value) => {
+      const watcher = watch(() => buffer.value, (value) => {
         watcher()
         resetWriteBuffer()
-        watchers.value = watchers.value.filter(w => w !== watcher)
-        cancelablePromises.value = cancelablePromises.value.filter(p => p !== promise)
+        watchers = watchers.filter(w => w !== watcher)
+        cancelablePromises = cancelablePromises.filter(p => p !== promise)
 
-        if (readingEnter.value)
+        if (readingEnter)
           resolve(null)
         else
           resolve(handleResult(value ?? '', tipo))
       })
 
-      watchers.value.push(watcher)
+      watchers.push(watcher)
     })
 
-    cancelablePromises.value.push(promise)
+    cancelablePromises.push(promise)
 
     return promise
   }
@@ -185,12 +185,12 @@ export const usarTerminal = () => {
 
   function leerSecreto(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
     innerBuffer.value = ''
-    readingSecret.value = true
+    readingSecret = true
     return leer(pregunta, tipo)
   }
 
   function leerEnter(pregunta = PREGUNTA_POR_DEFECTO, tipo: ExpectedResult = ExpectedResult.porDefecto) {
-    readingEnter.value = true
+    readingEnter = true
     return leer(pregunta, tipo)
   }
 
