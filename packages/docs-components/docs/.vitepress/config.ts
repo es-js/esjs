@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-import WindiCSS from 'vite-plugin-windicss'
 
 export default {
   title: 'EsJS Docs Components',
@@ -24,14 +23,6 @@ export default {
     ],
   },
   vite: {
-    plugins: [
-      WindiCSS({
-        config: resolve(__dirname, '../../windi.config.ts'),
-        scan: {
-          dirs: ['./', '../src'],
-        },
-      }),
-    ],
     resolve: {
       alias: {
         '@es-js/docs-components': resolve(__dirname, '../../src'),

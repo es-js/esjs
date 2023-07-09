@@ -61,8 +61,8 @@ const playgroundUrl = computed(
       return
 
     const url = new URL(EDITOR_BASE_URL)
-    url.pathname = sharedCode.value
 
+    url.searchParams.set('code', sharedCode.value)
     url.searchParams.set('layout', props.layout || 'vertical')
     url.searchParams.set('hidePreview', String(props.hidePreview))
     url.searchParams.set('hideEditor', String(!props.onlyPlayground))
@@ -81,9 +81,10 @@ const playgroundUrl = computed(
     </div>
 
     <div v-if="!props.onlyPlayground" class="relative flex flex-row justify-center items-center print:hidden">
-      <div class="absolute flex flex-row justify-center z-10 -mt-4">
+      <div class="absolute flex flex-row justify-center z-10 -mt-5">
         <button
-          class="flex flex-row items-center space-x-1 px-2 py-1 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white"
+          :title="running ? 'Detener' : 'Ejecutar'"
+          class="flex flex-row items-center space-x-1 px-2 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white"
           @click="running ? stop() : run()"
         >
           <Icon :icon="running ? 'mdi:stop' : 'mdi:play'" class="w-4 h-4" />

@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import * as components from './components'
-import 'virtual:windi.css'
+import './style.css'
 
 function install(app: App) {
   for (const key in components) {

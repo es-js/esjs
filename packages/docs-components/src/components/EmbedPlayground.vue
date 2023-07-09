@@ -30,6 +30,9 @@ const defaultOpenSrc = computed(
 
     url.search = ''
 
+    if (srcUrl.searchParams.has('code'))
+      url.searchParams.set('code', srcUrl.searchParams.get('code') || '')
+
     if (srcUrl.searchParams.has('tests'))
       url.searchParams.set('tests', srcUrl.searchParams.get('tests') || '')
 
@@ -42,15 +45,22 @@ const defaultOpenSrc = computed(
   <div class="flex flex-col">
     <ClientOnly>
       <div class="w-full relative" :style="{ height: props.height }">
-        <iframe :src="String(props.src)" allow="clipboard-read; clipboard-write" class="w-full h-full border-0 rounded-[8px] bg-gray-800" />
+        <iframe
+          :src="String(props.src)"
+          allow="clipboard-read; clipboard-write"
+          frameborder="0"
+          title="Previsualización en EsJS Editor"
+          class="w-full h-full border-0 rounded-[8px] bg-transparent"
+        />
       </div>
     </ClientOnly>
 
-    <div class="flex flex-row justify-center z-10 print:hidden">
+    <div class="flex flex-row justify-center -mt-1 z-10 print:hidden">
       <a
         v-if="showOpenButton"
         :href="props.openSrc || defaultOpenSrc"
         target="_blank"
+        title="Abrir en EsJS Editor"
         class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400"
       >
         <Icon icon="mdi:open-in-new" class="w-4 h-4 text-white" />
