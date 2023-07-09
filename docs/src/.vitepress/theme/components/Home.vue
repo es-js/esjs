@@ -48,7 +48,7 @@
 
     <ClientOnly>
       <div class="w-full max-w-7xl mx-auto px-4 2xl:px-0">
-        <EmbedPlayground src="https://editor.esjs.dev/?code=PTAEBEFMDcFdIDbUqWA7AhqAthgLgE4CWAXqAMYD2aoClAzqDQA7HaQENMBf7njAExQIs9DkRRDQAMSIAjahnLkiAOgBQAM3QrqoMcUiyFmZUQAUaAJSgA3utD6ioS6AC8H0AEYb9x44JIPEoCTAJQAG0ABgBdB1AAX3V46Axwgwl3SKiAGm84+OY0rHNU8Oc3UAAmAG5QZwAeJjqiAGpW33jHDMgIohisnr7QAFp80Fb9cV6iEaq4xyT4wODQtKnDdSWqNHpKEVVIenJiOSICc3iAcgAZLi8o0FYiPi40Xg4uKRFQAGVp0BSYyKMz6agALiueVUMJ6wNMKnMDys6hR6iAA?tests=A4JwrgpgRghgzgCgN4CgAEaDkBGADG0ASwFsIQB7ONAOwC-SK5MAuNAMzGoGNDzq0EASjSoMGGG0IhiMEAEkA5mBgAbCInRiMAbVwAaNNgNG0AJgMBmAwFYDADmNWzJiwBYAuns1a4ZQhAAxQig%2BGC4eBDxBbzRojABfFHjooA&layout=horizontal&hidePreview=true&hideEditor=false&hideConsole=false&hideTests=false&hideOptions=true" show-open-button height="40em" />
+        <EmbedPlayground src="https://editor.esjs.dev/?code=PTAEBEFMDcFdIDbUqWA7AhqAthgLgE4CWAXqAMYD2aoClAzqDQA7HaQENMBf7njAExQIs9DkRRDQAMSIAjahnLkiAOgBQAM3QrqoMcUiyFmZUQAUaAJSgA3utD6ioS6AC8H0AEYb9x44JIPEoCTAJQAG0ABgBdB1AAX3V46Axwgwl3SKiAGm84+OY0rHNU8Oc3UAAmAG5QZwAeJjqiAGpW33jHDMgIohisnr7QAFp80Fb9cV6iEaq4xyT4wODQtKnDdSWqNHpKEVVIenJiOSICc3iAcgAZLi8o0FYiPi40Xg4uKRFQAGVp0BSYyKMz6agALiueVUMJ6wNMKnMDys6hR6iAA&tests=A4JwrgpgRghgzgCgN4CgAEaDkBGADG0ASwFsIQB7ONAOwC-SK5MAuNAMzGoGNDzq0EASjSoMGGG0IhiMEAEkA5mBgAbCInRiMAbVwAaNNgNG0AJgMBmAwFYDADmNWzJiwBYAuns1a4ZQhAAxQig%2BGC4eBDxBbzRojABfFHjooA&layout=horizontal&hidePreview=true&hideEditor=false&hideConsole=false&hideTests=false&hideOptions=true" show-open-button height="40em" />
       </div>
     </ClientOnly>
   </div>
