@@ -6,8 +6,8 @@ import { ref, watch } from './reactive'
 
 let xterm: XTerminal | null = null
 
-const innerBuffer: Ref<string | null> = ref(null)
-const buffer: Ref<string | null> = ref(null)
+const innerBuffer: Ref = ref(null)
+const buffer: Ref = ref(null)
 
 let readingValue = false
 let readingSecret = false

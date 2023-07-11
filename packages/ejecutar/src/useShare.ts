@@ -4,6 +4,7 @@ interface ShareOptions {
   theme: 'dark' | 'light'
   hidePreview: boolean
   previewTab: 'console' | 'flowchart' | 'hidden'
+  backgroundTransparent: boolean
 }
 
 export function useShare() {
@@ -32,6 +33,7 @@ export function useShare() {
       theme: parsedOptions.theme ?? (prefersDark ? 'dark' : 'light'),
       hidePreview: parsedOptions.hidePreview ?? false,
       previewTab: parsedOptions.previewTab ?? 'console',
+      backgroundTransparent: parsedOptions.backgroundTransparent ?? false,
     }
   }
 

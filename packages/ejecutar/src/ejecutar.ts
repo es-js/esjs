@@ -17,6 +17,8 @@ let theme: 'dark' | 'light' = 'dark'
 export async function init() {
   const options = useShare().getOptionsFromUrl()
 
+  setupBackgroundTransparent(options.backgroundTransparent)
+
   setupTheme(options.theme)
 
   await setupEruda()
@@ -26,6 +28,14 @@ export async function init() {
   previewTab(options.previewTab)
 
   await evalInitialCode()
+}
+
+function setupBackgroundTransparent(backgroundTransparent: boolean) {
+  const body = document.querySelector('body')
+
+  if (backgroundTransparent) {
+    body.style.backgroundColor = 'transparent'
+  }
 }
 
 export async function evalCode(args: any) {

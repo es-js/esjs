@@ -118,6 +118,7 @@ function getSandboxUrl() {
     theme: isDark.value ? 'dark' : 'light',
     hidePreview: settings.value.hidePreview,
     previewTab: useSettings().activePreviewTab.value,
+    backgroundTransparent: true,
   })))
   return url
 }
