@@ -51,9 +51,10 @@ export const useShare = () => {
     url.searchParams.set('hideTests', String(settings.settings.value.hideTests))
     url.searchParams.set('readonlyCode', String(settings.settings.value.readonlyCode))
     url.searchParams.set('readonlyTests', String(settings.settings.value.readonlyTests))
-    url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
     url.searchParams.set('preview', JSON.stringify(settings.settings.value.preview))
     url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
+    url.searchParams.set('language', useEditor().language.value)
+    url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
 
     return url
   }
@@ -79,6 +80,7 @@ export const useShare = () => {
       showAdvanced: url.searchParams.get('showAdvanced'),
       preview: JSON.parse(url.searchParams.get('preview') ?? '{}'),
       previewTab: decodePreviewTab(url),
+      language: url.searchParams.get('language'),
     }
   }
 
@@ -177,6 +179,7 @@ export const useShare = () => {
     settings.setShowAdvanced(showAdvanced === 'true')
     settings.setPreview(preview)
     settings.setPreviewTab(previewTab)
+    useEditor().setLanguage(useShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
   }
 
   async function setCodeFromUrl() {

@@ -17,7 +17,7 @@ import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
 import { formatCode } from '@es-js/compiler'
 import { isDark } from '@/composables/dark'
-import { esjsTokenizer } from '@/composables/esjsTokenizer'
+import { esjsTokenizer } from '@/language-tools/esjsTokenizer'
 import { useEditor } from '@/composables/useEditor'
 import IStandaloneCodeEditor = editor.IStandaloneCodeEditor
 import ProviderResult = languages.ProviderResult

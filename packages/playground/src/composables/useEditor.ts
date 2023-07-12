@@ -64,7 +64,11 @@ ${obfuscatedCode.getObfuscatedCode()}`
   }
 
   function toggleLanguage() {
-    language.value = language.value === 'esjs' ? 'js' : 'esjs'
+    setLanguage(language.value === 'esjs' ? 'js' : 'esjs')
+  }
+
+  function setLanguage(value: 'esjs' | 'js') {
+    language.value = value
   }
 
   return {
@@ -74,6 +78,7 @@ ${obfuscatedCode.getObfuscatedCode()}`
     setTestsCode,
     getObfuscatedCode,
     toggleLanguage,
+    setLanguage,
     language,
   }
 }

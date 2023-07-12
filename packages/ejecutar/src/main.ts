@@ -1,9 +1,6 @@
 import './style.css'
 import { evalCode, hidePreview, init, previewTab, setupTheme } from './ejecutar.js'
 
-const flowchartSvg = '<!--FLOWCHART_SVG-->'
-const activePreviewTab = '<!--ACTIVE_PREVIEW_TAB-->'
-
 window.process = { env: {} }
 window.__modules__ = {}
 

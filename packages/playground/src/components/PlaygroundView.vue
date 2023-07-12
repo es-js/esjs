@@ -24,14 +24,6 @@ const testsPaneMinSize = computed(() => {
 
   return 20
 })
-
-function openFile(file: string) {
-  // editor.openFile(file)
-}
-
-function toggleTestsEditor() {
-  useSettings().setHideTests(!settings.value.hideTests)
-}
 </script>
 
 <template>
@@ -70,7 +62,7 @@ function toggleTestsEditor() {
               <div class="flex flex-row items-center space-x-2">
                 <button
                   class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl"
-                  @click="toggleTestsEditor"
+                  @click="useSettings().setHideTests(!settings.hideTests)"
                 >
                   <Icon icon="mdi:test-tube" class="w-4 h-4" />
                   <span>{{ editor.language.value === 'esjs' ? 'pruebas.esjs' : 'pruebas.js' }}</span>
