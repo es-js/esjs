@@ -44,7 +44,6 @@ function setupRefreshButton() {
   refreshButton.addEventListener(
     'click',
     () => {
-      console.debug(['click'])
       evalCode(lastArgs)
     },
   )

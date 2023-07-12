@@ -1,13 +1,16 @@
 import isNumber from 'is-number'
 import XTerminal from 'xterminal'
 import PCancelable from 'p-cancelable'
-import type { Ref } from './reactive'
-import { ref, watch } from './reactive'
+import { ref, watch } from 'reactive-light'
+
+declare class Ref<T = any> {
+  value: T
+}
 
 let xterm: XTerminal | null = null
 
-const innerBuffer: Ref = ref(null)
-const buffer: Ref = ref(null)
+const innerBuffer: Ref<string | null> = ref(null)
+const buffer: Ref<string | null> = ref(null)
 
 let readingValue = false
 let readingSecret = false
