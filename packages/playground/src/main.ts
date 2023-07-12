@@ -25,7 +25,7 @@ async function init() {
     .use(FloatingVue, {
       themes: {
         tooltip: {
-          hideTriggers: events => [...events],
+          hideTriggers: (events: any) => [...events],
         },
       },
     })

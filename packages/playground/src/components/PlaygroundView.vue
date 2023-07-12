@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { Pane, Splitpanes } from 'splitpanes'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { Icon } from '@iconify/vue'
+import { useEventBus } from '@vueuse/core'
 import { useSettings } from '@/composables/useSettings'
 import OutputIframe from '@/output/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
 import AppContainer from '@/components/shared/AppContainer.vue'
+import MonacoEditor from '@/components/MonacoEditor.vue'
 
 const settings = useSettings().settings
 
@@ -24,6 +26,15 @@ const testsPaneMinSize = computed(() => {
 
   return 20
 })
+
+watch(
+  editor.language,
+  () => {
+    useEventBus('editor_code').emit('change-language', editor.language.value)
+    useEventBus('editor_tests').emit('change-language', editor.language.value)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -44,7 +55,14 @@ const testsPaneMinSize = computed(() => {
             </template>
 
             <template #default>
-              <CodeEditor class="relative w-full h-full overflow-hidden" />
+              <MonacoEditor
+                element-id="monacoCodeEditor"
+                name="code"
+                :value="editor.code.value"
+                :readonly="settings.readonlyCode"
+                class="relative w-full h-full overflow-hidden"
+                @update:value="editor.setCode($event)"
+              />
             </template>
           </AppContainer>
         </Pane>
@@ -73,7 +91,15 @@ const testsPaneMinSize = computed(() => {
             </template>
 
             <template #default>
-              <TestsEditor v-if="!settings.hideTests" class="relative w-full h-full overflow-hidden" />
+              <MonacoEditor
+                v-if="!settings.hideTests"
+                element-id="monacoTestsEditor"
+                name="tests"
+                :value="editor.testsCode.value"
+                :readonly="settings.readonlyTests"
+                class="relative w-full h-full overflow-hidden"
+                @update:value="editor.setTestsCode($event)"
+              />
             </template>
           </appcontainer>
         </Pane>
