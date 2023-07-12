@@ -14,7 +14,14 @@
       <div id="preview-container" class="flex-grow">
         <div id="preview-background" class="w-full h-full flex flex-col bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-800 rounded">
           <div class="flex flex-row items-center bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-800 rounded-t">
-            <div class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl cursor-pointer">
+            <button id="refresh-button"
+                    class="h-full flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl cursor-pointer"
+                    title="Refrescar"
+                    aria-label="Refrescar">
+              <iconify-icon icon="mdi:refresh"></iconify-icon>
+            </button>
+
+            <div class="h-full flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl cursor-pointer">
               <span class>Resultado</span>
             </div>
           </div>

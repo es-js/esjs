@@ -14,10 +14,14 @@ const scriptEls: HTMLScriptElement[] = []
 
 let theme: 'dark' | 'light' = 'dark'
 
+let lastArgs: any = {}
+
 export async function init() {
   const options = useShare().getOptionsFromUrl()
 
   setupBackgroundTransparent(options.backgroundTransparent)
+
+  setupRefreshButton()
 
   setupTheme(options.theme)
 
@@ -30,6 +34,22 @@ export async function init() {
   await evalInitialCode()
 }
 
+function setupRefreshButton() {
+  const refreshButton = document.querySelector('#refresh-button')
+
+  if (!refreshButton) {
+    return
+  }
+
+  refreshButton.addEventListener(
+    'click',
+    () => {
+      console.debug(['click'])
+      evalCode(lastArgs)
+    },
+  )
+}
+
 function setupBackgroundTransparent(backgroundTransparent: boolean) {
   const body = document.querySelector('body')
 
@@ -39,6 +59,7 @@ function setupBackgroundTransparent(backgroundTransparent: boolean) {
 }
 
 export async function evalCode(args: any) {
+  lastArgs = Object.assign({}, args)
   setupEsJSTerminal()
   clearConsole()
 

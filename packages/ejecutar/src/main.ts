@@ -1,5 +1,6 @@
 import './style.css'
 import { evalCode, hidePreview, init, previewTab, setupTheme } from './ejecutar.js'
+import 'iconify-icon'
 
 window.process = { env: {} }
 window.__modules__ = {}
