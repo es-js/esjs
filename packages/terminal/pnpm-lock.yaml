@@ -36,8 +36,8 @@ devDependencies:
     specifier: ^1.7.3
     version: 1.7.3(@types/node@18.16.19)(vite@4.4.2)
   xterminal:
-    specifier: ^2.0.0
-    version: 2.0.0
+    specifier: ^2.0.2
+    version: 2.0.2
 
 packages:
 
@@ -3660,8 +3660,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /xterminal@2.0.0:
-    resolution: {integrity: sha512-9nxgQW42HykOYLv2DyO3hu2Pe5ztjLKDqYmC68xq9/rYrbO6RSgTSNn4B4cYAUbra1STl1BjdvPwPTvbTdltfA==}
+  /xterminal@2.0.2:
+    resolution: {integrity: sha512-Uud8SpMEM1sYsCj6FRgx+7rmXfrQ36CzZyNo8w/JkT45rft3ggE+37s+2wrji1y8AlWIDeYasE/PorN2hzwJGw==}
     engines: {node: '>=14'}
     dev: true
 
