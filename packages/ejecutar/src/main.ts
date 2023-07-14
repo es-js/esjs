@@ -17,6 +17,20 @@ window.__dynamic_import__ = (key) => {
   return Promise.resolve(window.__modules__[key])
 }
 
+function registerEsJSPruebaEvents() {
+  const events = [
+    'esjs-prueba-success',
+    'esjs-prueba-error',
+    'esjs-pruebas-finished',
+  ]
+
+  events.map((event) => {
+    window.addEventListener(event, (args: any) => {
+      parent.postMessage({ action: event, data: JSON.stringify(args.detail) }, '*')
+    })
+  })
+}
+
 async function handle_message(ev: any) {
   const { action, cmd_id, args } = ev.data
 
@@ -91,6 +105,17 @@ window.addEventListener('unhandledrejection', (event) => {
     parent.postMessage({ action: 'unhandledrejection', value: event.reason.message }, '*')
   }
 })
+
+window._handleInfiniteLoopException = function (error: any) {
+  console.warn('¡Advertencia!: Se ha detectado un bucle infinito')
+  console.error(error)
+}
+
+window._previewException = function (line: number, column: number, message: string) {
+  console.warn(`¡Advertencia!: Se ha detectado un error en la línea ${line}`)
+}
+
+registerEsJSPruebaEvents()
 
 window.addEventListener('load', async () => {
   await init()

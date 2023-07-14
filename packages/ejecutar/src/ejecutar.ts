@@ -206,28 +206,3 @@ function setupEsJSTerminal() {
   })
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-window._handleInfiniteLoopException = function (error: any) {
-  console.warn('¡Advertencia!: Se ha detectado un bucle infinito')
-  console.error(error)
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-window._previewException = function (line: number, column: number, message: string) {
-  console.warn(`¡Advertencia!: Se ha detectado un error en la línea ${line}`)
-  // console.error(error.toString());
-}
-
-window.addEventListener('esjs-prueba-success', (args: any) => {
-  parent.postMessage({ action: 'esjs-prueba-success', data: JSON.stringify(args.detail) }, '*')
-})
-
-window.addEventListener('esjs-prueba-error', (args: any) => {
-  parent.postMessage({ action: 'esjs-prueba-error', data: JSON.stringify(args.detail) }, '*')
-})
-
-window.addEventListener('esjs-pruebas-finished', (args: any) => {
-  parent.postMessage({ action: 'esjs-pruebas-finished', data: JSON.stringify(args.detail) }, '*')
-})
