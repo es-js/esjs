@@ -1,3 +1,5 @@
+import { colors } from './colors.js'
+
 const userDefined = ['fondo', 'frente']
 
 const modifiers = [
@@ -9,23 +11,6 @@ const modifiers = [
   'tachado',
   'invertido',
 ]
-
-const colors = {
-  negro: '#000000',
-  rojo: '#EF4444',
-  verde: '#22C55E',
-  amarillo: '#FDE047',
-  azul: '#3B82F6',
-  magenta: '#E879F9',
-  cian: '#22D3EE',
-  blanco: '#FFFFFF',
-  gris: '#71717A',
-}
-
-for (const c in colors) {
-  if (Object.hasOwnProperty.call(colors, c))
-    colors[`fondo${c[0].toUpperCase()}${c.slice(1)}`] = colors[c]
-}
 
 const defaultConfig = {
   fondo: null,

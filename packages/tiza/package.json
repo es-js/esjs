@@ -1,6 +1,6 @@
 {
   "name": "@es-js/tiza",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Librería para colorear/estilizar texto en la Terminal, basada en chalk-dom",
   "scripts": {
     "dev": "vite",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.3",
     "eslint": "^8.44.0",
+    "tailwindcss": "^3.3.2",
     "vite": "^4.4.2",
     "vitest": "^0.25.8"
   },
