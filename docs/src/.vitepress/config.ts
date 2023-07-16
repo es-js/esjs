@@ -3,7 +3,8 @@ import { markdown } from './config/markdown'
 import { getHighlighter } from './config/getHighlighter'
 import { metaData } from './config/constants'
 
-const gtagId = process.env.NODE_ENV === 'production' ? 'G-0XH36H9K3M' : 'G-TEST'
+const isDev: boolean = process.env.NODE_ENV === 'development'
+const gtagId: string = isDev ? 'G-TEST' : 'G-0XH36H9K3M'
 
 export default async () => {
   const highlighter = await getHighlighter()
