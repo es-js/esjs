@@ -11,7 +11,7 @@ import Home from '@theme/components/Home.vue'
 
 <Home />
 
-<div class="max-w-8xl mx-auto px-3">
+<div class="max-w-7xl mx-auto px-3">
 
 <div class="w-full h-20"></div>
 

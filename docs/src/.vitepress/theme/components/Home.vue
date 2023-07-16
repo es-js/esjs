@@ -13,8 +13,12 @@
             JavaScript con sintaxis en Español
           </h1>
 
-          <div class="flex <md:flex-col space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
-            <a class="action primary" href="/guia/empezando">
+          <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-2">
+            <a
+              href="/guia/empezando"
+              title="Empezar a programar con EsJS"
+              class="action primary"
+            >
               Empezar
             </a>
             <a class="action" href="https://github.com/es-js/esjs" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
@@ -38,7 +42,7 @@
         </div>
 
         <div class="feature">
-          <h1>JavaScript</h1>
+          <h1>Basado en JavaScript</h1>
           <p>EsJS aprovecha todo el potencial de JavaScript, uno de los lenguajes de programación más utilizados en el mundo</p>
         </div>
       </div>
@@ -49,11 +53,7 @@
 <style scoped>
 .tagline {
   @apply text-2xl md:text-3xl xl:text-5xl text-center sm:text-left;
-  line-height: 1.25;
-  font-weight: 900;
-  letter-spacing: -1.5px;
-  max-width: 960px;
-  margin: 0px auto;
+  letter-spacing: -1px;
 }
 
 br {
@@ -63,11 +63,11 @@ br {
 }
 
 .accent {
-  @apply text-6xl xl:text-7xl;
+  @apply text-6xl md:text-7xl xl:text-8xl font-bold;
+  letter-spacing: -1.5px;
 }
 
-html:not(.dark) .accent,
-.dark .tagline {
+.accent {
   background: var(--vp-home-hero-name-background);
   -webkit-background-clip: text;
   -webkit-background-clip: text;
@@ -75,18 +75,23 @@ html:not(.dark) .accent,
 }
 
 .action {
-  @apply px-4 xl:px-5 py-2 xl:py-2.5 inline-block text-center text-gray-900 font-bold rounded-3xl bg-gray-100 border border-gray-300;
+  @apply px-4 xl:px-5 py-2 xl:py-2.5 inline-block
+  text-center font-bold
+  text-gray-900 dark:text-gray-100
+  bg-gray-50 hover:bg-gray-100
+  dark:bg-gray-700 dark:hover:bg-gray-600
+  border border-gray-300 dark:border-gray-600
+  rounded-3xl;
 }
 .action.primary {
-  border-color: var(--vp-c-brand-dark);
-  color: var(--vp-button-brand-text);
-  background-color: var(--vp-c-brand);
+  @apply bg-violet-600 hover:bg-violet-500
+  text-white
+  border-violet-500
 }
-
 .dark .action.primary {
-  border-color: var(--vp-c-brand);
-  color: var(--vp-button-brand-text);
-  background-color: var(--vp-c-brand-darker);
+  @apply bg-violet-700 hover:bg-violet-600
+  text-violet-50
+  border-violet-600
 }
 
 .features {
@@ -94,7 +99,10 @@ html:not(.dark) .accent,
 }
 
 .feature {
-  @apply flex flex-col py-6 px-6 space-y-2 bg-gray-50 dark:bg-gray-800 rounded-xl;
+  @apply flex flex-col py-6 px-6 space-y-2
+  bg-gray-50 dark:bg-gray-800
+  border border-gray-200 dark:border-gray-700
+  rounded-xl;
 }
 .feature h1 {
   @apply text-xl font-bold;
