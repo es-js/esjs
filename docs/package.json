@@ -19,10 +19,10 @@
     "@iconify/vue": "^4.1.1",
     "eslint": "^8.44.0",
     "lz-string": "^1.5.0",
-    "shiki": "^0.12.1",
-    "vite": "^4.4.2",
+    "shiki": "^0.14.3",
+    "vite": "^4.4.4",
     "vite-plugin-windicss": "^1.9.0",
-    "vitepress": "1.0.0-alpha.38",
+    "vitepress": "1.0.0-beta.5",
     "vue": "^3.3.4",
     "windicss": "^3.5.6"
   }
