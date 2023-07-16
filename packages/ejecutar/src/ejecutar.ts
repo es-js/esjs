@@ -77,6 +77,7 @@ export async function evalCode(args: any) {
   const usesTerminal = scripts.some((script) => script.includes('Terminal'))
 
   removeEsJSTerminal()
+  resetAppElement()
 
   if (usesTerminal) {
     addEsJSTerminal()
@@ -221,5 +222,15 @@ function removeEsJSTerminal() {
     usarTerminal().destroyTerminal()
     appElement.removeChild(currentEsTerminalElement)
   }
+}
+
+function resetAppElement() {
+  const appElement = document.getElementById('app')
+
+  if (!appElement) {
+    return
+  }
+
+  appElement.innerHTML = ''
 }
 
