@@ -59,8 +59,6 @@ function setupBackgroundTransparent(backgroundTransparent: boolean) {
 
 export async function evalCode(args: any) {
   lastArgs = Object.assign({}, args)
-  setupEsJSTerminal()
-  clearConsole()
 
   if (scriptEls.length) {
     scriptEls.forEach((el) => {
@@ -74,6 +72,17 @@ export async function evalCode(args: any) {
   if (typeof scripts === 'string') {
     scripts = [scripts]
   }
+
+  // Check if scripts uses Terminal
+  const usesTerminal = scripts.some((script) => script.includes('Terminal'))
+
+  removeEsJSTerminal()
+
+  if (usesTerminal) {
+    addEsJSTerminal()
+  }
+
+  clearConsole()
 
   for (const script of scripts) {
     const scriptEl = document.createElement('script')
@@ -182,18 +191,11 @@ export function setupTheme(value: 'dark' | 'light') {
   usarTerminal().setTheme(theme)
 }
 
-function setupEsJSTerminal() {
+function addEsJSTerminal() {
   const appElement = document.getElementById('app')
 
   if (!appElement) {
-    throw new Error('No se ha encontrado el elemento #app')
-  }
-
-  const currentEsTerminalElement = document.getElementById('es-terminal')
-
-  if (currentEsTerminalElement) {
-    usarTerminal().destroyTerminal()
-    appElement.removeChild(currentEsTerminalElement)
+    return
   }
 
   const newEsTerminalElement = document.createElement('div')
@@ -204,5 +206,20 @@ function setupEsJSTerminal() {
   usarTerminal().setupTerminal(newEsTerminalElement, {
     theme,
   })
+}
+
+function removeEsJSTerminal() {
+  const appElement = document.getElementById('app')
+
+  if (!appElement) {
+    return
+  }
+
+  const currentEsTerminalElement = document.getElementById('es-terminal')
+
+  if (currentEsTerminalElement) {
+    usarTerminal().destroyTerminal()
+    appElement.removeChild(currentEsTerminalElement)
+  }
 }
 

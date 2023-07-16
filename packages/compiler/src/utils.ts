@@ -7,7 +7,7 @@ import type { Options } from 'prettier'
 // import { convertCodeToSvg } from '@es-js/esjs2flowchart'
 import { splitCodeImports, transpile } from '@es-js/core'
 import { MAIN_FILE } from './orchestrator'
-import { DEFAULT_IMPORTS, DEFAULT_TESTS_IMPORTS } from './constants'
+import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from './constants'
 
 class PrepareCodeError extends Error {
   constructor(message: string, public line: number, public column: number) {
@@ -279,13 +279,24 @@ export function generateImportStatement(code: string, modulePath: string) {
 export function prepareCodeAndTestsForPlayground(code: string, tests: string) {
   const transpiledCode = transpile(prepareCode(code))
   const splittedCode = splitCodeImports(transpiledCode)
-  const imports = unifyImports(`${DEFAULT_IMPORTS} \n ${splittedCode.imports}`)
+
+  const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
+
+  const imports = unifyImports(`
+${codeUsesTerminal ? IMPORT_ESJS_TERMINAL : ''}
+${IMPORT_ESJS_PRUEBA}
+${splittedCode.imports}
+  `)
 
   const generatedCodeImports = unifyImports(generateImportStatement(splittedCode.codeWithoutImports, `./${MAIN_FILE}`))
 
   const transpiledTestsCode = transpile(prepareCode(tests))
   const splittedTestsCode = splitCodeImports(transpiledTestsCode)
-  const testsImports = unifyImports(`${DEFAULT_TESTS_IMPORTS} \n ${splittedTestsCode.imports} \n ${generatedCodeImports}`)
+  const testsImports = unifyImports(`
+  ${IMPORT_ESJS_PRUEBA}
+  ${splittedTestsCode.imports}
+  ${generatedCodeImports}
+  `)
 
   return {
     imports,
