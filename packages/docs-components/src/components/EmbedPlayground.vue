@@ -64,7 +64,7 @@ const defaultOpenSrc = computed(
         :href="props.openSrc || defaultOpenSrc"
         target="_blank"
         title="Abrir en EsJS Editor"
-        class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-500 hover:bg-indigo-400"
+        class="flex flex-row items-center space-x-1 px-2.5 py-0.5 rounded-full bg-indigo-600 hover:bg-indigo-400"
       >
         <Icon icon="mdi:open-in-new" class="w-4 h-4 text-white" />
         <span class="text-white text-sm">Abrir Editor</span>
