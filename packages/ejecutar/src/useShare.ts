@@ -3,6 +3,7 @@ import lzs from 'lz-string'
 interface ShareOptions {
   theme: 'dark' | 'light'
   hidePreview: boolean
+  hideConsole: boolean
   previewTab: 'console' | 'flowchart' | 'hidden'
   backgroundTransparent: boolean
 }
@@ -29,10 +30,13 @@ export function useShare() {
 
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
+    const hideConsole = parsedOptions.hideConsole === 'true'
+
     return {
       theme: parsedOptions.theme ?? (prefersDark ? 'dark' : 'light'),
-      hidePreview: parsedOptions.hidePreview ?? false,
-      previewTab: parsedOptions.previewTab ?? 'console',
+      hidePreview: parsedOptions.hidePreview === 'true',
+      hideConsole,
+      previewTab: parsedOptions.previewTab ?? (hideConsole ? 'hidden' : 'console'),
       backgroundTransparent: parsedOptions.backgroundTransparent ?? false,
     }
   }

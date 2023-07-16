@@ -12,16 +12,16 @@ export default defineConfig({
               imports: {
                 '@es-js/terminal': 'http://localhost:5174/src/main.ts',
                 '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
-                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.1/+esm',
+                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3',
               },
             },
           ]
         : [
             {
               imports: {
-                '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.8/dist/terminal.es.js',
+                '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.9/dist/terminal.es.js',
                 '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
-                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.2',
+                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3',
               },
             },
           ]),
