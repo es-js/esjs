@@ -18,6 +18,7 @@ export default {
         items: [
           { text: 'InlinePlayground', link: '/components/inline-playground' },
           { text: 'EmbedPlayground', link: '/components/embed-playground' },
+          { text: 'EsEjecutar', link: '/components/es-ejecutar' },
         ],
       },
     ],

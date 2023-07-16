@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
-import { EDITOR_BASE_URL } from '../constants/Constants'
+import { EDITOR_BASE_URL, EDITOR_HOST } from '../constants/Constants'
 
 const props = defineProps({
   src: {
@@ -28,6 +28,9 @@ const defaultOpenSrc = computed(
     const srcUrl = new URL(props.src)
     const url = new URL(props.src)
 
+    url.protocol = 'https:'
+    url.hostname = EDITOR_HOST
+    url.port = ''
     url.search = ''
 
     if (srcUrl.searchParams.has('code'))
