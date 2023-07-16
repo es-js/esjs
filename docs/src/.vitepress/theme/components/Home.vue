@@ -9,7 +9,7 @@
         <div class="order-2 sm:order-1 flex flex-col justify-center px-4 space-y-8">
           <h1 class="tagline">
             <span class="accent">EsJS</span>
-            <br />
+            <br>
             JavaScript con sintaxis en Español
           </h1>
 
@@ -22,7 +22,7 @@
         </div>
 
         <div class="order-1 sm:order-2 flex flex-col justify-center items-center py-8">
-          <img src="/assets/logo.png" alt="EsJS" class="w-full max-w-[160px] sm:max-w-[320px]" />
+          <img src="/assets/logo.png" alt="EsJS" class="w-full max-w-[160px] sm:max-w-[320px]">
         </div>
       </div>
 
@@ -43,14 +43,6 @@
         </div>
       </div>
     </section>
-
-    <div class="w-full h-8" />
-
-    <ClientOnly>
-      <div class="w-full max-w-7xl mx-auto px-4 2xl:px-0">
-        <EmbedPlayground src="https://editor.esjs.dev/?code=PTAEBEFMDcFdIDbUqWA7AhqAthgLgE4CWAXqAMYD2aoClAzqDQA7HaQENMBf7njAExQIs9DkRRDQAMSIAjahnLkiAOgBQAM3QrqoMcUiyFmZUQAUaAJSgA3utD6ioS6AC8H0AEYb9x44JIPEoCTAJQAG0ABgBdB1AAX3V46Axwgwl3SKiAGm84+OY0rHNU8Oc3UAAmAG5QZwAeJjqiAGpW33jHDMgIohisnr7QAFp80Fb9cV6iEaq4xyT4wODQtKnDdSWqNHpKEVVIenJiOSICc3iAcgAZLi8o0FYiPi40Xg4uKRFQAGVp0BSYyKMz6agALiueVUMJ6wNMKnMDys6hR6iAA&tests=A4JwrgpgRghgzgCgN4CgAEaDkBGADG0ASwFsIQB7ONAOwC-SK5MAuNAMzGoGNDzq0EASjSoMGGG0IhiMEAEkA5mBgAbCInRiMAbVwAaNNgNG0AJgMBmAwFYDADmNWzJiwBYAuns1a4ZQhAAxQig%2BGC4eBDxBbzRojABfFHjooA&layout=horizontal&hidePreview=true&hideEditor=false&hideConsole=false&hideTests=false&hideOptions=true" show-open-button height="40em" />
-      </div>
-    </ClientOnly>
   </div>
 </template>
 
@@ -81,7 +73,6 @@ html:not(.dark) .accent,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 .action {
   @apply px-4 xl:px-5 py-2 xl:py-2.5 inline-block text-center text-gray-900 font-bold rounded-3xl bg-gray-100 border border-gray-300;
