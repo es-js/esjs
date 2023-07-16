@@ -7,6 +7,7 @@ sidebar: false
 
 <script setup>
 import Home from '@theme/components/Home.vue'
+import SectionCodeExample from '@theme/components/SectionCodeExample.vue'
 </script>
 
 <Home />
@@ -15,31 +16,51 @@ import Home from '@theme/components/Home.vue'
 
 <div class="w-full h-20"></div>
 
-<h1 class="my-3 text-4xl font-bold text-center">Crea y ejecuta algoritmos en Español</h1>
+<SectionCodeExample>
 
-<div class="vp-doc grid grid-cols-1 md:grid-cols-2">
+<template #title>
 
-<div class="flex flex-col justify-center">
+Crea y ejecuta algoritmos en Español
+
+</template>
+
+<template #description>
+
+Escribe código en Español y ejecútalo en JavaScript.
+
+</template>
+
+<template #code>
 
 <!--@include: ./codigos/fibonacci.md -->
 
-</div>
+</template>
 
-<div class="flex flex-col justify-center">
+</SectionCodeExample>
 
-<div class="-mt-[16px] md:mt-0 mx-4 md:mx-0 bg-gray-100 dark:bg-gray-800 rounded-b-lg md:rounded-b-0 md:rounded-r-lg p-4">
+<div class="w-full h-20"></div>
 
-<EsEjecutar hide-preview height="300px">
+<SectionCodeExample>
+
+<template #title>
+
+Aprovecha la potencia de JavaScript
+
+</template>
+
+<template #description>
+
+EsJS está basado en JavaScript, por lo que puedes utilizar todas las librerías y frameworks que ya conoces.
+
+</template>
+
+<template #code>
 
 <!--@include: ./codigos/fibonacci.md -->
 
-</EsEjecutar>
+</template>
 
-</div>
-
-</div>
-
-</div>
+</SectionCodeExample>
 
 <div class="w-full h-20"></div>
 
