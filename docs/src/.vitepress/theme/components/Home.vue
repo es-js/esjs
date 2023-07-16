@@ -13,20 +13,20 @@
             JavaScript con sintaxis en Español
           </h1>
 
-          <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-2">
+          <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-2">
             <a
               href="/guia/empezando"
               title="Empezar a programar con EsJS"
               class="action primary"
             >
-              Empezar
+              Empezar con EsJS
             </a>
             <a class="action" href="https://github.com/es-js/esjs" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
           </div>
         </div>
 
         <div class="order-1 sm:order-2 flex flex-col justify-center items-center py-8">
-          <img src="/assets/logo.png" alt="EsJS" class="w-full max-w-[160px] sm:max-w-[320px]">
+          <img src="/assets/logo.png" alt="EsJS" class="w-[160px] sm:w-[260px] md:w-[320px]">
         </div>
       </div>
 
@@ -65,33 +65,6 @@ br {
 .accent {
   @apply text-6xl md:text-7xl xl:text-8xl font-bold;
   letter-spacing: -1.5px;
-}
-
-.accent {
-  background: var(--vp-home-hero-name-background);
-  -webkit-background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.action {
-  @apply px-4 xl:px-5 py-2 xl:py-2.5 inline-block
-  text-center font-bold
-  text-gray-900 dark:text-gray-100
-  bg-gray-50 hover:bg-gray-100
-  dark:bg-gray-700 dark:hover:bg-gray-600
-  border border-gray-300 dark:border-gray-600
-  rounded-3xl;
-}
-.action.primary {
-  @apply bg-violet-600 hover:bg-violet-500
-  text-white
-  border-violet-500
-}
-.dark .action.primary {
-  @apply bg-violet-700 hover:bg-violet-600
-  text-violet-50
-  border-violet-600
 }
 
 .features {
