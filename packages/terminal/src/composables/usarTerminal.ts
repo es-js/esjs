@@ -201,6 +201,10 @@ export const usarTerminal = () => {
     xterm?.clear()
   }
 
+  function limpiarUltimaLinea() {
+    xterm?.clearLast()
+  }
+
   function handleResult(value: string, expectedResult: ResultadoEsperado): string | number {
     switch (expectedResult) {
       case ResultadoEsperado.cadena:
@@ -242,6 +246,37 @@ export const usarTerminal = () => {
     xterm?.focus()
   }
 
+  function escribirSinSalto(...args: any[]) {
+    args.map((arg) => {
+      const type = typeof arg
+
+      switch (type) {
+        case 'object':
+          return xterm?.write(JSON.stringify(arg, null, 2))
+
+        default:
+          return xterm?.write(String(arg))
+      }
+    })
+  }
+
+  function configurarColores(fondo: string, frente: string) {
+    configurarColorFondo(fondo)
+    configurarColorFrente(frente)
+  }
+
+  function configurarColorFondo(fondo: string) {
+    establecerVariableCss('--xt-bg', fondo)
+  }
+
+  function configurarColorFrente(frente: string) {
+    establecerVariableCss('--xt-fg', frente)
+  }
+
+  function establecerVariableCss(variable: string, valor: string) {
+    terminalElement?.style.setProperty(variable, valor)
+  }
+
   return {
     escribir,
     log: escribir,
@@ -254,11 +289,17 @@ export const usarTerminal = () => {
     destroyTerminal,
     limpiar,
     clear: limpiar,
+    limpiarUltimaLinea,
     centrar,
     alinearIzquierda,
     alinearDerecha,
     justificar,
     setTheme,
     enfocar,
+    escribirSinSalto,
+    configurarColores,
+    configurarColorFondo,
+    configurarColorFrente,
+    establecerVariableCss,
   }
 }
