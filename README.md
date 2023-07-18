@@ -1,6 +1,6 @@
-# EsJS: Lenguaje de programación con sintaxis en Español basado en JavaScript
+# EsJS
 
-EsJS transpila el código escrito con una sintaxis en Español, a JavaScript (en Inglés). Esto permite a las personas hispanohablantes escribir código de manera más familiar y accesible, sin renunciar al poder y versatilidad de JavaScript.
+EsJS es un lenguaje de programación con sintaxis en Español que compila a JavaScript. Esto permite a las personas hispanohablantes escribir código de manera más familiar y accesible, sin renunciar al poder y versatilidad de JavaScript.
 
 ## Documentación
 
