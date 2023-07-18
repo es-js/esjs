@@ -4,7 +4,7 @@ EsJS fue creado con la intención de facilitar a los hablantes de español el de
 
 ## ¿Qué es EsJS?
 
-EsJS es un transpilador que convierte código escrito en una sintaxis en español a código equivalente escrito en JavaScript. La gramática de EsJS es la misma que la de JavaScript, solo que utiliza tokens del idioma español. Al ejecutarse, el código transpilado de EsJS es equivalente al código JavaScript.
+EsJS es un lenguaje de programación que utiliza palabras del idioma español para escribir código. La gramática de EsJS es la misma que la de JavaScript, solo que utiliza tokens del idioma español. Al ejecutarse, el código transpilado de EsJS es equivalente al código JavaScript.
 
 El siguiente código EsJS:
 
@@ -36,11 +36,12 @@ WIP
 
 ## ¿Cuál es la diferencia entre EsJS y JavaScript?
 
-EsJS es un transpilador (convierte código escrito en una sintaxis en español a código equivalente escrito en JavaScript). Esta conversión solo tiene lugar durante la etapa de "compilación". Una vez terminada esta etapa, el código EsJS deja de existir y sólo existe su equivalente en JavaScript.
+EsJS es un lenguaje de programación que utiliza palabras del idioma español para escribir código. EsJS compila el código escrito en español a código JavaScript.
 
-En cambio, JavaScript es un lenguaje de programación interpretado que se ejecuta en un navegador web o en un servidor. Puede ser utilizado tanto para desarrollar aplicaciones del lado del cliente como del servidor.
+A su vez, JavaScript es un lenguaje de programación interpretado, que utiliza palabras del idioma inglés para escribir código. Es uno de los lenguajes de programación más utilizados en el mundo.
 
-EsJS y JavaScript son lenguajes muy similares, y gracias a la utilización de plugins adecuados, EsJS puede hacer prácticamente lo mismo que JavaScript. De esta manera, EsJS es prácticamente igual a JavaScript en términos de funcionalidades y capacidades.
+Por lo tanto, EsJS y JavaScript son lenguajes muy similares, y gracias a la utilización de plugins adecuados, EsJS puede hacer prácticamente lo mismo que JavaScript. De esta manera, EsJS es prácticamente igual a JavaScript en términos de funcionalidades y capacidades.
+
 
 ## Alternativas
 

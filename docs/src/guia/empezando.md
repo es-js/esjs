@@ -2,7 +2,9 @@
 
 ## Introducción
 
-EsJS es un transpilador que convierte código escrito en una sintaxis en español a código equivalente escrito en JavaScript. Si quieres conocer más sobre el propósito de EsJS, puedes visitar la sección [¿Por qué usar EsJS?](./por-que-usar-esjs).
+EsJS es un lenguaje de programación con sintaxis en Español. EsJS compila a JavaScript, por lo que puedes utilizarlo en cualquier lugar donde se ejecute JavaScript.
+
+Si quieres conocer más sobre el propósito de EsJS, puedes visitar la sección [¿Por qué usar EsJS?](./por-que-usar-esjs).
 
 ## Prueba en línea
 
