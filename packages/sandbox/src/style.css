@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.h-eruda-tab {
+  height: 28px;
+}
+
+.eruda-dev-tools {
+  border-radius: 0.25rem;
+  padding-top: 28px !important;
+  border: 1px solid #d4d4d8 !important;
+}
+
+.dark .eruda-dev-tools {
+  border: 1px solid #27272a !important;
+}
+
+.eruda-tab {
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.eruda-tools {
+  border-radius: 0.25rem;
+}
+
+/* Floating button */
+.eruda-entry-btn {
+  display: none !important;
+}
+
+/* Misc */
+.eruda-resizer {
+  display: none !important;
+}
+
+.luna-tab-slider {
+  background: #6366F1 !important;
+}
+
+.eruda-console-container .eruda-js-input .eruda-icon-arrow-right {
+  color: #818cf8 !important;
+}
+
+.eruda-console .eruda-js-input .eruda-icon-arrow-right {
+  color: #818cf8 !important;
+}
+
+#eruda-flowchart {
+  overflow: auto;
+}
+
+.eruda-tab {
+  height: 28px;
+}
+.luna-tab-tabs-container {
+  height: 28px !important;
+}
+.luna-tab-item {
+  height: 27px !important;
+  line-height: 27px !important;
+  font-size: 0.875rem;
+}
+
+/* Quitar la barra de arriba y abajo (limpiar consola, filtrar tipos de logs, ejecutar código) */
+
+.eruda-control {
+  display: none;
+  height: 0
+}
+
+#eruda-console {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.eruda-js-input {
+  display: none !important;
+  height: 0 !important;
+}

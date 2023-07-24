@@ -7,12 +7,10 @@ import { compileModulesForPreview, prepareCode, prepareCodeAndTestsForPlayground
 import { PreviewProxy } from '@/output/PreviewProxy'
 import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator, OrchestratorFile } from '@es-js/compiler/orchestrator'
 import { isDark } from "@/composables/dark";
-import lzs from "lz-string";
 import debounce from "lodash.debounce";
+import { createSandbox } from "@es-js/sandbox";
 
 const editor = useEditor()
-
-const container = ref()
 
 const settings = useSettings().settings
 
@@ -21,48 +19,18 @@ const bus = useEventBus('editor_code')
 let sandbox: HTMLIFrameElement
 let proxy: PreviewProxy
 
-onMounted(() => {
-  createSandbox()
-})
-
-onUnmounted(() => {
-  proxy.destroy()
-})
-
-watch(isDark, () => {
-  proxy.iframe_command('DARK_MODE', isDark.value)
-})
-
-function createSandbox() {
+onMounted(async () => {
   if (sandbox) {
     proxy.destroy()
-    container.value.removeChild(sandbox)
   }
 
-  sandbox = document.createElement('iframe')
-  sandbox.setAttribute(
-    'sandbox',
-    [
-      'allow-forms',
-      'allow-modals',
-      'allow-pointer-lock',
-      'allow-popups',
-      'allow-same-origin',
-      'allow-scripts',
-      'allow-top-navigation-by-user-activation',
-    ].join(' '),
-  )
-  sandbox.setAttribute('frameborder', '0')
-  sandbox.setAttribute('scrolling', 'no')
-  sandbox.setAttribute('width', '100%')
-  sandbox.setAttribute('height', '100%')
-  sandbox.setAttribute('style', 'border: 0;')
-  sandbox.setAttribute('title', 'sandbox')
-  sandbox.setAttribute('allow', 'clipboard-read; clipboard-write;')
-
-  container.value.appendChild(sandbox)
-
-  sandbox.src = getSandboxUrl()
+  sandbox = await createSandbox('esjs-sandbox', {
+    theme: isDark.value ? 'dark' : 'light',
+    hidePreview: settings.value.hidePreview,
+    previewTab: useSettings().activePreviewTab.value,
+    code: editor.code.value,
+    testsCode: editor.testsCode.value,
+  })
 
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => { },
@@ -104,24 +72,15 @@ function createSandbox() {
       useSettings().setHideConsole(args.data === 'hidden')
     },
   })
+})
 
-  // sandbox.addEventListener('load', () => {
-  //   updateSandbox(options)
-  // })
-}
+onUnmounted(() => {
+  proxy.destroy()
+})
 
-function getSandboxUrl() {
-  const url = new URL('/', import.meta.env.VITE_SANDBOX_URL)
-  url.searchParams.set('code', lzs.compressToEncodedURIComponent(editor.code.value))
-  url.searchParams.set('tests', lzs.compressToEncodedURIComponent(editor.testsCode.value))
-  url.searchParams.set('options', lzs.compressToEncodedURIComponent(JSON.stringify({
-    theme: isDark.value ? 'dark' : 'light',
-    hidePreview: settings.value.hidePreview,
-    previewTab: useSettings().activePreviewTab.value,
-    backgroundTransparent: true,
-  })))
-  return url
-}
+watch(isDark, () => {
+  proxy.iframe_command('DARK_MODE', isDark.value)
+})
 
 const updateSandboxDebounced = debounce(updateSandbox, 500)
 
@@ -236,5 +195,5 @@ watch(
 </script>
 
 <template>
-  <div ref="container" class="w-full h-full" />
+  <div id="esjs-sandbox" class="w-full h-full"></div>
 </template>

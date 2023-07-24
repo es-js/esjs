@@ -1,0 +1,49 @@
+{
+  "name": "@es-js/sandbox",
+  "version": "0.0.1-alpha.9",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && pnpm tailwind:build",
+    "watch": "concurrently \"tsc --watch\" \"vite build --watch\"",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "publish": "pnpm build && pnpm publish",
+    "tailwind:dev": "tailwindcss -i ./src/style.css -o ./output.css --watch",
+    "tailwind:build": "tailwindcss -i ./src/style.css -o ./dist/style.css --minify"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.31.1",
+    "@arrow-js/core": "1.0.0-alpha.9",
+    "@es-js/compiler": "workspace:^",
+    "@es-js/sandbox": "workspace:^",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.0",
+    "eruda": "^3.0.1",
+    "eslint": "8.22.0",
+    "iconify-icon": "^1.0.8",
+    "lz-string": "^1.5.0",
+    "postcss": "^8.4.25",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.4",
+    "vite-plugin-import-maps": "^0.1.2"
+  },
+  "type": "module",
+  "main": "./dist/main.cjs",
+  "module": "./dist/main.js",
+  "types": "./types/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    },
+    "./sandbox": {
+      "import": "./dist/sandbox.js",
+      "require": "./dist/sandbox.cjs"
+    }
+  },
+  "files": [
+    "/dist",
+    "/types"
+  ]
+}
