@@ -26,20 +26,23 @@
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
     "vite": "^4.4.4",
+    "vite-plugin-dts": "^1.7.3",
     "vite-plugin-import-maps": "^0.1.2"
   },
   "type": "module",
   "main": "./dist/main.cjs",
   "module": "./dist/main.js",
-  "types": "./types/main.d.ts",
+  "types": "./dist/main.d.ts",
   "exports": {
     ".": {
       "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "require": "./dist/main.cjs",
+      "types": "./dist/main.d.ts"
     },
     "./sandbox": {
       "import": "./dist/sandbox.js",
-      "require": "./dist/sandbox.cjs"
+      "require": "./dist/sandbox.cjs",
+      "types": "./dist/sandbox.d.ts"
     }
   },
   "files": [

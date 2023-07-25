@@ -4,11 +4,11 @@ import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setup
 
 export interface EjecutarOptions {
   usarTerminal?: any
-  theme: 'dark' | 'light'
-  hidePreview: boolean
-  hideConsole: boolean
-  previewTab: 'console' | 'flowchart' | 'hidden'
-  backgroundTransparent: boolean
+  theme?: 'dark' | 'light'
+  hidePreview?: boolean
+  hideConsole?: boolean
+  previewTab?: 'console' | 'flowchart' | 'hidden'
+  backgroundTransparent?: boolean
   code?: string
   testsCode?: string
 }
