@@ -1,7 +1,8 @@
 <EsEjecutar>
 
 ```esjs
-Terminal.escribir('test');
+Terminal.escribir('Basic');
+consola.escribir('Basic');
 ```
 
 </EsEjecutar>

@@ -1,7 +1,8 @@
 <EsEjecutar hide-preview>
 
 ```esjs
-Terminal.escribir('test');
+Terminal.escribir('Hide Preview');
+consola.escribir('Hide Preview');
 ```
 
 </EsEjecutar>

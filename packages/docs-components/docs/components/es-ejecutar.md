@@ -1,6 +1,6 @@
 # EsEjecutar
 
-Componente que tiene un slot para insertar Código Markdown, y lo ejecuta en ejecutar.esjs.dev
+Componente que tiene un slot para insertar Código Markdown, y lo ejecuta con `@es-js/sandbox`.
 
 ## Examples
 
@@ -32,13 +32,16 @@ Source:
 
 ### Properties
 
-| Name           | Type    | Default      | Description                                                                               |
-|----------------|---------|--------------|-------------------------------------------------------------------------------------------|
-| hidePreview    | Boolean | `true`       | Muestra/oculta la previsualización                                                       |
-| hideConsole    | Boolean | `false`      | Muestra/oculta la consola                                                                |
+| Name           | Type    | Default  | Description                                                |
+|----------------|---------|----------|------------------------------------------------------------|
+| hidePreview    | Boolean | `true`   | Muestra/oculta la previsualización                         |
+| hideConsole    | Boolean | `false`  | Muestra/oculta la consola                                  |
+| hideOptions    | Boolean | `true`   | Muestra/oculta las opciones                                |
+| height         | string  | `'30em'` | Alto del `iframe`                                          |
+| showOpenButton | Boolean | `false`  | Muestra el botón para abrir el Editor en una nueva pestaña |
 
 ### Slots
 
-| Name    | Parameters | Description                                                                                                             |
-|---------| ---------- |-------------------------------------------------------------------------------------------------------------------------|
-| default |            | Éste slot debe contener código en Markdown, el cual será comprimido utilizando `lz-string` para abrirlo en EsJS Editor |
+| Name    | Parameters | Description                                                                              |
+|---------|------------|------------------------------------------------------------------------------------------|
+| default |            | Éste slot debe contener código en Markdown, el cual será ejecutado con `@es-js/sandbox`. |

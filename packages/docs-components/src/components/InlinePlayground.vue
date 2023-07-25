@@ -80,7 +80,7 @@ const playgroundUrl = computed(
       <slot />
     </div>
 
-    <span class="w-full h-1"></span>
+    <span class="w-full h-1" />
 
     <div v-if="!props.onlyPlayground" class="relative flex flex-row justify-center items-center print:hidden">
       <div class="absolute flex flex-row justify-center z-10 -mt-5">

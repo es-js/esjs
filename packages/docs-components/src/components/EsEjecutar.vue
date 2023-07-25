@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
-import * as lzs from 'lz-string'
 import { useCode } from '../composables/useCode'
-import { PLAY_BASE_URL } from '../constants/Constants'
+import EsSandbox from './EsSandbox.vue'
 
 const props = defineProps({
   hidePreview: {
@@ -30,27 +29,9 @@ const props = defineProps({
 
 const slot: Ref<null | HTMLElement> = ref(null)
 
-const playgroundUrl = computed(
+const codeFromCodeBlock = computed(
   () => {
-    const url = new URL(PLAY_BASE_URL)
-
-    const compressedCodeFromCodeBlock = useCode().getCompressedCodeFromCodeBlock(slot.value)
-
-    if (!compressedCodeFromCodeBlock)
-      return url
-
-    const options = {
-      hidePreview: String(props.hidePreview === 'true' || props.hidePreview === true),
-      hideConsole: String(props.hideConsole === 'true' || props.hideConsole === true),
-    }
-
-    url.searchParams.set('code', compressedCodeFromCodeBlock)
-    url.searchParams.set('hidePreview', options.hidePreview)
-    url.searchParams.set('hideConsole', options.hideConsole)
-    url.searchParams.set('hideOptions', String(props.hideOptions))
-    url.searchParams.set('options', lzs.compressToEncodedURIComponent(JSON.stringify(options)))
-
-    return url
+    return useCode().getCodeFromCodeBlock(slot.value)
   },
 )
 </script>
@@ -62,7 +43,13 @@ const playgroundUrl = computed(
     </div>
 
     <div class="flex flex-col print:hidden">
-      <EmbedPlayground :src="playgroundUrl" :height="height" :show-open-button="showOpenButton" />
+      <EsSandbox
+        v-if="codeFromCodeBlock"
+        :code="codeFromCodeBlock"
+        :hide-preview="props.hidePreview"
+        :hide-console="props.hideConsole"
+        :height="props.height"
+      />
     </div>
   </div>
 </template>
