@@ -1,10 +1,14 @@
+import { createWriteStream } from 'node:fs'
+import { resolve } from 'node:path'
+import { SitemapStream } from 'sitemap'
 import { defineConfigWithTheme } from 'vitepress'
-import { markdown } from './config/markdown'
-import { getHighlighter } from './config/getHighlighter'
 import { metaData } from './config/constants'
+import { getHighlighter } from './config/getHighlighter'
+import { markdown } from './config/markdown'
 
 const isDev: boolean = process.env.NODE_ENV === 'development'
-const gtagId: string = isDev ? 'G-TEST' : 'G-0XH36H9K3M'
+const gtagId = 'G-TEST'
+const links = []
 
 export default async () => {
   const highlighter = await getHighlighter()
@@ -77,6 +81,7 @@ export default async () => {
       title: metaData.title,
       description: metaData.description,
       markdown: markdown(highlighter),
+      cleanUrls: true,
 
       head: [
         ['meta', { name: 'theme-color', content: '#673AB7' }],
@@ -147,6 +152,26 @@ export default async () => {
           apiKey: '7545f38dfa3c4f435bbad0de83ec7189',
           indexName: 'esjs',
         },
+      },
+
+      transformHtml: (_, id, { pageData }) => {
+        if (!/[\\/]404\.html$/.test(id)) {
+          links.push({
+            url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
+            lastmod: pageData.lastUpdated,
+          })
+        }
+      },
+
+      buildEnd: async ({ outDir }) => {
+        const sitemap = new SitemapStream({
+          hostname: 'https://esjs.dev/',
+        })
+        const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
+        sitemap.pipe(writeStream)
+        links.forEach(link => sitemap.write(link))
+        sitemap.end()
+        await new Promise(resolve => writeStream.on('finish', resolve))
       },
     },
   )
