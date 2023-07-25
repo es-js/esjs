@@ -8,7 +8,6 @@ export interface EjecutarOptions {
   hidePreview?: boolean
   hideConsole?: boolean
   previewTab?: 'console' | 'flowchart' | 'hidden'
-  backgroundTransparent?: boolean
   code?: string
   testsCode?: string
 }
@@ -31,10 +30,7 @@ export async function init(customOptions: EjecutarOptions): Promise<void> {
     hidePreview: false,
     hideConsole: false,
     previewTab: 'console',
-    backgroundTransparent: false,
   }, customOptions)
-
-  setupBackgroundTransparent(options.backgroundTransparent)
 
   setupRefreshButton()
 
@@ -61,13 +57,6 @@ function setupRefreshButton() {
       evalCode(lastArgs)
     },
   )
-}
-
-function setupBackgroundTransparent(backgroundTransparent: boolean) {
-  const body = document.querySelector('body')
-
-  if (backgroundTransparent)
-    body.style.backgroundColor = 'transparent'
 }
 
 export async function evalCode(args: any) {

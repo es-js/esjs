@@ -32,6 +32,7 @@ onMounted(() => {
     return
 
   createSandbox(sandboxElement.value, {
+    theme: 'dark',
     hidePreview: String(props.hidePreview) === 'true',
     previewTab: String(props.hideConsole) === 'true' ? 'hidden' : 'console',
     code: props.code,

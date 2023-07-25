@@ -1,6 +1,8 @@
 import packageJson from '../../package.json' assert {type: 'json'}
 import type { EjecutarOptions } from './ejecutar'
 
+const isDev = false
+
 export function createIframe(parentElement: HTMLElement, options: EjecutarOptions): HTMLIFrameElement {
   const iframe = document.createElement('iframe')
 
@@ -24,13 +26,19 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
   iframe.setAttribute('title', 'sandbox')
   iframe.setAttribute('allow', 'clipboard-read; clipboard-write;')
 
+  iframe.classList.add('rounded')
+
   iframe.srcdoc = `
 <html lang="es" class="w-full h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>EsJS Ejecutar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@es-js/sandbox@${packageJson.version}/dist/style.css" />
+
+    ${isDev
+      ? '<link rel="stylesheet" href="http://localhost:5173/dist/style.css" />'
+      : `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@es-js/sandbox@${packageJson.version}/dist/style.css" />`
+    }
   </head>
 
   <script type="importmap">
@@ -44,11 +52,11 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
   }
   <\/script>
 
-  <body class="w-full h-full m-0 p-0 bg-transparent">
+  <body class="w-full h-full m-0 p-0 bg-gray-100 dark:bg-gray-900">
     <div class="w-full h-full flex flex-col space-y-2">
       <div id="preview-container" class="flex-grow">
         <div id="preview-background"
-             class="w-full h-full flex flex-col bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-800 rounded"
+             class="w-full h-full flex flex-col bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-800 rounded"
         >
           <div
             class="flex flex-row items-center bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-800 rounded-t"

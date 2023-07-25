@@ -8,7 +8,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "publish": "pnpm build && pnpm publish",
-    "tailwind:dev": "tailwindcss -i ./src/style.css -o ./output.css --watch",
+    "tailwind:dev": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch",
     "tailwind:build": "tailwindcss -i ./src/style.css -o ./dist/style.css --minify"
   },
   "devDependencies": {
