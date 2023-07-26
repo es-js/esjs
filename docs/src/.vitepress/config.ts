@@ -7,7 +7,7 @@ import { getHighlighter } from './config/getHighlighter'
 import { markdown } from './config/markdown'
 
 const isDev: boolean = process.env.NODE_ENV === 'development'
-const gtagId = 'G-TEST'
+const gtagId: string = isDev ? 'G-TEST' : 'G-0XH36H9K3M'
 const links = []
 
 export default async () => {
