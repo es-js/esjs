@@ -20,16 +20,16 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
-    "@types/node": "^18.16.19",
+    "@types/node": "^18.17.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "8.22.0",
     "is-number": "^7.0.0",
     "p-cancelable": "^4.0.1",
-    "reactive-light": "^1.0.14",
+    "reactive-light": "^1.0.15",
     "typescript": "^4.9.5",
-    "vite": "^4.4.2",
+    "vite": "^4.4.7",
     "vite-plugin-dts": "^1.7.3",
-    "xterminal": "^2.0.2"
+    "xterminal": "^2.0.8"
   },
   "files": [
     "dist"

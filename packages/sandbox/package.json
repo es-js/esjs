@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.1-alpha.9",
+  "version": "0.0.1-alpha.10",
   "scripts": {
     "dev": "vite",
     "build": "vite build && pnpm tailwind:build",
@@ -22,10 +22,10 @@
     "eslint": "8.22.0",
     "iconify-icon": "^1.0.8",
     "lz-string": "^1.5.0",
-    "postcss": "^8.4.25",
+    "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
-    "vite": "^4.4.4",
+    "vite": "^4.4.7",
     "vite-plugin-dts": "^1.7.3",
     "vite-plugin-import-maps": "^0.1.2"
   },

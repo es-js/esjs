@@ -56,7 +56,7 @@ packages:
     dependencies:
       '@jsdevtools/ez-spawn': 3.0.4
       cac: 6.7.14
-      fast-glob: 3.3.0
+      fast-glob: 3.3.1
       kleur: 4.1.5
       prompts: 2.4.2
       semver: 7.5.4
@@ -80,8 +80,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /fast-glob@3.3.0:
-    resolution: {integrity: sha512-ChDuvbOypPuNjO8yIDf36x7BlZX1smcUMTTcyoIjycexOxd6DFsKsg21qVBzEmr3G7fUKIRy2/psii+CIUt7FA==}
+  /fast-glob@3.3.1:
+    resolution: {integrity: sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==}
     engines: {node: '>=8.6.0'}
     dependencies:
       '@nodelib/fs.stat': 2.0.5
