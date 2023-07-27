@@ -1,5 +1,5 @@
 import 'iconify-icon'
-import { evalCode, hidePreview, previewTab, setupTheme } from './ejecutar.ts'
+import { evalFiles, hidePreview, previewTab, setupTheme } from './ejecutar.ts'
 
 export function setupWindow() {
   return new Promise((resolve) => {
@@ -99,7 +99,7 @@ async function handle_message(ev) {
 
   if (action === 'eval') {
     try {
-      await evalCode(args)
+      await evalFiles(args)
 
       send_ok()
     }

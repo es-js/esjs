@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { useEventBus } from '@vueuse/core'
-import { useEditor } from '@/composables/useEditor'
-import { useSettings } from '@/composables/useSettings'
-import { compileModulesForPreview, prepareCode, prepareCodeAndTestsForPlayground } from '@es-js/compiler'
-import { PreviewProxy } from '@/output/PreviewProxy'
-import { MAIN_FILE, MAIN_TESTS_FILE, orchestrator, OrchestratorFile } from '@es-js/compiler/orchestrator'
-import { isDark } from "@/composables/dark";
-import debounce from "lodash.debounce";
-import { createSandbox } from "@es-js/sandbox";
+import {isDark} from "@/composables/dark"
+import {useEditor} from '@/composables/useEditor'
+import {useSettings} from '@/composables/useSettings'
+import {PreviewProxy} from '@/output/PreviewProxy'
+import {useEventBus} from '@vueuse/core'
+import {createSandbox} from '@es-js/sandbox'
+import debounce from "lodash.debounce"
+import {onMounted, onUnmounted, watch} from 'vue'
+
+const MAIN_FILE = 'codigo.esjs'
+const MAIN_TESTS_FILE = 'pruebas.esjs'
 
 const editor = useEditor()
 
@@ -89,77 +90,11 @@ async function updateSandbox() {
     return
   }
 
-  const code = parseCode(editor.code.value)
+  const files = []
+  files[MAIN_FILE] = editor.code.value
+  files[MAIN_TESTS_FILE] = editor.testsCode.value
 
-  const testsCode = parseTestsCode(editor.testsCode.value)
-
-  const result = prepareCodeAndTestsForPlayground(code, testsCode)
-
-  orchestrator.files[MAIN_FILE] = new OrchestratorFile(
-    MAIN_FILE,
-    '',
-    `${result.imports}\n${result.code}\n`,
-    '',
-  )
-
-  orchestrator.files[MAIN_TESTS_FILE] = new OrchestratorFile(
-    MAIN_TESTS_FILE,
-    '',
-    `${result.testsImports}\n${result.testsCode}\n`,
-    '',
-  )
-
-  const modules = compileModulesForPreview([
-    orchestrator.files[MAIN_TESTS_FILE],
-    orchestrator.files[MAIN_FILE],
-  ])
-
-  await proxy.eval([
-    'const __modules__ = {};',
-    ...modules,
-  ])
-}
-
-function parseCode(code: string) {
-  bus.emit('clear-decorations')
-
-  try {
-    code = prepareCode(code)
-  } catch (error: SyntaxError | any) {
-    const line = error?.loc?.start?.line || 1
-    const column = error?.loc?.start?.column || 1
-    const errorMessage = error.message
-    bus.emit('decorate-error', {
-      line,
-      column,
-    })
-    code = `
-window._previewException(${line}, ${column}, ${JSON.stringify(errorMessage)});
-throw new Error(${JSON.stringify(errorMessage)});`
-  }
-
-  return code
-}
-
-function parseTestsCode(code: string) {
-  useEventBus('editor_tests').emit('clear-decorations')
-
-  try {
-    code = prepareCode(code)
-  } catch (error: SyntaxError | any) {
-    const line = error?.loc?.start?.line || 1
-    const column = error?.loc?.start?.column || 1
-    const errorMessage = error.message
-    useEventBus('editor_tests').emit('decorate-error', {
-      line,
-      column,
-    })
-    code = `
-window._previewException(${line}, ${column}, ${JSON.stringify(errorMessage)});
-throw new Error(${JSON.stringify(errorMessage)});`
-  }
-
-  return code
+  await proxy.eval(files)
 }
 
 watch(

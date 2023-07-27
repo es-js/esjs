@@ -42,7 +42,7 @@ export async function init(customOptions: EjecutarOptions): Promise<void> {
 
   previewTab(options.previewTab)
 
-  await evalInitialCode()
+  evalInitialCode()
 }
 
 function setupRefreshButton() {
@@ -59,7 +59,36 @@ function setupRefreshButton() {
   )
 }
 
-export async function evalCode(args: any) {
+export async function evalFiles({ files }) {
+  const result = prepareCodeAndTestsForPlayground(
+    files[MAIN_FILE] || '',
+    files[MAIN_TESTS_FILE] || '',
+  )
+
+  Object.keys(files).forEach((filename) => {
+    if (filename in orchestrator.files)
+      return
+
+    orchestrator.files[filename] = new OrchestratorFile(filename, '', '', '')
+  })
+
+  orchestrator.files[MAIN_FILE].script = `${result.imports}\n${result.code}\n`
+  orchestrator.files[MAIN_TESTS_FILE].script = `${result.testsImports}\n${result.testsCode}\n`
+
+  const modules = compileModulesForPreview([
+    orchestrator.files[MAIN_TESTS_FILE],
+    orchestrator.files[MAIN_FILE],
+  ])
+
+  await evalCode({
+    script: [
+      'const __modules__ = {};',
+      ...modules,
+    ],
+  })
+}
+
+async function evalCode(args: any) {
   lastArgs = Object.assign({}, args)
 
   if (scriptEls.length) {
@@ -103,37 +132,12 @@ export async function evalCode(args: any) {
   return true
 }
 
-async function evalInitialCode() {
-  const result = prepareCodeAndTestsForPlayground(
-    options.code || '',
-    options.testsCode || '',
-  )
+function evalInitialCode() {
+  const files = []
+  files[MAIN_FILE] = options.code || ''
+  files[MAIN_TESTS_FILE] = options.testsCode || ''
 
-  orchestrator.files[MAIN_FILE] = new OrchestratorFile(
-    MAIN_FILE,
-    '',
-    `${result.imports}\n${result.code}\n`,
-    '',
-  )
-
-  orchestrator.files[MAIN_TESTS_FILE] = new OrchestratorFile(
-    MAIN_TESTS_FILE,
-    '',
-    `${result.testsImports}\n${result.testsCode}\n`,
-    '',
-  )
-
-  const modules = compileModulesForPreview([
-    orchestrator.files[MAIN_TESTS_FILE],
-    orchestrator.files[MAIN_FILE],
-  ])
-
-  await evalCode({
-    script: [
-      'const __modules__ = {};',
-      ...modules,
-    ],
-  })
+  evalFiles({ files })
 }
 
 function clearConsole() {
@@ -240,3 +244,4 @@ function resetAppElement() {
 
   appElement.innerHTML = ''
 }
+
