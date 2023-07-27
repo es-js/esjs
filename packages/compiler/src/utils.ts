@@ -114,35 +114,34 @@ export function escapeQuotes(str) {
 }
 
 export function unifyImports(imports: string) {
-  const importMap = new Map()
-  let output = ''
+  const importMap = new Map<string, Set<string>>()
 
-  imports.split('\n')
-    .map(line => line.trim())
-    .forEach((line) => {
-      const importMatch = line.match(/^import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*(;)?$/)
+  const importRegex = /import\s+{([^}]+)}\s+from\s+['"]([^'"]+)['"]\s*(;)?/g
+  let match
+  while ((match = importRegex.exec(imports)) !== null) {
+    const [, namedImports, moduleSpecifier] = match
 
-      if (!importMatch) {
-        output += `${line}\n`
-        return
-      }
+    if (!importMap.has(moduleSpecifier))
+      importMap.set(moduleSpecifier, new Set())
 
-      const [matchedText, namedImports, moduleSpecifier] = importMatch
-
-      if (!importMap.has(moduleSpecifier))
-        importMap.set(moduleSpecifier, new Set())
-
-      namedImports.split(/\s*,\s*/g).forEach((namedImport) => {
-        importMap.get(moduleSpecifier).add(namedImport.trim())
-      })
+    namedImports.split(/\s*,\s*/g).forEach((namedImport) => {
+      const importName = namedImport.trim()
+      if (importName)
+        importMap.get(moduleSpecifier).add(importName)
     })
+  }
 
+  let output = ''
   importMap.forEach((namedImports, moduleSpecifier) => {
     const sortedImports = [...namedImports].sort()
     output += `import { ${sortedImports.join(', ')} } from '${moduleSpecifier}'\n`
   })
 
-  return output
+  // Add the remaining imports that are not duplicated
+  const remainingImports = imports.replace(importRegex, '').trim()
+  output += remainingImports
+
+  return output.trim()
 }
 
 export function formatCode(code: string, options?: Partial<Options>) {
