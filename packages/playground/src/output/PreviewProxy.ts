@@ -91,8 +91,4 @@ export class PreviewProxy {
   eval(script: string | string[]) {
     return this.iframe_command('eval', { script })
   }
-
-  handle_links() {
-    return this.iframe_command('catch_clicks', {})
-  }
 }
