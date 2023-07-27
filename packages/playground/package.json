@@ -14,7 +14,7 @@
     "@es-js/compiler": "workspace:^",
     "@es-js/core": "workspace:*",
     "@es-js/language-tools": "workspace:*",
-    "@es-js/sandbox": "workspace:0.0.1-alpha.10",
+    "@es-js/sandbox": "workspace:0.0.1-alpha.11",
     "@iconify/vue": "^4.1.1",
     "@mdi/font": "5.9.55",
     "@types/lodash.debounce": "^4.0.7",
@@ -43,7 +43,7 @@
     "vitest": "^0.25.8",
     "vue": "^3.3.4",
     "vue-gtag": "^2.0.1",
-    "vue-tsc": "^1.8.6",
+    "vue-tsc": "^1.8.8",
     "webfontloader": "^1.6.28"
   }
 }
