@@ -1,7 +1,8 @@
+import { prepareCode } from '@es-js/compiler'
+import { splitCodeImports, transpile } from '@es-js/core'
+import { obfuscate } from 'javascript-obfuscator'
 import type { Ref } from 'vue'
 import { ref } from 'vue'
-import { splitCodeImports, transpile } from '@es-js/core'
-import { obfuscateCode, prepareCode } from '@es-js/compiler'
 
 export const INITIAL_CODE = `/**
   EsJS: Lenguaje de programación con sintaxis en español basado en JavaScript.
@@ -69,6 +70,15 @@ ${obfuscatedCode.getObfuscatedCode()}`
 
   function setLanguage(value: 'esjs' | 'js') {
     language.value = value
+  }
+
+  function obfuscateCode(code: string) {
+    return obfuscate(code, {
+      compact: true,
+      simplify: false,
+      controlFlowFlattening: false,
+      ignoreImports: true,
+    })
   }
 
   return {

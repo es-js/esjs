@@ -12,10 +12,12 @@ import {
   transpile,
   variableLanguage,
 } from '@es-js/core'
+import type { Options } from 'prettier'
 import { watch } from 'vue'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
-import { formatCode } from '@es-js/compiler'
+import prettier from 'prettier/standalone'
+import parserBabel from 'prettier/parser-babel'
 import { isDark } from '@/composables/dark'
 import { esjsTokenizer } from '@/language-tools/esjsTokenizer'
 import { useEditor } from '@/composables/useEditor'
@@ -228,6 +230,15 @@ export const useMonaco = () => {
           },
         ]
       },
+    })
+  }
+
+  function formatCode(code: string, options?: Partial<Options>) {
+    return prettier.format(code, {
+      parser: 'babel',
+      plugins: [parserBabel],
+      semi: false,
+      ...options,
     })
   }
 

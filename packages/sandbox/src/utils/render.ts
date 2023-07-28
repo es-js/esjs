@@ -47,7 +47,7 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
       "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.9/dist/terminal.es.js",
       "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm",
       "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3",
-      "@es-js/sandbox": "https://cdn.jsdelivr.net/npm/@es-js/sandbox@${packageJson.version}/sandbox/+esm"
+      "@es-js/sandbox": "${isDev ? 'http://localhost:5173/src/sandbox.ts' : `https://cdn.jsdelivr.net/npm/@es-js/sandbox@${packageJson.version}/sandbox/+esm`}"
     }
   }
   <\/script>

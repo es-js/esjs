@@ -1,10 +1,5 @@
 import * as espree from 'espree'
-import prettier from 'prettier/standalone'
-import parserBabel from 'prettier/parser-babel'
 import escodegen from 'escodegen'
-import { obfuscate } from 'javascript-obfuscator'
-import type { Options } from 'prettier'
-// import { convertCodeToSvg } from '@es-js/esjs2flowchart'
 import { splitCodeImports, transpile } from '@es-js/core'
 import { MAIN_FILE } from './orchestrator'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from './constants'
@@ -21,7 +16,6 @@ export function prepareCode(code: string) {
       code += '\n'
 
     code = transpile(code)
-    code = formatCode(code) // TODO: Es necesario?.
     code = addExportToFunctions(code)
     code = addInfiniteLoopProtection(code)
     return code
@@ -144,24 +138,6 @@ export function unifyImports(imports: string) {
   return output.trim()
 }
 
-export function formatCode(code: string, options?: Partial<Options>) {
-  return prettier.format(code, {
-    parser: 'babel',
-    plugins: [parserBabel],
-    semi: false,
-    ...options,
-  })
-}
-
-export function obfuscateCode(code: string) {
-  return obfuscate(code, {
-    compact: true,
-    simplify: false,
-    controlFlowFlattening: false,
-    ignoreImports: true,
-  })
-}
-
 export function escapeTemplateLiteral(code: string) {
   return code.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
 }
@@ -195,22 +171,6 @@ export function removeTopLevelAwaits(code: string) {
   })
 
   return escodegen.generate(ast)
-}
-
-export function getFlowchartSvg(code: string): string {
-//   try {
-//     return escapeTemplateLiteral(
-//       convertCodeToSvg(
-//         removeTopLevelAwaits(code),
-//       ),
-//     )
-//   }
-//   catch (error) {
-//     return `<div class="w-full h-full flex flex-col justify-center items-center text-center text-red-700 text-2xl font-sans">
-//     <p>¡Ups!</p>
-//     <p>No se pudo generar el Diagrama de Flujo</p>
-// </div>`
-//   }
 }
 
 /**
