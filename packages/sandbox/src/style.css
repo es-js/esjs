@@ -6,31 +6,8 @@
   height: calc(28px + 0.5rem) !important;
 }
 
-.eruda-dev-tools.opened {
-  @apply m-1 border-0 border-gray-300 dark:border-gray-700 rounded !important;
-  width: calc(100% - 0.5rem) !important;
-}
-.eruda-dev-tools.opened-50 {
-  height: calc(50% - 0.5rem) !important;
-}
-.eruda-dev-tools.opened-100 {
-  height: calc(100% - 0.5rem) !important;
-}
-.eruda-dev-tools.closed {
-  @apply m-1 border-0 border-gray-300 rounded !important;
-  width: calc(100% - 0.5rem) !important;
-}
-
-.eruda-tab {
-  @apply rounded-t;
-}
-
-.eruda-tools {
-  @apply rounded-b;
-}
-
 .eruda-logs-container {
-  @apply bg-gray-100 dark:bg-gray-900 !important;
+  @apply bg-gray-50 dark:bg-gray-900 !important;
 }
 
 /* Floating button */

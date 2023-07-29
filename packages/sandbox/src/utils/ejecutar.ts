@@ -60,32 +60,37 @@ function setupRefreshButton() {
 }
 
 export async function evalFiles({ files }) {
-  const result = prepareCodeAndTestsForPlayground(
-    files[MAIN_FILE] || '',
-    files[MAIN_TESTS_FILE] || '',
-  )
+  try {
+    const result = prepareCodeAndTestsForPlayground(
+      files[MAIN_FILE] || '',
+      files[MAIN_TESTS_FILE] || '',
+    )
 
-  Object.keys(files).forEach((filename) => {
-    if (filename in orchestrator.files)
-      return
+    Object.keys(files).forEach((filename) => {
+      if (filename in orchestrator.files)
+        return
 
-    orchestrator.files[filename] = new OrchestratorFile(filename, '', '', '')
-  })
+      orchestrator.files[filename] = new OrchestratorFile(filename, '', '', '')
+    })
 
-  orchestrator.files[MAIN_FILE].script = `${result.imports}\n${result.code}\n`
-  orchestrator.files[MAIN_TESTS_FILE].script = `${result.testsImports}\n${result.testsCode}\n`
+    orchestrator.files[MAIN_FILE].script = `${result.imports}\n${result.code}\n`
+    orchestrator.files[MAIN_TESTS_FILE].script = `${result.testsImports}\n${result.testsCode}\n`
 
-  const modules = compileModulesForPreview([
-    orchestrator.files[MAIN_TESTS_FILE],
-    orchestrator.files[MAIN_FILE],
-  ])
+    const modules = compileModulesForPreview([
+      orchestrator.files[MAIN_TESTS_FILE],
+      orchestrator.files[MAIN_FILE],
+    ])
 
-  await evalCode({
-    script: [
-      'const __modules__ = {};',
-      ...modules,
-    ],
-  })
+    await evalCode({
+      script: [
+        'const __modules__ = {};',
+        ...modules,
+      ],
+    })
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 async function evalCode(args: any) {

@@ -26,8 +26,6 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
   iframe.setAttribute('title', 'sandbox')
   iframe.setAttribute('allow', 'clipboard-read; clipboard-write;')
 
-  iframe.classList.add('rounded')
-
   iframe.srcdoc = `
 <html lang="es" class="w-full h-full">
   <head>
