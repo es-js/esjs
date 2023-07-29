@@ -3,35 +3,44 @@
 @tailwind utilities;
 
 .h-eruda-tab {
-  height: 28px;
+  height: calc(28px + 0.5rem) !important;
 }
 
-.eruda-dev-tools {
-  border-radius: 0.25rem;
-  padding-top: 28px !important;
-  border: 1px solid #d4d4d8 !important;
+.eruda-dev-tools.opened {
+  @apply m-1 border-0 border-gray-300 dark:border-gray-700 rounded !important;
+  width: calc(100% - 0.5rem) !important;
 }
-
-.dark .eruda-dev-tools {
-  border: 1px solid #27272a !important;
+.eruda-dev-tools.opened-50 {
+  height: calc(50% - 0.5rem) !important;
+}
+.eruda-dev-tools.opened-100 {
+  height: calc(100% - 0.5rem) !important;
+}
+.eruda-dev-tools.closed {
+  @apply m-1 border-0 border-gray-300 rounded !important;
+  width: calc(100% - 0.5rem) !important;
 }
 
 .eruda-tab {
-  border-radius: 0.25rem 0.25rem 0 0;
+  @apply rounded-t;
 }
 
 .eruda-tools {
-  border-radius: 0.25rem;
+  @apply rounded-b;
+}
+
+.eruda-logs-container {
+  @apply bg-gray-100 dark:bg-gray-900 !important;
 }
 
 /* Floating button */
 .eruda-entry-btn {
-  display: none !important;
+  @apply hidden !important;
 }
 
 /* Misc */
 .eruda-resizer {
-  display: none !important;
+  @apply hidden !important;
 }
 
 .luna-tab-slider {

@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import MonacoEditor from "@/components/MonacoEditor.vue"
+import AppContainer from "@/components/shared/AppContainer.vue"
 import {isDark} from "@/composables/dark"
 import {useEditor} from '@/composables/useEditor'
 import {useSettings} from '@/composables/useSettings'
 import {PreviewProxy} from '@/output/PreviewProxy'
+import {Icon} from "@iconify/vue"
 import {useEventBus} from '@vueuse/core'
 import {createSandbox} from '@es-js/sandbox'
 import debounce from "lodash.debounce"
@@ -130,5 +133,19 @@ watch(
 </script>
 
 <template>
-  <div id="esjs-sandbox" class="w-full h-full"></div>
+  <AppContainer>
+    <template #title>
+      <div class="flex flex-row items-center space-x-2">
+        <button class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl">
+          <span>Resultado</span>
+        </button>
+
+        <div class="flex flex-grow" />
+      </div>
+    </template>
+
+    <template #default>
+      <div id="esjs-sandbox" class="w-full h-full"></div>
+    </template>
+  </AppContainer>
 </template>

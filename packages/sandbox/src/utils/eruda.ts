@@ -41,7 +41,7 @@ export function setupEruda() {
 
   renameErudaTabs()
 
-  setActiveTab(activePreviewTab)
+  setActiveTab(activePreviewTab, true)
 
   fixDevToolsPadding()
 
@@ -56,8 +56,8 @@ export function getActiveTab() {
   return activePreviewTab
 }
 
-export function setActiveTab(value: 'console' | 'flowchart' | 'hidden') {
-  if (value === getActiveTab())
+export function setActiveTab(value: 'console' | 'flowchart' | 'hidden', force = false) {
+  if (!force && activePreviewTab === value)
     return
 
   if (!eruda || !eruda.get())
@@ -90,6 +90,22 @@ export function openEruda() {
     return
 
   eruda.get().config.set('displaySize', size)
+
+  const erudaDevToolsElement = document.querySelector('.eruda-dev-tools') as HTMLElement
+  if (erudaDevToolsElement) {
+    if (size === 50) {
+      erudaDevToolsElement.classList.toggle('opened-50', true)
+      erudaDevToolsElement.classList.toggle('opened-100', false)
+    }
+    else if (size === 100) {
+      erudaDevToolsElement.classList.toggle('opened-100', true)
+      erudaDevToolsElement.classList.toggle('opened-50', false)
+    }
+    else {
+      erudaDevToolsElement.classList.toggle('opened-50', false)
+      erudaDevToolsElement.classList.toggle('opened-100', false)
+    }
+  }
 
   const consoleElement = document.getElementById('console-container')
 
@@ -126,6 +142,14 @@ export function hideEruda() {
   const lunaTabSliderElement: HTMLElement | null = document.querySelector('.luna-tab-slider')
   if (lunaTabSliderElement)
     lunaTabSliderElement.style.display = 'none'
+
+  const erudaDevToolsElement = document.querySelector('.eruda-dev-tools') as HTMLElement
+  if (erudaDevToolsElement) {
+    erudaDevToolsElement.classList.toggle('opened', false)
+    erudaDevToolsElement.classList.toggle('opened-50', false)
+    erudaDevToolsElement.classList.toggle('opened-100', false)
+    erudaDevToolsElement.classList.toggle('closed', true)
+  }
 }
 
 function openConsole() {
@@ -139,6 +163,12 @@ function openConsole() {
   if (consoleElement) {
     consoleElement.classList.remove('h-eruda-tab')
     consoleElement.classList.add('flex-grow')
+  }
+
+  const erudaDevToolsElement = document.querySelector('.eruda-dev-tools') as HTMLElement
+  if (erudaDevToolsElement) {
+    erudaDevToolsElement.classList.toggle('opened', true)
+    erudaDevToolsElement.classList.toggle('closed', false)
   }
 }
 
