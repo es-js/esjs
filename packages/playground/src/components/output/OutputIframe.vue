@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {PreviewProxy} from '@/components/output/PreviewProxy'
 import AppContainer from "@/components/shared/AppContainer.vue"
-import AppTabButton from "@/components/shared/AppTabButton.vue"
 import {isDark} from "@/composables/dark"
 import {useEditor} from '@/composables/useEditor'
 import {useSettings} from '@/composables/useSettings'
