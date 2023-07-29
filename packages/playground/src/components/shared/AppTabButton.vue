@@ -18,10 +18,10 @@ const emit = defineEmits(['click'])
 
 <template>
   <button
-    class="h-full flex flex-row justify-center items-center text-xs px-3.5 py-1.5 space-x-1.5 rounded"
+    class="h-full flex flex-row justify-center items-center text-xs px-2.5 py-1.5 space-x-1.5 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border-b-2"
     :class="{
-      'bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900 dark:hover:bg-indigo-700 text-indigo-800 hover:text-indigo-700 dark:text-indigo-100 dark:hover:text-indigo-50': props.active,
-      'bg-gray-50 hover:bg-indigo-200 dark:bg-gray-800 dark:hover:bg-indigo-700 text-gray-800 hover:text-indigo-700 dark:text-gray-100 dark:hover:text-indigo-50': !props.active,
+      'border-indigo-700 dark:border-indigo-500': props.active,
+      'border-transparent': !props.active,
     }"
     @click="emit('click')"
   >

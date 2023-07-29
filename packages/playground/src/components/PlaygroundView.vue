@@ -3,8 +3,9 @@ import { Pane, Splitpanes } from 'splitpanes'
 import { computed, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 import { useEventBus } from '@vueuse/core'
+import AppTabButton from '@/components/shared/AppTabButton.vue'
 import { useSettings } from '@/composables/useSettings'
-import OutputIframe from '@/output/OutputIframe.vue'
+import OutputIframe from '@/components/output/OutputIframe.vue'
 import { useEditor } from '@/composables/useEditor'
 import AppContainer from '@/components/shared/AppContainer.vue'
 import MonacoEditor from '@/components/MonacoEditor.vue'
@@ -45,12 +46,13 @@ watch(
           <AppContainer>
             <template #title>
               <div class="flex flex-row items-center space-x-2">
-                <button class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl">
-                  <Icon icon="mdi:code-tags" class="w-4 h-4" />
-                  <span>{{ editor.language.value === 'esjs' ? 'codigo.esjs' : 'codigo.js' }}</span>
-                </button>
+                <AppTabButton
+                  icon="mdi:code-tags"
+                  :text="editor.language.value === 'esjs' ? 'codigo.esjs' : 'codigo.js'"
+                  active
+                />
 
-                <div class="flex flex-grow" />
+                <span class="flex-1" />
               </div>
             </template>
 
@@ -78,13 +80,12 @@ watch(
           <AppContainer class="flex-grow">
             <template #title>
               <div class="flex flex-row items-center space-x-2">
-                <button
-                  class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl"
+                <AppTabButton
+                  icon="mdi:test-tube"
+                  :text="editor.language.value === 'esjs' ? 'pruebas.esjs' : 'pruebas.js'"
+                  :active="!settings.hideTests"
                   @click="useSettings().setHideTests(!settings.hideTests)"
-                >
-                  <Icon icon="mdi:test-tube" class="w-4 h-4" />
-                  <span>{{ editor.language.value === 'esjs' ? 'pruebas.esjs' : 'pruebas.js' }}</span>
-                </button>
+                />
 
                 <div class="flex flex-grow" />
               </div>

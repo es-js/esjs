@@ -1,0 +1,42 @@
+ /* SpintPanes */
+
+.splitpanes.default-theme .splitpanes__pane {
+    @apply bg-transparent !important;
+}
+.splitpanes.default-theme .splitpanes__splitter {
+    /*background-color: transparent !important;*/
+    /*border-color: transparent !important;*/
+    min-width: 0.25rem !important;
+    min-height: 0.25rem !important;
+    /*height: 0.25rem !important;*/
+    @apply bg-gray-200 hover:bg-blue-500 dark:bg-gray-800 dark:hover:bg-blue-500 border-transparent !important;
+}
+
+.splitpanes.default-theme.splitpanes--horizontal > .splitpanes__splitter {
+    height: 0.25rem !important;
+}
+
+.splitpanes.default-theme.splitpanes--vertical > .splitpanes__splitter {
+    width: 0.25rem !important;
+    /*height: 100% !important;*/
+}
+
+.splitpanes.default-theme .splitpanes__splitter::before,
+.splitpanes.default-theme .splitpanes__splitter::after {
+    @apply bg-transparent !important;
+}
+
+.splitpanes.default-theme .splitpanes__splitter:hover::before,
+.splitpanes.default-theme .splitpanes__splitter:hover::after {
+    @apply bg-transparent !important;
+}
+
+.dark .splitpanes.default-theme .splitpanes__splitter::before,
+.dark .splitpanes.default-theme .splitpanes__splitter::after {
+    @apply bg-transparent !important;
+}
+
+.dark .splitpanes.default-theme .splitpanes__splitter:hover::before,
+.dark .splitpanes.default-theme .splitpanes__splitter:hover::after {
+    @apply bg-transparent !important;
+}

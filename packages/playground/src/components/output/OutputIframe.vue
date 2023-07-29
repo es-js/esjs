@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import MonacoEditor from "@/components/MonacoEditor.vue"
+import {PreviewProxy} from '@/components/output/PreviewProxy'
 import AppContainer from "@/components/shared/AppContainer.vue"
+import AppTabButton from "@/components/shared/AppTabButton.vue"
 import {isDark} from "@/composables/dark"
 import {useEditor} from '@/composables/useEditor'
 import {useSettings} from '@/composables/useSettings'
-import {PreviewProxy} from '@/output/PreviewProxy'
-import {Icon} from "@iconify/vue"
-import {useEventBus} from '@vueuse/core'
 import {createSandbox} from '@es-js/sandbox'
 import debounce from "lodash.debounce"
 import {onMounted, onUnmounted, watch} from 'vue'
+import { Icon } from '@iconify/vue'
 
 const MAIN_FILE = 'codigo.esjs'
 const MAIN_TESTS_FILE = 'pruebas.esjs'
@@ -18,14 +17,24 @@ const editor = useEditor()
 
 const settings = useSettings().settings
 
-const bus = useEventBus('editor_code')
-
 let sandbox: HTMLIFrameElement
 let proxy: PreviewProxy
 
-onMounted(async () => {
+onMounted(() => {
+  init()
+})
+
+onUnmounted(() => {
+  proxy.destroy()
+})
+
+async function init() {
   if (sandbox) {
     proxy.destroy()
+    const esjsSandboxElement = document.getElementById('esjs-sandbox')
+    if (esjsSandboxElement) {
+      esjsSandboxElement.innerHTML = ''
+    }
   }
 
   sandbox = await createSandbox('esjs-sandbox', {
@@ -76,15 +85,11 @@ onMounted(async () => {
       useSettings().setHideConsole(args.data === 'hidden')
     },
   })
-})
+}
 
-onUnmounted(() => {
-  proxy.destroy()
-})
-
-watch(isDark, () => {
-  proxy.iframe_command('DARK_MODE', isDark.value)
-})
+function refresh() {
+  init()
+}
 
 const updateSandboxDebounced = debounce(updateSandbox, 500)
 
@@ -99,6 +104,10 @@ async function updateSandbox() {
 
   await proxy.eval(files)
 }
+
+watch(isDark, () => {
+  proxy.iframe_command('DARK_MODE', isDark.value)
+})
 
 watch(
   () => settings.value.hidePreview,
@@ -133,19 +142,34 @@ watch(
 </script>
 
 <template>
-  <AppContainer>
+  <AppContainer class="w-full h-full">
     <template #title>
-      <div class="flex flex-row items-center space-x-2">
-        <button class="flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white rounded-tl">
-          <span>Resultado</span>
+      <div class="flex flex-row items-center">
+        <button id="refresh-button"
+                class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+                title="Refrescar"
+                aria-label="Refrescar"
+                @click="refresh"
+        >
+          <Icon icon="mdi:refresh" class="w-4 h-4" />
         </button>
 
-        <div class="flex flex-grow" />
+        <div class="flex flex-grow px-2">
+          <span class="h-5 flex flex-grow flex-row justify-center items-center text-center text-xs px-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full">
+            Resultado
+          </span>
+        </div>
+
+        <button id="refresh-button"
+                class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+                title="Abrir en una nueva pestaña"
+                aria-label="Abrir en una nueva pestaña"
+        >
+          <Icon icon="mdi:open-in-new" class="w-4 h-4" />
+        </button>
       </div>
     </template>
 
-    <template #default>
-      <div id="esjs-sandbox" class="w-full h-full"></div>
-    </template>
+    <div id="esjs-sandbox" class="w-full h-full"></div>
   </AppContainer>
 </template>

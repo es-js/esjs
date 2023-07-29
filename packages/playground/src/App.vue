@@ -43,7 +43,7 @@ onBeforeUnmount(() => {
     <div class="flex flex-col w-full h-full">
       <TopBar class="h-10" />
 
-      <div class="flex flex-row flex-grow px-2 pb-2">
+      <div class="flex flex-row flex-grow">
         <div class="relative flex flex-1">
           <PlaygroundView class="absolute inset-0 w-full h-full" />
         </div>

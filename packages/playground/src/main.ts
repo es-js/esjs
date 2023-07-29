@@ -5,6 +5,7 @@ import App from './App.vue'
 import { loadFonts } from '@/plugins/webfontloader'
 
 import '@/styles/main.css'
+import '@/styles/splitpanes.css'
 import 'floating-vue/dist/style.css'
 import 'splitpanes/dist/splitpanes.css'
 import { useShare } from '@/composables/useShare'
