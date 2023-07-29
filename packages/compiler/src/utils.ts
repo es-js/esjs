@@ -1,9 +1,10 @@
 import * as espree from 'espree'
 import escodegen from 'escodegen'
 import { splitCodeImports, transpile } from '@es-js/core'
+import prettier from 'prettier/standalone'
+import parserBabel from 'prettier/parser-babel'
 import { MAIN_FILE } from './orchestrator'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from './constants'
-
 class PrepareCodeError extends Error {
   constructor(message: string, public line: number, public column: number) {
     super(message)
@@ -16,8 +17,9 @@ export function prepareCode(code: string) {
       code += '\n'
 
     code = transpile(code)
-    code = addExportToFunctions(code)
-    code = addInfiniteLoopProtection(code)
+    code = formatCode(code) // To check syntax errors
+    code = addExportToFunctions(code) // To allow functions to be called from another file
+    // code = addInfiniteLoopProtection(code) // To prevent infinite loops
     return code
   }
   catch (error: SyntaxError | any) {
@@ -97,14 +99,6 @@ export function addInfiniteLoopProtection(code: string, { timeout } = { timeout:
     })
 
   return code
-}
-
-/**
- * @author @slevithan
- * @param str
- */
-export function escapeQuotes(str) {
-  return str.replace(/\\([\s\S])|(")/g, '\\$1$2')
 }
 
 export function unifyImports(imports: string) {
@@ -264,4 +258,12 @@ ${splittedCode.imports}
     testsImports,
     testsCode: splittedTestsCode.codeWithoutImports,
   }
+}
+
+function formatCode(code: string) {
+  return prettier.format(code, {
+    parser: 'babel',
+    plugins: [parserBabel],
+    semi: false,
+  })
 }
