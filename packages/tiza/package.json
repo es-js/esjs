@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.3",
-    "eslint": "^8.45.0",
+    "eslint": "^8.46.0",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.7",
     "vitest": "^0.25.8"

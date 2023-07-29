@@ -20,7 +20,7 @@
     "@types/node": "^18.17.1",
     "typescript": "^4.9.5",
     "unbuild": "^1.2.1",
-    "vue-tsc": "^1.8.6"
+    "vue-tsc": "^1.8.8"
   },
   "type": "module",
   "exports": {
