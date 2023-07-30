@@ -1,5 +1,5 @@
 import * as lzs from 'lz-string'
-import { useClipboard } from '@vueuse/core'
+import { useClipboard, useDark } from '@vueuse/core'
 import { useSettings } from '@/composables/useSettings'
 import { INITIAL_CODE, useEditor } from '@/composables/useEditor'
 import { useNotification } from '@/composables/useNotification'
@@ -55,6 +55,22 @@ export const useShare = () => {
     url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
     url.searchParams.set('language', useEditor().language.value)
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
+
+    return url
+  }
+
+  function getEjecutarUrl(): URL {
+    const url = new URL('/', 'https://ejecutar.esjs.dev')
+
+    const options = {
+      theme: useDark().value ? 'dark' : 'light',
+      hidePreview: settings.settings.value.hidePreview,
+      previewTab: settings.settings.value.previewTab,
+    }
+
+    url.searchParams.set('code', lzs.compressToEncodedURIComponent(useEditor().code.value))
+    url.searchParams.set('tests', lzs.compressToEncodedURIComponent(useEditor().testsCode.value ?? ''))
+    url.searchParams.set('options', lzs.compressToEncodedURIComponent(JSON.stringify(options)))
 
     return url
   }
@@ -201,5 +217,6 @@ export const useShare = () => {
     getTestsCodeFromUrl,
     setSettingsFromUrl,
     setCodeFromUrl,
+    getEjecutarUrl,
   }
 }

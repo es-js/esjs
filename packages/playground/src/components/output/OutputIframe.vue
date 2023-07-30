@@ -4,6 +4,7 @@ import AppContainer from "@/components/shared/AppContainer.vue"
 import {isDark} from "@/composables/dark"
 import {useEditor} from '@/composables/useEditor'
 import {useSettings} from '@/composables/useSettings'
+import {useShare} from "@/composables/useShare"
 import {createSandbox} from '@es-js/sandbox'
 import debounce from "lodash.debounce"
 import {onMounted, onUnmounted, watch} from 'vue'
@@ -104,6 +105,12 @@ async function updateSandbox() {
   await proxy.eval(files)
 }
 
+function openInNewTab() {
+  const url = useShare().getEjecutarUrl()
+
+  window.open(url, '_blank')
+}
+
 watch(isDark, () => {
   proxy.iframe_command('DARK_MODE', isDark.value)
 })
@@ -163,6 +170,7 @@ watch(
                 class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
                 title="Abrir en una nueva pestaña"
                 aria-label="Abrir en una nueva pestaña"
+                @click="openInNewTab"
         >
           <Icon icon="mdi:open-in-new" class="w-4 h-4" />
         </button>
