@@ -151,8 +151,7 @@ watch(
   <AppContainer class="w-full h-full">
     <template #title>
       <div class="flex flex-row items-center">
-        <button id="refresh-button"
-                class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+        <button class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
                 title="Refrescar"
                 aria-label="Refrescar"
                 @click="refresh"
@@ -166,8 +165,7 @@ watch(
           </span>
         </div>
 
-        <button id="refresh-button"
-                class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+        <button class="h-full flex flex-row items-center p-2 space-x-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
                 title="Abrir en una nueva pestaña"
                 aria-label="Abrir en una nueva pestaña"
                 @click="openInNewTab"

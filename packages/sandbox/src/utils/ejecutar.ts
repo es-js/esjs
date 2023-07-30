@@ -32,8 +32,6 @@ export async function init(customOptions: EjecutarOptions): Promise<void> {
     previewTab: 'console',
   }, customOptions)
 
-  setupRefreshButton()
-
   setupTheme(options.theme)
 
   await setupEruda()
@@ -43,20 +41,6 @@ export async function init(customOptions: EjecutarOptions): Promise<void> {
   previewTab(options.previewTab)
 
   evalInitialCode()
-}
-
-function setupRefreshButton() {
-  const refreshButton = document.querySelector('#refresh-button')
-
-  if (!refreshButton)
-    return
-
-  refreshButton.addEventListener(
-    'click',
-    () => {
-      evalCode(lastArgs)
-    },
-  )
 }
 
 export async function evalFiles({ files }) {

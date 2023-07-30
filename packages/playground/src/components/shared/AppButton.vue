@@ -47,6 +47,7 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
         'rounded': !isIconOnly && !props.noRound,
         'p-1 rounded-full': isIconOnly,
       }"
+      :aria-label="props.description"
       @click="emit('click')"
     >
       <Icon
