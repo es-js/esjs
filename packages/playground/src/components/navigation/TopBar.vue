@@ -68,6 +68,7 @@ const settings = useSettings()
               icon="mdi:cog"
               icon-only
               color="gray"
+              description="Opciones"
             />
 
             <template #popper>
