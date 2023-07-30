@@ -6,36 +6,10 @@
     <link rel="icon" type="image/svg+xml" href="/esjs.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejecutar EsJS</title>
-    <link rel="stylesheet" href="/output.css" />
   </head>
 
-  <body id="body" class="w-full h-full m-0 p-0 bg-white dark:bg-gray-900">
-    <div class="w-full h-full flex flex-col space-y-2">
-      <div id="preview-container" class="flex-grow">
-        <div id="preview-background" class="w-full h-full flex flex-col bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-800 rounded">
-          <div class="flex flex-row items-center bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-800 rounded-t">
-            <button id="refresh-button"
-                    class="h-full flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-600 dark:text-white rounded-tl cursor-pointer"
-                    title="Refrescar"
-                    aria-label="Refrescar">
-              <iconify-icon icon="mdi:refresh"></iconify-icon>
-            </button>
-
-            <div class="h-full flex flex-row items-center px-2 py-1 space-x-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white cursor-pointer">
-              <span class>Resultado</span>
-            </div>
-          </div>
-
-          <div class="relative flex flex-1">
-            <div id="app" class="w-full min-h-full"></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="console-container" class="flex-grow">
-        <div id="eruda-container"></div>
-      </div>
-    </div>
+  <body style="width: 100vw; height: 100vh; overflow: hidden; margin: 0; padding: 0;">
+    <div id="esjs-sandbox" style="width: 100%; height: 100%;"></div>
 
     <script>
       (function () {
@@ -48,7 +22,5 @@
     </script>
 
     <script type="module" src="/src/main.ts"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.9/dist/style.css" />
   </body>
 </html>
