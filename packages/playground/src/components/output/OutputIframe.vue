@@ -43,6 +43,24 @@ async function init() {
     previewTab: useSettings().activePreviewTab.value,
     code: editor.code.value,
     testsCode: editor.testsCode.value,
+    ...(
+      import.meta.env.VITE_SANDBOX_DEV === 'true'
+        ? {
+          importMap: JSON.stringify({
+              'imports': {
+                "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.9/dist/terminal.es.js",
+                "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm",
+                "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3",
+                "@es-js/sandbox": "http://localhost:5173/src/sandbox.ts",
+              }
+            }
+          ),
+          stylesheets: [
+            'http://localhost:5173/dist/style.css',
+          ],
+        }
+        : {}
+    )
   })
 
   proxy = new PreviewProxy(sandbox, {

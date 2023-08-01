@@ -33,21 +33,11 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>EsJS Ejecutar</title>
 
-    ${isDev
-      ? '<link rel="stylesheet" href="http://localhost:5173/dist/style.css" />'
-      : `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@es-js/sandbox@${packageJson.version}/dist/style.css" />`
-    }
+    ${options.stylesheets?.map(href => `<link rel="stylesheet" href="${href}" />`).join('\n')}
   </head>
 
   <script type="importmap">
-  {
-    "imports": {
-      "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0-beta.9/dist/terminal.es.js",
-      "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm",
-      "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3",
-      "@es-js/sandbox": "${isDev ? 'http://localhost:5173/src/sandbox.ts' : `https://cdn.jsdelivr.net/npm/@es-js/sandbox@${packageJson.version}/sandbox/+esm`}"
-    }
-  }
+  ${options.importMap}
   <\/script>
 
   <body class="w-full h-full m-0 p-0 bg-white dark:bg-[#121212]">
@@ -69,8 +59,8 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
     import { setupSandbox } from '@es-js/sandbox'
 
     setupSandbox({
+      ${Object.entries(options).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join(',\n')},
       usarTerminal,
-      ${Object.entries(options).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join(',\n')}
     })
   </script>
 </html>`

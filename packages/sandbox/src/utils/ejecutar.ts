@@ -3,16 +3,18 @@ import { MAIN_FILE, MAIN_TESTS_FILE, OrchestratorFile, orchestrator } from '@es-
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
-  usarTerminal?: any
-  theme?: 'dark' | 'light'
-  hidePreview?: boolean
-  hideConsole?: boolean
-  previewTab?: 'console' | 'flowchart' | 'hidden'
-  code?: string
-  testsCode?: string
+  usarTerminal: any
+  theme: 'dark' | 'light'
+  hidePreview: boolean
+  hideConsole: boolean
+  previewTab: 'console' | 'flowchart' | 'hidden'
+  code: string
+  testsCode: string
+  importMap: string
+  stylesheets: string[]
 }
 
-let options: EjecutarOptions
+let _options: EjecutarOptions
 
 const scriptEls: HTMLScriptElement[] = []
 
@@ -20,25 +22,19 @@ let theme: 'dark' | 'light' = 'dark'
 
 let lastArgs: any = {}
 
-export async function init(customOptions: EjecutarOptions): Promise<void> {
-  if (typeof customOptions.usarTerminal !== 'function')
+export async function init(options: EjecutarOptions): Promise<void> {
+  _options = options
+
+  if (typeof _options.usarTerminal !== 'function')
     throw new Error('usarTerminal is required')
 
-  options = Object.assign({
-    usarTerminal: null,
-    theme: 'dark',
-    hidePreview: false,
-    hideConsole: false,
-    previewTab: 'console',
-  }, customOptions)
-
-  setupTheme(options.theme)
+  setupTheme(_options.theme)
 
   await setupEruda()
 
-  hidePreview(options.hidePreview)
+  hidePreview(_options.hidePreview)
 
-  previewTab(options.previewTab)
+  previewTab(_options.previewTab)
 
   evalInitialCode()
 }
@@ -123,8 +119,8 @@ async function evalCode(args: any) {
 
 function evalInitialCode() {
   const files = []
-  files[MAIN_FILE] = options.code || ''
-  files[MAIN_TESTS_FILE] = options.testsCode || ''
+  files[MAIN_FILE] = _options.code || ''
+  files[MAIN_TESTS_FILE] = _options.testsCode || ''
 
   evalFiles({ files })
 }
@@ -177,7 +173,7 @@ export function setupTheme(value: 'dark' | 'light') {
 
   setErudaTheme(theme)
 
-  options.usarTerminal().setTheme(theme)
+  _options.usarTerminal().setTheme(theme)
 }
 
 function addEsJSTerminalCss() {
@@ -205,7 +201,7 @@ async function addEsJSTerminal() {
   newEsTerminalElement.className = 'w-full h-full absolute inset-0'
   appElement.appendChild(newEsTerminalElement)
 
-  options.usarTerminal().setupTerminal(newEsTerminalElement, {
+  _options.usarTerminal().setupTerminal(newEsTerminalElement, {
     theme,
   })
 }
@@ -221,7 +217,7 @@ function removeEsJSTerminal() {
   if (!currentEsTerminalElement)
     return
 
-  options.usarTerminal().destroyTerminal()
+  _options.usarTerminal().destroyTerminal()
   appElement.removeChild(currentEsTerminalElement)
 }
 
