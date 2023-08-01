@@ -18,7 +18,7 @@ import SectionCodeExample from '@theme/components/SectionCodeExample.vue';
 
 <SectionCodeExample title="Crea y ejecuta algoritmos en Español" description="Escribe código en Español y ejecútalo en JavaScript." hide-console="false" hide-preview="true">
 
-<!--@include: ./codigos/fibonacci.md -->
+<!--@include: ./public/codigos/fibonacci.md -->
 
 </SectionCodeExample>
 
@@ -26,7 +26,7 @@ import SectionCodeExample from '@theme/components/SectionCodeExample.vue';
 
 <SectionCodeExample title="Aprovecha la potencia de JavaScript" description="EsJS está basado en JavaScript, por lo que puedes utilizar todas las librerías y frameworks que ya conoces." hide-console="true" hide-preview="false" play-height="30rem">
 
-<!--@include: ./codigos/calculadora.md -->
+<!--@include: ./public/codigos/calculadora.md -->
 
 </SectionCodeExample>
 
@@ -38,7 +38,7 @@ import SectionCodeExample from '@theme/components/SectionCodeExample.vue';
 
 <EsEjecutar only-playground hide-preview="false" hide-console="true">
 
-<!--@include: ./codigos/esjs-mendable-app.md -->
+<!--@include: ./public/codigos/esjs-mendable-app.md -->
 
 </EsEjecutar>
 
