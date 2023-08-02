@@ -3,14 +3,20 @@ import escodegen from 'escodegen'
 import { splitCodeImports, transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
-import { MAIN_FILE } from './orchestrator'
+import {MAIN_FILE, MAIN_TESTS_FILE} from './orchestrator'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from './constants'
+
 class PrepareCodeError extends Error {
   constructor(message: string, public line: number, public column: number) {
     super(message)
   }
 }
 
+class ParseFileError extends Error {
+  constructor(message: string, public filename: string, public line: number, public column: number) {
+    super(message)
+  }
+}
 export function prepareCode(code: string) {
   try {
     if (!code.endsWith('\n'))
@@ -230,7 +236,7 @@ export function generateImportStatement(code: string, modulePath: string) {
 }
 
 export function prepareCodeAndTestsForPlayground(code: string, tests: string) {
-  const transpiledCode = transpile(prepareCode(code))
+  const transpiledCode = tryToParseFile(MAIN_FILE, code)
   const splittedCode = splitCodeImports(transpiledCode)
 
   const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
@@ -243,7 +249,7 @@ ${splittedCode.imports}
 
   const generatedCodeImports = unifyImports(generateImportStatement(splittedCode.codeWithoutImports, `./${MAIN_FILE}`))
 
-  const transpiledTestsCode = transpile(prepareCode(tests))
+  const transpiledTestsCode = tryToParseFile(MAIN_TESTS_FILE, tests)
   const splittedTestsCode = splitCodeImports(transpiledTestsCode)
   const testsImports = unifyImports(`
   ${IMPORT_ESJS_PRUEBA}
@@ -257,6 +263,15 @@ ${splittedCode.imports}
 
     testsImports,
     testsCode: splittedTestsCode.codeWithoutImports,
+  }
+}
+
+function tryToParseFile(filename: string, code: string) {
+  try {
+    return prepareCode(code)
+  }
+  catch (error: any) {
+    throw new ParseFileError(error.message, filename, error.line, error.column)
   }
 }
 

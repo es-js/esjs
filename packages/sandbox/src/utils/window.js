@@ -23,10 +23,6 @@ export function setupWindow() {
       console.error(error)
     }
 
-    window._previewException = function (line, column, message) {
-      console.warn(`¡Advertencia!: Se ha detectado un error en la línea ${line}`)
-    }
-
     window.onerror = function (
       msg,
       url,
@@ -109,9 +105,6 @@ async function handle_message(ev) {
   }
   else if (action === 'HIDE_PREVIEW') {
     hidePreview(args)
-  }
-  else if (action === 'previewException') {
-    window._previewException(...args)
   }
   else if (action === 'PREVIEW') {
     // console.warn(['----- DEPRECATED -----', 'Please use PREVIEW_TAB instead'])

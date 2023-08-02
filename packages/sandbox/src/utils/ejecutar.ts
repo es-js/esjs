@@ -69,8 +69,35 @@ export async function evalFiles({ files }) {
     })
   }
   catch (error) {
-    console.error(error)
+    handleEvalError(error)
   }
+}
+
+function handleEvalError(error) {
+  const errorArgs = {
+    filename: error.filename,
+    message: error.message,
+    line: error.line,
+    column: error.column,
+  }
+
+  evalCode({
+    script: [
+      `import { Terminal } from '@es-js/terminal'; import { tiza } from '@es-js/tiza';
+
+Terminal.clear()
+
+Terminal.escribir(\`Error en el archivo \${tiza.fondoAzul50.azul800(${JSON.stringify(error.filename)})}:\`)
+
+Terminal.escribir(
+  tiza.rojo(${JSON.stringify(error.message)})
+)
+
+console.error(${JSON.stringify(error.message)})
+
+window.onerror(${JSON.stringify(error.message)}, null, 1, 1, ${JSON.stringify(errorArgs)})`,
+    ],
+  })
 }
 
 async function evalCode(args: any) {

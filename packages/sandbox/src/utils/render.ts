@@ -1,7 +1,4 @@
-import packageJson from '../../package.json' assert {type: 'json'}
 import type { EjecutarOptions } from './ejecutar'
-
-const isDev = false
 
 export function createIframe(parentElement: HTMLElement, options: EjecutarOptions): HTMLIFrameElement {
   const iframe = document.createElement('iframe')

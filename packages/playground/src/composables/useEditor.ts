@@ -50,7 +50,7 @@ export const useEditor = () => {
   }
 
   function getObfuscatedCode(code: string) {
-    const transpiledCode = transpile(prepareCode(code))
+    const transpiledCode = prepareCode(code)
 
     const splittedCode = splitCodeImports(transpiledCode)
 
