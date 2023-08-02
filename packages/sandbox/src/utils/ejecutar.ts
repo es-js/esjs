@@ -204,7 +204,7 @@ export function setupTheme(value: 'dark' | 'light') {
 }
 
 function addEsJSTerminalCss() {
-  const href = 'https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/style.css'
+  const href = 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0/dist/style.css'
 
   if (document.querySelector(`link[href="${href}"]`))
     return
