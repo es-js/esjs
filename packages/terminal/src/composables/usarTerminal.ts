@@ -56,8 +56,7 @@ export const usarTerminal = () => {
       }
       else if (readingSecret) {
         if (data.trim() === '' && innerBuffer.value?.trim() === '') {
-          xterm?.writeln('')
-          await leer(currentPrompt)
+          xterm?.writeln(currentPrompt)
           return
         }
 
@@ -65,8 +64,7 @@ export const usarTerminal = () => {
         xterm?.writeln('')
       }
       else if (data.trim() === '') {
-        xterm?.writeln('')
-        await leer(currentPrompt)
+        xterm?.writeln(currentPrompt)
       }
       else {
         buffer.value = data
@@ -139,6 +137,7 @@ export const usarTerminal = () => {
     readingSecret = false
     readingEnter = false
     currentPrompt = PREGUNTA_POR_DEFECTO
+    buffer.value = null
   }
 
   async function leer(pregunta = PREGUNTA_POR_DEFECTO, tipo: ResultadoEsperado = ResultadoEsperado.porDefecto) {
