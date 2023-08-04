@@ -36,11 +36,14 @@ import SectionCodeExample from '@theme/components/SectionCodeExample.vue';
 
 <p class="text-center">Chatea con un asistente virtual en la siguiente aplicación creada con EsJS en modo Terminal.</p>
 
-<EsEjecutar only-playground hide-preview="false" hide-console="true">
-
-<!--@include: ./public/codigos/esjs-mendable-app.md -->
-
-</EsEjecutar>
+<ClientOnly>
+    <iframe
+        src="https://esjs-mendable-app.vercel.app/"
+        frameborder="0"
+        title="Asistente virtual EsJS"
+        class="w-full h-[30rem] border-0 rounded-[8px] bg-transparent"
+    />
+</ClientOnly>
 
 <div class="w-full h-20"></div>
 
