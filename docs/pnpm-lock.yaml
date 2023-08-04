@@ -9,10 +9,10 @@ devDependencies:
     specifier: ^0.34.2
     version: 0.34.2(eslint@8.46.0)(typescript@5.1.6)
   '@es-js/docs-components':
-    specifier: workspace:*
+    specifier: ^1.0.0-beta.4
     version: link:../packages/docs-components
   '@es-js/language-tools':
-    specifier: workspace:*
+    specifier: ^0.0.14
     version: link:../packages/language-tools
   '@iconify/vue':
     specifier: ^4.1.1
