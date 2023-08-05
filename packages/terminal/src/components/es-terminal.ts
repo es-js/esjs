@@ -9,13 +9,13 @@ class EsTerminal extends HTMLElement {
 
     this.#shadowRoot = this.attachShadow({ mode: 'open' })
 
-    const styleElement = document.createElement('style')
-    styleElement.textContent = style
-    this.#shadowRoot.appendChild(styleElement)
+    this.#shadowRoot.innerHTML = `
+      <style>
+        ${style}
+      </style>
 
-    const terminalElement = this.#shadowRoot.appendChild(document.createElement('div'))
-    terminalElement.style.width = '100%'
-    terminalElement.style.height = '100%'
+      <div style="width: 100%; height: 100%;"></div>
+    `
   }
 
   connectedCallback() {

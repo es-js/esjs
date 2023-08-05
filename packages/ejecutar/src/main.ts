@@ -10,5 +10,5 @@ createSandbox('esjs-sandbox', {
   hidePreview: options.hidePreview,
   previewTab: options.previewTab,
   code: share.getCodeFromUrl(),
-  testsCode: share.getTestsCodeFromUrl()
+  testsCode: share.getTestsCodeFromUrl(),
 })

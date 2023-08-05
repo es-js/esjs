@@ -1,5 +1,5 @@
 import { prepareCode } from '@es-js/compiler'
-import { splitCodeImports, transpile } from '@es-js/core'
+import { splitCodeImports } from '@es-js/core'
 import { obfuscate } from 'javascript-obfuscator'
 import type { Ref } from 'vue'
 import { ref } from 'vue'

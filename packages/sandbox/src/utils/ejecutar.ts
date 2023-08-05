@@ -28,9 +28,9 @@ export async function init(options: EjecutarOptions): Promise<void> {
   if (typeof _options.usarTerminal !== 'function')
     throw new Error('usarTerminal is required')
 
-  setupTheme(_options.theme)
+  setupEruda()
 
-  await setupEruda()
+  setupTheme(_options.theme)
 
   hidePreview(_options.hidePreview)
 

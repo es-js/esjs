@@ -3,7 +3,7 @@ import escodegen from 'escodegen'
 import { splitCodeImports, transpile } from '@es-js/core'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
-import {MAIN_FILE, MAIN_TESTS_FILE} from './orchestrator'
+import { MAIN_FILE, MAIN_TESTS_FILE } from './orchestrator'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from './constants'
 
 class PrepareCodeError extends Error {

@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 import eruda from 'eruda'
 
 let size = 50
@@ -25,10 +23,9 @@ export function setupEruda() {
     defaults: {
       displaySize: size,
       transparency: 100,
+      theme: document.documentElement.classList.contains('dark') ? 'Material Darker' : 'Light',
     },
   })
-
-  eruda.get().config.set('theme', document.documentElement.classList.contains('dark') ? 'Material Darker' : 'Light')
 
   if (showFlowchart)
     addFlowchartPlugin()
@@ -60,9 +57,6 @@ export function setActiveTab(value: 'console' | 'flowchart' | 'hidden') {
   if (value === getActiveTab())
     return
 
-  if (!eruda || !eruda.get())
-    return
-
   activePreviewTab = value
 
   switch (activePreviewTab) {
@@ -79,17 +73,11 @@ export function setActiveTab(value: 'console' | 'flowchart' | 'hidden') {
 }
 
 export function setErudaTheme(theme: 'dark' | 'light') {
-  if (!initialized || !eruda || !eruda.get())
-    return
-
-  eruda.get().config.set('theme', theme === 'dark' ? 'Material Darker' : 'Light')
+  setErudaConfig('theme', theme === 'dark' ? 'Material Darker' : 'Light')
 }
 
 export function openEruda() {
-  if (!eruda || !eruda.get())
-    return
-
-  eruda.get().config.set('displaySize', size)
+  setErudaConfig('displaySize', size)
 
   const consoleElement = document.getElementById('console-container')
 
@@ -104,13 +92,10 @@ export function openEruda() {
 }
 
 export function hideEruda() {
-  if (!eruda || !eruda.get())
-    return
-
   activePreviewTab = 'hidden'
   parent.postMessage({ action: 'activePreviewTab', data: 'hidden' }, '*')
 
-  eruda.get().config.set('displaySize', 1)
+  setErudaConfig('displaySize', 1)
 
   const consoleElement = document.getElementById('console-container')
   if (consoleElement) {
@@ -159,6 +144,8 @@ function openFlowchart() {
 function addFlowchartPlugin() {
   eruda.add((eruda: any) => {
     class Flowchart extends eruda.Tool {
+      name: string
+
       constructor() {
         super()
         this.name = 'flowchart'
@@ -170,15 +157,15 @@ function addFlowchartPlugin() {
       }
 
       show() {
-        super.show()
+        return super.show()
       }
 
       hide() {
-        super.hide()
+        return super.hide()
       }
 
       destroy() {
-        super.destroy()
+        return super.destroy()
       }
     }
 
@@ -241,4 +228,19 @@ function fixDevToolsPadding() {
   const erudaDevToolsElement: HTMLElement | null = erudaDevToolsElements.length ? erudaDevToolsElements[0] as HTMLElement : null
   if (erudaDevToolsElement)
     erudaDevToolsElement.style.setProperty('padding-top', '28px', 'important')
+}
+
+function getErudaConfig() {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  return initialized && eruda && eruda.get('')?.config
+}
+
+function setErudaConfig(key: string, value: any) {
+  const config = getErudaConfig()
+
+  if (!config)
+    return
+
+  config.set(key, value)
 }

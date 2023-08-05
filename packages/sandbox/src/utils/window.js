@@ -1,4 +1,3 @@
-import 'iconify-icon'
 import { evalFiles, hidePreview, previewTab, setupTheme } from './ejecutar.ts'
 
 export function setupWindow() {

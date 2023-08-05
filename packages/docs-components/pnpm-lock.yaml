@@ -9,7 +9,7 @@ devDependencies:
     specifier: ^0.35.3
     version: 0.35.3(eslint@8.46.0)(typescript@4.9.5)
   '@es-js/sandbox':
-    specifier: ^0.0.1-alpha.25
+    specifier: ^0.0.1-alpha.27
     version: link:../sandbox
   '@iconify/vue':
     specifier: ^4.1.1

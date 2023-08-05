@@ -1,7 +1,7 @@
-import { MagicString, babelParse, walk, walkIdentifiers } from '@vue/compiler-sfc'
 import type { ExportSpecifier, Identifier, Node, ObjectProperty } from '@babel/types'
-import type { OrchestratorFile as File } from './orchestrator.ts'
-import { orchestrator } from './orchestrator.ts'
+import { MagicString, babelParse, walk, walkIdentifiers } from '@vue/compiler-sfc'
+import type { OrchestratorFile as File } from './orchestrator'
+import { orchestrator } from './orchestrator'
 
 export function compileModulesForPreview(
   files: File[] = [],

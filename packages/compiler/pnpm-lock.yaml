@@ -17,6 +17,9 @@ devDependencies:
   '@types/escodegen':
     specifier: ^0.0.7
     version: 0.0.7
+  '@types/prettier':
+    specifier: ^2.7.3
+    version: 2.7.3
   '@vue/compiler-sfc':
     specifier: ^3.3.4
     version: 3.3.4
@@ -520,6 +523,10 @@ packages:
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/prettier@2.7.3:
+    resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
     dev: true
 
   /@types/semver@7.5.0:

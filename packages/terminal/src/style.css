@@ -1,6 +1,6 @@
 @import 'xterminal/dist/xterminal.css';
 
-:root {
+:host {
     --xt-bg: #ffffff;
     --xt-fg: #000000;
 }

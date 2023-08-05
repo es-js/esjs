@@ -49,7 +49,7 @@ async function init() {
         ? {
           importMap: JSON.stringify({
               'imports': {
-                "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@1.1.0/dist/terminal.es.js",
+                "@es-js/terminal": "https://cdn.jsdelivr.net/npm/@es-js/terminal@1.1.3/dist/terminal.es.js",
                 "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm",
                 "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3",
                 "@es-js/sandbox": "http://localhost:5173/src/sandbox.ts",
