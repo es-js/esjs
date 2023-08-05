@@ -1,5 +1,5 @@
+import './components/es-terminal'
 import { usarTerminal } from './composables/usarTerminal'
-import './style.css'
 
 export { usarTerminal } from './composables/usarTerminal'
 

@@ -115,7 +115,6 @@ async function evalCode(args: any) {
   if (typeof scripts === 'string')
     scripts = [scripts]
 
-  removeEsJSTerminal()
   resetAppElement()
 
   const usesTerminal = scripts.some(script => script.includes('Terminal'))
@@ -203,49 +202,17 @@ export function setupTheme(value: 'dark' | 'light') {
   _options.usarTerminal().setTheme(theme)
 }
 
-function addEsJSTerminalCss() {
-  const href = 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.0.0/dist/style.css'
-
-  if (document.querySelector(`link[href="${href}"]`))
-    return
-
-  const style = document.createElement('link')
-  style.rel = 'stylesheet'
-  style.href = href
-  document.head.appendChild(style)
-}
-
 async function addEsJSTerminal() {
   const appElement = document.getElementById('app')
 
   if (!appElement)
     return
 
-  addEsJSTerminalCss()
-
-  const newEsTerminalElement = document.createElement('div')
+  const newEsTerminalElement = document.createElement('es-terminal')
   newEsTerminalElement.id = 'es-terminal'
   newEsTerminalElement.className = 'w-full h-full absolute inset-0'
+  newEsTerminalElement.setAttribute('tema', theme === 'dark' ? 'oscuro' : 'claro')
   appElement.appendChild(newEsTerminalElement)
-
-  _options.usarTerminal().setupTerminal(newEsTerminalElement, {
-    theme,
-  })
-}
-
-function removeEsJSTerminal() {
-  const appElement = document.getElementById('app')
-
-  if (!appElement)
-    return
-
-  const currentEsTerminalElement = document.getElementById('es-terminal')
-
-  if (!currentEsTerminalElement)
-    return
-
-  _options.usarTerminal().destroyTerminal()
-  appElement.removeChild(currentEsTerminalElement)
 }
 
 function resetAppElement() {
