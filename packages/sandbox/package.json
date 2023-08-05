@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.1-alpha.24",
+  "version": "0.0.1-alpha.25",
   "scripts": {
     "dev": "vite",
     "build": "vite build && pnpm tailwind:build",
@@ -13,9 +13,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
-    "@arrow-js/core": "1.0.0-alpha.9",
     "@es-js/compiler": "workspace:^",
-    "@es-js/sandbox": "workspace:^",
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.0",
     "eruda": "^3.0.1",
@@ -26,8 +24,7 @@
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
-    "vite-plugin-dts": "^1.7.3",
-    "vite-plugin-import-maps": "^0.1.2"
+    "vite-plugin-dts": "^1.7.3"
   },
   "type": "module",
   "main": "./dist/main.cjs",
