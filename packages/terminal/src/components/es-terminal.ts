@@ -1,5 +1,5 @@
 import { usarTerminal } from '../composables/usarTerminal'
-import style from '../style.css'
+import style from '../style.css?inline'
 
 class EsTerminal extends HTMLElement {
   #shadowRoot: ShadowRoot
