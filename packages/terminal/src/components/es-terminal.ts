@@ -19,13 +19,13 @@ class EsTerminal extends HTMLElement {
   }
 
   connectedCallback() {
-    usarTerminal().setupTerminal(this.#shadowRoot.querySelector('div') as HTMLElement, {
+    usarTerminal().iniciar(this.#shadowRoot.querySelector('div') as HTMLElement, {
       theme: this.getAttribute('tema') === 'oscuro' ? 'dark' : 'light',
     })
   }
 
   disconnectedCallback() {
-    usarTerminal().destroyTerminal()
+    usarTerminal().destruir()
   }
 }
 

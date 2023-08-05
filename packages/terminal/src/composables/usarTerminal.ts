@@ -32,7 +32,7 @@ const PREGUNTA_POR_DEFECTO = '> '
 let currentPrompt: string = PREGUNTA_POR_DEFECTO
 
 export const usarTerminal = () => {
-  function setupTerminal(elementOrId: HTMLElement | string, options: any = {}) {
+  function iniciar(elementOrId: HTMLElement | string, options: any = {}) {
     if (typeof elementOrId === 'string')
       elementOrId = document.querySelector(elementOrId) as HTMLElement
 
@@ -107,7 +107,7 @@ export const usarTerminal = () => {
     setTheme(options.theme || 'dark')
   }
 
-  function destroyTerminal() {
+  function destruir() {
     watchers.map(unwatch => unwatch())
     watchers = []
 
@@ -279,13 +279,16 @@ export const usarTerminal = () => {
   return {
     escribir,
     log: escribir,
+    imprimir: escribir,
+    escribirSinSalto,
+    imprimirSinSalto: escribirSinSalto,
     leer,
     leerCadena,
     leerNumero,
     leerSecreto,
     leerEnter,
-    setupTerminal,
-    destroyTerminal,
+    iniciar,
+    destruir,
     limpiar,
     clear: limpiar,
     limpiarUltimaLinea,
@@ -295,7 +298,6 @@ export const usarTerminal = () => {
     justificar,
     setTheme,
     enfocar,
-    escribirSinSalto,
     configurarColores,
     configurarColorFondo,
     configurarColorFrente,
