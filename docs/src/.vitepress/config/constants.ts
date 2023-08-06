@@ -9,4 +9,3 @@ export const metaData = {
   site,
   image: `${site}/assets/logo.png`,
 }
-

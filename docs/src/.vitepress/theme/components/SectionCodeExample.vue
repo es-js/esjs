@@ -58,7 +58,7 @@ const openUrl = computed(
   </p>
 
   <div class="vp-doc grid grid-cols-1 md:grid-cols-2">
-    <div ref="codeSlot" class="flex flex-col justify-center max-h-[42rem]">
+    <div ref="codeSlot" class="flex flex-col justify-center max-h-[42rem] max-w-[85%] sm:max-w-[100%] mx-auto sm:mx-0">
       <slot />
     </div>
 

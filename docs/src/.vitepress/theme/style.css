@@ -55,3 +55,7 @@
 .lang {
     @apply text-gray-200 !important
 }
+
+.vp-doc div[class*='language-'] {
+    @apply rounded-lg
+}

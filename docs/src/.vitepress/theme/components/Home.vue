@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div>
     <section class="w-full max-w-7xl mx-auto px-10 xl:px-4 space-y-8">
