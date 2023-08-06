@@ -66,12 +66,14 @@ async function init() {
 
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => {
-      useEventBus(
-        error.value.filename === MAIN_TESTS_FILE ? 'editor_tests' : 'editor_code'
-      ).emit('decorate-error', {
-        line: error.value.line,
-        column: error.value.column,
-      })
+      if (error.value.line && error.value.column) {
+        useEventBus(
+          error.value.filename === MAIN_TESTS_FILE ? 'editor_tests' : 'editor_code'
+        ).emit('decorate-error', {
+          line: error.value.line,
+          column: error.value.column,
+        })
+      }
     },
     on_unhandled_rejection: (error: any) => { },
     on_prueba_success: (args: any) => {
