@@ -15,7 +15,8 @@ Ejecuta una prueba unitaria.
 ```esjs
 importar { prueba } desde "@es-js/prueba"
 
-prueba("Nombre de mi prueba", () => {
+prueba("Nombre de mi prueba", funcion () {
+    // Código de mi prueba
 })
 ```
 
@@ -55,24 +56,8 @@ Afirma que una expresión es verdadera.
 ```esjs
 importar { afirmar, prueba } desde "@es-js/prueba"
 
-prueba("1 + 1 es igual a 2", () => {
+prueba("1 + 1 es igual a 2", funcion () {
     afirmar(1 + 1 === 2)
-})
-```
-
-</InlinePlayground>
-
-### afirmarDistinto
-
-Afirma que dos valores son distintos.
-
-<InlinePlayground>
-
-```esjs
-importar { afirmarDistinto, prueba } desde "@es-js/prueba"
-
-prueba("1 + 1 no es igual a 3", () => {
-    afirmarDistinto(1 + 1, 3)
 })
 ```
 
@@ -87,8 +72,24 @@ Afirma que dos valores son iguales.
 ```esjs
 importar { afirmarIguales, prueba } desde "@es-js/prueba"
 
-prueba("1 + 1 es igual a 2", () => {
+prueba("1 + 1 es igual a 2", funcion () {
     afirmarIguales(1 + 1, 2)
+})
+```
+
+</InlinePlayground>
+
+### afirmarDistinto
+
+Afirma que dos valores son distintos.
+
+<InlinePlayground>
+
+```esjs
+importar { afirmarDistinto, prueba } desde "@es-js/prueba"
+
+prueba("1 + 1 no es igual a 3", funcion () {
+    afirmarDistinto(1 + 1, 3)
 })
 ```
 
@@ -96,14 +97,14 @@ prueba("1 + 1 es igual a 2", () => {
 
 ### afirmarSimilares
 
-Afirma que dos valores son similares.
+Afirma que dos valores son similares (es decir, que son iguales pero no necesariamente del mismo tipo).
 
 <InlinePlayground>
 
 ```esjs
 importar { afirmarSimilares, prueba } desde "@es-js/prueba"
 
-prueba("1 + 1 es igual a 2", () => {
+prueba("1 + 1 es igual a 2", funcion () {
     afirmarSimilares(1 + 1, "2")
 })
 ```
@@ -119,7 +120,7 @@ Afirma que una expresión es verdadera.
 ```esjs
 importar { afirmarVerdadero, prueba } desde "@es-js/prueba"
 
-prueba("1 + 1 es igual a 2", () => {
+prueba("1 + 1 es igual a 2", funcion () {
     afirmarVerdadero(1 + 1 === 2)
 })
 ```
@@ -135,7 +136,7 @@ Afirma que una expresión es falsa.
 ```esjs
 importar { afirmarFalso, prueba } desde "@es-js/prueba"
 
-prueba("1 + 1 no es igual a 3", () => {
+prueba("1 + 1 no es igual a 3", funcion () {
     afirmarFalso(1 + 1 === 3)
 })
 ```
@@ -156,7 +157,8 @@ Ejecuta una prueba unitaria asincrónica.
 ```esjs
 importar { pruebaAsincrona } desde "@es-js/prueba"
 
-pruebaAsincrona("Nombre de mi prueba asincrónica", asincrono () => {
+pruebaAsincrona("Nombre de mi prueba asincrónica", asincrono funcion () {
+    // Código de mi prueba asincrónica
 })
 ```
 
@@ -172,10 +174,10 @@ Ejecuta varias pruebas unitarias asincrónicas.
 importar { pruebasAsincronas } desde "@es-js/prueba"
 
 pruebasAsincronas({
-    "Nombre de mi prueba asincrónica 1": asincrono () => {
+    "Nombre de mi prueba asincrónica 1": asincrono funcion () {
         // Código de mi prueba asincrónica 1
     },
-    "Nombre de mi prueba asincrónica 2": asincrono () => {
+    "Nombre de mi prueba asincrónica 2": asincrono funcion() {
         // Código de mi prueba asincrónica 2
     }
 })

@@ -15,7 +15,7 @@ Escribe un mensaje en la terminal.
 ```esjs
 importar { Terminal } desde "@es-js/terminal"
 
-Terminal.escribir("Hola mundo")
+Terminal.escribir("Hola mundo desde EsJS")
 ```
 
 </InlinePlayground>
@@ -120,7 +120,7 @@ Limpia la terminal.
 ```esjs
 importar { Terminal } desde "@es-js/terminal"
 
-Terminal.escribir("Hola mundo")
+Terminal.escribir("Hola mundo desde EsJS")
 Terminal.escribir("Presiona Enter para limpiar la terminal")
 esperar Terminal.leerEnter()
 Terminal.limpiar()
@@ -137,7 +137,7 @@ Centra el texto en la terminal.
 ```esjs
 importar { Terminal } desde "@es-js/terminal"
 
-Terminal.escribir(Terminal.centrar("Hola mundo"))
+Terminal.escribir(Terminal.centrar("Hola mundo desde EsJS"))
 ```
 
 </InlinePlayground>
@@ -151,7 +151,7 @@ Alinea el texto a la izquierda en la terminal.
 ```esjs
 importar { Terminal } desde "@es-js/terminal"
 
-Terminal.escribir(Terminal.alinearIzquierda("Hola mundo"))
+Terminal.escribir(Terminal.alinearIzquierda("Hola mundo desde EsJS"))
 ```
 
 </InlinePlayground>
@@ -165,7 +165,7 @@ Alinea el texto a la derecha en la terminal.
 ```esjs
 importar { Terminal } desde "@es-js/terminal"
 
-Terminal.escribir(Terminal.alinearDerecha("Hola mundo"))
+Terminal.escribir(Terminal.alinearDerecha("Hola mundo desde EsJS"))
 ```
 
 </InlinePlayground>

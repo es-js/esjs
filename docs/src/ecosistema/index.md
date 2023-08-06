@@ -52,11 +52,11 @@ importar { Terminal } desde "@es-js/terminal"
 
 Terminal.escribir(
     Terminal.centrar(
-        tiza.fondoMagentaBrillo(
+        tiza.fondoMagenta(
             tiza.negrita(
                 tiza.blanco(
                     tiza.subrayado(
-                        "Hola mundo"
+                        "Hola mundo desde EsJS"
                     )
                 )
             )

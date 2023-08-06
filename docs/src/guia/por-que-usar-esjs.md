@@ -45,4 +45,4 @@ Por lo tanto, EsJS y JavaScript son lenguajes muy similares, y gracias a la util
 
 ## Alternativas
 
-Otra opción es [Lenguaje Latino](https://www.lenguajelatino.org/), que es un verdadero lenguaje de programación con sintaxis en español, pero por el momento no ofrece la misma versatilidad que JavaScript, lo que limita la creación de interfaces gráficas y aplicaciones webs.
+- [Lenguaje Latino](https://www.lenguajelatino.org/)

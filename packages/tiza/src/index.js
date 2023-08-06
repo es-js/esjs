@@ -7,7 +7,6 @@ const modifiers = [
   'negrita',
   'cursiva',
   'subrayado',
-  'sobrelinea',
   'tachado',
   'invertido',
 ]
