@@ -2,17 +2,20 @@ import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
 import { SitemapStream } from 'sitemap'
 import { defineConfigWithTheme } from 'vitepress'
-import { metaData } from './config/constants'
-import { getHighlighter } from './config/getHighlighter'
-import { markdown } from './config/markdown'
+import { metaData } from './constants'
+import esjsSyntax from './esjs.tmLanguage.json' assert {type: 'json'}
 
 const isDev: boolean = process.env.NODE_ENV === 'development'
 const gtagId: string = isDev ? 'G-TEST' : 'G-0XH36H9K3M'
 const links = []
 
-export default async () => {
-  const highlighter = await getHighlighter()
+const esjsLanguage = {
+  id: 'esjs',
+  scopeName: 'source.esjs',
+  grammar: esjsSyntax,
+}
 
+export default async () => {
   const defaultSidebar = [
     {
       text: 'Introducción',
@@ -80,7 +83,9 @@ export default async () => {
       lang: metaData.lang,
       title: metaData.title,
       description: metaData.description,
-      markdown: markdown(highlighter),
+      markdown: {
+        languages: [esjsLanguage],
+      },
       cleanUrls: true,
 
       head: [
