@@ -1,22 +1,15 @@
 import isNumber from 'is-number'
 import XTerminal from 'xterminal'
 import PCancelable from 'p-cancelable'
-import { ref, watch } from 'reactive-light'
-
-declare class Ref<T = any> {
-  value: T
-}
 
 let xterm: XTerminal | null = null
 
-const innerBuffer: Ref<string | null> = ref(null)
-const buffer: Ref<string | null> = ref(null)
+let buffer: string | null = null
 
 let readingValue = false
 let readingSecret = false
 let readingEnter = false
 
-let watchers: any[] = []
 let cancelablePromises: PCancelable<any>[] = []
 
 let terminalElement: HTMLElement | null = null
@@ -52,22 +45,22 @@ export const usarTerminal = () => {
         return
 
       if (readingEnter) {
-        buffer.value = Math.random().toString()
+        xterm?.emit('input:enter')
       }
       else if (readingSecret) {
-        if (data.trim() === '' && innerBuffer.value?.trim() === '') {
+        if (buffer?.trim() === '') {
           xterm?.writeln(currentPrompt)
           return
         }
 
-        buffer.value = innerBuffer.value
+        xterm?.emit('input', buffer)
         xterm?.writeln('')
       }
       else if (data.trim() === '') {
         xterm?.writeln(currentPrompt)
       }
       else {
-        buffer.value = data
+        xterm?.emit('input', data)
         xterm?.writeln(data)
       }
     })
@@ -79,28 +72,22 @@ export const usarTerminal = () => {
       else if (readingSecret) {
         const key = event.key.toLowerCase()
 
-        if (key === 'backspace') {
-          event.cancel()
-
-          if (innerBuffer.value && innerBuffer.value.length > 0)
-            innerBuffer.value = innerBuffer.value.substr(0, innerBuffer.value.length - 1)
-
-          xterm?.clearLast()
-          xterm?.write(`${currentPrompt}${'*'.repeat(innerBuffer.value?.length || 1)}`)
-          return
-        }
-
-        const hasModifier = event.altKey || event.ctrlKey || event.metaKey
-
-        if (key.length !== 1 || hasModifier) {
-          event.cancel()
-          return
-        }
-
         event.cancel()
+
+        if (key === 'backspace' && buffer?.length) {
+          buffer = buffer.substring(0, buffer.length - 1)
+        }
+        else {
+          const hasModifier = event.altKey || event.ctrlKey || event.metaKey
+
+          if (key.length !== 1 || hasModifier)
+            return
+
+          buffer += event.key
+        }
+
         xterm?.clearLast()
-        xterm?.write(`${currentPrompt}${'*'.repeat(innerBuffer.value?.length || 1)}`)
-        innerBuffer.value += event.key
+        xterm?.write(`${currentPrompt}${'*'.repeat(buffer?.length || 1)}`)
       }
     })
 
@@ -108,9 +95,6 @@ export const usarTerminal = () => {
   }
 
   function destruir() {
-    watchers.map(unwatch => unwatch())
-    watchers = []
-
     cancelablePromises.map(cancelablePromise => cancelablePromise.cancel())
     cancelablePromises = []
 
@@ -137,7 +121,7 @@ export const usarTerminal = () => {
     readingSecret = false
     readingEnter = false
     currentPrompt = PREGUNTA_POR_DEFECTO
-    buffer.value = null
+    buffer = null
   }
 
   async function leer(pregunta = PREGUNTA_POR_DEFECTO, tipo: ResultadoEsperado = ResultadoEsperado.porDefecto) {
@@ -157,19 +141,18 @@ export const usarTerminal = () => {
 
       xterm.write(pregunta)
 
-      const watcher = watch(() => buffer.value, (value) => {
-        watcher()
-        resetWriteBuffer()
-        watchers = watchers.filter(w => w !== watcher)
-        cancelablePromises = cancelablePromises.filter(p => p !== promise)
-
-        if (readingEnter)
+      if (readingEnter) {
+        xterm.once('input:enter', () => {
+          resetWriteBuffer()
           resolve(null)
-        else
+        })
+      }
+      else {
+        xterm.once('input', (value: any) => {
+          resetWriteBuffer()
           resolve(handleResult(value ?? '', tipo))
-      })
-
-      watchers.push(watcher)
+        })
+      }
     })
 
     cancelablePromises.push(promise)
@@ -186,7 +169,7 @@ export const usarTerminal = () => {
   }
 
   function leerSecreto(pregunta = PREGUNTA_POR_DEFECTO, tipo: ResultadoEsperado = ResultadoEsperado.porDefecto) {
-    innerBuffer.value = ''
+    buffer = ''
     readingSecret = true
     return leer(pregunta, tipo)
   }
