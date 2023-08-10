@@ -40,6 +40,15 @@ const testsCode: Ref<string> = ref('')
 
 const language: Ref<'esjs' | 'js'> = ref('esjs')
 
+const importMap: Ref<string> = ref(JSON.stringify({
+  imports: {
+    '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.1.4-beta.1/dist/terminal.es.js',
+    '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
+    '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0-beta.3',
+    '@es-js/sandbox': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@0.0.1-alpha.28/sandbox/+esm',
+  },
+}))
+
 export const useEditor = () => {
   function setCode(value: string) {
     code.value = value
@@ -90,5 +99,6 @@ ${obfuscatedCode.getObfuscatedCode()}`
     toggleLanguage,
     setLanguage,
     language,
+    importMap,
   }
 }
