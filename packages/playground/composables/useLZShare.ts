@@ -1,5 +1,5 @@
 import {useToast} from "#build/imports"
-import * as lzs from 'lz-string'
+import {compressToURL, decompressFromURL} from '@amoutonbrady/lz-string'
 import { useClipboard, useDark } from '@vueuse/core'
 
 const settings = useSettings()
@@ -43,10 +43,10 @@ export const useLZShare = () => {
     const url = new URL('/', window.location.origin)
 
     if (code !== INITIAL_CODE)
-      url.searchParams.set('code', lzs.compressToEncodedURIComponent(code))
+      url.searchParams.set('code', compressToURL(code))
 
     if (testsCode)
-      url.searchParams.set('tests', lzs.compressToEncodedURIComponent(testsCode))
+      url.searchParams.set('tests', compressToURL(testsCode))
 
     url.searchParams.set('layout', settings.settings.value.layout)
     url.searchParams.set('hidePreview', String(settings.settings.value.hidePreview))
@@ -72,15 +72,15 @@ export const useLZShare = () => {
       previewTab: settings.settings.value.previewTab,
     }
 
-    url.searchParams.set('code', lzs.compressToEncodedURIComponent(useEditor().code.value))
-    url.searchParams.set('tests', lzs.compressToEncodedURIComponent(useEditor().testsCode.value ?? ''))
-    url.searchParams.set('options', lzs.compressToEncodedURIComponent(JSON.stringify(options)))
+    url.searchParams.set('code', compressToURL(useEditor().code.value))
+    url.searchParams.set('tests', compressToURL(useEditor().testsCode.value ?? ''))
+    url.searchParams.set('options', compressToURL(JSON.stringify(options)))
 
     return url
   }
 
   function getSharedModuleUrl(code: string): URL {
-    return new URL(`/${lzs.compressToEncodedURIComponent(code)}`, ESJS_CDN)
+    return new URL(`/${compressToURL(code)}`, ESJS_CDN)
   }
 
   function decodeSharedUrl() {
@@ -123,7 +123,7 @@ export const useLZShare = () => {
 
     if (url.searchParams.get('code') !== null && url.searchParams.get('code') !== '') {
       const code = url.searchParams.get('code') ?? ''
-      return lzs.decompressFromEncodedURIComponent(code)
+      return decompressFromURL(code) ?? INITIAL_CODE
     }
 
     try {
@@ -138,7 +138,7 @@ export const useLZShare = () => {
       }
 
       if (pathname.length > 6)
-        return lzs.decompressFromEncodedURIComponent(pathname.substring(1))
+        return decompressFromURL(pathname.substring(1)) ?? INITIAL_CODE
 
       return INITIAL_CODE
     }
@@ -153,7 +153,7 @@ export const useLZShare = () => {
   function getTestsCodeFromUrl(): string | null {
     const url = new URL(window.location.href)
 
-    return lzs.decompressFromEncodedURIComponent(url.searchParams.get('tests') ?? '')
+    return decompressFromURL(url.searchParams.get('tests') ?? '')
   }
 
   async function getCodeFromGithub(githubUrl: string) {

@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@amoutonbrady/lz-string':
+    specifier: ^0.1.0
+    version: 0.1.0
   '@es-js/compiler':
     specifier: ^0.0.1
     version: link:../compiler
@@ -50,9 +53,6 @@ devDependencies:
   javascript-obfuscator:
     specifier: ^4.0.2
     version: 4.0.2
-  lz-string:
-    specifier: ^1.5.0
-    version: 1.5.0
   monaco-editor:
     specifier: ~0.38.0
     version: 0.38.0
@@ -82,6 +82,10 @@ packages:
   /@alloc/quick-lru@5.2.0:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+    dev: true
+
+  /@amoutonbrady/lz-string@0.1.0:
+    resolution: {integrity: sha512-WsUuFexe01PUHKD8SUdiV3OQmauZWKyoo/7bJx3pj1l5SxLSe5//l1nQcU3DJlYL4JnhA8SqImT0/1xgUt6k5g==}
     dev: true
 
   /@ampproject/remapping@2.2.1:
@@ -5984,11 +5988,6 @@ packages:
   /lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
-    dev: true
-
-  /lz-string@1.5.0:
-    resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
-    hasBin: true
     dev: true
 
   /magic-string-ast@0.3.0:

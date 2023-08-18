@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
+    "@amoutonbrady/lz-string": "^0.1.0",
     "@es-js/compiler": "^0.0.1",
     "@es-js/core": "^0.0.18",
     "@es-js/language-tools": "^0.0.14",
@@ -25,7 +26,6 @@
     "@vueuse/nuxt": "^10.3.0",
     "eslint": "^8.47.0",
     "javascript-obfuscator": "^4.0.2",
-    "lz-string": "^1.5.0",
     "monaco-editor": "~0.38.0",
     "nuxt": "^3.6.5",
     "nuxt-monaco-editor": "^1.2.2",
