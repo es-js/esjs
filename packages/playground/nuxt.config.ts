@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-monaco-editor',
     '@nuxtjs/robots',
+    'nuxt-gtag',
   ],
 
   monacoEditor: {
@@ -30,4 +31,8 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  gtag: {
+    id: process.env.VITE_GTAG_ID,
+  }
 })

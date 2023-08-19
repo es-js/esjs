@@ -59,6 +59,9 @@ devDependencies:
   nuxt:
     specifier: ^3.6.5
     version: 3.6.5(@types/node@18.17.3)(eslint@8.47.0)(typescript@4.9.5)
+  nuxt-gtag:
+    specifier: ^0.6.1
+    version: 0.6.1
   nuxt-monaco-editor:
     specifier: ^1.2.2
     version: 1.2.2(monaco-editor@0.38.0)(vite@4.4.9)
@@ -6664,6 +6667,17 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
+
+  /nuxt-gtag@0.6.1:
+    resolution: {integrity: sha512-HQQkspu60QbJwLnL8+ASQC2GKZJtnlez4JD9TwJzCtdkClcsK2yvb2kEKYK3veVWkB2dWeFd7ZybE1RQyYlanQ==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      defu: 6.1.2
+      pathe: 1.1.1
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /nuxt-monaco-editor@1.2.2(monaco-editor@0.38.0)(vite@4.4.9):
