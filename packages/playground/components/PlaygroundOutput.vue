@@ -10,7 +10,9 @@ const MAIN_TESTS_FILE = 'pruebas.esjs'
 
 const editor = useEditor()
 
-const settings = useSettings().settings
+const settings = useSettings();
+
+const settingsStore = settings.settings
 
 let sandbox: HTMLIFrameElement
 let proxy: PreviewProxy
@@ -34,7 +36,7 @@ async function init() {
 
   sandbox = await createSandbox('esjs-sandbox', {
     theme: isDark.value ? 'dark' : 'light',
-    hidePreview: settings.value.hidePreview,
+    hidePreview: settingsStore.value.hidePreview,
     previewTab: useSettings().activePreviewTab.value,
     code: editor.code.value,
     testsCode: editor.testsCode.value,
@@ -140,21 +142,21 @@ watch(isDark, () => {
 })
 
 watch(
-  () => settings.value.hidePreview,
+  () => settingsStore.value.hidePreview,
   () => {
-    proxy?.iframe_command('HIDE_PREVIEW', settings.value.hidePreview)
+    proxy?.iframe_command('HIDE_PREVIEW', settingsStore.value.hidePreview)
   },
 )
 
 watch(
-  () => settings.value.preview,
+  () => settingsStore.value.preview,
   () => {
     proxy?.iframe_command('PREVIEW', useSettings().activePreview.value)
   },
 )
 
 watch(
-  () => settings.value.previewTab,
+  () => settingsStore.value.previewTab,
   () => {
     proxy?.iframe_command('PREVIEW_TAB', useSettings().activePreviewTab.value)
   },
@@ -163,7 +165,7 @@ watch(
 watch(
   [editor.code, editor.testsCode],
   () => {
-    if (!settings.value.autoCompile)
+    if (!settingsStore.value.autoCompile)
       return
 
     useEventBus('editor_code').emit('clear-decorations')
@@ -184,6 +186,13 @@ watch(
           variant="ghost"
           size="2xs"
           @click="refresh"
+        />
+
+        <AppButton
+          :icon="settingsStore.hidePreview ? 'i-mdi-eye-off' : 'i-mdi-eye'"
+          :description="settingsStore.hidePreview ? 'Mostrar vista previa' : 'Ocultar vista previa'"
+          variant="ghost"
+          @click="settings.setHidePreview(!settingsStore.hidePreview)"
         />
 
         <div class="flex flex-grow px-2">
