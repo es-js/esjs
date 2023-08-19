@@ -41,7 +41,7 @@ import SectionCodeExample from '@theme/components/SectionCodeExample.vue';
         src="https://esjs-mendable-app.vercel.app/"
         frameborder="0"
         title="Asistente virtual EsJS"
-        class="w-full h-[30rem] border-0 rounded-[8px] bg-transparent"
+        class="w-full h-[80vh] border-0 rounded-[8px] bg-transparent"
     />
 </ClientOnly>
 
