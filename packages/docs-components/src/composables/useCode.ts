@@ -1,4 +1,4 @@
-import lzs from 'lz-string'
+import { compressToURL } from '@amoutonbrady/lz-string'
 import { EDITOR_BASE_URL } from '../constants/Constants'
 
 export function useCode() {
@@ -16,32 +16,18 @@ export function useCode() {
     return code
   }
 
-  function getCompressedCodeFromCodeBlock(slot: HTMLElement | null): string | null {
-    const code = getCodeFromCodeBlock(slot)
-
-    if (!code)
-      return null
-
-    return compressCode(code)
-  }
-
-  function compressCode(code: string): string {
-    return lzs.compressToEncodedURIComponent(code)
-  }
-
   function getEditorUrl(code: string, testsCode: string, options: any): string {
     const url = new URL(EDITOR_BASE_URL)
 
-    url.searchParams.set('code', compressCode(code))
-    url.searchParams.set('tests', compressCode(testsCode))
-    url.searchParams.set('options', compressCode(JSON.stringify(options)))
+    url.searchParams.set('code', compressToURL(code))
+    url.searchParams.set('tests', compressToURL(testsCode))
+    url.searchParams.set('options', compressToURL(JSON.stringify(options)))
 
     return url.toString()
   }
 
   return {
     getCodeFromCodeBlock,
-    getCompressedCodeFromCodeBlock,
     getEditorUrl,
   }
 }

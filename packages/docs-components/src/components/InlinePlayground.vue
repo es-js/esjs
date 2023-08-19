@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { compressToURL } from '@amoutonbrady/lz-string'
+import { Icon } from '@iconify/vue'
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
-import * as lzs from 'lz-string'
-import { Icon } from '@iconify/vue'
+import { useCode } from '../composables'
 import { EDITOR_BASE_URL } from '../constants/Constants'
 
 const props = defineProps({
@@ -31,19 +32,27 @@ const running = ref(props.onlyPlayground)
 
 const slot: Ref<null | HTMLElement> = ref(null)
 
-const sharedCode = computed(
+const codeFromCodeBlock = computed(
   () => {
-    if (!slot.value)
-      return null
+    return useCode().getCodeFromCodeBlock(slot.value)
+  },
+)
 
-    const codeElement = slot.value.getElementsByTagName('code')
+const playgroundUrl = computed(
+  () => {
+    if (!codeFromCodeBlock.value)
+      return
 
-    if (!codeElement || !codeElement.length)
-      return null
+    const url = new URL(EDITOR_BASE_URL)
 
-    const code = codeElement[0].innerText
+    url.searchParams.set('code', compressToURL(codeFromCodeBlock.value))
+    url.searchParams.set('layout', props.layout || 'vertical')
+    url.searchParams.set('hidePreview', String(props.hidePreview))
+    url.searchParams.set('hideEditor', String(!props.onlyPlayground))
+    url.searchParams.set('hideConsole', String(props.hideConsole))
+    url.searchParams.set('hideOptions', String(props.hideOptions))
 
-    return lzs.compressToEncodedURIComponent(code)
+    return url
   },
 )
 
@@ -54,24 +63,6 @@ function run() {
 function stop() {
   running.value = false
 }
-
-const playgroundUrl = computed(
-  () => {
-    if (!sharedCode.value)
-      return
-
-    const url = new URL(EDITOR_BASE_URL)
-
-    url.searchParams.set('code', sharedCode.value)
-    url.searchParams.set('layout', props.layout || 'vertical')
-    url.searchParams.set('hidePreview', String(props.hidePreview))
-    url.searchParams.set('hideEditor', String(!props.onlyPlayground))
-    url.searchParams.set('hideConsole', String(props.hideConsole))
-    url.searchParams.set('hideOptions', String(props.hideOptions))
-
-    return url
-  },
-)
 </script>
 
 <template>
