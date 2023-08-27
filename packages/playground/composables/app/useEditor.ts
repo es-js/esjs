@@ -1,10 +1,5 @@
-import { prepareCode } from '@es-js/compiler'
-import { splitCodeImports } from '@es-js/core'
-import javascriptObfuscator from 'javascript-obfuscator'
-import type { Ref } from 'vue'
-import { ref } from 'vue'
-
-const { obfuscate } = javascriptObfuscator
+import type {Ref} from 'vue'
+import {ref} from 'vue'
 
 export const loading = ref(true)
 
@@ -62,21 +57,6 @@ export const useEditor = () => {
     testsCode.value = value
   }
 
-  function getObfuscatedCode(code: string) {
-    const transpiledCode = prepareCode(code)
-
-    const splittedCode = splitCodeImports(transpiledCode)
-
-    const obfuscatedCode = obfuscateCode(splittedCode.codeWithoutImports)
-
-    if (!obfuscatedCode)
-      return
-
-    return `${splittedCode.imports}
-
-${obfuscatedCode.getObfuscatedCode()}`
-  }
-
   function toggleLanguage() {
     setLanguage(language.value === 'esjs' ? 'js' : 'esjs')
   }
@@ -85,22 +65,12 @@ ${obfuscatedCode.getObfuscatedCode()}`
     language.value = value
   }
 
-  function obfuscateCode(code: string) {
-    return obfuscate(code, {
-      compact: true,
-      simplify: false,
-      controlFlowFlattening: false,
-      ignoreImports: true,
-    })
-  }
-
   return {
     loading,
     code,
     testsCode,
     setCode,
     setTestsCode,
-    getObfuscatedCode,
     toggleLanguage,
     setLanguage,
     language,

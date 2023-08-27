@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {transpile} from "@es-js/core"
-import { Ref } from "vue"
+import {Ref} from "vue"
+import {isDark} from "~/composables/app/dark"
+import {useEditor} from "~/composables/app/useEditor"
 
 const props = defineProps({
   name: {
@@ -22,8 +24,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-
-const isDark: Ref<boolean> = useDark()
 
 const editor = useEditor()
 
@@ -113,19 +113,26 @@ async function formatCode() {
 }
 
 async function obfuscate() {
-  let obfuscatedCode: string
+  let codeToObfuscate: string
   switch (props.name) {
     case 'code':
-      obfuscatedCode = useEditor().getObfuscatedCode(useEditor().code.value) ?? ''
+      codeToObfuscate = useEditor().code.value
       break
     case 'tests':
-      obfuscatedCode = useEditor().getObfuscatedCode(useEditor().testsCode.value) ?? ''
+      codeToObfuscate = useEditor().testsCode.value
       break
     default:
       return null
   }
 
-  return editorInstance?.setValue(obfuscatedCode)
+  const response = await useFetch('/api/code/obfuscate', {
+      method: 'POST',
+      body: JSON.stringify({
+          code: codeToObfuscate,
+      }),
+  })
+
+  return editorInstance?.setValue(response?.data?.value?.obfuscatedCode)
 }
 
 function updateTheme() {

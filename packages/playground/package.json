@@ -21,10 +21,12 @@
     "@nuxthq/ui": "^2.7.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/robots": "^3.0.0",
+    "@nuxtjs/supabase": "^1.0.2",
     "@types/node": "^18.17.3",
     "@types/prettier": "^2.7.3",
     "@vueuse/nuxt": "^10.3.0",
     "eslint": "^8.47.0",
+    "h3-zod": "^0.5.1",
     "javascript-obfuscator": "^4.0.2",
     "monaco-editor": "~0.38.0",
     "nuxt": "^3.6.5",
@@ -32,6 +34,16 @@
     "nuxt-monaco-editor": "^1.2.2",
     "prettier": "^2.8.8",
     "splitpanes": "^3.1.5",
-    "theme-vitesse": "^0.7.2"
+    "theme-vitesse": "^0.7.2",
+    "vue-screen": "^2.3.2",
+    "zod": "^3.22.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "@supabase/gotrue-js": "2.16.0"
+    }
+  },
+  "dependencies": {
+    "octokit": "^3.1.0"
   }
 }

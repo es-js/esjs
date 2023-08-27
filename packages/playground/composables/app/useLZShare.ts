@@ -1,6 +1,8 @@
-import {useToast} from "#build/imports"
+import {useToast} from "#imports"
 import {compressToURL, decompressFromURL} from '@amoutonbrady/lz-string'
-import { useClipboard, useDark } from '@vueuse/core'
+import {useClipboard, useDark} from '@vueuse/core'
+import {INITIAL_CODE, useEditor} from './useEditor'
+import {useSettings} from './useSettings'
 
 const settings = useSettings()
 
@@ -10,7 +12,7 @@ export const useLZShare = () => {
   const toast = useToast()
 
   function shareCode() {
-    const url = getSharedUrl(useEditor().code.value, useEditor().testsCode.value)
+    const url = getSharedUrl()
 
     window.history.replaceState('', '', url)
 
@@ -39,7 +41,10 @@ export const useLZShare = () => {
     })
   }
 
-  function getSharedUrl(code: string, testsCode: string | null = null): URL {
+  function getSharedUrl(): URL {
+    const code = useEditor().code.value
+    const testsCode = useEditor().testsCode.value
+
     const url = new URL('/', window.location.origin)
 
     if (code !== INITIAL_CODE)
@@ -224,5 +229,6 @@ export const useLZShare = () => {
     setSettingsFromUrl,
     setCodeFromUrl,
     getEjecutarUrl,
+    getSharedUrl,
   }
 }

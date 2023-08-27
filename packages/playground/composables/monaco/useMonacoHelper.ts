@@ -1,18 +1,20 @@
-import * as monaco from 'monaco-editor'
 import {
   constantLanguage,
   keywordControl,
   metaVariable,
   storageType,
-  supportFunction, transpile,
+  supportFunction,
+  transpile,
   variableLanguage
 } from "@es-js/core"
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
-import type { Options } from 'prettier'
+import * as monaco from 'monaco-editor'
+import type {Options} from 'prettier'
+import parserBabel from 'prettier/parser-babel'
+import prettier from 'prettier/standalone'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
-import prettier from 'prettier/standalone'
-import parserBabel from 'prettier/parser-babel'
+import {useEditor} from '~/composables/app/useEditor'
 
 const esjsTokenizer: Record<string, any> = {
     keywords: [

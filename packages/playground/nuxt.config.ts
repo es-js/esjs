@@ -8,7 +8,12 @@ export default defineNuxtConfig({
     'nuxt-monaco-editor',
     '@nuxtjs/robots',
     'nuxt-gtag',
+    '@nuxtjs/supabase',
   ],
+
+  runtimeConfig: {
+    loginEnabled: process.env.LOGIN_ENABLED === 'true',
+  },
 
   monacoEditor: {
     locale: 'es',
@@ -34,5 +39,13 @@ export default defineNuxtConfig({
 
   gtag: {
     id: process.env.VITE_GTAG_ID,
+  },
+
+  supabase: {
+    redirectOptions: {
+      login: '/',
+      callback: '/confirm',
+      exclude: [],
+    }
   }
 })

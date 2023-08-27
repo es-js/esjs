@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import {useEditor} from "~/composables/app/useEditor"
+import {useLZShare} from "~/composables/app/useLZShare"
+import {usePlayground} from "~/composables/app/usePlayground"
+import {useSettings} from "~/composables/app/useSettings"
+
 const settings = useSettings()
 
 const editor = useEditor()
@@ -29,25 +34,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="w-full h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100 overflow-hidden">
-    <div class="flex flex-col w-full h-full">
-      <AppBar class="h-10" />
-
-      <div class="flex flex-row flex-grow">
-        <div class="relative flex flex-1">
-          <ClientOnly>
-            <PlaygroundPanes class="absolute inset-0 w-full h-full" />
-          </ClientOnly>
-        </div>
-      </div>
-    </div>
-
-    <UNotifications />
-  </div>
+  <PlaygroundPanes class="absolute inset-0 w-full h-full" />
 </template>
-
-<style>
-html {
-    overflow: hidden !important;
-}
-</style>

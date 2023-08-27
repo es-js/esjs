@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import {PreviewProxy} from "./PreviewProxy"
 import {createSandbox} from '@es-js/sandbox'
 import {useEventBus} from "@vueuse/core"
 import debounce from "lodash.debounce"
 import {onMounted, onUnmounted, watch} from 'vue'
+import {isDark} from "~/composables/app/dark"
+import {useEditor} from "~/composables/app/useEditor"
+import {useLZShare} from "~/composables/app/useLZShare"
+import {useSettings} from "~/composables/app/useSettings"
+import {PreviewProxy} from "~/utils/PreviewProxy"
 
 const MAIN_FILE = 'codigo.esjs'
 const MAIN_TESTS_FILE = 'pruebas.esjs'

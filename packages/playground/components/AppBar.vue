@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import {isDark, toggleDark} from "~/composables/app/dark"
+import {useEditor} from "~/composables/app/useEditor"
+import {useLZShare} from "~/composables/app/useLZShare"
+import {useSettings} from "~/composables/app/useSettings"
+
 const editor = useEditor()
 
 const share = useLZShare()
 
 const settings = useSettings()
+
+const loginEnabled = useRuntimeConfig().loginEnabled
 </script>
 
 <template>
@@ -11,11 +18,17 @@ const settings = useSettings()
     <div class="h-full grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
         <div class="flex flex-row items-center space-x-1">
-          <img
-            src="/favicon.ico"
-            alt="EsJS Logo"
-            class="w-7 h-7 rounded"
+          <UButton
+            to="/"
+            variant="link"
+            :padded="false"
           >
+            <img
+              src="/favicon.ico"
+              alt="EsJS Logo"
+              class="w-7 h-7 rounded"
+            >
+          </UButton>
           <span class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
           <span class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
         </div>
@@ -33,27 +46,12 @@ const settings = useSettings()
         >
           <AppSeparator />
 
-          <AppButton
-            icon="i-mdi-share"
-            text="Compartir"
-            description="Compartir código"
-            color="teal"
-            variant="soft"
-            @click="share.shareCode()"
-          />
+          <ShareModal />
         </div>
       </div>
 
       <div class="flex flex-row justify-center items-center">
-        <AppToggle
-          v-if="!settings.settings.value.hideOptions"
-          :checked="editor.language.value === 'esjs'"
-          label="EsJS"
-          prepend-label="JS"
-          :description="editor.language.value === 'esjs' ? 'Cambiar a JavaScript' : 'Cambiar a EsJS'"
-          class="h-6 ml-3"
-          @change="editor.toggleLanguage()"
-        />
+        <!--        TODO-->
       </div>
 
       <div class="flex flex-row justify-end items-center space-x-3">
@@ -110,14 +108,6 @@ const settings = useSettings()
           />
 
           <AppSeparator v-if="settings.settings.value.showAdvanced" />
-
-          <AppButton
-            icon="i-mdi-code-braces"
-            text="Formatear código"
-            description="Formatear código"
-            icon-only
-            @click="useEventBus('editor_code').emit('format')"
-          />
         </div>
 
         <div>
@@ -215,7 +205,9 @@ const settings = useSettings()
           v-if="!settings.settings.value.hideOptions"
           class="flex flex-row justify-end items-center space-x-3"
         >
+          <LoginButton v-if="loginEnabled" />
           <AppButton
+            v-if="!loginEnabled"
             icon="i-mdi-github"
             href="https://github.com/es-js/esjs"
             description="GitHub"

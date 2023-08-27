@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import {computed} from 'vue'
 
 const props = defineProps({
   text: {
@@ -58,6 +58,7 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
           }
         } : {}
       )"
+      v-bind="$attrs"
       @click="emit('click')"
     />
   </UTooltip>

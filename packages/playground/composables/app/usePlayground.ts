@@ -1,4 +1,4 @@
-import { useEventBus } from '@vueuse/core'
+import {useEventBus} from '@vueuse/core'
 
 export const usePlayground = () => {
   const bus = useEventBus('editor_code')
