@@ -10,7 +10,7 @@ const share = useLZShare()
 
 const settings = useSettings()
 
-const loginEnabled = useRuntimeConfig().loginEnabled
+const loginEnabled = useRuntimeConfig().public.loginEnabled
 </script>
 
 <template>

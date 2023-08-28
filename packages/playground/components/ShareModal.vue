@@ -17,7 +17,7 @@ const items = [{
   description: 'Compartir vía GitHub',
 }]
 
-const loginEnabled = useRuntimeConfig().loginEnabled
+const loginEnabled = useRuntimeConfig().public.loginEnabled
 
 function shareCode() {
   share.shareCode()

@@ -12,7 +12,9 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
-    loginEnabled: process.env.LOGIN_ENABLED === 'true',
+    public: {
+      loginEnabled: process.env.NUXT_LOGIN_ENABLED === 'true',
+    }
   },
 
   monacoEditor: {
