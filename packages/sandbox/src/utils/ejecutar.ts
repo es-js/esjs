@@ -12,6 +12,7 @@ export interface EjecutarOptions {
   testsCode: string
   importMap: string
   stylesheets: string[]
+  clearConsoleOnRun: boolean
 }
 
 let _options: EjecutarOptions
@@ -152,6 +153,9 @@ function evalInitialCode() {
 }
 
 function clearConsole() {
+  if (!_options.clearConsoleOnRun)
+    return
+
   const isDev = window && window.location && window.location.ancestorOrigins && window.location.ancestorOrigins.length
     ? window.location.ancestorOrigins.item(0)?.startsWith('http://localhost:')
     : window.location.href.startsWith('http://localhost:')
