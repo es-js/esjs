@@ -39,11 +39,10 @@ const url = computed(() => {
       />
     </div>
 
-    <AppButton
-      text="Listo"
-      description="Cerrar"
+    <UButton
+      label="Listo"
       color="black"
-      :block="true"
+      block
       @click="emit('close')"
     />
   </div>

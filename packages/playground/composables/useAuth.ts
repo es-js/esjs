@@ -3,12 +3,13 @@ export default function () {
 
 
   async function login() {
-    const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`
+    // Save current URL to redirect the user back to it after signing in.
+    const currentUrl = window.location.href
+    localStorage.setItem('redirect_url', currentUrl)
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo,
         scopes: 'read:org, repo',
       },
     })

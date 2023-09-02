@@ -5,6 +5,7 @@ import {z} from 'zod'
 import {useEditor} from "~/composables/app/useEditor"
 import useAuth from "~/composables/useAuth"
 import useOctokit from "~/composables/useOctokit"
+import randomWords from 'random-spanish-words'
 
 const emit = defineEmits(['close'])
 
@@ -18,6 +19,8 @@ const toast = useToast()
 
 const loading = ref(false)
 
+const loadingLogin = ref(false)
+
 const projectCreated = ref(false)
 
 const projectUrl = ref('')
@@ -25,7 +28,7 @@ const projectUrl = ref('')
 const form = ref()
 
 const state = ref({
-  name: '',
+  name: 'esjs-' + randomWords({exactly: 1, join: ''}) + '-app',
   private: true,
 })
 
@@ -50,7 +53,6 @@ const schema = z.object({
     ),
   private: z.boolean(),
 })
-
 
 async function validate() {
   const errors: FormError[] = []
@@ -130,6 +132,11 @@ async function submit() {
     loading.value = false
   }
 }
+
+async function login() {
+  loadingLogin.value = true
+  await auth.login()
+}
 </script>
 
 <template>
@@ -156,7 +163,8 @@ async function submit() {
             label="Iniciar sesión con GitHub"
             color="black"
             :block="true"
-            @click="auth.login()"
+            :loading="loadingLogin"
+            @click="login"
           />
         </div>
 
