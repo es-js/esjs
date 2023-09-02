@@ -29,6 +29,7 @@ export async function createSandbox(elementOrId: HTMLElement | string, customOpt
       stylesheets: DEFAULT_STYLESHEETS,
       code: '',
       testsCode: '',
+      clearConsoleOnRun: true,
     }, customOptions)
 
   return createIframe(elementOrId, options)
