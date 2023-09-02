@@ -13,9 +13,11 @@ const playground = usePlayground()
 const share = useLZShare()
 
 onBeforeMount(async () => {
-  share.setSettingsFromUrl()
-  await share.setCodeFromUrl()
-  editor.loading.value = false
+  if (process.client) {
+    share.setSettingsFromUrl()
+    await share.setCodeFromUrl()
+    editor.loading.value = false
+  }
 })
 
 onMounted(() => {
