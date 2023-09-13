@@ -6,6 +6,7 @@ import {useEditor} from "~/composables/app/useEditor"
 import useAuth from "~/composables/useAuth"
 import useOctokit from "~/composables/useOctokit"
 import randomWords from 'random-spanish-words'
+import confetti from 'canvas-confetti'
 
 const emit = defineEmits(['close'])
 
@@ -99,7 +100,16 @@ async function submit() {
           mode: '100644',
           type: 'blob',
           content: useEditor().code.value,
-        }
+        },
+
+        {
+          path: 'README.md',
+          mode: '100644',
+          type: 'blob',
+          content: `# ${state.value.name}
+
+Aplicación Web desarrollada en [EsJS](https://esjs.dev/).`,
+        },
       ],
       base_tree: currentCommit.data.commit.tree.sha,
     })
@@ -123,6 +133,7 @@ async function submit() {
 
     projectUrl.value = repo.data.html_url
     projectCreated.value = true
+    confettis()
   } catch (e) {
     toast.add({
       title: 'Ups!',
@@ -136,6 +147,29 @@ async function submit() {
 async function login() {
   loadingLogin.value = true
   await auth.login()
+}
+
+function confettis() {
+  const end = Date.now() + (3 * 1000);
+
+  (function frame() {
+    confetti({
+      particleCount: 2,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+    });
+    confetti({
+      particleCount: 2,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
 }
 </script>
 

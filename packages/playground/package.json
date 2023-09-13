@@ -25,6 +25,7 @@
     "@types/node": "^18.17.3",
     "@types/prettier": "^2.7.3",
     "@vueuse/nuxt": "^10.3.0",
+    "canvas-confetti": "^1.6.0",
     "eslint": "^8.47.0",
     "h3-zod": "^0.5.1",
     "javascript-obfuscator": "^4.0.2",
