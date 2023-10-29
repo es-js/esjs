@@ -1,0 +1,100 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should be importable 1`] = `
+{
+  "default": {
+    "languages": [
+      {
+        "extensions": [
+          ".esjs",
+        ],
+        "name": "EsJS",
+        "parsers": [
+          "esjs",
+        ],
+        "vscodeLanguageIds": [
+          "esjs",
+        ],
+      },
+    ],
+    "parsers": {
+      "esjs": {
+        "astFormat": "esjs-format",
+        "hasPragma": [Function],
+        "locEnd": [Function],
+        "locStart": [Function],
+        "parse": [Function],
+        "preprocess": [Function],
+      },
+    },
+    "printers": {
+      "esjs-format": {
+        "print": [Function],
+      },
+    },
+  },
+  "languages": [
+    {
+      "extensions": [
+        ".esjs",
+      ],
+      "name": "EsJS",
+      "parsers": [
+        "esjs",
+      ],
+      "vscodeLanguageIds": [
+        "esjs",
+      ],
+    },
+  ],
+  "parsers": {
+    "esjs": {
+      "astFormat": "esjs-format",
+      "hasPragma": [Function],
+      "locEnd": [Function],
+      "locStart": [Function],
+      "parse": [Function],
+      "preprocess": [Function],
+    },
+  },
+  "printers": {
+    "esjs-format": {
+      "print": [Function],
+    },
+  },
+}
+`;
+
+exports[`should be requireable 1`] = `
+{
+  "languages": [
+    {
+      "extensions": [
+        ".esjs",
+      ],
+      "name": "EsJS",
+      "parsers": [
+        "esjs",
+      ],
+      "vscodeLanguageIds": [
+        "esjs",
+      ],
+    },
+  ],
+  "parsers": {
+    "esjs": {
+      "astFormat": "esjs-format",
+      "hasPragma": [Function],
+      "locEnd": [Function],
+      "locStart": [Function],
+      "parse": [Function],
+      "preprocess": [Function],
+    },
+  },
+  "printers": {
+    "esjs-format": {
+      "print": [Function],
+    },
+  },
+}
+`;

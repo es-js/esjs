@@ -1,0 +1,44 @@
+{
+	"name": "prettier-plugin-esjs",
+	"version": "0.0.1-alpha.0",
+	"license": "MIT",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "pkgroll",
+		"lint": "eslint . && prettier . --check",
+		"lint:fix": "eslint . --fix && prettier . --write",
+		"start": "tsx src/index.ts",
+		"test": "vitest",
+		"typecheck": "tsc --noEmit",
+		"watch": "pkgroll --watch"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "1.0.0-beta.29",
+		"@antfu/ni": "^0.21.4",
+		"@es-js/core": "^0.0.18",
+		"@prettier/sync": "^0.3.0",
+		"@types/node": "^18.16.6",
+		"bumpp": "^9.1.1",
+		"eslint": "^8.48.0",
+		"pkgroll": "^1.10.0",
+		"prettier": "^3.0.3",
+		"tsx": "^3.12.7",
+		"typescript": "^5.1.6",
+		"vite": "^4.4.4",
+		"vitest": "^0.33.0"
+	},
+	"peerDependencies": {
+		"prettier": "^3.0.0"
+	}
+}
