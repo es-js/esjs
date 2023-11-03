@@ -141,7 +141,7 @@ export const stringMethods = new Map([
   ['repetir', 'repeat'],
   ['reemplazar', 'replace'],
   ['reemplazarTodo', 'replaceAll'],
-  ['buscar', 'search'],
+  ['buscarRegex', 'search'],
   ['recortar', 'slice'],
   ['dividir', 'split'],
   ['comienzaCon', 'startsWith'],
