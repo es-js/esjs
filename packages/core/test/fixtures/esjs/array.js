@@ -7,3 +7,5 @@ if (matriz.includes('test')) {
 }
 
 matriz.length
+
+matriz.find((item) => item === 'test')

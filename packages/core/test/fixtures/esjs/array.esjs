@@ -7,3 +7,5 @@ si (matriz.incluye('test')) {
 }
 
 matriz.longitud
+
+matriz.buscar((item) => item === 'test')
