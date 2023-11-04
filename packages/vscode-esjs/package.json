@@ -44,7 +44,7 @@
     "@vscode/test-electron": "^2.3.3",
     "axios": "^1.4.0",
     "bumpp": "^8.2.1",
-    "eslint": "^8.46.0",
+    "eslint": "8.22.0",
     "esno": "^0.16.3",
     "pnpm": "^7.33.5",
     "rimraf": "^3.0.2",

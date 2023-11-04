@@ -6,12 +6,15 @@
   "scripts": {
     "build": "pnpm --stream -r run build",
     "release": "bumpp packages/**/package.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sherif": "pnpm dlx sherif@latest --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "bumpp": "^8.2.1"
-  }
+  },
+  "private": true,
+  "packageManager": "pnpm@8.6.1"
 }
