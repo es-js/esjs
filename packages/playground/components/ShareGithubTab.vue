@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {FormError} from "@nuxthq/ui/dist/runtime/types"
 import {defineEmits} from 'vue'
 import {z} from 'zod'
 import {useEditor} from "~/composables/app/useEditor"
@@ -56,7 +55,7 @@ const schema = z.object({
 })
 
 async function validate() {
-  const errors: FormError[] = []
+  const errors: any[] = []
 
   const result = await schema.safeParseAsync(state.value)
 
