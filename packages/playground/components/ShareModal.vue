@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ShareGithubTab from "~/components/ShareGithubTab.vue"
-import ShareUrlTab from "~/components/ShareUrlTab.vue"
-import {useLZShare} from "~/composables/app/useLZShare"
+import ShareGithubTab from '~/components/ShareGithubTab.vue'
+import ShareUrlTab from '~/components/ShareUrlTab.vue'
+import { useLZShare } from '~/composables/app/useLZShare'
 
 const isOpen = ref(false)
 
@@ -16,8 +16,6 @@ const items = [{
   label: 'GitHub',
   description: 'Compartir vía GitHub',
 }]
-
-const loginEnabled = useRuntimeConfig().public.loginEnabled
 
 function shareCode() {
   share.shareCode()
@@ -68,22 +66,8 @@ function closeModal() {
               </div>
               <div v-else-if="item.key === 'github'">
                 <ShareGithubTab
-                  v-if="loginEnabled"
                   @close="closeModal"
                 />
-
-                <div
-                  v-if="!loginEnabled"
-                  class="flex flex-col space-y-4 p-4"
-                >
-                  <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
-                    Crea un proyecto en GitHub
-                  </h3>
-
-                  <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Pronto podrás compartir tu código vía GitHub
-                  </p>
-                </div>
               </div>
             </UCard>
           </template>

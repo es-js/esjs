@@ -1,8 +1,8 @@
-import {useToast} from "#imports"
-import {compressToURL, decompressFromURL} from '@amoutonbrady/lz-string'
-import {useClipboard, useDark} from '@vueuse/core'
-import {INITIAL_CODE, useEditor} from './useEditor'
-import {useSettings} from './useSettings'
+import { compressToURL, decompressFromURL } from '@amoutonbrady/lz-string'
+import { useClipboard, useDark } from '@vueuse/core'
+import { INITIAL_CODE, useEditor } from './useEditor'
+import { useSettings } from './useSettings'
+import { useToast } from '#imports'
 
 const settings = useSettings()
 
@@ -23,7 +23,7 @@ export const useLZShare = () => {
     clipboard.copy()
 
     toast.add({
-        title: 'Se copió la URL al portapapeles',
+      title: 'Se copió la URL al portapapeles',
     })
   }
 
@@ -37,7 +37,7 @@ export const useLZShare = () => {
     clipboard.copy()
 
     toast.add({
-        title: 'Se copió la URL al portapapeles',
+      title: 'Se copió la URL al portapapeles',
     })
   }
 
@@ -47,11 +47,13 @@ export const useLZShare = () => {
 
     const url = new URL('/', window.location.origin)
 
-    if (code !== INITIAL_CODE)
+    if (code !== INITIAL_CODE) {
       url.searchParams.set('code', compressToURL(code))
+    }
 
-    if (testsCode)
+    if (testsCode) {
       url.searchParams.set('tests', compressToURL(testsCode))
+    }
 
     url.searchParams.set('layout', settings.settings.value.layout)
     url.searchParams.set('hidePreview', String(settings.settings.value.hidePreview))
@@ -112,10 +114,10 @@ export const useLZShare = () => {
   function decodePreviewTab(url: URL) {
     try {
       return JSON.parse(url.searchParams.get('previewTab') || '')
-    }
-    catch (error) {
-      if (url.searchParams.get('hideConsole') === 'true')
+    } catch (error) {
+      if (url.searchParams.get('hideConsole') === 'true') {
         return { console: false, flowchart: false, hidden: true }
+      }
 
       return {}
     }
@@ -132,6 +134,8 @@ export const useLZShare = () => {
     }
 
     try {
+      console.debug({ pathname })
+
       if (pathname.includes('/github/')) {
         const githubUrl = pathname.replace('/github/', '')
         return await getCodeFromGithub(githubUrl)
@@ -142,14 +146,14 @@ export const useLZShare = () => {
         return await getCodeFromGist(gistUrl)
       }
 
-      if (pathname.length > 6)
+      if (pathname.length > 6) {
         return decompressFromURL(pathname.substring(1)) ?? INITIAL_CODE
+      }
 
       return INITIAL_CODE
-    }
-    catch (error: any) {
+    } catch (error: any) {
       toast.add({
-          title: error.toString(),
+        title: error.toString(),
       })
       return INITIAL_CODE
     }
@@ -171,8 +175,9 @@ export const useLZShare = () => {
 
     const response = await fetch(githubRawUrl)
 
-    if (response.status !== 200)
+    if (response.status !== 200) {
       throw new Error('No se pudo obtener el código desde GitHub')
+    }
 
     return response.text()
   }
@@ -183,8 +188,9 @@ export const useLZShare = () => {
 
     const response = await fetch(gistRawUrl)
 
-    if (response.status !== 200)
+    if (response.status !== 200) {
       throw new Error('No se pudo obtener el código desde Gist')
+    }
 
     return response.text()
   }
@@ -209,15 +215,18 @@ export const useLZShare = () => {
     useEditor().setLanguage(useLZShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
   }
 
-  async function setCodeFromUrl() {
+  async function loadCodeFromUrl() {
     const code = await getCodeFromUrl()
+
+    console.debug({ code })
 
     const testsCode = getTestsCodeFromUrl()
 
     useEditor().setCode(code)
 
-    if (testsCode)
+    if (testsCode) {
       useEditor().setTestsCode(testsCode)
+    }
   }
 
   return {
@@ -227,7 +236,7 @@ export const useLZShare = () => {
     getCodeFromUrl,
     getTestsCodeFromUrl,
     setSettingsFromUrl,
-    setCodeFromUrl,
+    loadCodeFromUrl,
     getEjecutarUrl,
     getSharedUrl,
   }

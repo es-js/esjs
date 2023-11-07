@@ -1,5 +1,4 @@
-import type {Ref} from 'vue'
-import {ref} from 'vue'
+import { Ref, ref } from 'vue'
 
 export const loading = ref(true)
 

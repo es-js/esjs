@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {transpile} from "@es-js/core"
-import {Ref} from "vue"
-import {isDark} from "~/composables/app/dark"
-import {useEditor} from "~/composables/app/useEditor"
+import { transpile } from '@es-js/core'
+import { Ref, ref } from 'vue'
+import { isDark } from '~/composables/app/dark'
+import { useEditor } from '~/composables/app/useEditor'
 
 const props = defineProps({
   name: {
@@ -56,8 +56,9 @@ onMounted(() => {
 })
 
 function decorateError(line: number, column: number) {
-  if (!editorInstance || !editorInstance.deltaDecorations || !monacoHelper)
+  if (!editorInstance || !editorInstance.deltaDecorations || !monacoHelper) {
     return
+  }
 
   decorations.value = editorInstance.deltaDecorations(
     decorations.value,
@@ -74,15 +75,17 @@ function decorateError(line: number, column: number) {
 }
 
 function clearDecorations() {
-  if (!editorInstance || !editorInstance.deltaDecorations)
+  if (!editorInstance || !editorInstance.deltaDecorations) {
     return
+  }
 
   decorations.value = editorInstance.deltaDecorations(decorations.value, [])
 }
 
 function focusEditor() {
-  if (!editorInstance)
+  if (!editorInstance) {
     return
+  }
 
   editorInstance.focus()
 }
@@ -126,18 +129,19 @@ async function obfuscate() {
   }
 
   const response = await useFetch('/api/code/obfuscate', {
-      method: 'POST',
-      body: JSON.stringify({
-          code: codeToObfuscate,
-      }),
+    method: 'POST',
+    body: JSON.stringify({
+      code: codeToObfuscate,
+    }),
   })
 
   return editorInstance?.setValue(response?.data?.value?.obfuscatedCode)
 }
 
 function updateTheme() {
-  if (!editorInstance)
+  if (!editorInstance) {
     return
+  }
 
   editorInstance.updateOptions({
     theme: isDark.value ? 'dark' : 'light',
@@ -156,11 +160,11 @@ watch(
 )
 
 watch(
-    isDark,
-    () => {
-      updateTheme()
-    },
-    { immediate: true },
+  isDark,
+  () => {
+    updateTheme()
+  },
+  { immediate: true },
 )
 </script>
 

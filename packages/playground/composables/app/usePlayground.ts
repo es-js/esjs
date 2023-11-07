@@ -1,16 +1,18 @@
-import {useEventBus} from '@vueuse/core'
+import { useEventBus } from '@vueuse/core'
 
 export const usePlayground = () => {
   const bus = useEventBus('editor_code')
 
   function handleWindowKeyup($event: any) {
-    if ($event.key === 'Escape')
+    if ($event.key === 'Escape') {
       bus.emit('focus')
+    }
   }
 
   function handleWindowClose($event: any) {
-    if (import.meta.env.MODE === 'development')
+    if (import.meta.env.MODE === 'development') {
       return
+    }
 
     // Cancelar el cierre de la ventana
     $event.preventDefault()

@@ -1,9 +1,9 @@
-import {Octokit} from "octokit"
+import { Octokit } from 'octokit'
 
-export default function () {
+export default function() {
   const providerToken = useCookie('sb-provider-token').value
 
   return new Octokit({
-    auth: providerToken
+    auth: providerToken,
   })
 }

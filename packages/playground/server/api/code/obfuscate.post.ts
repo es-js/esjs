@@ -1,20 +1,20 @@
-import {prepareCode} from "@es-js/compiler"
-import {splitCodeImports} from "@es-js/core"
-import {zh} from 'h3-zod'
+import { prepareCode } from '@es-js/compiler'
+import { splitCodeImports } from '@es-js/core'
+import { zh } from 'h3-zod'
 import javascriptObfuscator from 'javascript-obfuscator'
-import {z} from "zod"
+import { z } from 'zod'
 
-const {obfuscate} = javascriptObfuscator
+const { obfuscate } = javascriptObfuscator
 
-export default defineEventHandler(async (event) => {
-  const body      = await zh.useSafeValidatedBody(event, z.object({
+export default defineEventHandler(async(event) => {
+  const body = await zh.useSafeValidatedBody(event, z.object({
     code: z.string(),
   }))
 
   const obfuscatedCode = getObfuscatedCode(body.data.code)
 
   return {
-    obfuscatedCode
+    obfuscatedCode,
   }
 })
 
@@ -25,8 +25,9 @@ function getObfuscatedCode(code: string) {
 
   const obfuscatedCode = obfuscateCode(splittedCode.codeWithoutImports)
 
-  if (!obfuscatedCode)
+  if (!obfuscatedCode) {
     return
+  }
 
   return `${splittedCode.imports}
 
@@ -41,4 +42,3 @@ function obfuscateCode(code: string) {
     ignoreImports: true,
   })
 }
-

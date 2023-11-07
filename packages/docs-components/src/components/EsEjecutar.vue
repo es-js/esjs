@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
-import { useCode } from '../composables/useCode'
+import { useCode } from '../composables'
 import EsSandbox from './EsSandbox.vue'
 
 const props = defineProps({

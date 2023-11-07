@@ -1,22 +1,32 @@
 <script setup lang="ts">
-import {isDark, toggleDark} from "~/composables/app/dark"
-import {useEditor} from "~/composables/app/useEditor"
-import {useLZShare} from "~/composables/app/useLZShare"
-import {useSettings} from "~/composables/app/useSettings"
-
-const editor = useEditor()
+import ExamplesModal from '~/components/Examples/ExamplesModal.vue'
+import { isDark, toggleDark } from '~/composables/app/dark'
+import { useLZShare } from '~/composables/app/useLZShare'
+import { useSettings } from '~/composables/app/useSettings'
 
 const share = useLZShare()
 
 const settings = useSettings()
-
-const loginEnabled = useRuntimeConfig().public.loginEnabled
 </script>
 
 <template>
   <div class="w-full px-2 bg-gray-50 dark:bg-gray-800 shadow dark:shadow-none z-10">
     <div class="h-full grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
+        <UPopover>
+          <UButton
+            icon="i-mdi-menu"
+            icon-only
+            variant="soft"
+            description="Mostrar opciones"
+          />
+          <template #panel="{close}">
+            <div class="p-2">
+              <ExamplesModal @close="close" />
+            </div>
+          </template>
+        </UPopover>
+
         <div class="flex flex-row items-center space-x-1">
           <UButton
             to="/"
@@ -205,9 +215,8 @@ const loginEnabled = useRuntimeConfig().public.loginEnabled
           v-if="!settings.settings.value.hideOptions"
           class="flex flex-row justify-end items-center space-x-3"
         >
-          <LoginButton v-if="loginEnabled" />
+          <LoginButton />
           <AppButton
-            v-if="!loginEnabled"
             icon="i-mdi-github"
             href="https://github.com/es-js/esjs"
             description="GitHub"

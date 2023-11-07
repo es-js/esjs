@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {useEventBus} from '@vueuse/core'
-import {Pane, Splitpanes} from 'splitpanes'
+import { useEventBus } from '@vueuse/core'
+import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import {computed, watch} from 'vue'
-import {useGrid} from 'vue-screen'
-import {useEditor} from '~/composables/app/useEditor'
-import {useSettings} from '~/composables/app/useSettings'
+import { computed, watch } from 'vue'
+import { useGrid } from 'vue-screen'
+import { useEditor } from '~/composables/app/useEditor'
+import { useSettings } from '~/composables/app/useSettings'
 import '~/styles/splitpanes.css'
 
 const grid = useGrid('tailwind')
@@ -17,15 +17,17 @@ const settings = useSettings().settings
 const editor = useEditor()
 
 const testsPaneSize = computed(() => {
-  if (settings.value.hideTests)
+  if (settings.value.hideTests) {
     return settings.value.layout === 'vertical' ? 10 : 5
+  }
 
   return 50
 })
 
 const testsPaneMinSize = computed(() => {
-  if (settings.value.hideTests)
+  if (settings.value.hideTests) {
     return settings.value.layout === 'vertical' ? 10 : 5
+  }
 
   return 20
 })
@@ -44,7 +46,7 @@ const availableLanguages = [
         editor.language.value = 'js'
       },
     },
-  ]
+  ],
 ]
 
 watch(

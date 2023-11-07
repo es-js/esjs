@@ -10,6 +10,7 @@ export class PreviewProxy {
     number,
     { resolve: (value: unknown) => void; reject: (reason?: any) => void }
   >
+
   handle_event: (e: any) => void
 
   constructor(iframe: HTMLIFrameElement, handlers: Record<string, Function>) {
@@ -18,7 +19,7 @@ export class PreviewProxy {
 
     this.pending_cmds = new Map()
 
-    this.handle_event = (e) => this.handle_repl_message(e)
+    this.handle_event = e => this.handle_repl_message(e)
     window.addEventListener('message', this.handle_event, false)
   }
 
@@ -55,13 +56,13 @@ export class PreviewProxy {
       }
     } else if (action !== 'cmd_error' && action !== 'cmd_ok') {
       console.error('command not found', id, cmd_data, [
-        ...this.pending_cmds.keys()
+        ...this.pending_cmds.keys(),
       ])
     }
   }
 
   handle_repl_message(event: any) {
-    if (event.source !== this.iframe.contentWindow) return
+    if (event.source !== this.iframe.contentWindow) { return }
 
     const { action, args } = event.data
 

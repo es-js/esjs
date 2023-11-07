@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {defineEmits} from 'vue'
-import {z} from 'zod'
-import {useEditor} from "~/composables/app/useEditor"
-import useAuth from "~/composables/useAuth"
-import useOctokit from "~/composables/useOctokit"
+import { defineEmits } from 'vue'
+import { z } from 'zod'
 import randomWords from 'random-spanish-words'
 import confetti from 'canvas-confetti'
+import { useEditor } from '~/composables/app/useEditor'
+import useAuth from '~/composables/useAuth'
+import useOctokit from '~/composables/useOctokit'
 
 const emit = defineEmits(['close'])
 
@@ -28,7 +28,7 @@ const projectUrl = ref('')
 const form = ref()
 
 const state = ref({
-  name: 'esjs-' + randomWords({exactly: 1, join: ''}) + '-app',
+  name: 'esjs-' + randomWords({ exactly: 1, join: '' }) + '-app',
   private: true,
 })
 
@@ -37,7 +37,7 @@ const schema = z.object({
     .min(3)
     .max(50)
     .refine(
-      async (name) => {
+      async(name) => {
         try {
           const repo = await octokit.rest.repos.get({
             owner: user.value?.user_metadata?.user_name,
@@ -49,7 +49,7 @@ const schema = z.object({
           return true
         }
       },
-      'Ya existe un repositorio con ese nombre'
+      'Ya existe un repositorio con ese nombre',
     ),
   private: z.boolean(),
 })
@@ -157,18 +157,18 @@ function confettis() {
       angle: 60,
       spread: 55,
       origin: { x: 0 },
-    });
+    })
     confetti({
       particleCount: 2,
       angle: 120,
       spread: 55,
       origin: { x: 1 },
-    });
+    })
 
     if (Date.now() < end) {
-      requestAnimationFrame(frame);
+      requestAnimationFrame(frame)
     }
-  }());
+  }())
 }
 </script>
 

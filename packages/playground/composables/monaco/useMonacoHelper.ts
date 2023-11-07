@@ -5,35 +5,34 @@ import {
   storageType,
   supportFunction,
   transpile,
-  variableLanguage
-} from "@es-js/core"
+  variableLanguage,
+} from '@es-js/core'
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
 import * as monaco from 'monaco-editor'
-import type {Options} from 'prettier'
+import type { Options } from 'prettier'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
-import {useEditor} from '~/composables/app/useEditor'
+import { useEditor } from '~/composables/app/useEditor'
 
 const esjsTokenizer: Record<string, any> = {
-    keywords: [
-        'romper', 'caso', 'capturar', 'clase', 'continuar', 'const',
-        'constructor', 'depurador', 'porDefecto', 'eliminar', 'hacer', 'sino',
-        'exportar', 'extiende', 'falso', 'finalmente', 'para', 'de', 'funcion',
-        'obtener', 'si', 'importar', 'en', 'instanciaDe', 'var', 'crear', 'nulo',
-        'retorno', 'establecer', 'super', 'elegir', 'simbolo', 'ambiente', 'lanzar', 'verdadero',
-        'intentar', 'tipoDe', 'indefinido', 'global', 'vacio', 'mientras', 'con', 'rendimiento',
-        'asincrono', 'esperar', 'de',
-    ],
+  keywords: [
+    'romper', 'caso', 'capturar', 'clase', 'continuar', 'const',
+    'constructor', 'depurador', 'porDefecto', 'eliminar', 'hacer', 'sino',
+    'exportar', 'extiende', 'falso', 'finalmente', 'para', 'de', 'funcion',
+    'obtener', 'si', 'importar', 'en', 'instanciaDe', 'var', 'crear', 'nulo',
+    'retorno', 'establecer', 'super', 'elegir', 'simbolo', 'ambiente', 'lanzar', 'verdadero',
+    'intentar', 'tipoDe', 'indefinido', 'global', 'vacio', 'mientras', 'con', 'rendimiento',
+    'asincrono', 'esperar', 'de',
+  ],
 }
 
 export const useMonacoHelper = () => {
   function defineThemes() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     monaco.editor.defineTheme('dark', darktheme)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
     // @ts-expect-error
     monaco.editor.defineTheme('light', lightTheme)
   }
@@ -47,8 +46,7 @@ export const useMonacoHelper = () => {
 
     const javascript: any = allLangs.find(({ id }) => id === 'javascript')
 
-    if (!javascript)
-      throw new Error('No se pudo encontrar el lenguaje de JavaScript')
+    if (!javascript) { throw new Error('No se pudo encontrar el lenguaje de JavaScript') }
 
     const { conf, language: jsLang } = await javascript.loader()
 
@@ -57,16 +55,12 @@ export const useMonacoHelper = () => {
       if (key === 'tokenizer') {
         for (const category in value) {
           const tokenDefs = value[category]
-          if (!jsLang.tokenizer.hasOwnProperty(category))
-            jsLang.tokenizer[category] = []
+          if (!jsLang.tokenizer.hasOwnProperty(category)) { jsLang.tokenizer[category] = [] }
 
-          if (Array.isArray(tokenDefs))
-            jsLang.tokenizer[category].unshift.apply(jsLang.tokenizer[category], tokenDefs)
+          if (Array.isArray(tokenDefs)) { jsLang.tokenizer[category].unshift.apply(jsLang.tokenizer[category], tokenDefs) }
         }
-      }
-      else if (Array.isArray(value)) {
-        if (!jsLang.hasOwnProperty(key))
-          jsLang[key] = []
+      } else if (Array.isArray(value)) {
+        if (!jsLang.hasOwnProperty(key)) { jsLang[key] = [] }
 
         jsLang[key].unshift.apply(jsLang[key], value)
       }
@@ -141,13 +135,11 @@ export const useMonacoHelper = () => {
       provideDocumentFormattingEdits: (model): monaco.languages.TextEdit[] => {
         let code = model.getValue()
 
-        if (useEditor().language.value === 'esjs')
-          code = transpile(code)
+        if (useEditor().language.value === 'esjs') { code = transpile(code) }
 
         let formattedCode = formatCode(code)
 
-        if (useEditor().language.value === 'esjs')
-          formattedCode = transpile(formattedCode, true)
+        if (useEditor().language.value === 'esjs') { formattedCode = transpile(formattedCode, true) }
 
         return [
           {
@@ -178,7 +170,7 @@ export const useMonacoHelper = () => {
   }
 
   function createRange(startLineNumber: number, startColumn: number, endLineNumber: number, endColumn: number) {
-      return new monaco.Range(startLineNumber, startColumn, endLineNumber, endColumn)
+    return new monaco.Range(startLineNumber, startColumn, endLineNumber, endColumn)
   }
 
   return {

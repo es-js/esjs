@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {useEditor} from "~/composables/app/useEditor"
-import {useLZShare} from "~/composables/app/useLZShare"
-import {usePlayground} from "~/composables/app/usePlayground"
-import {useSettings} from "~/composables/app/useSettings"
+import { useEditor } from '~/composables/app/useEditor'
+import { useLZShare } from '~/composables/app/useLZShare'
+import { usePlayground } from '~/composables/app/usePlayground'
+import { useSettings } from '~/composables/app/useSettings'
 
 const settings = useSettings()
 
@@ -12,10 +12,10 @@ const playground = usePlayground()
 
 const share = useLZShare()
 
-onBeforeMount(async () => {
+onBeforeMount(async() => {
   if (process.client) {
     share.setSettingsFromUrl()
-    await share.setCodeFromUrl()
+    await share.loadCodeFromUrl()
     editor.loading.value = false
   }
 })

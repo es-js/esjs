@@ -1,6 +1,5 @@
-export default function () {
+export default function() {
   const supabase = useSupabaseClient()
-
 
   async function login() {
     // Save current URL to redirect the user back to it after signing in.

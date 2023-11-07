@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import {createSandbox} from '@es-js/sandbox'
-import {useEventBus} from "@vueuse/core"
-import debounce from "lodash.debounce"
-import {onMounted, onUnmounted, watch} from 'vue'
-import {isDark} from "~/composables/app/dark"
-import {useEditor} from "~/composables/app/useEditor"
-import {useLZShare} from "~/composables/app/useLZShare"
-import {useSettings} from "~/composables/app/useSettings"
-import {PreviewProxy} from "~/utils/PreviewProxy"
+import { createSandbox } from '@es-js/sandbox'
+import { useEventBus } from '@vueuse/core'
+import debounce from 'lodash.debounce'
+import { onMounted, onUnmounted, watch } from 'vue'
+import { isDark } from '~/composables/app/dark'
+import { useEditor } from '~/composables/app/useEditor'
+import { useLZShare } from '~/composables/app/useLZShare'
+import { useSettings } from '~/composables/app/useSettings'
+import { PreviewProxy } from '~/utils/PreviewProxy'
 
 const MAIN_FILE = 'codigo.esjs'
 const MAIN_TESTS_FILE = 'pruebas.esjs'
 
 const editor = useEditor()
 
-const settings = useSettings();
+const settings = useSettings()
 
 const settingsStore = settings.settings
 
@@ -47,22 +47,22 @@ async function init() {
     ...(
       import.meta.env.VITE_SANDBOX_DEV === 'true'
         ? {
-          importMap: JSON.stringify({
-              'imports': {
-                "@es-js/terminal": "http://localhost:5174/src/main.ts",
-                "@es-js/prueba": "https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm",
-                "@es-js/tiza": "https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0",
-                "@es-js/sandbox": "http://localhost:5173/src/sandbox.ts",
-              }
-            }
-          ),
-          stylesheets: [
-            'http://localhost:5173/dist/style.css',
-          ],
-        }
+            importMap: JSON.stringify({
+              imports: {
+                '@es-js/terminal': 'http://localhost:5174/src/main.ts',
+                '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
+                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0',
+                '@es-js/sandbox': 'http://localhost:5173/src/sandbox.ts',
+              },
+            },
+            ),
+            stylesheets: [
+              'http://localhost:5173/dist/style.css',
+            ],
+          }
         : {
-          importMap: editor.importMap.value,
-        }
+            importMap: editor.importMap.value,
+          }
     ),
   })
 
@@ -70,7 +70,7 @@ async function init() {
     on_error: (error: any) => {
       if (error.value.line && error.value.column) {
         useEventBus(
-          error.value.filename === MAIN_TESTS_FILE ? 'editor_tests' : 'editor_code'
+          error.value.filename === MAIN_TESTS_FILE ? 'editor_tests' : 'editor_code',
         ).emit('decorate-error', {
           line: error.value.line,
           column: error.value.column,
@@ -169,8 +169,9 @@ watch(
 watch(
   [editor.code, editor.testsCode],
   () => {
-    if (!settingsStore.value.autoCompile)
+    if (!settingsStore.value.autoCompile) {
       return
+    }
 
     useEventBus('editor_code').emit('clear-decorations')
     useEventBus('editor_tests').emit('clear-decorations')

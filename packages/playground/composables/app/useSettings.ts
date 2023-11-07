@@ -1,4 +1,4 @@
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 
 const settings = ref({
   layout: 'horizontal',
@@ -80,8 +80,9 @@ export const useSettings = () => {
       terminal: preview.terminal || false,
     }
 
-    if (!preview.terminal && !preview.flowchart && !preview.html)
+    if (!preview.terminal && !preview.flowchart && !preview.html) {
       settings.value.preview.terminal = true
+    }
   }
 
   function setPreviewTab(previewTab: { console: boolean; flowchart: boolean; hidden: boolean }) {
@@ -91,8 +92,9 @@ export const useSettings = () => {
       hidden: !previewTab.console && !previewTab.flowchart,
     }
 
-    if (!previewTab.console && !previewTab.flowchart && !previewTab.hidden)
+    if (!previewTab.console && !previewTab.flowchart && !previewTab.hidden) {
       settings.value.previewTab.console = true
+    }
   }
 
   function setActivePreview(preview: 'terminal' | 'flowchart' | 'html') {
