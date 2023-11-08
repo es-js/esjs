@@ -120,7 +120,7 @@ class Tiza {
     const colorFondo = invertido ? frente : fondo
     const colorFrente = invertido ? fondo : frente
 
-    const output = (wrap ? '<span style="white-space: pre;' : '')
+    const output = (wrap ? '<span style="white-space: pre-wrap;' : '')
       + (colorFondo ? `background-color:${colorFondo};` : '')
       + (colorFrente ? `color:${colorFrente};` : '')
       + (opaco ? 'opacity:0.5;' : '')
