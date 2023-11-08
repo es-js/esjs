@@ -10,7 +10,7 @@ const settings = useSettings()
 </script>
 
 <template>
-  <div class="w-full px-2 bg-gray-50 dark:bg-gray-800 shadow dark:shadow-none z-10">
+  <div class="w-full px-2 bg-gray-50 dark:bg-gray-800 z-10 border-b border-gray-200 dark:border-gray-700">
     <div class="h-full grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
         <UPopover>
