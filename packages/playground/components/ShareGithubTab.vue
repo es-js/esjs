@@ -107,7 +107,7 @@ async function submit() {
           type: 'blob',
           content: `# ${state.value.name}
 
-Aplicación Web desarrollada en [EsJS](https://esjs.dev/).`,
+Aplicación Web desarrollada en [EsJS](https://es.js.org/).`,
         },
       ],
       base_tree: currentCommit.data.commit.tree.sha,

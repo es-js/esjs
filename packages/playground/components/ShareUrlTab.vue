@@ -25,7 +25,6 @@ const url = computed(() => {
       <input
         type="text"
         class="w-full px-3 py-2 text-sm text-gray-700 placeholder-gray-400 border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 dark:border-gray-700"
-        placeholder="https://esjs.dev"
         :value="url"
         readonly
       >

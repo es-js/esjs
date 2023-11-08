@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { transpile } from '@es-js/core'
-import { Ref, ref } from 'vue'
+import { ref } from 'vue'
 import { isDark } from '~/composables/app/dark'
 import { useEditor } from '~/composables/app/useEditor'
 
@@ -33,7 +33,7 @@ let monacoHelper: any = null
 
 let editorInstance: any = null
 
-const decorations: Ref<any> = ref([])
+const decorations = ref([])
 
 async function onLoad(instance) {
   editorInstance = instance

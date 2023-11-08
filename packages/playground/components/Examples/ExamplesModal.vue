@@ -63,6 +63,7 @@ async function loadItems(category: any) {
       icon="i-mdi-rocket-launch-outline"
       block
       variant="soft"
+      color="black"
       @click="openModal"
     />
 

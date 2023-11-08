@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { isDark } from '~/composables/app/dark'
 
 const props = defineProps({
   text: {
@@ -35,6 +36,18 @@ const props = defineProps({
 const emit = defineEmits(['click'])
 
 const isIconOnly = computed(() => props.iconOnly || !props.text)
+
+const color = computed(() => {
+  if (props.active) {
+    return 'blue'
+  }
+
+  if (!props.color) {
+    return 'gray'
+  }
+
+  return props.color
+})
 </script>
 
 <template>
@@ -46,7 +59,7 @@ const isIconOnly = computed(() => props.iconOnly || !props.text)
       :to="props.href"
       :target="props.href ? '_blank' : null"
       :aria-label="props.description"
-      :color="props.active ? 'blue' : (props.color || 'gray')"
+      :color="color"
       :icon="props.icon || null"
       :label="isIconOnly ? '' : (props.text || '')"
       :variant="props.variant || 'solid'"

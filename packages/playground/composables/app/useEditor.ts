@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue'
+import { ref } from 'vue'
 
 export const loading = ref(true)
 
@@ -32,13 +32,13 @@ asincrono funcion inicio() {
 inicio()
 `
 
-const code: Ref<string> = ref(INITIAL_CODE)
+const code = ref(INITIAL_CODE)
 
-const testsCode: Ref<string> = ref('')
+const testsCode = ref('')
 
-const language: Ref<'esjs' | 'js'> = ref('esjs')
+const language = ref('esjs')
 
-const importMap: Ref<string> = ref(JSON.stringify({
+const importMap = ref(JSON.stringify({
   imports: {
     '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.1.4-beta.1/dist/terminal.es.js',
     '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',

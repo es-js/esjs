@@ -4,7 +4,7 @@ EsJS es un lenguaje de programación con sintaxis en Español que compila a Java
 
 ## Documentación
 
-Para obtener más información sobre cómo utilizar EsJS, visita la sección de documentación en https://esjs.dev/.
+Para obtener más información sobre cómo utilizar EsJS, visita la sección de documentación en https://es.js.org/.
 
 ## Prueba en línea
 

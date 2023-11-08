@@ -16,5 +16,8 @@
     "bumpp": "^8.2.1"
   },
   "private": true,
-  "packageManager": "pnpm@8.6.1"
+  "packageManager": "pnpm@8.6.1",
+  "workspaces": [
+    "packages/*"
+  ]
 }

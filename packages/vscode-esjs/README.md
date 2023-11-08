@@ -8,7 +8,7 @@ Soporte para el lenguaje EsJS.
 
 EsJS es un lenguaje de programación con sintaxis en Español que compila a JavaScript. Esto permite a las personas hispanohablantes escribir código de manera más familiar y accesible, sin renunciar al poder y versatilidad de JavaScript.
 
-Más infomación en: https://esjs.dev.
+Más información en: https:/es.js.org/.
 
 ## Licencia
 

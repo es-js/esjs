@@ -134,8 +134,6 @@ export const useLZShare = () => {
     }
 
     try {
-      console.debug({ pathname })
-
       if (pathname.includes('/github/')) {
         const githubUrl = pathname.replace('/github/', '')
         return await getCodeFromGithub(githubUrl)
@@ -217,8 +215,6 @@ export const useLZShare = () => {
 
   async function loadCodeFromUrl() {
     const code = await getCodeFromUrl()
-
-    console.debug({ code })
 
     const testsCode = getTestsCodeFromUrl()
 
