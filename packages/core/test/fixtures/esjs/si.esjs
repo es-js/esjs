@@ -1,7 +1,7 @@
 const foo = 'bar'
 si ("bar" === foo) {
   retornar verdadero
-} osi ("foo" == foo) {
+} sino si ("foo" == foo) {
   retornar verdadero
 } sino {
   retornar falso

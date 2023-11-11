@@ -8,10 +8,17 @@ function invertMap(map: Map<string, string>) {
   return invertedMap
 }
 
+function getDictionary(reverse = false) {
+  if (reverse)
+    return invertMap(keywords)
+
+  return keywords
+}
+
 export function transpile(input: string, reverse = false) {
   let current = 0
   let output = ''
-  const dictionary = reverse ? invertMap(keywords) : keywords
+  const dictionary = getDictionary(reverse)
 
   function finishIdentifier() {
     let name = ''
@@ -58,6 +65,13 @@ export function transpile(input: string, reverse = false) {
   while (current < input.length) {
     const currentChar = input[current]
 
+    const { isComment, end } = checkComment(input, current)
+    if (isComment) {
+      output += input.slice(current, end + 1)
+      current = end + 1
+      continue
+    }
+
     if (isWhitespace(currentChar)) {
       output += currentChar
       current++
@@ -103,4 +117,26 @@ function isBracket(char: string) {
 
 function isSpecialCharacter(char: string) {
   return !isWhitespace(char) && !isAlpha(char) && !isTick(char) && !isBracket(char)
+}
+
+function checkComment(input: string, current: number) {
+  // Comprueba si estamos en un comentario de una línea
+  if (input[current] === '/' && input[current + 1] === '/') {
+    let end = current
+    while (end < input.length && input[end] !== '\n')
+      end++
+
+    return { isComment: true, end }
+  }
+
+  // Comprueba si estamos en un comentario de varias líneas
+  if (input[current] === '/' && input[current + 1] === '*') {
+    let end = current
+    while (end < input.length && !(input[end] === '*' && input[end + 1] === '/'))
+      end++
+
+    return { isComment: true, end }
+  }
+
+  return { isComment: false, end: current }
 }

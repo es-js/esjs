@@ -46,12 +46,21 @@ describe('transform', () => {
 })
 
 describe('particular fixture', () => {
+  const fixture = './fixtures/esjs/array.esjs'
+
   it('transforms esjs', () => {
-    const { esjsCode, jsCode } = readFixture('./fixtures/esjs/templateLiterals.esjs')
+    const { esjsCode, jsCode } = readFixture(fixture)
 
     const esjsCodeTranspiled = transpile(esjsCode)
 
     expect(esjsCodeTranspiled).toEqual(jsCode)
   })
-})
 
+  it ('transforms js to esjs', () => {
+    const { esjsCode, jsCode } = readFixture(fixture)
+
+    const transpiledCode = transpile(jsCode, true)
+
+    expect(transpiledCode).toEqual(esjsCode)
+  })
+})
