@@ -2,7 +2,9 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
   entries: [
-    'src/index',
+    './src/index',
+    './src/keywords',
+    './src/utils',
   ],
   clean: true,
   declaration: true,

@@ -13,8 +13,7 @@ import {
   stringMethods,
   supportFunction,
   variableLanguage,
-
-} from '@es-js/core'
+} from '@es-js/core/keywords'
 import { markdownTable } from 'markdown-table'
 
 if (!existsSync('dist'))

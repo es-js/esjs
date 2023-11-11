@@ -1,7 +1,7 @@
 import path from 'path'
 import type { ExtensionContext } from 'vscode'
 import * as vscode from 'vscode'
-import { arrayMethods, consoleMethods, keywordControl, mathMethods, numberMethods, stringMethods } from '@es-js/core'
+import { arrayMethods, consoleMethods, keywordControl, mathMethods, numberMethods, stringMethods } from '@es-js/core/keywords'
 import type { LanguageClientOptions, ServerOptions } from 'vscode-languageclient/node'
 import { LanguageClient, TransportKind } from 'vscode-languageclient/node'
 import { registerMethods } from './utils/register-methods-completion'

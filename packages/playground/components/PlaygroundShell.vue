@@ -36,5 +36,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <PlaygroundPanes class="absolute inset-0 w-full h-full" />
+  <ClientOnly>
+    <PlaygroundPanes class="absolute inset-0 w-full h-full" />
+  </ClientOnly>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createSandbox } from '@es-js/sandbox'
+import { createSandbox } from '@es-js/sandbox/render'
 import { useEventBus } from '@vueuse/core'
 import debounce from 'lodash.debounce'
 import { onMounted, onUnmounted, watch } from 'vue'
@@ -49,10 +49,10 @@ async function init() {
         ? {
             importMap: JSON.stringify({
               imports: {
-                '@es-js/terminal': 'http://localhost:5174/src/main.ts',
+                '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.1.4-beta.1/dist/terminal.es.js',
                 '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
-                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.0',
-                '@es-js/sandbox': 'http://localhost:5173/src/sandbox.ts',
+                '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.1-beta.1',
+                '@es-js/sandbox': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@0.0.5-alpha.9/+esm',
               },
             },
             ),

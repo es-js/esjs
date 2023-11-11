@@ -1,5 +1,5 @@
 import { transformSync } from '@babel/core'
-import { splitCodeImports } from '@es-js/core'
+import { splitCodeImports } from '@es-js/core/utils'
 import BabelPluginEsJS from '@es-js/babel-plugin-esjs'
 import type { Plugin } from 'vite'
 

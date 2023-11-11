@@ -1,13 +1,11 @@
 {
   "name": "@es-js/compiler",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "watch": "concurrently \"tsc --watch\" \"vite build --watch\"",
+    "build": "unbuild",
     "test": "vitest",
-    "test:run": "vitest run",
-    "publish": "pnpm build && pnpm publish"
+    "test:run": "vitest run"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.2",
@@ -16,31 +14,41 @@
     "@types/escodegen": "^0.0.7",
     "@types/prettier": "^2.7.3",
     "@vue/compiler-sfc": "^3.3.4",
-    "concurrently": "^8.2.0",
     "escodegen": "^2.1.0",
     "eslint": "8.22.0",
     "espree": "^9.6.1",
     "prettier": "^2.8.8",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.7",
-    "vitest": "^0.32.4"
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6"
   },
   "type": "module",
-  "main": "./dist/compiler.mjs",
-  "module": "./dist/compiler.js",
-  "types": "./types/main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/compiler.js",
-      "require": "./dist/compiler.mjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
     "./orchestrator": {
-      "import": "./dist/orchestrator.js",
-      "require": "./dist/orchestrator.mjs"
+      "types": "./dist/orchestrator.d.ts",
+      "import": "./dist/orchestrator.mjs",
+      "require": "./dist/orchestrator.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts",
+        "./dist/orchestrator.d.ts"
+      ]
     }
   },
   "files": [
-    "/dist",
-    "/types"
+    "/dist"
   ]
 }

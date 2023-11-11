@@ -9,7 +9,7 @@ import {
   supportFunction,
   variableLanguage,
   vueRef,
-} from '@es-js/core'
+} from '@es-js/core/keywords'
 
 function includeKeywords(k) {
   return `\\b(${Array.from(k.keys()).join('|')})\\b`

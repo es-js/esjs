@@ -2,11 +2,8 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  plugins: [
-    dts(),
-  ],
+  plugins: [dts()],
   build: {
-    // minify: false,
     rollupOptions: {
       external: [
         '@es-js/terminal',
@@ -16,8 +13,8 @@ export default defineConfig({
     },
     lib: {
       entry: {
-        main: './src/main.ts',
-        sandbox: './src/sandbox.ts',
+        index: './src/index.ts',
+        render: './src/render.ts',
       },
       name: 'EsJS Sandbox',
       formats: ['es', 'cjs'],

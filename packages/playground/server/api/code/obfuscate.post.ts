@@ -1,5 +1,5 @@
 import { prepareCode } from '@es-js/compiler'
-import { splitCodeImports } from '@es-js/core'
+import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
 import javascriptObfuscator from 'javascript-obfuscator'
 import { z } from 'zod'

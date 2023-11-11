@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createSandbox } from '@es-js/sandbox'
+import { createSandbox } from '@es-js/sandbox/render'
 import { onMounted, ref } from 'vue'
 
 const props = defineProps({

@@ -43,7 +43,7 @@ const importMap = ref(JSON.stringify({
     '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@1.1.4-beta.1/dist/terminal.es.js',
     '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@0.0.8/+esm',
     '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@1.0.1-beta.1',
-    '@es-js/sandbox': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@0.0.1/sandbox/+esm',
+    '@es-js/sandbox': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@0.0.5-alpha.9/+esm',
   },
 }))
 

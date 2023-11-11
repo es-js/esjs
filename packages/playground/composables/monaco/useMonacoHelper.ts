@@ -4,9 +4,9 @@ import {
   metaVariable,
   storageType,
   supportFunction,
-  transpile,
   variableLanguage,
-} from '@es-js/core'
+} from '@es-js/core/keywords'
+import { transpile } from '@es-js/core'
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
 import * as monaco from 'monaco-editor'
 import type { Options } from 'prettier'

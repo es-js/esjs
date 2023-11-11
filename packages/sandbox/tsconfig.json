@@ -15,7 +15,8 @@
     "declarationDir": "./types",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "allowJs": true
   },
   "include": ["./src"]
 }
