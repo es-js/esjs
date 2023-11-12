@@ -2,7 +2,7 @@ import { format } from 'prettier'
 import { describe, expect, it } from 'vitest'
 
 describe('should', () => {
-  it('format', async () => {
+  it('formats function', async () => {
     expect(
       await format(`
 funcion inicio() {
@@ -26,7 +26,7 @@ retornar "Hola mundo!"
 `)
   })
 
-  it('format2', async () => {
+  it('formats function with return', async () => {
     expect(
       await format(`function inicio() {
   if (Math.random() < 0.5) {
@@ -41,6 +41,32 @@ retornar "Hola mundo!"
         parser: 'esjs',
       }),
     ).toBe(`funcion inicio() {
+  si (Mate.aleatorio() < 0.5) {
+    retornar "Hola mundo";
+  } sino {
+    retornar "Hola mundo!";
+  }
+}
+`)
+  })
+
+  it('formats code with comments', async () => {
+    expect(
+      await format(`
+funcion inicio() {
+// Comentario
+si (Mate.aleatorio() < 0.5) {
+retornar "Hola mundo"
+} sino {
+retornar "Hola mundo!"
+}
+}`, {
+        plugins: ['./dist/index.cjs'],
+        filepath: 'prueba/codigo.esjs',
+        parser: 'esjs',
+      }),
+    ).toBe(`funcion inicio() {
+  // Comentario
   si (Mate.aleatorio() < 0.5) {
     retornar "Hola mundo";
   } sino {
