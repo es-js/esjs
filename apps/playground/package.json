@@ -12,7 +12,7 @@
   "devDependencies": {
     "@amoutonbrady/lz-string": "^0.1.0",
     "@es-js/compiler": "^0.0.1",
-    "@es-js/core": "0.0.19-alpha.4",
+    "@es-js/core": "0.0.19-alpha.3",
     "@es-js/language-tools": "^0.0.14",
     "@es-js/sandbox": "0.0.5-alpha.9",
     "@iconify-json/mdi": "^1.1.54",
