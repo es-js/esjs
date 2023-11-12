@@ -6,7 +6,8 @@ const DEFAULT_IMPORTS_MAP = {
     '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/terminal.es.js',
     '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@latest/+esm',
     '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@latest',
-    '@es-js/sandbox': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@latest/sandbox/+esm',
+    '@es-js/sandbox': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@latest/+esm',
+    '@es-js/sandbox/render': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@latest/render/+esm',
   },
 }
 
