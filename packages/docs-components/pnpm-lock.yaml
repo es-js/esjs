@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^0.35.3
     version: 0.35.3(eslint@8.22.0)(typescript@4.9.5)
   '@es-js/sandbox':
-    specifier: ^0.0.1-alpha.27
-    version: 0.0.1-alpha.27
+    specifier: ^0.0.5-alpha.10
+    version: link:../sandbox
   '@iconify/vue':
     specifier: ^4.1.1
     version: 4.1.1(vue@3.3.4)
@@ -385,10 +385,6 @@ packages:
       search-insights: 2.10.0
     transitivePeerDependencies:
       - '@algolia/client-search'
-    dev: true
-
-  /@es-js/sandbox@0.0.1-alpha.27:
-    resolution: {integrity: sha512-wDu4yHA00WHyLcVXqQSzupu81+/gjGOfegs8UX0qTazyIfmqepZN6cZquz4EqqDbdBva+y+vuxNtHcCT1iNIVw==}
     dev: true
 
   /@esbuild/android-arm64@0.18.20:

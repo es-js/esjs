@@ -1,7 +1,7 @@
 import { transpile } from '@es-js/core'
 import type { AstPath, ParserOptions } from 'prettier'
-import * as prettierPluginBabel from 'prettier/plugins/babel'
 import { format } from 'prettier'
+import * as prettierPluginBabel from 'prettier/plugins/babel'
 
 const babelParser = prettierPluginBabel.parsers.babel
 
@@ -25,7 +25,6 @@ const EsJSPlugin = {
   parsers: {
     esjs: {
       ...babelParser,
-
       preprocess: (text: string, options: ParserOptions<any>) => {
         text = text.trim()
 
@@ -49,9 +48,19 @@ const EsJSPlugin = {
   printers: {
     esjs: {
       print: async (path: AstPath<any>, options: ParserOptions<any>, print: any) => {
+        // Taken from: https://github.com/ony3000/prettier-plugin-classnames/blob/master/src/packages/v3-plugin/printers.ts
+        // @ts-ignore
+        const comments = options[Symbol.for('comments')];
+        if (comments && Array.isArray(comments)) {
+          comments.forEach((comment: any) => {
+            comment.printed = true;
+          });
+        }
+
         const js = options.originalText
 
         const jsFormatted = await format(js, {
+          ...options,
           parser: 'babel',
         })
 

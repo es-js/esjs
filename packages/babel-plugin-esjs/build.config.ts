@@ -4,11 +4,9 @@ export default defineBuildConfig({
   entries: [
     'src/index',
   ],
-  clean: false,
+  clean: true,
   declaration: true,
-  externals: [],
   rollup: {
     emitCJS: true,
-    inlineDependencies: true,
   },
 })
