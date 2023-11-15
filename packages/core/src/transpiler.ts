@@ -22,7 +22,7 @@ export function transpile(input: string, reverse = false) {
 
   function finishIdentifier() {
     let name = ''
-    while (!isWhitespace(input[current]) && !isSpecialCharacter(input[current]) && !isBracket(input[current]) && !isTick(input[current])) {
+    while (!isWhitespace(input[current]) && !isSpecialCharacter(input[current]) && !isBracket(input[current]) && !isTick(input[current]) && !isUndefined(input[current])) {
       name += input[current]
       current++
     }
@@ -117,6 +117,10 @@ function isBracket(char: string) {
 
 function isSpecialCharacter(char: string) {
   return !isWhitespace(char) && !isAlpha(char) && !isTick(char) && !isBracket(char)
+}
+
+function isUndefined(value: any) {
+  return typeof value === 'undefined'
 }
 
 function checkComment(input: string, current: number) {

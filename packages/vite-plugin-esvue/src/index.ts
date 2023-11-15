@@ -1,6 +1,5 @@
-import * as babel from '@babel/core'
+import { transpile } from '@es-js/core'
 import { splitCodeImports, splitScriptTemplate } from '@es-js/core/utils'
-import BabelPluginEsJS from '@es-js/babel-plugin-esjs'
 import type { Plugin } from 'vite'
 
 export default function EsVue(): Plugin {
@@ -13,26 +12,15 @@ export default function EsVue(): Plugin {
 
       const { script, template } = splitScriptTemplate(raw)
 
-      const result = babel.transformSync(script, {
-        babelrc: false,
-        ast: true,
-        plugins: [
-          BabelPluginEsJS(),
-        ],
-        sourceFileName: id,
-        configFile: false,
-      })
+      const transpiled = transpile(script)
 
-      if (!result)
-        throw new Error('Cant transpile')
-
-      const scriptTranspiled = splitCodeImports(String(result.code))
+      const { imports, codeWithoutImports } = splitCodeImports(transpiled)
 
       return `
 <script setup lang="ts">
-${scriptTranspiled.imports}
+${imports}
 
-${scriptTranspiled.codeWithoutImports}
+${codeWithoutImports}
 </script>
 ${template}`
     },

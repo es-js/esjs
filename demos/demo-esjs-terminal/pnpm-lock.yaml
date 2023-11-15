@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
-  '@es-js/core':
-    specifier: workspace:*
-    version: link:../../packages/core
   '@es-js/terminal':
     specifier: workspace:^
     version: link:../../packages/terminal
@@ -15,8 +12,8 @@ devDependencies:
     specifier: workspace:^
     version: link:../../packages/vite-plugin-esjs
   vite:
-    specifier: ^4.4.7
-    version: 4.4.7
+    specifier: ^4.5.0
+    version: 4.5.0
 
 packages:
 
@@ -288,8 +285,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /vite@4.4.7:
-    resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
+  /vite@4.5.0:
+    resolution: {integrity: sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:

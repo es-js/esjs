@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^0.17.2
     version: 0.17.2
   '@es-js/core':
-    specifier: 0.0.19-alpha.2
-    version: 0.0.19-alpha.2
+    specifier: workspace:*
+    version: link:../core
   '@types/node':
     specifier: ^18.17.1
     version: 18.17.1
@@ -209,10 +209,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
-    dev: true
-
-  /@es-js/core@0.0.19-alpha.2:
-    resolution: {integrity: sha512-ItMI90LK5IeisUMiodmuSWFlWdptxQ6vq8oijK1p/pNx1OHSUy6Ind6gc0iBWPBoP1D5sNjM1rNWhBaQSn3OOw==}
     dev: true
 
   /@esbuild/android-arm64@0.17.19:

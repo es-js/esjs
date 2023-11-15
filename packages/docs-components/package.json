@@ -1,6 +1,6 @@
 {
   "name": "@es-js/docs-components",
-  "version": "1.0.0-beta.7",
+  "version": "0.0.14",
   "scripts": {
     "build": "rimraf dist && vue-tsc && vite build",
     "docs:dev": "vitepress dev docs",
@@ -15,7 +15,7 @@
   "devDependencies": {
     "@amoutonbrady/lz-string": "^0.1.0",
     "@antfu/eslint-config": "^0.35.3",
-    "@es-js/sandbox": "^0.0.5-alpha.10",
+    "@es-js/sandbox": "workspace:*",
     "@iconify/vue": "^4.1.1",
     "@types/node": "^18.17.1",
     "@vitejs/plugin-vue": "^2.3.4",

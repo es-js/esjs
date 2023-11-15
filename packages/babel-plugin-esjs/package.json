@@ -1,11 +1,15 @@
 {
   "name": "@es-js/babel-plugin-esjs",
-  "version": "0.0.14-alpha.2",
+  "version": "0.0.14",
   "description": "Plugin de Babel para EsJS",
   "scripts": {
     "build": "unbuild"
   },
-  "keywords": ["esjs", "babel", "plugin"],
+  "keywords": [
+    "esjs",
+    "babel",
+    "plugin"
+  ],
   "license": "ISC",
   "dependencies": {
     "@babel/parser": "^7.23.3",

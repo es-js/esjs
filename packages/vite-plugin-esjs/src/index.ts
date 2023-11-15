@@ -1,6 +1,5 @@
-import { transformSync } from '@babel/core'
+import { transpile } from '@es-js/core'
 import { splitCodeImports } from '@es-js/core/utils'
-import BabelPluginEsJS from '@es-js/babel-plugin-esjs'
 import type { Plugin } from 'vite'
 
 export default function EsJS(options = {}): Plugin {
@@ -11,24 +10,13 @@ export default function EsJS(options = {}): Plugin {
       if (!/\.esjs$/.test(id))
         return
 
-      const result = transformSync(raw, {
-        babelrc: false,
-        ast: true,
-        plugins: [
-          BabelPluginEsJS(),
-        ],
-        sourceFileName: id,
-        configFile: false,
-      })
+      const transpiled = transpile(raw)
 
-      if (!result)
-        throw new Error('Cant transpile')
+      const { imports, codeWithoutImports } = splitCodeImports(transpiled)
 
-      const scriptTranspiled = splitCodeImports(String(result.code))
+      return `${imports}
 
-      return `${scriptTranspiled.imports}
-
-${scriptTranspiled.codeWithoutImports}`
+${codeWithoutImports}`
     },
   }
 }

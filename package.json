@@ -1,19 +1,27 @@
 {
   "name": "esjs",
   "version": "0.0.0",
-  "description": "",
+  "description": "JavaScript con sintaxis en Español",
   "main": "index.js",
   "scripts": {
     "build": "pnpm --stream -r run build",
-    "release": "bumpp packages/**/package.json",
+    "release": "/bin/bash ./scripts/release.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sherif": "pnpm dlx sherif@latest --fix"
   },
-  "keywords": [],
+  "keywords": [
+    "esjs",
+    "español",
+    "javascript"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "bumpp": "^8.2.1"
+    "bumpp": "^9.2.0",
+    "consola": "^3.2.3",
+    "globby": "^14.0.0",
+    "jiti": "^1.21.0",
+    "pathe": "^1.1.1"
   },
   "private": true,
   "packageManager": "pnpm@8.6.1",

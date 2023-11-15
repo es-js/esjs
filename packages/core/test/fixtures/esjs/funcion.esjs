@@ -6,5 +6,9 @@
  * @returns true
  */
 funcion inicio() {
-retornar verdadero
+	retornar verdadero
 }
+
+const app = crear Fecha()
+
+exportar porDefecto app

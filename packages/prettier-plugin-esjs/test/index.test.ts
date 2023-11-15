@@ -75,4 +75,21 @@ retornar "Hola mundo!"
 }
 `)
   })
+
+  it('formats code with export default', async () => {
+    expect(
+      await format(`
+const app = crear Fecha()
+
+exportar   porDefecto   app
+`, {
+        plugins: ['./dist/index.cjs'],
+        filepath: 'prueba/codigo.esjs',
+        parser: 'esjs',
+      }),
+    ).toBe(`const app = crear Fecha();
+
+exportar porDefecto app;
+`)
+  })
 })

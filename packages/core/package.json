@@ -1,6 +1,6 @@
 {
   "name": "@es-js/core",
-  "version": "0.0.19-alpha.3",
+  "version": "0.0.19",
   "type": "module",
   "scripts": {
     "build": "unbuild",

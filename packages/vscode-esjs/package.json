@@ -2,7 +2,7 @@
   "publisher": "enzonotario",
   "name": "vscode-esjs",
   "displayName": "EsJS (JavaScript con sintaxis en Español)",
-  "version": "0.0.13-alpha.0",
+  "version": "0.0.13",
   "packageManager": "pnpm@7.8.0",
   "description": "Sintaxis y configuraciones para EsJS",
   "author": "Enzo Notario <hi@enzonotario.me>",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
     "@antfu/ni": "^0.17.2",
-    "@es-js/core": "0.0.19-alpha.2",
+    "@es-js/core": "workspace:*",
     "@types/node": "^18.17.1",
     "@types/vscode": "^1.80.0",
     "@vscode/test-electron": "^2.3.3",

@@ -6,5 +6,9 @@
  * @returns true
  */
 function inicio() {
-return true
+	return true
 }
+
+const app = new Date()
+
+export default app
