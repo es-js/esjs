@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   modules: [
-    '@nuxthq/ui',
+    '@nuxt/ui',
     '@vueuse/nuxt',
     'nuxt-monaco-editor',
     '@nuxtjs/robots',

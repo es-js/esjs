@@ -5,7 +5,7 @@ set -xe
 # Build all once to ensure things are nice
 pnpm build
 
-# Release packages
+# Bump all packages
 for PKG in ../packages/* ; do
   pushd $PKG
   echo "⚡ Bumping $PKG"
@@ -16,8 +16,10 @@ for PKG in ../packages/* ; do
   popd > /dev/null
 done
 
+# Install all dependencies
 pnpm -r install
 
+# Build all again
 pnpm build
 
 # Release packages
@@ -25,11 +27,10 @@ for PKG in ../packages/* ; do
   pushd $PKG
   echo "⚡ Publishing $PKG"
 
-  # Temporarily disable errexit for this command
+  # Temporarily disable errexit for publish
   set +e
 
   # Publish
-
   pnpm publish --no-git-checks --force
 
   # Re-enable errexit

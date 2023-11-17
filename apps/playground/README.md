@@ -1,6 +1,8 @@
-# Nuxt 3 Minimal Starter
+# Editor EsJS
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Editor de código para el lenguaje de programación EsJS.
+
+> https://editor.esjs.dev/
 
 ## Setup
 
