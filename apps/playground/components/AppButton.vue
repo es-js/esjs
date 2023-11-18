@@ -67,7 +67,7 @@ const color = computed(() => {
       :ui="(props.variant === 'soft' && props.color === 'teal' ?
         {
           variant: {
-            soft: 'bg-teal-100 hover:bg-teal-200 disabled:bg-teal-50 dark:bg-teal-900 dark:hover:bg-teal-800 dark:disabled:bg-teal-950 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-500 dark:focus-visible:ring-teal-400',
+            soft: 'bg-teal-100 hover:bg-teal-200 disabled:bg-teal-50 dark:bg-teal-900 dark:hover:bg-teal-800 dark:disabled:bg-teal-950 text-teal-700 dark:text-teal-300 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-500 dark:focus-visible:ring-teal-400',
           }
         } : {}
       )"

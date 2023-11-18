@@ -13,25 +13,19 @@ const playground = usePlayground()
 const share = useLZShare()
 
 onBeforeMount(async() => {
-  if (process.client) {
-    share.setSettingsFromUrl()
-    await share.loadCodeFromUrl()
-    editor.loading.value = false
-  }
+  share.setSettingsFromUrl()
+  await share.loadCodeFromUrl()
+  editor.loading.value = false
 })
 
 onMounted(() => {
-  if (process.client) {
-    window.addEventListener('beforeunload', playground.handleWindowClose)
-    window.addEventListener('keyup', playground.handleWindowKeyup)
-  }
+  window.addEventListener('beforeunload', playground.handleWindowClose)
+  window.addEventListener('keyup', playground.handleWindowKeyup)
 })
 
 onBeforeUnmount(() => {
-  if (process.client) {
-    window.removeEventListener('beforeunload', playground.handleWindowClose)
-    window.removeEventListener('keyup', playground.handleWindowKeyup)
-  }
+  window.removeEventListener('beforeunload', playground.handleWindowClose)
+  window.removeEventListener('keyup', playground.handleWindowKeyup)
 })
 </script>
 

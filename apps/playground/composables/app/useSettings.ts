@@ -4,6 +4,7 @@ const settings = ref({
   layout: 'horizontal',
   hideOptions: false,
   hideEditor: false,
+  hideOutput: false,
   hidePreview: false,
   hideConsole: false,
   hideTests: true,
@@ -41,6 +42,10 @@ export const useSettings = () => {
 
   function setHideEditor(hideEditor: boolean) {
     settings.value.hideEditor = hideEditor
+  }
+
+  function setHideOutput(hideOutput: boolean) {
+    settings.value.hideOutput = hideOutput
   }
 
   function setHidePreview(hidePreview: boolean) {
@@ -116,6 +121,7 @@ export const useSettings = () => {
     setLayout,
     setHideOptions,
     setHideEditor,
+    setHideOutput,
     setHidePreview,
     setHideConsole,
     setHideTests,

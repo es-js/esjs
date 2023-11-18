@@ -179,6 +179,7 @@ watch(
       renderWhitespace: 'all',
       roundedSelection: true,
       glyphMargin: true,
+      lineNumbersMinChars: 2,
       ...props.options,
     }"
     lang="javascript"

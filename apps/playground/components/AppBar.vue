@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useGrid } from 'vue-screen'
+import { computed } from 'vue'
 import ExamplesModal from '~/components/Examples/ExamplesModal.vue'
 import { isDark, toggleDark } from '~/composables/app/dark'
 import { useLZShare } from '~/composables/app/useLZShare'
@@ -7,6 +9,10 @@ import { useSettings } from '~/composables/app/useSettings'
 const share = useLZShare()
 
 const settings = useSettings()
+
+const grid = useGrid('tailwind')
+
+const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
 </script>
 
 <template>
@@ -18,6 +24,7 @@ const settings = useSettings()
             icon="i-mdi-menu"
             icon-only
             variant="soft"
+            color="black"
             description="Mostrar opciones"
           />
           <template #panel="{close}">
@@ -32,6 +39,7 @@ const settings = useSettings()
             to="/"
             variant="link"
             :padded="false"
+            class="w-7"
           >
             <img
               src="/favicon.ico"
@@ -39,8 +47,8 @@ const settings = useSettings()
               class="w-7 h-7 rounded"
             >
           </UButton>
-          <span class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
-          <span class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
+          <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
+          <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
         </div>
 
         <AppButton
@@ -163,10 +171,10 @@ const settings = useSettings()
 
                 <AppButton
                   icon="i-mdi-eye"
-                  :active="!settings.settings.value.hidePreview"
+                  :active="!settings.settings.value.hideOutput"
                   description="Mostrar vista previa"
                   variant="outline"
-                  @click="settings.setHidePreview(!settings.settings.value.hidePreview)"
+                  @click="settings.setHideOutput(!settings.settings.value.hideOutput)"
                 />
 
                 <AppSeparator />
