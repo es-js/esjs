@@ -39,13 +39,11 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
 
   <body class="w-full h-full m-0 p-0 bg-white dark:bg-[#121212]">
     <div class="w-full h-full flex flex-col">
-      <div id="preview-container" class="flex-grow">
-        <div class="relative flex flex-1">
-          <div id="app" class="w-full min-h-full"></div>
-        </div>
+      <div id="preview-container" class="relative flex flex-1">
+        <div id="app" class="absolute inset-0 w-full min-h-full overflow-auto"></div>
       </div>
 
-      <div id="console-container" class="flex-grow">
+      <div id="console-container" class="flex flex-1">
         <div id="eruda-container"></div>
       </div>
     </div>

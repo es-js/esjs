@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .h-eruda-tab {
-  height: calc(28px + 0.5rem) !important;
+  height: 27px !important;
 }
 
 .eruda-logs-container {

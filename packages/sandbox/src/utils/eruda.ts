@@ -83,7 +83,7 @@ export function openEruda() {
 
   if (consoleElement) {
     consoleElement.classList.remove('h-eruda-tab')
-    consoleElement.classList.add('flex-grow')
+    consoleElement.classList.add('flex-1')
   }
 
   const lunaTabSliderElement: HTMLElement | null = document.querySelector('.luna-tab-slider')
@@ -99,7 +99,7 @@ export function hideEruda() {
 
   const consoleElement = document.getElementById('console-container')
   if (consoleElement) {
-    consoleElement.classList.remove('flex-grow')
+    consoleElement.classList.remove('flex-1')
     consoleElement.classList.add('h-eruda-tab')
   }
 
@@ -123,7 +123,7 @@ function openConsole() {
   const consoleElement = document.getElementById('console-container')
   if (consoleElement) {
     consoleElement.classList.remove('h-eruda-tab')
-    consoleElement.classList.add('flex-grow')
+    consoleElement.classList.add('flex-1')
   }
 }
 
@@ -137,7 +137,7 @@ function openFlowchart() {
   const consoleElement = document.getElementById('console-container')
   if (consoleElement) {
     consoleElement.classList.remove('h-eruda-tab')
-    consoleElement.classList.add('flex-grow')
+    consoleElement.classList.add('flex-1')
   }
 }
 

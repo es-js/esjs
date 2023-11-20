@@ -14,7 +14,7 @@
     "@es-js/compiler": "^0.0.3",
     "@es-js/core": "0.0.19-beta.2",
     "@es-js/language-tools": "^0.0.15",
-    "@es-js/sandbox": "0.0.5",
+    "@es-js/sandbox": "0.0.6",
     "@iconify-json/mdi": "^1.1.54",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
