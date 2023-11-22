@@ -18,16 +18,21 @@ const editor = useEditor()
 
 const wrapper = ref<HTMLElement | null>(null)
 
+const wrapperHeight = computed(() => wrapper.value?.clientHeight ?? 0)
+
 const testsToolbarHeight = 34
 
-const testsPaneSize = computed(() => {
-  const wrapperHeightPx = wrapper.value?.clientHeight ?? 0
-
+const testsPaneSize = ref(50)
+function calculateTestsPaneSize() {
   if (settings.value.hideTests) {
-    return Math.round((testsToolbarHeight / wrapperHeightPx) * 100)
+    testsPaneSize.value = Math.round((testsToolbarHeight / wrapperHeight.value) * 100)
+  } else {
+    testsPaneSize.value = 50
   }
+}
 
-  return 50
+watchEffect(() => {
+  calculateTestsPaneSize()
 })
 </script>
 
@@ -89,7 +94,7 @@ const testsPaneSize = computed(() => {
         </Pane>
 
         <Pane
-          :key="settings.hideTests"
+          :key="`${settings.hideTests}-${settings.layout}`"
           :size="testsPaneSize"
           :min-size="settings.hideTests ? testsPaneSize : 20"
           :max-size="settings.hideTests ? testsPaneSize : 80"
