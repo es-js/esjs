@@ -1,4 +1,4 @@
-import { prepareCode } from '@es-js/compiler'
+import { prepareCode } from '@es-js/sandbox/parser'
 import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
 import javascriptObfuscator from 'javascript-obfuscator'

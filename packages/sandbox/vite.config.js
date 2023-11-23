@@ -13,8 +13,9 @@ export default defineConfig({
     },
     lib: {
       entry: {
-        index: './src/index.ts',
-        render: './src/render.ts',
+        render: './src/render/index.ts',
+        parser: './src/parser/index.ts',
+        runtime: './src/runtime/index.ts',
       },
       name: 'EsJS Sandbox',
       formats: ['es', 'cjs'],

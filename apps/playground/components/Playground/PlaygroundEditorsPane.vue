@@ -40,6 +40,7 @@ watchEffect(() => {
   <div ref="wrapper" class="relative h-full">
     <div class="absolute inset-0">
       <Splitpanes
+        :key="testsPaneSize"
         horizontal
         class="default-theme"
       >

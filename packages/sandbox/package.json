@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "scripts": {
     "dev": "vite",
     "build": "vite build && pnpm tailwind:build",
@@ -11,40 +11,50 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
+    "@es-js/core": "workspace:^",
+    "@types/escodegen": "^0.0.7",
+    "@types/prettier": "^2.7.3",
+    "@vue/compiler-sfc": "^3.3.4",
     "autoprefixer": "^10.4.16",
     "eruda": "^3.0.1",
+    "escodegen": "^2.1.0",
     "eslint": "8.22.0",
+    "espree": "^9.6.1",
     "postcss": "^8.4.31",
+    "prettier": "^2.8.8",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
     "vite-plugin-dts": "^1.7.3"
   },
-  "peerDependencies": {
-    "@es-js/compiler": "workspace:^"
-  },
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
     "./render": {
-      "types": "./dist/render.d.ts",
+      "types": "./dist/render/index.d.ts",
       "import": "./dist/render.js",
       "require": "./dist/render.cjs"
+    },
+    "./parser": {
+      "types": "./dist/parser/index.d.ts",
+      "import": "./dist/parser.js",
+      "require": "./dist/parser.cjs"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "import": "./dist/runtime.js",
+      "require": "./dist/runtime.cjs"
     }
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/render.cjs",
+  "module": "./dist/render.js",
+  "types": "./dist/render/index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
         "./dist/*",
-        "./dist/index.d.ts",
-        "./dist/render.d.ts"
+        "./dist/render/index.d.ts",
+        "./dist/parser/index.d.ts",
+        "./dist/runtime/index.d.ts"
       ]
     }
   },

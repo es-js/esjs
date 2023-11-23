@@ -1,5 +1,6 @@
-import { compileModulesForPreview, prepareCodeAndTestsForPlayground } from '@es-js/compiler'
-import { MAIN_FILE, MAIN_TESTS_FILE, OrchestratorFile, orchestrator } from '@es-js/compiler/orchestrator'
+import { MAIN_FILE, MAIN_TESTS_FILE, OrchestratorFile, orchestrator } from '../compiler/orchestrator'
+import { compileModulesForPreview } from '../compiler'
+import { prepareCodeAndTestsForPlayground } from '../parser'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {

@@ -4,8 +4,8 @@ import { transpile } from '@es-js/core'
 import { splitCodeImports } from '@es-js/core/utils'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
-import { MAIN_FILE, MAIN_TESTS_FILE } from './orchestrator'
-import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from './constants'
+import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
+import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
 
 let start
 let end

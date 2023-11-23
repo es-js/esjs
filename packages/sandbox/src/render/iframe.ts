@@ -1,4 +1,4 @@
-import type { EjecutarOptions } from './ejecutar'
+import type { EjecutarOptions } from '../runtime/ejecutar'
 
 export function createIframe(parentElement: HTMLElement, options: EjecutarOptions): HTMLIFrameElement {
   const iframe = document.createElement('iframe')
@@ -51,7 +51,7 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
 
   <script type="module">
     import { usarTerminal } from '@es-js/terminal'
-    import { setupSandbox } from '@es-js/sandbox'
+    import { setupSandbox } from '@es-js/sandbox/runtime'
 
     setupSandbox({
       ${Object.entries(options).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join(',\n')},

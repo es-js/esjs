@@ -8,7 +8,7 @@ import {
   prepareCodeAndTestsForPlayground,
   removeTopLevelAwaits,
   unifyImports,
-} from '../src/utils'
+} from '../src/parser'
 
 describe('utils', () => {
   it('unify duplicated imports', () => {
