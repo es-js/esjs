@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
-import PlaygroundDesktopView from '~/components/Playground/PlaygroundDesktopView.vue'
-import PlaygroundMobileView from '~/components/Playground/PlaygroundMobileView.vue'
+import PlaygroundDesktopView from '~/components/playground/PlaygroundDesktopView.vue'
+import PlaygroundMobileView from '~/components/playground/PlaygroundMobileView.vue'
 import { useSettings } from '~/composables/app/useSettings'
 
 const grid = useGrid('tailwind')

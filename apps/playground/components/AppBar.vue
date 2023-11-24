@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useGrid } from 'vue-screen'
 import { computed } from 'vue'
-import ExamplesModal from '~/components/Examples/ExamplesModal.vue'
+import ExamplesModal from '~/components/examples/ExamplesModal.vue'
 import { isDark, toggleDark } from '~/composables/app/dark'
 import { useLZShare } from '~/composables/app/useLZShare'
 import { useSettings } from '~/composables/app/useSettings'
@@ -16,7 +16,7 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
 </script>
 
 <template>
-  <div class="w-full px-2 bg-gray-50 dark:bg-gray-800 z-10 border-b border-gray-200 dark:border-gray-700">
+  <div class="w-full px-2">
     <div class="h-full grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
         <UPopover>

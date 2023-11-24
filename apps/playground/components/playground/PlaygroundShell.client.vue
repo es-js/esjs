@@ -2,9 +2,6 @@
 import { useEditor } from '~/composables/app/useEditor'
 import { useLZShare } from '~/composables/app/useLZShare'
 import { usePlayground } from '~/composables/app/usePlayground'
-import { useSettings } from '~/composables/app/useSettings'
-
-const settings = useSettings()
 
 const editor = useEditor()
 
