@@ -73,7 +73,3 @@ function logout() {
     />
   </div>
 </template>
-
-<style scoped>
-
-</style>

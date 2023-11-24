@@ -38,7 +38,7 @@ const decorations = ref([])
 async function onLoad(instance) {
   editorInstance = instance
 
-  const { useMonacoHelper } = await import('@/composables/monaco/useMonacoHelper')
+  const { useMonacoHelper } = await import('~/composables/monaco/useMonacoHelper')
 
   monacoHelper = useMonacoHelper()
 
@@ -111,7 +111,7 @@ function setupBusCommands() {
   })
 }
 
-async function formatCode() {
+function formatCode() {
   return editorInstance?.getAction('editor.action.formatDocument')?.run()
 }
 

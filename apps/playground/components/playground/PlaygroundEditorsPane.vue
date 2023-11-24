@@ -6,6 +6,7 @@ import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import { useEditor } from '~/composables/app/useEditor'
 import { useSettings } from '~/composables/app/useSettings'
+import AppEditor from '~/components/input/AppEditor.vue'
 import '~/styles/splitpanes.css'
 
 const grid = useGrid('tailwind')
