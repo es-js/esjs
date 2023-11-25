@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import confetti from 'canvas-confetti'
+import randomWords from 'random-spanish-words'
 import { defineEmits } from 'vue'
 import { z } from 'zod'
-import randomWords from 'random-spanish-words'
-import confetti from 'canvas-confetti'
-import { useEditor } from '~/composables/app/useEditor'
+import { FILE_CODE, useFiles } from '~/composables/app/useFiles'
 import useAuth from '~/composables/useAuth'
 import useOctokit from '~/composables/useOctokit'
 
@@ -98,7 +98,7 @@ async function submit() {
           path: 'src/app.esjs',
           mode: '100644',
           type: 'blob',
-          content: useEditor().code.value,
+          content: useFiles().getFileContent(FILE_CODE),
         },
 
         {

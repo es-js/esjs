@@ -5,14 +5,14 @@ import debounce from 'lodash.debounce'
 import { onMounted, onUnmounted, watch } from 'vue'
 import { isDark } from '~/composables/app/dark'
 import { useEditor } from '~/composables/app/useEditor'
+import { FILE_CODE, FILE_IMPORT_MAP, FILE_TESTS, useFiles } from '~/composables/app/useFiles'
 import { useLZShare } from '~/composables/app/useLZShare'
 import { useSettings } from '~/composables/app/useSettings'
 import { PreviewProxy } from '~/utils/PreviewProxy'
 
-const MAIN_FILE = 'codigo.esjs'
-const MAIN_TESTS_FILE = 'pruebas.esjs'
-
 const editor = useEditor()
+
+const files = useFiles()
 
 const settings = useSettings()
 
@@ -42,8 +42,8 @@ async function init() {
     theme: isDark.value ? 'dark' : 'light',
     hidePreview: settingsStore.value.hidePreview,
     previewTab: useSettings().activePreviewTab.value,
-    code: editor.code.value,
-    testsCode: editor.testsCode.value,
+    code: files.getFileContent(FILE_CODE),
+    testsCode: files.getFileContent(FILE_TESTS),
     ...(
       import.meta.env.VITE_SANDBOX_DEV === 'true'
         ? {
@@ -60,7 +60,7 @@ async function init() {
           ],
         }
         : {
-          importMap: editor.importMap.value,
+          importMap: files.getFileContent(FILE_IMPORT_MAP),
         }
     ),
   })
@@ -69,7 +69,7 @@ async function init() {
     on_error: (error: any) => {
       if (error.value.line && error.value.column) {
         useEventBus(
-          error.value.filename === MAIN_TESTS_FILE ? 'editor_tests' : 'editor_code',
+          error.value.filename === FILE_TESTS ? 'editor_tests' : 'editor_code',
         ).emit('decorate-error', {
           line: error.value.line,
           column: error.value.column,
@@ -127,11 +127,11 @@ async function updateSandbox() {
     return
   }
 
-  const files = []
-  files[MAIN_FILE] = editor.code.value
-  files[MAIN_TESTS_FILE] = editor.testsCode.value
+  const filesToEval = []
+  filesToEval[FILE_CODE] = files.getFileContent(FILE_CODE)
+  filesToEval[FILE_TESTS] = files.getFileContent(FILE_TESTS)
 
-  await proxy.eval(files)
+  await proxy.eval(filesToEval)
 }
 
 function openInNewTab() {
@@ -166,7 +166,9 @@ watch(
 )
 
 watch(
-  [editor.code, editor.testsCode],
+  () => {
+    return files.files.value.map((file) => file.content)
+  },
   () => {
     if (!settingsStore.value.autoCompile) {
       return
@@ -176,7 +178,7 @@ watch(
     useEventBus('editor_tests').emit('clear-decorations')
 
     updateSandboxDebounced()
-  },
+  }
 )
 </script>
 

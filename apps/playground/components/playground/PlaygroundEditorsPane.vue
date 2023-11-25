@@ -5,6 +5,7 @@ import 'splitpanes/dist/splitpanes.css'
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import { useEditor } from '~/composables/app/useEditor'
+import { FILE_CODE, FILE_IMPORT_MAP, FILE_TESTS, useFiles } from '~/composables/app/useFiles'
 import { useSettings } from '~/composables/app/useSettings'
 import AppEditor from '~/components/input/AppEditor.vue'
 import '~/styles/splitpanes.css'
@@ -16,6 +17,8 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
 const settings = useSettings().settings
 
 const editor = useEditor()
+
+const files = useFiles()
 
 const wrapper = ref<HTMLElement | null>(null)
 
@@ -35,6 +38,8 @@ function calculateTestsPaneSize() {
 watchEffect(() => {
   calculateTestsPaneSize()
 })
+
+const filesForTab0 = computed(() => files.files.value.filter(file => file.tab === 0))
 </script>
 
 <template>
@@ -49,11 +54,17 @@ watchEffect(() => {
           <AppContainer>
             <template #title>
               <div class="flex flex-row items-center space-x-2">
-                <AppTabButton
-                  icon="i-mdi-code-tags"
-                  :text="editor.language.value === 'esjs' ? 'codigo.esjs' : 'codigo.js'"
-                  active
-                />
+                <div class="flex flex-row items-center">
+                  <AppTabButton
+                    v-for="file in filesForTab0"
+                    :key="file.name"
+                    :icon="file.icon ?? 'i-mdi-file-outline'"
+                    :text="file.name"
+                    :text2="editor.language.value === 'esjs' ? 'codigo.esjs' : 'codigo.js'"
+                    :active="files.getActiveFile().name === file.name"
+                    @click="files.setActiveFile(file.name)"
+                  />
+                </div>
 
                 <span class="flex-1" />
 
@@ -88,8 +99,10 @@ watchEffect(() => {
 
             <template #default>
               <AppEditor
-                v-model="editor.code.value"
                 name="code"
+                :model-value="files.getActiveFileContent()"
+                :readonly="files.getActiveFile().readonly"
+                @update:model-value="files.updateFile(files.getActiveFile().name, $event)"
               />
             </template>
           </AppContainer>
@@ -117,8 +130,9 @@ watchEffect(() => {
             </div>
             <AppEditor
               v-if="!settings.hideTests"
-              v-model="editor.testsCode.value"
               name="tests"
+              :model-value="files.getFileContent(FILE_TESTS)"
+              @update:modelValue="files.updateFile(FILE_TESTS, $event)"
             />
           </div>
         </Pane>

@@ -1,7 +1,8 @@
 import { compressToURL, decompressFromURL } from '@amoutonbrady/lz-string'
 import { useClipboard, useDark } from '@vueuse/core'
-import { INITIAL_CODE, useEditor } from './useEditor'
+import { useEditor } from './useEditor'
 import { useSettings } from './useSettings'
+import { FILE_CODE, FILE_TESTS, INITIAL_CODE, useFiles } from '~/composables/app/useFiles'
 import { useToast } from '#imports'
 
 const settings = useSettings()
@@ -28,7 +29,7 @@ export const useLZShare = () => {
   }
 
   function shareModule() {
-    const url = getSharedModuleUrl(useEditor().code.value)
+    const url = getSharedModuleUrl(useFiles().getFileContent(FILE_CODE))
 
     const clipboard = useClipboard({
       source: url.toString(),
@@ -42,8 +43,8 @@ export const useLZShare = () => {
   }
 
   function getSharedUrl(): URL {
-    const code = useEditor().code.value
-    const testsCode = useEditor().testsCode.value
+    const code = useFiles().getFileContent(FILE_CODE)
+    const testsCode = useFiles().getFileContent(FILE_TESTS)
 
     const url = new URL('/', window.location.origin)
 
@@ -79,8 +80,8 @@ export const useLZShare = () => {
       previewTab: settings.settings.value.previewTab,
     }
 
-    url.searchParams.set('code', compressToURL(useEditor().code.value))
-    url.searchParams.set('tests', compressToURL(useEditor().testsCode.value ?? ''))
+    url.searchParams.set('code', compressToURL(useFiles().getFileContent(FILE_CODE) ?? ''))
+    url.searchParams.set('tests', compressToURL(useFiles().getFileContent(FILE_TESTS) ?? ''))
     url.searchParams.set('options', compressToURL(JSON.stringify(options)))
 
     return url
@@ -218,11 +219,9 @@ export const useLZShare = () => {
 
     const testsCode = getTestsCodeFromUrl()
 
-    useEditor().setCode(code)
+    useFiles().updateFile(FILE_CODE, code)
 
-    if (testsCode) {
-      useEditor().setTestsCode(testsCode)
-    }
+    useFiles().updateFile(FILE_TESTS, testsCode ?? '')
   }
 
   return {

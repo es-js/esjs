@@ -3,6 +3,7 @@ import { transpile } from '@es-js/core'
 import { ref } from 'vue'
 import { isDark } from '~/composables/app/dark'
 import { useEditor } from '~/composables/app/useEditor'
+import { FILE_CODE, FILE_TESTS, useFiles } from '~/composables/app/useFiles'
 
 const props = defineProps({
   name: {
@@ -26,6 +27,8 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const editor = useEditor()
+
+const files = useFiles()
 
 const bus = useEventBus(`editor_${props.name}`)
 
@@ -119,10 +122,10 @@ async function obfuscate() {
   let codeToObfuscate: string
   switch (props.name) {
     case 'code':
-      codeToObfuscate = useEditor().code.value
+      codeToObfuscate = files.getFileContent(FILE_CODE)
       break
     case 'tests':
-      codeToObfuscate = useEditor().testsCode.value
+      codeToObfuscate = files.getFileContent(FILE_TESTS)
       break
     default:
       return null
@@ -163,6 +166,20 @@ watch(
   isDark,
   () => {
     updateTheme()
+  },
+  { immediate: true },
+)
+
+watch(
+  () => props.readonly,
+  (readonly) => {
+    if (!editorInstance) {
+      return
+    }
+
+    editorInstance.updateOptions({
+      readOnly: readonly,
+    })
   },
   { immediate: true },
 )
