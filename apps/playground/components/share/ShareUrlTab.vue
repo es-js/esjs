@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLZShare } from '~/composables/app/useLZShare'
+import { useLZShare } from '~/composables/useLZShare'
 
 const emit = defineEmits(['close'])
 

@@ -3,7 +3,7 @@ import { watch } from 'vue'
 import { Pane, Splitpanes } from 'splitpanes'
 import PlaygroundOutput from '~/components/output/PlaygroundOutput.vue'
 import PlaygroundEditorsPane from '~/components/playground/PlaygroundEditorsPane.vue'
-import { useSettings } from '~/composables/app/useSettings'
+import { useSettings } from '~/composables/useSettings'
 import 'splitpanes/dist/splitpanes.css'
 import '~/styles/splitpanes.css'
 

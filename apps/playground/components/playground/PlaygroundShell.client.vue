@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useEditor } from '~/composables/app/useEditor'
-import { useLZShare } from '~/composables/app/useLZShare'
-import { usePlayground } from '~/composables/app/usePlayground'
+import { useEditor } from '~/composables/useEditor'
+import { useLZShare } from '~/composables/useLZShare'
+import { usePlayground } from '~/composables/usePlayground'
 
 const editor = useEditor()
 

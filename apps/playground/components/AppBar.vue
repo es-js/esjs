@@ -2,9 +2,9 @@
 import { useGrid } from 'vue-screen'
 import { computed } from 'vue'
 import ExamplesModal from '~/components/examples/ExamplesModal.vue'
-import { isDark, toggleDark } from '~/composables/app/dark'
-import { useLZShare } from '~/composables/app/useLZShare'
-import { useSettings } from '~/composables/app/useSettings'
+import { isDark, toggleDark } from '~/composables/dark'
+import { useLZShare } from '~/composables/useLZShare'
+import { useSettings } from '~/composables/useSettings'
 
 const share = useLZShare()
 

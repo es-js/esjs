@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import PlaygroundOutput from '~/components/output/PlaygroundOutput.vue'
 import PlaygroundEditorsPane from '~/components/playground/PlaygroundEditorsPane.vue'
-import { useEditor } from '~/composables/app/useEditor'
-import { useSettings } from '~/composables/app/useSettings'
+import { useEditor } from '~/composables/useEditor'
+import { useSettings } from '~/composables/useSettings'
 
 const settings = useSettings().settings
 

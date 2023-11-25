@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PlaygroundSandbox from '~/components/output/PlaygroundSandbox.vue'
-import { useEditor } from '~/composables/app/useEditor'
+import { useEditor } from '~/composables/useEditor'
 
 const editor = useEditor()
 </script>

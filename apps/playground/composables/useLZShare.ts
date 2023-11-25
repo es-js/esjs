@@ -2,7 +2,7 @@ import { compressToURL, decompressFromURL } from '@amoutonbrady/lz-string'
 import { useClipboard, useDark } from '@vueuse/core'
 import { useEditor } from './useEditor'
 import { useSettings } from './useSettings'
-import { FILE_CODE, FILE_TESTS, INITIAL_CODE, useFiles } from '~/composables/app/useFiles'
+import { FILE_CODE, FILE_TESTS, INITIAL_CODE, useFiles } from '~/composables/useFiles'
 import { useToast } from '#imports'
 
 const settings = useSettings()

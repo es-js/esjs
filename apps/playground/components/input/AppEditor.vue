@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { transpile } from '@es-js/core'
 import { ref } from 'vue'
-import { isDark } from '~/composables/app/dark'
-import { useEditor } from '~/composables/app/useEditor'
-import { FILE_CODE, FILE_TESTS, useFiles } from '~/composables/app/useFiles'
+import { isDark } from '~/composables/dark'
+import { useEditor } from '~/composables/useEditor'
+import { FILE_CODE, FILE_TESTS, useFiles } from '~/composables/useFiles'
 
 const props = defineProps({
   name: {
@@ -41,7 +41,7 @@ const decorations = ref([])
 async function onLoad(instance) {
   editorInstance = instance
 
-  const { useMonacoHelper } = await import('~/composables/monaco/useMonacoHelper')
+  const { useMonacoHelper } = await import('~/composables/useMonacoHelper')
 
   monacoHelper = useMonacoHelper()
 

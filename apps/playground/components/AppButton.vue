@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { isDark } from '~/composables/app/dark'
+import { isDark } from '~/composables/dark'
 
 const props = defineProps({
   text: {

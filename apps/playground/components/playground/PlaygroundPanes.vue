@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import PlaygroundDesktopView from '~/components/playground/PlaygroundDesktopView.vue'
 import PlaygroundMobileView from '~/components/playground/PlaygroundMobileView.vue'
-import { useSettings } from '~/composables/app/useSettings'
+import { useSettings } from '~/composables/useSettings'
 
 const grid = useGrid('tailwind')
 

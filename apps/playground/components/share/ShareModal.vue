@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ShareGithubTab from '~/components/share/ShareGithubTab.vue'
 import ShareUrlTab from '~/components/share/ShareUrlTab.vue'
-import { useLZShare } from '~/composables/app/useLZShare'
+import { useLZShare } from '~/composables/useLZShare'
 
 const isOpen = ref(false)
 

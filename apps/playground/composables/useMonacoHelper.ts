@@ -14,7 +14,7 @@ import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
-import { useEditor } from '~/composables/app/useEditor'
+import { useEditor } from '~/composables/useEditor'
 
 const esjsTokenizer: Record<string, any> = {
   keywords: [

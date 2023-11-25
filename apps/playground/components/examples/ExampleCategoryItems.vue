@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useEditor } from '~/composables/app/useEditor'
-import { isDark } from '~/composables/app/dark'
+import { useEditor } from '~/composables/useEditor'
+import { isDark } from '~/composables/dark'
 
 const props = defineProps({
   category: {
