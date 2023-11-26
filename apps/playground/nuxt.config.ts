@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     'nuxt-gtag',
     '@nuxtjs/supabase',
+    '@davestewart/nuxt-scrollbar',
   ],
 
   runtimeConfig: {

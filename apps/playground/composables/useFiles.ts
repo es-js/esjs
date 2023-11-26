@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 
 interface File {
   name: string;
@@ -21,27 +21,86 @@ export const INITIAL_CODE = `/**
   EsJS: Lenguaje de programación con sintaxis en español basado en JavaScript.
 */
 
-importar { Terminal } desde '@es-js/terminal'
+importar { Terminal } desde "@es-js/terminal"
+importar { tiza } desde "@es-js/tiza"
+importar confetti desde "npm/canvas-confetti/+esm"
 
 asincrono funcion inicio() {
-  consola.escribir('Inicio de ejecución')
-
   Terminal.limpiar()
 
-  Terminal.escribir('Ingresa un valor:')
+  Terminal.escribir(
+    "¡Hola mundo desde " + tiza.indigo800.fondoIndigo50(" EsJS ") + "!"
+  )
 
-  const resultado = esperar Terminal.leer()
+  Terminal.escribir(
+    "Aprende más sobre EsJS en " +
+      "<a href='https://es.js.org' target='_blank'>" +
+      tiza.indigo800.fondoIndigo50(" https://es-js.org ") +
+      "</a>"
+  )
 
-  Terminal.escribir({
-    Resultado: resultado,
-    Tipo: tipoDe resultado,
-  })
+  Terminal.escribir("*".repetir(50)) // Separador
 
-  Terminal.escribir('Presiona ENTER para volver a iniciar')
+  Terminal.escribir(
+    "Este es un ejemplo de como usar la Terminal. Selecciona una opcion:"
+  )
 
-  esperar Terminal.leerEnter()
+  Terminal.escribir("1. Tirar papeles")
+  Terminal.escribir("2. Tirar fuegos artificiales")
 
-  esperar inicio()
+  const opcion = esperar Terminal.leerNumero()
+
+  si (opcion === 1) {
+    tirarPapeles()
+  } sino si (opcion === 2) {
+    tirarFuegosArtificiales()
+  }
+
+  inicio()
+}
+
+funcion tirarPapeles() {
+  consola.escribir("Tirando papeles...")
+  confetti()
+}
+
+funcion tirarFuegosArtificiales() {
+  const duracion = 15 * 1000 // 15 segundos
+  const animacionFin = Fecha.ahora() + duracion
+  const opcionesPorDefecto = {
+    startVelocity: 30,
+    spread: 360,
+    ticks: 60,
+    zIndex: 0,
+  }
+
+  funcion aleatorioEnRango(minimo, maximo) {
+    retornar Mate.aleatorio() * (maximo - minimo) + minimo
+  }
+
+  const intervalo = establecerIntervalo(funcion () {
+    const tiempoRestante = animacionFin - Fecha.ahora()
+
+    consola.escribir("Tiempo restante: " + tiempoRestante / 1000 + " segundos")
+
+    si (tiempoRestante <= 0) {
+      consola.escribir("Fin de la animación")
+      retornar clearInterval(intervalo)
+    }
+
+    const cantidadParticulas = 50 * (tiempoRestante / duracion)
+
+    confetti({
+      ...opcionesPorDefecto,
+      particleCount: cantidadParticulas,
+      origin: { x: aleatorioEnRango(0.1, 0.3), y: Mate.aleatorio() - 0.2 },
+    })
+    confetti({
+      ...opcionesPorDefecto,
+      particleCount: cantidadParticulas,
+      origin: { x: aleatorioEnRango(0.7, 0.9), y: Mate.aleatorio() - 0.2 },
+    })
+  }, 250)
 }
 
 inicio()

@@ -54,16 +54,16 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
           <AppContainer>
             <template #title>
               <div class="flex flex-row items-center space-x-2">
-                <div class="flex flex-row items-center">
-                    <AppTabButton
-                      v-for="file in filesForTab0"
-                      :key="file.name"
-                      :icon="file.icon ?? 'i-mdi-file-outline'"
-                      :text="files.getFileNameWithExtension(file.name)"
-                      :active="files.getActiveFile().name === file.name"
-                      @click="files.setActiveFile(file.name)"
-                    />
-                </div>
+                <NuxtScrollbar class="flex flex-row items-center overflow-x-auto">
+                  <AppTabButton
+                    v-for="file in filesForTab0"
+                    :key="file.name"
+                    :icon="file.icon ?? 'i-mdi-file-outline'"
+                    :text="files.getFileNameWithExtension(file.name)"
+                    :active="files.getActiveFile().name === file.name"
+                    @click="files.setActiveFile(file.name)"
+                  />
+                </NuxtScrollbar>
 
                 <span class="flex-1" />
 
