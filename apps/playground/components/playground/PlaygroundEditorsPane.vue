@@ -55,22 +55,21 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
             <template #title>
               <div class="flex flex-row items-center space-x-2">
                 <div class="flex flex-row items-center">
-                  <AppTabButton
-                    v-for="file in filesForTab0"
-                    :key="file.name"
-                    :icon="file.icon ?? 'i-mdi-file-outline'"
-                    :text="file.name"
-                    :text2="editor.language.value === 'esjs' ? 'codigo.esjs' : 'codigo.js'"
-                    :active="files.getActiveFile().name === file.name"
-                    @click="files.setActiveFile(file.name)"
-                  />
+                    <AppTabButton
+                      v-for="file in filesForTab0"
+                      :key="file.name"
+                      :icon="file.icon ?? 'i-mdi-file-outline'"
+                      :text="files.getFileNameWithExtension(file.name)"
+                      :active="files.getActiveFile().name === file.name"
+                      @click="files.setActiveFile(file.name)"
+                    />
                 </div>
 
                 <span class="flex-1" />
 
                 <div
                   v-if="!settings.hideOptions"
-                  class="flex flex-row items-center px-1 space-x-2"
+                  class="flex flex-row flex-shrink-1 flex-grow-0 items-center px-1 space-x-2"
                 >
                   <UDropdown
                     :items="editor.availableLanguages"
@@ -120,7 +119,7 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
             >
               <AppTabButton
                 icon="i-mdi-test-tube"
-                :text="editor.language.value === 'esjs' ? 'pruebas.esjs' : 'pruebas.js'"
+                :text="files.getFileNameWithExtension(FILE_TESTS)"
                 :active="!settings.hideTests"
                 class="h-full"
                 @click="useSettings().setHideTests(!settings.hideTests)"

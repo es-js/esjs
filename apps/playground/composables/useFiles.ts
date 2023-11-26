@@ -90,6 +90,18 @@ export const useFiles = () => {
     return files.value.find(file => file.name === name)?.content ?? ''
   }
 
+  function getFileNameWithExtension(name: string) {
+    const nameWithoutExtension = name.split('.').slice(0, -1).join('.')
+
+    const extension = name.split('.').slice(-1)[0]
+
+    if (!['esjs', 'js'].includes(extension)) {
+      return name
+    }
+
+    return nameWithoutExtension + useEditor().getLanguageExtension()
+  }
+
   function getActiveFileContent() {
     return files.value.find(file => file.active)?.content
   }
@@ -108,6 +120,7 @@ export const useFiles = () => {
     files,
     updateFile,
     getFileContent,
+    getFileNameWithExtension,
     getActiveFileContent,
     getActiveFile,
     setActiveFile,

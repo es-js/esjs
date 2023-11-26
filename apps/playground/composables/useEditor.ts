@@ -40,10 +40,15 @@ export const useEditor = () => {
     language.value = value
   }
 
+  function getLanguageExtension() {
+    return language.value === 'esjs' ? '.esjs' : '.js'
+  }
+
   return {
     loading,
     toggleLanguage,
     setLanguage,
+    getLanguageExtension,
     language,
     availableLanguages,
   }

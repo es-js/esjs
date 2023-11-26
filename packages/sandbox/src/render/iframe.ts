@@ -20,7 +20,7 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
   iframe.setAttribute('width', '100%')
   iframe.setAttribute('height', '100%')
   iframe.setAttribute('style', 'border: 0;')
-  iframe.setAttribute('title', 'sandbox')
+  iframe.setAttribute('title', 'Resultado')
   iframe.setAttribute('allow', 'clipboard-read; clipboard-write;')
 
   iframe.srcdoc = `
