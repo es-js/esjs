@@ -1,16 +1,16 @@
-import { MAIN_FILE, MAIN_TESTS_FILE, OrchestratorFile, orchestrator } from '../compiler/orchestrator'
 import { compileModulesForPreview } from '../compiler'
-import { prepareCodeAndTestsForPlayground } from '../parser'
+import { OrchestratorFile, orchestrator } from '../compiler/orchestrator'
+import type { SandboxFile } from '../parser'
+import { prepareFiles } from '../parser'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
+  files?: SandboxFile[]
   usarTerminal: any
   theme: 'dark' | 'light'
   hidePreview: boolean
   hideConsole: boolean
   previewTab: 'console' | 'flowchart' | 'hidden'
-  code: string
-  testsCode: string
   importMap: string
   stylesheets: string[]
   clearConsoleOnRun: boolean
@@ -21,8 +21,6 @@ let _options: EjecutarOptions
 const scriptEls: HTMLScriptElement[] = []
 
 let theme: 'dark' | 'light' = 'dark'
-
-let lastArgs: any = {}
 
 export async function init(options: EjecutarOptions): Promise<void> {
   _options = options
@@ -38,44 +36,45 @@ export async function init(options: EjecutarOptions): Promise<void> {
 
   previewTab(_options.previewTab)
 
-  evalInitialCode()
+  await evalInitialCode()
 }
 
-export async function evalFiles({ files }) {
+export async function evalFiles({ files }: { files: SandboxFile[] }) {
   try {
-    const result = prepareCodeAndTestsForPlayground(
-      files[MAIN_FILE] || '',
-      files[MAIN_TESTS_FILE] || '',
+    const result = prepareFiles(
+      files.filter((file: any) => {
+        const extension = file.name.split('.').slice(-1)[0]
+
+        return ['esjs', 'js'].includes(extension)
+      }),
     )
 
-    Object.keys(files).forEach((filename) => {
-      if (filename in orchestrator.files)
+    result.forEach((file: any) => {
+      const extension = file.name.split('.').slice(-1)[0]
+
+      if (!['esjs', 'js'].includes(extension))
         return
 
-      orchestrator.files[filename] = new OrchestratorFile(filename, '', '', '')
+      orchestrator.files[file.name] = new OrchestratorFile(file.name, '', `${file.imports}\n${file.code}\n`, '')
     })
 
-    orchestrator.files[MAIN_FILE].script = `${result.imports}\n${result.code}\n`
-    orchestrator.files[MAIN_TESTS_FILE].script = `${result.testsImports}\n${result.testsCode}\n`
-
-    const modules = compileModulesForPreview([
-      orchestrator.files[MAIN_TESTS_FILE],
-      orchestrator.files[MAIN_FILE],
-    ])
+    const modules = compileModulesForPreview(
+      Object.values(orchestrator.files),
+    )
 
     await evalCode({
       script: [
         'const __modules__ = {};',
-        ...modules,
+        ...modules.reverse(),
       ],
     })
   }
   catch (error) {
-    handleEvalError(error)
+    await handleEvalError(error)
   }
 }
 
-function handleEvalError(error) {
+async function handleEvalError(error: any) {
   const errorArgs = {
     filename: error.filename,
     message: error.message,
@@ -83,7 +82,7 @@ function handleEvalError(error) {
     column: error.column,
   }
 
-  evalCode({
+  return evalCode({
     script: [
       `import { Terminal } from '@es-js/terminal'; import { tiza } from '@es-js/tiza';
 
@@ -103,8 +102,6 @@ window.onerror(${JSON.stringify(error.message)}, null, 1, 1, ${JSON.stringify(er
 }
 
 async function evalCode(args: any) {
-  lastArgs = Object.assign({}, args)
-
   if (scriptEls.length) {
     scriptEls.forEach((el) => {
       document.head.removeChild(el)
@@ -119,7 +116,7 @@ async function evalCode(args: any) {
 
   resetAppElement()
 
-  const usesTerminal = scripts.some(script => script.includes('Terminal'))
+  const usesTerminal = scripts.some((script: string[]) => script.includes('Terminal'))
   if (usesTerminal)
     await addEsJSTerminal()
 
@@ -131,6 +128,7 @@ async function evalCode(args: any) {
     // send ok in the module script to ensure sequential evaluation
     // of multiple proxy.eval() calls
     const done = new Promise((resolve) => {
+      // @ts-expect-error - __next__ is defined below, in scriptEl.innerHTML
       window.__next__ = resolve
     })
     scriptEl.innerHTML = `${script}\nwindow.__next__()`
@@ -145,12 +143,11 @@ async function evalCode(args: any) {
   return true
 }
 
-function evalInitialCode() {
-  const files = []
-  files[MAIN_FILE] = _options.code || ''
-  files[MAIN_TESTS_FILE] = _options.testsCode || ''
+async function evalInitialCode() {
+  if (!_options.files)
+    return
 
-  evalFiles({ files })
+  await evalFiles({ files: _options.files })
 }
 
 function clearConsole() {
@@ -164,6 +161,7 @@ function clearConsole() {
   if (isDev)
     return
 
+  // eslint-disable-next-line no-console
   console.clear()
 }
 

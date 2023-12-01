@@ -22,10 +22,12 @@ export class OrchestratorFile {
   }
 }
 
+export interface OrchestratorFiles {
+  [key: string]: OrchestratorFile
+}
+
 export interface Orchestrator {
-  files: {
-    [key: string]: OrchestratorFile
-  }
+  files: OrchestratorFiles
   errors: (string | Error)[]
   runtimeErrors: (string | Error)[]
 }

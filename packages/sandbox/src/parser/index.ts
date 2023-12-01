@@ -1,11 +1,11 @@
-import * as espree from 'espree'
-import escodegen from 'escodegen'
 import { transpile } from '@es-js/core'
 import { splitCodeImports } from '@es-js/core/utils'
-import prettier from 'prettier/standalone'
+import escodegen from 'escodegen'
+import * as espree from 'espree'
 import parserBabel from 'prettier/parser-babel'
-import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
+import prettier from 'prettier/standalone'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
+import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
 
 let start
 let end
@@ -23,6 +23,13 @@ class ParseFileError extends Error {
     super(message)
   }
 }
+
+export interface SandboxFile {
+  name: string
+  content: string
+  main?: boolean
+}
+
 export function prepareCode(code: string) {
   try {
     if (!code.endsWith('\n'))
@@ -239,8 +246,34 @@ export function generateImportStatement(code: string, modulePath: string) {
   return imports.join('\n')
 }
 
-export function prepareCodeAndTestsForPlayground(code: string, tests: string) {
-  const transpiledCode = tryToParseFile(MAIN_FILE, code)
+export function prepareFiles(files: SandboxFile[]) {
+  const main = prepareMainFile(files.find((file: any) => file.name === MAIN_FILE))
+
+  const restOfFiles = files.filter((file: any) => file.name !== MAIN_FILE)
+
+  return [
+    main,
+    ...restOfFiles.map((file) => {
+      const importsFromMain = generateImportStatement(main.code, `./${MAIN_FILE}`)
+      const transpiled = tryToParseFile(file)
+      const splitted = splitCodeImports(transpiled)
+      const imports = unifyImports(`
+        ${importsFromMain}
+        ${splitted.imports}
+        ${file.name === MAIN_TESTS_FILE ? IMPORT_ESJS_PRUEBA : ''}
+      `)
+
+      return {
+        ...file,
+        imports,
+        code: splitted.codeWithoutImports,
+      }
+    }),
+  ]
+}
+
+export function prepareMainFile(file: any) {
+  const transpiledCode = tryToParseFile(file)
   const splittedCode = splitCodeImports(transpiledCode)
 
   const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
@@ -251,31 +284,19 @@ ${IMPORT_ESJS_PRUEBA}
 ${splittedCode.imports}
   `)
 
-  const generatedCodeImports = unifyImports(generateImportStatement(splittedCode.codeWithoutImports, `./${MAIN_FILE}`))
-
-  const transpiledTestsCode = tryToParseFile(MAIN_TESTS_FILE, tests)
-  const splittedTestsCode = splitCodeImports(transpiledTestsCode)
-  const testsImports = unifyImports(`
-  ${IMPORT_ESJS_PRUEBA}
-  ${splittedTestsCode.imports}
-  ${generatedCodeImports}
-  `)
-
   return {
+    ...file,
     imports,
     code: splittedCode.codeWithoutImports,
-
-    testsImports,
-    testsCode: splittedTestsCode.codeWithoutImports,
   }
 }
 
-function tryToParseFile(filename: string, code: string) {
+function tryToParseFile(file: SandboxFile) {
   try {
-    return prepareCode(code)
+    return prepareCode(file.content)
   }
   catch (error: any) {
-    throw new ParseFileError(error.message, filename, error.line, error.column)
+    throw new ParseFileError(error.message, file.name, error.line, error.column)
   }
 }
 

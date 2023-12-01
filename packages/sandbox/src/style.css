@@ -32,15 +32,22 @@
   color: #818cf8 !important;
 }
 
+/** EsJS2Flowchart */
 #eruda-flowchart {
   overflow: auto;
 }
 
+.eruda-dev-tools {
+  @apply border-0 !important;
+}
+
 .eruda-tab {
   height: 28px;
+  @apply bg-gray-50 dark:bg-gray-900 !important;
 }
 .luna-tab-tabs-container {
   height: 28px !important;
+  @apply border-0 !important;
 }
 .luna-tab-item {
   height: 27px !important;

@@ -222,6 +222,10 @@ export const useLZShare = () => {
     useFiles().updateFile(FILE_CODE, code)
 
     useFiles().updateFile(FILE_TESTS, testsCode ?? '')
+
+    setTimeout(() => {
+      useEventBus('sandbox').emit('refresh')
+    })
   }
 
   return {

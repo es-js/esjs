@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce'
 import { onMounted, onUnmounted, watch } from 'vue'
 import { isDark } from '~/composables/dark'
 import { useEditor } from '~/composables/useEditor'
-import { FILE_CODE, FILE_IMPORT_MAP, FILE_TESTS, useFiles } from '~/composables/useFiles'
+import { FILE_IMPORT_MAP, FILE_TESTS, useFiles } from '~/composables/useFiles'
 import { useLZShare } from '~/composables/useLZShare'
 import { useSettings } from '~/composables/useSettings'
 import { PreviewProxy } from '~/utils/PreviewProxy'
@@ -23,6 +23,14 @@ let proxy: PreviewProxy
 
 onMounted(() => {
   init()
+
+  const bus = useEventBus('sandbox')
+
+  bus.on((event: string) => {
+    if (event === 'refresh') {
+      refresh()
+    }
+  })
 })
 
 onUnmounted(() => {
@@ -38,31 +46,12 @@ async function init() {
     }
   }
 
-  sandbox = await createSandbox('esjs-sandbox', {
+  sandbox = createSandbox('esjs-sandbox', {
     theme: isDark.value ? 'dark' : 'light',
     hidePreview: settingsStore.value.hidePreview,
     previewTab: useSettings().activePreviewTab.value,
-    code: files.getFileContent(FILE_CODE),
-    testsCode: files.getFileContent(FILE_TESTS),
-    ...(
-      import.meta.env.VITE_SANDBOX_DEV === 'true'
-        ? {
-          importMap: JSON.stringify({
-            imports: {
-              '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/terminal.es.js',
-              '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@latest/+esm',
-              '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@latest',
-              '@es-js/sandbox/runtime': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@latest/runtime/+esm',
-            },
-          }),
-          stylesheets: [
-            'http://localhost:5173/dist/style.css',
-          ],
-        }
-        : {
-          importMap: files.getFileContent(FILE_IMPORT_MAP),
-        }
-    ),
+    files: files.files.value,
+    importMap: files.getFileContent(FILE_IMPORT_MAP),
   })
 
   proxy = new PreviewProxy(sandbox, {
@@ -127,11 +116,7 @@ async function updateSandbox() {
     return
   }
 
-  const filesToEval = []
-  filesToEval[FILE_CODE] = files.getFileContent(FILE_CODE)
-  filesToEval[FILE_TESTS] = files.getFileContent(FILE_TESTS)
-
-  await proxy.eval(filesToEval)
+  await proxy.eval(toRaw(files.files.value))
 }
 
 function openInNewTab() {

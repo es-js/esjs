@@ -20,20 +20,20 @@ devDependencies:
     specifier: ^1.0.0
     version: 1.0.0(postcss@8.4.31)
   '@es-js/core':
-    specifier: 0.0.19-beta.2
-    version: 0.0.19-beta.2
+    specifier: 0.0.19
+    version: 0.0.19
   '@es-js/language-tools':
     specifier: ^0.0.15
-    version: link:../../packages/language-tools
+    version: 0.0.15
   '@es-js/sandbox':
-    specifier: 0.0.8
-    version: link:../../packages/sandbox
+    specifier: 0.0.9
+    version: 0.0.9
   '@iconify-json/mdi':
     specifier: ^1.1.54
     version: 1.1.54
   '@nuxt/devtools':
     specifier: latest
-    version: 1.0.3(nuxt@3.8.1)(vite@4.5.0)
+    version: 1.0.4(nuxt@3.8.1)(vite@4.5.0)
   '@nuxt/eslint-config':
     specifier: ^0.2.0
     version: 0.2.0(eslint@8.22.0)
@@ -533,8 +533,16 @@ packages:
       - supports-color
     dev: true
 
-  /@es-js/core@0.0.19-beta.2:
-    resolution: {integrity: sha512-AV7eSPPsnkDMk+eHFSkmV+ZnF5+V2qpnfcOIkm1NdUKEHpp2xE7SWm5x2elAuY41L8xJCFNhojDMeM5UchXk+A==}
+  /@es-js/core@0.0.19:
+    resolution: {integrity: sha512-f4iax7oknzjAxjMAYaSCW8wvBNurcczf6RG4/q0luqDvhaJKMRWy2HdyuorojxhvmQL3Fdcz8//pfPrfyMJssg==}
+    dev: true
+
+  /@es-js/language-tools@0.0.15:
+    resolution: {integrity: sha512-Kix++gZaH2sPqnXyLu+TQAbpdjA+i7XsU5b3HFB/4JI5KcHlToYpakxdDMdsrmw7QTj1oUGIyv6u4/bGqo7lZA==}
+    dev: true
+
+  /@es-js/sandbox@0.0.9:
+    resolution: {integrity: sha512-uMifBmoQ11mfA9fZrmKZP/NUuiFtDVohTKdOvp7JIXAchgRoQAgfEaDWvh9QrVzbAwg+7GwYOcnXOM1Yz7vgtQ==}
     dev: true
 
   /@esbuild/android-arm64@0.18.20:
@@ -1463,8 +1471,8 @@ packages:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
     dev: true
 
-  /@nuxt/devtools-kit@1.0.3(nuxt@3.8.1)(vite@4.5.0):
-    resolution: {integrity: sha512-a/ZAVmrD5yOfUYhRVfC9afMkczzL8J8zdf0h6QHbTd33rJW/jmjwTn++RTdnbSD2gg2fSBRi/h8y17RmqIdb9g==}
+  /@nuxt/devtools-kit@1.0.4(nuxt@3.8.1)(vite@4.5.0):
+    resolution: {integrity: sha512-AXNeI1dBilNryCmwuTd3lU7CrPBhzUJ5ntTFiXw9MmFwe5QT3NOxDFOv0gX7z1DFnmBEmx5mPKWysCwh7htEnQ==}
     peerDependencies:
       nuxt: ^3.8.1
       vite: '*'
@@ -1479,8 +1487,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/devtools-wizard@1.0.3:
-    resolution: {integrity: sha512-iningPOhBVMYov+7hDX5yr1tAVVA6AmJ7EgRkNfmHqPX2rerhD4eIN7Ao4KwkjGmQJ7qdM7k8w+NiL8OQOpdFQ==}
+  /@nuxt/devtools-wizard@1.0.4:
+    resolution: {integrity: sha512-3QHRfmkiITM67lAzSIOiI6N4Qzi5i705TCQ53pHQbce0+E00f5vck2hPauflN2X0/M3SZdkUV8UayaHc4egmdA==}
     hasBin: true
     dependencies:
       consola: 3.2.3
@@ -1495,16 +1503,16 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /@nuxt/devtools@1.0.3(nuxt@3.8.1)(vite@4.5.0):
-    resolution: {integrity: sha512-2mXvQiS3KTMF0fO80Y9WLx95yubRoIp2wSCarmhhqInPe8/0K9VZ4TUiTGF20ti45h0ky3OAxiVSmLfViwDWjg==}
+  /@nuxt/devtools@1.0.4(nuxt@3.8.1)(vite@4.5.0):
+    resolution: {integrity: sha512-G1Oo9+TaOYzePIXpNX+Zzalw/rJyIZKZpZmXfzolPlOJSA1i0JKzZX6Z7iQHdqPwNJ8t+HnVaF4PghPIpo1kwg==}
     hasBin: true
     peerDependencies:
       nuxt: ^3.8.1
       vite: '*'
     dependencies:
       '@antfu/utils': 0.7.6
-      '@nuxt/devtools-kit': 1.0.3(nuxt@3.8.1)(vite@4.5.0)
-      '@nuxt/devtools-wizard': 1.0.3
+      '@nuxt/devtools-kit': 1.0.4(nuxt@3.8.1)(vite@4.5.0)
+      '@nuxt/devtools-wizard': 1.0.4
       '@nuxt/kit': 3.8.2
       birpc: 0.2.14
       consola: 3.2.3
@@ -1796,7 +1804,7 @@ packages:
       std-env: 3.5.0
       strip-literal: 1.3.0
       ufo: 1.3.2
-      unplugin: 1.5.0
+      unplugin: 1.5.1
       vite: 4.5.0(@types/node@18.17.1)
       vite-node: 0.33.0(@types/node@18.17.1)
       vite-plugin-checker: 0.6.2(eslint@8.22.0)(typescript@5.2.2)(vite@4.5.0)
@@ -8031,7 +8039,7 @@ packages:
         optional: true
     dependencies:
       '@nuxt/devalue': 2.0.2
-      '@nuxt/devtools': 1.0.3(nuxt@3.8.1)(vite@4.5.0)
+      '@nuxt/devtools': 1.0.4(nuxt@3.8.1)(vite@4.5.0)
       '@nuxt/kit': 3.8.1
       '@nuxt/schema': 3.8.1
       '@nuxt/telemetry': 2.5.2
@@ -10630,7 +10638,7 @@ packages:
       pkg-types: 1.0.3
       scule: 1.1.0
       strip-literal: 1.3.0
-      unplugin: 1.5.0
+      unplugin: 1.5.1
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -10720,7 +10728,7 @@ packages:
       mlly: 1.4.2
       pathe: 1.1.1
       scule: 1.1.0
-      unplugin: 1.5.0
+      unplugin: 1.5.1
       vue-router: 4.2.5(vue@3.3.8)
       yaml: 2.3.4
     transitivePeerDependencies:

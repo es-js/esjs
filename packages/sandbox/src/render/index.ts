@@ -1,12 +1,10 @@
-import type { EjecutarOptions } from './ejecutar/ejecutar'
+import type { EjecutarOptions } from '../runtime/ejecutar'
 import { createIframe } from './iframe'
 
 const DEFAULT_IMPORTS_MAP = {
   imports: {
-    '@es-js/terminal': 'https://cdn.jsdelivr.net/npm/@es-js/terminal@latest/dist/terminal.es.js',
-    '@es-js/prueba': 'https://cdn.jsdelivr.net/npm/@es-js/prueba@latest/+esm',
-    '@es-js/tiza': 'https://cdn.jsdelivr.net/npm/@es-js/tiza@latest',
-    '@es-js/sandbox/runtime': 'https://cdn.jsdelivr.net/npm/@es-js/sandbox@latest/runtime/+esm',
+    '@es-js/': 'https://esm.run/@es-js/',
+    'npm/': 'https://cdn.jsdelivr.net/npm/',
   },
 }
 
@@ -14,7 +12,7 @@ const DEFAULT_STYLESHEETS = [
   'https://cdn.jsdelivr.net/npm/@es-js/sandbox@latest/dist/style.css',
 ]
 
-export async function createSandbox(elementOrId: HTMLElement | string, customOptions: Partial<EjecutarOptions>): Promise<HTMLIFrameElement> {
+export function createSandbox(elementOrId: HTMLElement | string, customOptions: Partial<EjecutarOptions>): HTMLIFrameElement {
   if (typeof elementOrId === 'string')
     elementOrId = document.getElementById(elementOrId) as HTMLElement
 
@@ -27,8 +25,6 @@ export async function createSandbox(elementOrId: HTMLElement | string, customOpt
       previewTab: 'console',
       importMap: JSON.stringify(DEFAULT_IMPORTS_MAP),
       stylesheets: DEFAULT_STYLESHEETS,
-      code: '',
-      testsCode: '',
       clearConsoleOnRun: true,
     }, customOptions)
 

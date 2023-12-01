@@ -5,6 +5,6 @@ import { setupWindow } from './window.js'
 export async function setupSandbox(ejecutarOptions: EjecutarOptions): Promise<void> {
   await setupWindow()
 
-  init(ejecutarOptions)
+  await init(ejecutarOptions)
 }
 

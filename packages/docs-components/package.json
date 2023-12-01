@@ -1,6 +1,6 @@
 {
   "name": "@es-js/docs-components",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "scripts": {
     "build": "rimraf dist && vue-tsc && vite build",
     "docs:dev": "vitepress dev docs",

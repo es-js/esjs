@@ -35,7 +35,17 @@ onMounted(() => {
     theme: 'dark',
     hidePreview: String(props.hidePreview) === 'true',
     previewTab: String(props.hideConsole) === 'true' ? 'hidden' : 'console',
-    code: props.code,
+    files: [
+      {
+        name: 'codigo.esjs',
+        content: props.code,
+        main: true,
+      },
+      {
+        name: 'pruebas.esjs',
+        content: props.testsCode,
+      },
+    ],
   })
 })
 </script>

@@ -7,6 +7,7 @@ interface File {
   tab: number;
   icon?: string;
   readonly?: boolean;
+  main?: boolean;
 }
 
 type Files = File[];
@@ -25,7 +26,7 @@ importar { Terminal } desde "@es-js/terminal"
 importar { tiza } desde "@es-js/tiza"
 importar confetti desde "npm/canvas-confetti/+esm"
 
-asincrono funcion inicio() {
+asincrono funcion principal() {
   Terminal.limpiar()
 
   Terminal.escribir(
@@ -56,7 +57,7 @@ asincrono funcion inicio() {
     tirarFuegosArtificiales()
   }
 
-  inicio()
+  principal()
 }
 
 funcion tirarPapeles() {
@@ -103,7 +104,7 @@ funcion tirarFuegosArtificiales() {
   }, 250)
 }
 
-inicio()
+principal()
 `
 
 const files: Ref<Files> = ref([
@@ -113,6 +114,7 @@ const files: Ref<Files> = ref([
     active: true,
     tab: 0,
     icon: 'i-mdi-code-tags',
+    main: true,
   },
   {
     name: FILE_TESTS,
@@ -120,6 +122,13 @@ const files: Ref<Files> = ref([
     active: false,
     tab: 1,
   },
+  // {
+  //   name: 'lib.esjs',
+  //   content: '',
+  //   active: false,
+  //   tab: 0,
+  //   icon: 'i-mdi-code-tags',
+  // },
   {
     name: FILE_IMPORT_MAP,
     content: `{
