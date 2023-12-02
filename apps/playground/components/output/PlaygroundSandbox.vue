@@ -170,7 +170,7 @@ watch(
 <template>
   <AppContainer class="w-full h-full">
     <template #title>
-      <div class="flex flex-row items-center">
+      <div v-if="!settingsStore.embed" class="flex flex-row items-center">
         <AppButton
           description="Refrescar"
           icon="i-mdi-refresh"

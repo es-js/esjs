@@ -66,6 +66,7 @@ export const useLZShare = () => {
     url.searchParams.set('preview', JSON.stringify(settings.settings.value.preview))
     url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
     url.searchParams.set('language', useEditor().language.value)
+    url.searchParams.set('embed', String(settings.settings.value.embed))
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
 
     return url
@@ -109,6 +110,7 @@ export const useLZShare = () => {
       preview: JSON.parse(url.searchParams.get('preview') ?? '{}'),
       previewTab: decodePreviewTab(url),
       language: url.searchParams.get('language'),
+      embed: url.searchParams.get('embed'),
     }
   }
 
@@ -198,7 +200,21 @@ export const useLZShare = () => {
     // if (window.location.pathname === '/')
     //   return
 
-    const { layout, hideOptions, hideEditor, hidePreview, hideConsole, hideTests, readonlyCode, readonlyTests, tests, showAdvanced, preview, previewTab } = useLZShare().decodeSharedUrl()
+    const {
+      layout,
+      hideOptions,
+      hideEditor,
+      hidePreview,
+      hideConsole,
+      hideTests,
+      readonlyCode,
+      readonlyTests,
+      tests,
+      showAdvanced,
+      preview,
+      previewTab,
+      embed,
+    } = useLZShare().decodeSharedUrl()
 
     settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
     settings.setHideOptions(hideOptions === 'true')
@@ -211,6 +227,7 @@ export const useLZShare = () => {
     settings.setShowAdvanced(showAdvanced === 'true')
     settings.setPreview(preview)
     settings.setPreviewTab(previewTab)
+    settings.setEmbed(embed === 'true')
     useEditor().setLanguage(useLZShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
   }
 

@@ -39,6 +39,10 @@ watch(
   <Splitpanes
     :horizontal="settings.layout === 'vertical'"
     class="default-theme"
+    :class="{
+      'editor-hidden': settings.hideEditor,
+      'output-hidden': settings.hideOutput,
+    }"
   >
     <Pane
       v-show="!settings.hideEditor"

@@ -2,12 +2,23 @@
 import { useEditor } from '~/composables/useEditor'
 import { useLZShare } from '~/composables/useLZShare'
 import { usePlayground } from '~/composables/usePlayground'
+import { setDark } from '~/composables/dark'
 
 const editor = useEditor()
 
 const playground = usePlayground()
 
 const share = useLZShare()
+
+const settings = useSettings()
+
+const handleMessage = (event: MessageEvent) => {
+  const { type, data } = event.data
+
+  if (type === 'dark') {
+    setDark(data.dark)
+  }
+}
 
 onBeforeMount(async() => {
   share.setSettingsFromUrl()
@@ -18,6 +29,7 @@ onBeforeMount(async() => {
 onMounted(() => {
   window.addEventListener('beforeunload', playground.handleWindowClose)
   window.addEventListener('keyup', playground.handleWindowKeyup)
+  window.addEventListener('message', handleMessage, false)
 })
 
 onBeforeUnmount(() => {

@@ -21,6 +21,7 @@ const settings = ref({
     flowchart: false,
     hidden: false,
   },
+  embed: false,
 })
 
 const activePreview = computed((): 'terminal' | 'flowchart' | 'html' => {
@@ -116,6 +117,10 @@ export const useSettings = () => {
     }
   }
 
+  function setEmbed(embed: boolean) {
+    settings.value.embed = embed
+  }
+
   return {
     settings,
     setLayout,
@@ -134,6 +139,7 @@ export const useSettings = () => {
     setPreviewTab,
     setActivePreview,
     setActivePreviewTab,
+    setEmbed,
     activePreview,
     activePreviewTab,
   }
