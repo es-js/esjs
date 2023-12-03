@@ -45,14 +45,11 @@ const defaultOpenSrc = computed(
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div class="EmbedPlayground flex flex-col">
     <ClientOnly>
       <div class="w-full relative" :style="{ height: props.height }">
-        <iframe
-          :src="String(props.src)"
-          allow="clipboard-read; clipboard-write"
-          frameborder="0"
-          title="Previsualización en EsJS Editor"
+        <EsIframe
+          :src="props.src"
           class="w-full h-full border-0 rounded-[8px] bg-transparent"
         />
       </div>

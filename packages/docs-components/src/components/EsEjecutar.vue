@@ -37,7 +37,7 @@ const codeFromCodeBlock = computed(
 </script>
 
 <template>
-  <div class="flex flex-col my-[16px] group-hover">
+  <div class="EsEjecutar flex flex-col my-[16px] group-hover">
     <div ref="slot" class="hidden">
       <slot />
     </div>

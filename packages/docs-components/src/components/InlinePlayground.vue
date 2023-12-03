@@ -26,6 +26,10 @@ const props = defineProps({
   layout: {
     type: String,
   },
+  embed: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const running = ref(props.onlyPlayground)
@@ -51,6 +55,7 @@ const playgroundUrl = computed(
     url.searchParams.set('hideEditor', String(!props.onlyPlayground))
     url.searchParams.set('hideConsole', String(props.hideConsole))
     url.searchParams.set('hideOptions', String(props.hideOptions))
+    url.searchParams.set('embed', String(props.embed))
 
     return url
   },
@@ -66,7 +71,7 @@ function stop() {
 </script>
 
 <template>
-  <div class="flex flex-col my-[16px] group-hover">
+  <div class="InlinePlayground flex flex-col my-[16px] group-hover">
     <div ref="slot" :class="{ hidden: props.onlyPlayground }">
       <slot />
     </div>

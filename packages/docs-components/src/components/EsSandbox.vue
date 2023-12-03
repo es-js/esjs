@@ -51,5 +51,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="sandboxElement" class="w-full relative" :style="{ height: props.height }" />
+  <div ref="sandboxElement" class="EsSandbox w-full relative" :style="{ height: props.height }" />
 </template>
