@@ -1,16 +1,15 @@
 import { describe, expect, it } from 'vitest'
+import { MAIN_FILE } from '../../src/compiler/orchestrator'
 import {
-  addExportToFunctions,
+  addExportToFunctions, addInfiniteLoopProtection,
   escapeTemplateLiteral,
   formatCode,
-  generateImportStatement,
-  prepareCode,
-  prepareCodeAndTestsForPlayground,
-  removeTopLevelAwaits,
+  generateImportStatement, prepareCode, prepareFiles, prepareMainFile,
+  tryToParseFile,
   unifyImports,
-} from '../src/parser'
+} from '../../src/parser'
 
-describe('utils', () => {
+describe('parser', () => {
   it('unify duplicated imports', () => {
     const imports = `import { afirmar, afirmarIguales, assert, pruebas } from '@es-js/prueba'
 import { Terminal } from '@es-js/terminal'
@@ -92,39 +91,6 @@ import { Terminal } from '@es-js/terminal'`
     expect(escapeTemplateLiteral(code)).toBe(expected)
   })
 
-  it('removes top level awaits', () => {
-    const code = `async function init() {
-      const response = await fetch('https://google.com')
-    }
-    await init()
-    `
-
-    const expected = `async function init() {
-      const response = await fetch('https://google.com')
-    }
-    `
-
-    expect(formatCode(removeTopLevelAwaits(code))).toBe(formatCode(expected))
-  })
-
-  it('removes top level awaits inside if', () => {
-    const code = `async function init() {
-      const response = await fetch('https://google.com')
-    }
-
-    if (true) {
-      await init()
-    }
-    `
-
-    const expected = `async function init() {
-      const response = await fetch('https://google.com')
-    }
-    `
-
-    expect(formatCode(removeTopLevelAwaits(code))).toBe(formatCode(expected))
-  })
-
   it('adds export to function', () => {
     const code = formatCode(`function foo() {
 return 'foo';
@@ -148,27 +114,40 @@ return 'foo';
     expect(formatCode(generateImportStatement(addExportToFunctions(code), './foo.js'))).toBe(expected)
   })
 
-  it('prepareCodeAndTestsForPlayground', () => {
-    const code = ''
-    const tests = ''
-
-    const result = prepareCodeAndTestsForPlayground(code, tests)
-
-    expect(result.code).toBe('')
-    expect(result.testsCode).toBe('')
+  it('adds infinite loop protection', () => {
+    const code = 'while (true) {}'
+    const protectedCode = addInfiniteLoopProtection(code)
+    expect(protectedCode).toContain('Date.now()')
   })
 
-  it('prepareCodeAndTestsForPlayground 2', () => {
-    const code = 'Terminal.escribir(\'test\')'
+  it('prepares code correctly', () => {
+    const code = 'funcion prueba() { retornar \'Hola, mundo!\'; }'
+    const preparedCode = prepareCode(code)
+    expect(preparedCode).toContain('export function prueba')
+  })
 
-    const tests = ''
+  it('prepares files correctly', () => {
+    const files = [
+      {
+        name: MAIN_FILE,
+        content: 'funcion prueba() { retornar \'Hola, mundo!\'; }',
+        main: true,
+      },
+    ]
 
-    const result = prepareCodeAndTestsForPlayground(
-      code,
-      tests,
-    )
+    const preparedFiles = prepareFiles(files)
 
-    expect(result.code).toBe('Terminal.log(\'test\');')
-    expect(result.testsCode).toBe('')
+    expect(preparedFiles[0].code).toContain('export function prueba')
+  })
+
+  it('prepares main file correctly', () => {
+    const file = { name: 'main.js', content: 'funcion prueba() { retornar \'Hola, mundo!\'; }' }
+    const preparedFile = prepareMainFile(file)
+    expect(preparedFile.code).toContain('export function prueba')
+  })
+
+  it('throws error when parsing invalid file', () => {
+    const file = { name: 'main.js', content: 'funcion prueba() { retornar \'Hola, mundo!\'; ' } // Falta el cierre de llave
+    expect(() => tryToParseFile(file)).toThrow()
   })
 })

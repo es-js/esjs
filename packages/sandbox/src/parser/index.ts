@@ -158,32 +158,6 @@ export function escapeTemplateLiteral(code: string) {
   return code.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
 }
 
-export function removeTopLevelAwaits(code: string) {
-  const ast = espree.parse(code, {
-    range: true,
-    ecmaVersion: 'latest',
-    jsx: false,
-    loc: true,
-    tolerant: true,
-    sourceType: 'module',
-  })
-
-  const topLevelAwaits = ast.body.filter((node: any) => {
-    if (node.type === 'AwaitExpression')
-      return true
-
-    return node.type === 'ExpressionStatement'
-      && node.expression.type === 'AwaitExpression'
-  })
-
-  topLevelAwaits.forEach((node: any) => {
-    const index = ast.body.indexOf(node)
-    ast.body.splice(index, 1)
-  })
-
-  return escodegen.generate(ast)
-}
-
 /**
  * Agrega `export` a las funciones declaradas.
  * @param code
@@ -291,7 +265,7 @@ ${splittedCode.imports}
   }
 }
 
-function tryToParseFile(file: SandboxFile) {
+export function tryToParseFile(file: SandboxFile) {
   try {
     return prepareCode(file.content)
   }

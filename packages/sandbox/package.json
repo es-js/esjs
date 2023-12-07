@@ -25,7 +25,8 @@
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
-    "vite-plugin-dts": "^1.7.3"
+    "vite-plugin-dts": "^1.7.3",
+    "vitest": "^1.0.1"
   },
   "type": "module",
   "exports": {
