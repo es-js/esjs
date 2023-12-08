@@ -212,7 +212,7 @@ function confettis() {
         :state="state"
         :validate="validate"
         class="space-y-2"
-        @submit.prevent="submit"
+        @submit="submit"
       >
         <UFormGroup
           label="Nombre del repositorio"
