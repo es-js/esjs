@@ -32,6 +32,10 @@ Source:
 
 <!--@include: ./demo/EsEjecutar/Theme.md-->
 
+### Browser Window
+
+<!--@include: ./demo/EsEjecutar/BrowserWindow.md-->
+
 ## Reference
 
 ### Properties

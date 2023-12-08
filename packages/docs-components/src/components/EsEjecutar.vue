@@ -29,6 +29,14 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  browserWindow: {
+    type: Boolean,
+    default: false,
+  },
+  browserWindowUrl: {
+    type: String,
+    default: '/',
+  },
 })
 
 const slot: Ref<null | HTMLElement> = ref(null)
@@ -46,7 +54,25 @@ const codeFromCodeBlock = computed(
       <slot />
     </div>
 
-    <div class="flex flex-col print:hidden">
+    <div
+      class="flex flex-col print:hidden"
+      :class="{
+        BrowserWindow: props.browserWindow,
+      }"
+    >
+      <div
+        v-if="props.browserWindow"
+        class="py-1 px-2 rounded-tl rounded-tr flex items-center space-x-2 bg-gray-100 dark:bg-gray-800"
+      >
+        <div class="flex flex-row space-x-1">
+          <div class="rounded-full h-3 w-3 bg-red-400" />
+          <div class="rounded-full h-3 w-3 bg-yellow-400" />
+          <div class="rounded-full h-3 w-3 bg-green-400" />
+        </div>
+        <div class="flex-auto px-2 py-1 rounded text-xs bg-gray-200 dark:bg-gray-700">
+          {{ props.browserWindowUrl }}
+        </div>
+      </div>
       <EsSandbox
         v-if="codeFromCodeBlock"
         :code="codeFromCodeBlock"
@@ -58,3 +84,13 @@ const codeFromCodeBlock = computed(
     </div>
   </div>
 </template>
+
+<style>
+.BrowserWindow {
+  @apply rounded border border-gray-300 dark:border-gray-700;
+}
+
+.BrowserWindow > .EsSandbox > iframe {
+  @apply rounded-b;
+}
+</style>

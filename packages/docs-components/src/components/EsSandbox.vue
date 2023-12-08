@@ -59,12 +59,6 @@ function triggerDarkMode() {
   if (!iframe.value)
     return
 
-  console.debug(['triggerDarkMode', {
-    iframe: iframe.value,
-    isDark: isDark.value,
-    theme: theme.value,
-  }])
-
   iframe.value.contentWindow!.postMessage({
     action: 'DARK_MODE',
     cmd_id: Math.random() * 1000,
