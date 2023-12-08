@@ -28,6 +28,10 @@ Source:
 
 <<< @/components/demo/EsEjecutar/HidePreview.md
 
+### Theme
+
+<!--@include: ./demo/EsEjecutar/Theme.md-->
+
 ## Reference
 
 ### Properties

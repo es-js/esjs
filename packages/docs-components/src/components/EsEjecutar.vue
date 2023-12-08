@@ -25,6 +25,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  theme: {
+    type: String,
+    default: null,
+  },
 })
 
 const slot: Ref<null | HTMLElement> = ref(null)
@@ -49,6 +53,7 @@ const codeFromCodeBlock = computed(
         :hide-preview="props.hidePreview"
         :hide-console="props.hideConsole"
         :height="props.height"
+        :theme="props.theme"
       />
     </div>
   </div>
