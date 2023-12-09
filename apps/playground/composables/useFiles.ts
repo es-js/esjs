@@ -145,6 +145,8 @@ const files: Ref<Files> = ref([
   },
 ])
 
+const loading = ref(true)
+
 export const useFiles = () => {
   function updateFile(name: string, content: string) {
     const file = files.value.find(file => file.name === name)
@@ -184,6 +186,10 @@ export const useFiles = () => {
     })
   }
 
+  function setLoading(value: boolean) {
+    loading.value = value
+  }
+
   return {
     files,
     updateFile,
@@ -192,5 +198,7 @@ export const useFiles = () => {
     getActiveFileContent,
     getActiveFile,
     setActiveFile,
+    setLoading,
+    loading,
   }
 }

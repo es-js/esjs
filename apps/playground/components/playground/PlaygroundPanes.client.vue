@@ -14,7 +14,7 @@ const settings = useSettings().settings
 
 <template>
   <div>
-    <PlaygroundMobileView v-if="!mdAndUp && settings.layout === 'horizontal'" />
-    <PlaygroundDesktopView v-else />
+    <PlaygroundDesktopView v-if="mdAndUp || settings.layout === 'vertical'" />
+    <PlaygroundMobileView v-else />
   </div>
 </template>

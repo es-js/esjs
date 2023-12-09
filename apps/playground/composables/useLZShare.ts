@@ -232,6 +232,8 @@ export const useLZShare = () => {
   }
 
   async function loadCodeFromUrl() {
+    useFiles().setLoading(true)
+
     const code = await getCodeFromUrl()
 
     const testsCode = getTestsCodeFromUrl()
@@ -241,7 +243,7 @@ export const useLZShare = () => {
     useFiles().updateFile(FILE_TESTS, testsCode ?? '')
 
     setTimeout(() => {
-      useEventBus('sandbox').emit('refresh')
+      useFiles().setLoading(false)
     })
   }
 

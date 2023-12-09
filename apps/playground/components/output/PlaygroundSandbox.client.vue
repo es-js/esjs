@@ -34,12 +34,17 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  proxy.destroy()
+  if (proxy) {
+    proxy.destroy()
+  }
 })
 
 async function init() {
-  if (sandbox) {
+  if (proxy) {
     proxy.destroy()
+  }
+
+  if (sandbox) {
     const esjsSandboxElement = document.getElementById('esjs-sandbox')
     if (esjsSandboxElement) {
       esjsSandboxElement.innerHTML = ''
