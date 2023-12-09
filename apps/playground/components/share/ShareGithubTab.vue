@@ -3,8 +3,8 @@ import confetti from 'canvas-confetti'
 import randomWords from 'random-spanish-words'
 import { defineEmits } from 'vue'
 import { z } from 'zod'
-import { FILE_CODE, useFiles } from '~/composables/useFiles'
 import useAuth from '~/composables/useAuth'
+import { FILE_CODE, useFiles } from '~/composables/useFiles'
 import useOctokit from '~/composables/useOctokit'
 
 const emit = defineEmits(['close'])

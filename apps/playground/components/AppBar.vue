@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useGrid } from 'vue-screen'
 import { computed } from 'vue'
+import { useGrid } from 'vue-screen'
 import ExamplesModal from '~/components/examples/ExamplesModal.vue'
 import { isDark, toggleDark } from '~/composables/dark'
 import { useLZShare } from '~/composables/useLZShare'

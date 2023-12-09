@@ -4,10 +4,10 @@ import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
-import { useEditor } from '~/composables/useEditor'
-import { FILE_CODE, FILE_IMPORT_MAP, FILE_TESTS, useFiles } from '~/composables/useFiles'
-import { useSettings } from '~/composables/useSettings'
 import AppEditor from '~/components/input/AppEditor.client.vue'
+import { useEditor } from '~/composables/useEditor'
+import { FILE_TESTS, useFiles } from '~/composables/useFiles'
+import { useSettings } from '~/composables/useSettings'
 import '~/styles/splitpanes.css'
 
 const grid = useGrid('tailwind')

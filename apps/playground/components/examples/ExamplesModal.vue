@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { isDark } from '~/composables/dark'
 import ExampleCategoryItems from '~/components/examples/ExampleCategoryItems.vue'
+import { isDark } from '~/composables/dark'
 
 const emit = defineEmits(['open', 'close'])
 

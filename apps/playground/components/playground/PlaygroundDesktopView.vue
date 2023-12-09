@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { watch } from 'vue'
 import { Pane, Splitpanes } from 'splitpanes'
+import 'splitpanes/dist/splitpanes.css'
+import { watch } from 'vue'
 import PlaygroundOutput from '~/components/output/PlaygroundOutput.vue'
 import PlaygroundEditorsPane from '~/components/playground/PlaygroundEditorsPane.vue'
 import { useSettings } from '~/composables/useSettings'
-import 'splitpanes/dist/splitpanes.css'
 import '~/styles/splitpanes.css'
 
 const settings = useSettings().settings
