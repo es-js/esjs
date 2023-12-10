@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     'nuxt-gtag',
     '@nuxtjs/supabase',
     '@davestewart/nuxt-scrollbar',
+    '@nuxt/content',
   ],
 
   runtimeConfig: {

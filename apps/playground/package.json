@@ -16,6 +16,7 @@
     "@es-js/language-tools": "^0.0.15",
     "@es-js/sandbox": "0.0.9",
     "@iconify-json/mdi": "^1.1.54",
+    "@nuxt/content": "^2.9.0",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/ui": "^2.10.0",
