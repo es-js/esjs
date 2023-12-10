@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PlaygroundSandbox from '~/components/output/PlaygroundSandbox.client.vue'
+import PlaygroundSandbox from '~/components/output/PlaygroundSandbox.vue'
 
 const files = useFiles()
 </script>

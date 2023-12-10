@@ -21,7 +21,7 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
       <div class="flex flex-row items-center space-x-2">
         <div class="flex flex-row items-center space-x-1">
           <UButton
-            to="/aprender"
+            to="/"
             variant="link"
             :padded="false"
             class="w-7"

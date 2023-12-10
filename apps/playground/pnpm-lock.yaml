@@ -21,13 +21,13 @@ devDependencies:
     version: 1.0.0(postcss@8.4.31)
   '@es-js/core':
     specifier: 0.0.19
-    version: link:../../packages/core
+    version: 0.0.19
   '@es-js/language-tools':
     specifier: ^0.0.15
-    version: link:../../packages/language-tools
+    version: 0.0.15
   '@es-js/sandbox':
     specifier: 0.0.9
-    version: link:../../packages/sandbox
+    version: 0.0.9
   '@iconify-json/mdi':
     specifier: ^1.1.54
     version: 1.1.54
@@ -534,6 +534,18 @@ packages:
       tailwindcss: 3.3.5
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@es-js/core@0.0.19:
+    resolution: {integrity: sha512-f4iax7oknzjAxjMAYaSCW8wvBNurcczf6RG4/q0luqDvhaJKMRWy2HdyuorojxhvmQL3Fdcz8//pfPrfyMJssg==}
+    dev: true
+
+  /@es-js/language-tools@0.0.15:
+    resolution: {integrity: sha512-Kix++gZaH2sPqnXyLu+TQAbpdjA+i7XsU5b3HFB/4JI5KcHlToYpakxdDMdsrmw7QTj1oUGIyv6u4/bGqo7lZA==}
+    dev: true
+
+  /@es-js/sandbox@0.0.9:
+    resolution: {integrity: sha512-uMifBmoQ11mfA9fZrmKZP/NUuiFtDVohTKdOvp7JIXAchgRoQAgfEaDWvh9QrVzbAwg+7GwYOcnXOM1Yz7vgtQ==}
     dev: true
 
   /@esbuild/android-arm64@0.18.20:

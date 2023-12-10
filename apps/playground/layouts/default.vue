@@ -17,9 +17,3 @@ const settings = useSettings().settings
     <UNotifications />
   </div>
 </template>
-
-<style>
-html {
-  overflow: hidden !important;
-}
-</style>

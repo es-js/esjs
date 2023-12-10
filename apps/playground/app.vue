@@ -1,20 +1,12 @@
 <script setup lang="ts">
+import '~/styles/base.css'
+import '~/styles/prose.css'
 import 'splitpanes/dist/splitpanes.css'
 import '~/styles/splitpanes.css'
 </script>
 
 <template>
-  <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-
-    <UNotifications />
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
-
-<style>
-html {
-  overflow: hidden !important;
-}
-</style>

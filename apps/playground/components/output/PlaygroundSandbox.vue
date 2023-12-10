@@ -51,6 +51,11 @@ async function init() {
     }
   }
 
+  if (!document.getElementById('esjs-sandbox')) {
+    console.warn('no esjs-sandbox element')
+    return
+  }
+
   sandbox = createSandbox('esjs-sandbox', {
     theme: isDark.value ? 'dark' : 'light',
     hidePreview: settingsStore.value.hidePreview,

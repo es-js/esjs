@@ -1,0 +1,36 @@
+.prose a {
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.prose :where(h1 a, h2 a, h3 a, h4 a) {
+  border-bottom: none !important;
+  text-decoration: none !important;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.dark.prose,
+.dark .prose p,
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6,
+.dark .prose li,
+.dark .prose blockquote,
+.dark .prose pre,
+.dark .prose code
+{
+  @apply text-gray-100 !important;
+}
+.dark .prose a {
+  @apply text-indigo-300 !important;
+}
+
+

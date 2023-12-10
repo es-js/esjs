@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import LearnBar from '~/components/learn/LearnBar.vue'
-
-const settings = useSettings().settings
 </script>
 
 <template>
@@ -9,19 +7,9 @@ const settings = useSettings().settings
     <div class="flex flex-col w-full h-full">
       <LearnBar class="h-10" />
 
-      <div class="flex flex-row flex-grow">
-        <div class="relative flex flex-1">
-          <slot />
-        </div>
-      </div>
+      <slot />
     </div>
 
     <UNotifications />
   </div>
 </template>
-
-<style>
-html {
-  overflow: hidden !important;
-}
-</style>

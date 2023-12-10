@@ -52,4 +52,14 @@ export default defineNuxtConfig({
       exclude: [],
     },
   },
+
+  content: {
+    documentDriven: true,
+    highlight: {
+      theme: {
+        default: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+    },
+  },
 })

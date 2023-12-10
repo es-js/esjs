@@ -2,6 +2,7 @@ import { compressToURL, decompressFromURL } from '@amoutonbrady/lz-string'
 import { useClipboard, useDark } from '@vueuse/core'
 import { useEditor } from './useEditor'
 import { useSettings } from './useSettings'
+import { learnDomain } from '~/constants/app'
 import { FILE_CODE, FILE_TESTS, INITIAL_CODE, useFiles } from '~/composables/useFiles'
 import { useToast } from '#imports'
 
@@ -149,6 +150,10 @@ export const useLZShare = () => {
 
       if (pathname.length > 6) {
         return decompressFromURL(pathname.substring(1)) ?? INITIAL_CODE
+      }
+
+      if (learnDomain.includes(url.host)) {
+        return ''
       }
 
       return INITIAL_CODE
