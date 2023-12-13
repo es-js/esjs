@@ -9,7 +9,9 @@ Este tutorial interactivo te permitirá aprender [EsJS](https://es.js.org) de fo
 
 **Trabajo en progreso**. Si quieres colaborar, puedes hacerlo en [GitHub](https://github.com/es-js/esjs).
 
-## Básico
+## Básicos
 
 1. [Hola Mundo!](/basicos/hola-mundo)
-2. [Variables](/basicos/variables)
+2. [Comentarios](/basicos/comentarios)
+3. [Variables](/basicos/variables)
+4. [Constantes](/basicos/constantes)
