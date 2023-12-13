@@ -25,12 +25,13 @@
 .dark .prose li,
 .dark .prose blockquote,
 .dark .prose pre,
-.dark .prose code
+.dark .prose code,
+.dark .prose strong
 {
-  @apply text-gray-100 !important;
+  @apply text-gray-100;
 }
 .dark .prose a {
-  @apply text-indigo-300 !important;
+  @apply text-indigo-300;
 }
 
 

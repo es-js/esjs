@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json' assert { type: 'json' }
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
@@ -60,6 +62,14 @@ export default defineNuxtConfig({
         default: 'vitesse-light',
         dark: 'vitesse-dark',
       },
+      preload: [
+        {
+          ...esjsSyntax,
+          id: 'esjs',
+          name: 'esjs',
+          scopeName: 'source.esjs',
+        },
+      ],
     },
   },
 })
