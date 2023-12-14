@@ -34,10 +34,7 @@ asincrono funcion principal() {
   )
 
   Terminal.escribir(
-    "Aprende más sobre EsJS en " +
-      "<a href='https://es.js.org' target='_blank'>" +
-      tiza.indigo800.fondoIndigo50(" https://es-js.org ") +
-      "</a>"
+    "Aprende más sobre EsJS en " + "<a href='https://es.js.org' target='_blank'>" + tiza.indigo800.fondoIndigo50(" https://es.js.org ") + "</a>"
   )
 
   Terminal.escribir("*".repetir(50)) // Separador

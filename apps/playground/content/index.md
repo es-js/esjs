@@ -12,6 +12,12 @@ Este tutorial interactivo te permitirá aprender [EsJS](https://es.js.org) de fo
 ## Básicos
 
 1. [Hola Mundo!](/basicos/hola-mundo)
-2. [Comentarios](/basicos/comentarios)
-3. [Variables](/basicos/variables)
-4. [Constantes](/basicos/constantes)
+2. [Identificadores](/basicos/identificadores)
+3. [Comentarios](/basicos/comentarios)
+4. [Variables](/basicos/variables)
+5. [Constantes](/basicos/constantes)
+6. [Tipos de datos](/basicos/tipos-de-datos)
+7. [Operadores](/basicos/operadores)
+8. [Estructuras de control](/basicos/estructuras-de-control)
+9. [Funciones](/basicos/funciones)
+10. [Módulos](/basicos/modulos)
