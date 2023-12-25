@@ -213,8 +213,8 @@ export const storageType = new Map([
   ['global', 'var'],
   ['var', 'let'],
   ['porDefecto', 'default'],
-  ['obtener', 'get'],
-  ['establecer', 'set'],
+  // ['obtener', 'get'],
+  // ['establecer', 'set'],
   ['funcion', 'function'],
 ])
 
