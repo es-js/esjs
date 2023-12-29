@@ -1,47 +1,28 @@
-import { keywords } from './keywords'
+import type { SingleCharacterToken, Token } from './token'
+import { token } from './token'
 
-function invertMap(map: Map<string, string>) {
-  const invertedMap = new Map()
-  for (const [key, value] of map.entries())
-    invertedMap.set(value, key)
-
-  return invertedMap
-}
-
-function getDictionary(reverse = false) {
-  if (reverse)
-    return invertMap(keywords)
-
-  return keywords
-}
-
-export function transpile(input: string, reverse = false) {
+export function tokenize(input: string): Token[] {
   let current = 0
-  let output = ''
-  const dictionary = getDictionary(reverse)
+  const tokens = []
 
   function finishIdentifier() {
     let name = ''
-    while (!isWhitespace(input[current]) && !isSpecialCharacter(input[current]) && !isBracket(input[current]) && !isTick(input[current]) && !isUndefined(input[current])) {
+    while (!isWhitespace(input[current]) && !isSpecialCharacter(input[current]) && !isSingleCharacter(input[current]) && !isTick(input[current]) && !isUndefined(input[current])) {
       name += input[current]
       current++
     }
 
-    const translation = dictionary.get(name)
-
-    return translation || name
+    return token.keyword(name)
   }
 
-  function finishSpecialCharacters() {
+  function finishSpecialCharacter() {
     let chars = ''
     while (isSpecialCharacter(input[current])) {
       chars += input[current]
       current++
     }
 
-    const translation = dictionary.get(chars)
-
-    return translation || chars
+    return token.specialCharacter(chars)
   }
 
   function finishStringLiteral(tick: string) {
@@ -56,10 +37,25 @@ export function transpile(input: string, reverse = false) {
     if (isTick(input[current])) {
       value += input[current]
       current++
-      return value
+      return token.stringLiteral(value)
     }
 
     throw new Error('Unterminated string, expected a closing \', " or `')
+  }
+
+  function finishWhitespace() {
+    let value = ''
+    while (isWhitespace(input[current])) {
+      value += input[current]
+      current++
+    }
+
+    return token.whitespace(value)
+  }
+
+  function finishComment(value: string) {
+    current += value.length
+    return token.comment(value)
   }
 
   while (current < input.length) {
@@ -67,36 +63,34 @@ export function transpile(input: string, reverse = false) {
 
     const { isComment, end } = checkComment(input, current)
     if (isComment) {
-      output += input.slice(current, end + 1)
-      current = end + 1
+      tokens.push(finishComment(input.slice(current, end + 1)))
       continue
     }
 
     if (isWhitespace(currentChar)) {
-      output += currentChar
-      current++
+      tokens.push(finishWhitespace())
       continue
     }
 
     if (isTick(currentChar)) {
-      output += finishStringLiteral(currentChar)
+      tokens.push(finishStringLiteral(currentChar))
     }
-    else if (isAlpha(currentChar)) {
-      output += finishIdentifier()
+    else if (isSingleCharacter(currentChar)) {
+      tokens.push(getCharToken(currentChar))
+      current++
     }
     else if (isSpecialCharacter(currentChar)) {
-      output += finishSpecialCharacters()
+      tokens.push(finishSpecialCharacter())
     }
-    else if (isBracket(currentChar)) {
-      output += currentChar
-      current++
+    else if (isAlpha(currentChar)) {
+      tokens.push(finishIdentifier())
     }
     else {
       throw new Error(`Unknown character: ${currentChar}`)
     }
   }
 
-  return output
+  return tokens
 }
 
 function isAlpha(char: string) {
@@ -111,12 +105,8 @@ function isTick(char: string) {
   return ['"', '\'', '`'].includes(char)
 }
 
-function isBracket(char: string) {
-  return ['{', '}'].includes(char)
-}
-
 function isSpecialCharacter(char: string) {
-  return !isWhitespace(char) && !isAlpha(char) && !isTick(char) && !isBracket(char)
+  return !isWhitespace(char) && !isAlpha(char) && !isTick(char) && !isSingleCharacter(char)
 }
 
 function isUndefined(value: any) {
@@ -143,4 +133,22 @@ function checkComment(input: string, current: number) {
   }
 
   return { isComment: false, end: current }
+}
+
+const knownSingleCharacters = new Map([
+  ['(', token.leftParen],
+  [')', token.rightParen],
+  ['{', token.leftCurly],
+  ['}', token.rightCurly],
+  ['.', token.dot],
+  [';', token.semicolon],
+])
+
+function isSingleCharacter(char: string): char is SingleCharacterToken {
+  return knownSingleCharacters.has(char as SingleCharacterToken)
+}
+
+function getCharToken(char: SingleCharacterToken) {
+  const builder = knownSingleCharacters.get(char)
+  return builder!()
 }

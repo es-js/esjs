@@ -1,5 +1,14 @@
-asincrono inicio = () => {
+asincrono funcion principal() {
 	retornar verdadero
 }
 
-inicio()
+const objeto = {
+	miFuncion: asincrono funcion () {
+		retornar verdadero
+	},
+	miFuncionFlecha: asincrono () => {
+		retornar verdadero
+	},
+}
+
+principal()

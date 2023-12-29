@@ -1,6 +1,6 @@
 {
   "name": "@es-js/core",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "type": "module",
   "scripts": {
     "build": "unbuild",
@@ -23,9 +23,9 @@
       "require": "./dist/index.cjs"
     },
     "./keywords": {
-      "types": "./dist/keywords.d.ts",
-      "import": "./dist/keywords.mjs",
-      "require": "./dist/keywords.cjs"
+      "types": "./dist/compiler/keywords.d.ts",
+      "import": "./dist/compiler/keywords.mjs",
+      "require": "./dist/compiler/keywords.cjs"
     },
     "./utils": {
       "types": "./dist/utils.d.ts",
@@ -41,7 +41,7 @@
       "*": [
         "./dist/*",
         "./dist/index.d.ts",
-        "./dist/keywords.d.ts",
+        "./dist/compiler/keywords.d.ts",
         "./dist/utils.d.ts"
       ]
     }

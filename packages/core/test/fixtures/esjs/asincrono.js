@@ -1,5 +1,14 @@
-async inicio = () => {
+async function principal() {
 	return true
 }
 
-inicio()
+const objeto = {
+	miFuncion: async function () {
+		return true
+	},
+	miFuncionFlecha: async () => {
+		return true
+	},
+}
+
+principal()

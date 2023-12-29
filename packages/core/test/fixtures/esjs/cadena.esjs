@@ -2,4 +2,4 @@ const foo = crear Cadena('bar');
 
 const searchResult = foo.buscarRegex('a');
 
-retornar foo.caracterEn(0);
+foo.caracterEn(0);

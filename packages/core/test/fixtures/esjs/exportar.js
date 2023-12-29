@@ -1,1 +1,3 @@
-export default const foo = 'bar'
+export default function() {
+  return true;
+}

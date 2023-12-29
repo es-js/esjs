@@ -1,0 +1,187 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`tokenizer > tokenizes a simple program 1`] = `
+[
+  {
+    "type": "Whitespace",
+    "value": "
+",
+  },
+  {
+    "type": "Comment",
+    "value": "// Funcion principal: if (a > b) { return a; } else { return b; }
+",
+  },
+  {
+    "type": "Whitespace",
+    "value": "
+",
+  },
+  {
+    "type": "Comment",
+    "value": "/**
+* Funcion principal
+* @param {string} mensaje
+* @returns {string}
+*",
+  },
+  {
+    "type": "SpecialCharacter",
+    "value": "/",
+  },
+  {
+    "type": "Whitespace",
+    "value": "
+",
+  },
+  {
+    "name": "funcion",
+    "type": "Keyword",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "name": "principal",
+    "type": "Keyword",
+  },
+  {
+    "type": "LeftParen",
+    "value": "(",
+  },
+  {
+    "name": "mensaje",
+    "type": "Keyword",
+  },
+  {
+    "type": "RightParen",
+    "value": ")",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "type": "LeftCurly",
+    "value": "{",
+  },
+  {
+    "type": "Whitespace",
+    "value": "
+  ",
+  },
+  {
+    "name": "const",
+    "type": "Keyword",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "name": "hola",
+    "type": "Keyword",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "type": "SpecialCharacter",
+    "value": "=",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "type": "StringLiteral",
+    "value": "'hola'",
+  },
+  {
+    "type": "Semicolon",
+    "value": ";",
+  },
+  {
+    "type": "Whitespace",
+    "value": "
+  ",
+  },
+  {
+    "name": "consola",
+    "type": "Keyword",
+  },
+  {
+    "type": "Dot",
+    "value": ".",
+  },
+  {
+    "name": "escribir",
+    "type": "Keyword",
+  },
+  {
+    "type": "LeftParen",
+    "value": "(",
+  },
+  {
+    "name": "hola",
+    "type": "Keyword",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "type": "SpecialCharacter",
+    "value": "+",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "name": "mensaje",
+    "type": "Keyword",
+  },
+  {
+    "type": "RightParen",
+    "value": ")",
+  },
+  {
+    "type": "Semicolon",
+    "value": ";",
+  },
+  {
+    "type": "Whitespace",
+    "value": "
+
+  ",
+  },
+  {
+    "name": "retornar",
+    "type": "Keyword",
+  },
+  {
+    "type": "Whitespace",
+    "value": " ",
+  },
+  {
+    "name": "mensaje",
+    "type": "Keyword",
+  },
+  {
+    "type": "Semicolon",
+    "value": ";",
+  },
+  {
+    "type": "Whitespace",
+    "value": "
+",
+  },
+  {
+    "type": "RightCurly",
+    "value": "}",
+  },
+]
+`;

@@ -1,1 +1,3 @@
-exportar porDefecto const foo = 'bar'
+exportar porDefecto funcion() {
+  retornar verdadero;
+}
