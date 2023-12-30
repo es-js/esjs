@@ -8,7 +8,6 @@ import {
   storageType,
   supportFunction,
   variableLanguage,
-  vueRef,
 } from '@es-js/core/keywords'
 
 function includeKeywords(k) {
@@ -49,10 +48,6 @@ const esjsRepository = {
     {
       name: 'storage.type.esjs',
       match: includeKeywords(storageType),
-    },
-    {
-      name: 'keyword.other.esjs',
-      match: includeKeywords(vueRef),
     },
     {
       name: 'keyword.other.esjs',
