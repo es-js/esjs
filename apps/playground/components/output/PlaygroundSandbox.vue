@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { createSandbox } from '@es-js/sandbox/render'
 import { useEventBus } from '@vueuse/core'
-import debounce from 'lodash.debounce'
+import debounce from 'just-debounce-it'
 import { onMounted, onUnmounted, watch } from 'vue'
 import { isDark } from '~/composables/dark'
 import { useEditor } from '~/composables/useEditor'
