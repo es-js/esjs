@@ -201,7 +201,7 @@ watch(
     }"
     lang="javascript"
     class="w-full h-full"
-    @update:modelValue="emit('update:modelValue', $event)"
+    @update:model-value="emit('update:modelValue', $event)"
     @load="onLoad"
   />
 </template>

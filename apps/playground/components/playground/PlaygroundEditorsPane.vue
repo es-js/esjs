@@ -129,7 +129,7 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
               v-if="!settings.hideTests"
               name="tests"
               :model-value="files.getFileContent(FILE_TESTS)"
-              @update:modelValue="files.updateFile(FILE_TESTS, $event)"
+              @update:model-value="files.updateFile(FILE_TESTS, $event)"
             />
           </div>
         </Pane>

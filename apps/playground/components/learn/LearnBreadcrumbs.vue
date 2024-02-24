@@ -9,15 +9,17 @@ type BreadcrumbItem = {
 
 function findNavItemFromPath(path: string, items = navigation.value): NavItem | undefined {
   const item = items.find(i => i._path === path)
-  if (item)
+  if (item) {
     return item
+  }
 
   const parts = path.split('/').filter(Boolean)
   for (let i = parts.length - 1; i > 0; i--) {
     const parentPath = `/${parts.slice(0, i).join('/')}`
     const parent = items.find(i => i._path === parentPath)
-    if (parent)
+    if (parent) {
       return findNavItemFromPath(path, parent.children || [])
+    }
   }
 }
 
@@ -47,14 +49,18 @@ const breadcrumbs = computed(() => {
 
 <template>
   <div class="w-full px-2 flex items-center h-8 bg-gray-100 dark:bg-gray-800">
-    <template v-for="(breadcrumb, idx) in breadcrumbs">
-      <div v-if="breadcrumb.path" class="inline-flex items-center">
-        <UIcon :name="idx === 0 ? 'i-mdi-text-box-outline' : 'i-mdi-chevron-right'"
-               class="text-gray-500 dark:text-gray-400 px-3.5 w-4 h-4" />
-        <NuxtLink :to="breadcrumb.path" class="text-sm hover:text-primary">
-          {{ breadcrumb.title }}
-        </NuxtLink>
-      </div>
-    </template>
+    <div
+      v-for="(breadcrumb, idx) in breadcrumbs"
+      :key="`breadcrumb-${idx}-${breadcrumb.path}`"
+      class="inline-flex items-center"
+    >
+      <UIcon
+        :name="idx === 0 ? 'i-mdi-text-box-outline' : 'i-mdi-chevron-right'"
+        class="text-gray-500 dark:text-gray-400 px-3.5 w-4 h-4"
+      />
+      <NuxtLink :to="breadcrumb.path" class="text-sm hover:text-primary">
+        {{ breadcrumb.title }}
+      </NuxtLink>
+    </div>
   </div>
 </template>

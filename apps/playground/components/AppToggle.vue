@@ -41,7 +41,7 @@ const emit = defineEmits(['change'])
 
       <UToggle
         :model-value="props.checked"
-        @update:modelValue="emit('change', $event)"
+        @update:model-value="emit('change', $event)"
       />
 
       <span class="ml-3 text-xs font-medium text-gray-900 dark:text-gray-300">
