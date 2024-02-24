@@ -34,4 +34,8 @@
   @apply text-indigo-300;
 }
 
+.prose :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  @apply p-4 my-4 bg-gray-100 dark:bg-gray-800 rounded-lg;
+}
+
 

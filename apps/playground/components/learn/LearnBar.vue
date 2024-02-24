@@ -32,7 +32,8 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
               class="w-7 h-7 rounded"
             >
           </UButton>
-          <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Aprender.EsJS.Dev</span>
+          <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
+          <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Tutorial</span>
         </div>
       </div>
 
