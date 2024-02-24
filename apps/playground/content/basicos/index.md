@@ -1,3 +1,7 @@
+---
+navigation: false
+---
+
 # Conceptos básicos
 
 En esta sección exploraremos los conceptos básicos de la programación en EsJS.
