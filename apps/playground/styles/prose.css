@@ -1,17 +1,38 @@
+/* Remove underlines from links */
 .prose a {
   text-decoration: none;
 }
-
 .prose a:hover {
   text-decoration: underline;
   text-decoration-style: dotted;
 }
-
+/* Remove underlines from headings */
 .prose :where(h1 a, h2 a, h3 a, h4 a) {
   border-bottom: none !important;
   text-decoration: none !important;
   color: inherit;
   font-weight: inherit;
+}
+
+/* Text/Link colors */
+.prose,
+.prose p,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6,
+.prose li,
+.prose blockquote,
+.prose pre,
+.prose code,
+.prose strong
+{
+  @apply text-black;
+}
+.prose a:not(h1 a):not(h2 a):not(h3 a):not(h4 a) {
+  @apply text-indigo-500;
 }
 
 .dark.prose,
@@ -30,10 +51,11 @@
 {
   @apply text-gray-100;
 }
-.dark .prose a {
+.dark .prose a:not(h1 a):not(h2 a):not(h3 a):not(h4 a) {
   @apply text-indigo-300;
 }
 
+/* Code blocks */
 .prose :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   @apply p-4 my-4 bg-white dark:bg-[#121212] rounded-lg border border-gray-200 dark:border-gray-700;
 }
