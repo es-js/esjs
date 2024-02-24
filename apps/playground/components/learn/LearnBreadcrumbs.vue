@@ -50,7 +50,7 @@ const breadcrumbs = computed(() => {
     <template v-for="(breadcrumb, idx) in breadcrumbs">
       <div v-if="breadcrumb.path" class="inline-flex items-center">
         <UIcon :name="idx === 0 ? 'i-mdi-text-box-outline' : 'i-mdi-chevron-right'"
-               class="text-gray-500 dark:text-gray-400 px-3.5" />
+               class="text-gray-500 dark:text-gray-400 px-3.5 w-4 h-4" />
         <NuxtLink :to="breadcrumb.path" class="text-sm hover:text-primary">
           {{ breadcrumb.title }}
         </NuxtLink>
