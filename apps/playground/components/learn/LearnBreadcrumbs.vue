@@ -48,19 +48,18 @@ const breadcrumbs = computed(() => {
 </script>
 
 <template>
-  <div class="w-full px-2 flex items-center h-8 bg-gray-100 dark:bg-gray-800">
-    <div
+  <div class="w-full flex items-center h-8 bg-gray-100 dark:bg-gray-800">
+    <NuxtLink
       v-for="(breadcrumb, idx) in breadcrumbs"
       :key="`breadcrumb-${idx}-${breadcrumb.path}`"
-      class="inline-flex items-center"
+      :to="breadcrumb.path"
+      class="h-full text-sm hover:text-primary flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 px-2 py-1 gap-1"
     >
       <UIcon
         :name="idx === 0 ? 'i-mdi-text-box-outline' : 'i-mdi-chevron-right'"
-        class="text-gray-500 dark:text-gray-400 px-3.5 w-4 h-4"
+        class="text-gray-500 dark:text-gray-400 w-4 h-4"
       />
-      <NuxtLink :to="breadcrumb.path" class="text-sm hover:text-primary">
-        {{ breadcrumb.title }}
-      </NuxtLink>
-    </div>
+      <span>{{ breadcrumb.title }}</span>
+    </NuxtLink>
   </div>
 </template>
