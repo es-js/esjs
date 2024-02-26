@@ -15,7 +15,14 @@ Así como los humanos hablamos diferentes idiomas, las computadoras también tie
 
 EsJS está basado en JavaScript, uno de los lenguajes de programación más populares y utilizados en el mundo. EsJS te permite escribir programas utilizando palabras en Español, aunque también puedes utilizar palabras en Inglés si lo prefieres. Es decir, EsJS y JavaScript son interoperables.
 
-## Empezando
+## Primeros pasos
 
+::div{.flex.flex-col.gap-2}
 
-::content-card{to="/basicos" title="Conceptos básicos" description="En esta sección se explican los conceptos básicos de la programación en EsJS/JavaScript." icon="i-mdi-shape-outline"}
+::content-card{to="/fundamentos" title="Fundamentos" description="Fundamentos de la programación en EsJS/JavaScript" icon="i-mdi-shape-outline"}
+::
+
+::content-card{to="/intermedios" title="Conceptos intermedios" description="Explora los conceptos intermedios de la programación en EsJS" icon="i-mdi-shape-plus-outline"}
+::
+
+::

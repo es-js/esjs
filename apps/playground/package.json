@@ -29,6 +29,8 @@
     "canvas-confetti": "^1.6.0",
     "eslint": "8.22.0",
     "h3-zod": "^0.5.1",
+    "hast-util-from-html": "^2.0.1",
+    "hast-util-to-html": "^9.0.0",
     "javascript-obfuscator": "^4.0.2",
     "just-debounce-it": "^3.2.0",
     "monaco-editor": "~0.44.0",

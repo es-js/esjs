@@ -14,6 +14,7 @@ defineProps<{
   >
     <!-- Just to make sure the icon is loaded -->
     <UIcon v-if="false" name="i-mdi-shape-outline" />
+    <UIcon v-if="false" name="i-mdi-shape-plus-outline" />
 
     <UIcon
       v-if="icon"

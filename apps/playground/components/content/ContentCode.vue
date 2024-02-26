@@ -1,6 +1,14 @@
 <script setup lang="ts">
+import { toString } from 'hast-util-to-string'
+import { fromHtml } from 'hast-util-from-html'
 
 const slot: Ref<null | HTMLElement> = ref(null)
+
+const codeFromCodeBlock = computed(
+  () => {
+    return getCodeFromCodeBlock(slot.value)
+  },
+)
 
 function getCodeFromCodeBlock(slot: HTMLElement | null): string | null {
   if (!slot) { return null }
@@ -9,23 +17,19 @@ function getCodeFromCodeBlock(slot: HTMLElement | null): string | null {
 
   if (!codeElement || !codeElement.length) { return null }
 
-  const code = codeElement[0].innerText
-
-  return code
+  return toString(fromHtml(codeElement[0].innerHTML))
 }
-
-const codeFromCodeBlock = computed(
-  () => {
-    return getCodeFromCodeBlock(slot.value)
-  },
-)
 
 function useInEditor() {
   const code = codeFromCodeBlock.value
 
   if (!code) { return }
 
-  useFiles().updateFile(FILE_CODE, code)
+  useFiles().updateFile(FILE_CODE, removeMultipleEmptyLines(code))
+}
+
+function removeMultipleEmptyLines(code: string): string {
+  return code.replace(/\n{3,}/g, '\n\n')
 }
 </script>
 
