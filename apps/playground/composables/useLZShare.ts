@@ -237,15 +237,21 @@ export const useLZShare = () => {
   }
 
   async function loadCodeFromUrl() {
+    const subdomain = useCookie('subdomain')
+
     useFiles().setLoading(true)
 
     const code = await getCodeFromUrl()
 
     const testsCode = getTestsCodeFromUrl()
 
-    useFiles().updateFile(FILE_CODE, code)
-
-    useFiles().updateFile(FILE_TESTS, testsCode ?? '')
+    if (subdomain.value === 'aprender') {
+      useFiles().updateFile(FILE_CODE, '')
+      useFiles().updateFile(FILE_TESTS, '')
+    } else {
+      useFiles().updateFile(FILE_CODE, code)
+      useFiles().updateFile(FILE_TESTS, testsCode ?? '')
+    }
 
     setTimeout(() => {
       useFiles().setLoading(false)
