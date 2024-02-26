@@ -7,6 +7,8 @@ const playground = usePlayground()
 
 const share = useLZShare()
 
+const subdomain = useCookie('subdomain')
+
 const handleMessage = (event: MessageEvent) => {
   const { type, data } = event.data
 
@@ -17,7 +19,10 @@ const handleMessage = (event: MessageEvent) => {
 
 onBeforeMount(async() => {
   share.setSettingsFromUrl()
-  await share.loadCodeFromUrl()
+
+  if (subdomain.value !== 'aprender') {
+    await share.loadCodeFromUrl()
+  }
 })
 
 onMounted(() => {
