@@ -24,7 +24,7 @@ devDependencies:
     version: 0.0.21
   '@es-js/language-tools':
     specifier: ^0.0.17
-    version: link:../../packages/language-tools
+    version: 0.0.17
   '@es-js/sandbox':
     specifier: 0.0.10
     version: 0.0.10
@@ -561,6 +561,10 @@ packages:
 
   /@es-js/core@0.0.21:
     resolution: {integrity: sha512-zsyGS4Atu9n5g1eMEDBy/KA82G9hybDoa5Ky6isyfDRw6QGfL+IPnTCpL1lbgYiVtsfxGxZP5i7AeDIalyptmA==}
+    dev: true
+
+  /@es-js/language-tools@0.0.17:
+    resolution: {integrity: sha512-d0/IoUDyFjd2NtTTvnRttClB+8uXyfGyNktI6V/NeJQgmHxfWhRYRn0CR4bOXk1Y4HD7zcNjFyIWdPqLSXjW4A==}
     dev: true
 
   /@es-js/sandbox@0.0.10:
