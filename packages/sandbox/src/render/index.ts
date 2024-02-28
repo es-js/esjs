@@ -3,7 +3,7 @@ import { createIframe } from './iframe'
 
 const DEFAULT_IMPORTS_MAP = {
   imports: {
-    '@es-js/': 'https://esm.run/@es-js/',
+    '@es-js/': 'https://esm.sh/@es-js/',
     'npm/': 'https://cdn.jsdelivr.net/npm/',
   },
 }
