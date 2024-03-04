@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import { toString } from 'hast-util-to-string'
 import { fromHtml } from 'hast-util-from-html'
+import { codeToHtml } from 'shiki'
+import { isDark } from '~/composables/dark'
 
 const slot: Ref<null | HTMLElement> = ref(null)
+
+const editor = useEditor()
 
 const codeFromCodeBlock = computed(
   () => {
     return getCodeFromCodeBlock(slot.value)
   },
 )
+
+const esjsCode = ref(null)
+const esjsPreHtml = ref(null)
+
+const jsCode = ref(null)
+const jsPreHtml = ref(null)
 
 function getCodeFromCodeBlock(slot: HTMLElement | null): string | null {
   if (!slot) { return null }
@@ -17,20 +27,61 @@ function getCodeFromCodeBlock(slot: HTMLElement | null): string | null {
 
   if (!codeElement || !codeElement.length) { return null }
 
-  return toString(fromHtml(codeElement[0].innerHTML))
+  return removeMultipleEmptyLines(toString(fromHtml(codeElement[0].innerHTML)))
 }
 
 function useInEditor() {
-  const code = codeFromCodeBlock.value
-
-  if (!code) { return }
-
-  useFiles().updateFile(FILE_CODE, removeMultipleEmptyLines(code))
+  useFiles().updateFile(FILE_CODE, editor.language.value === 'esjs' ? esjsCode.value : jsCode.value)
 }
 
 function removeMultipleEmptyLines(code: string): string {
   return code.replace(/\n{3,}/g, '\n\n')
 }
+
+function setupCodes() {
+  if (!esjsCode.value) {
+    esjsCode.value = codeFromCodeBlock.value
+  }
+
+  if (!jsCode.value) {
+    jsCode.value = editor.formatCode(esjsCode.value, 'esjs', 'js').replace(/\n$/, '')
+  }
+}
+
+async function setupCodesPreHtml() {
+  if (!slot.value) { return }
+
+  const code = codeFromCodeBlock.value
+
+  if (!code) { return }
+
+  if (!esjsPreHtml.value) {
+    esjsPreHtml.value = slot.value.getElementsByTagName('pre')[0].innerHTML
+  }
+
+  if (!jsPreHtml.value) {
+    let html = await codeToHtml(jsCode.value, {
+      lang: 'js',
+      theme: isDark.value ? 'vitesse-dark' : 'vitesse-light',
+    })
+    html = html.replace(/<pre[^>]*>/, '').replace(/<\/pre>/, '')
+
+    jsPreHtml.value = html
+  }
+}
+
+watch(
+  editor.language,
+  async() => {
+    if (!slot.value) { return }
+
+    setupCodes()
+    await setupCodesPreHtml()
+
+    slot.value.getElementsByTagName('pre')[0].innerHTML = editor.language.value === 'esjs' ? esjsPreHtml.value : jsPreHtml.value
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

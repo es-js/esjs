@@ -1,5 +1,9 @@
 import { useEventBus } from '@vueuse/core/index'
+import { Options } from 'prettier'
+import parserBabel from 'prettier/parser-babel'
+import prettier from 'prettier/standalone'
 import { ref, watch } from 'vue'
+import { transpile } from '@es-js/core'
 
 export const loading = ref(true)
 
@@ -44,6 +48,23 @@ export const useEditor = () => {
     return language.value === 'esjs' ? '.esjs' : '.js'
   }
 
+  function formatCode(code: string, fromLanguage: string = 'esjs', toLanguage: string = 'esjs') {
+    const transpiledCode = fromLanguage === 'esjs' ? transpile(code) : code
+
+    const formattedCode = formatWithPrettier(transpiledCode)
+
+    return toLanguage === 'esjs' ? transpile(formattedCode, true) : formattedCode
+  }
+
+  function formatWithPrettier(code: string, options?: Partial<Options>) {
+    return prettier.format(code, {
+      parser: 'babel',
+      plugins: [parserBabel],
+      semi: false,
+      ...options,
+    })
+  }
+
   return {
     loading,
     toggleLanguage,
@@ -51,5 +72,6 @@ export const useEditor = () => {
     getLanguageExtension,
     language,
     availableLanguages,
+    formatCode,
   }
 }

@@ -152,6 +152,7 @@ export const useMonacoHelper = () => {
   }
 
   function formatCode(code: string, options?: Partial<Options>) {
+    // TODO: use useEditor().formatCode.
     return prettier.format(code, {
       parser: 'babel',
       plugins: [parserBabel],

@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
-import ExamplesModal from '~/components/examples/ExamplesModal.vue'
 import { isDark, toggleDark } from '~/composables/dark'
-import { useLZShare } from '~/composables/useLZShare'
-import { useSettings } from '~/composables/useSettings'
-
-const share = useLZShare()
-
-const settings = useSettings()
 
 const grid = useGrid('tailwind')
 
 const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
+
+const editor = useEditor()
 </script>
 
 <template>
@@ -37,9 +32,7 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
         </div>
       </div>
 
-      <div class="flex flex-row justify-center items-center">
-        <!--        TODO-->
-      </div>
+      <div class="flex flex-1" />
 
       <div class="flex flex-row justify-end items-center space-x-2">
         <div class="hidden md:flex flex-row items-center space-x-4">
