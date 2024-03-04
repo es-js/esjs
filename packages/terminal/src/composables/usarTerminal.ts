@@ -220,6 +220,12 @@ export const usarTerminal = () => {
     return `<div style="text-align: justify;">${texto}</div>`
   }
 
+  function enlace(url: string, texto?: string, destino = '_nuevo') {
+    destino = destino === '_nuevo' ? '_blank' : destino
+
+    return `<a href="${url}" target="${destino}">${texto || url}</a>`
+  }
+
   function setTheme(theme: 'dark' | 'light') {
     terminalElement?.classList.toggle('dark', theme === 'dark')
   }
@@ -279,6 +285,7 @@ export const usarTerminal = () => {
     alinearIzquierda,
     alinearDerecha,
     justificar,
+    enlace,
     setTheme,
     enfocar,
     configurarColores,
