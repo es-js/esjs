@@ -70,7 +70,7 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
                   v-if="!settings.hideOptions"
                   class="flex flex-row flex-shrink-1 flex-grow-0 items-center px-1 space-x-2"
                 >
-                  <LanguageSwitcher v-if="!editor.isLearnApp" />
+                  <LanguageSwitcher v-if="!editor.isLearnApp.value" />
 
                   <AppButton
                     icon="i-mdi-auto-fix"
