@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import LearnBar from '~/components/learn/LearnBar.vue'
+import { useLZShare } from '~/composables/useLZShare'
+
+onBeforeMount(async() => {
+  const share = useLZShare()
+
+  share.setSettingsFromUrl()
+})
 </script>
 
 <template>

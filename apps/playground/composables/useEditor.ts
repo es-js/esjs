@@ -35,11 +35,12 @@ watch(
   { immediate: true },
 )
 
-export const useEditor = () => {
-  function toggleLanguage() {
-    setLanguage(language.value === 'esjs' ? 'js' : 'esjs')
-  }
+const isLearnApp = computed(() => {
+  const subdomain = useCookie('subdomain')
+  return subdomain.value === 'aprender'
+})
 
+export const useEditor = () => {
   function setLanguage(value: 'esjs' | 'js') {
     language.value = value
   }
@@ -67,11 +68,11 @@ export const useEditor = () => {
 
   return {
     loading,
-    toggleLanguage,
     setLanguage,
     getLanguageExtension,
     language,
     availableLanguages,
     formatCode,
+    isLearnApp,
   }
 }

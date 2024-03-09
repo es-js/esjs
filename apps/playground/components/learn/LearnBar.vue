@@ -2,12 +2,11 @@
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import { isDark, toggleDark } from '~/composables/dark'
+import LanguageSwitcher from '~/components/input/LanguageSwitcher.vue'
 
 const grid = useGrid('tailwind')
 
 const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
-
-const editor = useEditor()
 </script>
 
 <template>
@@ -29,6 +28,9 @@ const editor = useEditor()
           </UButton>
           <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
           <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Tutorial</span>
+          <div class="flex flex-row items-center pl-2">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
 

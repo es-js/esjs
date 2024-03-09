@@ -70,15 +70,31 @@ async function setupCodesPreHtml() {
   }
 }
 
+function setupPreHtml() {
+  if (!slot.value) { return }
+
+  slot.value.getElementsByTagName('pre')[0].innerHTML = editor.language.value === 'esjs' ? esjsPreHtml.value : jsPreHtml.value
+}
+
 watch(
   editor.language,
+  () => {
+    setupPreHtml()
+  },
+  { immediate: true },
+)
+
+const unwatch = watch(
+  slot,
   async() => {
     if (!slot.value) { return }
 
     setupCodes()
     await setupCodesPreHtml()
 
-    slot.value.getElementsByTagName('pre')[0].innerHTML = editor.language.value === 'esjs' ? esjsPreHtml.value : jsPreHtml.value
+    setupPreHtml()
+
+    unwatch()
   },
   { immediate: true },
 )

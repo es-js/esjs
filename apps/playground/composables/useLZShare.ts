@@ -237,15 +237,13 @@ export const useLZShare = () => {
   }
 
   async function loadCodeFromUrl() {
-    const subdomain = useCookie('subdomain')
-
     useFiles().setLoading(true)
 
     const code = await getCodeFromUrl()
 
     const testsCode = getTestsCodeFromUrl()
 
-    if (subdomain.value === 'aprender') {
+    if (useEditor().isLearnApp) {
       useFiles().updateFile(FILE_CODE, '')
       useFiles().updateFile(FILE_TESTS, '')
     } else {

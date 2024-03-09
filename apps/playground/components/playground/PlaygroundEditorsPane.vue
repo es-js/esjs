@@ -4,6 +4,7 @@ import { Pane, Splitpanes } from 'splitpanes'
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import AppEditor from '~/components/input/AppEditor.vue'
+import LanguageSwitcher from '~/components/input/LanguageSwitcher.vue'
 import { useEditor } from '~/composables/useEditor'
 import { FILE_TESTS, useFiles } from '~/composables/useFiles'
 import { useSettings } from '~/composables/useSettings'
@@ -69,18 +70,7 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
                   v-if="!settings.hideOptions"
                   class="flex flex-row flex-shrink-1 flex-grow-0 items-center px-1 space-x-2"
                 >
-                  <UDropdown
-                    :items="editor.availableLanguages"
-                    :popper="{ placement: 'bottom-start' }"
-                  >
-                    <UButton
-                      color="gray"
-                      :label="editor.language.value === 'esjs' ? 'EsJS' : 'JS'"
-                      trailing-icon="i-mdi-chevron-down"
-                      icon="i-mdi-code-tags"
-                      size="2xs"
-                    />
-                  </UDropdown>
+                  <LanguageSwitcher v-if="!editor.isLearnApp" />
 
                   <AppButton
                     icon="i-mdi-auto-fix"

@@ -7,6 +7,8 @@ const playground = usePlayground()
 
 const share = useLZShare()
 
+const editor = useEditor()
+
 const handleMessage = (event: MessageEvent) => {
   const { type, data } = event.data
 
@@ -16,6 +18,10 @@ const handleMessage = (event: MessageEvent) => {
 }
 
 onBeforeMount(async() => {
+  if (editor.isLearnApp) {
+    return
+  }
+
   share.setSettingsFromUrl()
 
   await share.loadCodeFromUrl()
