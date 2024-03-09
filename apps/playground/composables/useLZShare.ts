@@ -243,7 +243,7 @@ export const useLZShare = () => {
 
     const testsCode = getTestsCodeFromUrl()
 
-    if (useEditor().isLearnApp) {
+    if (useEditor().isLearnApp.value) {
       useFiles().updateFile(FILE_CODE, '')
       useFiles().updateFile(FILE_TESTS, '')
     } else {

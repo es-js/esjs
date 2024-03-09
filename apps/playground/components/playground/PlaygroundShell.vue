@@ -18,10 +18,6 @@ const handleMessage = (event: MessageEvent) => {
 }
 
 onBeforeMount(async() => {
-  if (editor.isLearnApp) {
-    return
-  }
-
   share.setSettingsFromUrl()
 
   await share.loadCodeFromUrl()
