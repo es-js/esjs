@@ -1,8 +1,8 @@
-import type { Token } from '../tokenizer/token'
-import { TokenType } from '../tokenizer/token'
+import type { NamedToken, Token, ValuedToken } from '../lexer/token'
+import { TokenType } from '../lexer/token'
 import { getDictionary } from './keywords'
 
-export function compile(tokens: Token[], reverse = false): string {
+export function generate(tokens: Token[], reverse = false): string {
   const dictionary: Map<string, string> = getDictionary(reverse)
   let output = ''
   let current = 0
@@ -89,6 +89,14 @@ export function compile(tokens: Token[], reverse = false): string {
       throw new SyntaxError(`Unexpected end of file. Expected ${type}`)
   }
 
+  function compileNamedToken(token: NamedToken) {
+    return dictionary.get(token.name) || token.name
+  }
+
+  function compileValuedToken(token: ValuedToken) {
+    return token.value
+  }
+
   function compileStatement() {
     let statement = ''
     const token = peek()
@@ -96,7 +104,7 @@ export function compile(tokens: Token[], reverse = false): string {
     switch (token.type) {
       case TokenType.Keyword:
       case TokenType.Identifier:
-        statement += dictionary.get(token.name) || token.name
+        statement += compileNamedToken(token as NamedToken)
         break
       case TokenType.SpecialCharacter:
       case TokenType.StringLiteral:
@@ -108,7 +116,7 @@ export function compile(tokens: Token[], reverse = false): string {
       case TokenType.RightCurly:
       case TokenType.Dot:
       case TokenType.Semicolon:
-        return token.value
+        return compileValuedToken(token as ValuedToken)
       default:
         throw new SyntaxError(`Unexpected token: ${token.type}`)
     }

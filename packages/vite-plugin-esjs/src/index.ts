@@ -1,4 +1,4 @@
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 import { splitCodeImports } from '@es-js/core/utils'
 import type { Plugin } from 'vite'
 
@@ -10,9 +10,9 @@ export default function EsJS(options = {}): Plugin {
       if (!/\.esjs$/.test(id))
         return
 
-      const transpiled = transpile(raw)
+      const compiled = compile(raw)
 
-      const { imports, codeWithoutImports } = splitCodeImports(transpiled)
+      const { imports, codeWithoutImports } = splitCodeImports(compiled)
 
       return `${imports}
 

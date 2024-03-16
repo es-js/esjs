@@ -1,4 +1,4 @@
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 import { splitCodeImports, splitScriptTemplate } from '@es-js/core/utils'
 import type { Plugin } from 'vite'
 
@@ -12,9 +12,9 @@ export default function EsVue(): Plugin {
 
       const { script, template } = splitScriptTemplate(raw)
 
-      const transpiled = transpile(script)
+      const compiled = compile(script)
 
-      const { imports, codeWithoutImports } = splitCodeImports(transpiled)
+      const { imports, codeWithoutImports } = splitCodeImports(compiled)
 
       return `
 <script setup lang="ts">

@@ -3,7 +3,7 @@ import { Options } from 'prettier'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { ref, watch } from 'vue'
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 
 export const loading = ref(true)
 
@@ -50,11 +50,11 @@ export const useEditor = () => {
   }
 
   function formatCode(code: string, fromLanguage: string = 'esjs', toLanguage: string = 'esjs') {
-    const transpiledCode = fromLanguage === 'esjs' ? transpile(code) : code
+    const compiledCode = fromLanguage === 'esjs' ? compile(code) : code
 
-    const formattedCode = formatWithPrettier(transpiledCode)
+    const formattedCode = formatWithPrettier(compiledCode)
 
-    return toLanguage === 'esjs' ? transpile(formattedCode, true) : formattedCode
+    return toLanguage === 'esjs' ? compile(formattedCode, true) : formattedCode
   }
 
   function formatWithPrettier(code: string, options?: Partial<Options>) {

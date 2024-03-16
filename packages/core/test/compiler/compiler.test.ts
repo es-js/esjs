@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { compile } from '../../src/compiler/compiler'
-import { token } from '../../src/tokenizer/token'
+import { generate } from '../../src/compiler/generator'
+import { token } from '../../src/lexer/token'
 
 describe('compiler', () => {
   it('compiles a simple program', async () => {
@@ -67,7 +67,7 @@ function principal(mensaje) {
       token.rightCurly(),
     ]
 
-    const compiled = compile(tokens)
+    const compiled = generate(tokens)
 
     expect(compiled).toEqual(expected)
   })

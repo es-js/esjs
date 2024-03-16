@@ -19,9 +19,9 @@ export default defineEventHandler(async(event) => {
 })
 
 function getObfuscatedCode(code: string) {
-  const transpiledCode = prepareCode(code)
+  const compiledCode = prepareCode(code)
 
-  const splittedCode = splitCodeImports(transpiledCode)
+  const splittedCode = splitCodeImports(compiledCode)
 
   const obfuscatedCode = obfuscateCode(splittedCode.codeWithoutImports)
 

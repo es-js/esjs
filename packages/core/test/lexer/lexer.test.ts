@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { TokenType } from '../../src/tokenizer/token'
-import { tokenize } from '../../src/tokenizer/tokenizer'
+import { TokenType } from '../../src/lexer/token'
+import { tokenize } from '../../src/lexer/lexer'
 
-describe('tokenizer', () => {
+describe('lexer', () => {
   it('tokenizes a simple program', () => {
     const input = `
 // Funcion principal: if (a > b) { return a; } else { return b; }

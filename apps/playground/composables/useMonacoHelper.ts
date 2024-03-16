@@ -1,4 +1,4 @@
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 import {
   constantLanguage,
   keywordControl,
@@ -135,11 +135,11 @@ export const useMonacoHelper = () => {
       provideDocumentFormattingEdits: (model): monaco.languages.TextEdit[] => {
         let code = model.getValue()
 
-        if (useEditor().language.value === 'esjs') { code = transpile(code) }
+        if (useEditor().language.value === 'esjs') { code = compile(code) }
 
         let formattedCode = formatCode(code)
 
-        if (useEditor().language.value === 'esjs') { formattedCode = transpile(formattedCode, true) }
+        if (useEditor().language.value === 'esjs') { formattedCode = compile(formattedCode, true) }
 
         return [
           {

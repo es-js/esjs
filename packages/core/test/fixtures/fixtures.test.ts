@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { transpile } from '../../src'
+import { compile } from '../../src'
 
 const esjsFixtures = import.meta.glob('./esjs/*.esjs')
 
@@ -22,12 +22,12 @@ const readFixture = (filepath: string) => {
   }
 }
 
-const testTranspile = async (fixture: string, reverse = false) => {
+const testCompile = async (fixture: string, reverse = false) => {
   try {
     const { esjsCode, jsCode } = readFixture(fixture)
 
     return {
-      generated: transpile(reverse ? jsCode : esjsCode, reverse),
+      generated: compile(reverse ? jsCode : esjsCode, reverse),
       expected: reverse ? esjsCode : jsCode,
     }
   }
@@ -36,10 +36,10 @@ const testTranspile = async (fixture: string, reverse = false) => {
   }
 }
 
-describe('transpile', () => {
+describe('compile', () => {
   it('test fixtures', async () => {
     for (const key of fixtureKeys) {
-      const result = await testTranspile(key)
+      const result = await testCompile(key)
 
       expect(result.generated).toEqual(result.expected)
     }
@@ -47,22 +47,22 @@ describe('transpile', () => {
 
   it('test reverse fixtures', () => {
     fixtureKeys.forEach((key) => {
-      testTranspile(key, true)
+      testCompile(key, true)
     })
   })
 })
 
-describe('transpile single', () => {
+describe('compile single', () => {
   const fixture = './esjs/asincrono.esjs'
 
   it('transforms esjs', async () => {
-    const result = await testTranspile(fixture)
+    const result = await testCompile(fixture)
 
     expect(result.generated).toEqual(result.expected)
   })
 
   it('transforms js to esjs', async () => {
-    const result = await testTranspile(fixture, true)
+    const result = await testCompile(fixture, true)
 
     expect(result.generated).toEqual(result.expected)
   })

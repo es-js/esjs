@@ -1,8 +1,10 @@
-import { compile } from './compiler/compiler'
-import { tokenize } from './tokenizer/tokenizer'
+import { tokenize } from './lexer/lexer'
+import { generate } from './compiler/generator'
 
-export function transpile(code: string, reverse = false): string {
+export function compile(code: string, reverse = false): string {
   const tokens = tokenize(code)
 
-  return compile(tokens, reverse)
+  return generate(tokens, reverse)
 }
+
+export { compile as transpile }

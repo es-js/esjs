@@ -1,4 +1,4 @@
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 import type { AstPath, ParserOptions } from 'prettier'
 import { format } from 'prettier'
 import * as prettierPluginBabel from 'prettier/plugins/babel'
@@ -28,7 +28,7 @@ const EsJSPlugin = {
       preprocess: (text: string, options: ParserOptions<any>) => {
         text = text.trim()
 
-        const js = transpile(text)
+        const js = compile(text)
 
         // Taken from https://github.com/sveltejs/prettier-plugin-svelte/blob/9060efde88d3a70560ba663b08217c79dc11d631/src/index.ts#L54
         // Prettier sets the preprocessed text as the originalText in case
@@ -64,7 +64,7 @@ const EsJSPlugin = {
           parser: 'babel',
         })
 
-        const esjs = transpile(jsFormatted, true)
+        const esjs = compile(jsFormatted, true)
 
         return esjs
       },

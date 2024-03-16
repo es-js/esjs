@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { transpile } from '../src/index'
+import { compile } from '../src'
 
 describe('known issues', () => {
-  it('transpiles variables named `escribir`', () => {
+  it('compiles variables named `escribir`', () => {
     const esjs = `
     const escribir = 'prueba'
 `
@@ -11,14 +11,14 @@ describe('known issues', () => {
     const log = 'prueba'
 `
 
-    const transpiled = transpile(esjs)
+    const compiled = compile(esjs)
 
-    expect(transpiled).toEqual(js)
+    expect(compiled).toEqual(js)
 
-    expect(transpile(js, true)).toEqual(esjs)
+    expect(compile(js, true)).toEqual(esjs)
   })
 
-  it('fixed: does not transpile variables named `get`', () => {
+  it('fixed: does not compile variables named `get`', () => {
     const esjs = `
     var get = 'prueba'
 `
@@ -27,10 +27,10 @@ describe('known issues', () => {
     let get = 'prueba'
 `
 
-    const transpiled = transpile(esjs)
+    const compiled = compile(esjs)
 
-    expect(transpiled).toEqual(js)
+    expect(compiled).toEqual(js)
 
-    expect(transpile(js, true)).toEqual(esjs)
+    expect(compile(js, true)).toEqual(esjs)
   })
 })

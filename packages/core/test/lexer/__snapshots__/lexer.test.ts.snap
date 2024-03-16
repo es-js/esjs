@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`tokenizer > tokenizes a simple program 1`] = `
+exports[`lexer > tokenizes a simple program 1`] = `
 [
   {
     "type": "Whitespace",

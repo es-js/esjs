@@ -1,4 +1,4 @@
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 import { splitCodeImports } from '@es-js/core/utils'
 import escodegen from 'escodegen'
 import * as espree from 'espree'
@@ -35,7 +35,7 @@ export function prepareCode(code: string) {
     if (!code.endsWith('\n'))
       code += '\n'
 
-    code = transpile(code)
+    code = compile(code)
     code = formatCode(code) // To check syntax errors
     code = addExportToFunctions(code) // To allow functions to be called from another file
     // code = addInfiniteLoopProtection(code) // To prevent infinite loops
@@ -229,8 +229,8 @@ export function prepareFiles(files: SandboxFile[]) {
     main,
     ...restOfFiles.map((file) => {
       const importsFromMain = generateImportStatement(main.code, `./${MAIN_FILE}`)
-      const transpiled = tryToParseFile(file)
-      const splitted = splitCodeImports(transpiled)
+      const compiled = tryToParseFile(file)
+      const splitted = splitCodeImports(compiled)
       const imports = unifyImports(`
         ${importsFromMain}
         ${splitted.imports}
@@ -247,8 +247,8 @@ export function prepareFiles(files: SandboxFile[]) {
 }
 
 export function prepareMainFile(file: any) {
-  const transpiledCode = tryToParseFile(file)
-  const splittedCode = splitCodeImports(transpiledCode)
+  const compiledCode = tryToParseFile(file)
+  const splittedCode = splitCodeImports(compiledCode)
 
   const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
 

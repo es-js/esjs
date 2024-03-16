@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { transpile } from '@es-js/core'
+import { compile } from '@es-js/core'
 import { ref } from 'vue'
 import { isDark } from '~/composables/dark'
 import { useEditor } from '~/composables/useEditor'
@@ -154,7 +154,7 @@ function updateTheme() {
 watch(
   editor.language,
   (language) => {
-    const formattedCode = transpile(props.modelValue, language === 'esjs')
+    const formattedCode = compile(props.modelValue, language === 'esjs')
 
     if (formattedCode !== props.modelValue) {
       emit('update:modelValue', formattedCode)
