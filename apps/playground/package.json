@@ -12,37 +12,37 @@
   "devDependencies": {
     "@amoutonbrady/lz-string": "^0.1.0",
     "@davestewart/nuxt-scrollbar": "^1.0.0",
-    "@es-js/core": "0.0.21",
+    "@es-js/core": "0.0.24",
     "@es-js/language-tools": "^0.0.17",
     "@es-js/sandbox": "0.0.10",
-    "@iconify-json/mdi": "^1.1.54",
-    "@nuxt/content": "^2.12.0",
+    "@iconify-json/mdi": "^1.1.64",
+    "@nuxt/content": "^2.12.1",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxt/ui": "^2.13.0",
+    "@nuxt/ui": "^2.14.2",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/robots": "^3.0.0",
-    "@nuxtjs/supabase": "^1.1.6",
-    "@types/node": "^18.17.1",
+    "@nuxtjs/supabase": "^1.1.7",
+    "@types/node": "^18.19.24",
     "@types/prettier": "^2.7.3",
-    "@vueuse/nuxt": "^10.7.2",
-    "canvas-confetti": "^1.6.0",
+    "@vueuse/nuxt": "^10.9.0",
+    "canvas-confetti": "^1.9.2",
     "eslint": "8.22.0",
-    "h3-zod": "^0.5.1",
+    "h3-zod": "^0.5.3",
     "hast-util-from-html": "^2.0.1",
     "hast-util-to-html": "^9.0.0",
-    "javascript-obfuscator": "^4.0.2",
+    "javascript-obfuscator": "^4.1.0",
     "just-debounce-it": "^3.2.0",
     "monaco-editor": "~0.44.0",
-    "nuxt": "^3.10.1",
-    "nuxt-gtag": "^1.2.0",
+    "nuxt": "^3.11.0",
+    "nuxt-gtag": "^1.2.1",
     "nuxt-monaco-editor": "^1.2.7",
     "prettier": "^2.8.8",
     "random-spanish-words": "^2.0.0",
     "splitpanes": "^3.1.5",
-    "theme-vitesse": "^0.7.3",
+    "theme-vitesse": "^0.7.7",
     "vue-screen": "^2.3.2",
-    "zod": "^3.22.2"
+    "zod": "^3.22.4"
   },
   "pnpm": {
     "overrides": {
@@ -50,6 +50,6 @@
     }
   },
   "dependencies": {
-    "octokit": "^3.1.0"
+    "octokit": "^3.1.2"
   }
 }

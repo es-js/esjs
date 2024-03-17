@@ -1,4 +1,3 @@
-import { compile } from '@es-js/core'
 import {
   constantLanguage,
   keywordControl,
@@ -9,9 +8,6 @@ import {
 } from '@es-js/core/keywords'
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
 import * as monaco from 'monaco-editor'
-import type { Options } from 'prettier'
-import parserBabel from 'prettier/parser-babel'
-import prettier from 'prettier/standalone'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'
 import lightTheme from 'theme-vitesse/themes/vitesse-light.json'
 import { useEditor } from '~/composables/useEditor'
@@ -132,14 +128,12 @@ export const useMonacoHelper = () => {
 
   function setupMonacoFormat() {
     monaco.languages.registerDocumentFormattingEditProvider('javascript', {
-      provideDocumentFormattingEdits: (model): monaco.languages.TextEdit[] => {
-        let code = model.getValue()
+      provideDocumentFormattingEdits: (model: monaco.editor.ITextModel): monaco.languages.TextEdit[] => {
+        const code = model.getValue()
 
-        if (useEditor().language.value === 'esjs') { code = compile(code) }
+        const currentLanguage = useEditor().language.value === 'esjs' ? 'esjs' : 'js'
 
-        let formattedCode = formatCode(code)
-
-        if (useEditor().language.value === 'esjs') { formattedCode = compile(formattedCode, true) }
+        const formattedCode = useEditor().formatCode(code, currentLanguage, currentLanguage)
 
         return [
           {
@@ -148,16 +142,6 @@ export const useMonacoHelper = () => {
           },
         ]
       },
-    })
-  }
-
-  function formatCode(code: string, options?: Partial<Options>) {
-    // TODO: use useEditor().formatCode.
-    return prettier.format(code, {
-      parser: 'babel',
-      plugins: [parserBabel],
-      semi: false,
-      ...options,
     })
   }
 
