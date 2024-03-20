@@ -23,4 +23,3 @@ export function splitCodeImports(code: string): SplitCodeImports {
 function replace(string: string, regex: RegExp, value = ''): string {
   return string.replace(regex, value).trim()
 }
-

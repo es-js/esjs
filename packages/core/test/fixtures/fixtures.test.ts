@@ -12,7 +12,7 @@ beforeEach(() => {
   expect(fixtureKeys.length).toBeGreaterThan(0)
 })
 
-const readFixture = (filepath: string) => {
+function readFixture(filepath: string) {
   const esjsCode = readFileSync(resolve(join(__dirname, filepath)), 'utf-8')
   const jsCode = readFileSync(resolve(join(__dirname, filepath.replace('.esjs', '.js'))), 'utf-8')
 
@@ -22,7 +22,7 @@ const readFixture = (filepath: string) => {
   }
 }
 
-const testCompile = async (fixture: string, reverse = false) => {
+async function testCompile(fixture: string, reverse = false) {
   try {
     const { esjsCode, jsCode } = readFixture(fixture)
 

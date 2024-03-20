@@ -131,4 +131,3 @@ export function generate(tokens: Token[], reverse = false): string {
 
   return output
 }
-
