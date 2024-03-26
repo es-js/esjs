@@ -14,6 +14,7 @@ export interface EjecutarOptions {
   importMap: string
   stylesheets: string[]
   clearConsoleOnRun: boolean
+  infiniteLoopProtection: boolean
 }
 
 let _options: EjecutarOptions
@@ -39,7 +40,7 @@ export async function init(options: EjecutarOptions): Promise<void> {
   await evalInitialCode()
 }
 
-export async function evalFiles({ files }: { files: SandboxFile[] }) {
+export async function evalFiles({ files, options}: { files: SandboxFile[], options?: EjecutarOptions }) {
   try {
     const result = prepareFiles(
       files.filter((file: any) => {
@@ -47,6 +48,7 @@ export async function evalFiles({ files }: { files: SandboxFile[] }) {
 
         return ['esjs', 'js'].includes(extension)
       }),
+      options
     )
 
     result.forEach((file: any) => {

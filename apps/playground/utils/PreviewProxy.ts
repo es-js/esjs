@@ -89,7 +89,7 @@ export class PreviewProxy {
     }
   }
 
-  eval(files: Record<string, string>) {
-    return this.iframe_command('eval', { files })
+  eval(files: Record<string, string>, options: any) {
+    return this.iframe_command('eval', { files, options })
   }
 }

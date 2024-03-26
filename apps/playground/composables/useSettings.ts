@@ -22,6 +22,7 @@ const settings = ref({
     hidden: false,
   },
   embed: false,
+  infiniteLoopProtection: false,
 })
 
 const activePreview = computed((): 'terminal' | 'flowchart' | 'html' => {
@@ -81,6 +82,10 @@ export const useSettings = () => {
     settings.value.showAdvanced = showAdvanced
   }
 
+  function setInfiniteLoopProtection(infiniteLoopProtection: boolean) {
+    settings.value.infiniteLoopProtection = infiniteLoopProtection
+  }
+
   function setPreview(preview: { terminal: boolean; flowchart: boolean; html: boolean }) {
     settings.value.preview = {
       terminal: preview.terminal || false,
@@ -135,6 +140,7 @@ export const useSettings = () => {
     setAutoCompile,
     setCustomHtml,
     setShowAdvanced,
+    setInfiniteLoopProtection,
     setPreview,
     setPreviewTab,
     setActivePreview,

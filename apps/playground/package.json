@@ -14,7 +14,7 @@
     "@davestewart/nuxt-scrollbar": "^1.0.0",
     "@es-js/core": "0.0.24",
     "@es-js/language-tools": "^0.0.17",
-    "@es-js/sandbox": "0.0.10",
+    "@es-js/sandbox": "0.0.15",
     "@iconify-json/mdi": "^1.1.64",
     "@nuxt/content": "^2.12.1",
     "@nuxt/devtools": "latest",

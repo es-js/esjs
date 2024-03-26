@@ -62,6 +62,7 @@ async function init() {
     previewTab: useSettings().activePreviewTab.value,
     files: files.files.value,
     importMap: files.getFileContent(FILE_IMPORT_MAP),
+    infiniteLoopProtection: settingsStore.value.infiniteLoopProtection,
   })
 
   proxy = new PreviewProxy(sandbox, {
@@ -126,7 +127,9 @@ async function updateSandbox() {
     return
   }
 
-  await proxy.eval(toRaw(files.files.value))
+  await proxy.eval(toRaw(files.files.value), {
+    infiniteLoopProtection: useSettings().settings.value.infiniteLoopProtection,
+  })
 }
 
 function openInNewTab() {
@@ -162,7 +165,7 @@ watch(
 
 watch(
   () => {
-    return files.files.value.map((file) => file.content)
+    return [files.files.value.map((file) => file.content), settingsStore.value.infiniteLoopProtection]
   },
   () => {
     if (!settingsStore.value.autoCompile) {

@@ -6,6 +6,7 @@ import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
+import { EjecutarOptions } from '../runtime/ejecutar'
 
 let start
 let end
@@ -30,7 +31,7 @@ export interface SandboxFile {
   main?: boolean
 }
 
-export function prepareCode(code: string) {
+export function prepareCode(code: string, options?: EjecutarOptions) {
   try {
     if (!code.endsWith('\n'))
       code += '\n'
@@ -38,7 +39,8 @@ export function prepareCode(code: string) {
     code = compile(code)
     code = formatCode(code) // To check syntax errors
     code = addExportToFunctions(code) // To allow functions to be called from another file
-    // code = addInfiniteLoopProtection(code) // To prevent infinite loops
+    if (options && options.infiniteLoopProtection)
+      code = addInfiniteLoopProtection(code) // To prevent infinite loops
     return code
   }
   catch (error: SyntaxError | any) {
@@ -56,7 +58,7 @@ export function prepareCode(code: string) {
  * @author Enzo Notario (versión espree)
  * @see https://github.com/chinchang/web-maker/blob/master/src/utils.js#L122
  */
-export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 5000 }) {
+export function addInfiniteLoopProtection(code: string, { timeout } = { timeout: 75 }) {
   let loopId = 1
   const patches: { pos: number; str: string }[] = []
   const varPrefix = '_wmloopvar'
@@ -220,8 +222,8 @@ export function generateImportStatement(code: string, modulePath: string) {
   return imports.join('\n')
 }
 
-export function prepareFiles(files: SandboxFile[]) {
-  const main = prepareMainFile(files.find((file: any) => file.name === MAIN_FILE))
+export function prepareFiles(files: SandboxFile[], options?: EjecutarOptions) {
+  const main = prepareMainFile(files.find((file: any) => file.name === MAIN_FILE), options)
 
   const restOfFiles = files.filter((file: any) => file.name !== MAIN_FILE)
 
@@ -229,7 +231,7 @@ export function prepareFiles(files: SandboxFile[]) {
     main,
     ...restOfFiles.map((file) => {
       const importsFromMain = generateImportStatement(main.code, `./${MAIN_FILE}`)
-      const compiled = tryToParseFile(file)
+      const compiled = tryToParseFile(file, options)
       const splitted = splitCodeImports(compiled)
       const imports = unifyImports(`
         ${importsFromMain}
@@ -246,8 +248,8 @@ export function prepareFiles(files: SandboxFile[]) {
   ]
 }
 
-export function prepareMainFile(file: any) {
-  const compiledCode = tryToParseFile(file)
+export function prepareMainFile(file: any, options?: EjecutarOptions) {
+  const compiledCode = tryToParseFile(file, options)
   const splittedCode = splitCodeImports(compiledCode)
 
   const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
@@ -265,9 +267,9 @@ ${splittedCode.imports}
   }
 }
 
-export function tryToParseFile(file: SandboxFile) {
+export function tryToParseFile(file: SandboxFile, options?: EjecutarOptions) {
   try {
-    return prepareCode(file.content)
+    return prepareCode(file.content, options)
   }
   catch (error: any) {
     throw new ParseFileError(error.message, file.name, error.line, error.column)

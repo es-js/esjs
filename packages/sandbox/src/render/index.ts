@@ -26,6 +26,7 @@ export function createSandbox(elementOrId: HTMLElement | string, customOptions: 
       importMap: JSON.stringify(DEFAULT_IMPORTS_MAP),
       stylesheets: DEFAULT_STYLESHEETS,
       clearConsoleOnRun: true,
+      infiniteLoopProtection: false,
     }, customOptions)
 
   return createIframe(elementOrId, options)

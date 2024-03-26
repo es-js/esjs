@@ -13,6 +13,24 @@ const settings = useSettings()
 const grid = useGrid('tailwind')
 
 const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
+
+const toast = useToast()
+
+function setupInfiniteLoopProtection() {
+  settings.setInfiniteLoopProtection(!settings.settings.value.infiniteLoopProtection)
+
+  if (settings.settings.value.infiniteLoopProtection) {
+    toast.add({
+      title: 'Protección de bucle infinito habilitada',
+      color: 'green',
+    })
+  } else {
+    toast.add({
+      title: 'Protección de bucle infinito deshabilitada. ¡Ten cuidado!',
+      color: 'red',
+    })
+  }
+}
 </script>
 
 <template>
@@ -128,7 +146,17 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
           <AppSeparator v-if="settings.settings.value.showAdvanced" />
         </div>
 
-        <div>
+        <div class="flex flex-row items-center space-x-3">
+          <AppButton
+            icon="i-mdi-shield-sync"
+            text="Protección de código"
+            description="Habilita la protección contra bucles infinitos"
+            icon-only
+            color="gray"
+            :active="settings.settings.value.infiniteLoopProtection"
+            @click="setupInfiniteLoopProtection"
+          />
+
           <UPopover
             mode="hover"
             :close-delay="300"
