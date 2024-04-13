@@ -29,4 +29,6 @@ class EsTerminal extends HTMLElement {
   }
 }
 
-customElements.define('es-terminal', EsTerminal)
+if (!customElements.get('es-terminal'))
+  customElements.define('es-terminal', EsTerminal)
+
