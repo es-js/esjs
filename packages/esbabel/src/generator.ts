@@ -1,5 +1,5 @@
-import type { NamedToken, Token, ValuedToken } from '../lexer/token'
-import { TokenType } from '../lexer/token'
+import type { NamedToken, Token, ValuedToken } from './token'
+import { TokenType } from './token'
 import { getDictionary } from './keywords'
 
 export function generate(tokens: Token[], reverse = false): string {

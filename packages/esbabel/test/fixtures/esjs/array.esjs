@@ -1,0 +1,11 @@
+const matriz = Matriz.de([])
+
+matriz.agregar('test')
+
+si (matriz.incluye('test')) {
+  matriz.sacar()
+}
+
+matriz.longitud
+
+matriz.buscar((item) => item === 'test')

@@ -1,0 +1,5 @@
+const foo = crear Cadena('bar');
+
+const searchResult = foo.buscarRegex('a');
+
+foo.caracterEn(0);

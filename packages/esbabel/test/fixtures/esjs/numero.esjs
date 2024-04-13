@@ -1,0 +1,3 @@
+const numero = Numero.interpretarEntero('123');
+
+const numero2 = interpretarEntero('456');

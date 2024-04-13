@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { TokenType } from '../../src/lexer/token'
-import { tokenize } from '../../src/lexer/lexer'
+import { TokenType } from '../../src/token'
+import { tokenize } from '../../src/lexer'
 
 describe('lexer', () => {
   it('tokenizes a simple program', () => {

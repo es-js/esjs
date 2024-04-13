@@ -1,0 +1,3 @@
+exportar porDefecto funcion() {
+  retornar verdadero;
+}

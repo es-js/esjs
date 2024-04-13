@@ -3,13 +3,11 @@ import { defineBuildConfig } from 'unbuild'
 export default defineBuildConfig({
   entries: [
     './src/index',
-    // './src/compiler/keywords',
-    './src/utils',
+    './src/keywords',
   ],
   clean: true,
   declaration: true,
   rollup: {
     emitCJS: true,
-    inlineDependencies: true,
   },
 })

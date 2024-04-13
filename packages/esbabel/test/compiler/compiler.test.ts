@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { generate } from '../../src/compiler/generator'
-import { token } from '../../src/lexer/token'
+import { generate } from '../../src/generator'
+import { token } from '../../src/token'
 
 describe('compiler', () => {
   it('compiles a simple program', async () => {

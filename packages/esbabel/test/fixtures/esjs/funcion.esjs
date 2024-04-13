@@ -1,0 +1,14 @@
+// Este comentario no debe ser transpilado ni ninguna de los siguientes Tokens: if else while
+
+/**
+ * Tampoco este comentario.
+ * if else while
+ * @returns true
+ */
+funcion inicio() {
+	retornar verdadero
+}
+
+const app = crear Fecha()
+
+exportar porDefecto app
