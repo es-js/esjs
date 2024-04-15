@@ -31,7 +31,9 @@ function getCodeFromCodeBlock(slot: HTMLElement | null): string | null {
 }
 
 function useInEditor() {
-  useFiles().updateFile(FILE_CODE, editor.language.value === 'esjs' ? esjsCode.value : jsCode.value)
+  useFiles().updateFile(FILE_CODE, {
+    content: editor.language.value === 'esjs' ? esjsCode.value : jsCode.value,
+  })
 }
 
 function removeMultipleEmptyLines(code: string): string {

@@ -8,6 +8,8 @@ const settings = ref({
   hidePreview: false,
   hideConsole: false,
   hideTests: true,
+  showCompiledEditor: false,
+  showCompiledDiff: false,
   readonlyCode: false,
   readonlyTests: false,
   autoCompile: true,
@@ -44,6 +46,14 @@ export const useSettings = () => {
 
   function setHideEditor(hideEditor: boolean) {
     settings.value.hideEditor = hideEditor
+  }
+
+  function setShowCompiledEditor(showCompiledEditor: boolean) {
+    settings.value.showCompiledEditor = showCompiledEditor
+  }
+
+  function setShowCompiledDiff(showCompiledDiff: boolean) {
+    settings.value.showCompiledDiff = showCompiledDiff
   }
 
   function setHideOutput(hideOutput: boolean) {
@@ -131,6 +141,8 @@ export const useSettings = () => {
     setLayout,
     setHideOptions,
     setHideEditor,
+    setShowCompiledEditor,
+    setShowCompiledDiff,
     setHideOutput,
     setHidePreview,
     setHideConsole,

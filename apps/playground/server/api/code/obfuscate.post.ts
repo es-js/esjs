@@ -1,4 +1,4 @@
-import { prepareCode } from '@es-js/sandbox/parser'
+import { compileCode, prepareCode } from '@es-js/sandbox/utils'
 import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
 import javascriptObfuscator from 'javascript-obfuscator'
@@ -19,7 +19,9 @@ export default defineEventHandler(async(event) => {
 })
 
 function getObfuscatedCode(code: string) {
-  const compiledCode = prepareCode(code)
+  const compiledCode = prepareCode(
+    compileCode(code),
+  )
 
   const splittedCode = splitCodeImports(compiledCode)
 

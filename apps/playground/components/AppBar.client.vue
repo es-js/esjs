@@ -198,6 +198,14 @@ function setupInfiniteLoopProtection() {
                 />
 
                 <AppButton
+                  icon="i-mdi-compare-horizontal"
+                  :active="settings.settings.value.showCompiledEditor"
+                  description="Mostrar código compilado"
+                  variant="outline"
+                  @click="settings.setShowCompiledEditor(!settings.settings.value.showCompiledEditor)"
+                />
+
+                <AppButton
                   icon="i-mdi-eye"
                   :active="!settings.settings.value.hideOutput"
                   description="Mostrar vista previa"

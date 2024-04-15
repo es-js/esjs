@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { compile } from '@es-js/core'
 import { ref } from 'vue'
 import { isDark } from '~/composables/dark'
 import { useEditor } from '~/composables/useEditor'
@@ -154,11 +153,17 @@ function updateTheme() {
 watch(
   editor.language,
   (language) => {
-    const formattedCode = compile(props.modelValue, language === 'esjs')
+    const allFiles = toRaw(files.files.value)
 
-    if (formattedCode !== props.modelValue) {
-      emit('update:modelValue', formattedCode)
-    }
+    allFiles.forEach((file) => {
+      if (!file.code) {
+        return
+      }
+
+      files.updateFile(file.name, {
+        content: language === 'esjs' ? file.code.esjs : file.code.js,
+      })
+    })
   },
 )
 
@@ -189,15 +194,9 @@ watch(
   <MonacoEditor
     :model-value="props.modelValue"
     :options="{
-      automaticLayout: true,
-      theme: isDark ? 'dark' : 'light',
-      fontFamily: 'Fira Code',
-      fontSize: 16,
-      renderWhitespace: 'all',
-      roundedSelection: true,
-      glyphMargin: true,
-      lineNumbersMinChars: 2,
+      ...editor.EDITOR_DEFAULT_OPTIONS,
       ...props.options,
+      theme: isDark ? 'dark' : 'light',
     }"
     lang="javascript"
     class="w-full h-full"

@@ -1,7 +1,7 @@
+import { AvailableLanguages, type CompileOptions } from '@es-js/core'
 import { compileModulesForPreview } from '../compiler'
-import { OrchestratorFile, orchestrator } from '../compiler/orchestrator'
-import type { SandboxFile } from '../parser'
-import { prepareFiles } from '../parser'
+import { orchestrator, OrchestratorFile } from '../compiler/orchestrator'
+import { compileFile, ParseFileError, prepareFiles, SandboxFile, SandboxFileError } from '../utils'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
@@ -15,6 +15,8 @@ export interface EjecutarOptions {
   stylesheets: string[]
   clearConsoleOnRun: boolean
   infiniteLoopProtection: boolean
+  fromLanguage?: AvailableLanguages
+  toLanguage?: AvailableLanguages
 }
 
 let _options: EjecutarOptions
@@ -37,70 +39,87 @@ export async function init(options: EjecutarOptions): Promise<void> {
 
   previewTab(_options.previewTab)
 
-  await evalInitialCode()
+  await evalEditorFiles()
 }
 
 export async function evalFiles({ files, options}: { files: SandboxFile[], options?: EjecutarOptions }) {
-  try {
-    const result = prepareFiles(
-      files.filter((file: any) => {
-        const extension = file.name.split('.').slice(-1)[0]
-
-        return ['esjs', 'js'].includes(extension)
-      }),
-      options
-    )
-
-    result.forEach((file: any) => {
+  const result = prepareFiles(
+    files.filter((file: any) => {
       const extension = file.name.split('.').slice(-1)[0]
 
-      if (!['esjs', 'js'].includes(extension))
-        return
+      return ['esjs', 'js'].includes(extension)
+    }),
+    options
+  )
 
-      orchestrator.files[file.name] = new OrchestratorFile(file.name, '', `${file.imports}\n${file.code}\n`, '')
-    })
+  result.forEach((file: any) => {
+    if (!file.name) {
+      return
+    }
 
-    const modules = compileModulesForPreview(
-      Object.values(orchestrator.files),
-    )
+    const extension = file.name.split('.').slice(-1)[0]
 
-    await evalCode({
-      script: [
-        'const __modules__ = {};',
-        ...modules.reverse(),
-      ],
-    })
-  }
-  catch (error) {
-    await handleEvalError(error)
-  }
-}
+    if (!['esjs', 'js'].includes(extension))
+      return
 
-async function handleEvalError(error: any) {
-  const errorArgs = {
-    filename: error.filename,
-    message: error.message,
-    line: error.line,
-    column: error.column,
-  }
+    orchestrator.files[file.name] = new OrchestratorFile(file.name, '', `${file.imports}\n${file.codeWithoutImports}\n`, '')
+  })
 
-  return evalCode({
+  const modules = compileModulesForPreview(
+    Object.values(orchestrator.files),
+  )
+
+  await evalCode({
     script: [
-      `import { Terminal } from '@es-js/terminal'; import { tiza } from '@es-js/tiza';
-
-Terminal.clear()
-
-Terminal.escribir(\`Error en el archivo \${tiza.fondoAzul50.azul800(${JSON.stringify(error.filename)})}:\`)
-
-Terminal.escribir(
-  tiza.rojo(${JSON.stringify(error.message)})
-)
-
-console.error(${JSON.stringify(error.message)})
-
-window.onerror(${JSON.stringify(error.message)}, null, 1, 1, ${JSON.stringify(errorArgs)})`,
+      'const __modules__ = {};',
+      ...modules.reverse(),
     ],
   })
+}
+
+export async function compileFiles({ files, options}: { files: SandboxFile[], options: CompileOptions }) {
+  const filesCompiled: SandboxFile[] = files
+    .map((file: any) => {
+      const extension = file.name.split('.').slice(-1)[0]
+
+      if (!['esjs', 'js'].includes(extension)) {
+        return file
+      }
+
+      let compiled: string = ''
+      let error: SandboxFileError | undefined
+
+      try {
+        compiled = compileFile(file, options)
+      } catch (exception: any) {
+        compiled = ''
+        error = {
+          message: exception.message,
+          line: exception.line || 1,
+          column: exception.column || 1,
+          stack: exception.stack,
+        }
+      }
+
+      return {
+        ...file,
+        code: {
+          esjs: compileFile(file, {
+            ...options,
+            to: 'esjs',
+          }),
+          js: compiled,
+        },
+        error,
+      }
+    })
+
+  parent.postMessage({
+    action: 'cmd_files_compiled',
+    filesCompiled,
+  })
+
+  return filesCompiled
 }
 
 async function evalCode(args: any) {
@@ -145,11 +164,28 @@ async function evalCode(args: any) {
   return true
 }
 
-async function evalInitialCode() {
+export function setFiles(files: SandboxFile[]) {
+  _options.files = files
+}
+
+export async function evalEditorFiles(options?: EjecutarOptions) {
   if (!_options.files)
     return
 
-  await evalFiles({ files: _options.files })
+ const compiledFiles = await compileFiles({
+    files: _options.files,
+    options: {
+      from: options?.fromLanguage || 'esjs',
+      to: options?.toLanguage || 'js',
+    },
+  })
+
+  setFiles(compiledFiles)
+
+  await evalFiles({
+    files: _options.files,
+    options,
+  })
 }
 
 function clearConsole() {

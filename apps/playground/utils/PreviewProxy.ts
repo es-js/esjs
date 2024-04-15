@@ -1,5 +1,6 @@
 // ReplProxy and srcdoc implementation from Svelte REPL
 // MIT License https://github.com/sveltejs/svelte-repl/blob/master/LICENSE
+import type { CompileOptions } from '@es-js/core'
 
 let uid = 1
 
@@ -86,10 +87,16 @@ export class PreviewProxy {
         return this.handlers.on_active_preview(event.data)
       case 'activePreviewTab':
         return this.handlers.on_active_preview_tab(event.data)
+      case 'cmd_files_compiled':
+        return this.handlers.on_files_compiled(event.data)
     }
   }
 
   eval(files: Record<string, string>, options: any) {
     return this.iframe_command('eval', { files, options })
+  }
+
+  compile(files: Record<string, string>, options: CompileOptions) {
+    return this.iframe_command('COMPILE', { files, options })
   }
 }

@@ -1,13 +1,14 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.15",
+  "version": "0.0.16-alpha.6",
   "scripts": {
     "dev": "vite",
     "build": "vite build && pnpm tailwind:build",
     "test": "vitest",
     "test:run": "vitest run",
     "tailwind:dev": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch",
-    "tailwind:build": "tailwindcss -i ./src/style.css -o ./dist/style.css --minify"
+    "tailwind:build": "tailwindcss -i ./src/style.css -o ./dist/style.css --minify",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.31.1",
@@ -35,10 +36,10 @@
       "import": "./dist/render.js",
       "require": "./dist/render.cjs"
     },
-    "./parser": {
-      "types": "./dist/parser/index.d.ts",
-      "import": "./dist/parser.js",
-      "require": "./dist/parser.cjs"
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils.js",
+      "require": "./dist/utils.cjs"
     },
     "./runtime": {
       "types": "./dist/runtime/index.d.ts",
@@ -54,7 +55,7 @@
       "*": [
         "./dist/*",
         "./dist/render/index.d.ts",
-        "./dist/parser/index.d.ts",
+        "./dist/utils/index.d.ts",
         "./dist/runtime/index.d.ts"
       ]
     }

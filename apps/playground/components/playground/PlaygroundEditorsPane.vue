@@ -89,7 +89,9 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
                 name="code"
                 :model-value="files.getActiveFileContent()"
                 :readonly="files.getActiveFile().readonly"
-                @update:model-value="files.updateFile(files.getActiveFile().name, $event)"
+                @update:model-value="files.updateFile(files.getActiveFile().name, {
+                  content: $event,
+                })"
               />
             </template>
           </AppContainer>
@@ -119,7 +121,9 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
               v-if="!settings.hideTests"
               name="tests"
               :model-value="files.getFileContent(FILE_TESTS)"
-              @update:model-value="files.updateFile(FILE_TESTS, $event)"
+              @update:model-value="files.updateFile(FILE_TESTS, {
+                content: $event,
+              })"
             />
           </div>
         </Pane>

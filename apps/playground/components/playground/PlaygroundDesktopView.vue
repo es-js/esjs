@@ -2,6 +2,7 @@
 import { Pane, Splitpanes } from 'splitpanes'
 import { watch } from 'vue'
 import PlaygroundOutput from '~/components/output/PlaygroundOutput.vue'
+import PlaygroundDiffEditor from '~/components/playground/PlaygroundDiffEditor.vue'
 import PlaygroundEditorsPane from '~/components/playground/PlaygroundEditorsPane.vue'
 import { useSettings } from '~/composables/useSettings'
 
@@ -47,6 +48,13 @@ watch(
       :size="inputPaneSize"
     >
       <PlaygroundEditorsPane />
+    </Pane>
+
+    <Pane
+      v-if="settings.showCompiledEditor"
+      :size="30"
+    >
+      <PlaygroundDiffEditor />
     </Pane>
 
     <Pane

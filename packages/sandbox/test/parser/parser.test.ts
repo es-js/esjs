@@ -5,9 +5,8 @@ import {
   escapeTemplateLiteral,
   formatCode,
   generateImportStatement, prepareCode, prepareFiles, prepareMainFile,
-  tryToParseFile,
   unifyImports,
-} from '../../src/parser'
+} from '../../src/utils'
 
 describe('parser', () => {
   it('unify duplicated imports', () => {
@@ -148,6 +147,6 @@ return 'foo';
 
   it('throws error when parsing invalid file', () => {
     const file = { name: 'main.js', content: 'funcion prueba() { retornar \'Hola, mundo!\'; ' } // Falta el cierre de llave
-    expect(() => tryToParseFile(file)).toThrow()
+    expect(() => prepareCode(file)).toThrow()
   })
 })

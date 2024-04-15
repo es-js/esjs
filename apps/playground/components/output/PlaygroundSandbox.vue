@@ -113,6 +113,14 @@ async function init() {
       useSettings().setActivePreviewTab(args.data)
       useSettings().setHideConsole(args.data === 'hidden')
     },
+    on_files_compiled: (args: any) => {
+      args.filesCompiled.forEach((file: any) => {
+        files.updateFile(file.name, {
+          code: file.code,
+          error: file.error ?? null,
+        })
+      })
+    },
   })
 }
 

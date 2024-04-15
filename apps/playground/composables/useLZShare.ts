@@ -62,6 +62,8 @@ export const useLZShare = () => {
     url.searchParams.set('hideEditor', String(settings.settings.value.hideEditor))
     url.searchParams.set('hideConsole', String(settings.settings.value.hideConsole))
     url.searchParams.set('hideTests', String(settings.settings.value.hideTests))
+    url.searchParams.set('showCompiledEditor', String(settings.settings.value.showCompiledEditor))
+    url.searchParams.set('showCompiledDiff', String(settings.settings.value.showCompiledDiff))
     url.searchParams.set('readonlyCode', String(settings.settings.value.readonlyCode))
     url.searchParams.set('readonlyTests', String(settings.settings.value.readonlyTests))
     url.searchParams.set('preview', JSON.stringify(settings.settings.value.preview))
@@ -105,6 +107,8 @@ export const useLZShare = () => {
       hidePreview: url.searchParams.get('hidePreview'),
       hideConsole: url.searchParams.get('hideConsole'),
       hideTests: url.searchParams.get('hideTests'),
+      showCompiledEditor: url.searchParams.get('showCompiledEditor'),
+      showCompiledDiff: url.searchParams.get('showCompiledDiff'),
       readonlyCode: url.searchParams.get('readonlyCode'),
       readonlyTests: url.searchParams.get('readonlyTests'),
       showAdvanced: url.searchParams.get('showAdvanced'),
@@ -212,6 +216,8 @@ export const useLZShare = () => {
       hidePreview,
       hideConsole,
       hideTests,
+      showCompiledEditor,
+      showCompiledDiff,
       readonlyCode,
       readonlyTests,
       tests,
@@ -227,6 +233,8 @@ export const useLZShare = () => {
     settings.setHidePreview(hidePreview === 'true')
     settings.setHideConsole(hideConsole === 'true')
     settings.setHideTests(hideTests === 'true' || tests === null)
+    settings.setShowCompiledEditor(showCompiledEditor === 'true')
+    settings.setShowCompiledDiff(showCompiledDiff === 'true')
     settings.setReadonlyCode(readonlyCode === 'true')
     settings.setReadonlyTests(readonlyTests === 'true')
     settings.setShowAdvanced(showAdvanced === 'true')
@@ -244,11 +252,19 @@ export const useLZShare = () => {
     const testsCode = getTestsCodeFromUrl()
 
     if (useEditor().isLearnApp.value) {
-      useFiles().updateFile(FILE_CODE, '')
-      useFiles().updateFile(FILE_TESTS, '')
+      useFiles().updateFile(FILE_CODE, {
+        content: '',
+      })
+      useFiles().updateFile(FILE_TESTS, {
+        content: '',
+      })
     } else {
-      useFiles().updateFile(FILE_CODE, code)
-      useFiles().updateFile(FILE_TESTS, testsCode ?? '')
+      useFiles().updateFile(FILE_CODE, {
+        content: code,
+      })
+      useFiles().updateFile(FILE_TESTS, {
+        content: testsCode ?? '',
+      })
     }
 
     setTimeout(() => {

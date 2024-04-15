@@ -1,4 +1,4 @@
-import { evalFiles, hidePreview, previewTab, setupTheme } from './ejecutar.ts'
+import { compileFiles, evalEditorFiles, hidePreview, previewTab, setFiles, setupTheme } from './ejecutar.ts'
 
 export function setupWindow() {
   return new Promise((resolve) => {
@@ -94,9 +94,21 @@ async function handle_message(ev) {
 
   if (action === 'eval') {
     try {
-      await evalFiles(args)
+      const { files, options } = args
+
+      await setFiles(files)
+      await evalEditorFiles(options)
 
       send_ok()
+    }
+    catch (error) {
+      send_error(error.message, error.stack)
+    }
+  }
+  else if (action === 'COMPILE') {
+    try {
+      const { files, options } = args
+      await compileFiles({ files, options })
     }
     catch (error) {
       send_error(error.message, error.stack)

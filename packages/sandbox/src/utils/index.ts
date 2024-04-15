@@ -1,7 +1,9 @@
-import { compile } from '@es-js/core'
+import { compile, type CompileOptions } from '@es-js/core'
+// import { plugins, setToEsJS } from '@es-js/core/plugins'
 import { splitCodeImports } from '@es-js/core/utils'
 import escodegen from 'escodegen'
 import * as espree from 'espree'
+// import putout from 'https://esm.sh/@putout/bundle@2'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
@@ -19,7 +21,7 @@ class PrepareCodeError extends Error {
   }
 }
 
-class ParseFileError extends Error {
+export class ParseFileError extends Error {
   constructor(message: string, public filename: string, public line: number, public column: number) {
     super(message)
   }
@@ -29,6 +31,54 @@ export interface SandboxFile {
   name: string
   content: string
   main?: boolean
+  code?: {
+    esjs?: string
+    js?: string
+  },
+  error?: SandboxFileError
+}
+
+export interface SandboxFileError {
+  message: string
+  line: number
+  column: number
+  stack: string
+}
+
+export function compileFile(file: SandboxFile, options?: CompileOptions) {
+  if (!file.code) {
+    file.code = {}
+  }
+
+  return compileCode(file.content, options)
+
+  // try {
+  //   file.code.js = compile(file.content, options)
+  //
+  //   const ast = putout.parse(file.code.js, {
+  //     printer: 'recast',
+  //   })
+  //
+  //   setToEsJS(options?.to === 'esjs')
+  //
+  //   putout.transform(ast, file.code.js, {
+  //     plugins,
+  //   })
+  //
+  //   return putout.print(ast, {
+  //     printer: 'recast',
+  //   })
+  // } catch (error: any) {
+  //   throw new ParseFileError(error.message, file.name, error.loc?.line || 1, error.loc?.column || 1)
+  // }
+}
+
+export function compileCode(code: string, options?: CompileOptions) {
+  try {
+    return compile(code, options)
+  } catch (error: any) {
+    throw new ParseFileError(error.message, 'code', error.loc?.line || 1, error.loc?.column || 1)
+  }
 }
 
 export function prepareCode(code: string, options?: EjecutarOptions) {
@@ -36,11 +86,13 @@ export function prepareCode(code: string, options?: EjecutarOptions) {
     if (!code.endsWith('\n'))
       code += '\n'
 
-    code = compile(code)
     code = formatCode(code) // To check syntax errors
+
     code = addExportToFunctions(code) // To allow functions to be called from another file
+
     if (options && options.infiniteLoopProtection)
       code = addInfiniteLoopProtection(code) // To prevent infinite loops
+
     return code
   }
   catch (error: SyntaxError | any) {
@@ -223,56 +275,97 @@ export function generateImportStatement(code: string, modulePath: string) {
 }
 
 export function prepareFiles(files: SandboxFile[], options?: EjecutarOptions) {
+  if (files.some((file) => file.error)) {
+    const firstFileWithError = files.find((file) => file.error)
+
+    if (!firstFileWithError?.error) {
+      return files
+    }
+
+    return printError(firstFileWithError)
+  }
+
   const main = prepareMainFile(files.find((file: any) => file.name === MAIN_FILE), options)
 
-  const restOfFiles = files.filter((file: any) => file.name !== MAIN_FILE)
+  if (main.error) {
+    return printError(main)
+  }
+
+  const restOfFiles = files
+    .filter((file: any) => file.name !== MAIN_FILE)
+    .map((file) => {
+      try {
+        const importsFromMain = generateImportStatement(main.codeWithoutImports, `./${MAIN_FILE}`)
+        const compiledCode = prepareCode(file?.code?.js || '', options)
+        const splitted = splitCodeImports(compiledCode)
+        const imports = unifyImports(`
+      ${importsFromMain}
+      ${splitted.imports}
+      ${file.name === MAIN_TESTS_FILE ? IMPORT_ESJS_PRUEBA : ''}
+    `)
+
+        return {
+          ...file,
+          imports,
+          codeWithoutImports: splitted.codeWithoutImports,
+        }
+      } catch (error: any) {
+        return {
+          ...file,
+          error: {
+            message: error.message,
+            line: error.line,
+            column: error.column,
+            stack: error.stack,
+          },
+        }
+      }
+    })
+
+  if (restOfFiles.some((file) => file.error)) {
+    const firstFileWithError = restOfFiles.find((file) => file.error)
+
+    if (!firstFileWithError?.error) {
+      return restOfFiles
+    }
+
+    return printError(firstFileWithError)
+  }
 
   return [
     main,
-    ...restOfFiles.map((file) => {
-      const importsFromMain = generateImportStatement(main.code, `./${MAIN_FILE}`)
-      const compiled = tryToParseFile(file, options)
-      const splitted = splitCodeImports(compiled)
-      const imports = unifyImports(`
-        ${importsFromMain}
-        ${splitted.imports}
-        ${file.name === MAIN_TESTS_FILE ? IMPORT_ESJS_PRUEBA : ''}
-      `)
-
-      return {
-        ...file,
-        imports,
-        code: splitted.codeWithoutImports,
-      }
-    }),
+    ...restOfFiles
   ]
 }
 
 export function prepareMainFile(file: any, options?: EjecutarOptions) {
-  const compiledCode = tryToParseFile(file, options)
-  const splittedCode = splitCodeImports(compiledCode)
+  try {
+    const compiledCode = prepareCode(file?.code?.js || '', options)
+    const splittedCode = splitCodeImports(compiledCode)
 
-  const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
+    const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
 
-  const imports = unifyImports(`
+    const imports = unifyImports(`
 ${codeUsesTerminal ? IMPORT_ESJS_TERMINAL : ''}
 ${IMPORT_ESJS_PRUEBA}
 ${splittedCode.imports}
   `)
 
-  return {
-    ...file,
-    imports,
-    code: splittedCode.codeWithoutImports,
-  }
-}
-
-export function tryToParseFile(file: SandboxFile, options?: EjecutarOptions) {
-  try {
-    return prepareCode(file.content, options)
-  }
-  catch (error: any) {
-    throw new ParseFileError(error.message, file.name, error.line, error.column)
+    return {
+      ...file,
+      imports,
+      codeWithoutImports: splittedCode.codeWithoutImports,
+    }
+  } catch (error: any) {
+    return {
+      ...file,
+      error: {
+        message: error.message,
+        line: error.line,
+        column: error.column,
+        stack: error.stack,
+      },
+    }
   }
 }
 
@@ -282,4 +375,29 @@ export function formatCode(code: string) {
     plugins: [parserBabel],
     semi: false,
   })
+}
+
+function printError(file: SandboxFile) {
+  if (!file.error) {
+    return [file]
+  }
+
+  return [
+    {
+      ...file,
+      imports: 'import { Terminal } from \'@es-js/terminal\'; import { tiza } from \'@es-js/tiza\';',
+      codeWithoutImports: `
+Terminal.clear()
+
+Terminal.escribir(\`Error en el archivo \${tiza.fondoAzul50.azul800(${JSON.stringify(file.name)})}:\`)
+
+Terminal.escribir(
+tiza.rojo(${JSON.stringify(file.error.message)})
+)
+
+console.error(${JSON.stringify(file.error.message)})
+
+window.onerror(${JSON.stringify(file.error.message)}, null, ${file.error.line}, ${file.error.column}, ${JSON.stringify(file.error)})`,
+    }
+  ]
 }

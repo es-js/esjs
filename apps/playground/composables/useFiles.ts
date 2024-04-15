@@ -1,13 +1,24 @@
 import { Ref, ref } from 'vue'
 
-interface File {
+export interface File {
   name: string;
   content: string;
   active: boolean;
+  activeDiff: boolean;
   tab: number;
   icon?: string;
   readonly?: boolean;
   main?: boolean;
+  code?: {
+    esjs?: string;
+    js?: string;
+  };
+  error?: {
+    message: string;
+    line: number;
+    column: number;
+    stack: string;
+  };
 }
 
 type Files = File[];
@@ -113,6 +124,7 @@ const files: Ref<Files> = ref([
     name: FILE_CODE,
     content: INITIAL_CODE,
     active: true,
+    activeDiff: true,
     tab: 0,
     icon: 'i-mdi-code-tags',
     main: true,
@@ -121,6 +133,7 @@ const files: Ref<Files> = ref([
     name: FILE_TESTS,
     content: '',
     active: false,
+    activeDiff: false,
     tab: 1,
   },
   // {
@@ -140,6 +153,7 @@ const files: Ref<Files> = ref([
 }
 `,
     active: false,
+    activeDiff: false,
     tab: 0,
     icon: 'i-mdi-json',
     readonly: true,
@@ -149,12 +163,13 @@ const files: Ref<Files> = ref([
 const loading = ref(true)
 
 export const useFiles = () => {
-  function updateFile(name: string, content: string) {
-    const file = files.value.find(file => file.name === name)
+  function updateFile(name: string, value: Partial<File>) {
+    const file = files.value.find((f: File) => f.name === name)
 
     if (!file) { return }
 
-    file.content = content
+    file.content = value.content ?? file.content
+    file.code = value.code ?? file.code
   }
 
   function getFileContent(name: string) {
@@ -181,9 +196,19 @@ export const useFiles = () => {
     return files.value.find(file => file.active)
   }
 
+  function getActiveDiffFile() {
+    return files.value.find(file => file.activeDiff)
+  }
+
   function setActiveFile(name: string) {
-    files.value.forEach((file) => {
+    files.value.forEach((file: File) => {
       file.active = file.name === name
+    })
+  }
+
+  function setActiveDiffFile(name: string) {
+    files.value.forEach((file: File) => {
+      file.activeDiff = file.name === name
     })
   }
 
@@ -198,7 +223,9 @@ export const useFiles = () => {
     getFileNameWithExtension,
     getActiveFileContent,
     getActiveFile,
+    getActiveDiffFile,
     setActiveFile,
+    setActiveDiffFile,
     setLoading,
     loading,
   }
