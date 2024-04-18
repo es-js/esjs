@@ -9,6 +9,6 @@ funcion inicio() {
 	retornar verdadero
 }
 
-const app = crear Fecha()
+const app = { }
 
 exportar porDefecto app

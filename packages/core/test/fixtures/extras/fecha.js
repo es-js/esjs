@@ -1,4 +1,4 @@
-const fecha = Date()
+const fecha = new Date()
 
 fecha.getDate()
 fecha.getDay()

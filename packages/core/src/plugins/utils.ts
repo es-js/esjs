@@ -1,0 +1,149 @@
+import { invertMap } from '../utils'
+
+let toEsJS = false
+
+export function setToEsJS(value: boolean) {
+  toEsJS = value
+}
+
+export function replaceObjectNew({
+  from,
+  to,
+}: {
+  from: string
+  to: string
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  return {
+    [`new ${a}(__a)`]: `new ${b}(__a)`,
+    [`new ${a}.__a`]: `new ${b}.__a`,
+    [`new ${a}()`]: `new ${b}()`,
+  }
+}
+
+export function replaceObjectCall({
+  from,
+  to,
+}: {
+  from: string
+  to: string
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  return {
+    [`${a}(__a)`]: `${b}(__a)`,
+    [`${a}.__a`]: `${b}.__a`,
+  }
+}
+
+export function replaceObject({
+  from,
+  to,
+}: {
+  from: string
+  to: string
+}) {
+  return {
+    ...replaceObjectNew({
+      from,
+      to,
+    }),
+    ...replaceObjectCall({
+      from,
+      to,
+    }),
+  }
+}
+
+export function replaceObjects({
+  objects,
+}: {
+  objects: Map<string, string>
+}) {
+  const rules = []
+
+  for (const [from, to] of objects) {
+    rules.push(replaceObject({
+      from,
+      to,
+    }))
+  }
+
+  return Object.assign({}, ...rules)
+}
+
+export function replaceObjectMethods({
+  methods,
+}: {
+  methods: Map<string, string>
+}) {
+  const dictionary = toEsJS ? invertMap(methods) : methods
+
+  return Object.fromEntries([...dictionary].map(([key, value]) => {
+    return [`__a.${key}`, `__a.${value}`]
+  }))
+}
+
+export function replaceObjectProperties({
+  properties,
+}: {
+  properties: Map<string, string>
+}) {
+  const dictionary = toEsJS ? invertMap(properties) : properties
+
+  return Object.fromEntries([...dictionary].map(([key, value]) => {
+    return [`__a.${key}`, `__a.${value}`]
+  }))
+}
+
+export function replaceGlobalMethods({
+  from,
+  to,
+  methods,
+}: {
+  from: string
+  to: string
+  methods: Map<string, string>
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  const dictionary = toEsJS ? invertMap(methods) : methods
+
+  return Object.fromEntries([...dictionary].map(([key, value]) => {
+    return [`${a}.${key}`, `${b}.${value}`]
+  }))
+}
+
+export function replaceKeyword({
+  from,
+  to,
+}: {
+  from: string
+  to: string
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  return {
+    [a]: b,
+  }
+}
+
+export function replaceInstanceof({
+  from,
+  to,
+}: {
+  from: string
+  to: string
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  return {
+    [`__a instanceof ${a}`]: `__a instanceof ${b}`,
+  }
+}

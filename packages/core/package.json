@@ -16,9 +16,14 @@
   ],
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.3",
+    "@es-js/parser": "0.0.1-alpha.7",
     "@es-js/esbabel": "workspace:0.0.1-alpha.0",
     "@types/node": "^20.9.0",
+    "acorn-stage3": "^4.0.0",
     "eslint": "8.55.0",
+    "hermes-parser": "^0.20.1",
+    "putout": "^35.7.6",
+    "tenko": "^2.0.1",
     "typescript": "^5.2.2",
     "unbuild": "^2.0.0",
     "vite": "^5.1.1",
@@ -39,6 +44,16 @@
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.mjs",
       "require": "./dist/utils.cjs"
+    },
+    "./plugins": {
+      "types": "./dist/plugins/index.d.ts",
+      "import": "./dist/plugins/index.mjs",
+      "require": "./dist/plugins/index.cjs"
+    },
+    "./applyPlugins": {
+      "types": "./dist/applyPlugins.d.ts",
+      "import": "./dist/applyPlugins.mjs",
+      "require": "./dist/applyPlugins.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -50,7 +65,9 @@
         "./dist/*",
         "./dist/index.d.ts",
         "./dist/keywords.d.ts",
-        "./dist/utils.d.ts"
+        "./dist/utils.d.ts",
+        "./dist/plugins.d.ts",
+        "./dist/applyPlugins.d.ts"
       ]
     }
   },

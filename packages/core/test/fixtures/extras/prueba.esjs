@@ -1,0 +1,135 @@
+// Definición de una clase con herencia
+clase Animal {
+    constructor(nombre) {
+        ambiente.nombre = nombre;
+    }
+
+    // Método de instancia
+    hablar() {
+        consola.escribir(`${this.nombre} hace un sonido.`);
+    }
+}
+
+clase Perro extiende Animal {
+    constructor(nombre) {
+        super(nombre);
+    }
+
+    // Método de instancia sobrescrito
+    hablar() {
+        consola.escribir(`${this.nombre} ladra.`);
+    }
+
+    // Método estático
+    static informacion() {
+        consola.escribir('Los perros son animales domésticos.');
+    }
+}
+
+// Función asíncrona
+asincrono funcion funcionAsincrona() {
+    intentar {
+        esperar algunaOperacionAsincrona();
+    } capturar (error) {
+        consola.error('Error:', error);
+    } finalmente {
+        consola.escribir('Operación asíncrona terminada.');
+    }
+}
+
+// Función generadora
+funcion* funcionGeneradora() {
+    producir 'Uno';
+    producir 'Dos';
+    producir 'Tres';
+}
+
+// Operadores
+var a = 5;
+var b = 10;
+mut suma = a + b;
+mut resta = b - a;
+mut multiplicacion = a * b;
+mut division = b / a;
+mut resto = b % a;
+
+// Estructura de control
+si (a < b) {
+    consola.escribir('A es menor que B.');
+} sino {
+    consola.escribir('A es mayor o igual que B.');
+}
+
+mut i = 0;
+mientras (i < 5) {
+    consola.escribir('Iteración:', i);
+    i++;
+}
+
+// Uso de keywords especiales
+mut miObjeto = crear Animal('Gato');
+consola.escribir(miObjeto instanciaDe Animal);
+
+mut miVariable = nulo;
+consola.escribir(tipoDe miVariable);
+
+mut miArray = [1, 2, 3];
+eliminar miArray[0];
+
+mut x = 5;
+mut y = 10;
+consola.escribir(x en miObjeto);
+
+mut z = crear Perro('Bobby');
+consola.escribir(z instanciaDe Perro);
+
+// Palabras reservadas
+mut valorNulo = nulo;
+mut valorVerdadero = verdadero;
+mut valorFalso = falso;
+mut esteValor = ambiente;
+mut romperValor = 'romper';
+mut casoValor = 'caso';
+mut capturarValor = 'capturar';
+mut continuarValor = 'continuar';
+mut depuradorValor = 'depurador';
+mut porDefecto = 'por defecto';
+mut hacerValor = 'hacer';
+mut sinoValor = 'sino';
+mut finalmenteValor = 'finalmente';
+mut paraValor = 'para';
+mut funcionValor = 'función';
+mut siValor = 'si';
+mut retornarValor = 'retornar';
+mut elegirValor = 'elegir';
+mut lanzarValor = 'lanzar';
+mut intentarValor = 'intentar';
+mut mutarValor = 'mutar';
+mut mientrasValor = 'mientras';
+mut conValor = 'con';
+mut crearValor = 'crear';
+mut ambienteValor = 'ambiente';
+mut claseValor = 'clase';
+mut extiendeValor = 'extiende';
+mut exportarValor = 'exportar';
+mut importarValor = 'importar';
+mut producirValor = 'producir';
+mut nuloValor = 'nulo';
+mut verdaderoValor = 'verdadero';
+mut falsoValor = 'falso';
+mut enValor = 'en';
+mut instanciaDeValor = 'instancia de';
+mut tipoDeValor = 'tipo de';
+mut vacioValor = 'vacío';
+mut eliminarValor = 'eliminar';
+mut asincronoValor = 'asíncrono';
+
+funcionAsincrona();
+
+funcion algunaOperacionAsincrona() {
+    retornar crear Promesa(resuelve => {
+        establecerTemporizador(() => resuelve(), 1000);
+    });
+}
+
+Perro.informacion();

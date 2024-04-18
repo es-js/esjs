@@ -1,36 +1,44 @@
-import { describe, expect, it } from 'vitest'
-import { compile } from '../src'
+import { describe, it } from 'vitest'
+import { assertResult } from './testUtils'
 
 describe('known issues', () => {
-  it('compiles variables named `escribir`', () => {
-    const esjs = `
-    const escribir = 'prueba'
-`
-
-    const js = `
-    const log = 'prueba'
-`
-
-    const compiled = compile(esjs)
-
-    expect(compiled).toEqual(js)
-
-    expect(compile(js, true)).toEqual(esjs)
+  it('fixed: compiles variables named `escribir`', async () => {
+    await assertResult(`
+      const escribir = 'prueba'
+    `, `
+      const escribir = 'prueba'
+    `, {
+      compiler: 'essucrase',
+    })
   })
 
-  it('fixed: does not compile variables named `get`', () => {
-    const esjs = `
-    var get = 'prueba'
-`
+  it('fixed: does not compile variables named `get`', async () => {
+    await assertResult(`
+      mut get = 'prueba'
+    `, `
+      let get = 'prueba'
+    `, {
+      compiler: 'essucrase',
+    })
+  })
 
-    const js = `
-    let get = 'prueba'
-`
-
-    const compiled = compile(esjs)
-
-    expect(compiled).toEqual(js)
-
-    expect(compile(js, true)).toEqual(esjs)
+  it('fixed: transpiles const/mut/var to const/let/var', async () => {
+    await assertResult(`
+      const desde = 'a'
+      var b = {
+        para: 'para',
+        si: 'si',
+      }
+      mut hasta = 'c'
+    `, `
+      const desde = 'a'
+      var b = {
+        para: 'para',
+        si: 'si',
+      }
+      let hasta = 'c'
+    `, {
+      compiler: 'essucrase',
+    })
   })
 })

@@ -5,6 +5,8 @@ export default defineBuildConfig({
     './src/index',
     './src/keywords',
     './src/utils',
+    './src/plugins/index',
+    './src/applyPlugins',
   ],
   clean: true,
   declaration: true,

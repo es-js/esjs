@@ -1,0 +1,7 @@
+const numero = Numero.interpretarEntero('123');
+
+const numero2 = interpretarEntero('456');
+
+const numeroDecimal = Numero.interpretarDecimal('123.456');
+
+const numeroDecimal2 = interpretarDecimal('456.789');

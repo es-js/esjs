@@ -1,4 +1,4 @@
-const fecha = Fecha()
+const fecha = crear Fecha()
 
 fecha.obtenerDia()
 fecha.obtenerDiaSemana()

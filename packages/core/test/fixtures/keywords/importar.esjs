@@ -1,2 +1,2 @@
 importar { dirname } desde 'node:path';
-importar * as path desde 'node:path';
+importar * como path desde 'node:path';

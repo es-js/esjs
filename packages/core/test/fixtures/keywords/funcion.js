@@ -9,6 +9,6 @@ function inicio() {
 	return true
 }
 
-const app = new Date()
+const app = { }
 
 export default app
