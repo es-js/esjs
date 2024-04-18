@@ -30,6 +30,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
+    "./keywords": {
+      "types": "./dist/keywords.d.ts",
+      "import": "./dist/keywords.mjs",
+      "require": "./dist/keywords.cjs"
+    },
     "./utils": {
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.mjs",
@@ -44,6 +49,7 @@
       "*": [
         "./dist/*",
         "./dist/index.d.ts",
+        "./dist/keywords.d.ts",
         "./dist/utils.d.ts"
       ]
     }
