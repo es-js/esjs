@@ -1,8 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { compile } from '../src'
-import { applyPlugins } from '../src/applyPlugins'
+import { compileCode } from './testUtils'
 
 const esjsFixtures = import.meta.glob('./fixtures/keywords/*.esjs')
 const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
@@ -34,19 +33,13 @@ async function testCompile(fixture: string, options: {
   try {
     const { esjsCode, jsCode } = readFixture(fixture)
 
-    let codeToCompile = options.reverse ? jsCode : esjsCode
-
-    if (options.reverse && options.convert)
-      codeToCompile = applyPlugins(codeToCompile, options.reverse)
-
-    let generated = compile(codeToCompile, {
-      from: options.reverse ? 'js' : 'esjs',
-      to: options.reverse ? 'esjs' : 'js',
-      compiler: 'essucrase',
-    })
-
-    if (!options.reverse && options.convert)
-      generated = applyPlugins(generated, options.reverse)
+    const generated = await compileCode(
+      options.reverse ? jsCode : esjsCode,
+      {
+        reverse: options.reverse,
+        convert: options.convert,
+      },
+    )
 
     return {
       generated,

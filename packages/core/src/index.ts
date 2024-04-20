@@ -19,7 +19,7 @@ export function compile(code: string, options: CompileOptions = {} as CompileOpt
     options.to = options.reverse ? 'esjs' : 'js'
 
   if (!options.compiler)
-    options.compiler = 'essucrase'
+    options.compiler = 'esbabel'
 
   if (options.compiler === 'esbabel')
     return compileEsbabel(code, options.to === 'esjs')

@@ -1,4 +1,4 @@
-import { replaceGlobalMethods } from '../utils'
+import { replaceObjectStaticMethods } from '../utils'
 
 export const report = () => 'Converts consola to console'
 
@@ -33,16 +33,10 @@ export const objects = new Map<string, string>([
 
 export function replace() {
   return {
-    ...replaceGlobalMethods({
+    ...replaceObjectStaticMethods({
       from: 'consola',
       to: 'console',
       methods,
     }),
-
-    // ...replaceGlobalMethods({
-    //   from: 'console',
-    //   to: 'consola',
-    //   methods,
-    // }),
   }
 }

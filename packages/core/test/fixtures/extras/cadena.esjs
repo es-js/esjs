@@ -3,3 +3,7 @@ const foo = crear Cadena('bar');
 const searchResult = foo.buscarRegex('a');
 
 foo.caracterEn(0);
+
+Cadena.desdeCodigoDeCaracter(65, 66, 67); // 'ABC'
+Cadena.desdePuntoDeCodigo(65, 66, 67); // 'ABC'
+Cadena.crudo`Hola\nMundo`; // 'Hola\\nMundo'

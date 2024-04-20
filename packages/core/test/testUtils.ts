@@ -18,15 +18,32 @@ export async function formatWithPrettier(code: string, options?: Partial<Options
   })
 }
 
-export async function assertResult(
-  code: string,
-  expectedResult: string,
+export function assertCompile(
+  esjsCode: string,
+  jsCode: string,
   options: any = { },
   message?: string,
-): Promise<void> {
-  let generated = compile(code, options)
+): void {
+  expect(compileCode(esjsCode, { ...options, reverse: false })).toEqual(jsCode)
 
-  generated = applyPlugins(generated, options.reverse)
+  expect(compileCode(jsCode, { ...options, reverse: true })).toEqual(esjsCode)
+}
 
-  expect(await formatWithPrettier(generated)).toEqual(await formatWithPrettier(expectedResult))
+export function compileCode(code: string, options: any = {}) {
+  if (options.reverse && options.convert) {
+    code = applyPlugins(compile(code, {
+      to: 'js',
+    }), options.reverse)
+  }
+
+  let generated = compile(code, {
+    from: options.reverse ? 'js' : 'esjs',
+    to: options.reverse ? 'esjs' : 'js',
+    compiler: 'essucrase',
+  })
+
+  if (!options.reverse && options.convert)
+    generated = applyPlugins(generated, options.reverse)
+
+  return generated
 }

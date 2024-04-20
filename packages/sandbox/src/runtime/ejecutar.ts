@@ -1,7 +1,7 @@
 import { AvailableLanguages, type CompileOptions } from '@es-js/core'
 import { compileModulesForPreview } from '../compiler'
 import { orchestrator, OrchestratorFile } from '../compiler/orchestrator'
-import { compileFile, ParseFileError, prepareFiles, SandboxFile, SandboxFileError } from '../utils'
+import { compileFile, ParseFileError, processSandboxedFiles, SandboxFile, SandboxFileError } from '../utils'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
@@ -39,11 +39,11 @@ export async function init(options: EjecutarOptions): Promise<void> {
 
   previewTab(_options.previewTab)
 
-  await evalEditorFiles()
+  await evalEditorFiles(_options)
 }
 
 export async function evalFiles({ files, options}: { files: SandboxFile[], options?: EjecutarOptions }) {
-  const result = prepareFiles(
+  const result = processSandboxedFiles(
     files.filter((file: any) => {
       const extension = file.name.split('.').slice(-1)[0]
 
@@ -52,17 +52,22 @@ export async function evalFiles({ files, options}: { files: SandboxFile[], optio
     options
   )
 
-  result.forEach((file: any) => {
+  result.forEach((file: SandboxFile) => {
     if (!file.name) {
       return
     }
 
     const extension = file.name.split('.').slice(-1)[0]
 
-    if (!['esjs', 'js'].includes(extension))
+    if (!['esjs', 'js'].includes(extension)) {
       return
+    }
 
-    orchestrator.files[file.name] = new OrchestratorFile(file.name, '', `${file.imports}\n${file.codeWithoutImports}\n`, '')
+    if (!file.sandboxed) {
+      return
+    }
+
+    orchestrator.files[file.name] = new OrchestratorFile(file.name, '', `${file.sandboxed.imports}\n${file.sandboxed.codeWithoutImports}\n`, '')
   })
 
   const modules = compileModulesForPreview(
@@ -77,6 +82,26 @@ export async function evalFiles({ files, options}: { files: SandboxFile[], optio
   })
 }
 
+function tryToCompile(file: any, options: CompileOptions) {
+  let compiled: string = ''
+  let error: SandboxFileError | undefined
+  try {
+    compiled = compileFile(file, options)
+  } catch (exception: any) {
+    compiled = file.content
+    error = {
+      message: exception.message,
+      line: exception.line || 1,
+      column: exception.column || 1,
+      stack: exception.stack,
+    }
+  }
+  return {
+    compiled,
+    error,
+  }
+}
+
 export async function compileFiles({ files, options}: { files: SandboxFile[], options: CompileOptions }) {
   const filesCompiled: SandboxFile[] = files
     .map((file: any) => {
@@ -86,31 +111,20 @@ export async function compileFiles({ files, options}: { files: SandboxFile[], op
         return file
       }
 
-      let compiled: string = ''
-      let error: SandboxFileError | undefined
+      const { compiled: compiledJS, error: errorJS } = tryToCompile(file, options)
 
-      try {
-        compiled = compileFile(file, options)
-      } catch (exception: any) {
-        compiled = ''
-        error = {
-          message: exception.message,
-          line: exception.line || 1,
-          column: exception.column || 1,
-          stack: exception.stack,
-        }
-      }
+      const { compiled: compiledEsJS, error: errorEsJS } = tryToCompile(file, {
+        ...options,
+        to: 'esjs',
+      })
 
       return {
         ...file,
         code: {
-          esjs: compileFile(file, {
-            ...options,
-            to: 'esjs',
-          }),
-          js: compiled,
+          esjs: compiledEsJS,
+          js: compiledJS,
         },
-        error,
+        error: errorJS || errorEsJS || undefined,
       }
     })
 
@@ -178,6 +192,7 @@ export async function evalEditorFiles(options?: EjecutarOptions) {
       from: options?.fromLanguage || 'esjs',
       to: options?.toLanguage || 'js',
     },
+    compiler: 'esbabel',
   })
 
   setFiles(compiledFiles)

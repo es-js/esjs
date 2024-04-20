@@ -75,7 +75,7 @@ export function replaceObjects({
   return Object.assign({}, ...rules)
 }
 
-export function replaceObjectMethods({
+export function replaceExpressionMethods({
   methods,
 }: {
   methods: Map<string, string>
@@ -84,6 +84,25 @@ export function replaceObjectMethods({
 
   return Object.fromEntries([...dictionary].map(([key, value]) => {
     return [`__a.${key}`, `__a.${value}`]
+  }))
+}
+
+export function replaceObjectStaticMethods({
+  from,
+  to,
+  methods,
+}: {
+  from: string
+  to: string
+  methods: Map<string, string>
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  const dictionary = toEsJS ? invertMap(methods) : methods
+
+  return Object.fromEntries([...dictionary].map(([key, value]) => {
+    return [`${a}.${key}`, `${b}.${value}`]
   }))
 }
 
@@ -100,21 +119,14 @@ export function replaceObjectProperties({
 }
 
 export function replaceGlobalMethods({
-  from,
-  to,
   methods,
 }: {
-  from: string
-  to: string
   methods: Map<string, string>
 }) {
-  const a = toEsJS ? to : from
-  const b = toEsJS ? from : to
-
   const dictionary = toEsJS ? invertMap(methods) : methods
 
   return Object.fromEntries([...dictionary].map(([key, value]) => {
-    return [`${a}.${key}`, `${b}.${value}`]
+    return [key, value]
   }))
 }
 

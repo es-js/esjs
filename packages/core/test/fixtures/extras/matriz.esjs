@@ -9,3 +9,11 @@ si (matriz.incluye('test')) {
 matriz.longitud
 
 matriz.buscar((item) => item === 'test')
+
+Matriz.desde([1, 2, 3])
+
+Matriz.desdeAsincrono([1, 2, 3])
+
+Matriz.esMatriz([])
+
+Matriz.de([1, 2, 3])

@@ -3,7 +3,7 @@ import type { AvailableLanguages } from '@es-js/core'
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import { isDark } from '~/composables/dark'
-import { useFiles, type File } from '~/composables/useFiles'
+import { useFiles, type SandboxFile } from '~/composables/useFiles'
 import { useSettings } from '~/composables/useSettings'
 import { useEditor } from '~/composables/useEditor'
 
@@ -24,10 +24,14 @@ const valueToCompare = computed((): string => {
 
   const toLanguage = fromLanguage === 'esjs' ? 'js' : 'esjs'
 
+  // if (files.getActiveDiffFile()?.sandboxed) {
+  //   return files.getActiveDiffFile()?.sandboxed?.imports + '\n' + files.getActiveDiffFile()?.sandboxed?.codeWithoutImports
+  // }
+
   return files.getActiveDiffFile()?.code?.[toLanguage] ?? ''
 })
 
-function setActiveDiffFile(file: File) {
+function setActiveDiffFile(file: SandboxFile) {
   files.setActiveDiffFile(file.name)
 
   file.tab === 0 ? files.setActiveFile(file.name) : useSettings().setHideTests(false)

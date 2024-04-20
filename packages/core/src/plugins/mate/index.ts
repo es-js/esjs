@@ -1,4 +1,4 @@
-import { replaceGlobalMethods, replaceObjectCall, replaceObjects } from '../utils'
+import { replaceObjectStaticMethods, replaceObjects } from '../utils'
 
 export const report = () => 'Converts Mate methods to JavaScript'
 
@@ -44,13 +44,10 @@ export const objects = new Map<string, string>([
   ['Mate', 'Math'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({
-      objects,
-    }),
-    ...replaceGlobalMethods({
-      from: 'Math',
+    ...replaceObjectStaticMethods({
+      from: 'Mate',
       to: 'Math',
       methods,
     }),

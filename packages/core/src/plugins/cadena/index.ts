@@ -1,7 +1,8 @@
 import {
+  replaceExpressionMethods,
   replaceInstanceof,
-  replaceObjectMethods,
   replaceObjectProperties,
+  replaceObjectStaticMethods,
   replaceObjects,
 } from '../utils'
 
@@ -14,8 +15,6 @@ export const methods = new Map<string, string>([
   ['puntoDeCodigoEn', 'codePointAt'],
   ['concatenar', 'concat'],
   ['terminaCon', 'endsWith'],
-  ['desdeCodigoDeCaracter', 'fromCharCode'],
-  ['desdePuntoDeCodigo', 'fromCodePoint'],
   ['incluye', 'includes'],
   ['indiceDe', 'indexOf'],
   ['ultimoIndiceDe', 'lastIndexOf'],
@@ -25,7 +24,6 @@ export const methods = new Map<string, string>([
   ['normalizar', 'normalize'],
   ['rellenarAlFinal', 'padEnd'],
   ['rellenarAlComienzo', 'padStart'],
-  ['crudo', 'raw'],
   ['repetir', 'repeat'],
   ['reemplazar', 'replace'],
   ['reemplazarTodo', 'replaceAll'],
@@ -45,6 +43,12 @@ export const methods = new Map<string, string>([
   ['valorDe', 'valueOf'],
 ])
 
+export const staticMethods = new Map<string, string>([
+  ['desdeCodigoDeCaracter', 'fromCharCode'],
+  ['desdePuntoDeCodigo', 'fromCodePoint'],
+  ['crudo', 'raw'],
+])
+
 export const properties = new Map<string, string>([
   ['longitud', 'length'],
 ])
@@ -53,12 +57,14 @@ export const objects = new Map<string, string>([
   ['Cadena', 'String'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({
-      objects,
+    ...replaceObjectStaticMethods({
+      from: 'Cadena',
+      to: 'String',
+      methods: staticMethods,
     }),
-    ...replaceObjectMethods({
+    ...replaceExpressionMethods({
       methods,
     }),
     ...replaceObjectProperties({
@@ -67,6 +73,9 @@ export const replace = () => {
     ...replaceInstanceof({
       from: 'Cadena',
       to: 'String',
+    }),
+    ...replaceObjects({
+      objects,
     }),
   }
 }

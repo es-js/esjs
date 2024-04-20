@@ -9,3 +9,11 @@ if (matriz.includes('test')) {
 matriz.length;
 
 matriz.find((item) => item === 'test')
+
+Array.from([1, 2, 3])
+
+Array.fromAsync([1, 2, 3])
+
+Array.isArray([])
+
+Array.of([1, 2, 3])

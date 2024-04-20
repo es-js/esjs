@@ -1,4 +1,4 @@
-import { replaceInstanceof, replaceObjectMethods, replaceObjects } from '../utils'
+import { replaceExpressionMethods, replaceInstanceof, replaceObjectStaticMethods, replaceObjects } from '../utils'
 
 export const report = () => 'Converts Matriz methods to JavaScript'
 
@@ -39,6 +39,12 @@ export const methods = new Map<string, string>([
   ['aCadena', 'toString'],
   ['agregarInicio', 'unshift'],
   ['valores', 'values'],
+])
+
+export const staticMethods = new Map<string, string>([
+  ['desde', 'from'],
+  ['desdeAsincrono', 'fromAsync'],
+  ['esMatriz', 'isArray'],
   ['de', 'of'],
 ])
 
@@ -47,12 +53,14 @@ export const objects = new Map<string, string>([
   ['Arreglo', 'Array'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({
-      objects,
+    ...replaceObjectStaticMethods({
+      from: 'Matriz',
+      to: 'Array',
+      methods: staticMethods,
     }),
-    ...replaceObjectMethods({
+    ...replaceExpressionMethods({
       methods,
     }),
     ...replaceInstanceof({
@@ -62,6 +70,9 @@ export const replace = () => {
     ...replaceInstanceof({
       from: 'Arreglo',
       to: 'Array',
+    }),
+    ...replaceObjects({
+      objects,
     }),
   }
 }

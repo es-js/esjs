@@ -19,8 +19,8 @@ export const plugins = [
   ['promesa', promesa],
   ['mate', mate],
   ['booleano', booleano],
-  ['soporte', soporte],
   ['funcion', funcion],
+  ['soporte', soporte],
 ]
 
 export { setToEsJS }

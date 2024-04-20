@@ -118,6 +118,7 @@ async function init() {
         files.updateFile(file.name, {
           code: file.code,
           error: file.error ?? null,
+          sandboxed: file.sandboxed,
         })
       })
     },

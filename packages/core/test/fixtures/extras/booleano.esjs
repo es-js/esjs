@@ -1,1 +1,6 @@
-const x = crear Booleano(verdadero)
+const bien = Booleano(verdadero)
+
+const mal = crear Booleano(verdadero)
+
+Booleano(verdadero).aCadena()
+Booleano(verdadero).valorDe()

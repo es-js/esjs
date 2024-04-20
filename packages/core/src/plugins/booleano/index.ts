@@ -9,14 +9,14 @@ export const objects = new Map<string, string>([
   ['Booleano', 'Boolean'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({
-      objects,
-    }),
     ...replaceInstanceof({
       from: 'Booleano',
       to: 'Boolean',
+    }),
+    ...replaceObjects({
+      objects,
     }),
   }
 }

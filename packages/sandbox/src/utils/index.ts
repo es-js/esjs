@@ -1,9 +1,9 @@
 import { compile, type CompileOptions } from '@es-js/core'
-// import { plugins, setToEsJS } from '@es-js/core/plugins'
+import { plugins, setToEsJS } from '@es-js/core/plugins'
 import { splitCodeImports } from '@es-js/core/utils'
 import escodegen from 'escodegen'
 import * as espree from 'espree'
-// import putout from 'https://esm.sh/@putout/bundle@2'
+import putout from 'https://esm.sh/@putout/bundle@2'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
@@ -35,6 +35,10 @@ export interface SandboxFile {
     esjs?: string
     js?: string
   },
+  sandboxed?: {
+    imports: string
+    codeWithoutImports: string
+  },
   error?: SandboxFileError
 }
 
@@ -52,36 +56,43 @@ export function compileFile(file: SandboxFile, options?: CompileOptions) {
 
   return compileCode(file.content, options)
 
-  // try {
-  //   file.code.js = compile(file.content, options)
-  //
-  //   const ast = putout.parse(file.code.js, {
-  //     printer: 'recast',
-  //   })
-  //
-  //   setToEsJS(options?.to === 'esjs')
-  //
-  //   putout.transform(ast, file.code.js, {
-  //     plugins,
-  //   })
-  //
-  //   return putout.print(ast, {
-  //     printer: 'recast',
-  //   })
-  // } catch (error: any) {
-  //   throw new ParseFileError(error.message, file.name, error.loc?.line || 1, error.loc?.column || 1)
-  // }
 }
 
 export function compileCode(code: string, options?: CompileOptions) {
   try {
-    return compile(code, options)
+    if (options?.compiler === 'essucrase' && options?.to === 'esjs') {
+      code = applyPlugins(compile(code, { to: 'js' }), true)
+    }
+
+    const compiled = compile(code, options)
+
+    if (options?.compiler === 'essucrase' && options?.to === 'js') {
+      return applyPlugins(compiled)
+    }
+
+    return compiled
   } catch (error: any) {
     throw new ParseFileError(error.message, 'code', error.loc?.line || 1, error.loc?.column || 1)
   }
 }
 
-export function prepareCode(code: string, options?: EjecutarOptions) {
+function applyPlugins(code: string, toEsJS?: boolean) {
+  const ast = putout.parse(code, {
+    printer: 'recast',
+  })
+
+  setToEsJS(toEsJS)
+
+  putout.transform(ast, code, {
+    plugins,
+  })
+
+  return putout.print(ast, {
+    printer: 'recast',
+  })
+}
+
+export function processSandboxedCode(code: string, options?: EjecutarOptions) {
   try {
     if (!code.endsWith('\n'))
       code += '\n'
@@ -90,8 +101,9 @@ export function prepareCode(code: string, options?: EjecutarOptions) {
 
     code = addExportToFunctions(code) // To allow functions to be called from another file
 
-    if (options && options.infiniteLoopProtection)
+    if (options && options.infiniteLoopProtection) {
       code = addInfiniteLoopProtection(code) // To prevent infinite loops
+    }
 
     return code
   }
@@ -101,6 +113,63 @@ export function prepareCode(code: string, options?: EjecutarOptions) {
     const column = error?.loc?.start?.column || 1
 
     throw new PrepareCodeError(errorMessage, line, column)
+  }
+}
+
+function addInfiniteLoopProtectionToBody (node: any, varStr: string, varPrefix: string, loopId: number, patches: {
+  pos: number;
+  str: string
+}[], checkStr: string) {
+  switch (node.type) {
+    case 'FunctionDeclaration':
+      const { body } = node
+
+      body.body.forEach((childNode: any) => {
+        addInfiniteLoopProtectionToBody(childNode, varStr, varPrefix, loopId, patches, checkStr)
+      })
+
+      break
+
+    case 'ExportNamedDeclaration':
+    case 'ExportDefaultDeclaration':
+    case 'ExportAllDeclaration':
+      addInfiniteLoopProtectionToBody(node.declaration, varStr, varPrefix, loopId, patches, checkStr)
+      break
+
+    case 'DoWhileStatement':
+    case 'ForStatement':
+    case 'ForInStatement':
+    case 'ForOfStatement':
+    case 'WhileStatement':
+      start = 1 + node.body.range[0]
+      end = node.body.range[1]
+      prolog = checkStr.replace('%d', varPrefix + loopId)
+      epilog = ''
+
+      if (node.body.type !== 'BlockStatement') {
+        // `while(1) doThat()` becomes `while(1) {doThat()}`
+        prolog = `{${prolog}`
+        epilog = '}'
+        --start
+      }
+
+      patches.push({
+        pos: start,
+        str: prolog,
+      })
+      patches.push({
+        pos: end,
+        str: epilog,
+      })
+      patches.push({
+        pos: node.range[0],
+        str: varStr.replace('%d', varPrefix + loopId),
+      })
+      ++loopId
+      break
+
+    default:
+      break
   }
 }
 
@@ -125,42 +194,7 @@ export function addInfiniteLoopProtection(code: string, { timeout } = { timeout:
     tolerant: true,
     sourceType: 'module',
   }).body.forEach((node: any) => {
-    switch (node.type) {
-      case 'DoWhileStatement':
-      case 'ForStatement':
-      case 'ForInStatement':
-      case 'ForOfStatement':
-      case 'WhileStatement':
-        start = 1 + node.body.range[0]
-        end = node.body.range[1]
-        prolog = checkStr.replace('%d', varPrefix + loopId)
-        epilog = ''
-
-        if (node.body.type !== 'BlockStatement') {
-          // `while(1) doThat()` becomes `while(1) {doThat()}`
-          prolog = `{${prolog}`
-          epilog = '}'
-          --start
-        }
-
-        patches.push({
-          pos: start,
-          str: prolog,
-        })
-        patches.push({
-          pos: end,
-          str: epilog,
-        })
-        patches.push({
-          pos: node.range[0],
-          str: varStr.replace('%d', varPrefix + loopId),
-        })
-        ++loopId
-        break
-
-      default:
-        break
-    }
+    addInfiniteLoopProtectionToBody(node, varStr, varPrefix, loopId, patches, checkStr)
   })
 
   patches
@@ -274,7 +308,7 @@ export function generateImportStatement(code: string, modulePath: string) {
   return imports.join('\n')
 }
 
-export function prepareFiles(files: SandboxFile[], options?: EjecutarOptions) {
+export function processSandboxedFiles(files: SandboxFile[], options?: EjecutarOptions) {
   if (files.some((file) => file.error)) {
     const firstFileWithError = files.find((file) => file.error)
 
@@ -295,9 +329,9 @@ export function prepareFiles(files: SandboxFile[], options?: EjecutarOptions) {
     .filter((file: any) => file.name !== MAIN_FILE)
     .map((file) => {
       try {
-        const importsFromMain = generateImportStatement(main.codeWithoutImports, `./${MAIN_FILE}`)
-        const compiledCode = prepareCode(file?.code?.js || '', options)
-        const splitted = splitCodeImports(compiledCode)
+        const importsFromMain = generateImportStatement(main.sandboxed.codeWithoutImports, `./${MAIN_FILE}`)
+        const sandboxedCode = processSandboxedCode(file?.code?.js || '', options)
+        const splitted = splitCodeImports(sandboxedCode)
         const imports = unifyImports(`
       ${importsFromMain}
       ${splitted.imports}
@@ -306,8 +340,10 @@ export function prepareFiles(files: SandboxFile[], options?: EjecutarOptions) {
 
         return {
           ...file,
-          imports,
-          codeWithoutImports: splitted.codeWithoutImports,
+          sandboxed: {
+            imports,
+            codeWithoutImports: splitted.codeWithoutImports,
+          },
         }
       } catch (error: any) {
         return {
@@ -332,16 +368,23 @@ export function prepareFiles(files: SandboxFile[], options?: EjecutarOptions) {
     return printError(firstFileWithError)
   }
 
-  return [
+  const sandboxedFiles = [
     main,
-    ...restOfFiles
+    ...restOfFiles,
   ]
+
+  parent.postMessage({
+    action: 'cmd_files_compiled',
+    filesCompiled: sandboxedFiles,
+  })
+
+  return sandboxedFiles
 }
 
 export function prepareMainFile(file: any, options?: EjecutarOptions) {
   try {
-    const compiledCode = prepareCode(file?.code?.js || '', options)
-    const splittedCode = splitCodeImports(compiledCode)
+    const sandboxedCode = processSandboxedCode(file?.code?.js || '', options)
+    const splittedCode = splitCodeImports(sandboxedCode)
 
     const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
 
@@ -353,8 +396,10 @@ ${splittedCode.imports}
 
     return {
       ...file,
-      imports,
-      codeWithoutImports: splittedCode.codeWithoutImports,
+      sandboxed: {
+        imports,
+        codeWithoutImports: splittedCode.codeWithoutImports,
+      },
     }
   } catch (error: any) {
     return {
@@ -385,8 +430,9 @@ function printError(file: SandboxFile) {
   return [
     {
       ...file,
-      imports: 'import { Terminal } from \'@es-js/terminal\'; import { tiza } from \'@es-js/tiza\';',
-      codeWithoutImports: `
+      sandboxed: {
+        imports: 'import { Terminal } from \'@es-js/terminal\'; import { tiza } from \'@es-js/tiza\';',
+        codeWithoutImports: `
 Terminal.clear()
 
 Terminal.escribir(\`Error en el archivo \${tiza.fondoAzul50.azul800(${JSON.stringify(file.name)})}:\`)
@@ -398,6 +444,7 @@ tiza.rojo(${JSON.stringify(file.error.message)})
 console.error(${JSON.stringify(file.error.message)})
 
 window.onerror(${JSON.stringify(file.error.message)}, null, ${file.error.line}, ${file.error.column}, ${JSON.stringify(file.error)})`,
+      },
     }
   ]
 }

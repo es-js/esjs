@@ -1,0 +1,12 @@
+Promesa.todos([1, 2, 3]).luego(consola.escribir)
+
+Promesa.todosTerminados([1, 2, 3]).luego(consola.escribir).capturar(consola.error)
+
+Promesa.cualquiera([1, 2, 3]).luego(consola.escribir).capturar(consola.error)
+
+Promesa.carrera([1, 2, 3]).luego(consola.escribir).capturar(consola.error)
+
+Promesa.rechaza('error').capturar(consola.error)
+
+Promesa.resuelve('ok').luego(consola.escribir)
+

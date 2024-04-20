@@ -1,29 +1,31 @@
 import { describe, it } from 'vitest'
-import { assertResult } from './testUtils'
+import { assertCompile } from './testUtils'
 
 describe('known issues', () => {
   it('fixed: compiles variables named `escribir`', async () => {
-    await assertResult(`
+    assertCompile(`
       const escribir = 'prueba'
     `, `
       const escribir = 'prueba'
     `, {
+      convert: true,
       compiler: 'essucrase',
     })
   })
 
   it('fixed: does not compile variables named `get`', async () => {
-    await assertResult(`
+    assertCompile(`
       mut get = 'prueba'
     `, `
       let get = 'prueba'
     `, {
+      convert: true,
       compiler: 'essucrase',
     })
   })
 
   it('fixed: transpiles const/mut/var to const/let/var', async () => {
-    await assertResult(`
+    assertCompile(`
       const desde = 'a'
       var b = {
         para: 'para',
@@ -38,6 +40,34 @@ describe('known issues', () => {
       }
       let hasta = 'c'
     `, {
+      convert: true,
+      compiler: 'essucrase',
+    })
+  })
+
+  it('fixed: number methods', async () => {
+    assertCompile(`
+      consola.escribir(
+        Numero.interpretarDecimal(Mate.aleatorio())
+      )
+
+      const x = Numero.interpretarEntero('123')
+
+      consola.escribir(
+        x.fijarDecimales(2)
+      )
+    `, `
+      console.log(
+        Number.parseFloat(Math.random())
+      )
+
+      const x = Number.parseInt('123')
+
+      console.log(
+        x.toFixed(2)
+      )
+    `, {
+      convert: true,
       compiler: 'essucrase',
     })
   })

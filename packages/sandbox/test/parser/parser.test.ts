@@ -4,7 +4,7 @@ import {
   addExportToFunctions, addInfiniteLoopProtection,
   escapeTemplateLiteral,
   formatCode,
-  generateImportStatement, prepareCode, prepareFiles, prepareMainFile,
+  generateImportStatement, processSandboxedCode, processSandboxedFiles, prepareMainFile,
   unifyImports,
 } from '../../src/utils'
 
@@ -121,7 +121,7 @@ return 'foo';
 
   it('prepares code correctly', () => {
     const code = 'funcion prueba() { retornar \'Hola, mundo!\'; }'
-    const preparedCode = prepareCode(code)
+    const preparedCode = processSandboxedCode(code)
     expect(preparedCode).toContain('export function prueba')
   })
 
@@ -134,7 +134,7 @@ return 'foo';
       },
     ]
 
-    const preparedFiles = prepareFiles(files)
+    const preparedFiles = processSandboxedFiles(files)
 
     expect(preparedFiles[0].code).toContain('export function prueba')
   })
@@ -147,6 +147,6 @@ return 'foo';
 
   it('throws error when parsing invalid file', () => {
     const file = { name: 'main.js', content: 'funcion prueba() { retornar \'Hola, mundo!\'; ' } // Falta el cierre de llave
-    expect(() => prepareCode(file)).toThrow()
+    expect(() => processSandboxedCode(file)).toThrow()
   })
 })

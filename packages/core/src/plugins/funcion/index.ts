@@ -1,4 +1,4 @@
-import { replaceInstanceof, replaceObjectMethods, replaceObjects } from '../utils'
+import { replaceInstanceof, replaceObjects } from '../utils'
 
 export const report = () => 'Converts Funcion methods to JavaScript'
 
@@ -8,17 +8,14 @@ export const objects = new Map<string, string>([
   ['Funcion', 'Function'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({
-      objects,
-    }),
-    ...replaceObjectMethods({
-      methods,
-    }),
     ...replaceInstanceof({
       from: 'Funcion',
       to: 'Function',
+    }),
+    ...replaceObjects({
+      objects,
     }),
   }
 }

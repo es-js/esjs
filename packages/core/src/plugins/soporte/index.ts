@@ -4,12 +4,10 @@ export const keywords = new Map<string, string>([
   ['establecerTemporizador', 'setTimeout'],
   ['establecerIntervalo', 'setInterval'],
   ['esNuN', 'isNaN'],
-  ['interpretarEntero', 'parseInt'],
-  ['interpretarDecimal', 'parseFloat'],
   // TODO: Add more support functions.
 ])
 
-export const replace = () => {
+export function replace() {
   return {
     ...Object.fromEntries(Array.from(keywords).map(([from, to]) => {
       return [from, () => {

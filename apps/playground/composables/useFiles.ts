@@ -1,6 +1,6 @@
 import { Ref, ref } from 'vue'
 
-export interface File {
+export interface SandboxFile {
   name: string;
   content: string;
   active: boolean;
@@ -19,9 +19,13 @@ export interface File {
     column: number;
     stack: string;
   };
+  sandboxed?: {
+    imports: string;
+    codeWithoutImports: string;
+  };
 }
 
-type Files = File[];
+type Files = SandboxFile[];
 
 export const FILE_CODE = 'codigo.esjs'
 
@@ -163,13 +167,14 @@ const files: Ref<Files> = ref([
 const loading = ref(true)
 
 export const useFiles = () => {
-  function updateFile(name: string, value: Partial<File>) {
-    const file = files.value.find((f: File) => f.name === name)
+  function updateFile(name: string, value: Partial<SandboxFile>) {
+    const file = files.value.find((f: SandboxFile) => f.name === name)
 
     if (!file) { return }
 
     file.content = value.content ?? file.content
     file.code = value.code ?? file.code
+    file.sandboxed = value.sandboxed ?? file.sandboxed
   }
 
   function getFileContent(name: string) {
@@ -201,13 +206,13 @@ export const useFiles = () => {
   }
 
   function setActiveFile(name: string) {
-    files.value.forEach((file: File) => {
+    files.value.forEach((file: SandboxFile) => {
       file.active = file.name === name
     })
   }
 
   function setActiveDiffFile(name: string) {
-    files.value.forEach((file: File) => {
+    files.value.forEach((file: SandboxFile) => {
       file.activeDiff = file.name === name
     })
   }

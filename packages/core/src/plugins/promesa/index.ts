@@ -1,29 +1,38 @@
-import { replaceObjectMethods, replaceObjects } from '../utils'
+import { replaceExpressionMethods, replaceObjectStaticMethods, replaceObjects } from '../utils'
 
 export const report = () => 'Converts Promesa methods to JavaScript'
 
 export const methods = new Map<string, string>([
+  ['capturar', 'catch'],
+  ['finalmente', 'finally'],
+  ['luego', 'then'],
+])
+
+export const staticMethods = new Map<string, string>([
   ['todos', 'all'],
   ['todosTerminados', 'allSettled'],
   ['cualquiera', 'any'],
-  ['capturar', 'catch'],
-  ['finalmente', 'finally'],
   ['carrera', 'race'],
   ['rechaza', 'reject'],
   ['resuelve', 'resolve'],
-  ['luego', 'then'],
 ])
 
 export const objects = new Map<string, string>([
   ['Promesa', 'Promise'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({ objects }),
-
-    ...replaceObjectMethods({
+    ...replaceObjectStaticMethods({
+      from: 'Promesa',
+      to: 'Promise',
+      methods: staticMethods,
+    }),
+    ...replaceExpressionMethods({
       methods,
+    }),
+    ...replaceObjects({
+      objects,
     }),
   }
 }

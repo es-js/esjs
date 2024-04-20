@@ -1,4 +1,4 @@
-import { replaceInstanceof, replaceObjectMethods, replaceObjects } from '../utils'
+import { replaceExpressionMethods, replaceInstanceof, replaceObjectStaticMethods, replaceObjects } from '../utils'
 
 export const report = () => 'Converts Fecha methods to JavaScript'
 
@@ -23,8 +23,6 @@ export const methods = new Map<string, string>([
   ['obtenerMinutosUTC', 'getUTCMinutes'],
   ['obtenerMesUTC', 'getUTCMonth'],
   ['obtenerSegundosUTC', 'getUTCSeconds'],
-  ['ahora', 'now'],
-  ['analizar', 'parse'],
   ['establecerFecha', 'setDate'],
   ['establecerAnio', 'setFullYear'],
   ['establecerAño', 'setFullYear'],
@@ -51,25 +49,35 @@ export const methods = new Map<string, string>([
   ['aCadena', 'toString'],
   ['aCadenaTiempo', 'toTimeString'],
   ['aCadenaUTC', 'toUTCString'],
-  ['UTC', 'UTC'],
   ['valorDe', 'valueOf'],
+])
+
+export const staticMethods = new Map<string, string>([
+  ['ahora', 'now'],
+  ['analizar', 'parse'],
+  ['UTC', 'UTC'],
 ])
 
 export const objects = new Map<string, string>([
   ['Fecha', 'Date'],
 ])
 
-export const replace = () => {
+export function replace() {
   return {
-    ...replaceObjects({
-      objects,
+    ...replaceObjectStaticMethods({
+      from: 'Fecha',
+      to: 'Date',
+      methods: staticMethods,
     }),
-    ...replaceObjectMethods({
+    ...replaceExpressionMethods({
       methods,
     }),
     ...replaceInstanceof({
       from: 'Fecha',
       to: 'Date',
+    }),
+    ...replaceObjects({
+      objects,
     }),
   }
 }
