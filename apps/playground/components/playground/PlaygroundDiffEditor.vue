@@ -20,13 +20,13 @@ const files = useFiles()
 const wrapper = ref<HTMLElement | null>(null)
 
 const valueToCompare = computed((): string => {
+  if (settings.value.showSandboxedDiff && files.getActiveDiffFile()?.sandboxed) {
+    return files.getActiveDiffFile()?.sandboxed?.imports + '\n' + files.getActiveDiffFile()?.sandboxed?.codeWithoutImports
+  }
+
   const fromLanguage = editor.language.value
 
   const toLanguage = fromLanguage === 'esjs' ? 'js' : 'esjs'
-
-  // if (files.getActiveDiffFile()?.sandboxed) {
-  //   return files.getActiveDiffFile()?.sandboxed?.imports + '\n' + files.getActiveDiffFile()?.sandboxed?.codeWithoutImports
-  // }
 
   return files.getActiveDiffFile()?.code?.[toLanguage] ?? ''
 })
@@ -62,11 +62,22 @@ function setActiveDiffFile(file: SandboxFile) {
               class="flex flex-row flex-shrink-1 flex-grow-0 items-center px-1 space-x-2"
             >
               <AppButton
+                icon="i-mdi-file-code"
+                text="Sandboxed"
+                description="Diferencias en el código empaquetado"
+                size="2xs"
+                icon-only
+                :active="settings.showSandboxedDiff"
+                @click="useSettings().setShowSandboxedDiff(!settings.showSandboxedDiff)"
+              />
+
+              <AppButton
                 icon="i-mdi-file-compare"
                 text="Diferencias"
                 description="Mostrar diferencias"
                 size="2xs"
                 :icon-only="!mdAndUp"
+                :active="settings.showCompiledDiff"
                 @click="useSettings().setShowCompiledDiff(!settings.showCompiledDiff)"
               />
             </div>

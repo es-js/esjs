@@ -10,6 +10,7 @@ const settings = ref({
   hideTests: true,
   showCompiledEditor: false,
   showCompiledDiff: false,
+  showSandboxedDiff: false,
   readonlyCode: false,
   readonlyTests: false,
   autoCompile: true,
@@ -54,6 +55,10 @@ export const useSettings = () => {
 
   function setShowCompiledDiff(showCompiledDiff: boolean) {
     settings.value.showCompiledDiff = showCompiledDiff
+  }
+
+  function setShowSandboxedDiff(showSandboxedDiff: boolean) {
+    settings.value.showSandboxedDiff = showSandboxedDiff
   }
 
   function setHideOutput(hideOutput: boolean) {
@@ -143,6 +148,7 @@ export const useSettings = () => {
     setHideEditor,
     setShowCompiledEditor,
     setShowCompiledDiff,
+    setShowSandboxedDiff,
     setHideOutput,
     setHidePreview,
     setHideConsole,

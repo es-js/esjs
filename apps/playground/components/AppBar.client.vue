@@ -86,9 +86,7 @@ function setupInfiniteLoopProtection() {
         </div>
       </div>
 
-      <div class="flex flex-row justify-center items-center">
-        <!--        TODO-->
-      </div>
+      <div class="flex-1" />
 
       <div class="flex flex-row justify-end items-center space-x-3">
         <div

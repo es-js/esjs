@@ -105,6 +105,8 @@ export function processSandboxedCode(code: string, options?: EjecutarOptions) {
       code = addInfiniteLoopProtection(code) // To prevent infinite loops
     }
 
+    code = formatCode(code) // To format the code again
+
     return code
   }
   catch (error: SyntaxError | any) {
