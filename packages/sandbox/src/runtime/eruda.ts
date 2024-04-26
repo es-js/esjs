@@ -1,5 +1,3 @@
-import eruda from 'eruda'
-
 let size = 50
 
 let activePreviewTab: 'console' | 'flowchart' | 'hidden' = 'console'
@@ -8,7 +6,13 @@ const flowchartSvg = ''
 
 let initialized = false
 
-export function setupEruda() {
+let eruda: any = null
+
+export async function setupEruda() {
+  if (!eruda) {
+    eruda = await import('eruda')
+  }
+
   const erudaContainerElement = document.getElementById('eruda-container')
   const showFlowchart = false
 

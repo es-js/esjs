@@ -3,12 +3,11 @@ import { plugins, setToEsJS } from '@es-js/core/plugins'
 import { splitCodeImports } from '@es-js/core/utils'
 import escodegen from 'escodegen'
 import * as espree from 'espree'
-import putout from 'https://esm.sh/@putout/bundle@2'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
-import { EjecutarOptions } from '../runtime/ejecutar'
+import { EjecutarOptions, getOptions } from '../runtime/ejecutar'
 
 let start
 let end
@@ -55,13 +54,12 @@ export function compileFile(file: SandboxFile, options?: CompileOptions) {
   }
 
   return compileCode(file.content, options)
-
 }
 
 export function compileCode(code: string, options?: CompileOptions) {
   try {
     if (options?.compiler === 'essucrase' && options?.to === 'esjs') {
-      code = applyPlugins(compile(code, { to: 'js' }), true)
+      code = applyPlugins(compile(code, { to: 'js', compiler: options?.compiler }), true)
     }
 
     const compiled = compile(code, options)
@@ -77,6 +75,8 @@ export function compileCode(code: string, options?: CompileOptions) {
 }
 
 function applyPlugins(code: string, toEsJS?: boolean) {
+  const putout = getOptions().putout
+
   const ast = putout.parse(code, {
     printer: 'recast',
   })

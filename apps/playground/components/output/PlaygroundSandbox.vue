@@ -63,6 +63,7 @@ async function init() {
     files: files.files.value,
     importMap: files.getFileContent(FILE_IMPORT_MAP),
     infiniteLoopProtection: settingsStore.value.infiniteLoopProtection,
+    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
   })
 
   proxy = new PreviewProxy(sandbox, {
@@ -138,6 +139,7 @@ async function updateSandbox() {
 
   await proxy.eval(toRaw(files.files.value), {
     infiniteLoopProtection: useSettings().settings.value.infiniteLoopProtection,
+    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
   })
 }
 

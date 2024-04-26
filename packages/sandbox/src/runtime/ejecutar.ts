@@ -1,7 +1,7 @@
 import { AvailableLanguages, type CompileOptions } from '@es-js/core'
 import { compileModulesForPreview } from '../compiler'
 import { orchestrator, OrchestratorFile } from '../compiler/orchestrator'
-import { compileFile, ParseFileError, processSandboxedFiles, SandboxFile, SandboxFileError } from '../utils'
+import { compileFile, processSandboxedFiles, SandboxFile, SandboxFileError } from '../utils'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
@@ -17,6 +17,8 @@ export interface EjecutarOptions {
   infiniteLoopProtection: boolean
   fromLanguage?: AvailableLanguages
   toLanguage?: AvailableLanguages
+  compiler?: 'esbabel' | 'essucrase'
+  putout?: any
 }
 
 let _options: EjecutarOptions
@@ -25,19 +27,27 @@ const scriptEls: HTMLScriptElement[] = []
 
 let theme: 'dark' | 'light' = 'dark'
 
+export function getOptions() {
+  return _options
+}
+
 export async function init(options: EjecutarOptions): Promise<void> {
   _options = options
 
   if (typeof _options.usarTerminal !== 'function')
     throw new Error('usarTerminal is required')
 
-  setupEruda()
+  await setupEruda()
 
   setupTheme(_options.theme)
 
   hidePreview(_options.hidePreview)
 
   previewTab(_options.previewTab)
+
+  if (_options.compiler === 'essucrase' && !_options.putout) {
+    _options.putout = await import('https://esm.sh/@putout/bundle@2')
+  }
 
   await evalEditorFiles(_options)
 }
@@ -191,8 +201,8 @@ export async function evalEditorFiles(options?: EjecutarOptions) {
     options: {
       from: options?.fromLanguage || 'esjs',
       to: options?.toLanguage || 'js',
+      compiler: options?.compiler,
     },
-    compiler: 'esbabel',
   })
 
   setFiles(compiledFiles)

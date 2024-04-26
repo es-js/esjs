@@ -1,14 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { MAIN_FILE } from '../../src/compiler/orchestrator'
+import { MAIN_FILE } from '../src/compiler/orchestrator'
+import { compileFiles } from '../src/runtime/ejecutar'
 import {
   addExportToFunctions, addInfiniteLoopProtection,
   escapeTemplateLiteral,
   formatCode,
   generateImportStatement, processSandboxedCode, processSandboxedFiles, prepareMainFile,
-  unifyImports,
-} from '../../src/utils'
+  unifyImports, compileCode,
+} from '../src/utils'
 
-describe('parser', () => {
+describe('utils', () => {
   it('unify duplicated imports', () => {
     const imports = `import { afirmar, afirmarIguales, assert, pruebas } from '@es-js/prueba'
 import { Terminal } from '@es-js/terminal'
@@ -121,8 +122,9 @@ return 'foo';
 
   it('prepares code correctly', () => {
     const code = 'funcion prueba() { retornar \'Hola, mundo!\'; }'
-    const preparedCode = processSandboxedCode(code)
-    expect(preparedCode).toContain('export function prueba')
+    const compiledCode = compileCode(code)
+    const sandboxedCode = processSandboxedCode(compiledCode)
+    expect(sandboxedCode).toContain('export function prueba')
   })
 
   it('prepares files correctly', () => {
@@ -134,7 +136,8 @@ return 'foo';
       },
     ]
 
-    const preparedFiles = processSandboxedFiles(files)
+    const compiledFiles = compileFiles({ files, options: {} })
+    const preparedFiles = processSandboxedFiles(compiledFiles)
 
     expect(preparedFiles[0].code).toContain('export function prueba')
   })
