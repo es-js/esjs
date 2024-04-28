@@ -208,21 +208,29 @@ export async function evalEditorFiles(options?: EjecutarOptions) {
   if (!_options.files)
     return
 
- const compiledFiles = await compileFiles({
-    files: _options.files,
-    options: {
-      from: options?.fromLanguage || 'esjs',
-      to: options?.toLanguage || 'js',
-      compiler: options?.compiler,
-    },
-  })
+  if (isAnyFileNotCompiled(_options.files)) {
+    const compiledFiles = await compileFiles({
+      files: _options.files,
+      options: {
+        from: options?.fromLanguage || 'esjs',
+        to: options?.toLanguage || 'js',
+        compiler: options?.compiler,
+      },
+    })
 
-  setFiles(compiledFiles)
+    setFiles(compiledFiles)
+  }
 
   await evalFiles({
     files: _options.files,
     options,
   })
+}
+
+export function isAnyFileNotCompiled(files: SandboxFile[]) {
+  return files
+    .filter((file) => ['esjs', 'js'].includes(file.name.split('.').slice(-1)[0]))
+    .some((file) => !file.code?.js || !file.code?.esjs)
 }
 
 function clearConsole() {
