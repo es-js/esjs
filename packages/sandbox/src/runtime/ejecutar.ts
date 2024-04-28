@@ -1,7 +1,8 @@
 import { AvailableLanguages, type CompileOptions } from '@es-js/core'
-import { compileModulesForPreview } from '../compiler'
-import { orchestrator, OrchestratorFile } from '../compiler/orchestrator'
-import { compileFile, processSandboxedFiles, SandboxFile, SandboxFileError } from '../utils'
+import { compileCode } from '../compiler'
+import { compileModulesForPreview } from '../moduleCompiler'
+import { orchestrator, OrchestratorFile } from '../moduleCompiler/orchestrator'
+import { processSandboxedFiles, SandboxFile, SandboxFileError } from '../utils'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
@@ -92,26 +93,6 @@ export async function evalFiles({ files, options}: { files: SandboxFile[], optio
   })
 }
 
-function tryToCompile(file: any, options: CompileOptions) {
-  let compiled: string = ''
-  let error: SandboxFileError | undefined
-  try {
-    compiled = compileFile(file, options)
-  } catch (exception: any) {
-    compiled = file.content
-    error = {
-      message: exception.message,
-      line: exception.line || 1,
-      column: exception.column || 1,
-      stack: exception.stack,
-    }
-  }
-  return {
-    compiled,
-    error,
-  }
-}
-
 export async function compileFiles({ files, options}: { files: SandboxFile[], options: CompileOptions }) {
   const filesCompiled: SandboxFile[] = files
     .map((file: any) => {
@@ -144,6 +125,37 @@ export async function compileFiles({ files, options}: { files: SandboxFile[], op
   })
 
   return filesCompiled
+}
+
+function tryToCompile(file: any, options: CompileOptions) {
+  let compiled: string = ''
+  let error: SandboxFileError | undefined
+  try {
+    compiled = compileFile(file, options)
+  } catch (exception: any) {
+    compiled = file.content
+    error = {
+      message: exception.message,
+      line: exception.line || 1,
+      column: exception.column || 1,
+      stack: exception.stack,
+    }
+  }
+  return {
+    compiled,
+    error,
+  }
+}
+
+function compileFile(file: SandboxFile, options?: CompileOptions) {
+  if (!file.code) {
+    file.code = {}
+  }
+
+  return compileCode(file.content, {
+    ...options,
+    putout: getOptions().putout,
+  })
 }
 
 async function evalCode(args: any) {

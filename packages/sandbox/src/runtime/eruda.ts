@@ -235,8 +235,6 @@ function fixDevToolsPadding() {
 }
 
 function getErudaConfig() {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   return initialized && eruda && eruda.get('')?.config
 }
 

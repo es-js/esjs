@@ -1,15 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { MAIN_FILE } from '../src/compiler/orchestrator'
-import { compileFiles } from '../src/runtime/ejecutar'
-import {
-  addExportToFunctions, addInfiniteLoopProtection,
-  escapeTemplateLiteral,
-  formatCode,
-  generateImportStatement, processSandboxedCode, processSandboxedFiles, prepareMainFile,
-  unifyImports, compileCode,
-} from '../src/utils'
+import { unifyImports } from '../../src/utils/unifyImports'
 
-describe('utils', () => {
+describe('unifyImports', () => {
   it('unify duplicated imports', () => {
     const imports = `import { afirmar, afirmarIguales, assert, pruebas } from '@es-js/prueba'
 import { Terminal } from '@es-js/terminal'
@@ -81,75 +73,5 @@ import { afirmarObjetosIguales } from '@es-js/prueba';`
 import { Terminal } from '@es-js/terminal'`
 
     expect(unifyImports(imports).trim()).toBe(expected)
-  })
-
-  it('escapes template literals', () => {
-    const code = 'consola.escribir(\`Hola ${nombre}\`)'
-
-    const expected = 'consola.escribir(\\`Hola \\${nombre}\\`)'
-
-    expect(escapeTemplateLiteral(code)).toBe(expected)
-  })
-
-  it('adds export to function', () => {
-    const code = formatCode(`function foo() {
-return 'foo';
-}
-`)
-    const expected = formatCode(`export function foo() {
-return 'foo';
-}
-`)
-
-    expect(formatCode(addExportToFunctions(code))).toBe(expected)
-  })
-
-  it('generates import statement', () => {
-    const code = formatCode(`function foo() {
-return 'foo';
-}`)
-
-    const expected = formatCode('import { foo } from \'./foo.js\'')
-
-    expect(formatCode(generateImportStatement(addExportToFunctions(code), './foo.js'))).toBe(expected)
-  })
-
-  it('adds infinite loop protection', () => {
-    const code = 'while (true) {}'
-    const protectedCode = addInfiniteLoopProtection(code)
-    expect(protectedCode).toContain('Date.now()')
-  })
-
-  it('prepares code correctly', () => {
-    const code = 'funcion prueba() { retornar \'Hola, mundo!\'; }'
-    const compiledCode = compileCode(code)
-    const sandboxedCode = processSandboxedCode(compiledCode)
-    expect(sandboxedCode).toContain('export function prueba')
-  })
-
-  it('prepares files correctly', () => {
-    const files = [
-      {
-        name: MAIN_FILE,
-        content: 'funcion prueba() { retornar \'Hola, mundo!\'; }',
-        main: true,
-      },
-    ]
-
-    const compiledFiles = compileFiles({ files, options: {} })
-    const preparedFiles = processSandboxedFiles(compiledFiles)
-
-    expect(preparedFiles[0].code).toContain('export function prueba')
-  })
-
-  it('prepares main file correctly', () => {
-    const file = { name: 'main.js', content: 'funcion prueba() { retornar \'Hola, mundo!\'; }' }
-    const preparedFile = prepareMainFile(file)
-    expect(preparedFile.code).toContain('export function prueba')
-  })
-
-  it('throws error when parsing invalid file', () => {
-    const file = { name: 'main.js', content: 'funcion prueba() { retornar \'Hola, mundo!\'; ' } // Falta el cierre de llave
-    expect(() => processSandboxedCode(file)).toThrow()
   })
 })
