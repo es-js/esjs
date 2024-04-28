@@ -128,12 +128,12 @@ export const useMonacoHelper = () => {
 
   function setupMonacoFormat() {
     monaco.languages.registerDocumentFormattingEditProvider('javascript', {
-      provideDocumentFormattingEdits: (model: monaco.editor.ITextModel): monaco.languages.TextEdit[] => {
+      provideDocumentFormattingEdits: async(model: monaco.editor.ITextModel): monaco.languages.TextEdit[] => {
         const code = model.getValue()
 
         const currentLanguage = useEditor().language.value === 'esjs' ? 'esjs' : 'js'
 
-        const formattedCode = useEditor().formatCode(code, currentLanguage, currentLanguage)
+        const formattedCode = await useEditor().formatCode(code, currentLanguage, currentLanguage)
 
         return [
           {

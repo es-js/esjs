@@ -128,6 +128,8 @@ async function init() {
 
 function refresh() {
   init()
+  useEventBus('editor_code').emit('clear-decorations')
+  useEventBus('editor_tests').emit('clear-decorations')
 }
 
 const updateSandboxDebounced = debounce(updateSandbox, 500)
@@ -189,6 +191,10 @@ watch(
     updateSandboxDebounced()
   }
 )
+
+watch(editor.version, () => {
+  refresh()
+})
 </script>
 
 <template>

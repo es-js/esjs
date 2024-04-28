@@ -40,13 +40,13 @@ function removeMultipleEmptyLines(code: string): string {
   return code.replace(/\n{3,}/g, '\n\n')
 }
 
-function setupCodes() {
+async function setupCodes() {
   if (!esjsCode.value) {
     esjsCode.value = codeFromCodeBlock.value
   }
 
   if (!jsCode.value) {
-    jsCode.value = editor.formatCode(esjsCode.value, 'esjs', 'js').replace(/\n$/, '')
+    jsCode.value = (await editor.formatCode(esjsCode.value, 'esjs', 'js')).replace(/\n$/, '')
   }
 }
 
@@ -91,7 +91,7 @@ const unwatch = watch(
   async() => {
     if (!slot.value) { return }
 
-    setupCodes()
+    await setupCodes()
     await setupCodesPreHtml()
 
     setupPreHtml()
