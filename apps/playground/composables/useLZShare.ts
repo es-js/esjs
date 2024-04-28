@@ -71,6 +71,7 @@ export const useLZShare = () => {
     url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
     url.searchParams.set('language', useEditor().language.value)
     url.searchParams.set('embed', String(settings.settings.value.embed))
+    url.searchParams.set('version', useEditor().version.value)
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
 
     return url
@@ -118,6 +119,7 @@ export const useLZShare = () => {
       previewTab: decodePreviewTab(url),
       language: url.searchParams.get('language'),
       embed: url.searchParams.get('embed'),
+      version: url.searchParams.get('version'),
     }
   }
 
@@ -228,6 +230,7 @@ export const useLZShare = () => {
       preview,
       previewTab,
       embed,
+      version,
     } = useLZShare().decodeSharedUrl()
 
     settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
@@ -245,6 +248,11 @@ export const useLZShare = () => {
     settings.setPreview(preview)
     settings.setPreviewTab(previewTab)
     settings.setEmbed(embed === 'true')
+
+    if (version) {
+      useEditor().setVersion(version)
+    }
+
     useEditor().setLanguage(useLZShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
   }
 

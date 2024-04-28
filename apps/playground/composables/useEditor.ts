@@ -111,6 +111,10 @@ export const useEditor = () => {
     })
   }
 
+  function setVersion(value: string) {
+    version.value = value
+  }
+
   return {
     loading,
     setLanguage,
@@ -121,6 +125,7 @@ export const useEditor = () => {
     availableVersions,
     formatCode,
     isLearnApp,
+    setVersion,
     EDITOR_DEFAULT_OPTIONS,
   }
 }
