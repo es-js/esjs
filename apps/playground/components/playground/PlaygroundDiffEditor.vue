@@ -28,7 +28,9 @@ const valueToCompare = computed((): string => {
 
   const toLanguage = fromLanguage === 'esjs' ? 'js' : 'esjs'
 
-  return files.getActiveDiffFile()?.code?.[toLanguage] ?? ''
+  const output = toLanguage === 'js' ? files.getActiveDiffFile()?.compiled?.js : files.getActiveDiffFile()?.compiled?.esjs
+
+  return output
 })
 
 function setActiveDiffFile(file: SandboxFile) {

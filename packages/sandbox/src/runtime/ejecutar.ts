@@ -22,6 +22,10 @@ export interface EjecutarOptions {
   putout?: any
 }
 
+export interface ProcessSandboxedCodeOptions {
+  infiniteLoopProtection?: boolean
+}
+
 let _options: EjecutarOptions
 
 const scriptEls: HTMLScriptElement[] = []
@@ -111,7 +115,7 @@ export async function compileFiles({ files, options}: { files: SandboxFile[], op
 
       return {
         ...file,
-        code: {
+        compiled: {
           esjs: compiledEsJS,
           js: compiledJS,
         },
@@ -148,8 +152,8 @@ function tryToCompile(file: any, options: CompileOptions) {
 }
 
 function compileFile(file: SandboxFile, options?: CompileOptions) {
-  if (!file.code) {
-    file.code = {}
+  if (!file.compiled) {
+    file.compiled = {}
   }
 
   return compileCode(file.content, {
@@ -230,7 +234,7 @@ export async function evalEditorFiles(options?: EjecutarOptions) {
 export function isAnyFileNotCompiled(files: SandboxFile[]) {
   return files
     .filter((file) => ['esjs', 'js'].includes(file.name.split('.').slice(-1)[0]))
-    .some((file) => !file.code?.js || !file.code?.esjs)
+    .some((file) => file?.compiled?.js === undefined || file?.compiled?.esjs === undefined)
 }
 
 function clearConsole() {

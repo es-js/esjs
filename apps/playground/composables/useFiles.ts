@@ -1,3 +1,6 @@
+import { splitCodeImports } from '@es-js/core/utils'
+import { compileCode, SandboxCompileOptions } from '@es-js/sandbox/compiler'
+import { processSandboxedCode, SandboxFileError } from '@es-js/sandbox/utils'
 import { Ref, ref } from 'vue'
 
 export interface SandboxFile {
@@ -9,7 +12,7 @@ export interface SandboxFile {
   icon?: string;
   readonly?: boolean;
   main?: boolean;
-  code?: {
+  compiled?: {
     esjs?: string;
     js?: string;
   };
@@ -151,6 +154,7 @@ const files: Ref<Files> = ref([
     name: FILE_IMPORT_MAP,
     content: `{
   "imports": {
+    "@es-js/sandbox/runtime" : "http://localhost:5173/src/runtime",
     "@es-js/" : "https://esm.run/@es-js/",
     "npm/" : "https://cdn.jsdelivr.net/npm/"
   }
@@ -167,13 +171,17 @@ const files: Ref<Files> = ref([
 const loading = ref(true)
 
 export const useFiles = () => {
+  function setFileContent(name: string, content: string) {
+    updateFile(name, { content })
+  }
+
   function updateFile(name: string, value: Partial<SandboxFile>) {
     const file = files.value.find((f: SandboxFile) => f.name === name)
 
     if (!file) { return }
 
     file.content = value.content ?? file.content
-    file.code = value.code ?? file.code
+    file.compiled = value.compiled ?? file.compiled
     file.sandboxed = value.sandboxed ?? file.sandboxed
   }
 
@@ -221,8 +229,104 @@ export const useFiles = () => {
     loading.value = value
   }
 
+  async function compileFiles(options: SandboxCompileOptions) {
+    options.putout = options.compiler === 'essucrase' ? await import('https://esm.sh/@putout/bundle@2') : undefined
+
+    files
+      .value
+      .filter((file: SandboxFile) => ['esjs', 'js'].includes(file.name.split('.').slice(-1)[0]))
+      .forEach((file: SandboxFile) => {
+        if (!file.compiled) {
+          file.compiled = {
+            esjs: '',
+            js: '',
+          }
+        }
+
+        const { compiled: compiledEsJS, error: errorEsJS } = tryToCompile(file.content, {
+          ...options,
+          to: 'esjs',
+        })
+
+        const { compiled: compiledJS, error: errorJS } = tryToCompile(file.content, {
+          ...options,
+          to: 'js',
+        })
+
+        file.compiled.esjs = compiledEsJS
+        file.compiled.js = compiledJS
+        file.error = errorEsJS || errorJS || undefined
+
+        if (!file.error) {
+          const { sandboxed, error } = tryToProcessSandboxedCode(file.compiled.js, options)
+
+          file.sandboxed = sandboxed
+          file.error = error
+        }
+      })
+  }
+
+  function tryToCompile(code: string, options: SandboxCompileOptions) {
+    let compiled: string = ''
+    let error: SandboxFileError | undefined
+    try {
+      compiled = compileCode(code, options)
+    } catch (exception: any) {
+      compiled = ''
+      error = {
+        message: exception.message,
+        line: exception.line || 1,
+        column: exception.column || 1,
+        stack: exception.stack,
+      }
+    }
+    return {
+      compiled,
+      error,
+    }
+  }
+
+  function tryToProcessSandboxedCode(code: string, options: SandboxCompileOptions) {
+    let sandboxed: {
+      imports: string;
+      codeWithoutImports: string;
+    } = {
+      imports: '',
+      codeWithoutImports: '',
+    }
+    let error: SandboxFileError | undefined
+    try {
+      const processed = processSandboxedCode(code, {
+        infiniteLoopProtection: options.infiniteLoopProtection,
+      })
+
+      const split = splitCodeImports(processed)
+
+      sandboxed = {
+        imports: split.imports,
+        codeWithoutImports: split.codeWithoutImports,
+      }
+    } catch (exception: any) {
+      sandboxed = {
+        imports: '',
+        codeWithoutImports: '',
+      }
+      error = {
+        message: exception.message,
+        line: exception.line || 1,
+        column: exception.column || 1,
+        stack: exception.stack,
+      }
+    }
+    return {
+      sandboxed,
+      error,
+    }
+  }
+
   return {
     files,
+    setFileContent,
     updateFile,
     getFileContent,
     getFileNameWithExtension,
@@ -232,6 +336,7 @@ export const useFiles = () => {
     setActiveFile,
     setActiveDiffFile,
     setLoading,
+    compileFiles,
     loading,
   }
 }

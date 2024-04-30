@@ -1,7 +1,7 @@
 import { splitCodeImports } from '@es-js/core/utils'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../moduleCompiler/constants'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '../moduleCompiler/orchestrator'
-import { EjecutarOptions } from '../runtime/ejecutar'
+import { EjecutarOptions, ProcessSandboxedCodeOptions } from '../runtime/ejecutar'
 import { ExportFunctionsTransformer } from '../transformers/exportFunctions.transformer'
 import { InfiniteLoopProtectionTransformer } from '../transformers/infiniteLoopProtection.transformer'
 import { formatCode } from './formatCode'
@@ -18,7 +18,7 @@ export interface SandboxFile {
   name: string
   content: string
   main?: boolean
-  code?: {
+  compiled?: {
     esjs?: string
     js?: string
   },
@@ -36,7 +36,7 @@ export interface SandboxFileError {
   stack: string
 }
 
-export function processSandboxedFiles(files: SandboxFile[], options?: EjecutarOptions) {
+export function processSandboxedFiles(files: SandboxFile[], options: ProcessSandboxedCodeOptions) {
   if (files.some((file) => file.error)) {
     const firstFileWithError = files.find((file) => file.error)
 
@@ -80,7 +80,7 @@ export function processSandboxedFiles(files: SandboxFile[], options?: EjecutarOp
   return sandboxedFiles
 }
 
-export function processSandboxedCode(code: string, options?: EjecutarOptions) {
+export function processSandboxedCode(code: string, options?: ProcessSandboxedCodeOptions) {
   try {
     if (!code.endsWith('\n'))
       code += '\n'
@@ -106,9 +106,11 @@ export function processSandboxedCode(code: string, options?: EjecutarOptions) {
   }
 }
 
-function prepareMainFile(file: any, options?: EjecutarOptions) {
+function prepareMainFile(file: SandboxFile, options?: ProcessSandboxedCodeOptions) {
   try {
-    const sandboxedCode = processSandboxedCode(file?.code?.js || '', options)
+    const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', {
+      infiniteLoopProtection: options?.infiniteLoopProtection || false,
+    })
     const splittedCode = splitCodeImports(sandboxedCode)
 
     const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
@@ -139,13 +141,15 @@ ${splittedCode.imports}
   }
 }
 
-function prepareOtherFile(file: any, main: any, options?: EjecutarOptions) {
+function prepareOtherFile(file: any, main: any, options: ProcessSandboxedCodeOptions) {
   try {
     const importsFromMain = generateImportFunctions({
       code: main.sandboxed.codeWithoutImports,
       modulePath: `./${MAIN_FILE}`,
     })
-    const sandboxedCode = processSandboxedCode(file?.code?.js || '', options)
+    const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', {
+      infiniteLoopProtection: options.infiniteLoopProtection,
+    })
     const splitted = splitCodeImports(sandboxedCode)
     const imports = unifyImports(`
       ${importsFromMain}

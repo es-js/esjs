@@ -39,6 +39,8 @@ watchEffect(() => {
 })
 
 const filesForTab0 = computed(() => files.files.value.filter(file => file.tab === 0))
+
+const activeFile = computed(() => files.getActiveFile())
 </script>
 
 <template>
@@ -59,7 +61,7 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
                     :key="file.name"
                     :icon="file.icon ?? 'i-mdi-file-outline'"
                     :text="files.getFileNameWithExtension(file.name)"
-                    :active="files.getActiveFile().name === file.name"
+                    :active="activeFile.name === file.name"
                     @click="files.setActiveFile(file.name)"
                   />
                 </NuxtScrollbar>
@@ -88,10 +90,8 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
               <AppEditor
                 name="code"
                 :model-value="files.getActiveFileContent()"
-                :readonly="files.getActiveFile().readonly"
-                @update:model-value="files.updateFile(files.getActiveFile().name, {
-                  content: $event,
-                })"
+                :readonly="activeFile.readonly"
+                @update:model-value="files.setFileContent(activeFile.name, $event)"
               />
             </template>
           </AppContainer>
@@ -121,9 +121,7 @@ const filesForTab0 = computed(() => files.files.value.filter(file => file.tab ==
               v-if="!settings.hideTests"
               name="tests"
               :model-value="files.getFileContent(FILE_TESTS)"
-              @update:model-value="files.updateFile(FILE_TESTS, {
-                content: $event,
-              })"
+              @update:model-value="files.setFileContent(FILE_TESTS, $event)"
             />
           </div>
         </Pane>

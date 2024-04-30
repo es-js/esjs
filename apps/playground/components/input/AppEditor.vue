@@ -156,12 +156,12 @@ watch(
     const allFiles = toRaw(files.files.value)
 
     allFiles.forEach((file) => {
-      if (!file.code) {
+      if (!file.compiled) {
         return
       }
 
       files.updateFile(file.name, {
-        content: language === 'esjs' ? file.code.esjs : file.code.js,
+        content: language === 'esjs' ? file.compiled.esjs : file.compiled.js,
       })
     })
   },

@@ -86,8 +86,8 @@ devDependencies:
     specifier: ^3.2.0
     version: 3.2.0
   monaco-editor:
-    specifier: ~0.44.0
-    version: 0.44.0
+    specifier: ~0.48.0
+    version: 0.48.0
   nuxt:
     specifier: ^3.11.0
     version: 3.11.0(@types/node@18.19.24)(@unocss/reset@0.58.7)(eslint@8.22.0)(floating-vue@5.2.2)(typescript@5.4.2)(unocss@0.58.7)(vite@5.1.6)
@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^1.2.1
     version: 1.2.1
   nuxt-monaco-editor:
-    specifier: ^1.2.7
-    version: 1.2.7(monaco-editor@0.44.0)(vite@5.1.6)
+    specifier: ^1.2.9
+    version: 1.2.9(monaco-editor@0.48.0)(vite@5.1.6)
   prettier:
     specifier: ^2.8.8
     version: 2.8.8
@@ -1463,22 +1463,6 @@ packages:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
     dev: true
 
-  /@nuxt/devtools-kit@1.1.5(nuxt@3.11.0)(vite@5.1.6):
-    resolution: {integrity: sha512-Nb/NKFCRtxyqcPD6snB52rXtbRQMjGtn3ncpa8cLWsnoqnkd9emQ4uwV8IwCNxTnqUBtbGU79/TlJ79SKH9TAw==}
-    peerDependencies:
-      nuxt: ^3.9.0
-      vite: '*'
-    dependencies:
-      '@nuxt/kit': 3.11.2
-      '@nuxt/schema': 3.11.2
-      execa: 7.2.0
-      nuxt: 3.11.0(@types/node@18.19.24)(@unocss/reset@0.58.7)(eslint@8.22.0)(floating-vue@5.2.2)(typescript@5.4.2)(unocss@0.58.7)(vite@5.1.6)
-      vite: 5.1.6(@types/node@18.19.24)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/devtools-kit@1.2.0(nuxt@3.11.0)(vite@5.1.6):
     resolution: {integrity: sha512-T81TQuaN6hbQFzgvQeRAMJjcL4mgWtYvlGTAvtuvd3TFuHV7bMK+tFZaxgJXzIu1/UPO7/aO4VLCB0xl5sSwZw==}
     peerDependencies:
@@ -1886,7 +1870,7 @@ packages:
   /@nuxtjs/color-mode@3.3.2:
     resolution: {integrity: sha512-BLpBfrYZngV2QWFQ4HNEFwAXa3Pno43Ge+2XHcZJTTa1Z4KzRLvOwku8yiyV3ovIaaXKGwduBdv3Z5Ocdp0/+g==}
     dependencies:
-      '@nuxt/kit': 3.11.1
+      '@nuxt/kit': 3.11.2
       lodash.template: 4.5.0
       pathe: 1.1.2
     transitivePeerDependencies:
@@ -2006,7 +1990,7 @@ packages:
   /@nuxtjs/tailwindcss@6.11.4:
     resolution: {integrity: sha512-09cksgZD4seQj054Z/BeiwFg1bzQTol8KPulLDLGnmMTkEi21vj/z+WlXQRpVbN1GS9+oU9tcSsu2ufXCM3DBg==}
     dependencies:
-      '@nuxt/kit': 3.11.1
+      '@nuxt/kit': 3.11.2
       autoprefixer: 10.4.18(postcss@8.4.35)
       chokidar: 3.6.0
       clear-module: 4.1.2
@@ -8434,12 +8418,8 @@ packages:
       supports-color: 3.1.2
     dev: true
 
-  /monaco-editor-nls@3.1.0:
-    resolution: {integrity: sha512-GdzgKRAiwXlGI/ude/HbzP8ukml28yUoZ7rx/xsSsmYf9W13jTyWjXjoMK/+pjL6JorAThH2WkCYaDoCnIX7Jg==}
-    dev: true
-
-  /monaco-editor@0.44.0:
-    resolution: {integrity: sha512-5SmjNStN6bSuSE5WPT2ZV+iYn1/yI9sd4Igtk23ChvqB7kDk9lZbB9F5frsuvpB+2njdIeGGFf2G4gbE6rCC9Q==}
+  /monaco-editor@0.48.0:
+    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
     dev: true
 
   /mri@1.2.0:
@@ -8838,8 +8818,8 @@ packages:
     dependencies:
       '@iconify/collections': 1.0.404
       '@iconify/vue': 4.1.1(vue@3.4.21)
-      '@nuxt/devtools-kit': 1.1.5(nuxt@3.11.0)(vite@5.1.6)
-      '@nuxt/kit': 3.11.1
+      '@nuxt/devtools-kit': 1.2.0(nuxt@3.11.0)(vite@5.1.6)
+      '@nuxt/kit': 3.11.2
     transitivePeerDependencies:
       - nuxt
       - rollup
@@ -8848,16 +8828,15 @@ packages:
       - vue
     dev: true
 
-  /nuxt-monaco-editor@1.2.7(monaco-editor@0.44.0)(vite@5.1.6):
-    resolution: {integrity: sha512-kDhIu9KIIC7NAqGraBJwWk5paQ2G0lv6tmi4UTB4mb1TtNEgFr3X0C2q6kmabXBHGtawX55CQSOvvdEg6g3TQQ==}
+  /nuxt-monaco-editor@1.2.9(monaco-editor@0.48.0)(vite@5.1.6):
+    resolution: {integrity: sha512-O51sng1MxDAmmm1drOvlUyu6sMdRQtC7ZeSU/r+Hp8KWDDi0JWblPwMOJ+oxMDBnvWw1mOXEhaUBlLjUTEeU/Q==}
     peerDependencies:
       monaco-editor: '*'
     dependencies:
-      '@nuxt/kit': 3.11.0
+      '@nuxt/kit': 3.11.2
       defu: 6.1.4
-      monaco-editor: 0.44.0
-      monaco-editor-nls: 3.1.0
-      vite-plugin-static-copy: 0.17.1(vite@5.1.6)
+      monaco-editor: 0.48.0
+      vite-plugin-static-copy: 1.0.3(vite@5.1.6)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -12076,11 +12055,11 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-static-copy@0.17.1(vite@5.1.6):
-    resolution: {integrity: sha512-9h3iaVs0bqnqZOM5YHJXGHqdC5VAVlTZ2ARYsuNpzhEJUHmFqXY7dAK4ZFpjEQ4WLFKcaN8yWbczr81n01U4sQ==}
-    engines: {node: ^14.18.0 || >=16.0.0}
+  /vite-plugin-static-copy@1.0.3(vite@5.1.6):
+    resolution: {integrity: sha512-hBCCz6T0uNI3oF5oJ/Ju73rhoR+ADrJ2iLAea5+wA7kpQ8clYgY8BD+GL0w0BrqsYCbgBITOByBP/3y9Y+h93A==}
+    engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
-      vite: ^3.0.0 || ^4.0.0 || ^5.0.0
+      vite: ^5.0.0
     dependencies:
       chokidar: 3.6.0
       fast-glob: 3.3.2

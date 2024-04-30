@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createSandbox } from '@es-js/sandbox/render'
+import { createSandbox } from 'http://localhost:5173/src/render'
 import { useEventBus } from '@vueuse/core'
 import debounce from 'just-debounce-it'
 import { onMounted, onUnmounted, watch } from 'vue'
@@ -55,6 +55,10 @@ async function init() {
     console.warn('no esjs-sandbox element')
     return
   }
+
+  await files.compileFiles({
+    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+  })
 
   sandbox = createSandbox('esjs-sandbox', {
     theme: isDark.value ? 'dark' : 'light',
@@ -117,7 +121,7 @@ async function init() {
     on_files_compiled: (args: any) => {
       args.filesCompiled.forEach((file: any) => {
         files.updateFile(file.name, {
-          code: file.code,
+          compiled: file.code,
           error: file.error ?? null,
           sandboxed: file.sandboxed,
         })
@@ -138,6 +142,10 @@ async function updateSandbox() {
   if (!proxy) {
     return
   }
+
+  await files.compileFiles({
+    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+  })
 
   await proxy.eval(toRaw(files.files.value), {
     infiniteLoopProtection: useSettings().settings.value.infiniteLoopProtection,
