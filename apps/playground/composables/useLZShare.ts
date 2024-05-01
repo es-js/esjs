@@ -71,6 +71,7 @@ export const useLZShare = () => {
     url.searchParams.set('previewTab', JSON.stringify(settings.settings.value.previewTab))
     url.searchParams.set('language', useEditor().language.value)
     url.searchParams.set('embed', String(settings.settings.value.embed))
+    url.searchParams.set('infiniteLoopProtection', String(settings.settings.value.infiniteLoopProtection))
     url.searchParams.set('version', useEditor().version.value)
     url.searchParams.set('hideOptions', String(settings.settings.value.hideOptions))
 
@@ -119,6 +120,7 @@ export const useLZShare = () => {
       previewTab: decodePreviewTab(url),
       language: url.searchParams.get('language'),
       embed: url.searchParams.get('embed'),
+      infiniteLoopProtection: url.searchParams.get('infiniteLoopProtection'),
       version: url.searchParams.get('version'),
     }
   }
@@ -230,6 +232,7 @@ export const useLZShare = () => {
       preview,
       previewTab,
       embed,
+      infiniteLoopProtection,
       version,
     } = useLZShare().decodeSharedUrl()
 
@@ -248,6 +251,7 @@ export const useLZShare = () => {
     settings.setPreview(preview)
     settings.setPreviewTab(previewTab)
     settings.setEmbed(embed === 'true')
+    settings.setInfiniteLoopProtection(infiniteLoopProtection === 'true')
 
     if (version) {
       useEditor().setVersion(version)
