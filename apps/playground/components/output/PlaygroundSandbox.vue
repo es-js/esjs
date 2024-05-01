@@ -57,7 +57,7 @@ async function init() {
   }
 
   await files.compileFiles({
-    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+    compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
 
   sandbox = createSandbox('esjs-sandbox', {
@@ -67,7 +67,7 @@ async function init() {
     files: files.files.value,
     importMap: files.getFileContent(FILE_IMPORT_MAP),
     infiniteLoopProtection: settingsStore.value.infiniteLoopProtection,
-    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+    compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
 
   proxy = new PreviewProxy(sandbox, {
@@ -144,12 +144,12 @@ async function updateSandbox() {
   }
 
   await files.compileFiles({
-    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+    compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
 
   await proxy.eval(toRaw(files.files.value), {
     infiniteLoopProtection: useSettings().settings.value.infiniteLoopProtection,
-    compiler: editor.version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+    compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
 }
 

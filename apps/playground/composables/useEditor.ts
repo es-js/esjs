@@ -9,7 +9,7 @@ export const loading = ref(true)
 
 const language = ref('esjs')
 
-const version = ref('0.0.1')
+const version = ref('0.0.x')
 
 const availableLanguages = [
   [
@@ -31,15 +31,15 @@ const availableLanguages = [
 const availableVersions = [
   [
     {
-      label: 'v0.0.1 (Actual)',
+      label: 'v0.0.X (Actual)',
       click: () => {
-        version.value = '0.0.1'
+        version.value = '0.0.x'
       },
     },
     {
-      label: 'v0.1.0 (Próxima)',
+      label: 'v0.X.0 (Próxima)',
       click: () => {
-        version.value = '0.1.0'
+        version.value = '0.x.0'
       },
     },
   ],
@@ -79,13 +79,13 @@ export const useEditor = () => {
   }
 
   async function formatCode(code: string, fromLanguage: string = 'esjs', toLanguage: string = 'esjs') {
-    const putout = version.value === '0.1.0' ? await import('https://esm.sh/@putout/bundle@2') : undefined
+    const putout = version.value === '0.x.0' ? await import('https://esm.sh/@putout/bundle@2') : undefined
 
     const compiledCode = fromLanguage === 'esjs'
       ? compileCode(code, {
         from: 'esjs',
         to: 'js',
-        compiler: version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+        compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',
         putout,
       })
       : code
@@ -96,7 +96,7 @@ export const useEditor = () => {
       ? compileCode(formattedCode, {
         from: 'js',
         to: 'esjs',
-        compiler: version.value === '0.1.0' ? 'essucrase' : 'esbabel',
+        compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',
         putout,
       })
       : formattedCode

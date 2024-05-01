@@ -121,8 +121,20 @@ export const useLZShare = () => {
       language: url.searchParams.get('language'),
       embed: url.searchParams.get('embed'),
       infiniteLoopProtection: url.searchParams.get('infiniteLoopProtection'),
-      version: url.searchParams.get('version'),
+      version: determineVersion(url.searchParams.get('version') ?? '0.0.x'),
     }
+  }
+
+  function determineVersion(version: string) {
+    if (version === '0.1.0') {
+      return '0.x.0'
+    }
+
+    if (version === '0.0.1') {
+      return '0.0.x'
+    }
+
+    return version
   }
 
   function decodePreviewTab(url: URL) {

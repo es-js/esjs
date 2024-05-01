@@ -26,7 +26,6 @@ const settings = ref({
   },
   embed: false,
   infiniteLoopProtection: false,
-  version: '0.0.1',
 })
 
 const activePreview = computed((): 'terminal' | 'flowchart' | 'html' => {
