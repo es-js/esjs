@@ -2,9 +2,10 @@ import { splitCodeImports } from '@es-js/core/utils'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../moduleCompiler/constants'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '../moduleCompiler/orchestrator'
 import { ProcessSandboxedCodeOptions } from '../runtime/ejecutar'
+import { applyTransformers } from '../transformers'
 import { ExportFunctionsTransformer } from '../transformers/exportFunctions.transformer'
+import { FormatTransformer } from '../transformers/format.transformer'
 import { InfiniteLoopProtectionTransformer } from '../transformers/infiniteLoopProtection.transformer'
-import { formatCode } from './formatCode'
 import { generateImportFunctions } from './generateImportFunctions'
 import { unifyImports } from './unifyImports'
 
@@ -82,24 +83,12 @@ export function processSandboxedFiles(files: SandboxFile[], options: ProcessSand
 
 export function processSandboxedCode(code: string, options?: ProcessSandboxedCodeOptions) {
   try {
-    if (!code.endsWith('\n'))
-      code += '\n'
-
-    code = formatCode(code) // To check syntax errors
-
-    if (options?.exportFunctions) {
-      code = new ExportFunctionsTransformer().transform(code)
-    }
-
-    if (options?.infiniteLoopProtection) {
-      code = new InfiniteLoopProtectionTransformer().transform(code)
-    }
-
-    if (options?.exportFunctions || options?.infiniteLoopProtection) {
-      code = formatCode(code) // To format the code again}
-    }
-
-    return code
+    return applyTransformers(code, [
+      ...(options?.preFormat ? [new FormatTransformer()] : []),
+      ...(options?.exportFunctions ? [new ExportFunctionsTransformer()] : []),
+      ...(options?.infiniteLoopProtection ? [new InfiniteLoopProtectionTransformer()] : []),
+      new FormatTransformer(),
+    ])
   }
   catch (error: SyntaxError | any) {
     const errorMessage = error.message
@@ -113,24 +102,25 @@ export function processSandboxedCode(code: string, options?: ProcessSandboxedCod
 function prepareMainFile(file: SandboxFile, options?: ProcessSandboxedCodeOptions) {
   try {
     const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', {
+      ...options,
       exportFunctions: true,
-      infiniteLoopProtection: options?.infiniteLoopProtection || false,
     })
-    const splittedCode = splitCodeImports(sandboxedCode)
 
-    const codeUsesTerminal = splittedCode.codeWithoutImports.includes('Terminal')
+    const split = splitCodeImports(sandboxedCode)
+
+    const codeUsesTerminal = split.codeWithoutImports.includes('Terminal')
 
     const imports = unifyImports(`
 ${codeUsesTerminal ? IMPORT_ESJS_TERMINAL : ''}
 ${IMPORT_ESJS_PRUEBA}
-${splittedCode.imports}
+${split.imports}
   `)
 
     return {
       ...file,
       sandboxed: {
         imports,
-        codeWithoutImports: splittedCode.codeWithoutImports,
+        codeWithoutImports: split.codeWithoutImports,
       },
     }
   } catch (error: any) {
@@ -152,9 +142,7 @@ function prepareOtherFile(file: any, main: any, options: ProcessSandboxedCodeOpt
       code: main.sandboxed.codeWithoutImports,
       modulePath: `./${MAIN_FILE}`,
     })
-    const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', {
-      infiniteLoopProtection: options.infiniteLoopProtection,
-    })
+    const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', options)
     const split = splitCodeImports(sandboxedCode)
     const imports = unifyImports(`
       ${importsFromMain}

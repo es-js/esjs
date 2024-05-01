@@ -256,6 +256,10 @@ export const useFiles = () => {
         file.compiled.esjs = compiledEsJS
         file.compiled.js = compiledJS
         file.error = errorEsJS || errorJS || undefined
+
+        if (file.error) {
+          file.sandboxed = undefined
+        }
       })
   }
 
@@ -266,10 +270,13 @@ export const useFiles = () => {
       compiled = compileCode(code, options)
     } catch (exception: any) {
       compiled = ''
+      const line = exception.loc?.line ?? exception.line ?? 1
+      const column = exception.loc?.column ?? exception.column ?? 1
+
       error = {
         message: exception.message,
-        line: exception.line || 1,
-        column: exception.column || 1,
+        line,
+        column,
         stack: exception.stack,
       }
     }

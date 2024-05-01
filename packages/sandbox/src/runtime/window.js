@@ -105,15 +105,6 @@ async function handle_message(ev) {
       send_error(error.message, error.stack)
     }
   }
-  else if (action === 'COMPILE') {
-    try {
-      const { files, options } = args
-      await compileFiles({ files, options })
-    }
-    catch (error) {
-      send_error(error.message, error.stack)
-    }
-  }
   else if (action === 'HIDE_PREVIEW') {
     hidePreview(args)
   }

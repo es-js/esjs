@@ -23,6 +23,7 @@ export interface EjecutarOptions {
 }
 
 export interface ProcessSandboxedCodeOptions {
+  preFormat?: boolean
   exportFunctions?: boolean
   infiniteLoopProtection?: boolean
 }
@@ -66,6 +67,7 @@ export async function evalFiles({ files, options}: { files: SandboxFile[], optio
       return ['esjs', 'js'].includes(extension)
     }),
     {
+      preFormat: !options?.compiler || options?.compiler === 'esbabel',
       infiniteLoopProtection: options?.infiniteLoopProtection || false,
     }
   )

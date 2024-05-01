@@ -95,8 +95,4 @@ export class PreviewProxy {
   eval(files: Record<string, string>, options: any) {
     return this.iframe_command('eval', { files, options })
   }
-
-  compile(files: Record<string, string>, options: CompileOptions) {
-    return this.iframe_command('COMPILE', { files, options })
-  }
 }
