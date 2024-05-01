@@ -1,14 +1,14 @@
 import { splitCodeImports } from '@es-js/core/utils'
 import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../moduleCompiler/constants'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '../moduleCompiler/orchestrator'
-import { EjecutarOptions, ProcessSandboxedCodeOptions } from '../runtime/ejecutar'
+import { ProcessSandboxedCodeOptions } from '../runtime/ejecutar'
 import { ExportFunctionsTransformer } from '../transformers/exportFunctions.transformer'
 import { InfiniteLoopProtectionTransformer } from '../transformers/infiniteLoopProtection.transformer'
 import { formatCode } from './formatCode'
 import { generateImportFunctions } from './generateImportFunctions'
 import { unifyImports } from './unifyImports'
 
-class PrepareCodeError extends Error {
+class ProcessSandboxedCodeError extends Error {
   constructor(message: string, public line: number, public column: number) {
     super(message)
   }
@@ -87,13 +87,17 @@ export function processSandboxedCode(code: string, options?: ProcessSandboxedCod
 
     code = formatCode(code) // To check syntax errors
 
-    code = new ExportFunctionsTransformer().transform(code)
+    if (options?.exportFunctions) {
+      code = new ExportFunctionsTransformer().transform(code)
+    }
 
-    if (options && options.infiniteLoopProtection) {
+    if (options?.infiniteLoopProtection) {
       code = new InfiniteLoopProtectionTransformer().transform(code)
     }
 
-    code = formatCode(code) // To format the code again
+    if (options?.exportFunctions || options?.infiniteLoopProtection) {
+      code = formatCode(code) // To format the code again}
+    }
 
     return code
   }
@@ -102,13 +106,14 @@ export function processSandboxedCode(code: string, options?: ProcessSandboxedCod
     const line = error?.loc?.start?.line || 1
     const column = error?.loc?.start?.column || 1
 
-    throw new PrepareCodeError(errorMessage, line, column)
+    throw new ProcessSandboxedCodeError(errorMessage, line, column)
   }
 }
 
 function prepareMainFile(file: SandboxFile, options?: ProcessSandboxedCodeOptions) {
   try {
     const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', {
+      exportFunctions: true,
       infiniteLoopProtection: options?.infiniteLoopProtection || false,
     })
     const splittedCode = splitCodeImports(sandboxedCode)
@@ -150,10 +155,10 @@ function prepareOtherFile(file: any, main: any, options: ProcessSandboxedCodeOpt
     const sandboxedCode = processSandboxedCode(file?.compiled?.js || '', {
       infiniteLoopProtection: options.infiniteLoopProtection,
     })
-    const splitted = splitCodeImports(sandboxedCode)
+    const split = splitCodeImports(sandboxedCode)
     const imports = unifyImports(`
       ${importsFromMain}
-      ${splitted.imports}
+      ${split.imports}
       ${file.name === MAIN_TESTS_FILE ? IMPORT_ESJS_PRUEBA : ''}
     `)
 
@@ -161,7 +166,7 @@ function prepareOtherFile(file: any, main: any, options: ProcessSandboxedCodeOpt
       ...file,
       sandboxed: {
         imports,
-        codeWithoutImports: splitted.codeWithoutImports,
+        codeWithoutImports: split.codeWithoutImports,
       },
     }
   } catch (error: any) {

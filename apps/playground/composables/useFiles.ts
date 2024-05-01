@@ -256,13 +256,6 @@ export const useFiles = () => {
         file.compiled.esjs = compiledEsJS
         file.compiled.js = compiledJS
         file.error = errorEsJS || errorJS || undefined
-
-        if (!file.error) {
-          const { sandboxed, error } = tryToProcessSandboxedCode(file.compiled.js, options)
-
-          file.sandboxed = sandboxed
-          file.error = error
-        }
       })
   }
 

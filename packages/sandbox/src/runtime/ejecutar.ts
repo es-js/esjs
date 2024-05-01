@@ -23,6 +23,7 @@ export interface EjecutarOptions {
 }
 
 export interface ProcessSandboxedCodeOptions {
+  exportFunctions?: boolean
   infiniteLoopProtection?: boolean
 }
 
@@ -64,7 +65,9 @@ export async function evalFiles({ files, options}: { files: SandboxFile[], optio
 
       return ['esjs', 'js'].includes(extension)
     }),
-    options
+    {
+      infiniteLoopProtection: options?.infiniteLoopProtection || false,
+    }
   )
 
   result.forEach((file: SandboxFile) => {
