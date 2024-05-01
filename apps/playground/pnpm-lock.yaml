@@ -29,8 +29,8 @@ devDependencies:
     specifier: ^0.0.17
     version: 0.0.17
   '@es-js/sandbox':
-    specifier: 0.0.16-alpha.11
-    version: 0.0.16-alpha.11
+    specifier: 0.0.16-alpha.12
+    version: 0.0.16-alpha.12
   '@iconify-json/mdi':
     specifier: ^1.1.64
     version: 1.1.64
@@ -610,8 +610,8 @@ packages:
     resolution: {integrity: sha512-d0/IoUDyFjd2NtTTvnRttClB+8uXyfGyNktI6V/NeJQgmHxfWhRYRn0CR4bOXk1Y4HD7zcNjFyIWdPqLSXjW4A==}
     dev: true
 
-  /@es-js/sandbox@0.0.16-alpha.11:
-    resolution: {integrity: sha512-S+95S1WOK/09GrvKNVndoRzkXI1yB7kLd3jH4+z+tDg5p66kDnL7KuIkNiqq4zTGFbtQCOC0vNC6QfUTFFf5DQ==}
+  /@es-js/sandbox@0.0.16-alpha.12:
+    resolution: {integrity: sha512-3nj1A24n/XKlTn+5woF697fpD7VkZE56gm+73PxsnBAPb7vuQeDjOweoLMTQy+lw60xg+Wr7CPXj1l6JUSGftA==}
     dev: true
 
   /@esbuild/aix-ppc64@0.19.12:

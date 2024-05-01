@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createSandbox } from 'http://localhost:5173/src/render'
+import { createSandbox } from '@es-js/sandbox/render'
 import { useEventBus } from '@vueuse/core'
 import debounce from 'just-debounce-it'
 import { onMounted, onUnmounted, watch } from 'vue'

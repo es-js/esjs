@@ -154,7 +154,6 @@ const files: Ref<Files> = ref([
     name: FILE_IMPORT_MAP,
     content: `{
   "imports": {
-    "@es-js/sandbox/runtime" : "http://localhost:5173/src/runtime",
     "@es-js/" : "https://esm.run/@es-js/",
     "npm/" : "https://cdn.jsdelivr.net/npm/"
   }
