@@ -15,6 +15,7 @@ describe('pruebas', () => {
       numeroPruebas: 1,
       exitosas: 1,
       fallidas: 0,
+      sinAfirmaciones: 0,
     })
   })
 

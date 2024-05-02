@@ -1,6 +1,6 @@
 {
   "name": "@es-js/prueba",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -8,7 +8,7 @@
     "prepare": "npm run build",
     "test": "vitest",
     "test:run": "vitest run",
-    "publish": "pnpm build && pnpm publish"
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.2",

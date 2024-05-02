@@ -260,9 +260,9 @@ describe('obtenerResumen', () => {
           basica: () => {
             afirmar(true)
           },
-        }, 0),
+        }, 0, 0),
       ),
-    ).toEqual('Se ejecutó 1 prueba: \n 1 exitosa \n 0 fallidas')
+    ).toEqual('Se ejecutó 1 prueba: \n 1 exitosa \n 0 fallidas \n 0 sin afirmaciones')
   })
 
   it('works for many tests', () => {
@@ -275,9 +275,9 @@ describe('obtenerResumen', () => {
           falla: () => {
             afirmar(false)
           },
-        }, 1),
+        }, 1, 0),
       ),
-    ).toEqual('Se ejecutaron 2 pruebas: \n 1 exitosa \n 1 fallida')
+    ).toEqual('Se ejecutaron 2 pruebas: \n 1 exitosa \n 1 fallida \n 0 sin afirmaciones')
 
     expect(
       obtenerResumen(
@@ -291,9 +291,19 @@ describe('obtenerResumen', () => {
           basica3: () => {
             afirmar(true)
           },
-        }, 0),
+        }, 0, 0),
       ),
-    ).toEqual('Se ejecutaron 3 pruebas: \n 3 exitosas \n 0 fallidas')
+    ).toEqual('Se ejecutaron 3 pruebas: \n 3 exitosas \n 0 fallidas \n 0 sin afirmaciones')
+  })
+
+  it('detects no assertions', () => {
+    expect(
+      obtenerResumen(
+        obtenerResultado({
+          basica: () => {},
+        }, 0, 1),
+      ),
+    ).toEqual('Se ejecutó 1 prueba: \n 0 exitosas \n 0 fallidas \n 1 sin afirmaciones')
   })
 })
 
@@ -304,11 +314,12 @@ describe('obtenerResultado', () => {
         basica: () => {
           afirmar(true)
         },
-      }, 0),
+      }, 0, 0),
     ).toEqual({
       numeroPruebas: 1,
       exitosas: 1,
       fallidas: 0,
+      sinAfirmaciones: 0,
     })
   })
 
@@ -321,11 +332,12 @@ describe('obtenerResultado', () => {
         falla: () => {
           afirmar(false)
         },
-      }, 1),
+      }, 1, 0),
     ).toEqual({
       numeroPruebas: 2,
       exitosas: 1,
       fallidas: 1,
+      sinAfirmaciones: 0,
     })
 
     expect(
@@ -339,11 +351,25 @@ describe('obtenerResultado', () => {
         basica3: () => {
           afirmar(true)
         },
-      }, 0),
+      }, 0, 0),
     ).toEqual({
       numeroPruebas: 3,
       exitosas: 3,
       fallidas: 0,
+      sinAfirmaciones: 0,
+    })
+  })
+
+  it('detects no assertions', () => {
+    expect(
+      obtenerResultado({
+        basica: () => {},
+      }, 0, 1),
+    ).toEqual({
+      numeroPruebas: 1,
+      exitosas: 0,
+      fallidas: 0,
+      sinAfirmaciones: 1,
     })
   })
 })

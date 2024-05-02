@@ -7,6 +7,7 @@ interface Resultado {
   numeroPruebas: number
   exitosas: number
   fallidas: number
+  sinAfirmaciones: number
 }
 
 interface Prueba {
@@ -33,26 +34,34 @@ class PruebasError extends Error {
 
 export function pruebas(pruebas: Pruebas) {
   let failures = 0
+  let noAssertions = 0
 
   Object.entries(pruebas).forEach(([pruebaNombre, pruebaFuncion]) => {
     try {
-      prueba(pruebaNombre, pruebaFuncion)
+      const { afirmaciones } = prueba(pruebaNombre, pruebaFuncion)
+
+      if (afirmaciones === 0)
+        noAssertions++
     }
     catch (error: any) {
       failures++
     }
   })
 
-  return onPruebasFinished(pruebas, failures)
+  return onPruebasFinished(pruebas, failures, noAssertions)
 }
 
 export async function pruebasAsincronas(pruebas: PruebaAsincrona) {
   let failures = 0
+  let noAssertions = 0
 
   await Promise.all(
     Object.entries(pruebas).map(async ([pruebaNombre, pruebaFuncion]) => {
       try {
-        await pruebaAsincrona(pruebaNombre, pruebaFuncion)
+        const { afirmaciones } = await pruebaAsincrona(pruebaNombre, pruebaFuncion)
+
+        if (afirmaciones === 0)
+          noAssertions++
       }
       catch (error: any) {
         failures++
@@ -60,11 +69,11 @@ export async function pruebasAsincronas(pruebas: PruebaAsincrona) {
     }),
   )
 
-  return onPruebasFinished(pruebas, failures)
+  return onPruebasFinished(pruebas, failures, noAssertions)
 }
 
-function onPruebasFinished(pruebas: Pruebas, failures = 0) {
-  const result: Resultado = obtenerResultado(pruebas, failures)
+function onPruebasFinished(pruebas: Pruebas, failures = 0, noAssertions = 0) {
+  const result: Resultado = obtenerResultado(pruebas, failures, noAssertions)
 
   // eslint-disable-next-line no-console
   console.log(obtenerResumen(result))
@@ -85,7 +94,7 @@ function onPruebasFinished(pruebas: Pruebas, failures = 0) {
   return result
 }
 
-export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
+export function prueba(pruebaNombre: string, pruebaFuncion: () => void): { afirmaciones: number } {
   afirmaciones = 0
 
   try {
@@ -94,20 +103,24 @@ export function prueba(pruebaNombre: string, pruebaFuncion: () => void) {
     return onPruebaSuccess(pruebaNombre, afirmaciones)
   }
   catch (error: any) {
-    return onPruebaError(pruebaNombre, error)
+    onPruebaError(pruebaNombre, error)
+
+    return { afirmaciones: 0 }
   }
 }
 
-export async function pruebaAsincrona(pruebaNombre: string, pruebaFuncion: () => Promise<void>) {
+export async function pruebaAsincrona(pruebaNombre: string, pruebaFuncion: () => Promise<void>): Promise<{ afirmaciones: number }> {
   afirmaciones = 0
 
   try {
     await pruebaFuncion()
 
-    onPruebaSuccess(pruebaNombre, afirmaciones)
+    return onPruebaSuccess(pruebaNombre, afirmaciones)
   }
   catch (error: any) {
-    return onPruebaError(pruebaNombre, error)
+    onPruebaError(pruebaNombre, error)
+
+    return { afirmaciones: 0 }
   }
 }
 
@@ -164,18 +177,20 @@ export function obtenerResumen(result: Resultado) {
   const executedTestsString = result.numeroPruebas === 1 ? 'Se ejecutó 1 prueba' : `Se ejecutaron ${result.numeroPruebas} pruebas`
   const numberOfSuccessesString = result.exitosas === 1 ? '1 exitosa' : `${result.exitosas} exitosas`
   const numberOfFailuresString = result.fallidas === 1 ? '1 fallida' : `${result.fallidas} fallidas`
+  const noAssertionsString = `${result.sinAfirmaciones} sin afirmaciones`
 
-  return `${executedTestsString}: \n ${numberOfSuccessesString} \n ${numberOfFailuresString}`
+  return `${executedTestsString}: \n ${numberOfSuccessesString} \n ${numberOfFailuresString} \n ${noAssertionsString}`
 }
 
-export function obtenerResultado(pruebas: Pruebas, fallidas: number): Resultado {
+export function obtenerResultado(pruebas: Pruebas, fallidas: number, sinAfirmaciones: number) {
   const numeroPruebas = Object.keys(pruebas).length
-  const exitosas = numeroPruebas - fallidas
+  const exitosas = numeroPruebas - fallidas - sinAfirmaciones
 
   return {
     numeroPruebas,
     exitosas,
     fallidas,
+    sinAfirmaciones,
   } as Resultado
 }
 
