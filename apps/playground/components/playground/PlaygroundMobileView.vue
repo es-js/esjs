@@ -34,10 +34,10 @@ const tabs = [
   >
     <template #item="{ item }">
       <div class="flex flex-col h-full">
-        <PlaygroundEditorsPane v-show="item.key === 'input'" />
+        <PlaygroundEditorsPane v-if="item.key === 'input'" />
 
         <PlaygroundOutput
-          v-show="item.key === 'output'"
+          v-if="item.key === 'output'"
           class="relative w-full h-full overflow-hidden"
         />
       </div>
