@@ -6,6 +6,12 @@ import { expect } from 'vitest'
 import { compile } from '../src'
 import { applyPlugins } from '../src/applyPlugins'
 
+export interface TestCompileOptions {
+  reverse?: boolean
+  convert?: boolean
+  compiler?: 'essucrase' | 'esbabel'
+}
+
 export async function formatWithPrettier(code: string, options?: Partial<Options>) {
   return prettier.format(code, {
     parser: 'babel',
@@ -21,7 +27,7 @@ export async function formatWithPrettier(code: string, options?: Partial<Options
 export function assertCompile(
   esjsCode: string,
   jsCode: string,
-  options: any = { },
+  options: TestCompileOptions = {},
   message?: string,
 ): void {
   expect(compileCode(esjsCode, { ...options, reverse: false })).toEqual(jsCode)
@@ -29,14 +35,16 @@ export function assertCompile(
   expect(compileCode(jsCode, { ...options, reverse: true })).toEqual(esjsCode)
 }
 
-export function compileCode(code: string, options: any = {}) {
+export function compileCode(code: string, options: TestCompileOptions = {}) {
+  let toCompile = code
+
   if (options.reverse && options.convert) {
-    code = applyPlugins(compile(code, {
+    toCompile = applyPlugins(compile(code, {
       to: 'js',
     }), options.reverse)
   }
 
-  let generated = compile(code, {
+  let generated = compile(toCompile, {
     from: options.reverse ? 'js' : 'esjs',
     to: options.reverse ? 'esjs' : 'js',
     compiler: 'essucrase',

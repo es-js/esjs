@@ -3,17 +3,17 @@ import { setToEsJS } from './plugins/utils'
 import { plugins } from './plugins/'
 
 export function applyPlugins(source: string, toEsJS = false) {
-  const ast = parse(source, {
-    printer: 'recast',
-  })
+	const ast = parse(source, {
+		printer: 'recast',
+	})
 
-  setToEsJS(toEsJS)
+	setToEsJS(toEsJS)
 
-  transform(ast, source, {
-    plugins,
-  })
+	transform(ast, source, {
+		plugins,
+	})
 
-  return print(ast, {
-    printer: 'recast',
-  })
+	return print(ast, {
+		printer: 'recast',
+	})
 }

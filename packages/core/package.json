@@ -15,12 +15,11 @@
     "spanish"
   ],
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.3",
-    "@es-js/parser": "0.0.1-alpha.7",
+    "@biomejs/biome": "1.7.2",
     "@es-js/esbabel": "workspace:0.0.1-alpha.0",
+    "@es-js/parser": "0.0.1-alpha.7",
     "@types/node": "^20.9.0",
     "acorn-stage3": "^4.0.0",
-    "eslint": "8.55.0",
     "hermes-parser": "^0.20.1",
     "putout": "^35.7.6",
     "tenko": "^2.0.1",

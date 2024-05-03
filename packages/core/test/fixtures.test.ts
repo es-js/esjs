@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { compileCode } from './testUtils'
+import { compileCode, type TestCompileOptions } from './testUtils'
+
 
 const esjsFixtures = import.meta.glob('./fixtures/keywords/*.esjs')
 const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
@@ -23,10 +24,7 @@ function readFixture(filepath: string) {
   }
 }
 
-async function testCompile(fixture: string, options: {
-  reverse?: boolean
-  convert?: boolean
-} = {
+async function testCompile(fixture: string, options: TestCompileOptions = {
   reverse: false,
   convert: true,
 }) {

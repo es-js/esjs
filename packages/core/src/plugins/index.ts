@@ -11,16 +11,16 @@ import * as soporte from './soporte'
 import * as funcion from './funcion'
 
 export const plugins = [
-  ['consola', consola],
-  ['matriz', matriz],
-  ['cadena', cadena],
-  ['fecha', fecha],
-  ['numero', numero],
-  ['promesa', promesa],
-  ['mate', mate],
-  ['booleano', booleano],
-  ['funcion', funcion],
-  ['soporte', soporte],
+	['consola', consola],
+	['matriz', matriz],
+	['cadena', cadena],
+	['fecha', fecha],
+	['numero', numero],
+	['promesa', promesa],
+	['mate', mate],
+	['booleano', booleano],
+	['funcion', funcion],
+	['soporte', soporte],
 ]
 
 export { setToEsJS }
