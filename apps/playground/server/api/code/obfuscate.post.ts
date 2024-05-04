@@ -1,4 +1,4 @@
-import { compileCode } from '@es-js/sandbox/compiler'
+import { compile } from '@es-js/sandbox/compiler'
 import { processSandboxedCode } from '@es-js/sandbox/utils'
 import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
@@ -21,7 +21,7 @@ export default defineEventHandler(async(event) => {
 
 function getObfuscatedCode(code: string) {
   const compiledCode = processSandboxedCode(
-    compileCode(code),
+    compile(code),
   )
 
   const splittedCode = splitCodeImports(compiledCode)

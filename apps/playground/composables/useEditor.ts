@@ -1,9 +1,9 @@
 import { useEventBus } from '@vueuse/core/index'
-import { Options } from 'prettier'
+import type { Options } from 'prettier'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { ref, watch } from 'vue'
-import { compileCode } from '@es-js/sandbox/compiler'
+import { compile } from '@es-js/sandbox/compiler'
 
 export const loading = ref(true)
 
@@ -82,7 +82,7 @@ export const useEditor = () => {
     const putout = version.value === '0.x.0' ? await import('https://esm.sh/@putout/bundle@2') : undefined
 
     const compiledCode = fromLanguage === 'esjs'
-      ? compileCode(code, {
+      ? compile(code, {
         from: 'esjs',
         to: 'js',
         compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',
@@ -93,7 +93,7 @@ export const useEditor = () => {
     const formattedCode = formatWithPrettier(compiledCode)
 
     return toLanguage === 'esjs'
-      ? compileCode(formattedCode, {
+      ? compile(formattedCode, {
         from: 'js',
         to: 'esjs',
         compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',

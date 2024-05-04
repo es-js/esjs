@@ -1,7 +1,7 @@
 import { splitCodeImports } from '@es-js/core/utils'
-import { compileCode, SandboxCompileOptions } from '@es-js/sandbox/compiler'
-import { processSandboxedCode, SandboxFileError } from '@es-js/sandbox/utils'
-import { Ref, ref } from 'vue'
+import { compile, type SandboxCompileOptions } from '@es-js/sandbox/compiler'
+import { processSandboxedCode, type SandboxFileError } from '@es-js/sandbox/utils'
+import { type Ref, ref } from 'vue'
 
 export interface SandboxFile {
   name: string;
@@ -263,10 +263,10 @@ export const useFiles = () => {
   }
 
   function tryToCompile(code: string, options: SandboxCompileOptions) {
-    let compiled: string = ''
+    let compiled = ''
     let error: SandboxFileError | undefined
     try {
-      compiled = compileCode(code, options)
+      compiled = compile(code, options)
     } catch (exception: any) {
       compiled = ''
       const line = exception.loc?.line ?? exception.line ?? 1
