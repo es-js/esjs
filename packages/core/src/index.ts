@@ -24,7 +24,7 @@ export function compile(
 ) {
 	const compiler: Compiler =
 		options?.compiler === 'essucrase'
-			? new EssucraseCompiler(typeof putout === 'function' ? putout : undefined)
+			? new EssucraseCompiler(putout)
 			: new EsbabelCompiler()
 
 	return compiler.compile(code, options)

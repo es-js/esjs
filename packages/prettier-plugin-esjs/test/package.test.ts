@@ -4,23 +4,23 @@ import { fileURLToPath } from 'node:url'
 import { expect, it } from 'vitest'
 
 it('should be importable', async () => {
-  const imported = await import('..')
+	const imported = await import('..')
 
-  expect(imported).toMatchSnapshot()
+	expect(imported).toMatchSnapshot()
 })
 
 it('should be requireable', () => {
-  const imported = createRequire(import.meta.url)('..')
+	const imported = createRequire(import.meta.url)('..')
 
-  expect(imported).toMatchSnapshot()
+	expect(imported).toMatchSnapshot()
 })
 
 it('should be resolvable', () => {
-  const actualPath = fileURLToPath(
-    new URL('../dist/index.cjs', import.meta.url),
-  )
+	const actualPath = fileURLToPath(
+		new URL('../dist/index.cjs', import.meta.url),
+	)
 
-  const resolved = require.resolve('..')
+	const resolved = require.resolve('..')
 
-  expect(resolved).toEqual(actualPath)
+	expect(resolved).toEqual(actualPath)
 })

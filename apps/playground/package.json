@@ -28,7 +28,6 @@
     "@types/prettier": "^2.7.3",
     "@vueuse/nuxt": "^10.9.0",
     "canvas-confetti": "^1.9.2",
-    "eslint": "8.22.0",
     "h3-zod": "^0.5.3",
     "hast-util-from-html": "^2.0.1",
     "hast-util-to-html": "^9.0.0",

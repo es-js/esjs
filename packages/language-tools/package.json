@@ -13,9 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@antfu/eslint-config": "^0.31.1",
     "@es-js/core": "workspace:^",
-    "eslint": "8.22.0",
     "markdown-table": "^3.0.3"
   },
   "exports": {

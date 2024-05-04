@@ -1,36 +1,41 @@
 import type { EjecutarOptions } from '../runtime/ejecutar'
 
-export function createIframe(parentElement: HTMLElement, options: EjecutarOptions): HTMLIFrameElement {
-  const iframe = document.createElement('iframe')
+export function createIframe(
+	parentElement: HTMLElement,
+	options: EjecutarOptions,
+): HTMLIFrameElement {
+	const iframe = document.createElement('iframe')
 
-  iframe.setAttribute(
-    'sandbox',
-    [
-      'allow-forms',
-      'allow-modals',
-      'allow-pointer-lock',
-      'allow-popups',
-      'allow-same-origin',
-      'allow-scripts',
-      'allow-top-navigation-by-user-activation',
-    ].join(' '),
-  )
-  iframe.setAttribute('frameborder', '0')
-  iframe.setAttribute('scrolling', 'no')
-  iframe.setAttribute('width', '100%')
-  iframe.setAttribute('height', '100%')
-  iframe.setAttribute('style', 'border: 0;')
-  iframe.setAttribute('title', 'Resultado')
-  iframe.setAttribute('allow', 'clipboard-read; clipboard-write;')
+	iframe.setAttribute(
+		'sandbox',
+		[
+			'allow-forms',
+			'allow-modals',
+			'allow-pointer-lock',
+			'allow-popups',
+			'allow-same-origin',
+			'allow-scripts',
+			'allow-top-navigation-by-user-activation',
+		].join(' '),
+	)
+	iframe.setAttribute('frameborder', '0')
+	iframe.setAttribute('scrolling', 'no')
+	iframe.setAttribute('width', '100%')
+	iframe.setAttribute('height', '100%')
+	iframe.setAttribute('style', 'border: 0;')
+	iframe.setAttribute('title', 'Resultado')
+	iframe.setAttribute('allow', 'clipboard-read; clipboard-write;')
 
-  iframe.srcdoc = `
+	iframe.srcdoc = `
 <html lang="es" class="w-full h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>EsJS Ejecutar</title>
 
-    ${options.stylesheets?.map(href => `<link rel="stylesheet" href="${href}" />`).join('\n')}
+    ${options.stylesheets
+			?.map((href) => `<link rel="stylesheet" href="${href}" />`)
+			.join('\n')}
   </head>
 
   <script type="importmap">
@@ -54,14 +59,15 @@ export function createIframe(parentElement: HTMLElement, options: EjecutarOption
     import { setupSandbox } from '@es-js/sandbox/runtime'
 
     setupSandbox({
-      ${Object.entries(options).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join(',\n')},
+      ${Object.entries(options)
+				.map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
+				.join(',\n')},
       usarTerminal,
     })
   </script>
 </html>`
 
-  parentElement.appendChild(iframe)
+	parentElement.appendChild(iframe)
 
-  return iframe
+	return iframe
 }
-

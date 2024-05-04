@@ -3,8 +3,8 @@ import { TokenType } from '../../src/token'
 import { tokenize } from '../../src/lexer'
 
 describe('lexer', () => {
-  it('tokenizes a simple program', () => {
-    const input = `
+	it('tokenizes a simple program', () => {
+		const input = `
 // Funcion principal: if (a > b) { return a; } else { return b; }
 
 /**
@@ -19,26 +19,25 @@ funcion principal(mensaje) {
   retornar mensaje;
 }`
 
-    const tokens = tokenize(input)
+		const tokens = tokenize(input)
 
-    expect(tokens).toMatchSnapshot()
+		expect(tokens).toMatchSnapshot()
 
-    // Ensure it uses all TokenTypes available
-    expect(Object.keys(TokenType).length).toBeGreaterThan(0)
+		// Ensure it uses all TokenTypes available
+		expect(Object.keys(TokenType).length).toBeGreaterThan(0)
 
-    for (const tokenType of Object.values(TokenType)) {
-      if (tokenType === TokenType.Identifier) {
-        // Identifiers are not tokenized at this stage
-        continue
-      }
+		for (const tokenType of Object.values(TokenType)) {
+			if (tokenType === TokenType.Identifier) {
+				// Identifiers are not tokenized at this stage
+				continue
+			}
 
-      try {
-        expect(tokens.some(token => token.type === tokenType)).toBe(true)
-      }
-      catch (error) {
-        console.error(`Missing token type: ${tokenType}`)
-        throw error
-      }
-    }
-  })
+			try {
+				expect(tokens.some((token) => token.type === tokenType)).toBe(true)
+			} catch (error) {
+				console.error(`Missing token type: ${tokenType}`)
+				throw error
+			}
+		}
+	})
 })

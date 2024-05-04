@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "1.7.2",
     "bumpp": "^9.2.0",
     "consola": "^3.2.3",
     "globby": "^14.0.0",

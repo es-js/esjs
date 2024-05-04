@@ -6,32 +6,32 @@ import { Transformer } from './index'
  * Agrega `export` a las funciones declaradas.
  */
 export class ExportFunctionsTransformer implements Transformer {
-  transform(code: string) {
-    const ast = espree.parse(code, {
-      range: true,
-      ecmaVersion: 'latest',
-      jsx: false,
-      loc: true,
-      tolerant: true,
-      sourceType: 'module',
-    })
+	transform(code: string) {
+		const ast = espree.parse(code, {
+			range: true,
+			ecmaVersion: 'latest',
+			jsx: false,
+			loc: true,
+			tolerant: true,
+			sourceType: 'module',
+		})
 
-    ast.body.forEach((node: any) => {
-      if (node.type === 'FunctionDeclaration') {
-        // Crear el nodo de exportación
-        const exportNode = {
-          type: 'ExportNamedDeclaration',
-          declaration: node,
-          source: null,
-          specifiers: [],
-        }
+		ast.body.forEach((node: any) => {
+			if (node.type === 'FunctionDeclaration') {
+				// Crear el nodo de exportación
+				const exportNode = {
+					type: 'ExportNamedDeclaration',
+					declaration: node,
+					source: null,
+					specifiers: [],
+				}
 
-        // Reemplazar el nodo de la función con el nodo de exportación
-        const index = ast.body.indexOf(node)
-        ast.body[index] = exportNode
-      }
-    })
+				// Reemplazar el nodo de la función con el nodo de exportación
+				const index = ast.body.indexOf(node)
+				ast.body[index] = exportNode
+			}
+		})
 
-    return escodegen.generate(ast)
-  }
+		return escodegen.generate(ast)
+	}
 }

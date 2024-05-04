@@ -18,31 +18,31 @@ import * as espree from 'espree'
  * ```
  */
 export function generateImportFunctions({
-  code,
-  modulePath,
+	code,
+	modulePath,
 }: {
-  code: string
-  modulePath: string
+	code: string
+	modulePath: string
 }) {
-  const ast = espree.parse(code, {
-    range: true,
-    ecmaVersion: 'latest',
-    jsx: false,
-    loc: true,
-    tolerant: true,
-    sourceType: 'module',
-  })
+	const ast = espree.parse(code, {
+		range: true,
+		ecmaVersion: 'latest',
+		jsx: false,
+		loc: true,
+		tolerant: true,
+		sourceType: 'module',
+	})
 
-  const namedExports = ast.body.filter(
-    (node: any) =>
-      node.type === 'ExportNamedDeclaration'
-      && node.declaration?.type === 'FunctionDeclaration',
-  )
+	const namedExports = ast.body.filter(
+		(node: any) =>
+			node.type === 'ExportNamedDeclaration' &&
+			node.declaration?.type === 'FunctionDeclaration',
+	)
 
-  const imports = namedExports.map(
-    (node: any) =>
-      `import { ${node.declaration?.id?.name} } from '${modulePath}'`,
-  )
+	const imports = namedExports.map(
+		(node: any) =>
+			`import { ${node.declaration?.id?.name} } from '${modulePath}'`,
+	)
 
-  return imports.join('\n')
+	return imports.join('\n')
 }

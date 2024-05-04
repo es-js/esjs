@@ -1,5 +1,3 @@
 import { useCode } from './useCode'
 
-export {
-  useCode,
-}
+export { useCode }
