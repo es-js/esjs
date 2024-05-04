@@ -8,12 +8,12 @@ devDependencies:
   '@biomejs/biome':
     specifier: 1.7.2
     version: 1.7.2
+  '@es-js/compiler':
+    specifier: 0.0.5
+    version: 0.0.5
   '@es-js/esbabel':
     specifier: workspace:0.0.1-alpha.0
     version: link:../esbabel
-  '@es-js/parser':
-    specifier: 0.0.1-alpha.7
-    version: 0.0.1-alpha.7
   '@types/node':
     specifier: ^20.9.0
     version: 20.9.0
@@ -374,8 +374,8 @@ packages:
     resolution: {integrity: sha512-ZKXyJeFAzcpKM2kk8ipoGIPUqx9BX52omTGnfwjJvxOCaZTM2wtDK7zN0aIgPRbT9XYAlha0HtmZ+XKteuh0Gw==}
     dev: true
 
-  /@es-js/parser@0.0.1-alpha.7:
-    resolution: {integrity: sha512-2IGXQwbaYffbIxI/hZ3UvCsWPCK+kQtxLEf9ohMDyS+l7U+L/9wqfnMM/Sslv1Ys+/m0tpwG9JpUPWK4K1QyTA==}
+  /@es-js/compiler@0.0.5:
+    resolution: {integrity: sha512-lzzg3DkUrdQWVvv91rqpvllWZsZEeiNP1RTMx1dRJUefpH6GczvYC/D6EpZJMQqBFEGUAQ3apbUkI4f1eysFbA==}
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
     dependencies:

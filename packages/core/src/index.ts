@@ -1,6 +1,7 @@
 import { compile as compileEsbabel } from '@es-js/esbabel'
-import { transform } from '@es-js/parser'
-import type { Transform } from '@es-js/parser/dist/types/Options'
+import { transform } from '@es-js/compiler'
+import type { Transform } from '@es-js/compiler/dist/types/Options'
+import { applyPlugins } from './applyPlugins'
 
 export type AvailableLanguages = 'esjs' | 'js'
 
@@ -13,30 +14,38 @@ export interface CompileOptions {
 
 export function compile(
 	code: string,
-	options: CompileOptions = {} as CompileOptions,
+	options: CompileOptions = {
+    from: 'esjs',
+    to: 'js',
+    compiler: 'esbabel',
+  } as CompileOptions,
 ) {
-	if (!options.from) {
-		options.from = options.reverse ? 'js' : 'esjs'
-	}
-
-	if (!options.to) {
-		options.to = options.reverse ? 'esjs' : 'js'
-	}
-
-	if (!options.compiler) {
-		options.compiler = 'esbabel'
-	}
-
 	if (options.compiler === 'esbabel') {
 		return compileEsbabel(code, options.to === 'esjs')
 	}
 
-	const transforms: Array<Transform> = ['esjs']
-	if (options.to === 'esjs') {
-		transforms.push('js2esjs')
-	}
+  let codeToCompile = code
 
-	return transform(code, { transforms }).code
+  if (options.from === 'esjs' || options.to === 'esjs') {
+    codeToCompile = applyPlugins(compileEssucrase(code, { to: 'js' }), options.to === 'esjs')
+  }
+
+  const compiled = compileEssucrase(codeToCompile, { to: options.to })
+
+  if (options.to === 'js') {
+    return applyPlugins(compiled)
+  }
+
+  return compiled
+}
+
+function compileEssucrase(code: string, options: CompileOptions) {
+  const transforms: Array<Transform> = ['esjs']
+  if (options.to === 'esjs') {
+    transforms.push('js2esjs')
+  }
+
+  return transform(code, { transforms }).code
 }
 
 export { compile as transpile }

@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { compileCode, type TestCompileOptions } from './testUtils'
-
+import { compile } from '../src'
+import { type TestCompileOptions } from './testUtils'
 
 const esjsFixtures = import.meta.glob('./fixtures/keywords/*.esjs')
 const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
@@ -26,16 +26,16 @@ function readFixture(filepath: string) {
 
 async function testCompile(fixture: string, options: TestCompileOptions = {
   reverse: false,
-  convert: true,
 }) {
   try {
     const { esjsCode, jsCode } = readFixture(fixture)
 
-    const generated = await compileCode(
+    const generated = compile(
       options.reverse ? jsCode : esjsCode,
       {
-        reverse: options.reverse,
-        convert: options.convert,
+        from: options.reverse ? 'js' : 'esjs',
+        to: options.reverse ? 'esjs' : 'js',
+        compiler: 'essucrase',
       },
     )
 
@@ -53,7 +53,7 @@ describe('compile esjs -> js', () => {
   it('test fixtures/keywords', async () => {
     for (const key of fixtureKeys) {
       const result = await testCompile(key, {
-        convert: false,
+
       })
 
       expect(result.generated).toEqual(result.expected)
@@ -63,7 +63,6 @@ describe('compile esjs -> js', () => {
   it('test fixtures/extras', async () => {
     for (const key of Object.keys(esjsFixturesExtras)) {
       const result = await testCompile(key, {
-        convert: true,
       })
 
       expect(result.generated).toEqual(result.expected)
@@ -83,7 +82,6 @@ describe('compile single', () => {
   it('compile single: js -> esjs', async () => {
     const result = await testCompile(fixture, {
       reverse: true,
-      convert: true,
     })
 
     expect(result.generated).toEqual(result.expected)
@@ -95,7 +93,6 @@ describe('compile js -> esjs', () => {
     for (const key of fixtureKeys) {
       const result = await testCompile(key, {
         reverse: true,
-        convert: false,
       })
 
       expect(result.generated).toEqual(result.expected)

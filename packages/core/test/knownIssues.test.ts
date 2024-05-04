@@ -8,7 +8,6 @@ describe('known issues', () => {
     `, `
       const escribir = 'prueba'
     `, {
-      convert: true,
       compiler: 'essucrase',
     })
   })
@@ -19,7 +18,6 @@ describe('known issues', () => {
     `, `
       let get = 'prueba'
     `, {
-      convert: true,
       compiler: 'essucrase',
     })
   })
@@ -40,7 +38,6 @@ describe('known issues', () => {
       }
       let hasta = 'c'
     `, {
-      convert: true,
       compiler: 'essucrase',
     })
   })
@@ -67,7 +64,6 @@ describe('known issues', () => {
         x.toFixed(2)
       )
     `, {
-      convert: true,
       compiler: 'essucrase',
     })
   })

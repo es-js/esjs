@@ -17,7 +17,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.7.2",
     "@es-js/esbabel": "workspace:0.0.1-alpha.0",
-    "@es-js/parser": "0.0.1-alpha.7",
+    "@es-js/compiler": "0.0.5",
     "@types/node": "^20.9.0",
     "acorn-stage3": "^4.0.0",
     "hermes-parser": "^0.20.1",
