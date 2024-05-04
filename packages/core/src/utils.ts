@@ -58,8 +58,8 @@ export function splitScriptTemplate(code: string): SplitScriptTemplate {
 export function invertMap(map: Map<string, string>): Map<string, string> {
 	const invertedMap = new Map<string, string>()
 	for (const [key, value] of map.entries()) {
-    invertedMap.set(value, key)
-  }
+		invertedMap.set(value, key)
+	}
 
 	return invertedMap
 }

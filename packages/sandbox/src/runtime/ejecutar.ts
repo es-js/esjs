@@ -1,8 +1,8 @@
-import { AvailableLanguages, type CompileOptions } from '@es-js/core'
-import { compileCode } from '../compiler'
+import type { AvailableLanguages, CompileOptions } from '@es-js/core'
+import { compile } from '../compiler'
 import { compileModulesForPreview } from '../moduleCompiler'
 import { orchestrator, OrchestratorFile } from '../moduleCompiler/orchestrator'
-import { processSandboxedFiles, SandboxFile, SandboxFileError } from '../utils'
+import { processSandboxedFiles, type SandboxFile, type SandboxFileError } from '../utils'
 import { changeSize, getActiveTab, openEruda, setActiveTab, setErudaTheme, setupEruda } from './eruda'
 
 export interface EjecutarOptions {
@@ -161,7 +161,7 @@ function compileFile(file: SandboxFile, options?: CompileOptions) {
     file.compiled = {}
   }
 
-  return compileCode(file.content, {
+  return compile(file.content, {
     ...options,
     putout: getOptions().putout,
   })

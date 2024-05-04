@@ -1,12 +1,18 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.7.2/schema.json",
+	"files": {
+		"ignore": ["test/fixtures/**"]
+	},
 	"organizeImports": {
 		"enabled": true
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"suspicious": {
+				"noExplicitAny": "warn"
+			}
 		}
 	},
 	"javascript": {
