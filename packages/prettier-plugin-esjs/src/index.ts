@@ -28,7 +28,11 @@ const EsJSPlugin = {
 			preprocess: (text: string, options: ParserOptions<any>) => {
 				text = text.trim()
 
-				const js = compile(text)
+				const js = compile(text, {
+					from: 'esjs',
+					to: 'js',
+					compiler: 'essucrase',
+				})
 
 				// Taken from https://github.com/sveltejs/prettier-plugin-svelte/blob/9060efde88d3a70560ba663b08217c79dc11d631/src/index.ts#L54
 				// Prettier sets the preprocessed text as the originalText in case
@@ -56,9 +60,9 @@ const EsJSPlugin = {
 				// @ts-ignore
 				const comments = options[Symbol.for('comments')]
 				if (comments && Array.isArray(comments)) {
-					comments.forEach((comment: any) => {
+					for (const comment of comments) {
 						comment.printed = true
-					})
+					}
 				}
 
 				const js = options.originalText
@@ -68,7 +72,11 @@ const EsJSPlugin = {
 					parser: 'babel',
 				})
 
-				const esjs = compile(jsFormatted, true)
+				const esjs = compile(jsFormatted, {
+					from: 'js',
+					to: 'esjs',
+					compiler: 'essucrase',
+				})
 
 				return esjs
 			},

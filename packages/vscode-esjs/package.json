@@ -27,7 +27,6 @@
     "build": "tsup src/index.ts --external vscode",
     "build:grammar": "ts-node scripts/generate-grammars-configurations.ts",
     "dev": "nr build --watch",
-    "lint": "eslint .",
     "vscode:prepublish": "nr build",
     "publish": "vsce publish --no-dependencies",
     "pack": "vsce package --no-dependencies",

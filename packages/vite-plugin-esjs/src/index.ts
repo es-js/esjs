@@ -11,7 +11,9 @@ export default function EsJS(options = {}): Plugin {
 				return
 			}
 
-			const compiled = compile(raw)
+			const compiled = compile(raw, {
+				compiler: 'essucrase',
+			})
 
 			const { imports, codeWithoutImports } = splitCodeImports(compiled)
 

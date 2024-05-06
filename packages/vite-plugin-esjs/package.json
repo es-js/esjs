@@ -1,9 +1,10 @@
 {
   "name": "@es-js/vite-plugin-esjs",
-  "version": "0.0.17",
+  "version": "0.1.0-alpha.9",
   "description": "Vite Plugin para EsJS",
   "scripts": {
-    "build": "unbuild"
+    "build": "unbuild",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "esjs",
@@ -12,10 +13,10 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "@es-js/core": "workspace:*",
     "vite": "^4.5.0"
   },
   "devDependencies": {
+    "@es-js/core": "workspace:*",
     "@types/node": "^20.9.0",
     "typescript": "^5.2.2",
     "unbuild": "^2.0.0"
