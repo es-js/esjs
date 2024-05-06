@@ -17,3 +17,6 @@ Array.fromAsync([1, 2, 3])
 Array.isArray([])
 
 Array.of([1, 2, 3])
+
+const lista = []
+lista.filter((item) => item === 'test').map((item) => item + 'test')

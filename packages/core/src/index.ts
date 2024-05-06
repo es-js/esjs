@@ -22,6 +22,18 @@ export function compile(
 		compiler: 'esbabel',
 	} as CompileOptions,
 ) {
+	if (!options.from) {
+		options.from = 'esjs'
+	}
+
+	if (!options.to) {
+		options.to = 'js'
+	}
+
+	if (!options.compiler) {
+		options.compiler = 'esbabel'
+	}
+
 	const compiler: Compiler =
 		options?.compiler === 'essucrase'
 			? new EssucraseCompiler(putout)

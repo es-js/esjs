@@ -9,6 +9,7 @@ import * as numero from './numero'
 import * as promesa from './promesa'
 import * as soporte from './soporte'
 import * as funcion from './funcion'
+import * as json from './json'
 
 export const plugins = [
 	['consola', consola],
@@ -21,6 +22,7 @@ export const plugins = [
 	['booleano', booleano],
 	['funcion', funcion],
 	['soporte', soporte],
+	['json', json],
 ]
 
 export { setToEsJS }

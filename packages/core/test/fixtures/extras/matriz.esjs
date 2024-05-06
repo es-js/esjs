@@ -17,3 +17,7 @@ Matriz.desdeAsincrono([1, 2, 3])
 Matriz.esMatriz([])
 
 Matriz.de([1, 2, 3])
+
+const lista = []
+lista.filtrar((item) => item === 'test')
+  .mapear((item) => item + 'test')
