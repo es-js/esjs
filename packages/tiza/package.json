@@ -1,12 +1,14 @@
 {
   "name": "@es-js/tiza",
-  "version": "1.0.1",
-  "description": "Librería para colorear/estilizar texto en la Terminal, basada en chalk-dom",
+  "version": "1.0.2",
+  "description": "Librería para colorear/estilizar texto en la Terminal de EsJS. Basada en chalk-dom",
+  "author": "Enzo Notario <hi@enzonotario.me>",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "esjs",
@@ -22,9 +24,6 @@
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.9",
     "vitest": "^0.34.1"
-  },
-  "eslintConfig": {
-    "extends": "@antfu/eslint-config"
   },
   "main": "./dist/tiza.es.js",
   "module": "./dist/tiza.es.js",

@@ -1,6 +1,8 @@
 {
   "name": "@es-js/terminal",
-  "version": "1.1.8",
+  "version": "1.1.9",
+  "description": "Componente de Terminal para navegadores web, diseñado para el Lenguaje de Programación EsJS. Basado en XTerminal.",
+  "author": "Enzo Notario <hi@enzonotario.me>",
   "keywords": [
     "esjs",
     "terminal",

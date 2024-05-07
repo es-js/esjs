@@ -26,8 +26,9 @@ let currentPrompt: string = PREGUNTA_POR_DEFECTO
 
 export const usarTerminal = () => {
 	function iniciar(elementOrId: HTMLElement | string, options: any = {}) {
-		if (typeof elementOrId === 'string')
-			elementOrId = document.querySelector(elementOrId) as HTMLElement
+		if (typeof elementOrId === 'string') {
+      elementOrId = document.querySelector(elementOrId) as HTMLElement
+    }
 
 		if (!elementOrId) {
 			return
@@ -205,7 +206,6 @@ export const usarTerminal = () => {
 			case ResultadoEsperado.numero:
 				return Number(value)
 
-			case ResultadoEsperado.porDefecto:
 			default:
 				if (isNumber(value))
 					return handleResult(value, ResultadoEsperado.numero)

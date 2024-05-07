@@ -18,14 +18,14 @@ export const colors = {
 }
 
 for (const color in colorsMap) {
-	;[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].forEach((level) => {
+	for (const level of [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]) {
 		const propertyName = `${color}${level}`
 		colors[propertyName] = colorsMap[color][level]
 
 		if (level === 500) {
 			colors[color] = colorsMap[color][500]
 		}
-	})
+	}
 }
 
 for (const c in colors) {
