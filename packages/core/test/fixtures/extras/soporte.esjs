@@ -1,0 +1,3 @@
+const data = importar.meta
+
+consola.escribir(`${importar.meta.env.ESJS}`)

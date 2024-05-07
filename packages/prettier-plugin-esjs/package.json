@@ -1,6 +1,6 @@
 {
 	"name": "prettier-plugin-esjs",
-	"version": "0.1.0-alpha.9",
+	"version": "0.1.0-alpha.10",
 	"license": "MIT",
 	"type": "module",
 	"main": "./dist/index.cjs",
