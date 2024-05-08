@@ -8,13 +8,13 @@ importers:
 
   .:
     dependencies:
-      '@es-js/core':
-        specifier: workspace:*
-        version: link:../core
       vite:
         specifier: ^4.5.0
         version: 4.5.0(@types/node@20.9.0)
     devDependencies:
+      '@es-js/core':
+        specifier: workspace:*
+        version: link:../core
       '@types/node':
         specifier: ^20.9.0
         version: 20.9.0

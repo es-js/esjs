@@ -13,7 +13,7 @@ import {
 	stringMethods,
 	supportFunction,
 	variableLanguage,
-} from '@es-js/core/keywords'
+} from '@es-js/esbabel/keywords'
 import { markdownTable } from 'markdown-table'
 
 if (!existsSync('dist')) mkdirSync('dist')

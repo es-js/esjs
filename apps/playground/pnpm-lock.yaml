@@ -22,17 +22,17 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.35)(rollup@4.13.0)
       '@es-js/core':
-        specifier: 0.1.0-alpha.9
-        version: 0.1.0-alpha.9
+        specifier: 0.1.0-alpha.11
+        version: 0.1.0-alpha.11
       '@es-js/esbabel':
-        specifier: 0.0.1-alpha.0
-        version: 0.0.1-alpha.0
+        specifier: 0.0.1-alpha.2
+        version: 0.0.1-alpha.2
       '@es-js/language-tools':
-        specifier: ^0.0.17
-        version: 0.0.17
+        specifier: ^0.0.18
+        version: 0.0.18
       '@es-js/sandbox':
-        specifier: 0.0.16-alpha.14
-        version: 0.0.16-alpha.14
+        specifier: 0.0.16-alpha.15
+        version: 0.0.16-alpha.15
       '@iconify-json/mdi':
         specifier: ^1.1.64
         version: 1.1.64
@@ -364,17 +364,17 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  '@es-js/core@0.1.0-alpha.9':
-    resolution: {integrity: sha512-3mov6uLnPpwQIwhiDORlplLkbVmTF9eVwuOeUlYVl+NFpV4VopRnKWGZlF6zZgSU/l1xHSw/k3Pc7oJKWaMueg==}
+  '@es-js/core@0.1.0-alpha.11':
+    resolution: {integrity: sha512-8+UwgaqS8A3B6ub+U8YfIEY6XZhvScLsVqAbY3JsJN2pWyRDSzh1QCBgpZMoHR+JHZYdVtOd6THhcjg5jlmVRg==}
 
-  '@es-js/esbabel@0.0.1-alpha.0':
-    resolution: {integrity: sha512-MyrIZYc6QOUay2nKpjtr6V2GuCtZcVWS9A91+S8F2+9ls7wJjsmu53cx+ClyZMX65nLV6asPzBocrftHXgnCCQ==}
+  '@es-js/esbabel@0.0.1-alpha.2':
+    resolution: {integrity: sha512-oc0hCXZVB8pKJL6GZusjdPBdlgwn2z6PCDmUArDByY5lukor87TwwZC/vAXYtdl12DH8uKbgUMkZv9PIwOo19g==}
 
-  '@es-js/language-tools@0.0.17':
-    resolution: {integrity: sha512-d0/IoUDyFjd2NtTTvnRttClB+8uXyfGyNktI6V/NeJQgmHxfWhRYRn0CR4bOXk1Y4HD7zcNjFyIWdPqLSXjW4A==}
+  '@es-js/language-tools@0.0.18':
+    resolution: {integrity: sha512-EvmODPiZIsgLqacTOnpvY3rqBOPkuFYNTV8CaOv6LZLlKuHiT97EPt7aRnozpVWfk1efnIwckPvtGYKtYEd49Q==}
 
-  '@es-js/sandbox@0.0.16-alpha.14':
-    resolution: {integrity: sha512-iwJGiLy2Lt9hibHUAbGbpBQE04QuPQJ1xB9pTRzX8SWWDiamixVBnL32BE4ZTuC/Yf8iHrz2TCvdby7TDv0hpg==}
+  '@es-js/sandbox@0.0.16-alpha.15':
+    resolution: {integrity: sha512-RszkwVYF/qeWlzH/92ubd8lYd4Y16eWwNGWLRA8qmz3ytQlLLQS1XLySKrltPN80T3kfbcRAbAvnwZj8LGU5nQ==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -6478,13 +6478,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@es-js/core@0.1.0-alpha.9': {}
+  '@es-js/core@0.1.0-alpha.11': {}
 
-  '@es-js/esbabel@0.0.1-alpha.0': {}
+  '@es-js/esbabel@0.0.1-alpha.2': {}
 
-  '@es-js/language-tools@0.0.17': {}
+  '@es-js/language-tools@0.0.18': {}
 
-  '@es-js/sandbox@0.0.16-alpha.14': {}
+  '@es-js/sandbox@0.0.16-alpha.15': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true

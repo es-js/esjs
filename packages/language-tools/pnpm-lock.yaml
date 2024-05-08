@@ -8,18 +8,23 @@ importers:
 
   .:
     devDependencies:
-      '@es-js/core':
-        specifier: workspace:^
-        version: link:../core
+      '@es-js/esbabel':
+        specifier: 0.0.1-alpha.2
+        version: 0.0.1-alpha.2
       markdown-table:
         specifier: ^3.0.3
         version: 3.0.3
 
 packages:
 
+  '@es-js/esbabel@0.0.1-alpha.2':
+    resolution: {integrity: sha512-oc0hCXZVB8pKJL6GZusjdPBdlgwn2z6PCDmUArDByY5lukor87TwwZC/vAXYtdl12DH8uKbgUMkZv9PIwOo19g==}
+
   markdown-table@3.0.3:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
 
 snapshots:
+
+  '@es-js/esbabel@0.0.1-alpha.2': {}
 
   markdown-table@3.0.3: {}

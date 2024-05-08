@@ -1,19 +1,20 @@
 {
   "name": "@es-js/language-tools",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "main": "src/generate-esjs-syntax.js",
   "type": "module",
   "scripts": {
     "dev": "node src/index.js",
     "build": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "pnpm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@es-js/core": "workspace:^",
+    "@es-js/esbabel": "0.0.1-alpha.2",
     "markdown-table": "^3.0.3"
   },
   "exports": {

@@ -1,6 +1,6 @@
 {
   "name": "@es-js/esbabel",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.2",
   "type": "module",
   "scripts": {
     "build": "unbuild",
