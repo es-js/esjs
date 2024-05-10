@@ -34,24 +34,24 @@ describe('known issues', () => {
 		expect(compile(js, true)).toEqual(esjs)
 	})
 
-  it('compiles var/global to var', () => {
-    const esjs = `
+	it('compiles var/global to var', () => {
+		const esjs = `
     var x = 1
     global y = 2
 `
 
-    const js = `
+		const js = `
     var x = 1
     var y = 2
 `
 
-    const compiled = compile(esjs)
+		const compiled = compile(esjs)
 
-    expect(compiled).toEqual(js)
+		expect(compiled).toEqual(js)
 
-    expect(compile(js, true)).toEqual(`
+		expect(compile(js, true)).toEqual(`
     var x = 1
     var y = 2
 `)
-  })
+	})
 })

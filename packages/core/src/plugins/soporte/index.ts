@@ -4,7 +4,7 @@ export const keywords = new Map<string, string>([
 	['establecerTemporizador', 'setTimeout'],
 	['establecerIntervalo', 'setInterval'],
 	['esNuN', 'isNaN'],
-  ['importar.meta', 'import.meta'],
+	['importar.meta', 'import.meta'],
 	// TODO: Add more support functions.
 ])
 

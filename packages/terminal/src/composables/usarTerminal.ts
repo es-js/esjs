@@ -27,8 +27,8 @@ let currentPrompt: string = PREGUNTA_POR_DEFECTO
 export const usarTerminal = () => {
 	function iniciar(elementOrId: HTMLElement | string, options: any = {}) {
 		if (typeof elementOrId === 'string') {
-      elementOrId = document.querySelector(elementOrId) as HTMLElement
-    }
+			elementOrId = document.querySelector(elementOrId) as HTMLElement
+		}
 
 		if (!elementOrId) {
 			return
