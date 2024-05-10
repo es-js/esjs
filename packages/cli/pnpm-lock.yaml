@@ -1,0 +1,41 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@es-js/core':
+        specifier: latest
+        version: 0.1.0-alpha.11
+      citty:
+        specifier: ^0.1.4
+        version: 0.1.6
+      consola:
+        specifier: ^3.2.3
+        version: 3.2.3
+
+packages:
+
+  '@es-js/core@0.1.0-alpha.11':
+    resolution: {integrity: sha512-8+UwgaqS8A3B6ub+U8YfIEY6XZhvScLsVqAbY3JsJN2pWyRDSzh1QCBgpZMoHR+JHZYdVtOd6THhcjg5jlmVRg==}
+
+  citty@0.1.6:
+    resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
+
+  consola@3.2.3:
+    resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+
+snapshots:
+
+  '@es-js/core@0.1.0-alpha.11': {}
+
+  citty@0.1.6:
+    dependencies:
+      consola: 3.2.3
+
+  consola@3.2.3: {}

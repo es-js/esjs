@@ -1,7 +1,12 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.7.2/schema.json",
 	"files": {
-		"include": ["scripts/**/*.js", "packages/**/*.js", "packages/**/*.ts"],
+		"include": [
+			"scripts/**/*.js",
+			"packages/**/*.js",
+			"packages/**/*.ts",
+			"packages/**/*.mjs"
+		],
 		"ignore": ["**/test/fixtures/**", "**/dist/**"]
 	},
 	"organizeImports": {

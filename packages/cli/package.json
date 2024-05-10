@@ -1,0 +1,29 @@
+{
+  "name": "es.js",
+  "version": "0.0.1-alpha.3",
+  "description": "CLI para el lenguaje de programación EsJS",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "esjs": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/cli"
+  },
+  "author": "Enzo Notario",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/es-js/esjs/issues"
+  },
+  "homepage": "https://github.com/es-js/esjs#readme",
+  "dependencies": {
+    "@es-js/core": "latest",
+    "citty": "^0.1.4",
+    "consola": "^3.2.3"
+  }
+}
