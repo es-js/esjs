@@ -147,13 +147,13 @@ export async function renderUsage(cmd, parent) {
 	const version = cmdMeta.version || parentMeta.version
 
 	usageLines.push(
-		colors.gray(
-			`${cmdMeta.description} (${
-				commandName + (version ? ` v${version}` : '')
-			})`,
-		),
+		`${colors.bgMagenta(colors.white(colors.bold(' EsJS ')))} ${colors.magenta(
+			`v${version}`,
+		)} JavaScript en Español`,
 		'',
 	)
+
+	usageLines.push(`${cmdMeta.description} (${commandName})`, '')
 
 	const hasOptions = argLines.length > 0 || posLines.length > 0
 	usageLines.push(
@@ -180,7 +180,7 @@ export async function renderUsage(cmd, parent) {
 		usageLines.push(formatLineColumns(commandsLines, '  '))
 		usageLines.push(
 			'',
-			`Escribe \`${commandName} <command> --ayuda\` para más información sobre un comando.`,
+			`Escribe \`${commandName} <comando> --ayuda\` para más información sobre un comando.`,
 		)
 	}
 

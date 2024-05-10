@@ -32,7 +32,7 @@ export default defineCommand({
 			ignoreUndefined: true,
 		})
 
-		// Setup history
+		// Setup history.
 		const NODE_REPL_HISTORY = process.env.NODE_REPL_HISTORY
 		replServer.setupHistory(NODE_REPL_HISTORY, () => {})
 	},

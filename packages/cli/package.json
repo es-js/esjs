@@ -1,6 +1,6 @@
 {
   "name": "es.js",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.10",
   "description": "CLI para el lenguaje de programación EsJS",
   "type": "module",
   "main": "index.js",

@@ -82,13 +82,9 @@ export default defineCommand({
 						extensionHacia,
 					)
 
-					await writeFile(
-						archivoDestino,
-						js,
-						{
-							encoding: 'utf-8',
-						},
-					)
+					await writeFile(archivoDestino, js, {
+						encoding: 'utf-8',
+					})
 				} catch (err) {
 					consola.error(err)
 				}
