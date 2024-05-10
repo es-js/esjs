@@ -143,13 +143,6 @@ const files: Ref<Files> = ref([
     activeDiff: false,
     tab: 1,
   },
-  // {
-  //   name: 'lib.esjs',
-  //   content: '',
-  //   active: false,
-  //   tab: 0,
-  //   icon: 'i-mdi-code-tags',
-  // },
   {
     name: FILE_IMPORT_MAP,
     content: `{
@@ -268,7 +261,7 @@ export const useFiles = () => {
     try {
       compiled = compile(code, options)
     } catch (exception: any) {
-      compiled = ''
+      compiled = code
       const line = exception.loc?.line ?? exception.line ?? 1
       const column = exception.loc?.column ?? exception.column ?? 1
 
