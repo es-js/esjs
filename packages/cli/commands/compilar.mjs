@@ -46,9 +46,15 @@ export default defineCommand({
 	},
 
 	async run({ args }) {
+		const extensionDesde = `.${args.desde}`
+		const extensionHacia = `.${args.hacia}`
+
 		const compilar = async (ruta) => {
 			const stats = await readdir(ruta, { withFileTypes: true })
-			const archivos = stats.filter((s) => s.isFile()).map((s) => s.name)
+			const archivos = stats
+				.filter((s) => s.isFile())
+				.filter((s) => s.name.endsWith(extensionDesde))
+				.map((s) => s.name)
 			const directorios = stats
 				.filter((s) => s.isDirectory())
 				.map((s) => s.name)
@@ -71,8 +77,6 @@ export default defineCommand({
 						to: args.hacia || 'js',
 					})
 
-					const extensionDesde = `.${args.desde}`
-					const extensionHacia = `.${args.hacia}`
 					const archivoDestino = rutaAbsoluta.replace(
 						new RegExp(`${extensionDesde}$`),
 						extensionHacia,

@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@es-js/core':
         specifier: latest
-        version: 0.1.0-alpha.11
+        version: 0.1.0-alpha.12
       citty:
         specifier: ^0.1.4
         version: 0.1.6
@@ -20,8 +20,8 @@ importers:
 
 packages:
 
-  '@es-js/core@0.1.0-alpha.11':
-    resolution: {integrity: sha512-8+UwgaqS8A3B6ub+U8YfIEY6XZhvScLsVqAbY3JsJN2pWyRDSzh1QCBgpZMoHR+JHZYdVtOd6THhcjg5jlmVRg==}
+  '@es-js/core@0.1.0-alpha.12':
+    resolution: {integrity: sha512-UB+baLhIasXVjRiNHfn3xvzWcQbNK6uVywIyYasP1dsPRs9hKz4TM7BiVSfOKtqox612Si73DT/xniw98TZe/Q==}
 
   citty@0.1.6:
     resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
@@ -32,7 +32,7 @@ packages:
 
 snapshots:
 
-  '@es-js/core@0.1.0-alpha.11': {}
+  '@es-js/core@0.1.0-alpha.12': {}
 
   citty@0.1.6:
     dependencies:
