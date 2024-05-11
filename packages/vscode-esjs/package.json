@@ -2,7 +2,7 @@
   "publisher": "enzonotario",
   "name": "vscode-esjs",
   "displayName": "EsJS (JavaScript con sintaxis en Español)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sintaxis y configuraciones para EsJS",
   "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "vscode": "^1.74.0"
   },
   "scripts": {
-    "build": "tsup src/index.ts --external vscode",
+    "build": "tsup src/index.ts --external vscode && pnpm run build:grammar",
     "build:grammar": "ts-node scripts/generate-grammars-configurations.ts",
     "dev": "nr build --watch",
     "vscode:prepublish": "nr build",
