@@ -19,8 +19,8 @@ done
 # Install all dependencies
 pnpm -r install
 
-# Build all again
-pnpm build
+## Build all again
+#pnpm build
 
 # Release packages
 for PKG in ../packages/* ; do
