@@ -1,4 +1,5 @@
 import logSymbols from 'log-symbols'
+import { isBrowser } from 'browser-or-node'
 import { isEqual } from './isEqual'
 
 let afirmaciones = 0
@@ -40,7 +41,7 @@ export function pruebas(pruebas: Pruebas) {
 	let failures = 0
 	let noAssertions = 0
 
-	Object.entries(pruebas).forEach(([pruebaNombre, pruebaFuncion]) => {
+	for (const [pruebaNombre, pruebaFuncion] of Object.entries(pruebas)) {
 		try {
 			const { afirmaciones } = prueba(pruebaNombre, pruebaFuncion)
 
@@ -50,7 +51,7 @@ export function pruebas(pruebas: Pruebas) {
 		} catch (error: any) {
 			failures++
 		}
-	})
+	}
 
 	return onPruebasFinished(pruebas, failures, noAssertions)
 }
@@ -85,7 +86,7 @@ function onPruebasFinished(pruebas: Pruebas, failures = 0, noAssertions = 0) {
 	// eslint-disable-next-line no-console
 	console.log(obtenerResumen(result))
 
-	if (window) {
+	if (isBrowser && window) {
 		const event = new CustomEvent('esjs-pruebas-finished', {
 			detail: {
 				result,
@@ -147,7 +148,7 @@ function onPruebaSuccess(pruebaNombre: string, afirmaciones = 0) {
 			'color: #14b8a6; font-size: 14px; padding: 2px 4px;',
 		)
 
-		if (window) {
+		if (isBrowser && window) {
 			const event = new CustomEvent('esjs-prueba-success', {
 				detail: {
 					pruebaNombre,
@@ -228,9 +229,9 @@ export function afirmar(valor: boolean, mensaje?: string) {
 	afirmaciones += 1
 
 	if (!valor) {
-		mensaje =
-			mensaje ?? 'afirmar(): Se esperaba "verdadero", pero se recibió "falso"'
-		throw new Error(mensaje)
+		throw new Error(
+			mensaje ?? 'afirmar(): Se esperaba "verdadero", pero se recibió "falso"',
+		)
 	}
 }
 
@@ -244,8 +245,8 @@ export function afirmarIguales(esperado: any, actual: any, mensaje?: string) {
 }
 
 export function afirmarSimilares(esperado: any, actual: any, mensaje?: string) {
-	// eslint-disable-next-line eqeqeq
 	return afirmar(
+		// biome-ignore lint/suspicious/noDoubleEquals: afirmarSimilares() es para comparar valores de diferentes tipos
 		esperado == actual,
 		mensaje ?? `afirmarSimilares(): "${esperado}" != "${actual}"`,
 	)

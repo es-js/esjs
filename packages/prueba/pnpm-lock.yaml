@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      browser-or-node:
+        specifier: ^3.0.0
+        version: 3.0.0
       concurrently:
         specifier: ^7.6.0
         version: 7.6.0
@@ -196,6 +199,9 @@ packages:
 
   assertion-error@1.1.0:
     resolution: {integrity: sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==}
+
+  browser-or-node@3.0.0:
+    resolution: {integrity: sha512-iczIdVJzGEYhP5DqQxYM9Hh7Ztpqqi+CXZpSmX8ALFs9ecXkQIeqRyM6TfxEfMVpwhl3dSuDvxdzzo9sUOIVBQ==}
 
   chai@4.3.10:
     resolution: {integrity: sha512-0UXG04VuVbruMUYbJ6JctvH0YnC/4q3/AkT18q4NaITo91CUm0liMS9VqzT9vZhVQ/1eqPanMWjBM+Juhfb/9g==}
@@ -720,6 +726,8 @@ snapshots:
       color-convert: 2.0.1
 
   assertion-error@1.1.0: {}
+
+  browser-or-node@3.0.0: {}
 
   chai@4.3.10:
     dependencies:
