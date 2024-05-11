@@ -8,7 +8,7 @@ import {
 	storageType,
 	supportFunction,
 	variableLanguage,
-} from '@es-js/esbabel/keywords'
+} from '@es-js/core/keywords'
 
 function includeKeywords(k) {
 	return `\\b(${Array.from(k.keys()).join('|')})\\b`

@@ -1,6 +1,6 @@
 {
   "name": "@es-js/language-tools",
-  "version": "0.0.18",
+  "version": "0.1.0",
   "description": "",
   "main": "src/generate-esjs-syntax.js",
   "type": "module",
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@es-js/esbabel": "0.0.1-alpha.2",
+    "@es-js/core": "workspace:*",
     "markdown-table": "^3.0.3"
   },
   "exports": {

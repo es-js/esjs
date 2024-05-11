@@ -1,3 +1,33 @@
-import { keywords as keywordsEsbabel } from '@es-js/esbabel/keywords'
+import {
+  keywordControl,
+  constantLanguage,
+  variableLanguage,
+  storageType,
+  metaVariable,
+  supportFunction,
+  promiseMethods,
+  dateMethods,
+  arrayMethods,
+  mathMethods,
+  numberMethods,
+  consoleMethods,
+  stringMethods,
+  keywords
+} from '@es-js/esbabel/keywords'
 
-export const keywords = keywordsEsbabel
+export {
+  keywordControl,
+  constantLanguage,
+  variableLanguage,
+  storageType,
+  metaVariable,
+  supportFunction,
+  promiseMethods,
+  dateMethods,
+  arrayMethods,
+  mathMethods,
+  numberMethods,
+  consoleMethods,
+  stringMethods,
+  keywords
+}

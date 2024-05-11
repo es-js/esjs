@@ -8,7 +8,7 @@ import {
 	mathMethods,
 	numberMethods,
 	stringMethods,
-} from '@es-js/esbabel/keywords'
+} from '@es-js/core/keywords'
 import type {
 	LanguageClientOptions,
 	ServerOptions,

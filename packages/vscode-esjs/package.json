@@ -2,7 +2,7 @@
   "publisher": "enzonotario",
   "name": "vscode-esjs",
   "displayName": "EsJS (JavaScript con sintaxis en Español)",
-  "version": "0.0.15",
+  "version": "0.1.0",
   "description": "Sintaxis y configuraciones para EsJS",
   "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",

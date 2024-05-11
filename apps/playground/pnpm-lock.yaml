@@ -28,8 +28,8 @@ importers:
         specifier: 0.0.1-alpha.2
         version: 0.0.1-alpha.2
       '@es-js/language-tools':
-        specifier: ^0.0.18
-        version: 0.0.18
+        specifier: ^0.1.0
+        version: 0.1.0
       '@es-js/sandbox':
         specifier: 0.0.16-alpha.17
         version: 0.0.16-alpha.17
@@ -370,8 +370,8 @@ packages:
   '@es-js/esbabel@0.0.1-alpha.2':
     resolution: {integrity: sha512-oc0hCXZVB8pKJL6GZusjdPBdlgwn2z6PCDmUArDByY5lukor87TwwZC/vAXYtdl12DH8uKbgUMkZv9PIwOo19g==}
 
-  '@es-js/language-tools@0.0.18':
-    resolution: {integrity: sha512-EvmODPiZIsgLqacTOnpvY3rqBOPkuFYNTV8CaOv6LZLlKuHiT97EPt7aRnozpVWfk1efnIwckPvtGYKtYEd49Q==}
+  '@es-js/language-tools@0.1.0':
+    resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
 
   '@es-js/sandbox@0.0.16-alpha.17':
     resolution: {integrity: sha512-ALRu+m2qMKtxeev6ek+9oi0v2q/ugNVHx2JPjmzmzczT90B7GzSCMUkMDfmcrFjfeA0SnoCYmCBS5fiBRS1f/A==}
@@ -6482,7 +6482,7 @@ snapshots:
 
   '@es-js/esbabel@0.0.1-alpha.2': {}
 
-  '@es-js/language-tools@0.0.18': {}
+  '@es-js/language-tools@0.1.0': {}
 
   '@es-js/sandbox@0.0.16-alpha.17': {}
 
