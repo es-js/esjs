@@ -11,8 +11,8 @@
     "prepublish": "pnpm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
   "devDependencies": {
     "@es-js/core": "workspace:*",
     "markdown-table": "^3.0.3"

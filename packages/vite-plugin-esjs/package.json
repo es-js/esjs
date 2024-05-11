@@ -11,7 +11,7 @@
     "vite",
     "plugin"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "vite": "^4.5.0"
   },

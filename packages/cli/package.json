@@ -15,7 +15,7 @@
     "url": "git+https://github.com/es-js/esjs.git",
     "directory": "packages/cli"
   },
-  "author": "Enzo Notario",
+  "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/es-js/esjs/issues"

@@ -12,7 +12,7 @@
     "vite",
     "plugin"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@es-js/core": "workspace:*",
     "vite": "^4.5.0"

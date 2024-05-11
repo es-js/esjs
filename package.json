@@ -14,8 +14,8 @@
     "español",
     "javascript"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.7.2",
     "bumpp": "^9.2.0",
