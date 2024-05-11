@@ -31,3 +31,19 @@ export function assertCompile(
 
 	expect(compile(jsCode, { ...options, to: 'esjs' })).toEqual(esjsCode)
 }
+
+export function assertEsJSToJS(
+	esjsCode: string,
+	jsCode: string,
+	options: TestCompileOptions = {},
+) {
+	expect(compile(esjsCode, { ...options, to: 'js' })).toEqual(jsCode)
+}
+
+export function assertJSToESJS(
+	jsCode: string,
+	esjsCode: string,
+	options: TestCompileOptions = {},
+) {
+	expect(compile(jsCode, { ...options, to: 'esjs' })).toEqual(esjsCode)
+}

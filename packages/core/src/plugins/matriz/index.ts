@@ -3,6 +3,7 @@ import {
 	replaceInstanceof,
 	replaceObjectStaticMethods,
 	replaceObjects,
+	replaceObjectCall,
 } from '../utils'
 
 export const report = () => 'Converts Matriz methods to JavaScript'
@@ -54,8 +55,8 @@ export const staticMethods = new Map<string, string>([
 ])
 
 export const objects = new Map<string, string>([
-	['Matriz', 'Array'],
 	['Arreglo', 'Array'],
+	['Matriz', 'Array'],
 ])
 
 export function replace() {

@@ -12,10 +12,10 @@
   "devDependencies": {
     "@amoutonbrady/lz-string": "^0.1.0",
     "@davestewart/nuxt-scrollbar": "^1.0.0",
-    "@es-js/core": "0.1.0-alpha.11",
+    "@es-js/core": "0.1.0-alpha.13",
     "@es-js/esbabel": "0.0.1-alpha.2",
     "@es-js/language-tools": "^0.0.18",
-    "@es-js/sandbox": "0.0.16-alpha.15",
+    "@es-js/sandbox": "0.0.16-alpha.17",
     "@iconify-json/mdi": "^1.1.64",
     "@nuxt/content": "^2.12.1",
     "@nuxt/devtools": "latest",

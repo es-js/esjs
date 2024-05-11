@@ -22,8 +22,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.35)(rollup@4.13.0)
       '@es-js/core':
-        specifier: 0.1.0-alpha.11
-        version: 0.1.0-alpha.11
+        specifier: 0.1.0-alpha.13
+        version: 0.1.0-alpha.13
       '@es-js/esbabel':
         specifier: 0.0.1-alpha.2
         version: 0.0.1-alpha.2
@@ -31,8 +31,8 @@ importers:
         specifier: ^0.0.18
         version: 0.0.18
       '@es-js/sandbox':
-        specifier: 0.0.16-alpha.15
-        version: 0.0.16-alpha.15
+        specifier: 0.0.16-alpha.17
+        version: 0.0.16-alpha.17
       '@iconify-json/mdi':
         specifier: ^1.1.64
         version: 1.1.64
@@ -364,8 +364,8 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  '@es-js/core@0.1.0-alpha.11':
-    resolution: {integrity: sha512-8+UwgaqS8A3B6ub+U8YfIEY6XZhvScLsVqAbY3JsJN2pWyRDSzh1QCBgpZMoHR+JHZYdVtOd6THhcjg5jlmVRg==}
+  '@es-js/core@0.1.0-alpha.13':
+    resolution: {integrity: sha512-Xr5r/dnzgN3fEte6S0fynFZNAmSrJJehqP7sdE8ipkq30jNUCry/1ALIX94V2BzN3fAsfb6rnHrywNWLjdo/Pg==}
 
   '@es-js/esbabel@0.0.1-alpha.2':
     resolution: {integrity: sha512-oc0hCXZVB8pKJL6GZusjdPBdlgwn2z6PCDmUArDByY5lukor87TwwZC/vAXYtdl12DH8uKbgUMkZv9PIwOo19g==}
@@ -373,8 +373,8 @@ packages:
   '@es-js/language-tools@0.0.18':
     resolution: {integrity: sha512-EvmODPiZIsgLqacTOnpvY3rqBOPkuFYNTV8CaOv6LZLlKuHiT97EPt7aRnozpVWfk1efnIwckPvtGYKtYEd49Q==}
 
-  '@es-js/sandbox@0.0.16-alpha.15':
-    resolution: {integrity: sha512-RszkwVYF/qeWlzH/92ubd8lYd4Y16eWwNGWLRA8qmz3ytQlLLQS1XLySKrltPN80T3kfbcRAbAvnwZj8LGU5nQ==}
+  '@es-js/sandbox@0.0.16-alpha.17':
+    resolution: {integrity: sha512-ALRu+m2qMKtxeev6ek+9oi0v2q/ugNVHx2JPjmzmzczT90B7GzSCMUkMDfmcrFjfeA0SnoCYmCBS5fiBRS1f/A==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -6478,13 +6478,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@es-js/core@0.1.0-alpha.11': {}
+  '@es-js/core@0.1.0-alpha.13': {}
 
   '@es-js/esbabel@0.0.1-alpha.2': {}
 
   '@es-js/language-tools@0.0.18': {}
 
-  '@es-js/sandbox@0.0.16-alpha.15': {}
+  '@es-js/sandbox@0.0.16-alpha.17': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true

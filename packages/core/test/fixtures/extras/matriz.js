@@ -18,5 +18,6 @@ Array.isArray([])
 
 Array.of([1, 2, 3])
 
+const a = Array(5)
 const lista = []
 lista.filter((item) => item === 'test').map((item) => item + 'test')

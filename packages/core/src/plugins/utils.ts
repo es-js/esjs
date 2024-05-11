@@ -17,7 +17,7 @@ export function replaceObjectNew({
 	const b = toEsJS ? from : to
 
 	return {
-		[`new ${a}(__a)`]: `new ${b}(__a)`,
+		[`new ${a}(__args)`]: `new ${b}(__args)`,
 		[`new ${a}.__a`]: `new ${b}.__a`,
 		[`new ${a}()`]: `new ${b}()`,
 	}
@@ -34,7 +34,7 @@ export function replaceObjectCall({
 	const b = toEsJS ? from : to
 
 	return {
-		[`${a}(__a)`]: `${b}(__a)`,
+		[`${a}(__args)`]: `${b}(__args)`,
 		[`${a}.__a`]: `${b}.__a`,
 	}
 }

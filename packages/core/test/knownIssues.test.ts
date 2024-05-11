@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest'
-import { assertCompile } from './testUtils'
+import { assertCompile, assertEsJSToJS, assertJSToESJS } from './testUtils'
 
 describe('known issues', () => {
 	it('fixed: compiles variables named `escribir`', async () => {
@@ -77,6 +77,48 @@ describe('known issues', () => {
       console.log(
         x.toFixed(2)
       )
+    `,
+			{
+				compiler: 'essucrase',
+			},
+		)
+	})
+
+	it('fixed: Matriz tiene precedencia sobre Arreglo', async () => {
+		assertEsJSToJS(
+			`
+      const x = Arreglo([])
+      const y = Arreglo(1, 2, 3)
+      const a = Matriz([])
+      const b = Matriz(1, 2, 3)
+      consola.escribir(x)
+    `,
+			`
+      const x = Array([])
+      const y = Array(1, 2, 3)
+      const a = Array([])
+      const b = Array(1, 2, 3)
+      console.log(x)
+    `,
+			{
+				compiler: 'essucrase',
+			},
+		)
+
+		assertJSToESJS(
+			`
+      const x = Array([])
+      const y = Array(1, 2, 3)
+      const a = Array([])
+      const b = Array(1, 2, 3)
+      console.log(x)
+    `,
+			`
+      const x = Matriz([])
+      const y = Matriz(1, 2, 3)
+      const a = Matriz([])
+      const b = Matriz(1, 2, 3)
+      consola.escribir(x)
     `,
 			{
 				compiler: 'essucrase',
