@@ -1,6 +1,6 @@
 {
   "name": "es.js",
-  "version": "0.0.1-alpha.10",
+  "version": "0.0.1-alpha.12",
   "description": "CLI para el lenguaje de programación EsJS",
   "type": "module",
   "main": "index.js",
@@ -8,7 +8,8 @@
     "esjs": "./index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node postinstall.js"
   },
   "repository": {
     "type": "git",
