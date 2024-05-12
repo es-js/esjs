@@ -13,6 +13,11 @@ const categories = [
     description: 'Ejemplos básicos',
   },
   {
+    key: 'algoritmos',
+    label: 'Algoritmos',
+    description: 'Ejemplos de algoritmos',
+  },
+  {
     key: 'advanced',
     label: 'Avanzados',
     description: 'Ejemplos avanzados',
