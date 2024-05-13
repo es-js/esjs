@@ -13,13 +13,13 @@ const configurations = [
 const snippets = ['esjs.code-snippets.json']
 
 for (const grammar of grammars) {
-  downloadFile(`${BASE_URL}${grammar}`, `./syntaxes/${grammar}`)
+	downloadFile(`${BASE_URL}${grammar}`, `./syntaxes/${grammar}`)
 }
 for (const conf of configurations) {
-  downloadFile(`${BASE_URL}${conf}`, `./languages/${conf}`)
+	downloadFile(`${BASE_URL}${conf}`, `./languages/${conf}`)
 }
 for (const snippet of snippets) {
-  downloadFile(`${BASE_URL}${snippet}`, `./snippets/${snippet}`)
+	downloadFile(`${BASE_URL}${snippet}`, `./snippets/${snippet}`)
 }
 
 async function downloadFile(url: string, destination: string) {

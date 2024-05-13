@@ -14,8 +14,8 @@ export default function EsVue(): Plugin {
 			const { script, template } = splitScriptTemplate(raw)
 
 			const compiled = compile(script || '', {
-        compiler: 'essucrase',
-      })
+				compiler: 'essucrase',
+			})
 
 			const { imports, codeWithoutImports } = splitCodeImports(compiled)
 
