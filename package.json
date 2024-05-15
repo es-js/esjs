@@ -10,13 +10,13 @@
     "sherif": "pnpm dlx sherif@latest --fix",
     "format": "pnpm biome format --write ."
   },
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
   "keywords": [
     "esjs",
     "español",
     "javascript"
   ],
-  "author": "Enzo Notario <hi@enzonotario.me>",
-  "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.7.2",
     "bumpp": "^9.2.0",

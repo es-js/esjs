@@ -10,9 +10,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "pnpm run build"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/language-tools"
+  },
   "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",
+  "keywords": [
+    "esjs",
+    "language-tools"
+  ],
   "devDependencies": {
     "@es-js/core": "workspace:*",
     "markdown-table": "^3.0.3"

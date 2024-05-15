@@ -1,6 +1,6 @@
 {
   "name": "es.js",
-  "version": "0.0.1-alpha.12",
+  "version": "0.0.1-alpha.13",
   "description": "CLI para el lenguaje de programación EsJS",
   "type": "module",
   "main": "index.js",
@@ -18,6 +18,10 @@
   },
   "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",
+  "keywords": [
+    "esjs",
+    "cli"
+  ],
   "bugs": {
     "url": "https://github.com/es-js/esjs/issues"
   },

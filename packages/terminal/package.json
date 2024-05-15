@@ -2,19 +2,19 @@
   "name": "@es-js/terminal",
   "version": "1.1.9",
   "description": "Componente de Terminal para navegadores web, diseñado para el Lenguaje de Programación EsJS. Basado en XTerminal.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/terminal"
+  },
   "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
   "keywords": [
     "esjs",
     "terminal",
     "xterminal",
     "xterm"
   ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/es-js/esjs.git",
-    "directory": "packages/terminal"
-  },
   "type": "module",
   "scripts": {
     "dev": "vite --host",

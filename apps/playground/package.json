@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "@es-js/playground",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -9,6 +9,18 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "apps/playground"
+  },
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
+  "keywords": [
+    "esjs",
+    "playground",
+    "editor"
+  ],
   "devDependencies": {
     "@amoutonbrady/lz-string": "^0.1.0",
     "@davestewart/nuxt-scrollbar": "^1.0.0",
