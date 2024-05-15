@@ -22,17 +22,17 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.35)(rollup@4.13.0)
       '@es-js/core':
-        specifier: 0.1.0-alpha.13
-        version: 0.1.0-alpha.13
+        specifier: 0.1.0-beta.0
+        version: 0.1.0-beta.0
       '@es-js/esbabel':
-        specifier: 0.0.1-alpha.2
-        version: 0.0.1-alpha.2
+        specifier: 0.0.1-beta.0
+        version: 0.0.1-beta.0
       '@es-js/language-tools':
         specifier: ^0.1.0
         version: 0.1.0
       '@es-js/sandbox':
-        specifier: 0.0.16-alpha.17
-        version: 0.0.16-alpha.17
+        specifier: 0.0.16
+        version: 0.0.16
       '@iconify-json/mdi':
         specifier: ^1.1.64
         version: 1.1.64
@@ -364,17 +364,17 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  '@es-js/core@0.1.0-alpha.13':
-    resolution: {integrity: sha512-Xr5r/dnzgN3fEte6S0fynFZNAmSrJJehqP7sdE8ipkq30jNUCry/1ALIX94V2BzN3fAsfb6rnHrywNWLjdo/Pg==}
+  '@es-js/core@0.1.0-beta.0':
+    resolution: {integrity: sha512-2sQa4pPiH5YK1T+8wmaid+CbKawpWJk8qcPKKTRnDPgk6tzL7aK+PE3w0zC+2ZjwyWQKmrDod096B1BOJ+uPnw==}
 
-  '@es-js/esbabel@0.0.1-alpha.2':
-    resolution: {integrity: sha512-oc0hCXZVB8pKJL6GZusjdPBdlgwn2z6PCDmUArDByY5lukor87TwwZC/vAXYtdl12DH8uKbgUMkZv9PIwOo19g==}
+  '@es-js/esbabel@0.0.1-beta.0':
+    resolution: {integrity: sha512-HNmtjr/mtJabcOA7/JN/dcbqJzJ1UxJuT3KgRkWuPgebT3Br4jO3TOj1Ss/z8CENWQ3m8CvCcAGhPZkSh/GX1Q==}
 
   '@es-js/language-tools@0.1.0':
     resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
 
-  '@es-js/sandbox@0.0.16-alpha.17':
-    resolution: {integrity: sha512-ALRu+m2qMKtxeev6ek+9oi0v2q/ugNVHx2JPjmzmzczT90B7GzSCMUkMDfmcrFjfeA0SnoCYmCBS5fiBRS1f/A==}
+  '@es-js/sandbox@0.0.16':
+    resolution: {integrity: sha512-TcG1VkLW1JNqTAsRd8+RcjRJWWZY3NoacAaTc6xNDMILOCRValx4Cs+6KD5346M6HG1P6JyI4fHlpajNFe85/w==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -6478,13 +6478,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@es-js/core@0.1.0-alpha.13': {}
+  '@es-js/core@0.1.0-beta.0': {}
 
-  '@es-js/esbabel@0.0.1-alpha.2': {}
+  '@es-js/esbabel@0.0.1-beta.0': {}
 
   '@es-js/language-tools@0.1.0': {}
 
-  '@es-js/sandbox@0.0.16-alpha.17': {}
+  '@es-js/sandbox@0.0.16': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true
