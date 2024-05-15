@@ -8,6 +8,13 @@
     "test:run": "vitest run",
     "prepublishOnly": "pnpm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/core"
+  },
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
   "keywords": [
     "esjs",
     "lenguaje-programacion",

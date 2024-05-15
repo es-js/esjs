@@ -5,6 +5,13 @@
   "scripts": {
     "build": "unbuild"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/vite-plugin-esvue"
+  },
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
   "keywords": [
     "esjs",
     "esvue",
@@ -12,7 +19,6 @@
     "vite",
     "plugin"
   ],
-  "license": "MIT",
   "dependencies": {
     "@es-js/core": "workspace:*",
     "vite": "^4.5.0"
