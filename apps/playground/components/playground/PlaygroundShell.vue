@@ -7,8 +7,6 @@ const playground = usePlayground()
 
 const share = useLZShare()
 
-const editor = useEditor()
-
 const handleMessage = (event: MessageEvent) => {
   const { type, data } = event.data
 
