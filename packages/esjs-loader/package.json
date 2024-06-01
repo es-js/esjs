@@ -1,0 +1,43 @@
+{
+  "name": "esjs-loader",
+  "version": "0.0.1",
+  "description": "Módulo EsJS para Node.js",
+  "scripts": {
+    "build": "unbuild",
+    "prepublishOnly": "pnpm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/esjs-loader"
+  },
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
+  "keywords": [
+    "esjs",
+    "loader",
+    "node"
+  ],
+  "dependencies": {
+    "vite": "^4.5.0"
+  },
+  "devDependencies": {
+    "@es-js/core": "workspace:*",
+    "@types/node": "^20.9.0",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^1.6.0"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
+}
