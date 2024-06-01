@@ -21,9 +21,10 @@ esjs
 
 El CLI de **EsJS** cuenta con los siguientes comandos:
 
-| Command         | Action                                                        |
-|-----------------|---------------------------------------------------------------|
-| `esjs ayuda`    | Muestra la ayuda del CLI.                                     |
-| `esjs repl`     | Inicia el REPL de **EsJS**.                                   |
-| `esjs ejecutar` | Ejecuta un archivo (script) de **EsJS**.                      |
-| `esjs compilar` | Compila un archivo o directorio de **EsJS** a **JavaScript**. |
+| Command         | Action                                                         |
+|-----------------|----------------------------------------------------------------|
+| `esjs ayuda`    | Muestra la ayuda del CLI.                                      |
+| `esjs repl`     | Inicia el REPL de **EsJS**.                                    |
+| `esjs ejecutar` | Ejecuta un archivo (script) de **EsJS**.                       |
+| `esjs compilar` | Compila un archivo o directorio de **EsJS** a **JavaScript**.  |
+| `esjs crear`    | Crea un nuevo proyecto de **EsJS**.                            |
