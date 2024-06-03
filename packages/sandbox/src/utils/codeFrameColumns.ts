@@ -1,29 +1,4 @@
-import { tiza } from "@es-js/tiza";
-import highlight, { shouldHighlight } from "@babel/highlight";
-
-import _colors, { createColors } from "picocolors";
-import type { Colors, Formatter } from "picocolors/types";
-// See https://github.com/alexeyraspopov/picocolors/issues/62
-const colors =
-  typeof process === "object" &&
-  (process.env.FORCE_COLOR === "0" || process.env.FORCE_COLOR === "false")
-    ? createColors(false)
-    : _colors;
-
-const compose: <T, U, V>(f: (gv: U) => V, g: (v: T) => U) => (v: T) => V =
-  (f, g) => v =>
-    f(g(v));
-
-let pcWithForcedColor: Colors = undefined;
-function getColors(forceColor: boolean) {
-  if (forceColor) {
-    pcWithForcedColor ??= createColors(true);
-    return pcWithForcedColor;
-  }
-  return colors;
-}
-
-let deprecationWarningShown = false;
+import { tiza } from '@es-js/tiza'
 
 type Location = {
   column: number;
@@ -36,18 +11,10 @@ type NodeLocation = {
 };
 
 export interface Options {
-  /** Syntax highlight the code as JavaScript for terminals. default: false */
-  highlightCode?: boolean;
   /**  The number of lines to show above the error. default: 2 */
   linesAbove?: number;
   /**  The number of lines to show below the error. default: 3 */
   linesBelow?: number;
-  /**
-   * Forcibly syntax highlight the code as JavaScript (for non-terminals);
-   * overrides highlightCode.
-   * default: false
-   */
-  forceColor?: boolean;
   /**
    * Pass in a string to be displayed inline (if possible) next to the
    * highlighted location in the code. If it can't be positioned inline,
@@ -55,17 +22,6 @@ export interface Options {
    * default: nothing
    */
   message?: string;
-}
-
-/**
- * Styles for code frame token types.
- */
-function getDefs(colors: Colors) {
-  return {
-    gutter: colors.gray,
-    marker: compose(colors.red, colors.bold),
-    message: compose(colors.red, colors.bold),
-  };
 }
 
 /**
@@ -156,22 +112,13 @@ export function codeFrameColumns(
   loc: NodeLocation,
   opts: Options = {},
 ): string {
-  const highlighted =
-    (opts.highlightCode || opts.forceColor) && shouldHighlight(opts);
-  const colors = getColors(opts.forceColor);
-  const defs = getDefs(colors);
-  const maybeHighlight = (fmt: Formatter, string: string) => {
-    return highlighted ? fmt(string) : string;
-  };
   const lines = rawLines.split(NEWLINE);
   const { start, end, markerLines } = getMarkerLines(loc, lines, opts);
   const hasColumns = loc.start && typeof loc.start.column === "number";
 
   const numberMaxWidth = String(end).length;
 
-  const highlightedLines = highlighted ? highlight(rawLines, opts) : rawLines;
-
-  let frame = highlightedLines
+  let frame = rawLines
     .split(NEWLINE, end)
     .slice(start, end)
     .map((line, index) => {
@@ -190,68 +137,44 @@ export function codeFrameColumns(
 
           markerLine = [
             "\n ",
-            maybeHighlight(defs.gutter, gutter.replace(/\d/g, " ")),
+            gutter.replace(/\d/g, " "),
             " ",
             markerSpacing,
-            maybeHighlight(defs.marker, "^").repeat(numberOfMarkers),
+            "^".repeat(numberOfMarkers),
           ].join("");
 
           if (lastMarkerLine && opts.message) {
-            markerLine += " " + maybeHighlight(defs.message, opts.message);
+            markerLine += " " + opts.message;
           }
         }
         return [
-          maybeHighlight(defs.marker, ">"),
-          maybeHighlight(defs.gutter, gutter),
+          ">",
+          gutter,
           line.length > 0 ? ` ${line}` : "",
           tiza.rojo(markerLine),
         ].join("");
       } else {
-        return ` ${maybeHighlight(defs.gutter, gutter)}${
-          line.length > 0 ? ` ${line}` : ""
-        }`;
+        return ` ${gutter}${line.length > 0 ? ` ${line}` : ""}`;
       }
     })
     .join("\n");
 
   if (opts.message && !hasColumns) {
-    frame = tiza.rojo(`${" ".repeat(numberMaxWidth + 1)}${opts.message}\n${frame}`);
+    frame = `${" ".repeat(numberMaxWidth + 1)}${opts.message}\n${frame}`;
   }
 
-  if (highlighted) {
-    return colors.reset(frame);
-  } else {
-    return frame;
-  }
+  return frame;
 }
 
 /**
- * Create a code frame, adding line numbers, code highlighting, and pointing to a given position.
+ * Create a code frame, adding line numbers, and pointing to a given position.
  */
-
 export default function (
   rawLines: string,
   lineNumber: number,
   colNumber?: number | null,
   opts: Options = {},
 ): string {
-  if (!deprecationWarningShown) {
-    deprecationWarningShown = true;
-
-    const message =
-      "Passing lineNumber and colNumber is deprecated to @babel/code-frame. Please use `codeFrameColumns`.";
-
-    if (process.emitWarning) {
-      // A string is directly supplied to emitWarning, because when supplying an
-      // Error object node throws in the tests because of different contexts
-      process.emitWarning(message, "DeprecationWarning");
-    } else {
-      const deprecationError = new Error(message);
-      deprecationError.name = "DeprecationWarning";
-      console.warn(new Error(message));
-    }
-  }
-
   colNumber = Math.max(colNumber, 0);
 
   const location: NodeLocation = {
