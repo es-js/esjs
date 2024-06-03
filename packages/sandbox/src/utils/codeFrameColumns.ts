@@ -144,7 +144,7 @@ export function codeFrameColumns(
           ].join("");
 
           if (lastMarkerLine && opts.message) {
-            markerLine += " " + opts.message;
+            markerLine += ` ${opts.message}`;
           }
         }
         return [
@@ -153,9 +153,9 @@ export function codeFrameColumns(
           line.length > 0 ? ` ${line}` : "",
           tiza.rojo(markerLine),
         ].join("");
-      } else {
-        return ` ${gutter}${line.length > 0 ? ` ${line}` : ""}`;
       }
+
+      return ` ${gutter}${line.length > 0 ? ` ${line}` : ""}`;
     })
     .join("\n");
 
@@ -172,13 +172,13 @@ export function codeFrameColumns(
 export default function (
   rawLines: string,
   lineNumber: number,
-  colNumber?: number | null,
+  colNumber = 0,
   opts: Options = {},
 ): string {
-  colNumber = Math.max(colNumber, 0);
+  const colNumberMax = Math.max(colNumber, 0);
 
   const location: NodeLocation = {
-    start: { column: colNumber, line: lineNumber },
+    start: { column: colNumberMax, line: lineNumber },
   };
 
   return codeFrameColumns(rawLines, location, opts);
