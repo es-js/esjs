@@ -14,9 +14,6 @@ importers:
       '@es-js/core':
         specifier: workspace:^
         version: link:../core
-      '@es-js/tiza':
-        specifier: ^1.0.2
-        version: link:../tiza
       '@types/escodegen':
         specifier: ^0.0.7
         version: 0.0.7

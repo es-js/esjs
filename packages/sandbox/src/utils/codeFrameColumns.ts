@@ -1,5 +1,3 @@
-import { tiza } from '@es-js/tiza'
-
 type Location = {
   column: number;
   line: number;
@@ -107,6 +105,10 @@ function getMarkerLines(
   return { start, end, markerLines };
 }
 
+function formatError(message: string): string {
+  return `<span style="color: #ef4444">${message}</span>`;
+}
+
 export function codeFrameColumns(
   rawLines: string,
   loc: NodeLocation,
@@ -151,7 +153,7 @@ export function codeFrameColumns(
           ">",
           gutter,
           line.length > 0 ? ` ${line}` : "",
-          tiza.rojo(markerLine),
+          formatError(markerLine),
         ].join("");
       }
 
@@ -164,22 +166,4 @@ export function codeFrameColumns(
   }
 
   return frame;
-}
-
-/**
- * Create a code frame, adding line numbers, and pointing to a given position.
- */
-export default function (
-  rawLines: string,
-  lineNumber: number,
-  colNumber = 0,
-  opts: Options = {},
-): string {
-  const colNumberMax = Math.max(colNumber, 0);
-
-  const location: NodeLocation = {
-    start: { column: colNumberMax, line: lineNumber },
-  };
-
-  return codeFrameColumns(rawLines, location, opts);
 }

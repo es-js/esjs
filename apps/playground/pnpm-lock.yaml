@@ -31,8 +31,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@es-js/sandbox':
-        specifier: 0.0.17
-        version: 0.0.17
+        specifier: 0.0.18
+        version: 0.0.18
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.1.66
@@ -353,8 +353,8 @@ packages:
   '@es-js/language-tools@0.1.0':
     resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
 
-  '@es-js/sandbox@0.0.17':
-    resolution: {integrity: sha512-dwJduGRqbhQflb6bN626JcdN1Y00xXJcKB4oPa9xyc3YaEewH6Kz6kLrSMp+CG8CQGEGhnoTzelkAqQn62JFKA==}
+  '@es-js/sandbox@0.0.18':
+    resolution: {integrity: sha512-CAX+l2K51JCwwA9Gyn50KUqJG/TwfXqmHd4IU+6kPak4P1y4+O1aAzVehW+uMQz6amMg51ovEiO8b95WsJC6HQ==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -6521,7 +6521,7 @@ snapshots:
 
   '@es-js/language-tools@0.1.0': {}
 
-  '@es-js/sandbox@0.0.17': {}
+  '@es-js/sandbox@0.0.18': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true

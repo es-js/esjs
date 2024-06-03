@@ -265,10 +265,6 @@ export const useLZShare = () => {
     settings.setEmbed(embed === 'true')
     settings.setInfiniteLoopProtection(infiniteLoopProtection === 'true')
 
-    if (version) {
-      useEditor().setVersion(version)
-    }
-
     useEditor().setLanguage(useLZShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
   }
 

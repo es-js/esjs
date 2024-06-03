@@ -63,9 +63,9 @@ export async function init(options: EjecutarOptions): Promise<void> {
 
 	previewTab(_options.previewTab)
 
-	if (_options.compiler === 'essucrase' && !_options.putout) {
+	// if (_options.compiler === 'essucrase' && !_options.putout) {
 		_options.putout = await import('https://esm.sh/@putout/bundle@2')
-	}
+	// }
 
 	await evalEditorFiles(_options)
 }

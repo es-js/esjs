@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import ExamplesModal from '~/components/examples/ExamplesModal.vue'
-import VersionSwitcher from '~/components/input/VersionSwitcher.vue'
 import { isDark, toggleDark } from '~/composables/dark'
 import { useLZShare } from '~/composables/useLZShare'
 import { useSettings } from '~/composables/useSettings'
@@ -146,8 +145,6 @@ function setupInfiniteLoopProtection() {
         </div>
 
         <div class="flex flex-row items-center space-x-3">
-          <VersionSwitcher />
-
           <AppButton
             icon="i-mdi-shield-sync"
             text="Protección de código"

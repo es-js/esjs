@@ -11,7 +11,7 @@ import { FormatTransformer } from '../transformers/format.transformer'
 import { InfiniteLoopProtectionTransformer } from '../transformers/infiniteLoopProtection.transformer'
 import { generateImportFunctions } from './generateImportFunctions'
 import { unifyImports } from './unifyImports'
-import { codeFrameColumns } from "../utils/codeFrameColumns"
+import { codeFrameColumns } from './codeFrameColumns'
 
 class ProcessSandboxedCodeError extends Error {
 	constructor(
