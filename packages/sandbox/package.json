@@ -11,7 +11,9 @@
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
+    "@babel/highlight": "^7.24.6",
     "@es-js/core": "workspace:^",
+    "@es-js/tiza": "^1.0.2",
     "@types/escodegen": "^0.0.7",
     "@types/prettier": "^2.7.3",
     "@vue/compiler-sfc": "^3.3.4",
@@ -19,6 +21,7 @@
     "eruda": "^3.0.1",
     "escodegen": "^2.1.0",
     "espree": "^9.6.1",
+    "picocolors": "^1.0.1",
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.5",

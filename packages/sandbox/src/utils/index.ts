@@ -11,6 +11,7 @@ import { FormatTransformer } from '../transformers/format.transformer'
 import { InfiniteLoopProtectionTransformer } from '../transformers/infiniteLoopProtection.transformer'
 import { generateImportFunctions } from './generateImportFunctions'
 import { unifyImports } from './unifyImports'
+import { codeFrameColumns } from "../utils/codeFrameColumns"
 
 class ProcessSandboxedCodeError extends Error {
 	constructor(
@@ -199,6 +200,12 @@ function printError(file: SandboxFile) {
 		return [file]
 	}
 
+  const codeFrame = codeFrameColumns(file.content, {
+    start: { line: file.error.line, column: file.error.column }
+  }, {
+    message: file.error.message,
+  })
+
 	return [
 		{
 			...file,
@@ -212,9 +219,7 @@ Terminal.escribir(\`Error en el archivo \${tiza.fondoAzul50.azul800(${JSON.strin
 					file.name,
 				)})}:\`)
 
-Terminal.escribir(
-tiza.rojo(${JSON.stringify(file.error.message)})
-)
+Terminal.escribir(\`<pre>${codeFrame}</pre>\`)
 
 console.error(${JSON.stringify(file.error.message)})
 
