@@ -36,6 +36,19 @@ export function createIframe(
     ${options.stylesheets
 			?.map((href) => `<link rel="stylesheet" href="${href}" />`)
 			.join('\n')}
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: "Fira Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+      }
+     </style>
   </head>
 
   <script type="importmap">
