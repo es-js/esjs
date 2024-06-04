@@ -19,7 +19,7 @@ export function compile(
 	options: CompileOptions = {
 		from: 'esjs',
 		to: 'js',
-		compiler: 'esbabel',
+		compiler: 'essucrase',
 	} as CompileOptions,
 ) {
 	if (!options.from) {
@@ -31,7 +31,7 @@ export function compile(
 	}
 
 	if (!options.compiler) {
-		options.compiler = 'esbabel'
+		options.compiler = 'essucrase'
 	}
 
 	const compiler: Compiler =
