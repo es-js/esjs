@@ -32,3 +32,12 @@ Mate.redondear(x)
 Mate.signo(x)
 Mate.seno(x)
 Mate.senoHiperbolico(x)
+
+const a = Mate.PI
+const b = Mate.E
+const c = Mate.LN2
+const d = Mate.LN10
+const e = Mate.LOG2E
+const f = Mate.LOG10E
+const g = Mate.RAIZ1_2
+const h = Mate.RAIZ2

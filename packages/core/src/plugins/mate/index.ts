@@ -1,4 +1,9 @@
-import { replaceObjectStaticMethods, replaceObjects } from '../utils'
+import {
+  replaceObjectStaticMethods,
+  replaceObjects,
+  replaceObjectProperties,
+  replaceObjectStaticProperties,
+} from '../utils'
 
 export const report = () => 'Converts Mate methods to JavaScript'
 
@@ -42,6 +47,17 @@ export const methods = new Map<string, string>([
 
 export const objects = new Map<string, string>([['Mate', 'Math']])
 
+export const properties = new Map<string, string>([
+  ['PI', 'PI'],
+  ['E', 'E'],
+  ['LN2', 'LN2'],
+  ['LN10', 'LN10'],
+  ['LOG2E', 'LOG2E'],
+  ['LOG10E', 'LOG10E'],
+  ['RAIZ1_2', 'SQRT1_2'],
+  ['RAIZ2', 'SQRT2'],
+])
+
 export function replace() {
 	return {
 		...replaceObjectStaticMethods({
@@ -49,5 +65,11 @@ export function replace() {
 			to: 'Math',
 			methods,
 		}),
+
+    ...replaceObjectStaticProperties({
+      from: 'Mate',
+      to: 'Math',
+      properties,
+    }),
 	}
 }

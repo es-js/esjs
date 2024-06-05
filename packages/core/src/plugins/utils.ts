@@ -126,6 +126,27 @@ export function replaceObjectProperties({
 	)
 }
 
+export function replaceObjectStaticProperties({
+  from,
+  to,
+  properties,
+}: {
+  from: string
+  to: string
+  properties: Map<string, string>
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  const dictionary = toEsJS ? invertMap(properties) : properties
+
+  return Object.fromEntries(
+    [...dictionary].map(([key, value]) => {
+      return [`${a}.${key}`, `${b}.${value}`]
+    }),
+  )
+}
+
 export function replaceGlobalMethods({
 	methods,
 }: {

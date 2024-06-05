@@ -32,3 +32,12 @@ Math.round(x)
 Math.sign(x)
 Math.sin(x)
 Math.sinh(x)
+
+const a = Math.PI
+const b = Math.E
+const c = Math.LN2
+const d = Math.LN10
+const e = Math.LOG2E
+const f = Math.LOG10E
+const g = Math.SQRT1_2
+const h = Math.SQRT2
