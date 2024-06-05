@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@supabase/gotrue-js': 2.16.0
+
 importers:
 
   .:
@@ -20,13 +23,13 @@ importers:
         version: 1.0.0(postcss@8.4.38)(rollup@4.17.2)
       '@es-js/core':
         specifier: 0.1.0-beta.2
-        version: link:../../packages/core
+        version: 0.1.0-beta.2
       '@es-js/language-tools':
         specifier: ^0.1.0
-        version: link:../../packages/language-tools
+        version: 0.1.0
       '@es-js/sandbox':
-        specifier: 0.0.18
-        version: link:../../packages/sandbox
+        specifier: 0.0.19
+        version: 0.0.19
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.1.66
@@ -337,6 +340,15 @@ packages:
     resolution: {integrity: sha512-75LfllKL2lq0sGH+wcpsn/sLtJ0kMkDWmcZTLAB76QLDTmfsFu4QHwZVbtCD2woGyKl9c8KvtOUW9JSjRqOVtA==}
     peerDependencies:
       tailwindcss: '*'
+
+  '@es-js/core@0.1.0-beta.2':
+    resolution: {integrity: sha512-38v8BAwxfV6TIZrgrrzEwbyTG+zHQ/2O7AgmpjkAVq1GMfLW30DwreERakeBfq4jlKScYPaWCRo53nxqWChW9A==}
+
+  '@es-js/language-tools@0.1.0':
+    resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
+
+  '@es-js/sandbox@0.0.19':
+    resolution: {integrity: sha512-jT3rmpDQVKzXFezxJm08bB62squhvloGJypNXUO4Mwm4R3U4u+hodCL5D8wxPCXL1a4ekhXHp5TSZxt97kh4mg==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -6496,6 +6508,12 @@ snapshots:
       tailwindcss: 3.4.3
     transitivePeerDependencies:
       - supports-color
+
+  '@es-js/core@0.1.0-beta.2': {}
+
+  '@es-js/language-tools@0.1.0': {}
+
+  '@es-js/sandbox@0.0.19': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
