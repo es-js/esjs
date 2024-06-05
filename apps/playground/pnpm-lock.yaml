@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@supabase/gotrue-js': 2.16.0
-
 importers:
 
   .:
@@ -22,17 +19,14 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.38)(rollup@4.17.2)
       '@es-js/core':
-        specifier: 0.1.0-beta.1
-        version: 0.1.0-beta.1
-      '@es-js/esbabel':
-        specifier: 0.0.1-beta.1
-        version: 0.0.1-beta.1
+        specifier: 0.1.0-beta.2
+        version: link:../../packages/core
       '@es-js/language-tools':
         specifier: ^0.1.0
-        version: 0.1.0
+        version: link:../../packages/language-tools
       '@es-js/sandbox':
         specifier: 0.0.18
-        version: 0.0.18
+        version: link:../../packages/sandbox
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.1.66
@@ -343,18 +337,6 @@ packages:
     resolution: {integrity: sha512-75LfllKL2lq0sGH+wcpsn/sLtJ0kMkDWmcZTLAB76QLDTmfsFu4QHwZVbtCD2woGyKl9c8KvtOUW9JSjRqOVtA==}
     peerDependencies:
       tailwindcss: '*'
-
-  '@es-js/core@0.1.0-beta.1':
-    resolution: {integrity: sha512-BBHQPNIrgtaiLHq6UVBJZLL4Oix/JIHoO2TrqRR/ptH04bCpEOxP/kCJYzCsoM5g2O6tdl+sF7Jxo/8IkyIVUQ==}
-
-  '@es-js/esbabel@0.0.1-beta.1':
-    resolution: {integrity: sha512-IABqnBSVY8KyVhdYIpYj+lKK2mxwDl1cPmbvtaABHd3xWH5l0H4ZFt3ZoSkraxff3ftmahZq2fsamkpmZ5MMoA==}
-
-  '@es-js/language-tools@0.1.0':
-    resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
-
-  '@es-js/sandbox@0.0.18':
-    resolution: {integrity: sha512-CAX+l2K51JCwwA9Gyn50KUqJG/TwfXqmHd4IU+6kPak4P1y4+O1aAzVehW+uMQz6amMg51ovEiO8b95WsJC6HQ==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -6514,14 +6496,6 @@ snapshots:
       tailwindcss: 3.4.3
     transitivePeerDependencies:
       - supports-color
-
-  '@es-js/core@0.1.0-beta.1': {}
-
-  '@es-js/esbabel@0.0.1-beta.1': {}
-
-  '@es-js/language-tools@0.1.0': {}
-
-  '@es-js/sandbox@0.0.18': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
