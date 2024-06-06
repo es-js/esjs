@@ -1,4 +1,4 @@
-import { codeFrameColumns } from "../../src/utils/codeFrameColumns.ts"
+import { codeFrameColumns } from '../../src/utils/codeFrameColumns.ts'
 import { describe, expect, it } from 'vitest'
 
 describe('codeFrame', () => {
@@ -20,13 +20,15 @@ consola.escribir(sumar(5, 3)) // Salida: 8
   6 | consola.escribir(sumar(5, 3)) // Salida: 8`
 
 		expect(
-      codeFrameColumns(code, {
-        start: { line: 3, column: 13 }
-      }, {
-        highlightCode: false,
-
-      })
-    ).toBe(expected)
+			codeFrameColumns(
+				code,
+				{
+					start: { line: 3, column: 13 },
+				},
+				{
+					highlightCode: false,
+				},
+			),
+		).toBe(expected)
 	})
-
 })

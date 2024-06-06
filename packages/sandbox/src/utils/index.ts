@@ -200,11 +200,15 @@ function printError(file: SandboxFile) {
 		return [file]
 	}
 
-  const codeFrame = codeFrameColumns(file.content, {
-    start: { line: file.error.line, column: file.error.column }
-  }, {
-    message: file.error.message,
-  })
+	const codeFrame = codeFrameColumns(
+		file.content,
+		{
+			start: { line: file.error.line, column: file.error.column },
+		},
+		{
+			message: file.error.message,
+		},
+	)
 
 	return [
 		{
