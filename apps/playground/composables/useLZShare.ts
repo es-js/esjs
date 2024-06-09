@@ -121,7 +121,7 @@ export const useLZShare = () => {
       language: url.searchParams.get('language'),
       embed: url.searchParams.get('embed'),
       infiniteLoopProtection: url.searchParams.get('infiniteLoopProtection'),
-      version: determineVersion(url.searchParams.get('version') ?? '0.0.x'),
+      version: determineVersion(url.searchParams.get('version') ?? '0.x.0'),
     }
   }
 
