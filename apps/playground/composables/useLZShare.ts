@@ -154,12 +154,12 @@ export const useLZShare = () => {
 
     const { pathname } = url
 
-    if (url.searchParams.get('code') !== null && url.searchParams.get('code') !== '') {
-      const code = url.searchParams.get('code') ?? ''
-      return decompressFromURL(code) ?? INITIAL_CODE
-    }
-
     try {
+      if (url.searchParams.get('code') !== null && url.searchParams.get('code') !== '') {
+        const code = url.searchParams.get('code') ?? ''
+        return decompressFromURL(code) ?? INITIAL_CODE
+      }
+
       if (pathname.includes('/github/')) {
         const githubUrl = pathname.replace('/github/', '')
         return await getCodeFromGithub(githubUrl)
