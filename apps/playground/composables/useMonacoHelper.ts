@@ -5,7 +5,7 @@ import {
   storageType,
   supportFunction,
   variableLanguage,
-} from '@es-js/core/keywords'
+} from '@es-js/esbabel/keywords'
 import snippets from '@es-js/language-tools/esjs.code-snippets.json'
 import * as monaco from 'monaco-editor'
 import darktheme from 'theme-vitesse/themes/vitesse-dark.json'

@@ -22,14 +22,17 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.38)(rollup@4.17.2)
       '@es-js/core':
-        specifier: 0.1.0-beta.2
-        version: 0.1.0-beta.2
+        specifier: 0.1.0-beta.1
+        version: 0.1.0-beta.1
+      '@es-js/esbabel':
+        specifier: 0.0.1-beta.1
+        version: 0.0.1-beta.1
       '@es-js/language-tools':
         specifier: ^0.1.0
         version: 0.1.0
       '@es-js/sandbox':
-        specifier: 0.0.19
-        version: 0.0.19
+        specifier: 0.0.20-alpha.0
+        version: 0.0.20-alpha.0
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.1.66
@@ -341,14 +344,17 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  '@es-js/core@0.1.0-beta.2':
-    resolution: {integrity: sha512-38v8BAwxfV6TIZrgrrzEwbyTG+zHQ/2O7AgmpjkAVq1GMfLW30DwreERakeBfq4jlKScYPaWCRo53nxqWChW9A==}
+  '@es-js/core@0.1.0-beta.1':
+    resolution: {integrity: sha512-BBHQPNIrgtaiLHq6UVBJZLL4Oix/JIHoO2TrqRR/ptH04bCpEOxP/kCJYzCsoM5g2O6tdl+sF7Jxo/8IkyIVUQ==}
+
+  '@es-js/esbabel@0.0.1-beta.1':
+    resolution: {integrity: sha512-IABqnBSVY8KyVhdYIpYj+lKK2mxwDl1cPmbvtaABHd3xWH5l0H4ZFt3ZoSkraxff3ftmahZq2fsamkpmZ5MMoA==}
 
   '@es-js/language-tools@0.1.0':
     resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
 
-  '@es-js/sandbox@0.0.19':
-    resolution: {integrity: sha512-jT3rmpDQVKzXFezxJm08bB62squhvloGJypNXUO4Mwm4R3U4u+hodCL5D8wxPCXL1a4ekhXHp5TSZxt97kh4mg==}
+  '@es-js/sandbox@0.0.20-alpha.0':
+    resolution: {integrity: sha512-r07rN20yFJkz32NKxsztX23qIEpIMEp7mXLF7LWqoC7JAhYbKqKp/0uj7G53ht9aNX3k+TWBqk7ZbO92G4dBYw==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -6509,11 +6515,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@es-js/core@0.1.0-beta.2': {}
+  '@es-js/core@0.1.0-beta.1': {}
+
+  '@es-js/esbabel@0.0.1-beta.1': {}
 
   '@es-js/language-tools@0.1.0': {}
 
-  '@es-js/sandbox@0.0.19': {}
+  '@es-js/sandbox@0.0.20-alpha.0': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true

@@ -9,7 +9,7 @@ export const loading = ref(true)
 
 const language = ref('esjs')
 
-const version = ref('0.x.0')
+const version = ref('0.0.x')
 
 const availableLanguages = [
   [
@@ -23,6 +23,23 @@ const availableLanguages = [
       label: 'JavaScript',
       click: () => {
         language.value = 'js'
+      },
+    },
+  ],
+]
+
+const availableVersions = [
+  [
+    {
+      label: 'v0.0.X (Actual)',
+      click: () => {
+        version.value = '0.0.x'
+      },
+    },
+    {
+      label: 'v0.X.0 (Próxima)',
+      click: () => {
+        version.value = '0.x.0'
       },
     },
   ],
@@ -94,6 +111,10 @@ export const useEditor = () => {
     })
   }
 
+  function setVersion(value: string) {
+    version.value = value
+  }
+
   return {
     loading,
     setLanguage,
@@ -101,8 +122,10 @@ export const useEditor = () => {
     language,
     availableLanguages,
     version,
+    availableVersions,
     formatCode,
     isLearnApp,
+    setVersion,
     EDITOR_DEFAULT_OPTIONS,
   }
 }

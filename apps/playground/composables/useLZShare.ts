@@ -121,7 +121,7 @@ export const useLZShare = () => {
       language: url.searchParams.get('language'),
       embed: url.searchParams.get('embed'),
       infiniteLoopProtection: url.searchParams.get('infiniteLoopProtection'),
-      version: determineVersion(url.searchParams.get('version') ?? '0.x.0'),
+      version: determineVersion(url.searchParams.get('version') ?? '0.0.x'),
     }
   }
 
@@ -154,12 +154,12 @@ export const useLZShare = () => {
 
     const { pathname } = url
 
-    try {
-      if (url.searchParams.get('code') !== null && url.searchParams.get('code') !== '') {
-        const code = url.searchParams.get('code') ?? ''
-        return decompressFromURL(code) ?? INITIAL_CODE
-      }
+    if (url.searchParams.get('code') !== null && url.searchParams.get('code') !== '') {
+      const code = url.searchParams.get('code') ?? ''
+      return decompressFromURL(code) ?? INITIAL_CODE
+    }
 
+    try {
       if (pathname.includes('/github/')) {
         const githubUrl = pathname.replace('/github/', '')
         return await getCodeFromGithub(githubUrl)
@@ -264,6 +264,10 @@ export const useLZShare = () => {
     settings.setPreviewTab(previewTab)
     settings.setEmbed(embed === 'true')
     settings.setInfiniteLoopProtection(infiniteLoopProtection === 'true')
+
+    if (version) {
+      useEditor().setVersion(version)
+    }
 
     useEditor().setLanguage(useLZShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
   }

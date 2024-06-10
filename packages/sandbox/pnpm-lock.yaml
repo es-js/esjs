@@ -14,6 +14,9 @@ importers:
       '@es-js/core':
         specifier: workspace:^
         version: link:../core
+      '@es-js/tiza':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@types/escodegen':
         specifier: ^0.0.7
         version: 0.0.7
@@ -86,6 +89,9 @@ packages:
   '@babel/types@7.23.4':
     resolution: {integrity: sha512-7uIFwVYpoplT5jp/kVv6EF93VaJ8H+Yn5IczYiaAi98ajzjfoZfslet/e0sLh+wVBjb2qqIut1b0S26VSafsSQ==}
     engines: {node: '>=6.9.0'}
+
+  '@es-js/tiza@1.0.2':
+    resolution: {integrity: sha512-/eXzuqaNvNoGPTdjymCpr/1+EXXyXDNjt8mSVK1xhrbW/a+4ax57+6VvveRrVNvGtgQDvksl/koAILqFB8IMcg==}
 
   '@esbuild/android-arm64@0.18.20':
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==}
@@ -1405,6 +1411,8 @@ snapshots:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.24.6
       to-fast-properties: 2.0.0
+
+  '@es-js/tiza@1.0.2': {}
 
   '@esbuild/android-arm64@0.18.20':
     optional: true

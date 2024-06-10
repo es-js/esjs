@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.19",
+  "version": "0.0.20-alpha.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build && pnpm tailwind:build",
@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/highlight": "^7.24.6",
     "@es-js/core": "workspace:^",
+    "@es-js/tiza": "^1.0.2",
     "@types/escodegen": "^0.0.7",
     "@types/prettier": "^2.7.3",
     "@vue/compiler-sfc": "^3.3.4",

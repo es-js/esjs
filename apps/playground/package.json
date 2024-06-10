@@ -24,9 +24,10 @@
   "devDependencies": {
     "@amoutonbrady/lz-string": "^0.1.0",
     "@davestewart/nuxt-scrollbar": "^1.0.0",
-    "@es-js/core": "0.1.0-beta.2",
+    "@es-js/core": "0.1.0-beta.1",
+    "@es-js/esbabel": "0.0.1-beta.1",
     "@es-js/language-tools": "^0.1.0",
-    "@es-js/sandbox": "0.0.19",
+    "@es-js/sandbox": "0.0.20-alpha.0",
     "@iconify-json/mdi": "^1.1.66",
     "@nuxt/content": "^2.12.1",
     "@nuxt/devtools": "latest",
