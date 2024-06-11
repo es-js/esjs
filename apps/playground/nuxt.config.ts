@@ -2,6 +2,10 @@
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json' assert { type: 'json' }
 
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
+
   devtools: { enabled: false },
 
   modules: [
