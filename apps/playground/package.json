@@ -45,7 +45,7 @@
     "javascript-obfuscator": "^4.1.0",
     "just-debounce-it": "^3.2.0",
     "monaco-editor": "~0.48.0",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.12.1",
     "nuxt-gtag": "^2.0.5",
     "nuxt-monaco-editor": "^1.2.9",
     "prettier": "^2.8.8",
