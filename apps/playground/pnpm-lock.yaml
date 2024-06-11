@@ -22,11 +22,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.38)(rollup@4.17.2)
       '@es-js/core':
-        specifier: 0.1.0-beta.1
-        version: 0.1.0-beta.1
-      '@es-js/esbabel':
-        specifier: 0.0.1-beta.1
-        version: 0.0.1-beta.1
+        specifier: 0.1.0-beta.2
+        version: 0.1.0-beta.2
       '@es-js/language-tools':
         specifier: ^0.1.0
         version: 0.1.0
@@ -344,11 +341,8 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  '@es-js/core@0.1.0-beta.1':
-    resolution: {integrity: sha512-BBHQPNIrgtaiLHq6UVBJZLL4Oix/JIHoO2TrqRR/ptH04bCpEOxP/kCJYzCsoM5g2O6tdl+sF7Jxo/8IkyIVUQ==}
-
-  '@es-js/esbabel@0.0.1-beta.1':
-    resolution: {integrity: sha512-IABqnBSVY8KyVhdYIpYj+lKK2mxwDl1cPmbvtaABHd3xWH5l0H4ZFt3ZoSkraxff3ftmahZq2fsamkpmZ5MMoA==}
+  '@es-js/core@0.1.0-beta.2':
+    resolution: {integrity: sha512-38v8BAwxfV6TIZrgrrzEwbyTG+zHQ/2O7AgmpjkAVq1GMfLW30DwreERakeBfq4jlKScYPaWCRo53nxqWChW9A==}
 
   '@es-js/language-tools@0.1.0':
     resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
@@ -536,12 +530,14 @@ packages:
   '@humanwhocodes/config-array@0.10.7':
     resolution: {integrity: sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/gitignore-to-minimatch@1.0.2':
     resolution: {integrity: sha512-rSqmMJDdLFUsyxR6FMtD00nfQKKLFb1kv+qBbOVKqErvloEIJLo5bDTJTQNTYgeyp78JsA7u/NPi5jT1GR/MuA==}
 
   '@humanwhocodes/object-schema@1.2.1':
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@iconify-json/heroicons@1.1.21':
     resolution: {integrity: sha512-A+3L4KN+TjH3V8fQ2N2dkOOnLLxMgMBzO8RDT0P9YL+YzvLMIbe/lkDLSB8NB8x0DKWmkvTimoo1l4DKMwi7Zg==}
@@ -6515,9 +6511,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@es-js/core@0.1.0-beta.1': {}
-
-  '@es-js/esbabel@0.0.1-beta.1': {}
+  '@es-js/core@0.1.0-beta.2': {}
 
   '@es-js/language-tools@0.1.0': {}
 
