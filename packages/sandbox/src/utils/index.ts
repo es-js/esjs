@@ -2,8 +2,8 @@ import { splitCodeImports } from '@es-js/core/utils'
 import {
 	IMPORT_ESJS_PRUEBA,
 	IMPORT_ESJS_TERMINAL,
-} from '../moduleCompiler/constants'
-import { MAIN_FILE, MAIN_TESTS_FILE } from '../moduleCompiler/orchestrator'
+} from '../compiler/constants'
+import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
 import type { ProcessSandboxedCodeOptions } from '../runtime/ejecutar'
 import { applyTransformers } from '../transformers'
 import { ExportFunctionsTransformer } from '../transformers/exportFunctions.transformer'

@@ -1,7 +1,7 @@
-import type { AvailableLanguages, CompileOptions } from '@es-js/core'
-import { compile } from '../compiler'
-import { compileModulesForPreview } from '../moduleCompiler'
-import { orchestrator, OrchestratorFile } from '../moduleCompiler/orchestrator'
+import type { AvailableLanguages, CompileOptions, Compiler } from '@es-js/core'
+import { EssucraseCompiler } from '@es-js/core/compiler/essucrase.compiler'
+import { compileModulesForPreview } from '../compiler'
+import { orchestrator, OrchestratorFile } from '../compiler/orchestrator'
 import {
 	processSandboxedFiles,
 	type SandboxFile,
@@ -181,6 +181,15 @@ function compileFile(file: SandboxFile, options?: CompileOptions) {
 		...options,
 		putout: getOptions().putout,
 	})
+}
+
+function compile(code: string, options: any): string {
+  if (!options.putout) {
+    return code
+  }
+
+  const compiler: Compiler = new EssucraseCompiler(options.putout)
+  return compiler.compile(code, options as CompileOptions)
 }
 
 async function evalCode(args: any) {
