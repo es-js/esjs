@@ -44,7 +44,7 @@ const isLearnApp = computed(() => {
 
 const EDITOR_DEFAULT_OPTIONS = {
   automaticLayout: true,
-  fontFamily: 'Fira Code',
+  fontFamily: 'Fira Mono',
   fontSize: 16,
   renderWhitespace: 'all',
   roundedSelection: true,
