@@ -1,27 +1,11 @@
 import { splitCodeImports } from '@es-js/core/utils'
-import {
-	IMPORT_ESJS_PRUEBA,
-	IMPORT_ESJS_TERMINAL,
-} from '../compiler/constants'
+import { IMPORT_ESJS_PRUEBA, IMPORT_ESJS_TERMINAL } from '../compiler/constants'
 import { MAIN_FILE, MAIN_TESTS_FILE } from '../compiler/orchestrator'
 import type { ProcessSandboxedCodeOptions } from '../runtime/ejecutar'
-import { applyTransformers } from '../transformers'
-import { ExportFunctionsTransformer } from '../transformers/exportFunctions.transformer'
-import { FormatTransformer } from '../transformers/format.transformer'
-import { InfiniteLoopProtectionTransformer } from '../transformers/infiniteLoopProtection.transformer'
-import { generateImportFunctions } from './generateImportFunctions'
-import { unifyImports } from './unifyImports'
 import { codeFrameColumns } from './codeFrameColumns'
-
-class ProcessSandboxedCodeError extends Error {
-	constructor(
-		message: string,
-		public line: number,
-		public column: number,
-	) {
-		super(message)
-	}
-}
+import { generateImportFunctions } from './generateImportFunctions'
+import { processSandboxedCode } from './processSandboxedCode'
+import { unifyImports } from './unifyImports'
 
 export interface SandboxFile {
 	name: string
@@ -70,7 +54,7 @@ export function processSandboxedFiles(
 
 	const restOfFiles = files
 		.filter((file: any) => file.name !== MAIN_FILE)
-		.map((file) => prepareOtherFile(file, main, options))
+		.map((file) => prepareFile(file, main, options))
 
 	if (restOfFiles.some((file) => file.error)) {
 		const firstFileWithError = restOfFiles.find((file) => file.error)
@@ -90,28 +74,6 @@ export function processSandboxedFiles(
 	})
 
 	return sandboxedFiles
-}
-
-export function processSandboxedCode(
-	code: string,
-	options?: ProcessSandboxedCodeOptions,
-) {
-	try {
-		return applyTransformers(code, [
-			...(options?.preFormat ? [new FormatTransformer()] : []),
-			...(options?.exportFunctions ? [new ExportFunctionsTransformer()] : []),
-			...(options?.infiniteLoopProtection
-				? [new InfiniteLoopProtectionTransformer()]
-				: []),
-			new FormatTransformer(),
-		])
-	} catch (error: any) {
-		const errorMessage = error.message
-		const line = error?.loc?.start?.line || 1
-		const column = error?.loc?.start?.column || 1
-
-		throw new ProcessSandboxedCodeError(errorMessage, line, column)
-	}
 }
 
 function prepareMainFile(
@@ -154,7 +116,7 @@ ${split.imports}
 	}
 }
 
-function prepareOtherFile(
+function prepareFile(
 	file: any,
 	main: any,
 	options: ProcessSandboxedCodeOptions,

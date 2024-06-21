@@ -6,28 +6,28 @@ export function createIframe(
 ): HTMLIFrameElement {
 	const iframe = document.createElement('iframe')
 
-  const iframeAttributes = {
-    sandbox: [
-      'allow-forms',
-      'allow-modals',
-      'allow-pointer-lock',
-      'allow-popups',
-      'allow-same-origin',
-      'allow-scripts',
-      'allow-top-navigation-by-user-activation',
-    ].join(' '),
-    frameborder: '0',
-    scrolling: 'no',
-    width: '100%',
-    height: '100%',
-    style: 'border: 0;',
-    title: 'Resultado',
-    allow: 'clipboard-read; clipboard-write;',
-  }
+	const iframeAttributes = {
+		sandbox: [
+			'allow-forms',
+			'allow-modals',
+			'allow-pointer-lock',
+			'allow-popups',
+			'allow-same-origin',
+			'allow-scripts',
+			'allow-top-navigation-by-user-activation',
+		].join(' '),
+		frameborder: '0',
+		scrolling: 'no',
+		width: '100%',
+		height: '100%',
+		style: 'border: 0;',
+		title: 'Resultado',
+		allow: 'clipboard-read; clipboard-write;',
+	}
 
-  for (const [key, value] of Object.entries(iframeAttributes)) {
-    iframe.setAttribute(key, value)
-  }
+	for (const [key, value] of Object.entries(iframeAttributes)) {
+		iframe.setAttribute(key, value)
+	}
 
 	iframe.srcdoc = `
 <html lang="es" class="w-full h-full">
@@ -42,7 +42,7 @@ export function createIframe(
 
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
       body {

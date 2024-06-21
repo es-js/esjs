@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.20-alpha.4",
+  "version": "0.0.20-alpha.5",
   "scripts": {
     "dev": "vite",
     "build": "pnpm lib:build && pnpm tailwind:build",
@@ -36,11 +36,6 @@
       "import": "./dist/render.js",
       "require": "./dist/render.cjs"
     },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils.js",
-      "require": "./dist/utils.cjs"
-    },
     "./runtime": {
       "types": "./dist/runtime/index.d.ts",
       "import": "./dist/runtime.js",
@@ -50,6 +45,16 @@
       "types": "./dist/compiler/index.d.ts",
       "import": "./dist/compiler.js",
       "require": "./dist/compiler.cjs"
+    },
+    "./utils/processSandboxedFiles": {
+      "types": "./dist/utils/processSandboxedFiles.d.ts",
+      "import": "./dist/utils/processSandboxedFiles.js",
+      "require": "./dist/utils/processSandboxedFiles.cjs"
+    },
+    "./utils/processSandboxedCode": {
+      "types": "./dist/utils/processSandboxedCode.d.ts",
+      "import": "./dist/utils/processSandboxedCode.js",
+      "require": "./dist/utils/processSandboxedCode.cjs"
     }
   },
   "main": "./dist/render.cjs",

@@ -1,5 +1,5 @@
 import { compile } from '@es-js/sandbox/compiler'
-import { processSandboxedCode } from '@es-js/sandbox/utils'
+import { processSandboxedCode } from '@es-js/sandbox/utils/processSandboxedCode'
 import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
 import javascriptObfuscator from 'javascript-obfuscator'

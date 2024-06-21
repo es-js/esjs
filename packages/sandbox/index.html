@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EsJS Sandbox</title>
+  </head>
+  <body style="margin: 0; padding: 0; height: 100vh;">
+    <div id="app" style="height: 100%"></div>
+    <script type="module" src="/src/render"></script>
+    <script type="module">
+      import { createSandbox } from '/src/render/index.ts'
+
+      createSandbox('app', {
+        files: [
+          {
+            name: 'codigo.esjs',
+            content: `importar { Terminal } desde '@es-js/terminal'
+            Terminal.escribir('Hola mundo')
+            consola.escribir('Hola mundo')`,
+            main: true,
+          },
+          {
+            name: 'pruebas.esjs',
+            content: '',
+          },
+        ],
+        importMap: JSON.stringify({
+            imports: {
+              '@es-js/sandbox/runtime': '/src/runtime',
+              '@es-js/': 'https://esm.run/@es-js/',
+              'npm/': 'https://cdn.jsdelivr.net/npm/',
+            },
+          }
+        ),
+      })
+    </script>
+  </body>
+</html>

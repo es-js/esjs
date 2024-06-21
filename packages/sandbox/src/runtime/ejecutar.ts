@@ -6,7 +6,7 @@ import {
 	processSandboxedFiles,
 	type SandboxFile,
 	type SandboxFileError,
-} from '../utils'
+} from '../utils/processSandboxedFiles'
 import {
 	changeSize,
 	getActiveTab,
@@ -50,7 +50,7 @@ export function getOptions() {
 }
 
 export async function loadPutout() {
-  _options.putout = await import('https://esm.sh/@putout/bundle@2')
+	_options.putout = await import('https://esm.sh/@putout/bundle@2')
 }
 
 export async function init(options: EjecutarOptions): Promise<void> {
@@ -67,8 +67,11 @@ export async function init(options: EjecutarOptions): Promise<void> {
 
 	previewTab(_options.previewTab)
 
-	if ((!_options.compiler || _options.compiler === 'essucrase') && !_options.putout) {
-    await loadPutout()
+	if (
+		(!_options.compiler || _options.compiler === 'essucrase') &&
+		!_options.putout
+	) {
+		await loadPutout()
 	}
 
 	await evalEditorFiles(_options)
@@ -188,12 +191,12 @@ function compileFile(file: SandboxFile, options?: CompileOptions) {
 }
 
 function compile(code: string, options: any): string {
-  if (!options.putout) {
-    return code
-  }
+	if (!options.putout) {
+		return code
+	}
 
-  const compiler: Compiler = new EssucraseCompiler(options.putout)
-  return compiler.compile(code, options as CompileOptions)
+	const compiler: Compiler = new EssucraseCompiler(options.putout)
+	return compiler.compile(code, options as CompileOptions)
 }
 
 async function evalCode(args: any) {

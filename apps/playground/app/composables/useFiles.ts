@@ -1,6 +1,7 @@
 import { splitCodeImports } from '@es-js/core/utils'
 import { compile, type SandboxCompileOptions } from '@es-js/sandbox/compiler'
-import { processSandboxedCode, type SandboxFileError } from '@es-js/sandbox/utils'
+import { processSandboxedCode } from '@es-js/sandbox/utils/processSandboxedCode'
+import { type SandboxFileError } from '@es-js/sandbox/utils/processSandboxedFiles'
 import { type Ref, ref } from 'vue'
 
 export interface SandboxFile {

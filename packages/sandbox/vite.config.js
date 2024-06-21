@@ -10,10 +10,11 @@ export default defineConfig({
 		lib: {
 			entry: {
 				render: './src/render/index.ts',
-				utils: './src/utils/index.ts',
 				runtime: './src/runtime/index.ts',
-				compiler: './src/compiler/index.ts',
-			},
+        compiler: './src/compiler/index.ts',
+        'utils/processSandboxedFiles': './src/utils/processSandboxedFiles.ts',
+        'utils/processSandboxedCode': './src/utils/processSandboxedCode.ts',
+      },
 			name: 'EsJS Sandbox',
 			formats: ['es', 'cjs'],
 		},
