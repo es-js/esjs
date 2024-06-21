@@ -1,5 +1,4 @@
 import {
-	compileFiles,
 	evalEditorFiles,
 	hidePreview,
 	previewTab,
@@ -106,7 +105,7 @@ async function handle_message(ev) {
 		try {
 			const { files, options } = args
 
-			await setFiles(files)
+			setFiles(files)
 			await evalEditorFiles(options)
 
 			send_ok()

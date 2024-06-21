@@ -49,6 +49,10 @@ export function getOptions() {
 	return _options
 }
 
+export async function loadPutout() {
+  _options.putout = await import('https://esm.sh/@putout/bundle@2')
+}
+
 export async function init(options: EjecutarOptions): Promise<void> {
 	_options = options
 
@@ -63,8 +67,8 @@ export async function init(options: EjecutarOptions): Promise<void> {
 
 	previewTab(_options.previewTab)
 
-	if (_options.compiler === 'essucrase' && !_options.putout) {
-		_options.putout = await import('https://esm.sh/@putout/bundle@2')
+	if ((!_options.compiler || _options.compiler === 'essucrase') && !_options.putout) {
+    await loadPutout()
 	}
 
 	await evalEditorFiles(_options)

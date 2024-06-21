@@ -6,25 +6,28 @@ export function createIframe(
 ): HTMLIFrameElement {
 	const iframe = document.createElement('iframe')
 
-	iframe.setAttribute(
-		'sandbox',
-		[
-			'allow-forms',
-			'allow-modals',
-			'allow-pointer-lock',
-			'allow-popups',
-			'allow-same-origin',
-			'allow-scripts',
-			'allow-top-navigation-by-user-activation',
-		].join(' '),
-	)
-	iframe.setAttribute('frameborder', '0')
-	iframe.setAttribute('scrolling', 'no')
-	iframe.setAttribute('width', '100%')
-	iframe.setAttribute('height', '100%')
-	iframe.setAttribute('style', 'border: 0;')
-	iframe.setAttribute('title', 'Resultado')
-	iframe.setAttribute('allow', 'clipboard-read; clipboard-write;')
+  const iframeAttributes = {
+    sandbox: [
+      'allow-forms',
+      'allow-modals',
+      'allow-pointer-lock',
+      'allow-popups',
+      'allow-same-origin',
+      'allow-scripts',
+      'allow-top-navigation-by-user-activation',
+    ].join(' '),
+    frameborder: '0',
+    scrolling: 'no',
+    width: '100%',
+    height: '100%',
+    style: 'border: 0;',
+    title: 'Resultado',
+    allow: 'clipboard-read; clipboard-write;',
+  }
+
+  for (const [key, value] of Object.entries(iframeAttributes)) {
+    iframe.setAttribute(key, value)
+  }
 
 	iframe.srcdoc = `
 <html lang="es" class="w-full h-full">
@@ -53,7 +56,7 @@ export function createIframe(
 
   <script type="importmap">
   ${options.importMap}
-  <\/script>
+  </script>
 
   <body class="w-full h-full m-0 p-0 bg-white dark:bg-[#121212]">
     <div class="w-full h-full flex flex-col">
