@@ -1,0 +1,14 @@
+const props = {
+  a: Numero,
+  b: Cadena,
+  c: Booleano,
+  d: Objeto,
+  e: Matriz,
+  f: Funcion,
+  g: Simbolo,
+  h: Fecha,
+  i: Error,
+  j: ExpReg,
+  k: Mapa,
+  l: Conjunto,
+}

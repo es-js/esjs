@@ -125,4 +125,86 @@ describe('known issues', () => {
 			},
 		)
 	})
+
+	it('convierte tipos de Vue', async () => {
+		assertEsJSToJS(
+			`
+      const props = {
+        a: Numero,
+        b: Cadena,
+        c: Booleano,
+        d: Objeto,
+        e: Matriz,
+        e2: Arreglo,
+        f: Funcion,
+        g: Simbolo,
+        h: Fecha,
+        i: Error,
+        j: ExpReg,
+        k: Mapa,
+        l: Conjunto,
+      }
+    `,
+			`
+      const props = {
+        a: Number,
+        b: String,
+        c: Boolean,
+        d: Object,
+        e: Array,
+        e2: Array,
+        f: Function,
+        g: Symbol,
+        h: Date,
+        i: Error,
+        j: RegExp,
+        k: Map,
+        l: Set,
+      }
+    `,
+			{
+				compiler: 'essucrase',
+			},
+		)
+
+		assertJSToESJS(
+			`
+      const props = {
+        a: Number,
+        b: String,
+        c: Boolean,
+        d: Object,
+        e: Array,
+        e2: Array,
+        f: Function,
+        g: Symbol,
+        h: Date,
+        i: Error,
+        j: RegExp,
+        k: Map,
+        l: Set,
+      }
+    `,
+			`
+      const props = {
+        a: Numero,
+        b: Cadena,
+        c: Booleano,
+        d: Objeto,
+        e: Matriz,
+        e2: Matriz,
+        f: Funcion,
+        g: Simbolo,
+        h: Fecha,
+        i: Error,
+        j: ExpReg,
+        k: Mapa,
+        l: Conjunto,
+      }
+    `,
+			{
+				compiler: 'essucrase',
+			},
+		)
+	})
 })

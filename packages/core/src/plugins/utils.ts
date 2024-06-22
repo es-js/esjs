@@ -6,6 +6,10 @@ export function setToEsJS(value: boolean) {
 	toEsJS = value
 }
 
+export function getToEsJS() {
+	return toEsJS
+}
+
 export function replaceObjectNew({
 	from,
 	to,
