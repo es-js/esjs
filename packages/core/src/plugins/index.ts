@@ -10,6 +10,7 @@ import * as promesa from './promesa'
 import * as soporte from './soporte'
 import * as funcion from './funcion'
 import * as json from './json'
+import * as tipos from './tipos'
 
 export const plugins = [
 	['consola', consola],
@@ -23,6 +24,7 @@ export const plugins = [
 	['funcion', funcion],
 	['soporte', soporte],
 	['json', json],
+	['tipos', tipos],
 ]
 
 export { setToEsJS }
