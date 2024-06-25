@@ -3,7 +3,7 @@ import type { Options } from 'prettier'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { ref, watch } from 'vue'
-import { compile } from '@es-js/sandbox/compiler'
+import { useCompiler } from '~/composables/useCompiler'
 
 export const loading = ref(true)
 
@@ -52,6 +52,8 @@ const EDITOR_DEFAULT_OPTIONS = {
   lineNumbersMinChars: 2,
 }
 
+const compiler = useCompiler()
+
 export const useEditor = () => {
   function setLanguage(value: 'esjs' | 'js') {
     language.value = value
@@ -62,25 +64,21 @@ export const useEditor = () => {
   }
 
   async function formatCode(code: string, fromLanguage: string = 'esjs', toLanguage: string = 'esjs') {
-    const putout = version.value === '0.x.0' ? await import('https://esm.sh/@putout/bundle@2') : undefined
-
     const compiledCode = fromLanguage === 'esjs'
-      ? compile(code, {
+      ? await compiler.compile(code, {
         from: 'esjs',
         to: 'js',
         compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',
-        putout,
       })
       : code
 
     const formattedCode = formatWithPrettier(compiledCode)
 
     return toLanguage === 'esjs'
-      ? compile(formattedCode, {
+      ? await compiler.compile(formattedCode, {
         from: 'js',
         to: 'esjs',
         compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',
-        putout,
       })
       : formattedCode
   }

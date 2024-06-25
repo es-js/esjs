@@ -1,4 +1,4 @@
-import { compile } from '@es-js/sandbox/compiler'
+import { EssucraseCompiler } from '@es-js/core/compiler/essucrase.compiler'
 import { processSandboxedCode } from '@es-js/sandbox/utils/processSandboxedCode'
 import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
@@ -12,16 +12,20 @@ export default defineEventHandler(async(event) => {
     code: z.string(),
   }))
 
-  const obfuscatedCode = getObfuscatedCode(body.data.code)
+  const obfuscatedCode = await getObfuscatedCode(body?.data?.code ?? '')
 
   return {
     obfuscatedCode,
   }
 })
 
-function getObfuscatedCode(code: string) {
+async function getObfuscatedCode(code: string) {
+  const putout = await import('https://esm.sh/@putout/bundle@2')
+
+  const compiler = new EssucraseCompiler(putout)
+
   const compiledCode = processSandboxedCode(
-    compile(code),
+    compiler.compile(code, {}),
   )
 
   const splittedCode = splitCodeImports(compiledCode)

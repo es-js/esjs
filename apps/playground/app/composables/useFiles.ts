@@ -1,8 +1,9 @@
 import { splitCodeImports } from '@es-js/core/utils'
-import { compile, type SandboxCompileOptions } from '@es-js/sandbox/compiler'
 import { processSandboxedCode } from '@es-js/sandbox/utils/processSandboxedCode'
 import { type SandboxFileError } from '@es-js/sandbox/utils/processSandboxedFiles'
 import { type Ref, ref } from 'vue'
+import { useCompiler } from '~/composables/useCompiler'
+import { type CompileOptions } from '@es-js/core'
 
 export interface SandboxFile {
   name: string;
@@ -163,6 +164,8 @@ const files: Ref<Files> = ref([
 
 const loading = ref(true)
 
+const compiler = useCompiler()
+
 export const useFiles = () => {
   function setFileContent(name: string, content: string) {
     updateFile(name, { content })
@@ -222,13 +225,12 @@ export const useFiles = () => {
     loading.value = value
   }
 
-  async function compileFiles(options: SandboxCompileOptions) {
-    options.putout = options.compiler === 'essucrase' ? await import('https://esm.sh/@putout/bundle@2') : undefined
-
-    files
+  async function compileFiles(options: CompileOptions) {
+    const filesToCompile =     files
       .value
       .filter((file: SandboxFile) => ['esjs', 'js'].includes(file.name.split('.').slice(-1)[0]))
-      .forEach((file: SandboxFile) => {
+
+    for (const file of filesToCompile) {
         if (!file.compiled) {
           file.compiled = {
             esjs: '',
@@ -236,12 +238,12 @@ export const useFiles = () => {
           }
         }
 
-        const { compiled: compiledEsJS, error: errorEsJS } = tryToCompile(file.content, {
+        const { compiled: compiledEsJS, error: errorEsJS } = await tryToCompile(file.content, {
           ...options,
           to: 'esjs',
         })
 
-        const { compiled: compiledJS, error: errorJS } = tryToCompile(file.content, {
+        const { compiled: compiledJS, error: errorJS } = await tryToCompile(file.content, {
           ...options,
           to: 'js',
         })
@@ -253,14 +255,14 @@ export const useFiles = () => {
         if (file.error) {
           file.sandboxed = undefined
         }
-      })
+      }
   }
 
-  function tryToCompile(code: string, options: SandboxCompileOptions) {
+  async function tryToCompile(code: string, options: SandboxCompileOptions) {
     let compiled = ''
     let error: SandboxFileError | undefined
     try {
-      compiled = compile(code, options)
+      compiled = await compiler.compile(code, options)
     } catch (exception: any) {
       compiled = code
       const line = exception.loc?.line ?? exception.line ?? 1
@@ -279,7 +281,7 @@ export const useFiles = () => {
     }
   }
 
-  function tryToProcessSandboxedCode(code: string, options: SandboxCompileOptions) {
+  function tryToProcessSandboxedCode(code: string, options: CompileOptions) {
     let sandboxed: {
       imports: string;
       codeWithoutImports: string;
