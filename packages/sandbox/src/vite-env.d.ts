@@ -2,8 +2,4 @@
 
 declare module 'espree'
 
-// declare module 'SandboxFile' {
-//   export interface SandboxFile {
-//     converted?: any;
-//   }
-// }
+declare module '@putout/bundle'
