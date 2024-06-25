@@ -26,7 +26,7 @@
     "@davestewart/nuxt-scrollbar": "^1.0.0",
     "@es-js/core": "0.1.0-beta.6",
     "@es-js/language-tools": "^0.1.0",
-    "@es-js/sandbox": "0.0.20-alpha.5",
+    "@es-js/sandbox": "0.0.20-alpha.7",
     "@fontsource/fira-mono": "^5.0.13",
     "@iconify-json/mdi": "^1.1.66",
     "@nuxt/content": "^2.12.1",
