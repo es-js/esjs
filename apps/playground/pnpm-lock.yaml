@@ -57,6 +57,9 @@ importers:
       '@nuxtjs/supabase':
         specifier: ^1.2.2
         version: 1.2.2(rollup@4.17.2)
+      '@putout/bundle':
+        specifier: ^3.14.0
+        version: 3.14.0
       '@types/node':
         specifier: ^18.19.24
         version: 18.19.24
@@ -1262,6 +1265,10 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
+  '@putout/bundle@3.14.0':
+    resolution: {integrity: sha512-J02CogvHOgvowg2FnFiBY6CEEXls8aKv16z/QuUJqw7tkZjzF7T2mE/BIDEHQ7NXHCIQrxvy2UQ7oAAXyKERzg==}
+    engines: {node: '>=18'}
 
   '@rollup/plugin-alias@5.1.0':
     resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
@@ -8279,6 +8286,8 @@ snapshots:
   '@polka/url@1.0.0-next.25': {}
 
   '@popperjs/core@2.11.8': {}
+
+  '@putout/bundle@3.14.0': {}
 
   '@rollup/plugin-alias@5.1.0(rollup@4.17.2)':
     dependencies:

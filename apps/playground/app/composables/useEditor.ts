@@ -65,7 +65,7 @@ export const useEditor = () => {
 
   async function formatCode(code: string, fromLanguage: string = 'esjs', toLanguage: string = 'esjs') {
     const compiledCode = fromLanguage === 'esjs'
-      ? await compiler.compile(code, {
+      ? compiler.compile(code, {
         from: 'esjs',
         to: 'js',
         compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',
@@ -75,7 +75,7 @@ export const useEditor = () => {
     const formattedCode = formatWithPrettier(compiledCode)
 
     return toLanguage === 'esjs'
-      ? await compiler.compile(formattedCode, {
+      ? compiler.compile(formattedCode, {
         from: 'js',
         to: 'esjs',
         compiler: version.value === '0.x.0' ? 'essucrase' : 'esbabel',

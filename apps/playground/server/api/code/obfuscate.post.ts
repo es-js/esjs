@@ -4,6 +4,7 @@ import { splitCodeImports } from '@es-js/core/utils'
 import { zh } from 'h3-zod'
 import javascriptObfuscator from 'javascript-obfuscator'
 import { z } from 'zod'
+import putout from '@putout/bundle'
 
 const { obfuscate } = javascriptObfuscator
 
@@ -20,12 +21,13 @@ export default defineEventHandler(async(event) => {
 })
 
 async function getObfuscatedCode(code: string) {
-  const putout = await import('https://esm.sh/@putout/bundle@2')
-
   const compiler = new EssucraseCompiler(putout)
 
   const compiledCode = processSandboxedCode(
-    compiler.compile(code, {}),
+    compiler.compile(code, {
+      from: 'esjs',
+      to: 'js',
+    }),
   )
 
   const splittedCode = splitCodeImports(compiledCode)

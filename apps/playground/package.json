@@ -36,6 +36,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/supabase": "^1.2.2",
+    "@putout/bundle": "^3.14.0",
     "@types/node": "^18.19.24",
     "@types/prettier": "^2.7.3",
     "@vueuse/nuxt": "^10.9.0",

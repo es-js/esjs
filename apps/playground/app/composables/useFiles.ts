@@ -1,9 +1,7 @@
-import { splitCodeImports } from '@es-js/core/utils'
-import { processSandboxedCode } from '@es-js/sandbox/utils/processSandboxedCode'
+import { type CompileOptions } from '@es-js/core'
 import { type SandboxFileError } from '@es-js/sandbox/utils/processSandboxedFiles'
 import { type Ref, ref } from 'vue'
 import { useCompiler } from '~/composables/useCompiler'
-import { type CompileOptions } from '@es-js/core'
 
 export interface SandboxFile {
   name: string;
@@ -238,12 +236,12 @@ export const useFiles = () => {
           }
         }
 
-        const { compiled: compiledEsJS, error: errorEsJS } = await tryToCompile(file.content, {
+        const { compiled: compiledEsJS, error: errorEsJS } = tryToCompile(file.content, {
           ...options,
           to: 'esjs',
         })
 
-        const { compiled: compiledJS, error: errorJS } = await tryToCompile(file.content, {
+        const { compiled: compiledJS, error: errorJS } = tryToCompile(file.content, {
           ...options,
           to: 'js',
         })
@@ -258,11 +256,11 @@ export const useFiles = () => {
       }
   }
 
-  async function tryToCompile(code: string, options: SandboxCompileOptions) {
+  function tryToCompile(code: string, options: CompileOptions) {
     let compiled = ''
     let error: SandboxFileError | undefined
     try {
-      compiled = await compiler.compile(code, options)
+      compiled = compiler.compile(code, options)
     } catch (exception: any) {
       compiled = code
       const line = exception.loc?.line ?? exception.line ?? 1
@@ -277,44 +275,6 @@ export const useFiles = () => {
     }
     return {
       compiled,
-      error,
-    }
-  }
-
-  function tryToProcessSandboxedCode(code: string, options: CompileOptions) {
-    let sandboxed: {
-      imports: string;
-      codeWithoutImports: string;
-    } = {
-      imports: '',
-      codeWithoutImports: '',
-    }
-    let error: SandboxFileError | undefined
-    try {
-      const processed = processSandboxedCode(code, {
-        infiniteLoopProtection: options.infiniteLoopProtection,
-      })
-
-      const split = splitCodeImports(processed)
-
-      sandboxed = {
-        imports: split.imports,
-        codeWithoutImports: split.codeWithoutImports,
-      }
-    } catch (exception: any) {
-      sandboxed = {
-        imports: '',
-        codeWithoutImports: '',
-      }
-      error = {
-        message: exception.message,
-        line: exception.line || 1,
-        column: exception.column || 1,
-        stack: exception.stack,
-      }
-    }
-    return {
-      sandboxed,
       error,
     }
   }
