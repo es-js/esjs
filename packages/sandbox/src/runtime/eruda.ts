@@ -252,7 +252,7 @@ function fixDevToolsPadding() {
 }
 
 function getErudaConfig() {
-  // @ts-ignore
+	// @ts-ignore
 	return initialized && eruda && eruda.get('')?.config
 }
 

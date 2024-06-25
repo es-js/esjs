@@ -1,6 +1,5 @@
 import type { AvailableLanguages, CompileOptions, Compiler } from '@es-js/core'
 import { EssucraseCompiler } from '@es-js/core/compiler/essucrase.compiler'
-import putout from '@putout/bundle'
 import { compileModulesForPreview } from '../compiler'
 import { orchestrator, OrchestratorFile } from '../compiler/orchestrator'
 import {
@@ -31,6 +30,7 @@ export interface EjecutarOptions {
 	fromLanguage?: AvailableLanguages
 	toLanguage?: AvailableLanguages
 	compiler?: 'esbabel' | 'essucrase'
+	putout?: any
 }
 
 export interface ProcessSandboxedCodeOptions {
@@ -49,6 +49,10 @@ export function getOptions() {
 	return _options
 }
 
+export async function loadPutout() {
+	_options.putout = await import('https://esm.sh/@putout/bundle@2')
+}
+
 export async function init(options: EjecutarOptions): Promise<void> {
 	_options = options
 
@@ -62,6 +66,13 @@ export async function init(options: EjecutarOptions): Promise<void> {
 	hidePreview(_options.hidePreview)
 
 	previewTab(_options.previewTab)
+
+	if (
+		(!_options.compiler || _options.compiler === 'essucrase') &&
+		!_options.putout
+	) {
+		await loadPutout()
+	}
 
 	await evalEditorFiles(_options)
 }
@@ -173,11 +184,18 @@ function compileFile(file: SandboxFile, options?: CompileOptions) {
 		file.compiled = {}
 	}
 
-	return compile(file.content, options)
+	return compile(file.content, {
+		...options,
+		putout: getOptions().putout,
+	})
 }
 
 function compile(code: string, options: any): string {
-	const compiler: Compiler = new EssucraseCompiler(putout)
+	if (!options.putout) {
+		return code
+	}
+
+	const compiler: Compiler = new EssucraseCompiler(options.putout)
 	return compiler.compile(code, options as CompileOptions)
 }
 

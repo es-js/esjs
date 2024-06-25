@@ -14,9 +14,6 @@ importers:
       '@es-js/tiza':
         specifier: workspace:^
         version: link:../tiza
-      '@putout/bundle':
-        specifier: ^3.14.0
-        version: 3.14.0
       '@types/escodegen':
         specifier: ^0.0.7
         version: 0.0.7
@@ -393,10 +390,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@putout/bundle@3.14.0':
-    resolution: {integrity: sha512-J02CogvHOgvowg2FnFiBY6CEEXls8aKv16z/QuUJqw7tkZjzF7T2mE/BIDEHQ7NXHCIQrxvy2UQ7oAAXyKERzg==}
-    engines: {node: '>=18'}
 
   '@rollup/pluginutils@5.0.5':
     resolution: {integrity: sha512-6aEYR910NyP73oHiJglti74iRyOwgFU4x3meH/H8OJx6Ry0j6cOVZ5X/wTvub7G7Ao6qaHBEaNsV3GLJkSsF+Q==}
@@ -1568,8 +1561,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
-
-  '@putout/bundle@3.14.0': {}
 
   '@rollup/pluginutils@5.0.5(rollup@4.6.1)':
     dependencies:

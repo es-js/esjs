@@ -44,9 +44,9 @@ function getMarkerLines(
 	markerLines: MarkerLines
 } {
 	const startLoc: Location = {
-    // @ts-ignore
+		// @ts-ignore
 		column: 0,
-    // @ts-ignore
+		// @ts-ignore
 		line: -1,
 		...loc.start,
 	}

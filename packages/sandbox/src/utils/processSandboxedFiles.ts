@@ -44,7 +44,7 @@ export function processSandboxedFiles(
 	}
 
 	const main = prepareMainFile(
-    // @ts-ignore
+		// @ts-ignore
 		files.find((file: any) => file.name === MAIN_FILE),
 		options,
 	)

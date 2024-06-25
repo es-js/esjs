@@ -28,8 +28,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@es-js/sandbox':
-        specifier: 0.0.20-alpha.7
-        version: 0.0.20-alpha.7
+        specifier: 0.0.20-alpha.8
+        version: 0.0.20-alpha.8
       '@fontsource/fira-mono':
         specifier: ^5.0.13
         version: 5.0.13
@@ -484,8 +484,8 @@ packages:
   '@es-js/language-tools@0.1.0':
     resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
 
-  '@es-js/sandbox@0.0.20-alpha.7':
-    resolution: {integrity: sha512-VZ7RygFMgWH0Ft6OUdO98LQwc4T0jU5jZkgvZj7t5DmdLf2iV7+0Oh1/HAW5itdsM2iJ7ybBcl+WQthG52K0Yg==}
+  '@es-js/sandbox@0.0.20-alpha.8':
+    resolution: {integrity: sha512-3MLSJJIim4hTvkU6+3w3gvQMaiwh3Ay9VQxM3K9e0G96mqn7eJKnwi+tEh8c0hRHhxVkoYToPwxRRASXpH7gzg==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -7012,7 +7012,7 @@ snapshots:
 
   '@es-js/language-tools@0.1.0': {}
 
-  '@es-js/sandbox@0.0.20-alpha.7': {}
+  '@es-js/sandbox@0.0.20-alpha.8': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
