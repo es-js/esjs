@@ -2,6 +2,9 @@ import { type CompileOptions } from '@es-js/core'
 import { type SandboxFileError } from '@es-js/sandbox/utils/processSandboxedFiles'
 import { type Ref, ref } from 'vue'
 import { useCompiler } from '~/composables/useCompiler'
+import packageJson from '../../package.json'
+
+const sandboxVersion = packageJson.devDependencies['@es-js/sandbox']
 
 export interface SandboxFile {
   name: string;
@@ -147,6 +150,7 @@ const files: Ref<Files> = ref([
     name: FILE_IMPORT_MAP,
     content: `{
   "imports": {
+    "@es-js/sandbox/runtime" : "https://cdn.jsdelivr.net/npm/@es-js/sandbox@${sandboxVersion}/runtime/+esm",
     "@es-js/" : "https://esm.run/@es-js/",
     "npm/" : "https://cdn.jsdelivr.net/npm/"
   }
