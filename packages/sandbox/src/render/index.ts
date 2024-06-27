@@ -1,8 +1,12 @@
 import type { EjecutarOptions } from '../runtime/ejecutar'
 import { createIframe } from './iframe'
+import packageJson from '../../package.json'
+
+export const version = packageJson.version
 
 const DEFAULT_IMPORTS_MAP = {
 	imports: {
+		'@es-js/sandbox/runtime': `https://cdn.jsdelivr.net/npm/@es-js/sandbox@${version}/runtime/+esm`,
 		'@es-js/': 'https://esm.run/@es-js/',
 		'npm/': 'https://cdn.jsdelivr.net/npm/',
 	},
