@@ -1,0 +1,42 @@
+<eshtml>
+   <cabecera>
+      <meta charset="UTF-8">
+      <titulo>Plantilla de Ejemplo en EsHTML</titulo>
+      <recurso rel="stylesheet" href="styles.css">
+   </cabecera>
+   <cuerpo>
+      <t1>Encabezado 1</t1>
+      <t2>Encabezado 2</t2>
+      <t3>Encabezado 3</t3>
+      <t4>Encabezado 4</t4>
+      <t5>Encabezado 5</t5>
+      <t6>Encabezado 6</t6>
+      <parrafo> Este es un <enlace href="#">enlace</enlace> en un párrafo.</parrafo>
+      <t2>Ejemplo de Tabla</t2>
+      <tabla>
+         <caption>Caption de la tabla</caption>
+         <thead>
+            <tr>
+               <th>Encabezado 1</th>
+               <th>Encabezado 2</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>Dato 1</td>
+               <td>Dato 2</td>
+            </tr>
+         </tbody>
+         <pie-de-tabla>
+            <tr>
+               <td>Pie 1</td>
+               <td>Pie 2</td>
+            </tr>
+         </pie-de-tabla>
+      </tabla>
+      <lista-desordenada>
+         <elemento-de-lista>Elemento 1</elemento-de-lista>
+         <elemento-de-lista>Elemento 2</elemento-de-lista>
+      </lista-desordenada>
+   </cuerpo>
+</eshtml>
