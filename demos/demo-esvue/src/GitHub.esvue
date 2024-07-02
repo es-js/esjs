@@ -1,6 +1,5 @@
-----
-<template>
-	<div class="grid place-items-center">
-		<a class="github-button" href="https://github.com/es-js/esjs" data-icon="octicon-star" data-size="large" aria-label="Star es-js/esjs on GitHub">Dejá tu estrella en GitHub!</a>
-	</div>
-</template>
+<plantilla>
+	<division class="grid place-items-center">
+		<enlace class="github-button" href="https://github.com/es-js/esjs" data-icon="octicon-star" data-size="large" aria-label="Star es-js/esjs on GitHub">Dejá tu estrella en GitHub!</enlace>
+	</division>
+</plantilla>

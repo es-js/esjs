@@ -1,4 +1,4 @@
----
+<codigo configuracion>
 import { ref } from 'vue'
 
 const contador = ref(0)
@@ -10,17 +10,16 @@ const aumentarContador = () => {
 const resetearContador = () => {
   contador.value = 0
 }
----
-<!--<script setup lang="ts">-->
-<!--</script>-->
-<template>
-  <div>
-    <div>
-      <h1>Hola desde EsJS + EsVue!</h1>
-      <span>Contador: {{contador}}</span>
-      <button @click="aumentarContador()">Aumentar contador</button>
-      <button @click="resetearContador()">Resetear contador</button>
-    </div>
-  </div>
-</template>
+</codigo>
+
+<plantilla>
+  <division>
+    <division>
+      <t1>Hola desde EsJS + EsVue!</t1>
+      <seccion>Contador: {{contador}}</seccion>
+      <boton @click="aumentarContador()">Aumentar contador</boton>
+      <boton @click="resetearContador()">Resetear contador</boton>
+    </division>
+  </division>
+</plantilla>
 
