@@ -1,42 +1,109 @@
-<eshtml>
-   <cabecera>
-      <meta charset="UTF-8">
-      <titulo>Plantilla de Ejemplo en EsHTML</titulo>
-      <recurso rel="stylesheet" href="styles.css">
-   </cabecera>
-   <cuerpo>
-      <t1>Encabezado 1</t1>
-      <t2>Encabezado 2</t2>
-      <t3>Encabezado 3</t3>
-      <t4>Encabezado 4</t4>
-      <t5>Encabezado 5</t5>
-      <t6>Encabezado 6</t6>
-      <parrafo> Este es un <enlace href="#">enlace</enlace> en un párrafo.</parrafo>
-      <t2>Ejemplo de Tabla</t2>
-      <tabla>
-         <caption>Caption de la tabla</caption>
-         <thead>
-            <tr>
-               <th>Encabezado 1</th>
-               <th>Encabezado 2</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td>Dato 1</td>
-               <td>Dato 2</td>
-            </tr>
-         </tbody>
-         <pie-de-tabla>
-            <tr>
-               <td>Pie 1</td>
-               <td>Pie 2</td>
-            </tr>
-         </pie-de-tabla>
-      </tabla>
-      <lista-desordenada>
-         <elemento-de-lista>Elemento 1</elemento-de-lista>
-         <elemento-de-lista>Elemento 2</elemento-de-lista>
-      </lista-desordenada>
-   </cuerpo>
+<eshtml idioma="es">
+  <cabecera>
+    <meta conjunto-caracteres="UTF-8">
+    <base referencia="https://ejemplo.com/">
+    <titulo>Plantilla de Ejemplo en EsHTML</titulo>
+    <estilo>
+      body { font-family: Arial, sans-serif; }
+    </estilo>
+    <codigo>
+      consola.escribir("Hola desde EsJS")
+    </codigo>
+  </cabecera>
+  <cuerpo>
+    <encabezado>
+      <t1>EsHTML: HTML en Español</t1>
+      <t2>Subtítulo</t2>
+      <t3>Subsubtítulo</t3>
+      <t4>Nivel 4</t4>
+      <t5>Nivel 5</t5>
+      <t6>Nivel 6</t6>
+    </encabezado>
+    <navegacion>
+      <menu>
+        <lista-elemento><enlace referencia="#seccion1">Sección 1</enlace></lista-elemento>
+        <lista-elemento><enlace referencia="#seccion2">Sección 2</enlace></lista-elemento>
+      </menu>
+    </navegacion>
+    <principal>
+      <seccion id="seccion1">
+        <articulo>
+          <t2>Artículo 1</t2>
+          <parrafo>Este es un <enfasis>párrafo</enfasis> con <fuerte>texto importante</fuerte>.</parrafo>
+          <cita-bloque>
+            <parrafo>Esta es una cita en bloque.</parrafo>
+          </cita-bloque>
+          <preformateado>
+Este es texto preformateado
+Mantiene    los    espacios
+</preformateado>
+          <codigo-bloque>
+            const saludo = "Hola, EsHTML!";
+            console.log(saludo);
+          </codigo-bloque>
+        </articulo>
+      </seccion>
+      <seccion id="seccion2">
+        <t2>Listas y Tablas</t2>
+        <lista-ordenada>
+          <lista-elemento>Primer elemento</lista-elemento>
+          <lista-elemento>Segundo elemento</lista-elemento>
+        </lista-ordenada>
+        <lista-desordenada>
+          <lista-elemento>Elemento no ordenado</lista-elemento>
+          <lista-elemento>Otro elemento</lista-elemento>
+        </lista-desordenada>
+        <lista-definiciones>
+          <termino-definicion>EsHTML</termino-definicion>
+          <definicion-descripcion>HTML en español</definicion-descripcion>
+        </lista-definiciones>
+        <tabla>
+          <tabla-leyenda>Tabla de Ejemplo</tabla-leyenda>
+          <tabla-encabezado>
+            <tabla-fila>
+              <tabla-celda-encabezado>Encabezado 1</tabla-celda-encabezado>
+              <tabla-celda-encabezado>Encabezado 2</tabla-celda-encabezado>
+            </tabla-fila>
+          </tabla-encabezado>
+          <tabla-cuerpo>
+            <tabla-fila>
+              <tabla-celda>Celda 1</tabla-celda>
+              <tabla-celda>Celda 2</tabla-celda>
+            </tabla-fila>
+          </tabla-cuerpo>
+          <tabla-pie>
+            <tabla-fila>
+              <tabla-celda extender-columnas="2">Pie de tabla</tabla-celda>
+            </tabla-fila>
+          </tabla-pie>
+        </tabla>
+      </seccion>
+      <seccion>
+        <t2>Otros Elementos</t2>
+        <detalles>
+          <resumen>Haz clic para más información</resumen>
+          <parrafo>Aquí hay más información detallada.</parrafo>
+        </detalles>
+        <dialogo id="miDialogo">
+          <parrafo>Este es un cuadro de diálogo.</parrafo>
+          <boton id="cerrarDialogo">Cerrar</boton>
+        </dialogo>
+        <medidor valor="70" minimo="0" maximo="100">70%</medidor>
+        <progreso valor="70" maximo="100">70%</progreso>
+        <marcado>Texto resaltado</marcado>
+        <hora fechahora="2024-07-05">5 de julio de 2024</hora>
+        <salida para="a b">Resultado</salida>
+      </seccion>
+      <lateral>
+        <t2>Contenido Lateral</t2>
+        <parrafo>Este es un contenido al lado del contenido principal.</parrafo>
+      </lateral>
+    </principal>
+    <pie-pagina>
+      <parrafo>&copy; 2024 EsHTML. Todos los derechos reservados.</parrafo>
+      <direccion>
+        Contacto: <enlace referencia="mailto:info@eshtml.com">info@eshtml.com</enlace>
+      </direccion>
+    </pie-pagina>
+  </cuerpo>
 </eshtml>

@@ -1,6 +1,7 @@
 import { parser } from 'posthtml-parser'
 import { render } from 'posthtml-render'
-import { getDictionary } from './keywords'
+import { transformAttr } from './attrs'
+import { getDictionary } from './tags'
 
 export interface CompileOptions {
 	from?: 'eshtml' | 'html'
@@ -19,18 +20,20 @@ export function compile(
 
 		const dictionary = getDictionary(options?.to === 'eshtml')
 
-		const newTree = compileTreeRecursive(tree, dictionary)
+		const newTree = compileTreeRecursive(tree, dictionary, options)
 
-		const output = render(newTree)
-
-		return output
+		return render(newTree)
 	} catch (error) {
 		console.error({ error })
 		return content
 	}
 }
 
-function compileTreeRecursive(tree: any, dictionary: Map<string, string>) {
+function compileTreeRecursive(
+	tree: any,
+	dictionary: Map<string, string>,
+	options: CompileOptions,
+): any {
 	return tree.map((node: any) => {
 		if (typeof node === 'string') {
 			return node
@@ -48,10 +51,12 @@ function compileTreeRecursive(tree: any, dictionary: Map<string, string>) {
 			newTag = transformTag(tag, dictionary)
 		}
 
-		const newAttrs = attrs
+		const htmlTag = options?.to === 'html' ? newTag : tag
+
+		const newAttrs = transformAttrs(htmlTag, attrs, options)
 
 		const newContent = content
-			? compileTreeRecursive(content, dictionary)
+			? compileTreeRecursive(content, dictionary, options)
 			: null
 
 		return {
@@ -67,4 +72,23 @@ function transformTag(
 	dictionary: Map<string, string>,
 ): string {
 	return dictionary.get(tagName.toLowerCase()) || tagName
+}
+
+function transformAttrs(
+	tagName: string,
+	attrs: any,
+	options: CompileOptions,
+): any {
+	if (!attrs) {
+		return attrs
+	}
+
+	const newAttrs = {}
+
+	for (const key in attrs) {
+		const newKey = transformAttr(tagName, key, options)
+		newAttrs[newKey] = attrs[key]
+	}
+
+	return newAttrs
 }

@@ -1,0 +1,233 @@
+<eshtml lang="es">
+  <cabecera>
+    <meta charset="UTF-8">
+    <base href="https://ejemplo.com/">
+    <titulo>Plantilla de Ejemplo en EsHTML</titulo>
+    <recurso rel="stylesheet" href="estilos.css">
+      <estilo>
+        cuerpo { font-family: Arial, sans-serif; }
+      </estilo>
+      <codigo>
+        consola.escribir("Hola desde EsJS")
+      </codigo>
+  </cabecera>
+  <cuerpo>
+    <encabezado>
+      <t1>EsHTML: HTML en Español</t1>
+      <t2>Subtítulo</t2>
+      <t3>Subsubtítulo</t3>
+      <t4>Nivel 4</t4>
+      <t5>Nivel 5</t5>
+      <t6>Nivel 6</t6>
+    </encabezado>
+    <navegacion>
+      <menu>
+        <elemento-lista><enlace href="#seccion1">Sección 1</enlace></elemento-lista>
+        <elemento-lista><enlace href="#seccion2">Sección 2</enlace></elemento-lista>
+      </menu>
+    </navegacion>
+    <contenido-principal>
+      <seccion id="seccion1">
+        <articulo>
+          <t2>Artículo 1</t2>
+          <parrafo>Este es un <enfasis>párrafo</enfasis> con <fuerte>texto importante</fuerte>.</parrafo>
+          <cita-en-bloque>
+            <parrafo>Esta es una cita en bloque.</parrafo>
+          </cita-en-bloque>
+          <preformateado>
+            Este es texto preformateado
+            Mantiene    los    espacios
+          </preformateado>
+          <bloque-codigo>
+            const saludo = "Hola, EsHTML!";
+            console.log(saludo);
+          </bloque-codigo>
+        </articulo>
+      </seccion>
+      <seccion id="seccion2">
+        <t2>Listas y Tablas</t2>
+        <lista-ordenada>
+          <elemento-lista>Primer elemento</elemento-lista>
+          <elemento-lista>Segundo elemento</elemento-lista>
+        </lista-ordenada>
+        <lista-desordenada>
+          <elemento-lista>Elemento no ordenado</elemento-lista>
+          <elemento-lista>Otro elemento</elemento-lista>
+        </lista-desordenada>
+        <lista-definiciones>
+          <termino-definicion>EsHTML</termino-definicion>
+          <definicion-descripcion>HTML en español</definicion-descripcion>
+        </lista-definiciones>
+        <tabla>
+          <caption>Tabla de Ejemplo</caption>
+          <encabezado-tabla>
+            <fila-tabla>
+              <encabezado-celda>Encabezado 1</encabezado-celda>
+              <encabezado-celda>Encabezado 2</encabezado-celda>
+            </fila-tabla>
+          </encabezado-tabla>
+          <cuerpo-tabla>
+            <fila-tabla>
+              <celda-tabla>Celda 1</celda-tabla>
+              <celda-tabla>Celda 2</celda-tabla>
+            </fila-tabla>
+          </cuerpo-tabla>
+          <pie-tabla>
+            <fila-tabla>
+              <celda-tabla colspan="2">Pie de tabla</celda-tabla>
+            </fila-tabla>
+          </pie-tabla>
+        </tabla>
+      </seccion>
+      <seccion>
+        <t2>Elementos Multimedia</t2>
+        <imagen src="imagen.jpg" alt="Descripción de la imagen">
+          <audio controls>
+            <fuente src="audio.mp3" type="audio/mpeg">
+              Tu navegador no soporta el elemento de audio.
+          </audio>
+          <video controls>
+            <fuente src="video.mp4" type="video/mp4">
+              Tu navegador no soporta el elemento de video.
+          </video>
+          <canvas id="miCanvas" width="200" height="100"></canvas>
+      </seccion>
+      <seccion>
+        <t2>Formulario</t2>
+        <formulario action="/enviar" method="post">
+          <conjunto-campos>
+            <leyenda>Información Personal</leyenda>
+            <etiqueta for="nombre">Nombre:</etiqueta>
+            <entrada type="text" id="nombre" name="nombre" required>
+              <etiqueta for="email">Email:</etiqueta>
+              <entrada type="email" id="email" name="email" required>
+                <etiqueta for="fecha">Fecha:</etiqueta>
+                <entrada type="date" id="fecha" name="fecha">
+                  <etiqueta for="color">Color favorito:</etiqueta>
+                  <entrada type="color" id="color" name="color">
+                    <etiqueta for="rango">Rango:</etiqueta>
+                    <entrada type="range" id="rango" name="rango" min="0" max="100">
+          </conjunto-campos>
+          <conjunto-campos>
+            <leyenda>Otras opciones</leyenda>
+            <etiqueta for="opciones">Selecciona una opción:</etiqueta>
+            <seleccion id="opciones" name="opciones">
+              <grupo-opciones label="Grupo 1">
+                <opcion value="1">Opción 1</opcion>
+                <opcion value="2">Opción 2</opcion>
+              </grupo-opciones>
+              <grupo-opciones label="Grupo 2">
+                <opcion value="3">Opción 3</opcion>
+                <opcion value="4">Opción 4</opcion>
+              </grupo-opciones>
+            </seleccion>
+            <etiqueta for="lista">Datalist:</etiqueta>
+            <entrada list="frutas" id="lista" name="fruta">
+              <lista-datos id="frutas">
+                <opcion value="Manzana">
+                  <opcion value="Banana">
+                    <opcion value="Cereza">
+              </lista-datos>
+          </conjunto-campos>
+          <etiqueta for="mensaje">Mensaje:</etiqueta>
+          <area-texto id="mensaje" name="mensaje" rows="4" required></area-texto>
+          <boton type="submit">Enviar</boton>
+          <boton type="reset">Reiniciar</boton>
+        </formulario>
+      </seccion>
+      <seccion>
+        <t2>Otros Elementos</t2>
+        <detalles>
+          <resumen>Haz clic para más información</resumen>
+          <parrafo>Aquí hay más información detallada.</parrafo>
+        </detalles>
+        <dialogo id="miDialogo">
+          <parrafo>Este es un cuadro de diálogo.</parrafo>
+          <boton id="cerrarDialogo">Cerrar</boton>
+        </dialogo>
+        <medidor value="70" min="0" max="100">70%</medidor>
+        <progreso value="70" max="100">70%</progreso>
+        <marcado>Texto resaltado</marcado>
+        <hora datetime="2024-07-05">5 de julio de 2024</hora>
+        <salida for="a b">Resultado</salida>
+        <svg width="100" height="100">
+          <circulo cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+        </svg>
+      </seccion>
+      <al-lado>
+        <t2>Contenido Lateral</t2>
+        <parrafo>Este es un contenido al lado del contenido principal.</parrafo>
+      </al-lado>
+    </contenido-principal>
+    <pie-pagina>
+      <parrafo>&copy; 2024 EsHTML. Todos los derechos reservados.</parrafo>
+      <direccion>
+        Contacto: <enlace href="mailto:info@eshtml.com">info@eshtml.com</enlace>
+      </direccion>
+    </pie-pagina>
+    <applet code="MiApplet.class" width="300" height="200">
+      Tu navegador no soporta applets.
+    </applet>
+    <marco-en-linea src="https://ejemplo.com" width="500" height="300"></marco-en-linea>
+    <sin-marcos>
+      Tu navegador no soporta marcos.
+    </sin-marcos>
+    <sin-codigo>
+      <parrafo>Tu navegador no soporta JavaScript.</parrafo>
+    </sin-codigo>
+    <objeto data="archivo.pdf" type="application/pdf" width="500" height="300">
+      <parametro name="page" value="1">
+        <parrafo>Tu navegador no soporta la visualización de PDFs.</parrafo>
+    </objeto>
+    <teletipo>Este es texto de teletipo</teletipo>
+    <variable>x</variable> = 5
+    <subindice>H<subindice>2</subindice>O</subindice>
+    <superindice>m<superindice>2</superindice></superindice>
+    <pequeno>Texto pequeño</pequeno>
+    <grande>Texto grande</grande>
+    <cursiva>Texto en cursiva</cursiva>
+    <negrita>Texto en negrita</negrita>
+    <subrayado>Texto subrayado</subrayado>
+    <tachado>Texto tachado</tachado>
+    <insertado>Texto insertado</insertado>
+    <borrado>Texto borrado</borrado>
+    <abreviatura title="EsHTML">EHTML</abreviatura>
+    <acronimo title="Lenguaje de Marcado de Hipertexto en Español">LMHE</acronimo>
+    <cita>Cita corta</cita>
+    <bloque-codigo>
+      Código en línea
+    </bloque-codigo>
+    <entrada-teclado>Ctrl + C</entrada-teclado>
+    <muestra>Salida de muestra</muestra>
+    <ruby>
+      漢 <rt>kan</rt>
+      字 <rt>ji</rt>
+    </ruby>
+    <aislamiento-direccion-texto>텍스트</aislamiento-direccion-texto>
+    <anulacion-direccion-texto dir="rtl">This text will go right to left.</anulacion-direccion-texto>
+    <imagen-multiple>
+      <fuente media="(min-width: 650px)" srcset="imagen-grande.jpg">
+        <fuente media="(min-width: 465px)" srcset="imagen-mediana.jpg">
+          <imagen src="imagen-pequena.jpg" alt="Imagen responsive">
+    </imagen-multiple>
+    <area shape="circle" coords="75,75,75" href="enlace.html" alt="Área circular">
+    <mapa name="mapa-ejemplo">
+      <area shape="rect" coords="0,0,82,126" href="enlace1.html" alt="Área rectangular">
+      <area shape="circle" coords="90,58,3" href="enlace2.html" alt="Área circular">
+    </mapa>
+    <plantilla id="miPlantilla">
+      <t2>Título de la plantilla</t2>
+      <parrafo>Contenido de la plantilla</parrafo>
+    </plantilla>
+    <busqueda>
+      <entrada type="search" name="q">
+        <boton>Buscar</boton>
+    </busqueda>
+    <grupo-encabezados>
+      <t1>Título principal</t1>
+      <t2>Subtítulo</t2>
+    </grupo-encabezados>
+    <pista src="subtitulos_es.vtt" kind="subtitles" srclang="es" label="Español">
+      <posible-salto-linea>Un texto muy largo que puede tener un salto de línea aquí</posible-salto-linea>
+  </cuerpo>
+</eshtml>

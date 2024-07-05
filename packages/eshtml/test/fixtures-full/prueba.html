@@ -1,0 +1,233 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <base href="https://ejemplo.com/">
+  <title>Plantilla de Ejemplo en EsHTML</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+      body { font-family: Arial, sans-serif; }
+  </style>
+  <script>
+    console.log("EsHTML es genial!");
+  </script>
+</head>
+<body>
+<header>
+  <h1>EsHTML: HTML en Español</h1>
+  <h2>Subtítulo</h2>
+  <h3>Subsubtítulo</h3>
+  <h4>Nivel 4</h4>
+  <h5>Nivel 5</h5>
+  <h6>Nivel 6</h6>
+</header>
+<nav>
+  <menu>
+    <li><a href="#seccion1">Sección 1</a></li>
+    <li><a href="#seccion2">Sección 2</a></li>
+  </menu>
+</nav>
+<main>
+  <section id="seccion1">
+    <article>
+      <h2>Artículo 1</h2>
+      <p>Este es un <em>párrafo</em> con <strong>texto importante</strong>.</p>
+      <blockquote>
+        <p>Esta es una cita en bloque.</p>
+      </blockquote>
+      <pre>
+    Este es texto preformateado
+    Mantiene    los    espacios
+                </pre>
+      <code>
+        const saludo = "Hola, EsHTML!";
+        console.log(saludo);
+      </code>
+    </article>
+  </section>
+  <section id="seccion2">
+    <h2>Listas y Tablas</h2>
+    <ol>
+      <li>Primer elemento</li>
+      <li>Segundo elemento</li>
+    </ol>
+    <ul>
+      <li>Elemento no ordenado</li>
+      <li>Otro elemento</li>
+    </ul>
+    <dl>
+      <dt>EsHTML</dt>
+      <dd>HTML en español</dd>
+    </dl>
+    <table>
+      <caption>Tabla de Ejemplo</caption>
+      <thead>
+      <tr>
+        <th>Encabezado 1</th>
+        <th>Encabezado 2</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Celda 1</td>
+        <td>Celda 2</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2">Pie de tabla</td>
+      </tr>
+      </tfoot>
+    </table>
+  </section>
+  <section>
+    <h2>Elementos Multimedia</h2>
+    <img src="imagen.jpg" alt="Descripción de la imagen">
+    <audio controls>
+      <source src="audio.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+    <video controls>
+      <source src="video.mp4" type="video/mp4">
+      Tu navegador no soporta el elemento de video.
+    </video>
+    <canvas id="miCanvas" width="200" height="100"></canvas>
+  </section>
+  <section>
+    <h2>Formulario</h2>
+    <form action="/enviar" method="post">
+      <fieldset>
+        <legend>Información Personal</legend>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha">
+        <label for="color">Color favorito:</label>
+        <input type="color" id="color" name="color">
+        <label for="rango">Rango:</label>
+        <input type="range" id="rango" name="rango" min="0" max="100">
+      </fieldset>
+      <fieldset>
+        <legend>Otras opciones</legend>
+        <label for="opciones">Selecciona una opción:</label>
+        <select id="opciones" name="opciones">
+          <optgroup label="Grupo 1">
+            <option value="1">Opción 1</option>
+            <option value="2">Opción 2</option>
+          </optgroup>
+          <optgroup label="Grupo 2">
+            <option value="3">Opción 3</option>
+            <option value="4">Opción 4</option>
+          </optgroup>
+        </select>
+        <label for="lista">Datalist:</label>
+        <input list="frutas" id="lista" name="fruta">
+        <datalist id="frutas">
+          <option value="Manzana">
+          <option value="Banana">
+          <option value="Cereza">
+        </datalist>
+      </fieldset>
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+      <button type="submit">Enviar</button>
+      <button type="reset">Reiniciar</button>
+    </form>
+  </section>
+  <section>
+    <h2>Otros Elementos</h2>
+    <details>
+      <summary>Haz clic para más información</summary>
+      <p>Aquí hay más información detallada.</p>
+    </details>
+    <dialog id="miDialogo">
+      <p>Este es un cuadro de diálogo.</p>
+      <button id="cerrarDialogo">Cerrar</button>
+    </dialog>
+    <meter value="70" min="0" max="100">70%</meter>
+    <progress value="70" max="100">70%</progress>
+    <mark>Texto resaltado</mark>
+    <time datetime="2024-07-05">5 de julio de 2024</time>
+    <output for="a b">Resultado</output>
+    <svg width="100" height="100">
+      <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    </svg>
+  </section>
+  <aside>
+    <h2>Contenido Lateral</h2>
+    <p>Este es un contenido al lado del contenido principal.</p>
+  </aside>
+</main>
+<footer>
+  <p>&copy; 2024 EsHTML. Todos los derechos reservados.</p>
+  <address>
+    Contacto: <a href="mailto:info@eshtml.com">info@eshtml.com</a>
+  </address>
+</footer>
+<applet code="MiApplet.class" width="300" height="200">
+  Tu navegador no soporta applets.
+</applet>
+<iframe src="https://ejemplo.com" width="500" height="300"></iframe>
+<noframes>
+  Tu navegador no soporta marcos.
+</noframes>
+<noscript>
+  <p>Tu navegador no soporta JavaScript.</p>
+</noscript>
+<object data="archivo.pdf" type="application/pdf" width="500" height="300">
+  <param name="page" value="1">
+  <p>Tu navegador no soporta la visualización de PDFs.</p>
+</object>
+<tt>Este es texto de teletipo</tt>
+<var>x</var> = 5
+<sub>H<sub>2</sub>O</sub>
+<sup>m<sup>2</sup></sup>
+<small>Texto pequeño</small>
+<big>Texto grande</big>
+<i>Texto en cursiva</i>
+<b>Texto en negrita</b>
+<u>Texto subrayado</u>
+<s>Texto tachado</s>
+<ins>Texto insertado</ins>
+<del>Texto borrado</del>
+<abbr title="EsHTML">EHTML</abbr>
+<acronym title="Lenguaje de Marcado de Hipertexto en Español">LMHE</acronym>
+<q>Cita corta</q>
+<code>
+  Código en línea
+</code>
+<kbd>Ctrl + C</kbd>
+<samp>Salida de muestra</samp>
+<ruby>
+  漢 <rt>kan</rt>
+  字 <rt>ji</rt>
+</ruby>
+<bdi>텍스트</bdi>
+<bdo dir="rtl">This text will go right to left.</bdo>
+<picture>
+  <source media="(min-width: 650px)" srcset="imagen-grande.jpg">
+  <source media="(min-width: 465px)" srcset="imagen-mediana.jpg">
+  <img src="imagen-pequena.jpg" alt="Imagen responsive">
+</picture>
+<area shape="circle" coords="75,75,75" href="enlace.html" alt="Área circular">
+<map name="mapa-ejemplo">
+  <area shape="rect" coords="0,0,82,126" href="enlace1.html" alt="Área rectangular">
+  <area shape="circle" coords="90,58,3" href="enlace2.html" alt="Área circular">
+</map>
+<template id="miPlantilla">
+  <h2>Título de la plantilla</h2>
+  <p>Contenido de la plantilla</p>
+</template>
+<search>
+  <input type="search" name="q">
+  <button>Buscar</button>
+</search>
+<hgroup>
+  <h1>Título principal</h1>
+  <h2>Subtítulo</h2>
+</hgroup>
+<track src="subtitulos_es.vtt" kind="subtitles" srclang="es" label="Español">
+<wbr>Un texto muy largo que puede tener un salto de línea aquí</wbr>
+</body>
+</html>

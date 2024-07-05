@@ -1,42 +1,109 @@
-<html>
-   <head>
-      <meta charset="UTF-8">
-      <title>Plantilla de Ejemplo en EsHTML</title>
-      <link rel="stylesheet" href="styles.css">
-   </head>
-   <body>
-      <h1>Encabezado 1</h1>
-      <h2>Encabezado 2</h2>
-      <h3>Encabezado 3</h3>
-      <h4>Encabezado 4</h4>
-      <h5>Encabezado 5</h5>
-      <h6>Encabezado 6</h6>
-      <p>Este es un <a href="#">enlace</a> en un párrafo.</p>
-      <h2>Ejemplo de Tabla</h2>
-      <table>
-         <caption>Caption de la tabla</caption>
-         <thead>
-            <tr>
-               <th>Encabezado 1</th>
-               <th>Encabezado 2</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td>Dato 1</td>
-               <td>Dato 2</td>
-            </tr>
-         </tbody>
-         <tfoot>
-            <tr>
-               <td>Pie 1</td>
-               <td>Pie 2</td>
-            </tr>
-         </tfoot>
-      </table>
-      <ul>
-         <li>Elemento 1</li>
-         <li>Elemento 2</li>
-      </ul>
-   </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <base href="https://ejemplo.com/">
+  <title>Plantilla de Ejemplo en EsHTML</title>
+  <style>
+      body { font-family: Arial, sans-serif; }
+  </style>
+  <script>
+    consola.escribir("Hola desde EsJS")
+  </script>
+</head>
+<body>
+<header>
+  <h1>EsHTML: HTML en Español</h1>
+  <h2>Subtítulo</h2>
+  <h3>Subsubtítulo</h3>
+  <h4>Nivel 4</h4>
+  <h5>Nivel 5</h5>
+  <h6>Nivel 6</h6>
+</header>
+<nav>
+  <menu>
+    <li><a href="#seccion1">Sección 1</a></li>
+    <li><a href="#seccion2">Sección 2</a></li>
+  </menu>
+</nav>
+<main>
+  <section id="seccion1">
+    <article>
+      <h2>Artículo 1</h2>
+      <p>Este es un <em>párrafo</em> con <strong>texto importante</strong>.</p>
+      <blockquote>
+        <p>Esta es una cita en bloque.</p>
+      </blockquote>
+      <pre>
+Este es texto preformateado
+Mantiene    los    espacios
+</pre>
+      <code>
+        const saludo = "Hola, EsHTML!";
+        console.log(saludo);
+      </code>
+    </article>
+  </section>
+  <section id="seccion2">
+    <h2>Listas y Tablas</h2>
+    <ol>
+      <li>Primer elemento</li>
+      <li>Segundo elemento</li>
+    </ol>
+    <ul>
+      <li>Elemento no ordenado</li>
+      <li>Otro elemento</li>
+    </ul>
+    <dl>
+      <dt>EsHTML</dt>
+      <dd>HTML en español</dd>
+    </dl>
+    <table>
+      <caption>Tabla de Ejemplo</caption>
+      <thead>
+      <tr>
+        <th>Encabezado 1</th>
+        <th>Encabezado 2</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Celda 1</td>
+        <td>Celda 2</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2">Pie de tabla</td>
+      </tr>
+      </tfoot>
+    </table>
+  </section>
+  <section>
+    <h2>Otros Elementos</h2>
+    <details>
+      <summary>Haz clic para más información</summary>
+      <p>Aquí hay más información detallada.</p>
+    </details>
+    <dialog id="miDialogo">
+      <p>Este es un cuadro de diálogo.</p>
+      <button id="cerrarDialogo">Cerrar</button>
+    </dialog>
+    <meter value="70" min="0" max="100">70%</meter>
+    <progress value="70" max="100">70%</progress>
+    <mark>Texto resaltado</mark>
+    <time datetime="2024-07-05">5 de julio de 2024</time>
+    <output for="a b">Resultado</output>
+  </section>
+  <aside>
+    <h2>Contenido Lateral</h2>
+    <p>Este es un contenido al lado del contenido principal.</p>
+  </aside>
+</main>
+<footer>
+  <p>&copy; 2024 EsHTML. Todos los derechos reservados.</p>
+  <address>
+    Contacto: <a href="mailto:info@eshtml.com">info@eshtml.com</a>
+  </address>
+</footer>
+</body>
 </html>

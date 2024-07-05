@@ -1,0 +1,478 @@
+[
+  {
+    "Attribute": "accept",
+    "Elements": "<form>, <input>"
+  },
+  {
+    "Attribute": "accept-charset",
+    "Elements": "<form>"
+  },
+  {
+    "Attribute": "accesskey",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "action",
+    "Elements": "<form>"
+  },
+  {
+    "Attribute": "allow",
+    "Elements": "<iframe>"
+  },
+  {
+    "Attribute": "alt",
+    "Elements": "<area>, <img>, <input>"
+  },
+  {
+    "Attribute": "as",
+    "Elements": "<link>"
+  },
+  {
+    "Attribute": "async",
+    "Elements": "<script>"
+  },
+  {
+    "Attribute": "autocapitalize",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "autocomplete",
+    "Elements": "<form>, <input>, <select>, <textarea>"
+  },
+  {
+    "Attribute": "autoplay",
+    "Elements": "<audio>, <video>"
+  },
+  {
+    "Attribute": "background",
+    "Elements": "<body>, <table>, <td>, <th>"
+  },
+  {
+    "Attribute": "bgcolor",
+    "Elements": "<body>, <col>, <colgroup>, <marquee>, <table>, <tbody>, <tfoot>, <td>, <th>, <tr>"
+  },
+  {
+    "Attribute": "border",
+    "Elements": "<img>, <object>, <table>"
+  },
+  {
+    "Attribute": "capture",
+    "Elements": "<input>"
+  },
+  {
+    "Attribute": "charset",
+    "Elements": "<meta>"
+  },
+  {
+    "Attribute": "checked",
+    "Elements": "<input>"
+  },
+  {
+    "Attribute": "cite",
+    "Elements": "<blockquote>, <del>, <ins>, <q>"
+  },
+  {
+    "Attribute": "class",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "color",
+    "Elements": "<font>, <hr>"
+  },
+  {
+    "Attribute": "cols",
+    "Elements": "<textarea>"
+  },
+  {
+    "Attribute": "colspan",
+    "Elements": "<td>, <th>"
+  },
+  {
+    "Attribute": "content",
+    "Elements": "<meta>"
+  },
+  {
+    "Attribute": "contenteditable",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "controls",
+    "Elements": "<audio>, <video>"
+  },
+  {
+    "Attribute": "coords",
+    "Elements": "<area>"
+  },
+  {
+    "Attribute": "crossorigin",
+    "Elements": "<audio>, <img>, <link>, <script>, <video>"
+  },
+  {
+    "Attribute": "csp",
+    "Elements": "<iframe>"
+  },
+  {
+    "Attribute": "data",
+    "Elements": "<object>"
+  },
+  {
+    "Attribute": "data-*",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "datetime",
+    "Elements": "<del>, <ins>, <time>"
+  },
+  {
+    "Attribute": "decoding",
+    "Elements": "<img>"
+  },
+  {
+    "Attribute": "default",
+    "Elements": "<track>"
+  },
+  {
+    "Attribute": "defer",
+    "Elements": "<script>"
+  },
+  {
+    "Attribute": "dir",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "dirname",
+    "Elements": "<input>, <textarea>"
+  },
+  {
+    "Attribute": "disabled",
+    "Elements": "<button>, <fieldset>, <input>, <optgroup>, <option>, <select>, <textarea>"
+  },
+  {
+    "Attribute": "download",
+    "Elements": "<a>, <area>"
+  },
+  {
+    "Attribute": "draggable",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "enctype",
+    "Elements": "<form>"
+  },
+  {
+    "Attribute": "enterkeyhint",
+    "Elements": "<textarea>, contenteditable"
+  },
+  {
+    "Attribute": "for",
+    "Elements": "<label>, <output>"
+  },
+  {
+    "Attribute": "form",
+    "Elements": "<button>, <fieldset>, <input>, <label>, <meter>, <object>, <output>, <progress>, <select>, <textarea>"
+  },
+  {
+    "Attribute": "formaction",
+    "Elements": "<input>, <button>"
+  },
+  {
+    "Attribute": "formenctype",
+    "Elements": "<button>, <input>"
+  },
+  {
+    "Attribute": "formmethod",
+    "Elements": "<button>, <input>"
+  },
+  {
+    "Attribute": "formnovalidate",
+    "Elements": "<button>, <input>"
+  },
+  {
+    "Attribute": "formtarget",
+    "Elements": "<button>, <input>"
+  },
+  {
+    "Attribute": "headers",
+    "Elements": "<td>, <th>"
+  },
+  {
+    "Attribute": "height",
+    "Elements": "<canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>"
+  },
+  {
+    "Attribute": "hidden",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "high",
+    "Elements": "<meter>"
+  },
+  {
+    "Attribute": "href",
+    "Elements": "<a>, <area>, <base>, <link>"
+  },
+  {
+    "Attribute": "hreflang",
+    "Elements": "<a>, <link>"
+  },
+  {
+    "Attribute": "http-equiv",
+    "Elements": "<meta>"
+  },
+  {
+    "Attribute": "id",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "integrity",
+    "Elements": "<link>, <script>"
+  },
+  {
+    "Attribute": "inputmode",
+    "Elements": "<textarea>, contenteditable"
+  },
+  {
+    "Attribute": "ismap",
+    "Elements": "<img>"
+  },
+  {
+    "Attribute": "itemprop",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "kind",
+    "Elements": "<track>"
+  },
+  {
+    "Attribute": "label",
+    "Elements": "<optgroup>, <option>, <track>"
+  },
+  {
+    "Attribute": "lang",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "loading",
+    "Elements": "<img>, <iframe>"
+  },
+  {
+    "Attribute": "list",
+    "Elements": "<input>"
+  },
+  {
+    "Attribute": "loop",
+    "Elements": "<audio>, <marquee>, <video>"
+  },
+  {
+    "Attribute": "low",
+    "Elements": "<meter>"
+  },
+  {
+    "Attribute": "max",
+    "Elements": "<input>, <meter>, <progress>"
+  },
+  {
+    "Attribute": "maxlength",
+    "Elements": "<input>, <textarea>"
+  },
+  {
+    "Attribute": "minlength",
+    "Elements": "<input>, <textarea>"
+  },
+  {
+    "Attribute": "media",
+    "Elements": "<a>, <area>, <link>, <source>, <style>"
+  },
+  {
+    "Attribute": "method",
+    "Elements": "<form>"
+  },
+  {
+    "Attribute": "min",
+    "Elements": "<input>, <meter>"
+  },
+  {
+    "Attribute": "multiple",
+    "Elements": "<input>, <select>"
+  },
+  {
+    "Attribute": "muted",
+    "Elements": "<audio>, <video>"
+  },
+  {
+    "Attribute": "name",
+    "Elements": "<button>, <form>, <fieldset>, <iframe>, <input>, <object>, <output>, <select>, <textarea>, <map>, <meta>, <param>"
+  },
+  {
+    "Attribute": "novalidate",
+    "Elements": "<form>"
+  },
+  {
+    "Attribute": "open",
+    "Elements": "<details>, <dialog>"
+  },
+  {
+    "Attribute": "optimum",
+    "Elements": "<meter>"
+  },
+  {
+    "Attribute": "pattern",
+    "Elements": "<input>"
+  },
+  {
+    "Attribute": "ping",
+    "Elements": "<a>, <area>"
+  },
+  {
+    "Attribute": "placeholder",
+    "Elements": "<input>, <textarea>"
+  },
+  {
+    "Attribute": "playsinline",
+    "Elements": "<video>"
+  },
+  {
+    "Attribute": "poster",
+    "Elements": "<video>"
+  },
+  {
+    "Attribute": "preload",
+    "Elements": "<audio>, <video>"
+  },
+  {
+    "Attribute": "readonly",
+    "Elements": "<input>, <textarea>"
+  },
+  {
+    "Attribute": "referrerpolicy",
+    "Elements": "<a>, <area>, <iframe>, <img>, <link>, <script>"
+  },
+  {
+    "Attribute": "rel",
+    "Elements": "<a>, <area>, <link>"
+  },
+  {
+    "Attribute": "required",
+    "Elements": "<input>, <select>, <textarea>"
+  },
+  {
+    "Attribute": "reversed",
+    "Elements": "<ol>"
+  },
+  {
+    "Attribute": "role",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "rows",
+    "Elements": "<textarea>"
+  },
+  {
+    "Attribute": "rowspan",
+    "Elements": "<td>, <th>"
+  },
+  {
+    "Attribute": "sandbox",
+    "Elements": "<iframe>"
+  },
+  {
+    "Attribute": "scope",
+    "Elements": "<th>"
+  },
+  {
+    "Attribute": "scoped",
+    "Elements": "<style>"
+  },
+  {
+    "Attribute": "selected",
+    "Elements": "<option>"
+  },
+  {
+    "Attribute": "shape",
+    "Elements": "<a>, <area>"
+  },
+  {
+    "Attribute": "size",
+    "Elements": "<input>, <select>"
+  },
+  {
+    "Attribute": "sizes",
+    "Elements": "<link>, <img>, <source>"
+  },
+  {
+    "Attribute": "slot",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "span",
+    "Elements": "<col>, <colgroup>"
+  },
+  {
+    "Attribute": "spellcheck",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "src",
+    "Elements": "<audio>, <embed>, <iframe>, <img>, <input>, <script>, <source>, <track>, <video>"
+  },
+  {
+    "Attribute": "srcdoc",
+    "Elements": "<iframe>"
+  },
+  {
+    "Attribute": "srclang",
+    "Elements": "<track>"
+  },
+  {
+    "Attribute": "srcset",
+    "Elements": "<img>, <source>"
+  },
+  {
+    "Attribute": "start",
+    "Elements": "<ol>"
+  },
+  {
+    "Attribute": "step",
+    "Elements": "<input>"
+  },
+  {
+    "Attribute": "style",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "tabindex",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "target",
+    "Elements": "<a>, <area>, <base>, <form>"
+  },
+  {
+    "Attribute": "title",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "translate",
+    "Elements": "Global attribute"
+  },
+  {
+    "Attribute": "type",
+    "Elements": "<button>, <input>, <embed>, <object>, <ol>, <script>, <source>, <style>, <menu>, <link>"
+  },
+  {
+    "Attribute": "usemap",
+    "Elements": "<img>, <input>, <object>"
+  },
+  {
+    "Attribute": "value",
+    "Elements": "<button>, <data>, <input>, <li>, <meter>, <option>, <progress>, <param>"
+  },
+  {
+    "Attribute": "width",
+    "Elements": "<canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>"
+  },
+  {
+    "Attribute": "wrap",
+    "Elements": "<textarea>"
+  }
+]
