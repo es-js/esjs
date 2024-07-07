@@ -1,7 +1,7 @@
+import htmlMinifier from 'html-minifier'
 import { Options } from 'prettier'
 import htmlParser from 'prettier/parser-html'
 import prettier from 'prettier/standalone'
-import htmlMinifier from 'html-minifier'
 
 export async function formatWithPrettier(
 	code: string,

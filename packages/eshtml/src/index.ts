@@ -87,6 +87,7 @@ function transformAttrs(
 
 	for (const key in attrs) {
 		const newKey = transformAttr(tagName, key, options)
+		// @ts-ignore
 		newAttrs[newKey] = attrs[key]
 	}
 

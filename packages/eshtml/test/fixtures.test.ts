@@ -3,7 +3,7 @@ import { join, resolve } from 'path'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { compile } from '../src'
 import { compareDoms } from '../src/utils/compareDoms'
-import { compareHtml, minifyHtml } from './testUtils'
+import { minifyHtml } from './testUtils'
 
 const eshtmlFixtures = import.meta.glob('./fixtures/*.eshtml')
 const htmlFixtures = import.meta.glob('./fixtures/*.html')

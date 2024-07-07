@@ -1,6 +1,6 @@
 import { invertMap } from '@es-js/core/utils'
-import { attributeUsages } from './utils/attributeUsages'
 import { CompileOptions } from './index'
+import { attributeUsages } from './utils/attributeUsages'
 
 const dictionary: Map<string, string> = new Map([
 	['accept', 'aceptar'],
