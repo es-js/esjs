@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { getDictionary, htmlTags } from '../src/tags'
+import { getDictionary, htmlAttrs } from '../src/attrs'
 
 describe('Dictionary completeness test', () => {
-	it('should contain all htmlKeywords', () => {
+	it('should contain all htmlAttrs', () => {
 		const dictionary = getDictionary()
 		const dictionaryKeys = Array.from(dictionary.values())
 
-		htmlTags.forEach((keyword) => {
+		htmlAttrs.forEach((keyword) => {
 			if (!dictionaryKeys.includes(keyword)) {
 				console.log('Missing keyword:', keyword)
 			}
