@@ -1,6 +1,6 @@
 import { parser } from 'posthtml-parser'
-import { render } from 'posthtml-render'
 import { transformAttr } from './attrs'
+import { render } from './render'
 import { getDictionary } from './tags'
 
 export interface CompileOptions {

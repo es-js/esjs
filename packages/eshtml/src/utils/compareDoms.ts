@@ -4,6 +4,10 @@ export function compareDoms(html1: string, html2: string) {
 	const tree1 = getTree(html1)
 	const tree2 = getTree(html2)
 
+	return compareTrees(tree1, tree2)
+}
+
+function compareTrees(tree1: any, tree2: any) {
 	const json1 = JSON.stringify(tree1)
 	const json2 = JSON.stringify(tree2)
 

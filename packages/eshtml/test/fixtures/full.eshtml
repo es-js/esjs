@@ -1,0 +1,136 @@
+<eshtml>
+  <cabecera>
+    <titulo>Documento Completo EsHTML</titulo>
+    <meta conjunto-caracteres="utf-8">
+    <base referencia="/">
+    <recurso referencia="styles.css" rel="stylesheet">
+    <estilo>
+      body { font-family: Arial, sans-serif; }
+    </estilo>
+  </cabecera>
+  <cuerpo>
+    <direccion>
+      <parrafo>Contacto: ejemplo@correo.com</parrafo>
+    </direccion>
+    <articulo>
+      <t1>Artículo Principal</t1>
+      <parrafo>Este es el contenido del artículo principal.</parrafo>
+    </articulo>
+    <lateral>
+      <t2>Información Lateral</t2>
+      <parrafo>Este es un contenido adicional en la sección lateral.</parrafo>
+    </lateral>
+    <encabezado>
+      <t1>Encabezado del Sitio</t1>
+    </encabezado>
+    <pie-pagina>
+      <parrafo>Pie de página con información adicional.</parrafo>
+    </pie-pagina>
+    <principal>
+      <t1>Contenido Principal</t1>
+      <seccion>
+        <t2>Sección Principal</t2>
+        <parrafo>Contenido de la sección principal.</parrafo>
+      </seccion>
+      <seccion>
+        <t2>Otra Sección</t2>
+        <cita-bloque>Esta es una cita en bloque.</cita-bloque>
+        <lista-definiciones>
+          <termino-definicion>Término</termino-definicion>
+          <definicion-descripcion>Descripción del término.</definicion-descripcion>
+        </lista-definiciones>
+      </seccion>
+    </principal>
+    <figura>
+      <imagen fuente="imagen.jpg" alternativo="Descripción de la imagen">
+      <figura-leyenda>Esta es una figura con leyenda.</figura-leyenda>
+    </figura>
+    <division>
+      <t3>Una División</t3>
+      <parrafo>Contenido de la división.</parrafo>
+    </division>
+    <lista-ordenada>
+      <lista-elemento>Elemento 1</lista-elemento>
+      <lista-elemento>Elemento 2</lista-elemento>
+    </lista-ordenada>
+    <lista-desordenada>
+      <lista-elemento>Elemento A</lista-elemento>
+      <lista-elemento>Elemento B</lista-elemento>
+    </lista-desordenada>
+    <enlace referencia="https://www.ejemplo.com">Este es un enlace</enlace>
+    <negrita>Texto en negrita</negrita>
+    <cursiva>Texto en cursiva</cursiva>
+    <enfasis>Texto con énfasis</enfasis>
+    <codigo-bloque>let a = 10;</codigo-bloque>
+    <definicion>Definición</definicion>
+    <tecla>Ctrl</tecla>
+    <marcado>Texto marcado</marcado>
+    <cita-corta>Esta es una cita corta</cita-corta>
+    <tachado>Texto tachado</tachado>
+    <muestra>Texto de muestra</muestra>
+    <pequeño>Texto pequeño</pequeño>
+    <segmento>Texto en un segmento</segmento>
+    <fuerte>Texto fuerte</fuerte>
+    <subindice>Texto subíndice</subindice>
+    <superindice>Texto superíndice</superindice>
+    <hora fechahora="2024-06-29">29 de Junio, 2024</hora>
+    <subrayado>Texto subrayado</subrayado>
+    <variable>Variable en código</variable>
+    <audio controles="">
+      <origen fuente="audio.mp3" tipo="audio/mpeg">
+        Su navegador no soporta el elemento de audio.
+    </audio>
+    <video controles="">
+      <origen fuente="video.mp4" tipo="video/mp4">
+        Su navegador no soporta el elemento de video.
+    </video>
+    <mapa nombre="mapa-ejemplo">
+      <area forma="rect" coordenadas="34,44,270,350" referencia="https://www.ejemplo.com" alternativo="Ejemplo">
+    </mapa>
+    <incrustar fuente="archivo.swf">
+      <marco-integrado fuente="https://www.ejemplo.com"></marco-integrado>
+      <objeto datos="archivo.pdf" tipo="application/pdf">
+        <parametro nombre="param" valor="valor">
+      </objeto>
+      <imagen-adaptativa>
+        <origen media="(min-width: 650px)" fuente-conjunto="img-large.jpg">
+        <origen media="(min-width: 465px)" fuente-conjunto="img-medium.jpg">
+        <imagen fuente="img-small.jpg" alternativo="Descripción">
+      </imagen-adaptativa>
+      <canvas id="miCanvas"></canvas>
+      <sin-codigo>El navegador no soporta script.</sin-codigo>
+      <codigo fuente="script.js"></codigo>
+      <tabla>
+        <tabla-leyenda>Tabla de Ejemplo</tabla-leyenda>
+        <columna rango="2" estilo="background-color:yellow">
+          <grupo-columnas>
+            <columna rango="2" estilo="background-color:lightgrey">
+          </grupo-columnas>
+          <tabla-cuerpo>
+            <tabla-fila>
+              <tabla-celda>Celda 1</tabla-celda>
+              <tabla-celda>Celda 2</tabla-celda>
+            </tabla-fila>
+          </tabla-cuerpo>
+      </tabla>
+      <boton>Enviar</boton>
+      <formulario accion="/enviar" metodo="post">
+        <etiqueta para="nombre">Nombre:</etiqueta>
+        <entrada tipo="text" id="nombre" nombre="nombre">
+        <etiqueta para="edad">Edad:</etiqueta>
+        <entrada tipo="number" id="edad" nombre="edad">
+        <boton tipo="submit">Enviar</boton>
+      </formulario>
+      <dialogo id="miDialogo">
+        <t1>Diálogo de Ejemplo</t1>
+        <parrafo>Este es un diálogo de ejemplo.</parrafo>
+        <boton id="cerrar">Cerrar</boton>
+      </dialogo>
+      <plantilla>
+        <parrafo>Este es un contenido de plantilla.</parrafo>
+      </plantilla>
+      <grafico-vectorial width="100" height="100">
+        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red"></circle>
+      </grafico-vectorial>
+  </cuerpo>
+</eshtml>
