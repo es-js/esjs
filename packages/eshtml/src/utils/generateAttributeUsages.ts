@@ -1,7 +1,7 @@
 import fs from 'fs'
 import attributes from './attributes.json' with { type: 'json' }
 
-export function parseAttributesFromMDN() {
+export function generateAttributeUsages() {
 	const output: any = []
 
 	for (const { Attribute, Elements } of attributes) {
