@@ -1,0 +1,26 @@
+// Lógica del contador
+const valorContador = document.getElementById('valor-contador');
+const botonIncrementar = document.getElementById('incrementar');
+const botonDecrementar = document.getElementById('decrementar');
+const botonReiniciar = document.getElementById('reiniciar');
+
+mut contador = 0;
+
+funcion actualizarContador() {
+  valorContador.textContent = contador;
+}
+
+botonIncrementar.addEventListener('click', () => {
+  contador++;
+  actualizarContador();
+});
+
+botonDecrementar.addEventListener('click', () => {
+  contador--;
+  actualizarContador();
+});
+
+botonReiniciar.addEventListener('click', () => {
+  contador = 0;
+  actualizarContador();
+});

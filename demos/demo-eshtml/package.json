@@ -1,0 +1,17 @@
+{
+  "name": "@es-js/demo-eshtml",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@es-js/vite-plugin-eshtml": "workspace:^"
+  },
+  "devDependencies": {
+    "@es-js/vite-plugin-esjs": "0.1.0-beta.1",
+    "vite": "^5.3.3"
+  }
+}

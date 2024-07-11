@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getEntryScripts 1`] = `
+Map {
+  "/fuente/indice.js" => "/fuente/indice.esjs",
+  "/fuente/utilidades.js" => "/fuente/utilidades.esjs",
+}
+`;

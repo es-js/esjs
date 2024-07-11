@@ -16,11 +16,11 @@ export function compile(
 	},
 ): string {
 	try {
-    if (options?.to === 'html') {
-      content = content.replace('<!TIPODOC eshtml>', '<!DOCTYPE html>')
-    }
+		if (options?.to === 'html') {
+			content = content.replace('<!TIPODOC eshtml>', '<!DOCTYPE html>')
+		}
 
-    const tree = parser(content)
+		const tree = parser(content)
 
 		const dictionary = getDictionary(options?.to === 'eshtml')
 
@@ -28,12 +28,12 @@ export function compile(
 
 		let output = render(newTree)
 
-    if (options?.to === 'eshtml') {
-      output = output.replace('<!DOCTYPE html>', '<!TIPODOC eshtml>')
-    }
+		if (options?.to === 'eshtml') {
+			output = output.replace('<!DOCTYPE html>', '<!TIPODOC eshtml>')
+		}
 
-    return output
-  } catch (error) {
+		return output
+	} catch (error) {
 		console.error({ error })
 		return content
 	}

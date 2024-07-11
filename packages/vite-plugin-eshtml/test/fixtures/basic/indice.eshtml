@@ -1,0 +1,15 @@
+<!TIPODOC eshtml>
+<eshtml idioma="es">
+
+  <cabecera>
+    <meta conjunto-caracteres="UTF-8">
+    <recurso rel="icon" referencia="/favicon.ico">
+    <meta nombre="viewport" contenido="width=device-width, initial-scale=1.0">
+    <titulo>EsHTML: HTML en Español</titulo>
+  </cabecera>
+
+  <cuerpo>
+    <t1>EsHTML: HTML en Español</t1>
+  </cuerpo>
+
+</eshtml>
