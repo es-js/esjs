@@ -16,14 +16,24 @@ export function compile(
 	},
 ): string {
 	try {
-		const tree = parser(content)
+    if (options?.to === 'html') {
+      content = content.replace('<!TIPODOC eshtml>', '<!DOCTYPE html>')
+    }
+
+    const tree = parser(content)
 
 		const dictionary = getDictionary(options?.to === 'eshtml')
 
 		const newTree = compileTreeRecursive(tree, dictionary, options)
 
-		return render(newTree)
-	} catch (error) {
+		let output = render(newTree)
+
+    if (options?.to === 'eshtml') {
+      output = output.replace('<!DOCTYPE html>', '<!TIPODOC eshtml>')
+    }
+
+    return output
+  } catch (error) {
 		console.error({ error })
 		return content
 	}

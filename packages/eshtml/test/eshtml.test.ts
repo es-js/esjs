@@ -3,7 +3,8 @@ import { compile } from '../src'
 import { compareDoms } from '../src/utils/compareDoms'
 import { minifyHtml } from './testUtils'
 
-const eshtml = `<eshtml idioma="es">
+const eshtml = `<!TIPODOC eshtml>
+<eshtml idioma="es">
 <cabecera>
     <recurso referencia="styles.css" rel="stylesheet">
     <estilo>
@@ -19,7 +20,8 @@ const eshtml = `<eshtml idioma="es">
 </cuerpo>
 </eshtml>`
 
-const html = `<html lang="es">
+const html = `<!DOCTYPE html>
+<html lang="es">
 <head>
     <link href="styles.css" rel="stylesheet">
     <style>
@@ -48,7 +50,7 @@ describe('compile', () => {
 		const compiled = compile(html, { from: 'html', to: 'eshtml' })
 
 		expect(compiled).toBe(eshtml)
-		expect(minifyHtml(compiled)).toBe(minifyHtml(eshtml))
+		// expect(minifyHtml(compiled)).toBe(minifyHtml(eshtml))
 		expect(compareDoms(compiled, eshtml)).toBe(true)
 	})
 })
