@@ -2,7 +2,9 @@ import fs from 'fs/promises'
 import { template } from 'lodash'
 import path from 'path'
 import type { Plugin, ViteDevServer } from 'vite'
+import { generatePagesInput } from './lib/generatePagesInput'
 import { getEntryScripts } from './lib/getEntryScripts'
+import { getPage } from './lib/getPage'
 import { replaceEntryScript } from './lib/replaceEntryScript'
 import { compile, dfs, dfs2 } from './lib/utils'
 
@@ -48,14 +50,6 @@ const getHtmlContent = async (payload: any) => {
 	return html
 }
 
-function getPage(options: any, pageName: string): Pagina | undefined {
-	if (pageName === 'index') {
-		return options?.paginas?.indice ?? options?.paginas?.index
-	}
-
-	return options?.paginas?.[pageName]
-}
-
 export interface Opciones {
 	paginasDir?: string
 	paginas?: Record<string, Pagina>
@@ -69,7 +63,7 @@ export interface Pagina {
 	archivo?: string
 }
 
-export default function eshtmlPlugin(opciones: Opciones = {}): Plugin {
+export default function eshtmlPlugin(opciones: Opciones = {}): Plugin[] {
 	const options: Opciones = {
 		paginasDir: 'fuente/paginas',
 		datos: {},
@@ -100,107 +94,125 @@ export default function eshtmlPlugin(opciones: Opciones = {}): Plugin {
 
 	const virtualEntries = new Map<string, string>()
 
-	return {
-		name: 'vite-plugin-eshtml',
-		enforce: 'pre',
+	return [
+		{
+			name: 'vite-plugin-eshtml-pages',
 
-		configureServer(server: ViteDevServer) {
-			server.middlewares.use(async (req: any, res: any, next: any) => {
-				const url = req._parsedUrl.pathname
-				let pageName
-
-				if (url === '/') {
-					pageName = 'index'
-				} else {
-					pageName = path.posix
-						.join(path.dirname(url), path.basename(url, '.html'))
-						.slice(1)
-				}
-
-				const page = getPage(options, pageName)
-
-				if (!page) {
-					return next()
-				}
-
-				const templateOption = page.plantilla
-				const templatePath = templateOption
-					? resolve(templateOption)
-					: resolve('indice.eshtml')
-
-				let content = await getHtmlContent({
-					templatePath,
-					pageEntry: page.entrada,
-					pageTitle: page.titulo || 'Inicio',
-					data: options.datos,
-				})
-
-				const entries = getEntryScripts(content)
-
-				for (const [key, value] of entries) {
-					virtualEntries.set(key, value)
-				}
-
-				content = replaceEntryScript(content)
-
-				res.end(content)
-			})
-		},
-
-		resolveId(id) {
-			if (path.extname(id) === '.html') {
-				const relativeId = relative(id)
-				const pageName = path.posix.join(
-					path.dirname(relativeId),
-					path.basename(relativeId, '.html'),
+			config(config, env) {
+				config.build = config.build || {}
+				config.build.rollupOptions = config.build.rollupOptions || {}
+				config.build.rollupOptions.input = generatePagesInput(
+					config.build.rollupOptions.input || {},
+					options,
 				)
+				config.server = config.server || {}
+				// default '' means first-page and you can customized or disabled.
+				// config.server.open =
+				//   options.open === '' ? getFirstPage(config.build.rollupOptions.input) : options.open
+			},
 
-				const page = getPage(options, pageName)
-				if (page) {
-					return id
-				}
-			}
+			configureServer(server: ViteDevServer) {
+				server.middlewares.use(async (req: any, res: any, next: any) => {
+					const url = req._parsedUrl.pathname
+					let pageName
 
-			return null
-		},
+					if (url === '/') {
+						pageName = 'index'
+					} else {
+						pageName = path.posix
+							.join(path.dirname(url), path.basename(url, '.html'))
+							.slice(1)
+					}
 
-		load(id) {
-			if (virtualEntries.has(id)) {
-				return `import '${virtualEntries.get(id)}'`
-			}
+					const page = getPage(options, pageName)
 
-			if (path.extname(id) === '.html') {
-				const relativeId = relative(id)
-				const pageName = path.posix.join(
-					path.dirname(relativeId),
-					path.basename(relativeId, '.html'),
-				)
+					if (!page) {
+						return next()
+					}
 
-				const page = getPage(options, pageName)
-				if (page) {
 					const templateOption = page.plantilla
 					const templatePath = templateOption
 						? resolve(templateOption)
 						: resolve('indice.eshtml')
 
-					return getHtmlContent({
+					let content = await getHtmlContent({
 						templatePath,
-						pageEntry: page.entrada || 'indice',
+						pageEntry: page.entrada,
 						pageTitle: page.titulo || 'Inicio',
 						data: options.datos,
 					})
+
+					const entries = getEntryScripts(content)
+
+					for (const [key, value] of entries) {
+						virtualEntries.set(key, value)
+					}
+
+					content = replaceEntryScript(content)
+
+					res.end(content)
+				})
+			},
+
+			resolveId(id) {
+				if (path.extname(id) === '.html') {
+					const relativeId = relative(id)
+					const pageName = path.posix.join(
+						path.dirname(relativeId),
+						path.basename(relativeId, '.html'),
+					)
+
+					const page = getPage(options, pageName)
+					if (page) {
+						return id
+					}
 				}
-			}
 
-			return null
+				return null
+			},
+
+			load(id) {
+				if (virtualEntries.has(id)) {
+					return `import '${virtualEntries.get(id)}'`
+				}
+
+				if (path.extname(id) === '.html') {
+					const relativeId = relative(id)
+					const pageName = path.posix.join(
+						path.dirname(relativeId),
+						path.basename(relativeId, '.html'),
+					)
+
+					const page = getPage(options, pageName)
+					if (page) {
+						const templateOption = page.plantilla
+						const templatePath = templateOption
+							? resolve(templateOption)
+							: resolve('indice.eshtml')
+
+						return getHtmlContent({
+							templatePath,
+							pageEntry: page.entrada || 'indice',
+							pageTitle: page.titulo || 'Inicio',
+							data: options.datos,
+						})
+					}
+				}
+
+				return null
+			},
 		},
 
-		transform(raw: string, id: string) {
-			if (!/\.eshtml$/.test(id)) {
-				return
-			}
+		{
+			name: 'vite-plugin-eshtml',
+			enforce: 'pre',
+			transform(raw: string, id: string) {
+				if (!/\.eshtml$/.test(id)) {
+					return
+				}
 
-			return compile(raw)
+				return compile(raw)
+			},
 		},
-	}
+	]
 }

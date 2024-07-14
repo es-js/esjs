@@ -1,0 +1,26 @@
+<!TIPODOC eshtml>
+<eshtml idioma="es">
+
+  <cabecera>
+    <meta conjunto-caracteres="UTF-8">
+    <recurso rel="icon" referencia="/favicon.ico">
+    <meta nombre="viewport" contenido="width=device-width, initial-scale=1.0">
+    <titulo><%= titulo %></titulo>
+  </cabecera>
+
+  <cuerpo>
+    <principal>
+      <t1>EsHTML: HTML en Español</t1>
+      <t2>Contador reactivo</t2>
+      <parrafo>El valor actual es: <segmento id="valor-contador">0</segmento></parrafo>
+      <boton id="incrementar">Incrementar</boton>
+      <boton id="decrementar">Decrementar</boton>
+      <boton id="reiniciar">Reiniciar</boton>
+
+      <linea-horizontal></linea-horizontal>
+
+      <enlace referencia="/">Volver al índice</enlace>
+    </principal>
+  </cuerpo>
+
+</eshtml>

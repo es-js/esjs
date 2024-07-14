@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-eshtml",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.4",
   "description": "Vite plugin for EsHTML",
   "scripts": {
     "build": "unbuild",

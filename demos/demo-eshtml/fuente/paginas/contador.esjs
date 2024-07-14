@@ -1,4 +1,3 @@
-// Lógica del contador
 const valorContador = document.getElementById('valor-contador');
 const botonIncrementar = document.getElementById('incrementar');
 const botonDecrementar = document.getElementById('decrementar');

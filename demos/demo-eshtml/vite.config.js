@@ -6,7 +6,15 @@ import EsHTML from '@es-js/vite-plugin-eshtml'
 export default defineConfig({
   plugins: [
     EsJS(),
-    EsHTML(),
+    EsHTML({
+      paginas: {
+        contador: {
+          entrada: 'fuente/paginas/contador.esjs',
+          plantilla: 'fuente/paginas/contador.eshtml',
+          titulo: 'Contador reactivo',
+        },
+      },
+    }),
   ],
   resolve: {
     alias: {

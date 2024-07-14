@@ -15,6 +15,14 @@
       <parrafo>
         Fecha y hora actual: <negrita><segmento id="fecha-actual">Cargando...</segmento></negrita>
       </parrafo>
+
+      <t2>Ejemplos en EsHTML/EsJS</t2>
+
+      <lista>
+        <lista-elemento>
+          <enlace referencia="/contador">Contador Reactivo</enlace>
+        </lista-elemento>
+      </lista>
     </principal>
   </cuerpo>
 
