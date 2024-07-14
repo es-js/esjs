@@ -1,11 +1,14 @@
 import { parser } from 'posthtml-parser'
 import { transformAttr } from './attrs'
 import { render } from './render'
+import { replaceDocType } from './utils/replaceDocType'
 import { getDictionary } from './tags'
+import { compile as compileEsJS } from '@es-js/core'
 
 export interface CompileOptions {
 	from?: 'eshtml' | 'html'
 	to?: 'eshtml' | 'html'
+	compileEsJS?: boolean
 }
 
 export function compile(
@@ -15,9 +18,24 @@ export function compile(
 		to: 'html',
 	},
 ): string {
+	if (!options.from) {
+		options.from = 'eshtml'
+	}
+
+	if (!options.to) {
+		options.to = 'html'
+	}
+
+	if (!options.compileEsJS) {
+		options.compileEsJS = true
+	}
+
 	try {
 		if (options?.to === 'html') {
-			content = content.replace('<!TIPODOC eshtml>', '<!DOCTYPE html>')
+			content = replaceDocType(content, {
+				from: 'eshtml',
+				to: 'html',
+			})
 		}
 
 		const tree = parser(content)
@@ -29,7 +47,10 @@ export function compile(
 		let output = render(newTree)
 
 		if (options?.to === 'eshtml') {
-			output = output.replace('<!DOCTYPE html>', '<!TIPODOC eshtml>')
+			output = replaceDocType(output, {
+				from: 'html',
+				to: 'eshtml',
+			})
 		}
 
 		return output
@@ -40,11 +61,11 @@ export function compile(
 }
 
 function compileTreeRecursive(
-	tree: any,
+	tree: any[],
 	dictionary: Map<string, string>,
 	options: CompileOptions,
-): any {
-	return tree.map((node: any) => {
+): any[] {
+	return tree.map((node) => {
 		if (typeof node === 'string') {
 			return node
 		}
@@ -55,26 +76,29 @@ function compileTreeRecursive(
 			return node
 		}
 
-		let newTag = tag
-
-		if (dictionary.has(tag.toLowerCase())) {
-			newTag = transformTag(tag, dictionary)
-		}
-
+		const newTag = transformTag(tag, dictionary)
 		const htmlTag = options?.to === 'html' ? newTag : tag
-
 		const newAttrs = transformAttrs(htmlTag, attrs, options)
 
-		const newContent = content
-			? compileTreeRecursive(content, dictionary, options)
-			: null
-
-		return {
-			tag: newTag,
-			attrs: newAttrs,
-			content: newContent,
+		let newContent = content
+		if (htmlTag === 'script' && options?.compileEsJS) {
+			newContent = content.map((c) => compileScriptContent(c, options))
+		} else if (content) {
+			newContent = compileTreeRecursive(content, dictionary, options)
 		}
+
+		return { tag: newTag, attrs: newAttrs, content: newContent }
 	})
+}
+
+function compileScriptContent(content: any, options: CompileOptions): any {
+	if (typeof content === 'string') {
+		return compileEsJS(content, {
+			from: options?.from === 'eshtml' ? 'esjs' : 'js',
+			to: options?.to === 'eshtml' ? 'esjs' : 'js',
+		})
+	}
+	return content
 }
 
 function transformTag(

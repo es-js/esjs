@@ -5,13 +5,25 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@es-js/vite-plugin-eshtml": "workspace:^"
   },
   "devDependencies": {
     "@es-js/vite-plugin-esjs": "0.1.0-beta.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-eshtml": "0.0.1-alpha.0",
+    "prettier-plugin-esjs": "0.1.0-beta.1",
     "vite": "^5.3.3"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-eshtml",
+      "prettier-plugin-esjs"
+    ],
+    "singleQuote": true,
+    "semi": false
   }
 }

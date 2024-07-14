@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { compareDoms } from '../src/utils/compareDoms'
+import { compareDoms } from '../../src/utils/compareDoms'
 
 describe('compareDoms', () => {
 	it('should return true for identical trees', () => {

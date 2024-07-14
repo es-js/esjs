@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generateAttributeUsages } from '../src/utils/generateAttributeUsages'
+import { generateAttributeUsages } from '../../src/utils/generateAttributeUsages'
 
 describe('generateAttributeUsages', () => {
 	it.skip('generates attribute usages', async () => {

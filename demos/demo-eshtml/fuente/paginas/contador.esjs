@@ -1,25 +1,25 @@
-const valorContador = document.getElementById('valor-contador');
-const botonIncrementar = document.getElementById('incrementar');
-const botonDecrementar = document.getElementById('decrementar');
-const botonReiniciar = document.getElementById('reiniciar');
+const valorContador = document.getElementById('valor-contador')
+const botonIncrementar = document.getElementById('incrementar')
+const botonDecrementar = document.getElementById('decrementar')
+const botonReiniciar = document.getElementById('reiniciar')
 
-mut contador = 0;
+mut contador = 0
 
 funcion actualizarContador() {
-  valorContador.textContent = contador;
+  valorContador.textContent = contador
 }
 
 botonIncrementar.addEventListener('click', () => {
-  contador++;
-  actualizarContador();
-});
+  contador++
+  actualizarContador()
+})
 
 botonDecrementar.addEventListener('click', () => {
-  contador--;
-  actualizarContador();
-});
+  contador--
+  actualizarContador()
+})
 
 botonReiniciar.addEventListener('click', () => {
-  contador = 0;
-  actualizarContador();
-});
+  contador = 0
+  actualizarContador()
+})

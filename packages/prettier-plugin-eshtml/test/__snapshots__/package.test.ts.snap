@@ -1,0 +1,100 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should be importable 1`] = `
+{
+  "default": {
+    "languages": [
+      {
+        "extensions": [
+          ".eshtml",
+        ],
+        "name": "EsHTML",
+        "parsers": [
+          "eshtml",
+        ],
+        "vscodeLanguageIds": [
+          "eshtml",
+        ],
+      },
+    ],
+    "parsers": {
+      "eshtml": {
+        "astFormat": "eshtml",
+        "hasPragma": [Function],
+        "locEnd": [Function],
+        "locStart": [Function],
+        "parse": [Function],
+        "preprocess": [Function],
+      },
+    },
+    "printers": {
+      "eshtml": {
+        "print": [Function],
+      },
+    },
+  },
+  "languages": [
+    {
+      "extensions": [
+        ".eshtml",
+      ],
+      "name": "EsHTML",
+      "parsers": [
+        "eshtml",
+      ],
+      "vscodeLanguageIds": [
+        "eshtml",
+      ],
+    },
+  ],
+  "parsers": {
+    "eshtml": {
+      "astFormat": "eshtml",
+      "hasPragma": [Function],
+      "locEnd": [Function],
+      "locStart": [Function],
+      "parse": [Function],
+      "preprocess": [Function],
+    },
+  },
+  "printers": {
+    "eshtml": {
+      "print": [Function],
+    },
+  },
+}
+`;
+
+exports[`should be requireable 1`] = `
+{
+  "languages": [
+    {
+      "extensions": [
+        ".eshtml",
+      ],
+      "name": "EsHTML",
+      "parsers": [
+        "eshtml",
+      ],
+      "vscodeLanguageIds": [
+        "eshtml",
+      ],
+    },
+  ],
+  "parsers": {
+    "eshtml": {
+      "astFormat": "eshtml",
+      "hasPragma": [Function],
+      "locEnd": [Function],
+      "locStart": [Function],
+      "parse": [Function],
+      "preprocess": [Function],
+    },
+  },
+  "printers": {
+    "eshtml": {
+      "print": [Function],
+    },
+  },
+}
+`;

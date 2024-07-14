@@ -1,6 +1,5 @@
 <!TIPODOC eshtml>
 <eshtml idioma="es">
-
   <cabecera>
     <meta conjunto-caracteres="UTF-8">
     <recurso rel="icon" referencia="/favicon.ico">
@@ -25,5 +24,4 @@
       </lista>
     </principal>
   </cuerpo>
-
 </eshtml>

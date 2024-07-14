@@ -1,8 +1,8 @@
-const fechaActualElemento = document.getElementById('fecha-actual');
+const fechaActualElemento = document.getElementById('fecha-actual')
 
 const actualizarFechaActual = () => {
-  fechaActualElemento.textContent = crear Fecha().aCadenaLocalizada();
-};
+  fechaActualElemento.textContent = crear Fecha().aCadenaLocalizada()
+}
 
-actualizarFechaActual();
-establecerIntervalo(actualizarFechaActual, 1000);
+actualizarFechaActual()
+setInterval(actualizarFechaActual, 1000)

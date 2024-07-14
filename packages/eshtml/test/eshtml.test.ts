@@ -53,4 +53,44 @@ describe('compile', () => {
 		// expect(minifyHtml(compiled)).toBe(minifyHtml(eshtml))
 		expect(compareDoms(compiled, eshtml)).toBe(true)
 	})
+
+	it('compiles EsJS', async () => {
+		const code = `<!TIPODOC eshtml>
+<eshtml idioma="es">
+<cabecera>
+  <codigo tipo="javascript">
+mut x = Mate.aleatorio()
+  consola.escribir("¡Hola desde EsHTML! ",
+x)
+  </codigo>
+</cabecera>
+
+<cuerpo>
+  <t1>¡Hola desde EsHTML!</t1>
+</cuerpo>
+</eshtml>`
+
+		const expected = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script type="text/javascript">
+  let x = Mate.random()
+  console.log("¡Hola desde EsHTML! ", x)
+  </script>
+</head>
+
+<body>
+  <h1>¡Hola desde EsHTML!</h1>
+</body>
+</html>
+`
+
+		const compiled = compile(code, {
+			compileEsJS: true,
+		})
+
+		expect(compiled).toBe(expected)
+		expect(minifyHtml(compiled)).toBe(minifyHtml(expected))
+		expect(compareDoms(compiled, expected)).toBe(true)
+	})
 })

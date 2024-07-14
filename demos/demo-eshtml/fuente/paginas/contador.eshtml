@@ -1,6 +1,5 @@
 <!TIPODOC eshtml>
 <eshtml idioma="es">
-
   <cabecera>
     <meta conjunto-caracteres="UTF-8">
     <recurso rel="icon" referencia="/favicon.ico">
@@ -17,10 +16,9 @@
       <boton id="decrementar">Decrementar</boton>
       <boton id="reiniciar">Reiniciar</boton>
 
-      <linea-horizontal></linea-horizontal>
+      <linea-horizontal>
 
       <enlace referencia="/">Volver al índice</enlace>
     </principal>
   </cuerpo>
-
 </eshtml>
