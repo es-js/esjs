@@ -82,7 +82,7 @@ function compileTreeRecursive(
 
 		let newContent = content
 		if (htmlTag === 'script' && options?.compileEsJS) {
-			newContent = content.map((c) => compileScriptContent(c, options))
+			newContent = content.map((c: any) => compileScriptContent(c, options))
 		} else if (content) {
 			newContent = compileTreeRecursive(content, dictionary, options)
 		}

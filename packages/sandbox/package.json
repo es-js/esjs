@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.20-alpha.9",
+  "version": "0.0.20-alpha.10",
   "scripts": {
     "dev": "vite",
     "build": "pnpm lib:build && pnpm tailwind:build",

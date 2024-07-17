@@ -22,14 +22,14 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.38)(rollup@4.17.2)
       '@es-js/core':
-        specifier: 0.1.0-beta.6
-        version: 0.1.0-beta.6
+        specifier: 0.1.0-beta.8
+        version: 0.1.0-beta.8
       '@es-js/language-tools':
         specifier: ^0.1.0
         version: 0.1.0
       '@es-js/sandbox':
-        specifier: 0.0.20-alpha.9
-        version: 0.0.20-alpha.9
+        specifier: 0.0.20-alpha.10
+        version: 0.0.20-alpha.10
       '@fontsource/fira-mono':
         specifier: ^5.0.13
         version: 5.0.13
@@ -478,14 +478,14 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  '@es-js/core@0.1.0-beta.6':
-    resolution: {integrity: sha512-E5aXk2c6Lama+By1XbOCWd3Z+0MVSxahIC95UGgRg7ODGvAkiKf5G2gmVA5T2t2y4WyipYG3YtEzbS4E+ttqlg==}
+  '@es-js/core@0.1.0-beta.8':
+    resolution: {integrity: sha512-JhRI/Lht+4olIBziL5z7pCQJroDb7uAyPtITgD5QU7EUWWJcY71LkqqzhzAF7sHKhcz/mZRPV9f8/2lMafMqeQ==}
 
   '@es-js/language-tools@0.1.0':
     resolution: {integrity: sha512-VrjXh330Hndahcl12Ljafax6vCXytrQTb5ib2jdm3fUUlIqLM7OcPk//igBQLCtLYowqQBCB+2hCXlgBdG2lEg==}
 
-  '@es-js/sandbox@0.0.20-alpha.9':
-    resolution: {integrity: sha512-kc+OnfMAyJulB9ycaP2zIwydfr6cD6IHQH4lqWeKHNC0Ps/BC05FkxUMphWvUcctsxvB/uSenEM2DgVjPJbX3g==}
+  '@es-js/sandbox@0.0.20-alpha.10':
+    resolution: {integrity: sha512-1Vy4D2L+VsHey2PA5nt+0x3CtOuLqAefReQgRoDSmZ8bb1x41h6sJr1Lvc77sEVmlzEwsFiTFcV6i5E90pMheg==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -7008,11 +7008,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@es-js/core@0.1.0-beta.6': {}
+  '@es-js/core@0.1.0-beta.8': {}
 
   '@es-js/language-tools@0.1.0': {}
 
-  '@es-js/sandbox@0.0.20-alpha.9': {}
+  '@es-js/sandbox@0.0.20-alpha.10': {}
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
