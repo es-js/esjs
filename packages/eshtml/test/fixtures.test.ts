@@ -11,43 +11,43 @@ const htmlFixtures = import.meta.glob('./fixtures/*.html')
 let fixtureKeys: string[] = []
 
 beforeEach(() => {
-	fixtureKeys = Object.keys(eshtmlFixtures)
-	expect(fixtureKeys.length).toBeGreaterThan(0)
+  fixtureKeys = Object.keys(eshtmlFixtures)
+  expect(fixtureKeys.length).toBeGreaterThan(0)
 })
 
 describe('fixtures', () => {
-	it('eshtml to html', async () => {
-		for (const key of fixtureKeys) {
-			const eshtmlCode = readFileSync(resolve(join(__dirname, key)), 'utf-8')
-			const htmlCode = readFileSync(
-				resolve(join(__dirname, key.replace('.eshtml', '.html'))),
-				'utf-8',
-			)
+  it('eshtml to html', async () => {
+    for (const key of fixtureKeys) {
+      const eshtmlCode = readFileSync(resolve(join(__dirname, key)), 'utf-8')
+      const htmlCode = readFileSync(
+        resolve(join(__dirname, key.replace('.eshtml', '.html'))),
+        'utf-8',
+      )
 
-			const compiled = compile(eshtmlCode)
+      const compiled = compile(eshtmlCode)
 
-			expect(minifyHtml(compiled)).toBe(minifyHtml(htmlCode))
+      expect(minifyHtml(compiled)).toBe(minifyHtml(htmlCode))
 
-			expect(compareDoms(compiled, htmlCode)).toBe(true)
-		}
-	})
+      expect(compareDoms(compiled, htmlCode)).toBe(true)
+    }
+  })
 
-	it('html to eshtml', async () => {
-		const htmlFixtureKeys = Object.keys(htmlFixtures)
-		expect(htmlFixtureKeys.length).toBeGreaterThan(0)
+  it('html to eshtml', async () => {
+    const htmlFixtureKeys = Object.keys(htmlFixtures)
+    expect(htmlFixtureKeys.length).toBeGreaterThan(0)
 
-		for (const key of htmlFixtureKeys) {
-			const htmlCode = readFileSync(resolve(join(__dirname, key)), 'utf-8')
-			const eshtmlCode = readFileSync(
-				resolve(join(__dirname, key.replace('.html', '.eshtml'))),
-				'utf-8',
-			)
+    for (const key of htmlFixtureKeys) {
+      const htmlCode = readFileSync(resolve(join(__dirname, key)), 'utf-8')
+      const eshtmlCode = readFileSync(
+        resolve(join(__dirname, key.replace('.html', '.eshtml'))),
+        'utf-8',
+      )
 
-			const compiled = compile(htmlCode, { from: 'html', to: 'eshtml' })
+      const compiled = compile(htmlCode, { from: 'html', to: 'eshtml' })
 
-			expect(minifyHtml(compiled)).toBe(minifyHtml(eshtmlCode))
+      expect(minifyHtml(compiled)).toBe(minifyHtml(eshtmlCode))
 
-			expect(compareDoms(compiled, eshtmlCode)).toBe(true)
-		}
-	})
+      expect(compareDoms(compiled, eshtmlCode)).toBe(true)
+    }
+  })
 })

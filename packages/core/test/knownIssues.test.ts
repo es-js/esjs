@@ -2,37 +2,37 @@ import { describe, it } from 'vitest'
 import { assertCompile, assertEsJSToJS, assertJSToESJS } from './testUtils'
 
 describe('known issues', () => {
-	it('fixed: compiles variables named `escribir`', async () => {
-		assertCompile(
-			`
+  it('fixed: compiles variables named `escribir`', async () => {
+    assertCompile(
+      `
       const escribir = 'prueba'
     `,
-			`
+      `
       const escribir = 'prueba'
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
-	})
+      {
+        compiler: 'essucrase',
+      },
+    )
+  })
 
-	it('fixed: does not compile variables named `get`', async () => {
-		assertCompile(
-			`
+  it('fixed: does not compile variables named `get`', async () => {
+    assertCompile(
+      `
       mut get = 'prueba'
     `,
-			`
+      `
       let get = 'prueba'
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
-	})
+      {
+        compiler: 'essucrase',
+      },
+    )
+  })
 
-	it('fixed: transpiles const/mut/var to const/let/var', async () => {
-		assertCompile(
-			`
+  it('fixed: transpiles const/mut/var to const/let/var', async () => {
+    assertCompile(
+      `
       const desde = 'a'
       var b = {
         para: 'para',
@@ -40,7 +40,7 @@ describe('known issues', () => {
       }
       mut hasta = 'c'
     `,
-			`
+      `
       const desde = 'a'
       var b = {
         para: 'para',
@@ -48,15 +48,15 @@ describe('known issues', () => {
       }
       let hasta = 'c'
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
-	})
+      {
+        compiler: 'essucrase',
+      },
+    )
+  })
 
-	it('fixed: number methods', async () => {
-		assertCompile(
-			`
+  it('fixed: number methods', async () => {
+    assertCompile(
+      `
       consola.escribir(
         Numero.interpretarDecimal(Mate.aleatorio())
       )
@@ -67,7 +67,7 @@ describe('known issues', () => {
         x.fijarDecimales(2)
       )
     `,
-			`
+      `
       console.log(
         Number.parseFloat(Math.random())
       )
@@ -78,57 +78,57 @@ describe('known issues', () => {
         x.toFixed(2)
       )
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
-	})
+      {
+        compiler: 'essucrase',
+      },
+    )
+  })
 
-	it('fixed: Matriz tiene precedencia sobre Arreglo', async () => {
-		assertEsJSToJS(
-			`
+  it('fixed: Matriz tiene precedencia sobre Arreglo', async () => {
+    assertEsJSToJS(
+      `
       const x = Arreglo([])
       const y = Arreglo(1, 2, 3)
       const a = Matriz([])
       const b = Matriz(1, 2, 3)
       consola.escribir(x)
     `,
-			`
+      `
       const x = Array([])
       const y = Array(1, 2, 3)
       const a = Array([])
       const b = Array(1, 2, 3)
       console.log(x)
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
+      {
+        compiler: 'essucrase',
+      },
+    )
 
-		assertJSToESJS(
-			`
+    assertJSToESJS(
+      `
       const x = Array([])
       const y = Array(1, 2, 3)
       const a = Array([])
       const b = Array(1, 2, 3)
       console.log(x)
     `,
-			`
+      `
       const x = Matriz([])
       const y = Matriz(1, 2, 3)
       const a = Matriz([])
       const b = Matriz(1, 2, 3)
       consola.escribir(x)
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
-	})
+      {
+        compiler: 'essucrase',
+      },
+    )
+  })
 
-	it('convierte tipos de Vue', async () => {
-		assertEsJSToJS(
-			`
+  it('convierte tipos de Vue', async () => {
+    assertEsJSToJS(
+      `
       const props = {
         a: Numero,
         b: Cadena,
@@ -145,7 +145,7 @@ describe('known issues', () => {
         l: Conjunto,
       }
     `,
-			`
+      `
       const props = {
         a: Number,
         b: String,
@@ -162,13 +162,13 @@ describe('known issues', () => {
         l: Set,
       }
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
+      {
+        compiler: 'essucrase',
+      },
+    )
 
-		assertJSToESJS(
-			`
+    assertJSToESJS(
+      `
       const props = {
         a: Number,
         b: String,
@@ -185,7 +185,7 @@ describe('known issues', () => {
         l: Set,
       }
     `,
-			`
+      `
       const props = {
         a: Numero,
         b: Cadena,
@@ -202,9 +202,9 @@ describe('known issues', () => {
         l: Conjunto,
       }
     `,
-			{
-				compiler: 'essucrase',
-			},
-		)
-	})
+      {
+        compiler: 'essucrase',
+      },
+    )
+  })
 })

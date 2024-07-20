@@ -2,8 +2,8 @@ import { format } from 'prettier'
 import { describe, expect, it } from 'vitest'
 
 describe('prettier-plugin-eshtml', () => {
-	it('formats EsHTML code', async () => {
-		const code = `<!TIPODOC eshtml>
+  it('formats EsHTML code', async () => {
+    const code = `<!TIPODOC eshtml>
 <eshtml idioma="es">
 <cabecera>
 <recurso referencia="styles.css" rel="stylesheet">
@@ -20,7 +20,7 @@ body { background-color: lightblue; }
 </cuerpo>
 </eshtml>`
 
-		const expected = `<!TIPODOC eshtml>
+    const expected = `<!TIPODOC eshtml>
 <eshtml idioma="es">
   <cabecera>
     <recurso referencia="styles.css" rel="stylesheet">
@@ -40,17 +40,17 @@ body { background-color: lightblue; }
 </eshtml>
 `
 
-		expect(
-			await format(code, {
-				plugins: ['./dist/index.cjs'],
-				filepath: 'fuente/indice.eshtml',
-				parser: 'eshtml',
-			}),
-		).toBe(expected)
-	})
+    expect(
+      await format(code, {
+        plugins: ['./dist/index.cjs'],
+        filepath: 'fuente/indice.eshtml',
+        parser: 'eshtml',
+      }),
+    ).toBe(expected)
+  })
 
-	it('formats parts of EsHTML code', async () => {
-		const code = `<cuerpo>
+  it('formats parts of EsHTML code', async () => {
+    const code = `<cuerpo>
   <!-- Comentario -->
   <t1>¡Hola desde EsHTML!</t1>
       <imagen fuente="./logo.png" alternativo="logo">
@@ -59,7 +59,7 @@ body { background-color: lightblue; }
                   </ElementoPersonalizado>
 </cuerpo>`
 
-		const expected = `<cuerpo>
+    const expected = `<cuerpo>
   <!-- Comentario -->
   <t1>¡Hola desde EsHTML!</t1>
   <imagen fuente="./logo.png" alternativo="logo">
@@ -69,17 +69,17 @@ body { background-color: lightblue; }
 </cuerpo>
 `
 
-		expect(
-			await format(code, {
-				plugins: ['./dist/index.cjs'],
-				filepath: 'fuente/indice.eshtml',
-				parser: 'eshtml',
-			}),
-		).toBe(expected)
-	})
+    expect(
+      await format(code, {
+        plugins: ['./dist/index.cjs'],
+        filepath: 'fuente/indice.eshtml',
+        parser: 'eshtml',
+      }),
+    ).toBe(expected)
+  })
 
-	it('formats EsHTML with EsJS code', async () => {
-		const code = `<!TIPODOC eshtml>
+  it('formats EsHTML with EsJS code', async () => {
+    const code = `<!TIPODOC eshtml>
 <eshtml idioma="es">
 <cabecera>
   <codigo>
@@ -94,7 +94,7 @@ x)
 </cuerpo>
 </eshtml>`
 
-		const expected = `<!TIPODOC eshtml>
+    const expected = `<!TIPODOC eshtml>
 <eshtml idioma="es">
   <cabecera>
     <codigo>
@@ -109,12 +109,12 @@ x)
 </eshtml>
 `
 
-		expect(
-			await format(code, {
-				plugins: ['./dist/index.cjs'],
-				filepath: 'fuente/indice.eshtml',
-				parser: 'eshtml',
-			}),
-		).toBe(expected)
-	})
+    expect(
+      await format(code, {
+        plugins: ['./dist/index.cjs'],
+        filepath: 'fuente/indice.eshtml',
+        parser: 'eshtml',
+      }),
+    ).toBe(expected)
+  })
 })

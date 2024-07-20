@@ -38,24 +38,24 @@ const html = `<!DOCTYPE html>
 </html>`
 
 describe('compile', () => {
-	it('eshtml to html', async () => {
-		const compiled = compile(eshtml)
+  it('eshtml to html', async () => {
+    const compiled = compile(eshtml)
 
-		expect(compiled).toBe(html)
-		expect(minifyHtml(compiled)).toBe(minifyHtml(html))
-		expect(compareDoms(compiled, html)).toBe(true)
-	})
+    expect(compiled).toBe(html)
+    expect(minifyHtml(compiled)).toBe(minifyHtml(html))
+    expect(compareDoms(compiled, html)).toBe(true)
+  })
 
-	it('html to eshtml', async () => {
-		const compiled = compile(html, { from: 'html', to: 'eshtml' })
+  it('html to eshtml', async () => {
+    const compiled = compile(html, { from: 'html', to: 'eshtml' })
 
-		expect(compiled).toBe(eshtml)
-		// expect(minifyHtml(compiled)).toBe(minifyHtml(eshtml))
-		expect(compareDoms(compiled, eshtml)).toBe(true)
-	})
+    expect(compiled).toBe(eshtml)
+    // expect(minifyHtml(compiled)).toBe(minifyHtml(eshtml))
+    expect(compareDoms(compiled, eshtml)).toBe(true)
+  })
 
-	it('compiles EsJS', async () => {
-		const code = `<!TIPODOC eshtml>
+  it('compiles EsJS', async () => {
+    const code = `<!TIPODOC eshtml>
 <eshtml idioma="es">
 <cabecera>
   <codigo tipo="javascript">
@@ -70,7 +70,7 @@ x)
 </cuerpo>
 </eshtml>`
 
-		const expected = `<!DOCTYPE html>
+    const expected = `<!DOCTYPE html>
 <html lang="es">
 <head>
   <script type="text/javascript">
@@ -85,12 +85,12 @@ x)
 </html>
 `
 
-		const compiled = compile(code, {
-			compileEsJS: true,
-		})
+    const compiled = compile(code, {
+      compileEsJS: true,
+    })
 
-		expect(compiled).toBe(expected)
-		expect(minifyHtml(compiled)).toBe(minifyHtml(expected))
-		expect(compareDoms(compiled, expected)).toBe(true)
-	})
+    expect(compiled).toBe(expected)
+    expect(minifyHtml(compiled)).toBe(minifyHtml(expected))
+    expect(compareDoms(compiled, expected)).toBe(true)
+  })
 })

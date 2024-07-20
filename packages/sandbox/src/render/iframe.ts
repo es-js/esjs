@@ -1,35 +1,35 @@
 import type { EjecutarOptions } from '../runtime/ejecutar'
 
 export function createIframe(
-	parentElement: HTMLElement,
-	options: EjecutarOptions,
+  parentElement: HTMLElement,
+  options: EjecutarOptions,
 ): HTMLIFrameElement {
-	const iframe = document.createElement('iframe')
+  const iframe = document.createElement('iframe')
 
-	const iframeAttributes = {
-		sandbox: [
-			'allow-forms',
-			'allow-modals',
-			'allow-pointer-lock',
-			'allow-popups',
-			'allow-same-origin',
-			'allow-scripts',
-			'allow-top-navigation-by-user-activation',
-		].join(' '),
-		frameborder: '0',
-		scrolling: 'no',
-		width: '100%',
-		height: '100%',
-		style: 'border: 0;',
-		title: 'Resultado',
-		allow: 'clipboard-read; clipboard-write;',
-	}
+  const iframeAttributes = {
+    sandbox: [
+      'allow-forms',
+      'allow-modals',
+      'allow-pointer-lock',
+      'allow-popups',
+      'allow-same-origin',
+      'allow-scripts',
+      'allow-top-navigation-by-user-activation',
+    ].join(' '),
+    frameborder: '0',
+    scrolling: 'no',
+    width: '100%',
+    height: '100%',
+    style: 'border: 0;',
+    title: 'Resultado',
+    allow: 'clipboard-read; clipboard-write;',
+  }
 
-	for (const [key, value] of Object.entries(iframeAttributes)) {
-		iframe.setAttribute(key, value)
-	}
+  for (const [key, value] of Object.entries(iframeAttributes)) {
+    iframe.setAttribute(key, value)
+  }
 
-	iframe.srcdoc = `
+  iframe.srcdoc = `
 <html lang="es" class="w-full h-full">
   <head>
     <meta charset="utf-8" />
@@ -37,8 +37,8 @@ export function createIframe(
     <title>EsJS Ejecutar</title>
 
     ${options.stylesheets
-			?.map((href) => `<link rel="stylesheet" href="${href}" />`)
-			.join('\n')}
+      ?.map((href) => `<link rel="stylesheet" href="${href}" />`)
+      .join('\n')}
 
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,14 +76,14 @@ export function createIframe(
 
     setupSandbox({
       ${Object.entries(options)
-				.map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-				.join(',\n')},
+        .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
+        .join(',\n')},
       usarTerminal,
     })
   </script>
 </html>`
 
-	parentElement.appendChild(iframe)
+  parentElement.appendChild(iframe)
 
-	return iframe
+  return iframe
 }

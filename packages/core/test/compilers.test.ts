@@ -12,63 +12,63 @@ const esjsCode = `funcion prueba() {
 }`
 
 describe('compile', () => {
-	it('can compile code with EsSucrase', async () => {
-		const compiled = compile(esjsCode, {
-			compiler: 'essucrase',
-		})
+  it('can compile code with EsSucrase', async () => {
+    const compiled = compile(esjsCode, {
+      compiler: 'essucrase',
+    })
 
-		expect(compiled).toBe(`function prueba() {
+    expect(compiled).toBe(`function prueba() {
   return {
     hola: 'Hola, mundo!',
     desde: 'EsJS',
   };
 }`)
-	})
+  })
 
-	it('can compile code with EsBabel', () => {
-		const compiled = compile(esjsCode, {
-			compiler: 'esbabel',
-		})
+  it('can compile code with EsBabel', () => {
+    const compiled = compile(esjsCode, {
+      compiler: 'esbabel',
+    })
 
-		expect(compiled).toBe(`function prueba() {
+    expect(compiled).toBe(`function prueba() {
   return {
     hola: 'Hola, mundo!',
     from: 'EsJS',
   };
 }`)
-	})
+  })
 })
 
 describe('EsbabelCompiler', () => {
-	it('can compile code', () => {
-		const compiler = new EsbabelCompiler()
-		const compiled = compiler.compile(esjsCode, {
-			from: 'esjs',
-			to: 'js',
-		})
+  it('can compile code', () => {
+    const compiler = new EsbabelCompiler()
+    const compiled = compiler.compile(esjsCode, {
+      from: 'esjs',
+      to: 'js',
+    })
 
-		expect(compiled).toBe(`function prueba() {
+    expect(compiled).toBe(`function prueba() {
   return {
     hola: 'Hola, mundo!',
     from: 'EsJS',
   };
 }`)
-	})
+  })
 })
 
 describe('EssucraseCompiler', () => {
-	it('can compile code', () => {
-		const compiler = new EssucraseCompiler(putout)
-		const compiled = compiler.compile(esjsCode, {
-			from: 'esjs',
-			to: 'js',
-		})
+  it('can compile code', () => {
+    const compiler = new EssucraseCompiler(putout)
+    const compiled = compiler.compile(esjsCode, {
+      from: 'esjs',
+      to: 'js',
+    })
 
-		expect(compiled).toBe(`function prueba() {
+    expect(compiled).toBe(`function prueba() {
   return {
     hola: 'Hola, mundo!',
     desde: 'EsJS',
   };
 }`)
-	})
+  })
 })

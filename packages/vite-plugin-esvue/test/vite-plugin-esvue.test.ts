@@ -18,28 +18,28 @@ let vitePluginVue: typeof import('@vitejs/plugin-vue')
 let EsVuePlugin: typeof import('../src/index')
 
 beforeAll(async () => {
-	vite = await import('vite')
-	vitePluginVue = await import('@vitejs/plugin-vue')
-	EsVuePlugin = await import('../src/index')
+  vite = await import('vite')
+  vitePluginVue = await import('@vitejs/plugin-vue')
+  EsVuePlugin = await import('../src/index')
 })
 
 it('build', async () => {
-	await vite.build({
-		root: path.join(__dirname, 'fixtures', 'basic'),
-		configFile: false,
-		logLevel: 'error',
-		plugins: [
-			EsVuePlugin.default(),
-			vitePluginVue.default({
-				include: [/\.vue$/, /\.esvue$/],
-			}),
-		],
-		build: {
-			write: true,
-			minify: false,
-		},
-		define: {
-			global: 'window',
-		},
-	})
+  await vite.build({
+    root: path.join(__dirname, 'fixtures', 'basic'),
+    configFile: false,
+    logLevel: 'error',
+    plugins: [
+      EsVuePlugin.default(),
+      vitePluginVue.default({
+        include: [/\.vue$/, /\.esvue$/],
+      }),
+    ],
+    build: {
+      write: true,
+      minify: false,
+    },
+    define: {
+      global: 'window',
+    },
+  })
 })

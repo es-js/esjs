@@ -3,7 +3,7 @@ import { expect, it } from 'vitest'
 import { getEntryScripts } from '../src/lib/getEntryScripts'
 
 it('getEntryScripts', async () => {
-	const html = `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="es">
 
   <head>
@@ -20,7 +20,7 @@ it('getEntryScripts', async () => {
 
 </html>`
 
-	const output = getEntryScripts(html)
+  const output = getEntryScripts(html)
 
-	expect(output).toMatchSnapshot()
+  expect(output).toMatchSnapshot()
 })

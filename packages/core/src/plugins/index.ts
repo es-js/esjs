@@ -13,18 +13,18 @@ import * as json from './json'
 import * as tipos from './tipos'
 
 export const plugins = [
-	['consola', consola],
-	['matriz', matriz],
-	['cadena', cadena],
-	['fecha', fecha],
-	['numero', numero],
-	['promesa', promesa],
-	['mate', mate],
-	['booleano', booleano],
-	['funcion', funcion],
-	['soporte', soporte],
-	['json', json],
-	['tipos', tipos],
+  ['consola', consola],
+  ['matriz', matriz],
+  ['cadena', cadena],
+  ['fecha', fecha],
+  ['numero', numero],
+  ['promesa', promesa],
+  ['mate', mate],
+  ['booleano', booleano],
+  ['funcion', funcion],
+  ['soporte', soporte],
+  ['json', json],
+  ['tipos', tipos],
 ]
 
 export { setToEsJS }

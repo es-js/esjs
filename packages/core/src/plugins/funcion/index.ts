@@ -7,13 +7,13 @@ export const methods = new Map<string, string>([])
 export const objects = new Map<string, string>([['Funcion', 'Function']])
 
 export function replace() {
-	return {
-		...replaceInstanceof({
-			from: 'Funcion',
-			to: 'Function',
-		}),
-		...replaceObjects({
-			objects,
-		}),
-	}
+  return {
+    ...replaceInstanceof({
+      from: 'Funcion',
+      to: 'Function',
+    }),
+    ...replaceObjects({
+      objects,
+    }),
+  }
 }

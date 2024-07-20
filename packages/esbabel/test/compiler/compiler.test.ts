@@ -3,8 +3,8 @@ import { generate } from '../../src/generator'
 import { token } from '../../src/token'
 
 describe('compiler', () => {
-	it('compiles a simple program', async () => {
-		const expected = `
+  it('compiles a simple program', async () => {
+    const expected = `
 // Funcion principal: if (a > b) { return a; } else { return b; }
 
 /**
@@ -19,58 +19,58 @@ function principal(mensaje) {
   return mensaje;
 }`
 
-		const tokens = [
-			token.whitespace('\n'),
-			token.comment(
-				'// Funcion principal: if (a > b) { return a; } else { return b; }\n',
-			),
-			token.whitespace('\n'),
-			token.comment(`/**
+    const tokens = [
+      token.whitespace('\n'),
+      token.comment(
+        '// Funcion principal: if (a > b) { return a; } else { return b; }\n',
+      ),
+      token.whitespace('\n'),
+      token.comment(`/**
 * Funcion principal
 * @param {string} mensaje
 * @returns {string}
 */`),
-			token.whitespace('\n'),
-			token.keyword('funcion'),
-			token.whitespace(' '),
-			token.keyword('principal'),
-			token.leftParen(),
-			token.keyword('mensaje'),
-			token.rightParen(),
-			token.whitespace(' '),
-			token.leftCurly(),
-			token.whitespace('\n  '),
-			token.keyword('const'),
-			token.whitespace(' '),
-			token.keyword('hola'),
-			token.whitespace(' '),
-			token.specialCharacter('='),
-			token.whitespace(' '),
-			token.stringLiteral("'hola'"),
-			token.semicolon(),
-			token.whitespace('\n  '),
-			token.keyword('consola'),
-			token.dot(),
-			token.keyword('escribir'),
-			token.leftParen(),
-			token.keyword('hola'),
-			token.whitespace(' '),
-			token.specialCharacter('+'),
-			token.whitespace(' '),
-			token.keyword('mensaje'),
-			token.rightParen(),
-			token.semicolon(),
-			token.whitespace('\n\n  '),
-			token.keyword('retornar'),
-			token.whitespace(' '),
-			token.keyword('mensaje'),
-			token.semicolon(),
-			token.whitespace('\n'),
-			token.rightCurly(),
-		]
+      token.whitespace('\n'),
+      token.keyword('funcion'),
+      token.whitespace(' '),
+      token.keyword('principal'),
+      token.leftParen(),
+      token.keyword('mensaje'),
+      token.rightParen(),
+      token.whitespace(' '),
+      token.leftCurly(),
+      token.whitespace('\n  '),
+      token.keyword('const'),
+      token.whitespace(' '),
+      token.keyword('hola'),
+      token.whitespace(' '),
+      token.specialCharacter('='),
+      token.whitespace(' '),
+      token.stringLiteral("'hola'"),
+      token.semicolon(),
+      token.whitespace('\n  '),
+      token.keyword('consola'),
+      token.dot(),
+      token.keyword('escribir'),
+      token.leftParen(),
+      token.keyword('hola'),
+      token.whitespace(' '),
+      token.specialCharacter('+'),
+      token.whitespace(' '),
+      token.keyword('mensaje'),
+      token.rightParen(),
+      token.semicolon(),
+      token.whitespace('\n\n  '),
+      token.keyword('retornar'),
+      token.whitespace(' '),
+      token.keyword('mensaje'),
+      token.semicolon(),
+      token.whitespace('\n'),
+      token.rightCurly(),
+    ]
 
-		const compiled = generate(tokens)
+    const compiled = generate(tokens)
 
-		expect(compiled).toEqual(expected)
-	})
+    expect(compiled).toEqual(expected)
+  })
 })
