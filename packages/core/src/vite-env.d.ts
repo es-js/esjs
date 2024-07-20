@@ -1,3 +1,3 @@
 /// <reference types="vite/client" />
 
-declare module 'putout'
+declare module '@putout/bundle'

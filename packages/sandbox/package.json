@@ -1,6 +1,6 @@
 {
   "name": "@es-js/sandbox",
-  "version": "0.0.20-alpha.10",
+  "version": "0.0.20-beta.1",
   "scripts": {
     "dev": "vite",
     "build": "pnpm lib:build && pnpm tailwind:build",
@@ -23,11 +23,11 @@
     "espree": "^9.6.1",
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
-    "vite-plugin-dts": "^1.7.3",
-    "vitest": "^1.0.1"
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4",
+    "vite-plugin-dts": "^4.0.0-beta.1",
+    "vitest": "^2.0.3"
   },
   "type": "module",
   "exports": {

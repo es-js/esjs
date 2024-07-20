@@ -27,34 +27,6 @@ function extractImportsFrom(code: string): string | null {
   return code.match(IMPORTS_REGEX)?.join('\n') ?? null
 }
 
-const FRONT_MATTER_DIVISOR = '---'
-
-export interface SplitScriptTemplate {
-  script: string | null
-  template: string | null
-}
-
-export function splitScriptTemplate(code: string): SplitScriptTemplate {
-  const trimmedCode: string = code.trim()
-  let script: string | null = trimmedCode
-  let template: string | null = null
-
-  if (trimmedCode.startsWith(FRONT_MATTER_DIVISOR)) {
-    script = trimmedCode.substring(
-      trimmedCode.indexOf(FRONT_MATTER_DIVISOR) + 3,
-    )
-    script = script
-      .substring(0, script.lastIndexOf(FRONT_MATTER_DIVISOR))
-      .trim()
-
-    template = trimmedCode
-      .substring(trimmedCode.lastIndexOf(FRONT_MATTER_DIVISOR) + 3)
-      .trim()
-  }
-
-  return { script, template }
-}
-
 export function invertMap(map: Map<string, string>): Map<string, string> {
   const invertedMap = new Map<string, string>()
   for (const [key, value] of map.entries()) {

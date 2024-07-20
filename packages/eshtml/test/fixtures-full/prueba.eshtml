@@ -40,7 +40,7 @@
           </preformateado>
           <bloque-codigo>
             const saludo = "Hola, EsHTML!";
-            console.log(saludo);
+            consola.escribir(saludo);
           </bloque-codigo>
         </articulo>
       </seccion>

@@ -1,0 +1,100 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should be importable 1`] = `
+{
+  "default": {
+    "languages": [
+      {
+        "extensions": [
+          ".esvue",
+        ],
+        "name": "EsVue",
+        "parsers": [
+          "esvue",
+        ],
+        "vscodeLanguageIds": [
+          "esvue",
+        ],
+      },
+    ],
+    "parsers": {
+      "esvue": {
+        "astFormat": "esvue",
+        "hasPragma": [Function],
+        "locEnd": [Function],
+        "locStart": [Function],
+        "parse": [Function],
+        "preprocess": [Function],
+      },
+    },
+    "printers": {
+      "esvue": {
+        "print": [Function],
+      },
+    },
+  },
+  "languages": [
+    {
+      "extensions": [
+        ".esvue",
+      ],
+      "name": "EsVue",
+      "parsers": [
+        "esvue",
+      ],
+      "vscodeLanguageIds": [
+        "esvue",
+      ],
+    },
+  ],
+  "parsers": {
+    "esvue": {
+      "astFormat": "esvue",
+      "hasPragma": [Function],
+      "locEnd": [Function],
+      "locStart": [Function],
+      "parse": [Function],
+      "preprocess": [Function],
+    },
+  },
+  "printers": {
+    "esvue": {
+      "print": [Function],
+    },
+  },
+}
+`;
+
+exports[`should be requireable 1`] = `
+{
+  "languages": [
+    {
+      "extensions": [
+        ".esvue",
+      ],
+      "name": "EsVue",
+      "parsers": [
+        "esvue",
+      ],
+      "vscodeLanguageIds": [
+        "esvue",
+      ],
+    },
+  ],
+  "parsers": {
+    "esvue": {
+      "astFormat": "esvue",
+      "hasPragma": [Function],
+      "locEnd": [Function],
+      "locStart": [Function],
+      "parse": [Function],
+      "preprocess": [Function],
+    },
+  },
+  "printers": {
+    "esvue": {
+      "print": [Function],
+    },
+  },
+}
+`;

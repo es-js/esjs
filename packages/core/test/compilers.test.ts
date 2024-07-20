@@ -58,7 +58,7 @@ describe('EsbabelCompiler', () => {
 
 describe('EssucraseCompiler', () => {
   it('can compile code', () => {
-    const compiler = new EssucraseCompiler(putout)
+    const compiler = new EssucraseCompiler()
     const compiled = compiler.compile(esjsCode, {
       from: 'esjs',
       to: 'js',

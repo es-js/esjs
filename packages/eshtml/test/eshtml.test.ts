@@ -59,9 +59,8 @@ describe('compile', () => {
 <eshtml idioma="es">
 <cabecera>
   <codigo tipo="javascript">
-mut x = Mate.aleatorio()
-  consola.escribir("¡Hola desde EsHTML! ",
-x)
+  mut x = Mate.aleatorio()
+  consola.escribir("¡Hola desde EsHTML! ", x)
   </codigo>
 </cabecera>
 
@@ -73,8 +72,8 @@ x)
     const expected = `<!DOCTYPE html>
 <html lang="es">
 <head>
-  <script type="text/javascript">
-  let x = Mate.random()
+  <script type="javascript">
+  let x = Math.random()
   console.log("¡Hola desde EsHTML! ", x)
   </script>
 </head>
@@ -82,8 +81,7 @@ x)
 <body>
   <h1>¡Hola desde EsHTML!</h1>
 </body>
-</html>
-`
+</html>`
 
     const compiled = compile(code, {
       compileEsJS: true,

@@ -39,7 +39,7 @@ Mantiene    los    espacios
 </preformateado>
           <codigo-bloque>
             const saludo = "Hola, EsHTML!";
-            console.log(saludo);
+            consola.escribir(saludo);
           </codigo-bloque>
         </articulo>
       </seccion>

@@ -1,5 +1,5 @@
 {
-	"name": "prettier-plugin-eshtml",
+	"name": "prettier-plugin-esvue",
 	"version": "0.0.1-beta.1",
 	"license": "MIT",
 	"type": "module",
@@ -25,6 +25,7 @@
 	"devDependencies": {
 		"@es-js/core": "workspace:*",
 		"@es-js/eshtml": "workspace:*",
+		"@es-js/esvue": "workspace:*",
 		"@prettier/sync": "^0.5.2",
 		"@types/node": "^20.14.12",
 		"pkgroll": "^2.4.1",

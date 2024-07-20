@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { invertMap, splitCodeImports, splitScriptTemplate } from '../src/utils'
+import { invertMap, splitCodeImports } from '../src/utils'
 
 describe('utils', () => {
   it('split code imports', () => {
@@ -46,34 +46,6 @@ let z = 3`)
     expect(imports).toBe('')
 
     expect(hasImports).toBe(false)
-  })
-
-  it('split script template', () => {
-    const code = `
----
-console.log('script')
----
-
-<div>template</div>
-`
-
-    const { script, template } = splitScriptTemplate(code)
-
-    expect(script).toBe(`console.log('script')`)
-
-    expect(template).toBe(`<div>template</div>`)
-  })
-
-  it('split template without script', () => {
-    const code = `
-console.log('script')
-`
-
-    const { script, template } = splitScriptTemplate(code)
-
-    expect(script).toBe(`console.log('script')`)
-
-    expect(template).toBe(null)
   })
 
   it('invert map', () => {

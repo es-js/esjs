@@ -1,6 +1,6 @@
 import { EsbabelCompiler } from './compiler/esbabel.compiler'
 import { EssucraseCompiler } from './compiler/essucrase.compiler'
-import putout from 'putout'
+import putout from '@putout/bundle'
 
 export type AvailableLanguages = 'esjs' | 'js'
 

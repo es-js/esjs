@@ -1,6 +1,6 @@
 {
   "name": "@es-js/eshtml",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-beta.1",
   "description": "EsHTML: HTML en Español",
   "scripts": {
     "build": "unbuild",
@@ -40,6 +40,11 @@
       "types": "./dist/render.d.ts",
       "import": "./dist/render.mjs",
       "require": "./dist/render.cjs"
+    },
+    "./parser": {
+      "types": "./dist/parser.d.ts",
+      "import": "./dist/parser.mjs",
+      "require": "./dist/parser.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -50,7 +55,8 @@
       "*": [
         "./dist/*",
         "./dist/index.d.ts",
-        "./dist/render.d.ts"
+        "./dist/render.d.ts",
+        "./dist/parser.d.ts"
       ]
     }
   },

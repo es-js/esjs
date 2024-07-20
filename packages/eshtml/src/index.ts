@@ -1,9 +1,9 @@
-import { parser } from 'posthtml-parser'
-import { transformAttr } from './attrs'
-import { render } from './render'
-import { replaceDocType } from './utils/replaceDocType'
-import { getDictionary } from './tags'
 import { compile as compileEsJS } from '@es-js/core'
+import { transformAttr } from './attrs'
+import { parser } from './parser'
+import { render } from './render'
+import { getDictionary } from './tags'
+import { replaceDocType } from './utils/replaceDocType'
 
 export interface CompileOptions {
   from?: 'eshtml' | 'html'
@@ -81,7 +81,7 @@ function compileTreeRecursive(
     const newAttrs = transformAttrs(htmlTag, attrs, options)
 
     let newContent = content
-    if (htmlTag === 'script' && options?.compileEsJS) {
+    if (htmlTag === 'script' && options?.compileEsJS && content) {
       newContent = content.map((c: any) => compileScriptContent(c, options))
     } else if (content) {
       newContent = compileTreeRecursive(content, dictionary, options)

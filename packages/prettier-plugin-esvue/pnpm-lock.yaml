@@ -14,6 +14,9 @@ importers:
       '@es-js/eshtml':
         specifier: workspace:*
         version: link:../eshtml
+      '@es-js/esvue':
+        specifier: workspace:*
+        version: link:../esvue
       '@prettier/sync':
         specifier: ^0.5.2
         version: 0.5.2(prettier@3.3.3)
