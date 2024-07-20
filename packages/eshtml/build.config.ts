@@ -1,8 +1,11 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	entries: ['src/index'],
-	clean: false,
+	entries: [
+    'src/index',
+    'src/render',
+  ],
+	clean: true,
 	declaration: true,
 	externals: ['@es-js/core'],
 	rollup: {

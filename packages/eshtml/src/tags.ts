@@ -133,6 +133,7 @@ const dictionary: Map<string, string> = new Map([
 
 	// Web Components
 	['template', 'plantilla'],
+  ['slot', 'ranura'],
 
 	// SVG and Math
 	['svg', 'grafico-vectorial'],
@@ -258,6 +259,7 @@ export const htmlTags = [
 	// 'search',
 	'section',
 	'select',
+  'slot',
 	'small',
 	'source',
 	'span',
