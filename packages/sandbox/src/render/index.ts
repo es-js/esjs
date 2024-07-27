@@ -20,8 +20,9 @@ export function createSandbox(
   elementOrId: HTMLElement | string,
   customOptions: Partial<EjecutarOptions>,
 ): HTMLIFrameElement {
-  if (typeof elementOrId === 'string')
-    elementOrId = document.getElementById(elementOrId) as HTMLElement
+  if (typeof elementOrId === 'string') {
+    elementOrId = document.getElementById(elementOrId) as HTMLElement;
+  }
 
   const options: EjecutarOptions = Object.assign(
     {

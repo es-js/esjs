@@ -56,8 +56,9 @@ export async function loadPutout() {
 export async function init(options: EjecutarOptions): Promise<void> {
   _options = options
 
-  if (typeof _options.usarTerminal !== 'function')
+  if (typeof _options.usarTerminal !== 'function') {
     throw new Error('usarTerminal is required')
+  }
 
   await setupEruda()
 
