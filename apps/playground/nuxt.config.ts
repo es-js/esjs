@@ -1,6 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json' assert { type: 'json' }
 
+const isDev = process.env.NODE_ENV === "development";
+
 export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
@@ -43,6 +45,16 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'es',
       },
+      script: [
+        ...(isDev ?
+          [] :
+          [
+            {
+              children: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "${process.env.NUXT_CLARITY_ID}");`
+            }
+          ]
+        ),
+      ]
     },
   },
 
