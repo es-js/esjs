@@ -64,11 +64,9 @@ async function loadItems(category: any) {
 <template>
   <div>
     <AppButton
-      label="Ejemplos"
+      text="Ejemplos"
       icon="i-mdi-rocket-launch-outline"
       block
-      variant="soft"
-      color="black"
       @click="openModal"
     />
 
@@ -91,9 +89,9 @@ async function loadItems(category: any) {
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Ejemplos en EsJS
             </h3>
-            <UButton
-              variant="ghost"
+            <AppButton
               icon="i-mdi-close"
+              description="Cerrar"
               @click="closeModal"
             />
           </div>
@@ -105,11 +103,12 @@ async function loadItems(category: any) {
               v-for="category in categories"
               :key="category.key"
             >
-              <UButton
-                :label="category.label"
-                :block="true"
+              <AppButton
+                :text="category.label"
                 :color="selectedCategory.key === category.key ? 'primary' : (isDark ? 'black' : 'white')"
-                variant="soft"
+                variant="secondary"
+                prevent-tooltip
+                class="w-full"
                 @click="selectedCategory = category"
               />
             </div>

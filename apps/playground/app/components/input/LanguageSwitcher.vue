@@ -9,12 +9,12 @@ const editor = useEditor()
     :items="editor.availableLanguages"
     :popper="{ placement: 'bottom-start' }"
   >
-    <UButton
+    <AppButton
       color="gray"
-      :label="editor.language.value === 'esjs' ? 'EsJS' : 'JS'"
+      :text="editor.language.value === 'esjs' ? 'EsJS' : 'JS'"
       trailing-icon="i-mdi-chevron-down"
       icon="i-mdi-code-tags"
-      size="2xs"
+      size="xs"
     />
   </UDropdown>
 </template>

@@ -46,17 +46,18 @@ function logout() {
             Para cerrar sesión, presiona el botón de confirmación.
           </p>
           <div class="flex items-center justify-end space-x-4">
-            <UButton
-              label="Confirmar"
+            <AppButton
+              text="Confirmar"
               color="red"
-              variant="soft"
               icon="i-mdi-logout"
+              prevent-tooltip
               @click="logout"
             />
-            <UButton
-              label="Cancelar"
+            <AppButton
+              text="Cancelar"
               color="black"
               icon="i-mdi-close"
+              prevent-tooltip
               @click="close"
             />
           </div>

@@ -32,10 +32,12 @@
     "@nuxt/content": "^2.12.1",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
+    "@nuxt/icon": "^1.4.4",
     "@nuxt/ui": "^2.16.0",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/supabase": "^1.2.2",
+    "@nuxtjs/tailwindcss": "^6.12.1",
     "@putout/bundle": "^3.14.0",
     "@types/node": "^18.19.24",
     "@types/prettier": "^2.7.3",
@@ -52,7 +54,7 @@
     "nuxt-monaco-editor": "^1.2.9",
     "prettier": "^2.8.8",
     "random-spanish-words": "^2.0.0",
-    "splitpanes": "^3.1.5",
+    "shadcn-nuxt": "^0.10.4",
     "theme-vitesse": "^0.8.0",
     "vue-screen": "^2.4.0",
     "zod": "^3.23.8"
@@ -63,6 +65,12 @@
     }
   },
   "dependencies": {
-    "octokit": "^3.1.2"
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.418.0",
+    "octokit": "^3.1.2",
+    "radix-vue": "^1.9.2",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

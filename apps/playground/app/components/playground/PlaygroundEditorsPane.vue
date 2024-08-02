@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useEventBus } from '@vueuse/core/index'
-import { Pane, Splitpanes } from 'splitpanes'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
 import AppEditor from '~/components/input/AppEditor.vue'
 import LanguageSwitcher from '~/components/input/LanguageSwitcher.vue'
+import PlaygroundOutput from '~/components/output/PlaygroundOutput.vue';
 import { useEditor } from '~/composables/useEditor'
 import { FILE_TESTS, useFiles } from '~/composables/useFiles'
 import { useSettings } from '~/composables/useSettings'
@@ -46,12 +47,11 @@ const activeFile = computed(() => files.getActiveFile())
 <template>
   <div ref="wrapper" class="relative h-full">
     <div class="absolute inset-0">
-      <Splitpanes
-        :key="testsPaneSize"
-        horizontal
-        class="default-theme"
-      >
-        <Pane>
+      <ResizablePanelGroup :key="testsPaneSize" direction="vertical">
+        <ResizablePanel :min-size="20"
+                        :max-size="settings.hideTests ? 100 : 80"
+                        class="px-2"
+                        :class="{'pb-2': !settings.hideTests}">
           <AppContainer>
             <template #title>
               <div class="flex flex-row items-center space-x-2">
@@ -78,7 +78,7 @@ const activeFile = computed(() => files.getActiveFile())
                     icon="i-mdi-auto-fix"
                     text="Formatear"
                     description="Formatear código"
-                    size="2xs"
+                    size="xs"
                     :icon-only="!mdAndUp"
                     @click="useEventBus('editor_code').emit('format')"
                   />
@@ -95,18 +95,15 @@ const activeFile = computed(() => files.getActiveFile())
               />
             </template>
           </AppContainer>
-        </Pane>
+        </ResizablePanel>
 
-        <Pane
-          :key="`${settings.hideTests}-${settings.layout}`"
-          :size="testsPaneSize"
-          :min-size="settings.hideTests ? testsPaneSize : 20"
-          :max-size="settings.hideTests ? testsPaneSize : 80"
-        >
-          <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900">
-            <div
-              class="flex flex-row items-center space-x-2 flex-1"
-            >
+        <ResizableHandle v-if="!settings.hideTests" with-handle />
+
+        <ResizablePanel :max-size="80"
+                        :default-size="testsPaneSize"
+                        class="px-2 py-2">
+          <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900 rounded border dark:border-gray-800">
+            <div class="flex flex-row items-center space-x-2 flex-1">
               <AppTabButton
                 icon="i-mdi-test-tube"
                 :text="files.getFileNameWithExtension(FILE_TESTS)"
@@ -124,8 +121,8 @@ const activeFile = computed(() => files.getActiveFile())
               @update:model-value="files.setFileContent(FILE_TESTS, $event)"
             />
           </div>
-        </Pane>
-      </Splitpanes>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   </div>
 </template>

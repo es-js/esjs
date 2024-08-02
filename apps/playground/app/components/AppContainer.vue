@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900">
+  <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900 rounded border dark:border-gray-800">
     <div class="flex flex-row items-center">
       <div class="w-full flex-1">
         <slot name="title" />

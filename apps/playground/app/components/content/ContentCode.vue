@@ -109,7 +109,7 @@ const unwatch = watch(
 
       <div class="absolute inset-y-0 right-0 flex flex-col items-center justify-center">
         <div class="relative w-px h-full">
-          <div class="sticky top-0 flex flex-row items-center -ml-2 mt-2 z-50">
+          <div class="sticky top-0 flex flex-row items-center -ml-2 mt-2 z-50 w-8 h-8">
             <AppButton
               text="Utilizar"
               description="Utilizar en el Editor"

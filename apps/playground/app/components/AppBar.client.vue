@@ -5,6 +5,12 @@ import ExamplesModal from '~/components/examples/ExamplesModal.vue'
 import { isDark, toggleDark } from '~/composables/dark'
 import { useLZShare } from '~/composables/useLZShare'
 import { useSettings } from '~/composables/useSettings'
+import { Button } from '@/components/ui/button'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
 const share = useLZShare()
 
@@ -35,14 +41,12 @@ function setupInfiniteLoopProtection() {
 
 <template>
   <div class="w-full px-2">
-    <div class="h-full grid grid-cols-3">
+    <div class="h-10 grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
         <UPopover>
-          <UButton
+          <AppButton
             icon="i-mdi-menu"
             icon-only
-            variant="soft"
-            color="black"
             description="Mostrar opciones"
           />
           <template #panel="{close}">
@@ -53,18 +57,17 @@ function setupInfiniteLoopProtection() {
         </UPopover>
 
         <div class="flex flex-row items-center space-x-1">
-          <UButton
-            to="/"
+          <Button
+            href="/"
             variant="link"
-            :padded="false"
-            class="w-7"
+            class="w-7 p-0"
           >
             <img
               src="/favicon.ico"
               alt="EsJS Logo"
               class="w-7 h-7 rounded"
             >
-          </UButton>
+          </Button>
           <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
           <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
         </div>
@@ -88,10 +91,10 @@ function setupInfiniteLoopProtection() {
 
       <div class="flex-1" />
 
-      <div class="flex flex-row justify-end items-center space-x-3">
+      <div class="flex flex-row justify-end items-center space-x-2">
         <div
           v-if="!settings.settings.value.hideOptions"
-          class="flex flex-row justify-end items-center space-x-3"
+          class="flex flex-row justify-end items-center space-x-2"
         >
           <AppButton
             v-if="settings.settings.value.showAdvanced"
@@ -144,7 +147,7 @@ function setupInfiniteLoopProtection() {
           <AppSeparator v-if="settings.settings.value.showAdvanced" />
         </div>
 
-        <div class="flex flex-row items-center space-x-3">
+        <div class="flex flex-row items-center space-x-2">
           <AppButton
             icon="i-mdi-shield-sync"
             text="Protección de código"
@@ -155,25 +158,22 @@ function setupInfiniteLoopProtection() {
             @click="setupInfiniteLoopProtection"
           />
 
-          <UPopover
-            mode="hover"
-            :close-delay="300"
-          >
-            <AppButton
-              description="Opciones"
-              prevent-tooltip
-              icon="i-mdi-cog"
-              icon-only
-              color="gray"
-            />
-
-            <template #panel>
-              <div class="flex flex-row items-center p-1 space-x-2">
+          <Popover>
+            <PopoverTrigger>
+              <AppButton
+                description="Opciones"
+                prevent-tooltip
+                icon="i-mdi-cog"
+                icon-only
+                color="gray"
+              />
+            </PopoverTrigger>
+            <PopoverContent>
+              <div class="flex flex-row flex-wrap items-center gap-2">
                 <AppButton
                   icon="i-mdi-view-split-vertical"
                   :active="'horizontal' === settings.settings.value.layout"
                   description="Orientación vertical"
-                  variant="outline"
                   @click="settings.setLayout('horizontal')"
                 />
 
@@ -181,7 +181,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-view-split-horizontal"
                   :active="'vertical' === settings.settings.value.layout"
                   description="Orientación horizontal"
-                  variant="outline"
                   @click="settings.setLayout('vertical')"
                 />
 
@@ -191,7 +190,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-code"
                   :active="!settings.settings.value.hideEditor"
                   description="Mostrar editor"
-                  variant="outline"
                   @click="settings.setHideEditor(!settings.settings.value.hideEditor)"
                 />
 
@@ -199,7 +197,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-compare-horizontal"
                   :active="settings.settings.value.showCompiledEditor"
                   description="Mostrar código compilado"
-                  variant="outline"
                   @click="settings.setShowCompiledEditor(!settings.settings.value.showCompiledEditor)"
                 />
 
@@ -207,7 +204,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-eye"
                   :active="!settings.settings.value.hideOutput"
                   description="Mostrar vista previa"
-                  variant="outline"
                   @click="settings.setHideOutput(!settings.settings.value.hideOutput)"
                 />
 
@@ -217,7 +213,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-autorenew"
                   :active="settings.settings.value.autoCompile"
                   description="Ejecutar automáticamente"
-                  variant="outline"
                   @click="settings.setAutoCompile(!settings.settings.value.autoCompile)"
                 />
 
@@ -225,7 +220,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-publish"
                   text="Exportar módulo"
                   description="Genera una URL con el módulo actual y la copia al portapapeles"
-                  variant="outline"
                   icon-only
                   color="gray"
                   @click="share.shareModule()"
@@ -237,7 +231,6 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-dots-horizontal"
                   :active="!settings.settings.value.hideOptions"
                   description="Mostrar opciones"
-                  variant="outline"
                   @click="settings.setHideOptions(!settings.settings.value.hideOptions)"
                 />
 
@@ -245,17 +238,16 @@ function setupInfiniteLoopProtection() {
                   icon="i-mdi-cogs"
                   :active="settings.settings.value.showAdvanced"
                   description="Mostrar avanzado"
-                  variant="outline"
                   @click="settings.setShowAdvanced(!settings.settings.value.showAdvanced)"
                 />
               </div>
-            </template>
-          </UPopover>
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div
           v-if="!settings.settings.value.hideOptions"
-          class="flex flex-row justify-end items-center space-x-3"
+          class="flex flex-row justify-end items-center space-x-2"
         >
           <LoginButton />
           <AppButton

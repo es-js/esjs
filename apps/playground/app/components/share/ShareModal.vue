@@ -35,7 +35,6 @@ function closeModal() {
       text="Compartir"
       description="Compartir código"
       color="teal"
-      variant="soft"
       @click="shareCode"
     />
 
@@ -46,10 +45,9 @@ function closeModal() {
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Compartir código
             </h3>
-            <UButton
-              color="gray"
-              variant="ghost"
+            <AppButton
               icon="i-mdi-close"
+              description="Cerrar"
               @click="isOpen = false"
             />
           </div>

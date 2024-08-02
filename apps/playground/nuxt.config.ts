@@ -12,6 +12,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
+    '@nuxt/icon',
     '@vueuse/nuxt',
     'nuxt-monaco-editor',
     '@nuxtjs/robots',
@@ -19,6 +20,8 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@davestewart/nuxt-scrollbar',
     '@nuxt/content',
+    // '@nuxtjs/tailwindcss',
+    'shadcn-nuxt',
   ],
 
   runtimeConfig: {
@@ -86,6 +89,19 @@ export default defineNuxtConfig({
           scopeName: 'source.esjs',
         },
       ],
+    },
+  },
+
+  shadcn: {
+    prefix: '',
+    componentDir: './app/components/ui'
+  },
+
+  compatibilityDate: '2024-07-31',
+
+  imports: {
+    transform: {
+      exclude: [/\bsandbox\b/],
     },
   },
 })

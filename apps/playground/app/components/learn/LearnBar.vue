@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
+import { Button } from '@/components/ui/button';
 import { isDark, toggleDark } from '~/composables/dark'
 import LanguageSwitcher from '~/components/input/LanguageSwitcher.vue'
 
@@ -14,18 +15,17 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
     <div class="h-full grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
         <div class="flex flex-row items-center space-x-1">
-          <UButton
-            to="/"
+          <Button
+            href="/"
             variant="link"
-            :padded="false"
-            class="w-7"
+            class="w-7 p-0"
           >
             <img
               src="/favicon.ico"
               alt="EsJS Logo"
               class="w-7 h-7 rounded"
             >
-          </UButton>
+          </Button>
           <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
           <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Tutorial</span>
           <div class="flex flex-row items-center pl-2">

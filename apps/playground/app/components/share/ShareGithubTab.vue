@@ -191,13 +191,13 @@ function confettis() {
         </p>
 
         <div class="flex flex-col space-y-2">
-          <UButton
+          <AppButton
             icon="i-mdi-github"
-            label="Iniciar sesión con GitHub"
+            text="Iniciar sesión con GitHub"
             color="black"
-            :block="true"
             :loading="loadingLogin"
             @click="login"
+            prevent-tooltip
           />
         </div>
 
@@ -228,14 +228,14 @@ function confettis() {
           label="Repositorio privado"
         />
 
-        <UButton
+        <AppButton
           type="submit"
+          text="Crear repositorio"
           :loading="loading"
           color="black"
-          :block="true"
-        >
-          Crear repositorio
-        </UButton>
+          prevent-tooltip
+          class="w-full"
+        />
       </UForm>
     </div>
 
@@ -252,13 +252,14 @@ function confettis() {
       </p>
 
       <div class="flex flex-col space-y-2">
-        <UButton
+        <AppButton
           :to="projectUrl"
           target="_blank"
           icon="i-mdi-github"
-          label="Ir al repositorio"
+          text="Ir al repositorio"
           color="black"
-          :block="true"
+          prevent-tooltip
+          class="w-full"
         />
       </div>
     </div>

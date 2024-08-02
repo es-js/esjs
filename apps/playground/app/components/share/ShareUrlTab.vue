@@ -32,16 +32,15 @@ const url = computed(() => {
         icon="i-mdi-content-copy"
         icon-only
         color="gray"
-        variant="soft"
         description="Copiar URL"
         @click="shareCode"
       />
     </div>
 
-    <UButton
-      label="Listo"
+    <AppButton
+      text="Listo"
       color="black"
-      block
+      prevent-tooltip
       @click="emit('close')"
     />
   </div>

@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import { Pane, Splitpanes } from 'splitpanes'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 
 const { prev, next } = useContent()
 </script>
 
 <template>
   <div class="w-full h-full overflow-hidden">
-    <Splitpanes
-      class="default-theme"
-    >
-      <Pane
-        size="35%"
-        min-size="20%"
-        max-size="80%"
-      >
+    <ResizablePanelGroup direction="horizontal">
+      <ResizablePanel :size="35"
+                      :min-size="30"
+                      :max-size="60">
         <div class="flex flex-col h-full">
           <LearnBreadcrumbs />
 
           <article class="p-6 h-full flex flex-col overflow-y-auto space-y-6">
-            <ContentDoc class="prose" />
+            <ContentDoc class="prose max-w-full" />
 
             <span class="flex-1" />
 
             <nav class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
               <NuxtLink v-if="prev" :to="prev._path" class="NavLink NavLink--prev group">
                 <div class="inline-flex items-center rounded-full p-1.5 bg-gray-100 dark:bg-gray-800 group-hover:bg-primary/10 ring-1 ring-gray-300 dark:ring-gray-700 mb-4 group-hover:ring-primary/50">
-                  <i class="i-heroicons-arrow-left-20-solid w-5 h-5 text-gray-900 dark:text-white group-hover:text-primary" />
+                  <UIcon name="mdi-arrow-left" class="w-5 h-5 text-gray-900 dark:text-white group-hover:text-primary" />
                 </div>
                 <span class="font-medium text-lg">{{ prev.title }}</span>
               </NuxtLink>
@@ -33,21 +29,25 @@ const { prev, next } = useContent()
 
               <NuxtLink v-if="next" :to="next._path" class="NavLink NavLink--next group">
                 <div class="inline-flex items-center rounded-full p-1.5 bg-gray-100 dark:bg-gray-800 group-hover:bg-primary/10 ring-1 ring-gray-300 dark:ring-gray-700 mb-4 group-hover:ring-primary/50">
-                  <i class="i-heroicons-arrow-right-20-solid w-5 h-5 text-gray-900 dark:text-white group-hover:text-primary" />
+                  <UIcon name="mdi-arrow-right" class="w-5 h-5 text-gray-900 dark:text-white group-hover:text-primary" />
                 </div>
                 <span>{{ next.title }}</span>
               </NuxtLink>
             </nav>
           </article>
         </div>
-      </Pane>
+      </ResizablePanel>
 
-      <Pane>
+      <ResizableHandle with-handle />
+
+      <ResizablePanel :size="65"
+                      :min-size="40"
+                      :max-size="70">
         <div class="w-full h-full relative flex flex-col flex-1">
           <PlaygroundShell />
         </div>
-      </Pane>
-    </Splitpanes>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   </div>
 </template>
 
