@@ -45,27 +45,22 @@ export const INITIAL_CODE = `/**
 
 importar { Terminal } desde "@es-js/terminal"
 importar { tiza } desde "@es-js/tiza"
-importar confetti desde "npm/canvas-confetti/+esm"
+importar papeles desde "npm/canvas-confetti/+esm"
 
 asincrono funcion principal() {
   Terminal.limpiar()
 
   Terminal.escribir(
-    "¡Hola mundo desde " + tiza.indigo800.fondoIndigo50(" EsJS ") + "!"
+    \`¡Hola mundo desde \$\{tiza.indigo800.fondoIndigo50("EsJS")\}!\`
   )
 
-  Terminal.escribir(
-    "Aprende más sobre EsJS en " +
-      Terminal.enlace(
-        "https://es.js.org",
-        tiza.indigo800.fondoIndigo50(" https://es.js.org ")
-      )
-  )
+  const enlace = Terminal.enlace("https://es.js.org", tiza.indigo800.fondoIndigo50("https://es.js.org"))
+  Terminal.escribir(\`Aprende más sobre EsJS en \$\{enlace\}\`)
 
   Terminal.escribir("*".repetir(50)) // Separador
 
   Terminal.escribir(
-    "Este es un ejemplo de como usar la Terminal. Selecciona una opcion:"
+    "Este es un ejemplo de como usar la Terminal. Ingresa una opción:"
   )
 
   Terminal.escribir("1. Tirar papeles")
@@ -84,7 +79,7 @@ asincrono funcion principal() {
 
 funcion tirarPapeles() {
   consola.escribir("Tirando papeles...")
-  confetti()
+  papeles()
 }
 
 funcion tirarFuegosArtificiales() {
@@ -104,7 +99,7 @@ funcion tirarFuegosArtificiales() {
   const intervalo = establecerIntervalo(funcion () {
     const tiempoRestante = animacionFin - Fecha.ahora()
 
-    consola.escribir("Tiempo restante: " + tiempoRestante / 1000 + " segundos")
+    consola.escribir(\`Tiempo restante: \$\{tiempoRestante / 1000\} segundos\`)
 
     si (tiempoRestante <= 0) {
       consola.escribir("Fin de la animación")
@@ -113,12 +108,12 @@ funcion tirarFuegosArtificiales() {
 
     const cantidadParticulas = 50 * (tiempoRestante / duracion)
 
-    confetti({
+    papeles({
       ...opcionesPorDefecto,
       particleCount: cantidadParticulas,
       origin: { x: aleatorioEnRango(0.1, 0.3), y: Mate.aleatorio() - 0.2 },
     })
-    confetti({
+    papeles({
       ...opcionesPorDefecto,
       particleCount: cantidadParticulas,
       origin: { x: aleatorioEnRango(0.7, 0.9), y: Mate.aleatorio() - 0.2 },
