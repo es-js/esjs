@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { DialogClose } from '@/components/ui/dialog'
+
 const props = defineProps({
   category: {
     type: String,
@@ -63,14 +65,14 @@ async function openExample(url: string) {
         v-if="items"
         class="grid grid-cols-2 md:grid-cols-3 gap-2"
       >
-        <a
-          v-for="item in items"
-          :key="item.name"
-          class="min-h-[4rem] flex flex-col items-center justify-center p-2 text-center bg-gray-100 dark:bg-gray-800 rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
-          @click="openExample(item.url)"
-        >
-          {{ item.name }}
-        </a>
+        <DialogClose v-for="item in items"
+                     :key="item.name">
+          <a class="min-h-[4rem] flex flex-col items-center justify-center p-2 text-center bg-gray-100 dark:bg-gray-800 rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+             @click="openExample(item.url)"
+          >
+            {{ item.name }}
+          </a>
+        </DialogClose>
       </div>
 
       <div

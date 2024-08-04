@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useGrid } from 'vue-screen'
-import ExamplesModal from '~/components/examples/ExamplesModal.vue'
+import ExamplesModal from '~/components/examples/ExamplesDialogContent.vue'
 import { isDark, toggleDark } from '~/composables/dark'
 import { useLZShare } from '~/composables/useLZShare'
 import { useSettings } from '~/composables/useSettings'
@@ -43,18 +43,7 @@ function setupInfiniteLoopProtection() {
   <div class="w-full px-2">
     <div class="h-10 grid grid-cols-3">
       <div class="flex flex-row items-center space-x-2">
-        <UPopover>
-          <AppButton
-            icon="i-mdi-menu"
-            icon-only
-            description="Mostrar opciones"
-          />
-          <template #panel="{close}">
-            <div class="p-2">
-              <ExamplesModal @close="close" />
-            </div>
-          </template>
-        </UPopover>
+        <AppMenu />
 
         <div class="flex flex-row items-center space-x-1">
           <Button

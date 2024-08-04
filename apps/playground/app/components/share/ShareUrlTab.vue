@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useLZShare } from '~/composables/useLZShare'
-
-const emit = defineEmits(['close'])
+import { DialogClose } from '@/components/ui/dialog'
 
 const share = useLZShare()
 
@@ -12,7 +11,6 @@ function shareCode() {
 const url = computed(() => {
   return share.getSharedUrl()
 })
-
 </script>
 
 <template>
@@ -37,11 +35,12 @@ const url = computed(() => {
       />
     </div>
 
-    <AppButton
-      text="Listo"
-      color="black"
-      prevent-tooltip
-      @click="emit('close')"
-    />
+    <DialogClose as-child>
+      <AppButton
+        text="Listo"
+        color="black"
+        prevent-tooltip
+      />
+    </DialogClose>
   </div>
 </template>

@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import confetti from 'canvas-confetti'
 import randomWords from 'random-spanish-words'
-import { defineEmits } from 'vue'
 import { z } from 'zod'
 import useAuth from '~/composables/useAuth'
 import { FILE_CODE, useFiles } from '~/composables/useFiles'
 import useOctokit from '~/composables/useOctokit'
-
-const emit = defineEmits(['close'])
+import { DialogClose } from '@/components/ui/dialog'
 
 const user = useSupabaseUser()
 
@@ -252,15 +250,17 @@ function confettis() {
       </p>
 
       <div class="flex flex-col space-y-2">
-        <AppButton
-          :to="projectUrl"
-          target="_blank"
-          icon="i-mdi-github"
-          text="Ir al repositorio"
-          color="black"
-          prevent-tooltip
-          class="w-full"
-        />
+        <DialogClose as-child>
+          <AppButton
+            :to="projectUrl"
+            target="_blank"
+            icon="i-mdi-github"
+            text="Ir al repositorio"
+            color="black"
+            prevent-tooltip
+            class="w-full"
+          />
+        </DialogClose>
       </div>
     </div>
   </div>

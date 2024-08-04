@@ -2,8 +2,7 @@
 import ShareGithubTab from '~/components/share/ShareGithubTab.vue'
 import ShareUrlTab from '~/components/share/ShareUrlTab.vue'
 import { useLZShare } from '~/composables/useLZShare'
-
-const isOpen = ref(false)
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 const share = useLZShare()
 
@@ -19,58 +18,42 @@ const items = [{
 
 function shareCode() {
   share.shareCode()
-
-  isOpen.value = true
-}
-
-function closeModal() {
-  isOpen.value = false
 }
 </script>
 
 <template>
   <div>
-    <AppButton
-      icon="i-mdi-share"
-      text="Compartir"
-      description="Compartir código"
-      color="teal"
-      @click="shareCode"
-    />
+    <Dialog>
+      <DialogTrigger>
+        <AppButton
+          icon="i-mdi-share"
+          text="Compartir"
+          description="Compartir código"
+          color="teal"
+          @click="shareCode"
+        />
+      </DialogTrigger>
 
-    <UModal v-model="isOpen">
-      <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-        <template #header>
-          <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-              Compartir código
-            </h3>
-            <AppButton
-              icon="i-mdi-close"
-              description="Cerrar"
-              @click="isOpen = false"
-            />
-          </div>
-        </template>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>
+            Compartir código
+          </DialogTitle>
+        </DialogHeader>
 
-        <UTabs
-          :items="items"
-          class="w-full"
-        >
+        <UTabs :items="items" class="w-full">
           <template #item="{ item }">
             <UCard>
               <div v-if="item.key === 'url'">
-                <ShareUrlTab @close="closeModal" />
+                <ShareUrlTab />
               </div>
               <div v-else-if="item.key === 'github'">
-                <ShareGithubTab
-                  @close="closeModal"
-                />
+                <ShareGithubTab />
               </div>
             </UCard>
           </template>
         </UTabs>
-      </UCard>
-    </UModal>
+      </DialogContent>
+    </Dialog>
   </div>
 </template>
