@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Toaster } from '@/components/ui/sonner'
+
 const settings = useSettings().settings
 </script>
 
@@ -14,6 +16,6 @@ const settings = useSettings().settings
       </div>
     </div>
 
-    <UNotifications />
+    <Toaster />
   </div>
 </template>

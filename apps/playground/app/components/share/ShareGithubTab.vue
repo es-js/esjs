@@ -6,14 +6,13 @@ import useAuth from '~/composables/useAuth'
 import { FILE_CODE, useFiles } from '~/composables/useFiles'
 import useOctokit from '~/composables/useOctokit'
 import { DialogClose } from '@/components/ui/dialog'
+import { toast } from 'vue-sonner'
 
 const user = useSupabaseUser()
 
 const auth = useAuth()
 
 const octokit = useOctokit()
-
-const toast = useToast()
 
 const loading = ref(false)
 
@@ -132,8 +131,7 @@ Aplicación Web desarrollada en [EsJS](https://es.js.org/).`,
     projectCreated.value = true
     confettis()
   } catch (e) {
-    toast.add({
-      title: 'Ups!',
+    toast.error('Ups!', {
       description: 'Ocurrió un error al crear el proyecto. Por favor, intenta de nuevo.',
     })
   } finally {

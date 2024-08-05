@@ -5,6 +5,7 @@ import AppOptionsMenu from '~/components/AppOptionsMenu.vue';
 import { isDark, toggleDark } from '~/composables/dark'
 import { useSettings } from '~/composables/useSettings'
 import { Button } from '@/components/ui/button'
+import { toast } from 'vue-sonner'
 
 const settings = useSettings()
 
@@ -12,21 +13,13 @@ const grid = useGrid('tailwind')
 
 const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
 
-const toast = useToast()
-
 function setupInfiniteLoopProtection() {
   settings.setInfiniteLoopProtection(!settings.settings.value.infiniteLoopProtection)
 
   if (settings.settings.value.infiniteLoopProtection) {
-    toast.add({
-      title: 'Protección de bucle infinito habilitada',
-      color: 'green',
-    })
+    toast.success('Protección de bucle infinito habilitada')
   } else {
-    toast.add({
-      title: 'Protección de bucle infinito deshabilitada. ¡Ten cuidado!',
-      color: 'red',
-    })
+    toast.error('Protección de bucle infinito deshabilitada. ¡Ten cuidado!')
   }
 }
 </script>

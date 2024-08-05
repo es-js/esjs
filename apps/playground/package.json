@@ -71,6 +71,7 @@
     "octokit": "^4.0.2",
     "radix-vue": "^1.9.2",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vue-sonner": "^1.1.4"
   }
 }

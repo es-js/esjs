@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { toast } from 'vue-sonner'
 import { DialogClose } from '@/components/ui/dialog'
 
 const props = defineProps({
@@ -39,10 +40,7 @@ async function loadItems() {
 async function openExample(url: string) {
   emit('close')
 
-  useToast().add({
-    title: 'Cargando ejemplo...',
-    timeout: 1500,
-  })
+  toast('Cargando ejemplo...')
 
   await useRouter().push({
     path: url,

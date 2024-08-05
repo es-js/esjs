@@ -4,15 +4,13 @@ import { useEditor } from './useEditor'
 import { useSettings } from './useSettings'
 import { learnDomain } from '~/constants/app'
 import { FILE_CODE, FILE_TESTS, INITIAL_CODE, useFiles } from '~/composables/useFiles'
-import { useToast } from '#imports'
+import { toast } from 'vue-sonner'
 
 const settings = useSettings()
 
 const ESJS_CDN = import.meta.env.MODE === 'development' ? 'http://localhost:1337' : 'https://cdn.esjs.dev'
 
 export const useLZShare = () => {
-  const toast = useToast()
-
   function shareCode() {
     const url = getSharedUrl()
 
@@ -24,9 +22,7 @@ export const useLZShare = () => {
 
     clipboard.copy()
 
-    toast.add({
-      title: 'Se copió la URL al portapapeles',
-    })
+    toast.success('Se copió la URL al portapapeles')
   }
 
   function shareModule() {
@@ -38,9 +34,7 @@ export const useLZShare = () => {
 
     clipboard.copy()
 
-    toast.add({
-      title: 'Se copió la URL al portapapeles',
-    })
+    toast.success('Se copió la URL al portapapeles')
   }
 
   function getSharedUrl(): URL {
@@ -180,9 +174,7 @@ export const useLZShare = () => {
 
       return INITIAL_CODE
     } catch (error: any) {
-      toast.add({
-        title: error.toString(),
-      })
+      toast(error.toString())
       return INITIAL_CODE
     }
   }

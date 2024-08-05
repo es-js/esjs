@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Toaster } from '@/components/ui/sonner'
 import LearnBar from '~/components/learn/LearnBar.vue'
 import { useLZShare } from '~/composables/useLZShare'
 
@@ -17,6 +18,6 @@ onBeforeMount(async() => {
       <slot />
     </div>
 
-    <UNotifications />
+    <Toaster />
   </div>
 </template>
