@@ -1,24 +1,13 @@
 <script setup lang="ts">
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
 import useAuth from '~/composables/useAuth'
 
 const user = useSupabaseUser()
 
 const auth = useAuth()
 
-const isOpen = ref(false)
-
-function open() {
-  isOpen.value = true
-}
-
-function close() {
-  isOpen.value = false
-}
-
 function logout() {
   auth.logout()
-
-  close()
 }
 </script>
 
@@ -33,19 +22,27 @@ function logout() {
       @click="auth.login()"
     />
 
-    <UModal v-model="isOpen">
-      <UCard>
-        <template #header>
-          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            Cerrar sesión
-          </h3>
-        </template>
+    <Dialog v-if="user">
+      <DialogTrigger>
+        <AppButton
+          icon="i-mdi-logout"
+          description="Cerrar sesión"
+          icon-only
+        />
+      </DialogTrigger>
 
-        <div class="flex flex-col space-y-4">
-          <p class="text-gray-600 dark:text-gray-400">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>
+            Cerrar sesión
+          </DialogTitle>
+          <DialogDescription>
             Para cerrar sesión, presiona el botón de confirmación.
-          </p>
-          <div class="flex items-center justify-end space-x-4">
+          </DialogDescription>
+        </DialogHeader>
+
+        <div class="flex items-center justify-end space-x-4">
+          <DialogClose as-child>
             <AppButton
               text="Confirmar"
               color="red"
@@ -53,24 +50,18 @@ function logout() {
               prevent-tooltip
               @click="logout"
             />
+          </DialogClose>
+
+          <DialogClose as-child>
             <AppButton
               text="Cancelar"
               color="black"
               icon="i-mdi-close"
               prevent-tooltip
-              @click="close"
             />
-          </div>
+          </DialogClose>
         </div>
-      </UCard>
-    </UModal>
-
-    <AppButton
-      v-if="user"
-      icon="i-mdi-logout"
-      description="Cerrar sesión"
-      icon-only
-      @click="open"
-    />
+      </DialogContent>
+    </Dialog>
   </div>
 </template>

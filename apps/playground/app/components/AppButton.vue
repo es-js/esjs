@@ -57,7 +57,7 @@ const color = computed(() => {
 </script>
 
 <template>
-  <TooltipProvider :disabled="props.preventTooltip || !props.description">
+  <TooltipProvider :disabled="props.preventTooltip || !props.description && !props.text">
     <Tooltip>
       <TooltipTrigger as-child>
         <Button
@@ -77,8 +77,8 @@ const color = computed(() => {
         </Button>
       </TooltipTrigger>
 
-      <TooltipContent v-if="props.description">
-        <p>{{ props.description }}</p>
+      <TooltipContent v-if="!props.preventTooltip && (props.description || props.text)">
+        <p>{{ props.description || props.text }}</p>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>

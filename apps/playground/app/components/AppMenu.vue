@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import ExamplesDialogContent from '~/components/examples/ExamplesDialogContent.vue'
+import {
+  Dialog,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import ExamplesModal from '~/components/examples/ExamplesDialogContent.vue';
+
 </script>
 
 <template>
@@ -17,7 +21,7 @@ import ExamplesDialogContent from '~/components/examples/ExamplesDialogContent.v
           <AppButton
             icon="i-mdi-menu"
             icon-only
-            description="Mostrar opciones"
+            description="Abrir menú"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
@@ -32,7 +36,7 @@ import ExamplesDialogContent from '~/components/examples/ExamplesDialogContent.v
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <ExamplesDialogContent />
+      <ExamplesModal />
     </Dialog>
   </div>
 </template>
