@@ -83,7 +83,7 @@ funcion tirarPapeles() {
 }
 
 funcion tirarFuegosArtificiales() {
-  const duracion = 15 * 1000 // 15 segundos
+  const duracion = 5000 // 5 segundos
   const animacionFin = Fecha.ahora() + duracion
   const opcionesPorDefecto = {
     startVelocity: 30,
