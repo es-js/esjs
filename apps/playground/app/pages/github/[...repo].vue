@@ -2,7 +2,5 @@
 </script>
 
 <template>
-  <div>
-    <PlaygroundShell />
-  </div>
+  <PlaygroundShell />
 </template>

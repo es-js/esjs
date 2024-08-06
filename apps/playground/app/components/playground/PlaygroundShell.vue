@@ -34,5 +34,19 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <PlaygroundPanes class="absolute inset-0 w-full h-full" />
+  <ClientOnly>
+    <PlaygroundPanes class="absolute inset-0 w-full h-full" />
+
+    <template #fallback>
+      <div class="w-full grid grid-cols-2 gap-2 px-2 pb-2">
+        <div class="w-full flex flex-col justify-center items-center text-center rounded border dark:border-gray-800">
+          <span>Cargando editor...</span>
+        </div>
+
+        <div class="w-full flex flex-col justify-center items-center text-center rounded border dark:border-gray-800">
+          <span>Cargando resultado...</span>
+        </div>
+      </div>
+    </template>
+  </ClientOnly>
 </template>

@@ -31,17 +31,18 @@ function setupInfiniteLoopProtection() {
         <AppMenu />
 
         <div class="flex flex-row items-center space-x-1">
-          <Button
-            href="/"
-            variant="link"
-            class="w-7 p-0"
-          >
-            <img
-              src="/favicon.ico"
-              alt="EsJS Logo"
-              class="w-7 h-7 rounded"
+          <NuxtLink to="/">
+            <Button
+              variant="link"
+              class="w-7 p-0"
             >
-          </Button>
+              <img
+                src="/favicon.ico"
+                alt="EsJS Logo"
+                class="w-7 h-7 rounded"
+              >
+            </Button>
+          </NuxtLink>
           <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
           <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
         </div>
