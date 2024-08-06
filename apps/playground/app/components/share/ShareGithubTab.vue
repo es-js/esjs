@@ -169,45 +169,40 @@ function confettis() {
 </script>
 
 <template>
-  <div class="flex flex-col space-y-2">
+  <div class="flex flex-col rounded border dark:border-gray-800 p-4">
     <div
       v-if="!projectCreated"
-      class="flex flex-col space-y-2"
+      class="flex flex-col space-y-4"
     >
       <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
         Crea un proyecto en GitHub
       </h3>
 
-      <div
-        v-if="!user"
-        class="flex flex-col space-y-2"
-      >
+      <template v-if="!user">
         <p class="text-sm text-gray-500 dark:text-gray-400">
           Para crear un proyecto en GitHub, primero debes iniciar sesión con tu cuenta de GitHub
         </p>
 
-        <div class="flex flex-col space-y-2">
-          <AppButton
-            icon="i-mdi-github"
-            text="Iniciar sesión con GitHub"
-            color="black"
-            :loading="loadingLogin"
-            @click="login"
-            prevent-tooltip
-          />
-        </div>
+        <AppButton
+          icon="i-mdi-github"
+          text="Iniciar sesión con GitHub"
+          color="black"
+          :loading="loadingLogin"
+          @click="login"
+          prevent-tooltip
+        />
 
         <p class="text-sm text-gray-500 dark:text-gray-400">
           Al iniciar sesión, se te pedirá que autorices a la aplicación a crear un repositorio en tu cuenta de GitHub
         </p>
-      </div>
+      </template>
 
       <UForm
         v-if="user"
         ref="form"
         :state="state"
         :validate="validate"
-        class="space-y-2"
+        class="space-y-4"
         @submit="submit"
       >
         <UFormGroup
@@ -237,7 +232,7 @@ function confettis() {
 
     <div
       v-if="projectCreated"
-      class="flex flex-col space-y-2"
+      class="flex flex-col space-y-4"
     >
       <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
         ¡Listo!

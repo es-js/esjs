@@ -14,7 +14,7 @@ const url = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col space-y-2">
+  <div class="flex flex-col space-y-4 rounded border dark:border-gray-800 p-4">
     <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
       Compartir vía URL
     </h3>

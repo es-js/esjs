@@ -3,18 +3,9 @@ import ShareGithubTab from '~/components/share/ShareGithubTab.vue'
 import ShareUrlTab from '~/components/share/ShareUrlTab.vue'
 import { useLZShare } from '~/composables/useLZShare'
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const share = useLZShare()
-
-const items = [{
-  key: 'url',
-  label: 'URL',
-  description: 'Compartir vía URL',
-}, {
-  key: 'github',
-  label: 'GitHub',
-  description: 'Compartir vía GitHub',
-}]
 
 function shareCode() {
   share.shareCode()
@@ -41,18 +32,23 @@ function shareCode() {
           </DialogTitle>
         </DialogHeader>
 
-        <UTabs :items="items" class="w-full">
-          <template #item="{ item }">
-            <UCard>
-              <div v-if="item.key === 'url'">
-                <ShareUrlTab />
-              </div>
-              <div v-else-if="item.key === 'github'">
-                <ShareGithubTab />
-              </div>
-            </UCard>
-          </template>
-        </UTabs>
+        <Tabs default-value="url">
+          <TabsList class="grid grid-flow-col justify-stretch">
+            <TabsTrigger value="url">
+              URL
+            </TabsTrigger>
+            <TabsTrigger value="github">
+              GitHub
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="url">
+            <ShareUrlTab />
+          </TabsContent>
+          <TabsContent value="github">
+            <ShareGithubTab />
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
   </div>
