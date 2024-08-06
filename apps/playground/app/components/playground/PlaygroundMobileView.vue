@@ -1,46 +1,25 @@
 <script setup lang="ts">
 import PlaygroundOutput from '~/components/output/PlaygroundOutput.vue'
 import PlaygroundEditorsPane from '~/components/playground/PlaygroundEditorsPane.vue'
-import { useEditor } from '~/composables/useEditor'
-import { useSettings } from '~/composables/useSettings'
-
-const settings = useSettings().settings
-
-const editor = useEditor()
-
-const tabs = [
-  {
-    key: 'input',
-    label: 'Código',
-    description: 'Código',
-  },
-  {
-    key: 'output',
-    label: 'Resultado',
-    description: 'Resultado',
-  },
-]
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 </script>
 
 <template>
-  <UTabs
-    :items="tabs"
-    class="w-full h-full"
-    :ui="{
-      wrapper: 'flex flex-col space-y-0 flex-col-reverse',
-      container: 'flex flex-col flex-1',
-      base: 'flex flex-col flex-1',
-    }"
-  >
-    <template #item="{ item }">
-      <div class="flex flex-col h-full">
-        <PlaygroundEditorsPane v-if="item.key === 'input'" />
+  <Tabs default-value="input" class="flex flex-col h-full">
+    <TabsList class="grid grid-flow-col justify-stretch">
+      <TabsTrigger value="input">
+        Código
+      </TabsTrigger>
+      <TabsTrigger value="output">
+        Resultado
+      </TabsTrigger>
+    </TabsList>
 
-        <PlaygroundOutput
-          v-if="item.key === 'output'"
-          class="relative w-full h-full overflow-hidden"
-        />
-      </div>
-    </template>
-  </UTabs>
+    <TabsContent value="input" class="m-0 w-full h-full pt-2">
+      <PlaygroundEditorsPane />
+    </TabsContent>
+    <TabsContent value="output" class="m-0 w-full h-full p-2">
+      <PlaygroundOutput />
+    </TabsContent>
+  </Tabs>
 </template>
