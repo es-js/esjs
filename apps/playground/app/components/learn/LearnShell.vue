@@ -7,9 +7,9 @@ const { prev, next } = useContent()
 <template>
   <div class="w-full h-full overflow-hidden">
     <ResizablePanelGroup direction="horizontal">
-      <ResizablePanel :size="35"
+      <ResizablePanel :size="50"
                       :min-size="30"
-                      :max-size="60">
+                      :max-size="50">
         <div class="flex flex-col h-full">
           <LearnBreadcrumbs />
 
@@ -40,9 +40,9 @@ const { prev, next } = useContent()
 
       <ResizableHandle with-handle />
 
-      <ResizablePanel :size="65"
-                      :min-size="40"
-                      :max-size="70">
+      <ResizablePanel :size="50"
+                      :min-size="50"
+                      :max-size="80">
         <div class="w-full h-full relative flex flex-col flex-1">
           <PlaygroundShell />
         </div>

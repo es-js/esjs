@@ -107,14 +107,16 @@ const unwatch = watch(
     <div ref="slot" class="relative">
       <slot />
 
-      <div class="absolute inset-y-0 right-0 flex flex-col items-center justify-center">
-        <div class="relative w-px h-full">
-          <div class="sticky top-0 flex flex-row items-center -ml-2 mt-2 z-50 w-8 h-8">
+      <div class="absolute top-0 right-0 flex items-center justify-center">
+        <div class="relative">
+          <div class="flex items-center justify-end mt-2 z-50">
             <AppButton
-              text="Utilizar"
-              description="Utilizar en el Editor"
+              text="Usar"
+              description="Usar en el Editor"
               icon="i-mdi-chevron-right"
-              icon-only
+              icon-only-mobile
+              color="black"
+              class="-mr-2"
               @click="useInEditor"
             />
           </div>
