@@ -38,7 +38,7 @@ watch(
     <ResizablePanelGroup :key="settings.layout" :direction="settings.layout === 'vertical' ? 'vertical' : 'horizontal'">
        <ResizablePanel v-show="!settings.hideEditor" :size="inputPaneSize" :min-size="20" :max-size="80">
          <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel v-show="!settings.hideEditor">
+          <ResizablePanel v-show="!settings.hideEditor" class="p-2 pt-1">
             <PlaygroundEditorsPane />
           </ResizablePanel>
 
@@ -52,14 +52,7 @@ watch(
 
       <ResizableHandle v-if="!settings.hideEditor && !settings.hideOutput" with-handle />
 
-      <ResizablePanel
-        v-show="!settings.hideOutput"
-        :default-size="outputPaneSize"
-        class="px-2 pb-2"
-        :class="{
-          'pt-2': settings.layout === 'vertical' && !settings.hideEditor,
-        }"
-      >
+      <ResizablePanel v-show="!settings.hideOutput" :default-size="outputPaneSize" class="p-2 pt-1">
         <PlaygroundOutput />
       </ResizablePanel>
     </ResizablePanelGroup>

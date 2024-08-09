@@ -44,7 +44,6 @@ const activeFile = computed(() => files.getActiveFile())
     <ResizablePanelGroup :key="testsPaneDefaultSize" direction="vertical">
       <ResizablePanel :min-size="20"
                       :max-size="settings.hideTests ? 100 : 80"
-                      class="px-2"
                       :class="{'pb-2': !settings.hideTests}">
         <AppContainer>
           <template #title>
@@ -95,7 +94,7 @@ const activeFile = computed(() => files.getActiveFile())
 
       <ResizablePanel :max-size="80"
                       :default-size="testsPaneDefaultSize"
-                      class="px-2 py-2">
+                      class="pt-2">
         <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900 rounded border dark:border-gray-800">
           <div class="flex flex-row items-center space-x-2 flex-1">
             <AppTabButton

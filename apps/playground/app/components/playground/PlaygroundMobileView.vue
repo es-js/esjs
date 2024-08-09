@@ -15,10 +15,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
       </TabsTrigger>
     </TabsList>
 
-    <TabsContent value="input" class="m-0 w-full h-full pt-2">
+    <TabsContent value="input" class="m-0 w-full h-full p-1">
       <PlaygroundEditorsPane />
     </TabsContent>
-    <TabsContent value="output" class="m-0 w-full h-full p-2">
+    <TabsContent value="output" class="m-0 w-full h-full p-1">
       <PlaygroundOutput />
     </TabsContent>
   </Tabs>
