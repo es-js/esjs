@@ -9,7 +9,7 @@ const settings = useSettings().settings
     <div class="flex flex-col w-full h-full">
       <AppBar v-if="!settings.embed" class="h-10" />
 
-      <div class="flex flex-row flex-grow">
+      <div :class="{'pt-1': settings.embed}" class="flex flex-row flex-grow">
         <div class="relative flex flex-1">
           <slot />
         </div>
