@@ -47,12 +47,14 @@ function setupInfiniteLoopProtection() {
           <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
         </div>
 
-        <AppButton
-          :icon="isDark ? 'i-mdi-weather-night' : 'i-mdi-weather-sunny'"
-          icon-only
-          :description="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
-          @click="toggleDark()"
-        />
+        <div>
+          <AppButton
+            :icon="isDark ? 'i-mdi-weather-night' : 'i-mdi-weather-sunny'"
+            icon-only
+            :description="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+            @click="toggleDark()"
+          />
+        </div>
 
         <div
           v-if="!settings.settings.value.hideOptions"

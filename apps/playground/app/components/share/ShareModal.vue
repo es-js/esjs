@@ -21,6 +21,7 @@ function shareCode() {
           text="Compartir"
           description="Compartir código"
           color="teal"
+          icon-only-mobile
           @click="shareCode"
         />
       </DialogTrigger>
