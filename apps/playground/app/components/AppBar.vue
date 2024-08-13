@@ -25,50 +25,49 @@ function setupInfiniteLoopProtection() {
 </script>
 
 <template>
-  <div class="w-full px-2">
-    <div class="h-10 grid grid-cols-3">
-      <div class="flex flex-row items-center space-x-2">
-        <AppMenu />
+  <NuxtScrollbar :options="{ suppressScrollY: true }" class="w-full h-10 px-2 flex items-center overflow-x-auto overflow-y-hidden">
+    <div class="flex flex-row items-center space-x-2">
+      <AppMenu />
 
-        <div class="flex flex-row items-center space-x-1">
-          <NuxtLink to="/">
-            <Button
-              variant="link"
-              class="w-7 p-0"
+      <div class="flex flex-row items-center space-x-1">
+        <NuxtLink to="/">
+          <Button
+            variant="link"
+            class="w-7 p-0"
+          >
+            <img
+              src="/favicon.ico"
+              alt="EsJS Logo"
+              class="w-7 h-7 rounded"
             >
-              <img
-                src="/favicon.ico"
-                alt="EsJS Logo"
-                class="w-7 h-7 rounded"
-              >
-            </Button>
-          </NuxtLink>
-          <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
-          <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
-        </div>
-
-        <div>
-          <AppButton
-            :icon="isDark ? 'i-mdi-weather-night' : 'i-mdi-weather-sunny'"
-            icon-only
-            :description="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
-            @click="toggleDark()"
-          />
-        </div>
-
-        <div
-          v-if="!settings.settings.value.hideOptions"
-          class="flex flex-row items-center space-x-2"
-        >
-          <AppSeparator />
-
-          <ShareModal />
-        </div>
+          </Button>
+        </NuxtLink>
+        <span v-show="mdAndUp" class="text-sm font-medium text-indigo-800 dark:text-indigo-200">EsJS</span>
+        <span v-show="mdAndUp" class="text-xs uppercase font-medium text-indigo-800 dark:text-indigo-200">Editor</span>
       </div>
 
-      <div class="flex-1" />
+      <div>
+        <AppButton
+          :icon="isDark ? 'i-mdi-weather-night' : 'i-mdi-weather-sunny'"
+          icon-only
+          :description="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+          @click="toggleDark()"
+        />
+      </div>
 
-      <div class="flex flex-row justify-end items-center space-x-2">
+      <div
+        v-if="!settings.settings.value.hideOptions"
+        class="flex flex-row items-center space-x-2"
+      >
+        <AppSeparator />
+
+        <ShareModal />
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-2" />
+
+    <div class="flex flex-row justify-end items-center space-x-2">
         <div class="flex flex-row items-center space-x-2">
           <AppButton
             icon="i-mdi-shield-sync"
@@ -96,6 +95,5 @@ function setupInfiniteLoopProtection() {
           />
         </div>
       </div>
-    </div>
-  </div>
+  </NuxtScrollbar>
 </template>
