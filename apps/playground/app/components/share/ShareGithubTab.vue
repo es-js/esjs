@@ -79,6 +79,7 @@ async function submit() {
       template_repo: 'crear-terminal-app',
       name: state.value.name,
       private: state.value.private,
+      description: 'Aplicación Web desarrollada en EsJS',
     })
 
     const currentCommit = await octokit.rest.repos.getCommit({
