@@ -26,6 +26,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  target: {
+    type: String,
+    default: '_self',
+  },
   variant: {
     type: String,
     default: 'outline',
@@ -35,6 +39,10 @@ const props = defineProps({
     default: 'sm',
   },
   preventTooltip: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
     type: Boolean,
     default: false,
   },
@@ -65,6 +73,8 @@ const color = computed(() => {
           :size="isIconOnly ? 'icon' : props.size"
           :variant="props.variant"
           v-bind="$attrs"
+          :disabled="props.loading"
+          :as-child="props.href !== null"
           class="space-x-2"
           :class="{
             'bg-teal-100 hover:bg-teal-200 disabled:bg-teal-50 dark:bg-teal-950 dark:hover:bg-teal-900 dark:disabled:bg-teal-950 text-teal-700 dark:text-teal-300 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-500 dark:focus-visible:ring-teal-400 border-teal-200 dark:border-teal-800': color === 'teal' && props.variant === 'outline',
@@ -74,12 +84,27 @@ const color = computed(() => {
           }"
           @click="emit('click')"
         >
-          <Icon v-if="props.icon" :name="props.icon" class="w-4 h-4" />
-          <span v-if="!isIconOnly"
-                :class="{
-                  'hidden sm:inline': props.iconOnlyMobile,
-                }">
-            {{ props.text }}</span>
+          <template v-if="props.href === null">
+            <Icon v-if="props.icon" :name="props.icon" class="w-4 h-4" />
+            <span v-if="!isIconOnly"
+                  :class="{
+                    'hidden sm:inline': props.iconOnlyMobile,
+                  }">
+              {{ props.loading ? 'Cargando...' : props.text }}
+            </span>
+          </template>
+
+          <template v-if="props.href !== null">
+            <a :href="props.href" :target="props.target" class="flex items-center space-x-2">
+              <Icon v-if="props.icon" :name="props.icon" class="w-4 h-4" />
+              <span v-if="!isIconOnly"
+                    :class="{
+                      'hidden sm:inline': props.iconOnlyMobile,
+                    }">
+                {{ props.loading ? 'Cargando...' : props.text }}
+              </span>
+            </a>
+          </template>
         </Button>
       </TooltipTrigger>
 

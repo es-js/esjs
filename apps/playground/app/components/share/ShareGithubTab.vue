@@ -69,11 +69,11 @@ async function validate() {
 }
 
 async function submit() {
-  await form.value!.validate()
-
   loading.value = true
 
   try {
+    await form.value!.validate()
+
     const repo = await octokit.rest.repos.createUsingTemplate({
       template_owner: 'es-js',
       template_repo: 'crear-terminal-app',
@@ -246,7 +246,7 @@ function confettis() {
       <div class="flex flex-col space-y-2">
         <DialogClose as-child>
           <AppButton
-            :to="projectUrl"
+            :href="projectUrl"
             target="_blank"
             icon="i-mdi-github"
             text="Ir al repositorio"
