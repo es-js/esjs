@@ -12,8 +12,6 @@ const user = useSupabaseUser()
 
 const auth = useAuth()
 
-const octokit = useOctokit()
-
 const loading = ref(false)
 
 const loadingLogin = ref(false)
@@ -36,7 +34,7 @@ const schema = z.object({
     .refine(
       async(name) => {
         try {
-          const repo = await octokit.rest.repos.get({
+          const repo = await useOctokit().rest.repos.get({
             owner: user.value?.user_metadata?.user_name,
             repo: name,
           })
@@ -72,6 +70,8 @@ async function submit() {
   loading.value = true
 
   try {
+    const octokit = useOctokit()
+
     await form.value!.validate()
 
     const repo = await octokit.rest.repos.createUsingTemplate({
