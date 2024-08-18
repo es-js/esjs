@@ -4,6 +4,8 @@ import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json' assert { typ
 const isDev = process.env.NODE_ENV === "development";
 
 export default defineNuxtConfig({
+  compatibilityDate: '2024-07-31',
+
   future: {
     compatibilityVersion: 4,
   },
@@ -26,6 +28,12 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+    },
+  },
+
+  imports: {
+    transform: {
+      exclude: [/\bsandbox\b/],
     },
   },
 
@@ -97,11 +105,4 @@ export default defineNuxtConfig({
     componentDir: './app/components/ui'
   },
 
-  compatibilityDate: '2024-07-31',
-
-  imports: {
-    transform: {
-      exclude: [/\bsandbox\b/],
-    },
-  },
 })
