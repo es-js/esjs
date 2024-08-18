@@ -51,6 +51,7 @@
     "monaco-editor": "~0.48.0",
     "nuxt": "^3.12.1",
     "nuxt-gtag": "^2.0.5",
+    "nuxt-logrocket": "^2.0.14",
     "nuxt-monaco-editor": "^1.2.9",
     "prettier": "^2.8.8",
     "random-spanish-words": "^2.0.0",

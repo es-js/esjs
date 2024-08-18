@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     // '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
+    'nuxt-logrocket',
   ],
 
   runtimeConfig: {
@@ -105,4 +106,11 @@ export default defineNuxtConfig({
     componentDir: './app/components/ui'
   },
 
+  logRocket: {
+    id: 'ngchvr/esjs-editor',
+    dev: false,
+    config: {
+      //
+    }
+  },
 })
