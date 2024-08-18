@@ -123,9 +123,6 @@ importers:
       nuxt-gtag:
         specifier: ^2.0.5
         version: 2.1.0(magicast@0.3.4)(rollup@4.20.0)
-      nuxt-logrocket:
-        specifier: ^2.0.14
-        version: 2.0.14(magicast@0.3.4)(rollup@4.20.0)
       nuxt-monaco-editor:
         specifier: ^1.2.9
         version: 1.2.9(magicast@0.3.4)(monaco-editor@0.48.0)(rollup@4.20.0)(vite@5.3.5(@types/node@18.19.43)(terser@5.31.3))
@@ -3653,9 +3650,6 @@ packages:
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
-  logrocket@4.0.4:
-    resolution: {integrity: sha512-BKberHlh9bo9YZFoDqy1aJoi8KrHXi1Z9DSS6+Nqspr+onqU0wVfLacTb3sZt+KnmSR7uELJGUjE+Tikw3e23Q==}
-
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
@@ -4076,9 +4070,6 @@ packages:
 
   nuxt-gtag@2.1.0:
     resolution: {integrity: sha512-06ES+hgMs5l98bHmsLyltbJXfVr1LAkm/5gwcncdNkz96+D0fVA+RhecIp06iDQXF+YPBE2xAgB4G5PnUn8drA==}
-
-  nuxt-logrocket@2.0.14:
-    resolution: {integrity: sha512-iQE0cWTBqmed8luXbcFqwfWlKpFHsQ3lEkStfMefRNXmuQvvTkFPzyg2F8FmE4zlKHiONkRR34EQCabkFVcxqQ==}
 
   nuxt-monaco-editor@1.2.9:
     resolution: {integrity: sha512-O51sng1MxDAmmm1drOvlUyu6sMdRQtC7ZeSU/r+Hp8KWDDi0JWblPwMOJ+oxMDBnvWw1mOXEhaUBlLjUTEeU/Q==}
@@ -10018,8 +10009,6 @@ snapshots:
 
   lodash@4.17.21: {}
 
-  logrocket@4.0.4: {}
-
   longest-streak@3.1.0: {}
 
   lru-cache@10.4.3: {}
@@ -10664,16 +10653,6 @@ snapshots:
       defu: 6.1.4
       pathe: 1.1.2
       ufo: 1.5.4
-    transitivePeerDependencies:
-      - magicast
-      - rollup
-      - supports-color
-
-  nuxt-logrocket@2.0.14(magicast@0.3.4)(rollup@4.20.0):
-    dependencies:
-      '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.20.0)
-      defu: 6.1.4
-      logrocket: 4.0.4
     transitivePeerDependencies:
       - magicast
       - rollup
