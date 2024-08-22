@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-esvue",
-  "version": "0.1.0-beta.8",
+  "version": "0.1.0-beta.9",
   "description": "Vite plugin for EsJS + Vue",
   "scripts": {
     "build": "unbuild",
@@ -27,6 +27,7 @@
     "@es-js/core": "workspace:*",
     "@es-js/eshtml": "workspace:*",
     "@es-js/esvue": "workspace:*",
+    "@types/hast": "^3.0.4",
     "@types/node": "^20.9.0",
     "@vitejs/plugin-vue": "^4.4.1",
     "typescript": "^5.2.2",

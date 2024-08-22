@@ -54,9 +54,11 @@ function compileScriptNode(node: any, options: CompileOptions): any {
   }
 
   if (node?.attrs?.hasOwnProperty('setup')) {
-    const code = node.content[0]
+    const code = node && node.content && node.content[0]
 
-    node.content[0] = EsJSCompile(code)
+    if (code) {
+      node.content[0] = EsJSCompile(code)
+    }
 
     if (options.to === 'esvue') {
       delete node.attrs.setup

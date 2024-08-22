@@ -38,3 +38,17 @@ describe('compile', () => {
     expect(compiled).toBe(esvue)
   })
 })
+
+describe('codigo vacio', () => {
+  it('esvue to vue', async () => {
+    const compiled = compile('<codigo configuracion=""></codigo>')
+
+    expect(compiled).toBe('<script setup=""></script>')
+  })
+
+  it('vue to esvue', async () => {
+    const compiled = compile('<script setup=""></script>', { from: 'vue', to: 'esvue' })
+
+    expect(compiled).toBe('<codigo configuracion=""></codigo>')
+  })
+})

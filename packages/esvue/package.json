@@ -1,6 +1,6 @@
 {
   "name": "@es-js/esvue",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "description": "EsVue: Vue en Español",
   "scripts": {
     "build": "unbuild",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@es-js/core": "workspace:*",
     "@es-js/eshtml": "workspace:*",
+    "@types/hast": "^3.0.4",
     "@types/node": "^20.14.9",
     "typescript": "^5.5.2",
     "unbuild": "^2.0.0",
