@@ -1,0 +1,13 @@
+consola.escribir(tipoDe 2);
+
+consola.escribir(tipoDe "Martin Fierro");
+
+consola.escribir(tipoDe verdadero);
+
+consola.escribir(tipoDe nulo);
+
+consola.escribir(tipoDe indefinido);
+
+consola.escribir(tipoDe {});
+
+consola.escribir(tipoDe []);
