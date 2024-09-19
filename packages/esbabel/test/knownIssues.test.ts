@@ -21,7 +21,7 @@ describe('known issues', () => {
   it.skip('fixed: does not compile variables named `get`', () => {
     // Deprecado: Ahora `mut` equivale a `let`, y `var` equivale a `var`.
     const esjs = `
-    var get = 'prueba'
+    mut get = 'prueba'
 `
 
     const js = `
