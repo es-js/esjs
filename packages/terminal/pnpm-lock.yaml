@@ -27,8 +27,8 @@ importers:
         specifier: ^1.7.3
         version: 1.7.3(@types/node@18.17.1)(rollup@3.29.4)(vite@4.4.7(@types/node@18.17.1))
       xterminal:
-        specifier: ^2.0.8
-        version: 2.0.8
+        specifier: ^2.1.9
+        version: 2.1.9
 
 packages:
 
@@ -525,9 +525,9 @@ packages:
       terser:
         optional: true
 
-  xterminal@2.0.8:
-    resolution: {integrity: sha512-9vCfQd3fEcHQAshpqhjrC8Pk2z3KuRJlc5AvXjVH/Ml+IhdAGcvSQeLqSilZLNsk8y4wAJriNbbOqXQ0E0bjHg==}
-    engines: {node: '>=14'}
+  xterminal@2.1.9:
+    resolution: {integrity: sha512-yx6EYgsi7YhfFlpS9FNNWy6HypnSIxXJPU0xMIBlXkB0gLZlOeEhZDc+ouwejkgUjNnkcPSrgFWhnUg7ZUU56Q==}
+    engines: {node: '>=18', pnpm: '>=8'}
 
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
@@ -964,7 +964,7 @@ snapshots:
       '@types/node': 18.17.1
       fsevents: 2.3.3
 
-  xterminal@2.0.8: {}
+  xterminal@2.1.9: {}
 
   yallist@4.0.0: {}
 
