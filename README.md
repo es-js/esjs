@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-  <a href="https://github.com/es-js/esjs">
+  <a href="https://github.com/es-js/esjs/">
     <img src="https://es.js.org/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -9,7 +9,7 @@
   <p align="center">
     Lenguaje de programación con sintaxis en Español que compila a JavaScript.
     <br />
-    <a href="https://es.js.org"><strong>Explorar »</strong></a>
+    <a href="https://es.js.org/"><strong>Explorar »</strong></a>
     <br />
     <br />
     <a href="https://editor.esjs.dev/">Prueba en línea</a>
@@ -76,7 +76,7 @@ Navega a `http://localhost:3000` para ver el resultado.
 
 #### Instalación manual
 
-Si prefieres crear un proyecto manualmente, puedes hacerlo siguiendo el enlace a nuestra documentación, donde detallamos los pasos necesarios para crear un proyecto EsJS desde cero. [Documentación instalación manual](https://es.js.org/primeros-pasos)
+Si prefieres crear un proyecto manualmente, puedes hacerlo siguiendo el enlace a nuestra documentación, donde detallamos los pasos necesarios para crear un proyecto EsJS desde cero: [Documentación instalación manual](https://es.js.org/primeros-pasos#instalacion-manual)
 
 ## Documentación
 
@@ -94,11 +94,11 @@ Puedes aprender EsJS de forma interactiva en [Aprender.EsJS.dev](https://aprende
 
 Las contribuciones son lo que hacen que la comunidad de código abierto sea un lugar increíble para aprender, inspirar y crear. Cualquier contribución que hagas será **agradecida**.
 
-1. Haz un fork del proyecto
+1. Haz un _fork_ del proyecto
 2. Crea tu rama de características (`git checkout -b mejora/MiMejora`)
-3. Realiza un commit de tus cambios (`git commit -m 'mejora(ambito): detalle de mejora'`)
-4. Haz un push a la rama (`git push origin mejora/MiMejora`)
-5. Abre un pull request
+3. Realiza un _commit_ de tus cambios (`git commit -m 'mejora(ambito): detalle de mejora'`)
+4. Haz un _push_ a la rama (`git push origin mejora/MiMejora`)
+5. Abre un _pull request_
 
 ## Licencia
 
