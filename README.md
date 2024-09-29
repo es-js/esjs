@@ -76,7 +76,7 @@ Navega a `http://localhost:3000` para ver el resultado.
 
 #### Instalación manual
 
-Si prefieres crear un proyecto manualmente, puedes hacerlo siguiendo el enlace a nuestra documentación, en dónde detallamos los pasos necesarios para crear un proyecto EsJS desde cero. [Documentación instalación manual](https://es.js.org/assets/logo.png)
+Si prefieres crear un proyecto manualmente, puedes hacerlo siguiendo el enlace a nuestra documentación, donde detallamos los pasos necesarios para crear un proyecto EsJS desde cero. [Documentación instalación manual](https://es.js.org/primeros-pasos)
 
 ## Documentación
 
