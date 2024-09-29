@@ -29,7 +29,7 @@
     "typescript": "^4.9.5",
     "vite": "^4.4.7",
     "vite-plugin-dts": "^1.7.3",
-    "xterminal": "^2.0.8"
+    "xterminal": "^2.1.9"
   },
   "files": [
     "dist"
