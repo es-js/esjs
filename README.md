@@ -1,11 +1,10 @@
-<!-- LOGO Proyecto -->
 <br />
 <div align="center">
   <a href="https://github.com/es-js/esjs">
     <img src="https://es.js.org/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">EsJS</h3>
+<h3 align="center">EsJS</h3>
 
   <p align="center">
     Lenguaje de programación con sintaxis en Español que compila a JavaScript.
@@ -22,7 +21,6 @@
 
 EsJS es un lenguaje de programación con sintaxis en Español que compila a JavaScript. Esto permite a las personas hispanohablantes escribir código de manera más familiar y accesible, sin renunciar al poder y versatilidad de JavaScript.
 
-<!-- ¿Cómo instalar? -->
 ## Primeros pasos
 
 ### Instalación
@@ -73,19 +71,24 @@ Una vez que se haya creado el proyecto, puedes ejecutarlo con el siguiente coman
     ```bash[bun]
     bun run dev
     ```
+
 Navega a `http://localhost:3000` para ver el resultado.
 
 #### Instalación manual
 
 Si prefieres crear un proyecto manualmente, puedes hacerlo siguiendo el enlace a nuestra documentación, en dónde detallamos los pasos necesarios para crear un proyecto EsJS desde cero. [Documentación instalación manual](https://es.js.org/assets/logo.png)
 
+## Documentación
+
+Para obtener más información sobre cómo utilizar EsJS, visita la sección de documentación en https://es.js.org/.
+
+## Prueba en línea
+
+Puedes probar EsJS en línea con el Editor EsJS: https://editor.esjs.dev/.
+
 ## Tutorial Interactivo
 
 Puedes aprender EsJS de forma interactiva en [Aprender.EsJS.dev](https://aprender.esjs.dev/).
-
-## Documentación
-
-Para obtener más información sobre cómo utilizar EsJS, visita la sección de documentación en [https://es.js.org/](https://es.js.org/).
 
 ## Contribuciones
 
@@ -93,13 +96,9 @@ Las contribuciones son lo que hacen que la comunidad de código abierto sea un l
 
 1. Haz un fork del proyecto
 2. Crea tu rama de características (`git checkout -b mejora/MiMejora`)
-3. Realiza un commit de tus cambios (`git commit -m 'Agregar Mejora'`)
+3. Realiza un commit de tus cambios (`git commit -m 'mejora(ambito): detalle de mejora'`)
 4. Haz un push a la rama (`git push origin mejora/MiMejora`)
 5. Abre un pull request
-
-## Prueba en línea
-
-Puedes probar EsJS en línea con el Editor EsJS: [https://editor.esjs.dev/](https://editor.esjs.dev/).
 
 ## Licencia
 
