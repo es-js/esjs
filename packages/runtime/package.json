@@ -1,0 +1,24 @@
+{
+    "name": "@es-js/runtime",
+    "version": "0.0.1-beta.0",
+    "description": "Ejecuta EsJS y EsHtml facilmente con una etiqueta!",
+    "license": "MIT",
+    "type": "module",
+    "main": "./src/index.js",
+    "author": {
+        "name": "Creadores Program Trollhunters501",
+        "url": "https://github.com/Creadores-Program/EsJS-Script-tag"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/es-js/esjs.git",
+      "directory": "packages/runtime"
+    },
+    "keywords": [
+    "esjs",
+    "navegadores",
+    "scripts",
+    "CreadoresProgram",
+    "eshtml"
+  ]
+}
