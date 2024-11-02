@@ -21,7 +21,7 @@ window.addEventListener("load", function(){
             let codigoCo2m = esJscore.compile(data);
             let element2o = document.createElement("script");
             element2o.innerHTML = codigoCo2m;
-            if(estiquetas[i].hasAttribute("mode") && etiquetas[i].getAttribute("mode") == "modulo"){
+            if(etiquetas[i].hasAttribute("mode") && etiquetas[i].getAttribute("mode") == "modulo"){
               element2o.setAttribute("type", "module");
             }
             document.body.appendChild(element2o);
