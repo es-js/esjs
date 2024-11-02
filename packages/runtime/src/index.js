@@ -18,13 +18,13 @@ window.addEventListener("load", function(){
       if(etiquetas[i].hasAttribute("src")){
         try{
           fetch(etiquetas[i].getAttribute("src")).then(res => res.text()).then(data => {
-            let codigoCo2m = esJscore.compile(data);
-            let element2o = document.createElement("script");
-            element2o.innerHTML = codigoCo2m;
+            let codigoCom = esJscore.compile(data);
+            let elemento = document.createElement("script");
+            elemento.innerHTML = codigoCom;
             if(etiquetas[i].hasAttribute("mode") && etiquetas[i].getAttribute("mode") == "modulo"){
-              element2o.setAttribute("type", "module");
+              elemento.setAttribute("type", "module");
             }
-            document.body.appendChild(element2o);
+            document.body.appendChild(elemento);
           }).catch(function(error){
             console.error(error);
           });
