@@ -17,6 +17,7 @@ export const types = new Map<string, string>([
   ['ExpReg', 'RegExp'],
   ['Mapa', 'Map'],
   ['Conjunto', 'Set'],
+  ['Apoderado', 'Proxy']
 ])
 
 export function traverse() {
