@@ -13,6 +13,7 @@ import * as json from './json'
 import * as tipos from './tipos'
 import * as navegador from './navegador'
 import * as ventana from './ventana'
+import * as apoderado from './apoderado'
 
 export const plugins = [
   ['consola', consola],
@@ -28,7 +29,8 @@ export const plugins = [
   ['json', json],
   ['tipos', tipos],
   ['navegador', navegador],
-  ['ventana', ventana]
+  ['ventana', ventana],
+  ['apoderado', apoderado]
 ]
 
 export { setToEsJS }
