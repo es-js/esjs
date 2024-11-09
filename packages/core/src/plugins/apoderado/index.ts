@@ -1,5 +1,4 @@
 import {
-    replaceExpressionMethods,
     replaceInstanceof,
     replaceObjectStaticMethods,
     replaceObjects,
