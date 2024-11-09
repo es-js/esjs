@@ -33,7 +33,7 @@ import {
     ['dividir', 'split'],
     ['aPrimitivo', 'toPrimitive'],
     ['aCadena', 'toStringTag'],
-    ['imposibleDescifrar']
+    ['imposibleDescifrar', 'unscopables']
   ])
 
   export const staticMethods = new Map<string, string>([
