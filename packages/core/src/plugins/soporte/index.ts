@@ -11,8 +11,6 @@ export const keywords = new Map<string, string>([
   ['preguntar', 'prompt'],
   ['confirmar', 'confirm'],
   ['consultar', 'fetch'],
-  ['analizarDecimal', 'parseFloat'],
-  ['analizarEntero', 'parseInt']
   // TODO: Add more support functions.
 ])
 
