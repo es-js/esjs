@@ -5,6 +5,11 @@ export const keywords = new Map<string, string>([
   ['establecerIntervalo', 'setInterval'],
   ['esNuN', 'isNaN'],
   ['importar.meta', 'import.meta'],
+  ['eliminarTemporizador', 'clearTimeout'],
+  ['eliminarIntervalo', 'clearInterval'],
+  ['alerta', "alert"],
+  ['preguntar', 'prompt'],
+  ['confirmar', 'confirm'],
   // TODO: Add more support functions.
 ])
 

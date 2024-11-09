@@ -11,6 +11,7 @@ import * as soporte from './soporte'
 import * as funcion from './funcion'
 import * as json from './json'
 import * as tipos from './tipos'
+import * as navegador from './navegador'
 
 export const plugins = [
   ['consola', consola],
@@ -25,6 +26,7 @@ export const plugins = [
   ['soporte', soporte],
   ['json', json],
   ['tipos', tipos],
+  ['navegador', navegador]
 ]
 
 export { setToEsJS }
