@@ -11,6 +11,10 @@ export const keywords = new Map<string, string>([
   ['preguntar', 'prompt'],
   ['confirmar', 'confirm'],
   ['consultar', 'fetch'],
+  ['decodificarURI', 'decodeURI'],
+  ['decodificarComponenteURI', 'decodeURIComponent'],
+  ['codificarURI', 'encodeURI'],
+  ['codificarComponenteURI', 'encodeURIComponent'],
   // TODO: Add more support functions.
 ])
 

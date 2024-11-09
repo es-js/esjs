@@ -4,23 +4,23 @@ import {
     replaceObjects,
   } from '../utils'
   
-  export const report = () => 'Converts Apoderado methods to JavaScript'
+  export const report = () => 'Converts Puente methods to JavaScript'
   
   export const staticMethods = new Map<string, string>([
     ["revocable", "revocable"]
   ])
 
-  export const objects = new Map<string, string>([['Apoderado', 'Proxy']])
+  export const objects = new Map<string, string>([['Puente', 'Proxy']])
 
   export function replace() {
     return {
       ...replaceObjectStaticMethods({
-        from: 'Apoderado',
+        from: 'Puente',
         to: 'Proxy',
         methods: staticMethods,
       }),
       ...replaceInstanceof({
-        from: 'Apoderado',
+        from: 'Puente',
         to: 'Proxy',
       }),
       ...replaceObjects({
