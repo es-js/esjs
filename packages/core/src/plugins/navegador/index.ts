@@ -1,6 +1,7 @@
 import { 
   replaceObjectStaticMethods,
-  replaceObjectStaticProperties
+  replaceObjectStaticProperties,
+  replaceObjects
 } from '../utils'
 export const report = () => 'Converts navegador to navigator'
 
@@ -61,6 +62,9 @@ export function replace() {
         from: 'navegador',
         to: 'navigator',
         properties,
+      }),
+      ...replaceObjects({
+        objects,
       })
     }
 }

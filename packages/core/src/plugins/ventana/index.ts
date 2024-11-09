@@ -1,6 +1,7 @@
 import { 
     replaceObjectStaticMethods,
-    replaceObjectStaticProperties
+    replaceObjectStaticProperties,
+    replaceObjects
   } from '../utils'
   export const report = () => 'Converts ventana to window'
   
@@ -131,6 +132,9 @@ import {
         from: 'ventana',
         to: 'window',
         properties,
+      }),
+      ...replaceObjects({
+        objects,
       })
     }
 }
