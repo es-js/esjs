@@ -15,6 +15,7 @@ import * as navegador from './navegador'
 import * as ventana from './ventana'
 import * as puente from './puente'
 import * as simbolo from './simbolo'
+import * as numerogrande from './numerogrande'
 
 export const plugins = [
   ['consola', consola],
@@ -32,7 +33,8 @@ export const plugins = [
   ['navegador', navegador],
   ['ventana', ventana],
   ['puente', puente],
-  ['simbolo', simbolo]
+  ['simbolo', simbolo],
+  ['numerogrande', numerogrande]
 ]
 
 export { setToEsJS }
