@@ -16,6 +16,7 @@ import * as ventana from './ventana'
 import * as puente from './puente'
 import * as simbolo from './simbolo'
 import * as numerogrande from './numerogrande'
+import * as documento from './documento'
 
 export const plugins = [
   ['consola', consola],
@@ -34,7 +35,8 @@ export const plugins = [
   ['ventana', ventana],
   ['puente', puente],
   ['simbolo', simbolo],
-  ['numerogrande', numerogrande]
+  ['numerogrande', numerogrande],
+  ['documento', documento]
 ]
 
 export { setToEsJS }
