@@ -8,7 +8,7 @@
     "dev": "node src/index.js",
     "build": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "pnpm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "repository": {
     "type": "git",
