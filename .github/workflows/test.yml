@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    types: [opened, synchronize]
+
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.0.0
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run test
+        run: pnpm -r test:run
