@@ -20,7 +20,7 @@ describe('known issues', () => {
 
   it('fixed: does not compile variables named `get`', () => {
     const esjs = `
-    var get = 'prueba'
+    mut get = 'prueba'
 `
 
     const js = `

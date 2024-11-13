@@ -8,6 +8,7 @@
     "dev": "node src/index.js",
     "build": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:run": "echo \"Error: no test specified\"",
     "prepublish": "pnpm run build"
   },
   "repository": {
