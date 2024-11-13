@@ -71,7 +71,7 @@ import {
     ["ventana", "window"]
   ])
 
-  export const objects = new Map<string, string>(["ventana", "window"])
+  export const objects = new Map<string, string>([["ventana", "window"]])
 
   export const methods = new Map<string, string>([
     ["atabi", "atob"],
@@ -93,7 +93,7 @@ import {
     ["obtenerEstiloComputacionalPorDefecto", "getDefaultComputedStyle"],
     ["obtenerDetallesPantalla", "getScreenDetails"],
     ["obtenerSeleccion", "getSelection"],
-    ["coincidenciaMedios", "mathMedia"],
+    ["coincidenciaMedios", "matchMedia"],
     ["moverPor", "moveBy"],
     ["moverA", "moveTo"],
     ["abrir", "open"],

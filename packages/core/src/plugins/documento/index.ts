@@ -46,7 +46,7 @@ export const methods = new Map<string, string>([
     ['mozEstablecerElementoImagen', 'mozSetImageElement'],
     ['anteponer', 'prepend'],
     ['consultarSeleccion', 'querySelector'],
-    ['consultarSeleccionarTodo', 'querySelectorAll'],
+    ['consultarSelectoresTodo', 'querySelectorAll'],
     ['liberarCaptura', 'releaseCapture'],
     ['reemplazarSecundario', 'replaceChildren'],
     ['solicitarAccesoAlmacenamiento', 'requestStorageAccess'],
@@ -117,6 +117,8 @@ export const properties = new Map<string, string>([
   ['titulo', 'title'],
   ['URL', 'URL']
 ])
+
+export const objects = new Map<string, string>([['Documento', 'Document']])
 
 export function replace() {
     return {

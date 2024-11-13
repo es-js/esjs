@@ -17,7 +17,7 @@ import {
 
   export const properties = new Map<string, string>([
     ['descripcion', 'description'],
-    ['aCadena', 'toStringTag']
+    ['etiquetaCadena', 'toStringTag']
   ])
 
   export const staticProperties = new Map<string, string>([

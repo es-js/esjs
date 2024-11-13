@@ -43,12 +43,14 @@ export const methods = new Map<string, string>([
   ["borrarInsigniaApp", "clearAppBadge"],
   ["obtenerBateria", "getBattery"],
   ["registrarControladorProtocolo", "registerProtocolHandler"],
-  ["solicitarAccesoSistemaClavesMultimedia", "requestMediaKeySystemAccess"],
+  ["solicitarClavesMultimedia", "requestMediaKeySystemAccess"],
   ["solicitarAccesoMIDI", "requestMIDIAccess"],
   ["enviarBeacon", "sendBeacon"],
   ["establecerInsigniaApp", "setAppBadge"],
   ["compartir", "share"],
-  ["vibrar", "vibrate"]
+  ["vibrar", "vibrate"],
+  ['javaHabilitado', 'javaEnabled'],
+  ['obtenerNotificaciones', 'getNotifications']
 ])
 
 export function replace() {

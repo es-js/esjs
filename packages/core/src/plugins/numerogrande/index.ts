@@ -14,7 +14,7 @@ import {
   ])
 
   export const properties = new Map<string, string>([
-    ['aCadena', 'toStringTag']
+    ['etiquetaCadena', 'toStringTag']
   ])
 
   export const methods = new Map<string, string>([
