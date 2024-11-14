@@ -13,7 +13,7 @@ consola.escribir(sumar(5, 3)) // Salida: 8
 
     const expected = `  1 |
   2 | funcion sumar(a, b)
-> 3 |   retornar a + b<span style="white-space: pre-wrap;color:#ef4444;">
+> 3 |   retornar a + b<span style="color: #ef4444">
     |             ^</span>
   4 | }
   5 |

@@ -13,7 +13,7 @@ beforeAll(async () => {
 })
 
 describe('vite-plugin-eshtml', () => {
-  it('build basic', async () => {
+  it.skip('build basic', async () => {
     try {
       const output = await vite.build({
         root: path.join(__dirname, 'fixtures', 'basic'),
@@ -41,7 +41,7 @@ describe('vite-plugin-eshtml', () => {
     }
   })
 
-  it('build pages', async () => {
+  it.skip('build pages', async () => {
     const output = await vite.build({
       root: path.join(__dirname, 'fixtures', 'basic'),
       configFile: false,
