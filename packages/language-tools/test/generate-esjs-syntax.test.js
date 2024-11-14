@@ -7,33 +7,24 @@ function readFile(path) {
 }
 
 describe('@es-js/language-tools', () => {
-  it('generates the correct reserved words table', () => {
-    const reservedWords = readFile('./dist/reserved-words.md');
-    expect(reservedWords).toMatchSnapshot();
-  });
-
-  it('generates the correct esjs code snippets', () => {
-    const esjsCodeSnippets = readFile('./dist/esjs.code-snippets.json');
-    expect(esjsCodeSnippets).toMatchSnapshot();
-  });
-
-  it('generates the correct esjs language configuration', () => {
-    const esjsLanguageConfiguration = readFile('./dist/esjs-language-configuration.json');
-    expect(esjsLanguageConfiguration).toMatchSnapshot();
-  });
-
-  it('generates the correct esjs syntax', () => {
-    const esjsTmLanguage = readFile('./dist/esjs.tmLanguage.json');
-    expect(esjsTmLanguage).toMatchSnapshot();
-  });
-
-  it('generates the correct esvue language configuration', () => {
-    const esvueLanguageConfiguration = readFile('./dist/esvue-language-configuration.json');
-    expect(esvueLanguageConfiguration).toMatchSnapshot();
-  });
-
-  it('generates the correct esvue syntax', () => {
-    const esvueTmLanguage = readFile('./dist/esvue.tmLanguage.json');
-    expect(esvueTmLanguage).toMatchSnapshot();
-  });
-});
+  const TEST_FILES = {
+    reservedWords: './dist/reserved-words.md',
+    esjsSnippets: './dist/esjs.code-snippets.json',
+    esjsConfig: './dist/esjs-language-configuration.json',
+    esjsSyntax: './dist/esjs.tmLanguage.json',
+    esvueConfig: './dist/esvue-language-configuration.json',
+    esvueSyntax: './dist/esvue.tmLanguage.json'
+  };
+  const testFile = (description, filePath) => {
+    it(`generates the correct ${description}`, () => {
+      const content = readFile(filePath);
+      expect(content).toMatchSnapshot();
+    });
+  };
+  testFile('reserved words table', TEST_FILES.reservedWords);
+  testFile('esjs code snippets', TEST_FILES.esjsSnippets);
+  testFile('esjs language configuration', TEST_FILES.esjsConfig);
+  testFile('esjs syntax', TEST_FILES.esjsSyntax);
+  testFile('esvue language configuration', TEST_FILES.esvueConfig);
+  testFile('esvue syntax', TEST_FILES.esvueSyntax);
+});;
