@@ -27,4 +27,4 @@ describe('@es-js/language-tools', () => {
   testFile('esjs syntax', TEST_FILES.esjsSyntax);
   testFile('esvue language configuration', TEST_FILES.esvueConfig);
   testFile('esvue syntax', TEST_FILES.esvueSyntax);
-});;
+});
