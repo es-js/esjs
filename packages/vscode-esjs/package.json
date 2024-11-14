@@ -54,7 +54,7 @@
     "tsup": "^6.7.0",
     "typescript": "^4.9.5",
     "vite": "^3.2.7",
-    "vitest": "^0.21.1",
+    "vitest": "^2.1.5",
     "vsce": "^2.15.0",
     "vscode": "^1.1.37",
     "vscode-languageclient": "^8.1.0",
