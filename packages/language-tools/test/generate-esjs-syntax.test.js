@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import fs from 'fs';
+import fs from 'node:fs';
 import '../src/index.js';
 
 function readFile(path) {
