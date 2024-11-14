@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { template } from 'lodash'
+import template from 'lodash/template'
 import path from 'path'
 import type { Plugin, ViteDevServer } from 'vite'
 import { generatePagesInput } from './lib/generatePagesInput'

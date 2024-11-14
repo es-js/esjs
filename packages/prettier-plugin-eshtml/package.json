@@ -18,6 +18,7 @@
 		"build": "pkgroll",
 		"start": "tsx src/index.ts",
 		"test": "vitest",
+		"test:run": "vitest run",
 		"typecheck": "tsc --noEmit",
 		"watch": "pkgroll --watch",
 		"prepublishOnly": "pnpm run build"

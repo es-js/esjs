@@ -26,5 +26,6 @@
     "jiti": "^1.21.0",
     "pathe": "^1.1.1"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@9.1.1"
 }
