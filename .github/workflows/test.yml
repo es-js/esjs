@@ -9,12 +9,13 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-  pull_request_review:
-    types: [submitted]
-
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
 
     steps:
       - name: Checkout code
