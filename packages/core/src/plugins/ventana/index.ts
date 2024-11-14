@@ -6,7 +6,7 @@ import {
   export const report = () => 'Converts ventana to window'
   
   export const properties = new Map<string, string>([
-    ["caches", "caches"]
+    ["caches", "caches"],
     ["informacionCliente", "clientInformation"],
     ["cerrado", "closed"],
     ["consola", "console"],
