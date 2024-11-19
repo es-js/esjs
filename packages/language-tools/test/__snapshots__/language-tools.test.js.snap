@@ -432,11 +432,11 @@ exports[`@es-js/language-tools > generates the correct esjs syntax 1`] = `
 			"patterns": [
 				{
 					"name": "keyword.control.esjs",
-					"match": "\\\\b(capturar|caso|con|continuar|crear|desde|elegir|esperar|exportar|hacer|importar|mientras|para|retornar|sino|osi|si|constructor|eliminar|extiende|finalmente|instanciaDe|intentar|lanzar|longitud|romper|simbolo|subcad|tipoDe|vacio|producir)\\\\b"
+					"match": "\\\\b(capturar|caso|con|continuar|crear|desde|elegir|esperar|exportar|hacer|importar|mientras|para|retornar|sino|si|constructor|eliminar|extiende|finalmente|instanciaDe|intentar|lanzar|longitud|romper|simbolo|subcad|tipoDe|vacio|producir)\\\\b"
 				},
 				{
 					"name": "constant.language.esjs",
-					"match": "\\\\b(falso|nulo|verdadero|indefinido|Infinito|NuN|ambienteGlobal|esNuN)\\\\b"
+					"match": "\\\\b(falso|nulo|verdadero|indefinido|Infinito|NuN|ambienteGlobal)\\\\b"
 				},
 				{
 					"name": "variable.language.esjs",
@@ -452,7 +452,7 @@ exports[`@es-js/language-tools > generates the correct esjs syntax 1`] = `
 				},
 				{
 					"name": "storage.type.esjs",
-					"match": "\\\\b(asincrono|clase|const|global|var|mut|porDefecto|funcion)\\\\b"
+					"match": "\\\\b(asincrono|clase|const|var|mut|porDefecto|funcion)\\\\b"
 				},
 				{
 					"name": "keyword.other.esjs",
@@ -6456,7 +6456,6 @@ exports[`@es-js/language-tools > generates the correct reserved words table 1`] 
 | para        | for         |
 | retornar    | return      |
 | sino        | else        |
-| osi         | else if     |
 | si          | if          |
 | constructor | constructor |
 | eliminar    | delete      |
@@ -6479,7 +6478,6 @@ exports[`@es-js/language-tools > generates the correct reserved words table 1`] 
 | asincrono   | async       |
 | clase       | class       |
 | const       | const       |
-| global      | var         |
 | var         | var         |
 | mut         | let         |
 | porDefecto  | default     |
@@ -6496,7 +6494,6 @@ exports[`@es-js/language-tools > generates the correct reserved words table 1`] 
 | Infinito       | Infinity   |
 | NuN            | NaN        |
 | ambienteGlobal | globalThis |
-| esNuN          | isNaN      |
 
 ## Funciones de soporte (Support Functions)
 
@@ -6587,6 +6584,7 @@ exports[`@es-js/language-tools > generates the correct reserved words table 1`] 
 
 | EsJS               | JavaScript     |
 | ------------------ | -------------- |
+| esNuN              | isNaN          |
 | esFinito           | isFinite       |
 | esEntero           | isInteger      |
 | esEnteroSeguro     | isSafeInteger  |

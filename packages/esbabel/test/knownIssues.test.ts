@@ -35,11 +35,11 @@ describe('known issues', () => {
     expect(compile(js, true)).toEqual(esjs)
   })
 
-  it('compiles var/global to var', () => {
+  it('does not compile var/global to var', () => {
     const esjs = `
     var x = 1
-    global y = 2
-`
+    var y = 2
+`;
 
     const js = `
     var x = 1
