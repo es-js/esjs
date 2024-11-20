@@ -12,7 +12,7 @@ import {
   export const methods = new Map<string, string>([
     ['aCadena', 'toString'],
     ['valorDe', 'valueOf'],
-    ['esPrimitivo', 'toPrimitive']
+    ['aPrimitivo', 'toPrimitive']
   ])
 
   export const properties = new Map<string, string>([

@@ -15,7 +15,6 @@ export const keywords = new Map<string, string>([
   ['decodificarComponenteURI', 'decodeURIComponent'],
   ['codificarURI', 'encodeURI'],
   ['codificarComponenteURI', 'encodeURIComponent'],
-  ['documento', 'document']
   // TODO: Add more support functions.
 ])
 

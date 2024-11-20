@@ -62,11 +62,8 @@ export const methods = new Map<string, string>([
     ['abrir', 'open'],
     ['consultarComandoActivo', 'queryCommandEnabled'],
     ['escribir', 'write'],
-    ['escribirEn', 'writeln']
-])
-
-export const staticMethods = new Map<string, string>([
-  ['analizarHTMLInseguro', 'parseHTMLUnsafe']
+    ['escribirEn', 'writeln'],
+    ['analizarHTMLInseguro', 'parseHTMLUnsafe']
 ])
 
 export const properties = new Map<string, string>([
@@ -123,16 +120,13 @@ export const objects = new Map<string, string>([['Documento', 'Document']])
 export function replace() {
     return {
       ...replaceObjectStaticMethods({
-        from: 'Documento',
-        to: 'Document',
-        methods: staticMethods,
-      }),
-      ...replaceExpressionMethods({
-        methods,
+        from: 'documento',
+        to: 'document',
+        methods: methods,
       }),
       ...replaceObjectStaticProperties({
-        from: 'Documento',
-        to: 'Document',
+        from: 'documento',
+        to: 'document',
         properties,
       }),
       ...replaceInstanceof({
