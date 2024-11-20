@@ -1,7 +1,7 @@
 import {
     replaceExpressionMethods,
     replaceInstanceof,
-    replaceObjectProperties,
+    replaceObjectStaticProperties,
     replaceObjectStaticMethods,
     replaceObjects,
   } from '../utils'
@@ -130,7 +130,9 @@ export function replace() {
       ...replaceExpressionMethods({
         methods,
       }),
-      ...replaceObjectProperties({
+      ...replaceObjectStaticProperties({
+        from: 'documento',
+        to: 'document',
         properties,
       }),
       ...replaceInstanceof({
