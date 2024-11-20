@@ -131,8 +131,8 @@ export function replace() {
         methods,
       }),
       ...replaceObjectStaticProperties({
-        from: 'documento',
-        to: 'document',
+        from: 'Documento',
+        to: 'Document',
         properties,
       }),
       ...replaceInstanceof({

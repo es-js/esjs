@@ -32,7 +32,7 @@ import {
     ['derivados', 'species'],
     ['dividir', 'split'],
     ['aPrimitivo', 'toPrimitive'],
-    ['aCadena', 'toStringTag'],
+    ['etiquetaCadena', 'toStringTag'],
     ['imposibleDescifrar', 'unscopables']
   ])
 
