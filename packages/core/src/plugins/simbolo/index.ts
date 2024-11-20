@@ -59,7 +59,7 @@ import {
       ...replaceObjectStaticProperties({
         from: 'Simbolo',
         to: 'Symbol',
-        methods: staticProperties,
+        properties: staticProperties,
       }),
       ...replaceInstanceof({
         from: 'Simbolo',
