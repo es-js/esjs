@@ -61,7 +61,7 @@ import {
     ["desplazamientoY", "scrollY"],
     ["miMismo", "self"],
     ["almacenamientoSesion", "sessionStorage"],
-    ["almacanamientoCompartido", "sharedStorage"],
+    ["almacenamientoCompartido", "sharedStorage"],
     ["sintesisVoz", "speechSynthesis"],
     ["barraEstado", "statusbar"],
     ["barraHerramientas", "toolbar"],
