@@ -104,7 +104,7 @@ export const properties = new Map<string, string>([
   ['estadoVisibilidad', 'visibilityState'],
   ['cookie', 'cookie'],
   ['vistaPorDefecto', 'defaultView'],
-  ['modoEditor', 'designMode'],
+  ['modoDiseño', 'designMode'],
   ['dir', 'dir'],
   ['pantallaCompletaActiva', 'fullscreenEnabled'],
   ['ultimaModificacion', 'lastModified'],
