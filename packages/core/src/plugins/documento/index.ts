@@ -56,7 +56,7 @@ export const methods = new Map<string, string>([
     ['crearSolucionarNS', 'createNSResolver'],
     ['evaluar', 'evaluate'],
     ['cerrar', 'close'],
-    ['ejecComando', 'execCommand'],
+    ['ejecutarComando', 'execCommand'],
     ['obtenerElementosPorNombre', 'getElementsByName'],
     ['estaEnfocado', 'hasFocus'],
     ['abrir', 'open'],
