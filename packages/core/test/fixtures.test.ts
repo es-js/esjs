@@ -23,10 +23,9 @@ const plugins = [
   'json',
   // 'tipos', // TODO: Add this fixture.
 ]
-const pluginsFixtures = plugins.reduce((acc, plugin) => {
-  acc[`./fixtures/extras/${plugin}.esjs`] = true
-  return acc
-}, {})
+const pluginsFixtures = Object.fromEntries(
+  plugins.map(plugin => [`./fixtures/extras/${plugin}.esjs`, true])
+)
 
 beforeEach(() => {
   fixtureKeys = Object.keys(esjsFixtures)
