@@ -70,7 +70,7 @@ export const properties = new Map<string, string>([
   ['elementoActivo', 'activeElement'],
   ['hojasEstiloAdoptadas', 'adoptedStyleSheets'],
   ['cuerpo', 'body'],
-  ['caracteresEstablecidos', 'characterSet'],
+  ['conjuntoCaracteres', 'characterSet'],
   ['longitudElementosSecundarios', 'childElementCount'],
   ['secundarios', 'children'],
   ['modoEstricto', 'compatMode'],
