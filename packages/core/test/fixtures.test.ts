@@ -9,6 +9,25 @@ const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
 
 let fixtureKeys: string[] = []
 
+const plugins = [
+  'consola',
+  'matriz',
+  'cadena',
+  'fecha',
+  'numero',
+  'promesa',
+  'mate',
+  'booleano',
+  'funcion',
+  // 'soporte', // TODO: Fix this fixture.
+  'json',
+  // 'tipos', // TODO: Add this fixture.
+]
+const pluginsFixtures = plugins.reduce((acc, plugin) => {
+  acc[`./fixtures/extras/${plugin}.esjs`] = true
+  return acc
+}, {})
+
 beforeEach(() => {
   fixtureKeys = Object.keys(esjsFixtures)
   expect(fixtureKeys.length).toBeGreaterThan(0)
@@ -90,6 +109,26 @@ describe('compile single', () => {
 describe('compile js -> esjs', () => {
   it('test fixtures/keywords', async () => {
     for (const key of fixtureKeys) {
+      const result = await testCompile(key, {
+        reverse: true,
+      })
+
+      expect(result.generated).toEqual(result.expected)
+    }
+  })
+})
+
+describe('plugins', () => {
+  it('esjs -> js', async () => {
+    for (const key of Object.keys(esjsFixturesExtras)) {
+      const result = await testCompile(key)
+
+      expect(result.generated).toEqual(result.expected)
+    }
+  })
+
+  it('js -> esjs', async () => {
+    for (const key of Object.keys(pluginsFixtures)) {
       const result = await testCompile(key, {
         reverse: true,
       })
