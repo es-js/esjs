@@ -101,7 +101,7 @@ import {
     ["imprimir", "print"],
     ["preguntar", "prompt"],
     ["consultarFuentesLocales", "queryLocalFonts"],
-    ["consultarMicroTareas", "queueMicrotask"],
+    ["encolarMicrotarea", "queueMicrotask"],
     ["reportarError", "reportError"],
     ["solicitarMarcoAnimacion", "requestAnimationFrame"],
     ["solicitarFuncionDevueltaInactiva", "requestIdleCallback"],
