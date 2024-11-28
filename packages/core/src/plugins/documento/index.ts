@@ -1,19 +1,18 @@
 import {
-    replaceExpressionMethods,
-    replaceInstanceof,
-    replaceObjectStaticProperties,
-    replaceObjectStaticMethods,
-    replaceObjects,
-  } from '../utils'
+  replaceExpressionMethods,
+  replaceInstanceof,
+  replaceObjectStaticProperties,
+  replaceObjectStaticMethods,
+  replaceObjects,
+} from '../utils'
 
 export const report = () => 'Converts Documento methods to JavaScript'
 
 export const methods = new Map<string, string>([
     ['adoptarNodo', 'adoptNode'],
-    ['agregar', 'append'],
+    ['anexar', 'append'],
     ['temasNavegador', 'browsingTopics'],
     ['posicionCursorPunto', 'caretPositionFromPoint'],
-    ['rangoCursorPunto', 'caretRangeFromPoint'],
     ['crearAtributo', 'createAttribute'],
     ['crearAtributoNS', 'createAttributeNS'],
     ['crearSeccionCDATA', 'createCDATASection'],
@@ -56,11 +55,9 @@ export const methods = new Map<string, string>([
     ['crearSolucionarNS', 'createNSResolver'],
     ['evaluar', 'evaluate'],
     ['cerrar', 'close'],
-    ['ejecutarComando', 'execCommand'],
     ['obtenerElementosPorNombre', 'getElementsByName'],
     ['estaEnfocado', 'hasFocus'],
     ['abrir', 'open'],
-    ['consultarComandoActivo', 'queryCommandEnabled'],
     ['escribir', 'write'],
     ['escribirEn', 'writeln'],
     ['analizarHTMLInseguro', 'parseHTMLUnsafe']
@@ -118,23 +115,23 @@ export const properties = new Map<string, string>([
 export const objects = new Map<string, string>([['Documento', 'Document']])
 
 export function replace() {
-    return {
-      ...replaceObjectStaticMethods({
-        from: 'documento',
-        to: 'document',
-        methods: methods,
-      }),
-      ...replaceObjectStaticProperties({
-        from: 'documento',
-        to: 'document',
-        properties,
-      }),
-      ...replaceInstanceof({
-        from: 'Documento',
-        to: 'Document',
-      }),
-      ...replaceObjects({
-        objects,
-      }),
-    }
+  return {
+    ...replaceObjectStaticMethods({
+      from: 'documento',
+      to: 'document',
+      methods: methods,
+    }),
+    ...replaceObjectStaticProperties({
+      from: 'documento',
+      to: 'document',
+      properties,
+    }),
+    ...replaceInstanceof({
+      from: 'Documento',
+      to: 'Document',
+    }),
+    ...replaceObjects({
+      objects,
+    }),
   }
+}

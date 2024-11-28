@@ -22,6 +22,7 @@ const plugins = [
   // 'soporte', // TODO: Fix this fixture.
   'json',
   // 'tipos', // TODO: Add this fixture.
+  'documento',
 ]
 const pluginsFixtures = Object.fromEntries(
   plugins.map(plugin => [`./fixtures/extras/${plugin}.esjs`, true])
