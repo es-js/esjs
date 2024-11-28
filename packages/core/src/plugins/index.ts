@@ -11,6 +11,12 @@ import * as soporte from './soporte'
 import * as funcion from './funcion'
 import * as json from './json'
 import * as tipos from './tipos'
+import * as navegador from './navegador'
+import * as ventana from './ventana'
+import * as puente from './puente'
+import * as simbolo from './simbolo'
+import * as numerogrande from './numerogrande'
+import * as documento from './documento'
 
 export const plugins = [
   ['consola', consola],
@@ -25,6 +31,12 @@ export const plugins = [
   ['soporte', soporte],
   ['json', json],
   ['tipos', tipos],
+  ['navegador', navegador],
+  ['ventana', ventana],
+  ['puente', puente],
+  ['simbolo', simbolo],
+  ['numerogrande', numerogrande],
+  ['documento', documento]
 ]
 
 export { setToEsJS }

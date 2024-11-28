@@ -17,6 +17,9 @@ export const types = new Map<string, string>([
   ['ExpReg', 'RegExp'],
   ['Mapa', 'Map'],
   ['Conjunto', 'Set'],
+  ['Puente', 'Proxy'],
+  ['NumeroGrande', 'BigInt'],
+  ['Documento', 'Document']
 ])
 
 export function traverse() {
