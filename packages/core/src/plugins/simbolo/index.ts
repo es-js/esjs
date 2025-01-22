@@ -55,17 +55,17 @@ import {
       ...replaceObjectProperties({
         properties,
       }),
-      ...replaceObjectStaticProperties({
-        from: 'Simbolo',
-        to: 'Symbol',
-        properties: staticProperties,
-      }),
       ...replaceInstanceof({
         from: 'Simbolo',
         to: 'Symbol',
       }),
       ...replaceObjects({
         objects,
+      }),
+      ...replaceObjectStaticProperties({
+        from: 'Simbolo',
+        to: 'Symbol',
+        properties: staticProperties,
       }),
     }
   }
