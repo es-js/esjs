@@ -71,14 +71,22 @@
         "extensions": [
           ".esvue"
         ],
-        "configuration": "./languages/esvue-language-configuration.json"
+        "configuration": "./languages/esvue-language-configuration.json",
+        "icon": {
+          "dark": "./res/icon.png",
+          "light": "./res/icon.png"
+        }
       },
       {
         "id": "esjs",
         "extensions": [
           ".esjs"
         ],
-        "configuration": "./languages/esjs-language-configuration.json"
+        "configuration": "./languages/esjs-language-configuration.json",
+        "icon": {
+          "dark": "./res/icon.png",
+          "light": "./res/icon.png"
+        }
       }
     ],
     "grammars": [

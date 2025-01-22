@@ -10,7 +10,6 @@ import {
   export const report = () => 'Converts Simbolo methods to JavaScript'
   
   export const methods = new Map<string, string>([
-    ['aCadena', 'toString'],
     ['valorDe', 'valueOf'],
     ['aPrimitivo', 'toPrimitive']
   ])
