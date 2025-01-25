@@ -1,2 +1,1 @@
 mut myPuent = crear Puente();
-Puente.revocable();
