@@ -23,6 +23,9 @@ const plugins = [
   'json',
   // 'tipos', // TODO: Add this fixture.
   'documento',
+  'numerogrande',
+  'simbolo',
+  'puente',
 ]
 const pluginsFixtures = Object.fromEntries(
   plugins.map(plugin => [`./fixtures/extras/${plugin}.esjs`, true])
