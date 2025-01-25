@@ -49,3 +49,4 @@ document.requestStorageAccessFor()
 document.startViewTransition()
 document.write()
 document.writeln()
+document.activeElement

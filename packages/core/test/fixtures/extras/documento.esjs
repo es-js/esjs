@@ -49,3 +49,4 @@ documento.solicitarAccesoAlmacenamientoPara()
 documento.iniciarVerTransicion()
 documento.escribir()
 documento.escribirEn()
+documento.elementoActivo

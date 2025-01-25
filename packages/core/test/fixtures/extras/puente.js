@@ -1,1 +1,1 @@
-let myPuent = new Proxy();
+let myPuent = new Proxy()
