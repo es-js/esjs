@@ -1,7 +1,7 @@
 const sim1 = Simbolo("foo")
 mut sim2 = Simbolo("foo")
 sim2.descripcion;
-Simbolo()
+Simbolo();
 Simbolo.para("foo")
 Simbolo.paraLlave(sim1)
 Simbolo.tieneInstancia;
