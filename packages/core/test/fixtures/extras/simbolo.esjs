@@ -9,4 +9,4 @@ Simbolo.iterador
 Simbolo.aPrimitivo
 Simbolo.etiquetaCadena
 Simbolo.imposibleDescifrar
-Simbolo.esConcatExtendible
+Simbolo.esConcatExtendible;

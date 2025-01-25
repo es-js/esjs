@@ -9,4 +9,4 @@ Symbol.iterator
 Symbol.toPrimitive
 Symbol.toStringTag
 Symbol.unscopables
-Symbol.isConcatSpreadable
+Symbol.isConcatSpreadable;
