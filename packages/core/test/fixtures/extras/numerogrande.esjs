@@ -1,5 +1,5 @@
 mut myNum = crear NumeroGrande(1000)
-myNum.etiquetaCadena
+myNum.etiquetaCadena;
 myNum.aCadenaLocalizada()
 myNum.aCadena()
 myNum.valorDe()

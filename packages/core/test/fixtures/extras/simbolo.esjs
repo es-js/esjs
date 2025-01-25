@@ -1,12 +1,12 @@
 const sim1 = Simbolo("foo")
 mut sim2 = Simbolo("foo")
-sim2.descripcion
+sim2.descripcion;
 Simbolo()
 Simbolo.para("foo")
 Simbolo.paraLlave(sim1)
-Simbolo.tieneInstancia
-Simbolo.iterador
-Simbolo.aPrimitivo
-Simbolo.etiquetaCadena
-Simbolo.imposibleDescifrar
+Simbolo.tieneInstancia;
+Simbolo.iterador;
+Simbolo.aPrimitivo;
+Simbolo.etiquetaCadena;
+Simbolo.imposibleDescifrar;
 Simbolo.esConcatExtendible;
