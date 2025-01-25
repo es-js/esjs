@@ -8,5 +8,5 @@ Simbolo.tieneInstancia;
 Simbolo.iterador;
 Simbolo.aPrimitivo;
 Simbolo.etiquetaCadena;
-Simbolo.imposibleDecifrar;
+Simbolo.imposibleDescifrar;
 Simbolo.esConcatExtendible;
