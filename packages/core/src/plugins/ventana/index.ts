@@ -7,7 +7,6 @@ import {
   
   export const properties = new Map<string, string>([
     ["caches", "caches"],
-    ["informacionCliente", "clientInformation"],
     ["cerrado", "closed"],
     ["consola", "console"],
     ["tiendaCookie", "cookieStore"],
@@ -76,7 +75,6 @@ import {
   export const methods = new Map<string, string>([
     ["atabi", "atob"],
     ["alerta", "alert"],
-    ["desenfocar", "blur"],
     ["biaat", "btoa"],
     ["cancelarAnimacionMarco", "cancelAnimationFrame"],
     ["cancelarFuncionDevueltaInactiva", "cancelIdleCallback"],
@@ -128,13 +126,13 @@ import {
         to: 'window',
         methods,
       }),
+      ...replaceObjects({
+        objects,
+      }),
       ...replaceObjectStaticProperties({
         from: 'ventana',
         to: 'window',
         properties,
       }),
-      ...replaceObjects({
-        objects,
-      })
     }
 }

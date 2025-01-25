@@ -26,6 +26,8 @@ const plugins = [
   'numerogrande',
   'simbolo',
   'puente',
+  'navegador',
+  'ventana',
 ]
 const pluginsFixtures = Object.fromEntries(
   plugins.map(plugin => [`./fixtures/extras/${plugin}.esjs`, true])
