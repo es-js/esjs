@@ -37,11 +37,11 @@ beforeEach(() => {
 })
 
 function readFixture(filepath: string) {
-  const esjsCode = readFileSync(resolve(join(__dirname, filepath)), 'utf-8')
+  const esjsCode = readFileSync(resolve(join(__dirname, filepath)), 'utf-8').replaceAll(/(\r\n|\r)/g, '\n')
   const jsCode = readFileSync(
     resolve(join(__dirname, filepath.replace('.esjs', '.js'))),
     'utf-8',
-  )
+  ).replaceAll(/(\r\n|\r)/g, '\n')
 
   return {
     esjsCode,
