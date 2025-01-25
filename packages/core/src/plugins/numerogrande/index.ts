@@ -10,7 +10,7 @@ import {
 
   export const staticMethods = new Map<string, string>([
     ['comoNumeroSig', 'asIntN'],
-    ['comoNumero', 'asUintN']
+    ['comoNumeroSinN', 'asUintN']
   ])
 
   export const properties = new Map<string, string>([

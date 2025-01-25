@@ -4,4 +4,4 @@ myNum.aCadenaLocalizada();
 myNum.aCadena();
 myNum.valorDe();
 NumeroGrande.comoNumeroSig(64, myNum);
-NumeroGrande.comoNumero(64, myNum);
+NumeroGrande.comoNumeroSinN(64, myNum);
