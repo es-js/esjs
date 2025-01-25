@@ -49,7 +49,6 @@ export const methods = new Map<string, string>([
   ["establecerInsigniaApp", "setAppBadge"],
   ["compartir", "share"],
   ["vibrar", "vibrate"],
-  ['javaHabilitado', 'javaEnabled'],
   ['obtenerNotificaciones', 'getNotifications']
 ])
 
@@ -60,13 +59,13 @@ export function replace() {
         to: 'navigator',
         methods,
       }),
+      ...replaceObjects({
+        objects,
+      }),
       ...replaceObjectStaticProperties({
         from: 'navegador',
         to: 'navigator',
         properties,
       }),
-      ...replaceObjects({
-        objects,
-      })
     }
 }

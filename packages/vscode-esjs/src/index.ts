@@ -32,7 +32,7 @@ export async function activate(context: ExtensionContext) {
     documentSelector: [{ scheme: 'file', language: 'esjs' }],
     errorHandler: {
       error: (error, message, count) => {
-        console.log(`Error: ${message}`);
+        console.error(`Error En Servidor EsJS: ${message}`);
         return { action: 'continue' };
       },
     },
