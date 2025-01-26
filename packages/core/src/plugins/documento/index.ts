@@ -1,10 +1,4 @@
-import {
-  replaceExpressionMethods,
-  replaceInstanceof,
-  replaceObjectStaticProperties,
-  replaceObjectStaticMethods,
-  replaceObjects,
-} from '../utils'
+import { replaceInstanceof, replaceObjects, replaceObjectStaticMethods, replaceObjectStaticProperties } from '../utils';
 
 export const report = () => 'Converts Documento methods to JavaScript'
 
@@ -20,13 +14,10 @@ export const methods = new Map<string, string>([
     ['crearFragmentoDocumento', 'createDocumentFragment'],
     ['crearElemento', 'createElement'],
     ['crearElementoNS', 'createElementNS'],
-    ['crearEvento', 'createEvent'],
     ['crearIteradorNodo', 'createNodeIterator'],
     ['crearInstruccionProcesamiento', 'createProcessingInstruction'],
     ['crearRango', 'createRange'],
     ['crearNodoTexto', 'createTextNode'],
-    ['crearToque', 'createTouch'],
-    ['crearListaToque', 'createTouchList'],
     ['crearCaminanteArboles', 'createTreeWalker'],
     ['elementoDesdePunto', 'elementFromPoint'],
     ['elementosDesdePunto', 'elementsFromPoint'],
@@ -37,29 +28,27 @@ export const methods = new Map<string, string>([
     ['obtenerElementoPorId', 'getElementById'],
     ['obtenerElementosPorNombreClase', 'getElementsByClassName'],
     ['obtenerElementosPorNombreEtiqueta', 'getElementsByTagName'],
-    ['obtenerElementosPorNombreNSEtiqueta', 'getElementsByTagNameNS'],
+    ['obtenerElementosPorNombreEtiquetaNS', 'getElementsByTagNameNS'],
     ['obtenerSeleccion', 'getSelection'],
     ['tieneAccesoAlmacenamiento', 'hasStorageAccess'],
     ['tieneAccesoCookiesSinParticiones', 'hasUnpartitionedCookieAccess'],
     ['importarNodo', 'importNode'],
     ['mozEstablecerElementoImagen', 'mozSetImageElement'],
     ['anteponer', 'prepend'],
-    ['consultarSeleccion', 'querySelector'],
-    ['consultarSelectoresTodo', 'querySelectorAll'],
+    ['consultarSelector', 'querySelector'],
+    ['consultarSelectoresTodos', 'querySelectorAll'],
     ['liberarCaptura', 'releaseCapture'],
     ['reemplazarSecundario', 'replaceChildren'],
     ['solicitarAccesoAlmacenamiento', 'requestStorageAccess'],
     ['solicitarAccesoAlmacenamientoPara', 'requestStorageAccessFor'],
     ['iniciarVerTransicion', 'startViewTransition'],
     ['crearExpresion', 'createExpression'],
-    ['crearSolucionarNS', 'createNSResolver'],
     ['evaluar', 'evaluate'],
     ['cerrar', 'close'],
     ['obtenerElementosPorNombre', 'getElementsByName'],
     ['estaEnfocado', 'hasFocus'],
     ['abrir', 'open'],
-    ['escribir', 'write'],
-    ['escribirEn', 'writeln'],
+    ['escribirNuevaLinea', 'writeln'],
     ['analizarHTMLInseguro', 'parseHTMLUnsafe']
 ])
 

@@ -1,4 +1,4 @@
-import { 
+import {
   replaceObjectStaticMethods,
   replaceObjectStaticProperties,
   replaceObjects
@@ -18,9 +18,9 @@ export const properties = new Map<string, string>([
     ["controladorWeb", "webdriver"],
     ["conexion", "connection"],
     ["cookieHabilitada", "cookieEnabled"],
-    ["geoLocalizacion", "geolocation"],
+    ["geoLocalizacion", "geolocation"], // l minusculas
     ["teclado", "keyboard"],
-    ["claves", "locks"],
+    ["claves", "locks"], // bloqueos
     ["capacidadesMedio", "mediaCapabilities"],
     ["dispositivosMultimedia", "mediaDevices"],
     ["sesionMultimedia", "mediaSession"],
