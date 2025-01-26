@@ -1,7 +1,0 @@
-mut myNum = crear NumeroGrande(1000)
-myNum.etiquetaCadena;
-myNum.aCadenaLocalizada()
-myNum.aCadena()
-myNum.valorDe()
-NumeroGrande.comoNumeroSig(64, myNum)
-NumeroGrande.comoNumeroSinN(64, myNum)

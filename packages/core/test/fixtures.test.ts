@@ -23,7 +23,7 @@ const plugins = [
   'json',
   // 'tipos', // TODO: Add this fixture.
   'documento',
-  'numerogrande',
+  'enterogrande',
   'simbolo',
   'puente',
   'navegador',
