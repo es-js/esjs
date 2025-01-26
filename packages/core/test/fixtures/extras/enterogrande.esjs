@@ -1,7 +1,6 @@
 mut myNum = crear EnteroGrande(1000)
-myNum.etiquetaCadena;
 myNum.aCadenaLocalizada()
 myNum.aCadena()
 myNum.valorDe()
-EnteroGrande.comoNumeroSig(64, myNum)
-EnteroGrande.comoNumeroSinN(64, myNum)
+EnteroGrande.comoEntero(64, myNum)
+EnteroGrande.comoEnteroSinSigno(64, myNum)

@@ -9,12 +9,8 @@ import {
   export const report = () => 'Converts EnteroGrande methods to JavaScript'
 
   export const staticMethods = new Map<string, string>([
-    ['comoNumeroSig', 'asIntN'],
-    ['comoNumeroSinN', 'asUintN']
-  ])
-
-  export const properties = new Map<string, string>([
-    ['etiquetaCadena', 'toStringTag']
+    ['comoEntero', 'asIntN'],
+    ['comoEnteroSinSigno', 'asUintN']
   ])
 
   export const methods = new Map<string, string>([
@@ -34,9 +30,6 @@ import {
       }),
       ...replaceExpressionMethods({
         methods,
-      }),
-      ...replaceObjectProperties({
-        properties,
       }),
       ...replaceInstanceof({
         from: 'EnteroGrande',

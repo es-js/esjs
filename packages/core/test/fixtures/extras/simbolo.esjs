@@ -7,6 +7,5 @@ Simbolo.paraLlave(sim1)
 Simbolo.tieneInstancia;
 Simbolo.iterador;
 Simbolo.aPrimitivo;
-Simbolo.etiquetaCadena;
 Simbolo.imposibleDescifrar;
 Simbolo.esConcatExtendible;
