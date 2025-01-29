@@ -6,9 +6,9 @@ import {
     replaceObjectStaticMethods,
     replaceObjects,
   } from '../utils'
-  
+
   export const report = () => 'Converts Simbolo methods to JavaScript'
-  
+
   export const methods = new Map<string, string>([
     ['valorDe', 'valueOf'],
     ['aPrimitivo', 'toPrimitive']
@@ -16,7 +16,7 @@ import {
 
   export const properties = new Map<string, string>([
     ['descripcion', 'description'],
-    ['etiquetaCadena', 'toStringTag']
+    ['aCadenaEtiqueta', 'toStringTag']
   ])
 
   export const staticProperties = new Map<string, string>([
@@ -31,7 +31,7 @@ import {
     ['derivados', 'species'],
     ['dividir', 'split'],
     ['aPrimitivo', 'toPrimitive'],
-    ['etiquetaCadena', 'toStringTag'],
+    ['aCadenaEtiqueta', 'toStringTag'],
     ['imposibleDescifrar', 'unscopables']
   ])
 
@@ -69,4 +69,3 @@ import {
       }),
     }
   }
-  
