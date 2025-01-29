@@ -10,9 +10,9 @@ navegador.agenteUsuario;
 navegador.controladorWeb;
 navegador.conexion;
 navegador.cookieHabilitada;
-navegador.geoLocalizacion;
+navegador.geolocalizacion;
 navegador.teclado;
-navegador.claves;
+navegador.bloqueos;
 navegador.capacidadesMedio;
 navegador.dispositivosMultimedia;
 navegador.sesionMultimedia;
@@ -23,7 +23,7 @@ navegador.almacenamiento;
 navegador.activacionUsuario;
 navegador.datosAgenteUsuario;
 navegador.controlesVentanaSuperpuestos;
-navegador.re;
+navegador.xr;
 navegador.puedeCompartir()
 navegador.borrarInsigniaApp()
 navegador.obtenerBateria()

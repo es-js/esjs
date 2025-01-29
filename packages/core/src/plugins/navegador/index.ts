@@ -18,9 +18,9 @@ export const properties = new Map<string, string>([
     ["controladorWeb", "webdriver"],
     ["conexion", "connection"],
     ["cookieHabilitada", "cookieEnabled"],
-    ["geoLocalizacion", "geolocation"], // l minusculas
+    ["geolocalizacion", "geolocation"],
     ["teclado", "keyboard"],
-    ["claves", "locks"], // bloqueos
+    ["bloqueos", "locks"],
     ["capacidadesMedio", "mediaCapabilities"],
     ["dispositivosMultimedia", "mediaDevices"],
     ["sesionMultimedia", "mediaSession"],
@@ -33,7 +33,7 @@ export const properties = new Map<string, string>([
     ["controlesVentanaSuperpuestos", "windowControlsOverlay"],
     ["hid", "hid"],
     ["serial", "serial"],
-    ["re", "xr"]
+    ["xr", "xr"]
 ])
 
 export const objects = new Map<string, string>([['navegador', 'navigator']])
