@@ -22,7 +22,7 @@ import {
   export const staticProperties = new Map<string, string>([
     ['iteradorAsincrono', 'asyncIterator'],
     ['tieneInstancia', 'hasInstance'],
-    ['esConcatExtendible', 'isConcatSpreadable'],
+    ['esConcatenableExtendido', 'isConcatSpreadable'],
     ['iterador', 'iterator'],
     ['coincidir', 'match'],
     ['coincidirTodo', 'matchAll'],
@@ -32,7 +32,7 @@ import {
     ['dividir', 'split'],
     ['aPrimitivo', 'toPrimitive'],
     ['aCadenaEtiqueta', 'toStringTag'],
-    ['imposibleDescifrar', 'unscopables']
+    ['excluibles', 'unscopables'],
   ])
 
   export const staticMethods = new Map<string, string>([
