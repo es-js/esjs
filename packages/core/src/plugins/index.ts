@@ -13,7 +13,7 @@ import * as json from './json'
 import * as tipos from './tipos'
 import * as navegador from './navegador'
 import * as ventana from './ventana'
-import * as puente from './puente'
+import * as apoderado from './apoderado'
 import * as simbolo from './simbolo'
 import * as enterogrande from './enterogrande'
 import * as documento from './documento'
@@ -33,7 +33,7 @@ export const plugins = [
   ['tipos', tipos],
   ['navegador', navegador],
   ['ventana', ventana],
-  ['puente', puente],
+  ['apoderado', apoderado],
   ['simbolo', simbolo],
   ['enterogrande', enterogrande],
   ['documento', documento]

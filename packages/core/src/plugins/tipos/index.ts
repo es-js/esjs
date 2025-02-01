@@ -17,7 +17,7 @@ export const types = new Map<string, string>([
   ['ExpReg', 'RegExp'],
   ['Mapa', 'Map'],
   ['Conjunto', 'Set'],
-  ['Puente', 'Proxy'],
+  ['Apoderado', 'Proxy'],
   ['EnteroGrande', 'BigInt'],
   ['Documento', 'Document']
 ])

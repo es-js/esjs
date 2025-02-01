@@ -25,7 +25,7 @@ const plugins = [
   'documento',
   'enterogrande',
   'simbolo',
-  'puente',
+  'apoderado',
   'navegador',
   'ventana',
 ]
