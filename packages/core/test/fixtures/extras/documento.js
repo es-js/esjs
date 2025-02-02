@@ -44,6 +44,7 @@ document.requestStorageAccess()
 document.requestStorageAccessFor()
 document.startViewTransition()
 document.writeln()
+
 document.activeElement;
 document.adoptedStyleSheets;
 document.body;
@@ -68,6 +69,7 @@ document.hidden;
 document.images;
 document.implementation;
 document.lastElementChild;
+document.links;
 document.pictureInPictureElement;
 document.pictureInPictureEnabled;
 document.plugins;
@@ -77,12 +79,16 @@ document.scrollingElement;
 document.styleSheets;
 document.timeline;
 document.visibilityState;
+document.cookie;
 document.defaultView;
 document.designMode;
+document.dir;
 document.fullscreenEnabled;
 document.lastModified;
 document.location;
 document.readyState;
 document.referrer;
 document.title;
-let myDoc = new Document()
+document.URL;
+
+let miDocumento = new Document()
