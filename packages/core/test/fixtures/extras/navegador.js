@@ -23,7 +23,11 @@ navigator.storage;
 navigator.userActivation;
 navigator.userAgentData;
 navigator.windowControlsOverlay;
+navigator.hid;
+navigator.serial;
 navigator.xr;
+navigator.bluetooth;
+navigator.clipboard;
 navigator.canShare()
 navigator.clearAppBadge()
 navigator.getBattery()

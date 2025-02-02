@@ -3,6 +3,7 @@ import {
   replaceObjectStaticProperties,
   replaceObjects,
 } from '../utils'
+
 export const report = () => 'Converts navegador to navigator'
 
 export const properties = new Map<string, string>([
@@ -34,6 +35,8 @@ export const properties = new Map<string, string>([
   ['hid', 'hid'],
   ['serial', 'serial'],
   ['xr', 'xr'],
+  ['bluetooth', 'bluetooth'],
+  ['portapapeles', 'clipboard'],
 ])
 
 export const objects = new Map<string, string>([['navegador', 'navigator']])
