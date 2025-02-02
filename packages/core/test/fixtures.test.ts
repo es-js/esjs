@@ -19,7 +19,7 @@ const plugins = [
   'mate',
   'booleano',
   'funcion',
-  // 'soporte', // TODO: Fix this fixture.
+  'soporte',
   'json',
   // 'tipos', // TODO: Add this fixture.
   'documento',
