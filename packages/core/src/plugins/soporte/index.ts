@@ -1,4 +1,4 @@
-import { replaceKeywords } from '../utils';
+import { replaceKeywords } from '../utils'
 
 export const report = () => 'Converts support functions to JavaScript'
 
@@ -8,7 +8,7 @@ export const keywords = new Map<string, string>([
   ['esNuN', 'isNaN'],
   ['limpiarTemporizador', 'clearTimeout'],
   ['limpiarIntervalo', 'clearInterval'],
-  ['alerta', "alert"],
+  ['alerta', 'alert'],
   ['preguntar', 'prompt'],
   ['confirmar', 'confirm'],
   ['consultar', 'fetch'],

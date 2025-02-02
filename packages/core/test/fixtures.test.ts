@@ -30,7 +30,7 @@ const plugins = [
   'ventana',
 ]
 const pluginsFixtures = Object.fromEntries(
-  plugins.map(plugin => [`./fixtures/extras/${plugin}.esjs`, true])
+  plugins.map((plugin) => [`./fixtures/extras/${plugin}.esjs`, true]),
 )
 
 beforeEach(() => {
@@ -39,16 +39,21 @@ beforeEach(() => {
 })
 
 function readFixture(filepath: string) {
-  const esjsCode = readFileSync(resolve(join(__dirname, filepath)), 'utf-8').replaceAll(/(\r\n|\r)/g, '\n')
+  const esjsCode = readFileSync(resolve(join(__dirname, filepath)), 'utf-8')
+
   const jsCode = readFileSync(
     resolve(join(__dirname, filepath.replace('.esjs', '.js'))),
     'utf-8',
-  ).replaceAll(/(\r\n|\r)/g, '\n') // Normaliza los saltos de línea.
+  )
 
   return {
-    esjsCode,
-    jsCode,
+    esjsCode: normalizeLineEndings(esjsCode),
+    jsCode: normalizeLineEndings(jsCode),
   }
+}
+
+function normalizeLineEndings(code: string) {
+  return code.replaceAll(/(\r\n|\r)/g, '\n')
 }
 
 async function testCompile(

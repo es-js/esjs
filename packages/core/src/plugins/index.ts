@@ -36,7 +36,7 @@ export const plugins = [
   ['apoderado', apoderado],
   ['simbolo', simbolo],
   ['enterogrande', enterogrande],
-  ['documento', documento]
+  ['documento', documento],
 ]
 
 export { setToEsJS }
