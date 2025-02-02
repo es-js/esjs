@@ -43,7 +43,7 @@ function readFixture(filepath: string) {
   const jsCode = readFileSync(
     resolve(join(__dirname, filepath.replace('.esjs', '.js'))),
     'utf-8',
-  ).replaceAll(/(\r\n|\r)/g, '\n')
+  ).replaceAll(/(\r\n|\r)/g, '\n') // Normaliza los saltos de línea.
 
   return {
     esjsCode,
