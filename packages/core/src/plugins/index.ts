@@ -30,13 +30,14 @@ export const plugins = [
   ['funcion', funcion],
   ['soporte', soporte],
   ['json', json],
-  ['tipos', tipos],
   ['navegador', navegador],
   ['ventana', ventana],
   ['apoderado', apoderado],
   ['simbolo', simbolo],
   ['enterogrande', enterogrande],
   ['documento', documento],
+  ['tipos', tipos],
+  ['tipos', objetos],
 ]
 
 export { setToEsJS }

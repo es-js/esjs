@@ -21,7 +21,7 @@ const plugins = [
   'funcion',
   'soporte',
   'json',
-  'tipos',
+  'objetos',
   'documento',
   'enterogrande',
   'simbolo',
