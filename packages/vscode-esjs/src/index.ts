@@ -30,12 +30,6 @@ export async function activate(context: ExtensionContext) {
 
   const clientOptions: LanguageClientOptions = {
     documentSelector: [{ scheme: 'file', language: 'esjs' }],
-    errorHandler: {
-      error: (error: Error, message: string, count: number) => {
-        console.error(`Error En Servidor EsJS: ${message}`)
-        return { action: 'continue' }
-      },
-    },
   }
 
   client = new LanguageClient(
