@@ -2,7 +2,7 @@
   "publisher": "enzonotario",
   "name": "vscode-esjs",
   "displayName": "EsJS (JavaScript con sintaxis en Español)",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sintaxis y configuraciones para EsJS",
   "repository": {
     "type": "git",
