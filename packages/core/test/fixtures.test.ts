@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { compile } from '../src'
-import { type TestCompileOptions } from './testUtils'
+import type { TestCompileOptions } from './testUtils'
 
 const esjsFixtures = import.meta.glob('./fixtures/keywords/*.esjs')
 const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
@@ -21,7 +21,7 @@ const plugins = [
   'funcion',
   'soporte',
   'json',
-  // 'tipos', // TODO: Add this fixture.
+  'tipos',
   'documento',
   'enterogrande',
   'simbolo',

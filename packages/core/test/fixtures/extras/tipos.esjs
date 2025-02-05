@@ -1,0 +1,31 @@
+const numero = Numero(1);
+
+const cadena = Cadena('Hola');
+
+const booleano = Booleano(true);
+
+const objeto = Objeto({});
+
+const arreglo = Arreglo([]);
+
+const matriz = Matriz([[]]);
+
+const f = Funcion(() => {});
+
+const simbolo = Simbolo('Simbolo');
+
+const fecha = Fecha(new Date());
+
+const error = Error('Error');
+
+const expReg = ExpReg(/ExpReg/);
+
+const mapa = Mapa(new Map());
+
+const conjunto = Conjunto(new Set());
+
+const apoderado = Apoderado(new Proxy({}, {}));
+
+const enteroGrande = EnteroGrande(1n);
+
+const documento = Document(document);
