@@ -1,7 +1,7 @@
-import { getToEsJS } from '../utils'
 import { invertMap } from '../../utils'
+import { getToEsJS } from '../utils'
 
-export const report = () => 'Converts prop types to JavaScript';
+export const report = () => 'Converts prop types to JavaScript'
 
 export const types = new Map<string, string>([
   ['Numero', 'Number'],
@@ -19,39 +19,38 @@ export const types = new Map<string, string>([
   ['Conjunto', 'Set'],
   ['Apoderado', 'Proxy'],
   ['EnteroGrande', 'BigInt'],
-  ['Documento', 'Document']
-]);
+  ['Documento', 'Document'],
+])
 
-export function traverse () {
+export function traverse() {
   return {
-    ObjectProperty (path: any) {
-      const { node } = path;
+    ObjectProperty(path: any) {
+      const { node } = path
       if (isIdentifier(node.value)) {
-        const typeName = node.value.name;
+        const typeName = node.value.name
 
-        const toEsJS = getToEsJS();
-        const dictionary = toEsJS ? invertMap(types) : types;
+        const toEsJS = getToEsJS()
+        const dictionary = toEsJS ? invertMap(types) : types
 
         if (dictionary.has(typeName)) {
-          node.value = identifier(dictionary.get(typeName)!);
+          node.value = identifier(dictionary.get(typeName)!)
         }
       }
-    }
-  };
+    },
+  }
 }
 
-function isIdentifier (node: any, opts?: any): node is any {
+function isIdentifier(node: any, opts?: any): node is any {
   if (!node) {
-    return false;
+    return false
   }
 
-  return node.type === 'Identifier';
+  return node.type === 'Identifier'
 }
 
-function identifier (name: string) {
+function identifier(name: string) {
   return {
     type: 'Identifier',
-    name
-  };
+    name,
+  }
 }
-

@@ -2,9 +2,9 @@ import {
   replaceExpressionMethods,
   replaceInstanceof,
   replaceObjectProperties,
-  replaceObjectStaticProperties,
-  replaceObjectStaticMethods,
   replaceObjects,
+  replaceObjectStaticMethods,
+  replaceObjectStaticProperties,
 } from '../utils'
 
 export const report = () => 'Converts Simbolo methods to JavaScript'

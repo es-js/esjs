@@ -1,8 +1,9 @@
 import {
+  replaceObjects,
   replaceObjectStaticMethods,
   replaceObjectStaticProperties,
-  replaceObjects,
 } from '../utils'
+
 export const report = () => 'Converts ventana to window'
 
 export const properties = new Map<string, string>([

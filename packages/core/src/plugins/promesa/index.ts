@@ -1,7 +1,7 @@
 import {
   replaceExpressionMethods,
-  replaceObjectStaticMethods,
   replaceObjects,
+  replaceObjectStaticMethods,
 } from '../utils'
 
 export const report = () => 'Converts Promesa methods to JavaScript'

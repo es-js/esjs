@@ -1,7 +1,7 @@
 import {
+  replaceObjects,
   replaceObjectStaticMethods,
   replaceObjectStaticProperties,
-  replaceObjects,
 } from '../utils'
 
 export const report = () => 'Converts navegador to navigator'

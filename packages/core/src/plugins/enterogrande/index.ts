@@ -1,9 +1,8 @@
 import {
   replaceExpressionMethods,
   replaceInstanceof,
-  replaceObjectProperties,
-  replaceObjectStaticMethods,
   replaceObjects,
+  replaceObjectStaticMethods,
 } from '../utils'
 
 export const report = () => 'Converts EnteroGrande methods to JavaScript'

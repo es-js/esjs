@@ -1,12 +1,12 @@
-import { types } from '../tipos';
-import { replaceObjects } from '../utils';
+import { types } from '../tipos'
+import { replaceObjects } from '../utils'
 
-export const report = () => 'Converts Objects to JavaScript';
+export const report = () => 'Converts Objects to JavaScript'
 
-export function replace () {
+export function replace() {
   return {
     ...replaceObjects({
-      objects: types
-    })
-  };
+      objects: types,
+    }),
+  }
 }

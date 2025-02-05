@@ -1,8 +1,8 @@
 import {
   replaceExpressionMethods,
   replaceInstanceof,
-  replaceObjectStaticMethods,
   replaceObjects,
+  replaceObjectStaticMethods,
 } from '../utils'
 
 export const report = () => 'Converts Fecha methods to JavaScript'

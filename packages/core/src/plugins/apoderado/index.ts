@@ -1,7 +1,7 @@
 import {
   replaceInstanceof,
-  replaceObjectStaticMethods,
   replaceObjects,
+  replaceObjectStaticMethods,
 } from '../utils'
 
 export const report = () => 'Converts Apoderado methods to JavaScript'
