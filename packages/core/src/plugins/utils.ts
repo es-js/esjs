@@ -213,23 +213,3 @@ export function replaceKeywords({
 
   return Object.assign({}, ...rules)
 }
-
-// // replace objects like `crear Objeto` with `new Objeto`
-// export function replaceObjectCreation({
-//   objects,
-// }: {
-//   objects: Map<string, string>
-// }) {
-//   const rules = []
-//
-//   for (const [from, to] of objects) {
-//     rules.push(
-//       replaceObjectNew({
-//         from,
-//         to,
-//       }),
-//     )
-//   }
-//
-//   return Object.assign({}, ...rules)
-// }
