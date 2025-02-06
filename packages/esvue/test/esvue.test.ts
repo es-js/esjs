@@ -47,7 +47,10 @@ describe('codigo vacio', () => {
   })
 
   it('vue to esvue', async () => {
-    const compiled = compile('<script setup=""></script>', { from: 'vue', to: 'esvue' })
+    const compiled = compile('<script setup=""></script>', {
+      from: 'vue',
+      to: 'esvue',
+    })
 
     expect(compiled).toBe('<codigo configuracion=""></codigo>')
   })

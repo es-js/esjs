@@ -194,3 +194,22 @@ export function replaceInstanceof({
     [`__a instanceof ${a}`]: `__a instanceof ${b}`,
   }
 }
+
+export function replaceKeywords({
+  keywords,
+}: {
+  keywords: Map<string, string>
+}) {
+  const rules = []
+
+  for (const [from, to] of keywords) {
+    rules.push(
+      replaceKeyword({
+        from,
+        to,
+      }),
+    )
+  }
+
+  return Object.assign({}, ...rules)
+}

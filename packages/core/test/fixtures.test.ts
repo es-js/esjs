@@ -2,12 +2,36 @@ import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { compile } from '../src'
-import { type TestCompileOptions } from './testUtils'
+import type { TestCompileOptions } from './testUtils'
 
 const esjsFixtures = import.meta.glob('./fixtures/keywords/*.esjs')
 const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
 
 let fixtureKeys: string[] = []
+
+const plugins = [
+  'consola',
+  'matriz',
+  'cadena',
+  'fecha',
+  'numero',
+  'promesa',
+  'mate',
+  'booleano',
+  'funcion',
+  'soporte',
+  'json',
+  'objetos',
+  'documento',
+  'enterogrande',
+  'simbolo',
+  'apoderado',
+  'navegador',
+  'ventana',
+]
+const pluginsFixtures = Object.fromEntries(
+  plugins.map((plugin) => [`./fixtures/extras/${plugin}.esjs`, true]),
+)
 
 beforeEach(() => {
   fixtureKeys = Object.keys(esjsFixtures)
@@ -16,15 +40,20 @@ beforeEach(() => {
 
 function readFixture(filepath: string) {
   const esjsCode = readFileSync(resolve(join(__dirname, filepath)), 'utf-8')
+
   const jsCode = readFileSync(
     resolve(join(__dirname, filepath.replace('.esjs', '.js'))),
     'utf-8',
   )
 
   return {
-    esjsCode,
-    jsCode,
+    esjsCode: normalizeLineEndings(esjsCode),
+    jsCode: normalizeLineEndings(jsCode),
   }
+}
+
+function normalizeLineEndings(code: string) {
+  return code.replaceAll(/(\r\n|\r)/g, '\n')
 }
 
 async function testCompile(
@@ -90,6 +119,26 @@ describe('compile single', () => {
 describe('compile js -> esjs', () => {
   it('test fixtures/keywords', async () => {
     for (const key of fixtureKeys) {
+      const result = await testCompile(key, {
+        reverse: true,
+      })
+
+      expect(result.generated).toEqual(result.expected)
+    }
+  })
+})
+
+describe('plugins', () => {
+  it('esjs -> js', async () => {
+    for (const key of Object.keys(esjsFixturesExtras)) {
+      const result = await testCompile(key)
+
+      expect(result.generated).toEqual(result.expected)
+    }
+  })
+
+  it('js -> esjs', async () => {
+    for (const key of Object.keys(pluginsFixtures)) {
       const result = await testCompile(key, {
         reverse: true,
       })

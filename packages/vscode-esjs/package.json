@@ -2,7 +2,7 @@
   "publisher": "enzonotario",
   "name": "vscode-esjs",
   "displayName": "EsJS (JavaScript con sintaxis en Español)",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sintaxis y configuraciones para EsJS",
   "repository": {
     "type": "git",
@@ -72,14 +72,22 @@
         "extensions": [
           ".esvue"
         ],
-        "configuration": "./languages/esvue-language-configuration.json"
+        "configuration": "./languages/esvue-language-configuration.json",
+        "icon": {
+          "dark": "./res/icon.png",
+          "light": "./res/icon.png"
+        }
       },
       {
         "id": "esjs",
         "extensions": [
           ".esjs"
         ],
-        "configuration": "./languages/esjs-language-configuration.json"
+        "configuration": "./languages/esjs-language-configuration.json",
+        "icon": {
+          "dark": "./res/icon.png",
+          "light": "./res/icon.png"
+        }
       }
     ],
     "grammars": [

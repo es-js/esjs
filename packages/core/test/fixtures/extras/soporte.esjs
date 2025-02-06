@@ -1,3 +1,29 @@
-const data = importar.meta
+const timeout = establecerTemporizador(() => {
+  consola.escribir('timeout')
+})
 
-consola.escribir(`${importar.meta.env.ESJS}`)
+const interval = establecerIntervalo(() => {
+  consola.escribir('interval')
+})
+
+consola.escribir(esNuN('a'))
+
+limpiarTemporizador(timeout)
+
+limpiarIntervalo(interval)
+
+alerta('alert')
+
+preguntar('prompt')
+
+confirmar('confirm')
+
+consultar('https://jsonplaceholder.typicode.com/todos/1')
+
+consola.escribir(decodificarURI('https://jsonplaceholder.typicode.com/todos/1'))
+
+consola.escribir(decodificarComponenteURI('https%3A%2F%2Fjsonplaceholder.typicode.com%2Ftodos%2F1'))
+
+consola.escribir(codificarURI('https://jsonplaceholder.typicode.com/todos/1'))
+
+consola.escribir(codificarComponenteURI('https://jsonplaceholder.typicode.com/todos/1'))

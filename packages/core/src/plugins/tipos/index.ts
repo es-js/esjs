@@ -1,5 +1,5 @@
-import { getToEsJS } from '../utils'
 import { invertMap } from '../../utils'
+import { getToEsJS } from '../utils'
 
 export const report = () => 'Converts prop types to JavaScript'
 
@@ -17,6 +17,9 @@ export const types = new Map<string, string>([
   ['ExpReg', 'RegExp'],
   ['Mapa', 'Map'],
   ['Conjunto', 'Set'],
+  ['Apoderado', 'Proxy'],
+  ['EnteroGrande', 'BigInt'],
+  ['Documento', 'Document'],
 ])
 
 export function traverse() {

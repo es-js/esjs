@@ -1,0 +1,29 @@
+const foo = Simbolo("foo")
+
+foo.valorDe() === "foo"
+foo.aCadena() === "foo"
+
+clase Validador {
+  get [Simbolo.aCadenaEtiqueta]() {
+    retornar 'Validador';
+  }
+}
+
+Simbolo.iterador.descripcion;
+
+Simbolo.iteradorAsincrono;
+Simbolo.tieneInstancia;
+Simbolo.esConcatenableExtendido;
+Simbolo.iterador;
+Simbolo.coincidir;
+Simbolo.coincidirTodo;
+Simbolo.reemplazar;
+Simbolo.buscarRegex;
+Simbolo.derivados;
+Simbolo.dividir;
+Simbolo.aPrimitivo;
+Simbolo.aCadenaEtiqueta;
+Simbolo.excluibles;
+
+mut sym = Simbolo.para("foo");
+Simbolo.paraLlave(sym) === "foo";

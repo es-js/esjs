@@ -1,9 +1,8 @@
 import {
   replaceExpressionMethods,
   replaceInstanceof,
-  replaceObjectStaticMethods,
   replaceObjects,
-  replaceObjectCall,
+  replaceObjectStaticMethods,
 } from '../utils'
 
 export const report = () => 'Converts Matriz methods to JavaScript'
