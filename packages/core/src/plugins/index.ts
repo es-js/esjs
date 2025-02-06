@@ -38,7 +38,7 @@ export const plugins = [
   ['enterogrande', enterogrande],
   ['documento', documento],
   ['tipos', tipos],
-  ['tipos', objetos],
+  ['objetos', objetos],
 ]
 
 export { setToEsJS }
