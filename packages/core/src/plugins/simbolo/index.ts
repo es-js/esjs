@@ -11,7 +11,6 @@ export const report = () => 'Converts Simbolo methods to JavaScript'
 
 export const methods = new Map<string, string>([
   ['valorDe', 'valueOf'],
-  ['aPrimitivo', 'toPrimitive'],
 ])
 
 export const properties = new Map<string, string>([
