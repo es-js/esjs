@@ -1,7 +1,5 @@
 import {
   replaceObjectStaticMethods,
-  replaceObjects,
-  replaceObjectProperties,
   replaceObjectStaticProperties,
 } from '../utils'
 

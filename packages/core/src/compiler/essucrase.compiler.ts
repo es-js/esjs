@@ -1,6 +1,6 @@
 import { transform, type Transform } from '@es-js/compiler'
+import type { CompileOptions, Compiler } from '../index'
 import { plugins, setToEsJS } from '../plugins'
-import type { Compiler, CompileOptions } from '../index'
 
 export class EssucraseCompiler implements Compiler {
   constructor(private putout: any | undefined = undefined) {}

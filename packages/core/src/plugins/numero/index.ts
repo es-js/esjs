@@ -1,9 +1,9 @@
 import {
-  replaceGlobalMethods,
-  replaceObjectStaticMethods,
-  replaceInstanceof,
   replaceExpressionMethods,
+  replaceGlobalMethods,
+  replaceInstanceof,
   replaceObjects,
+  replaceObjectStaticMethods,
 } from '../utils'
 
 export const report = () => 'Converts Numero methods to JavaScript'
