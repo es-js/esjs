@@ -7,6 +7,8 @@ const playground = usePlayground()
 
 const share = useLZShare()
 
+const settings = useSettings().settings
+
 const handleMessage = (event: MessageEvent) => {
   const { type, data } = event.data
 
@@ -22,13 +24,17 @@ onBeforeMount(async() => {
 })
 
 onMounted(() => {
-  window.addEventListener('beforeunload', playground.handleWindowClose)
+  if (import.meta.env.MODE !== 'development' && !settings.value.embed) {
+    window.addEventListener('beforeunload', playground.handleWindowClose)
+  }
   window.addEventListener('keyup', playground.handleWindowKeyup)
   window.addEventListener('message', handleMessage, false)
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('beforeunload', playground.handleWindowClose)
+  if (import.meta.env.MODE !== 'development' && !settings.value.embed) {
+    window.removeEventListener('beforeunload', playground.handleWindowClose)
+  }
   window.removeEventListener('keyup', playground.handleWindowKeyup)
 })
 </script>
