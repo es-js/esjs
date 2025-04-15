@@ -10,10 +10,6 @@ export const usePlayground = () => {
   }
 
   function handleWindowClose($event: any) {
-    if (import.meta.env.MODE === 'development') {
-      return
-    }
-
     // Cancelar el cierre de la ventana
     $event.preventDefault()
     // Chrome requiere que se establezca la propiedad returnValue en una cadena vacía
