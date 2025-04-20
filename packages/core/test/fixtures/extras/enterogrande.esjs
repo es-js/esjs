@@ -1,4 +1,4 @@
-mut myNum = crear EnteroGrande(1000)
+mut myNum = EnteroGrande(1000)
 myNum.aCadenaLocalizada()
 myNum.aCadena()
 myNum.valorDe()

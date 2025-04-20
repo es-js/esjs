@@ -18,7 +18,7 @@ prompt('prompt')
 
 confirm('confirm')
 
-fetch('https://jsonplaceholder.typicode.com/todos/1')
+fetch('https://jsonplaceholder.typicode.com/todos/1').then((respuesta) => { return respuesta.json() })
 
 console.log(decodeURI('https://jsonplaceholder.typicode.com/todos/1'))
 

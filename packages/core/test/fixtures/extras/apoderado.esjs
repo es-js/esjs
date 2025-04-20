@@ -1,1 +1,1 @@
-mut apoderado = crear Apoderado()
+mut apoderado = crear Apoderado({}, {})

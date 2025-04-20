@@ -1,4 +1,4 @@
-let myNum = new BigInt(1000)
+let myNum = BigInt(1000)
 myNum.toLocaleString()
 myNum.toString()
 myNum.valueOf()

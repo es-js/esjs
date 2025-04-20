@@ -18,7 +18,7 @@ preguntar('prompt')
 
 confirmar('confirm')
 
-consultar('https://jsonplaceholder.typicode.com/todos/1')
+consultar('https://jsonplaceholder.typicode.com/todos/1').luego((respuesta) => { retornar respuesta.json() })
 
 consola.escribir(decodificarURI('https://jsonplaceholder.typicode.com/todos/1'))
 
