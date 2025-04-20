@@ -5,8 +5,8 @@ window.addEventListener('load', function () {
   for (var i = 0; i < etiquetas.length; i++) {
     if (
       etiquetas[i].hasAttribute('type') &&
-      (etiquetas[i].getAttribute('type') == 'text/esjs' ||
-        etiquetas[i].getAttribute('type') == 'codigo/esjs')
+      (etiquetas[i].getAttribute('type') === 'text/esjs' ||
+        etiquetas[i].getAttribute('type') === 'codigo/esjs')
     ) {
       try {
         let codigoCom = esJscore.compile(etiquetas[i].innerHTML)
@@ -14,7 +14,7 @@ window.addEventListener('load', function () {
         elemento.innerHTML = codigoCom
         if (
           etiquetas[i].hasAttribute('mode') &&
-          etiquetas[i].getAttribute('mode') == 'modulo'
+          etiquetas[i].getAttribute('mode') === 'modulo'
         ) {
           elemento.setAttribute('type', 'module')
         }
@@ -32,7 +32,7 @@ window.addEventListener('load', function () {
               elemento.innerHTML = codigoCom
               if (
                 etiquetas[i].hasAttribute('mode') &&
-                etiquetas[i].getAttribute('mode') == 'modulo'
+                etiquetas[i].getAttribute('mode') === 'modulo'
               ) {
                 elemento.setAttribute('type', 'module')
               }
@@ -51,8 +51,8 @@ window.addEventListener('load', function () {
   for (var u = 0; u < etiquetasH.length; u++) {
     if (
       etiquetasH[u].hasAttribute('type') &&
-      (etiquetasH[u].getAttribute('type') == 'text/eshtml' ||
-        etiquetasH[u].getAttribute('type') == 'codigo/eshtml')
+      (etiquetasH[u].getAttribute('type') === 'text/eshtml' ||
+        etiquetasH[u].getAttribute('type') === 'codigo/eshtml')
     ) {
       try {
         etiquetasH[u].innerHTML = esJseshtml.compile(etiquetasH[u].innerHTML)
