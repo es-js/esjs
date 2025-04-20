@@ -14,7 +14,7 @@ export const keywordControl = new Map<string, string>([
   ['para', 'for'],
   ['retornar', 'return'],
   ['sino', 'else'],
-  ['osi', 'else if'],
+  // ['osi', 'else if'],
   ['si', 'if'],
   ['constructor', 'constructor'],
   ['eliminar', 'delete'],
@@ -40,7 +40,6 @@ export const constantLanguage = new Map<string, string>([
   ['Infinito', 'Infinity'],
   ['NuN', 'NaN'],
   ['ambienteGlobal', 'globalThis'],
-  ['esNuN', 'isNaN'],
 ])
 
 export const variableLanguage = new Map<string, string>([
@@ -52,7 +51,7 @@ export const storageType = new Map<string, string>([
   ['asincrono', 'async'],
   ['clase', 'class'],
   ['const', 'const'],
-  ['global', 'var'],
+  // ['global', 'var'],
   ['var', 'var'],
   ['mut', 'let'],
   ['porDefecto', 'default'],
@@ -225,6 +224,7 @@ export const mathMethods = new Map<string, string>([
 ])
 
 export const numberMethods = new Map<string, string>([
+  ['esNuN', 'isNaN'],
   ['esFinito', 'isFinite'],
   ['esEntero', 'isInteger'],
   ['esEnteroSeguro', 'isSafeInteger'],
