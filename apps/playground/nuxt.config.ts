@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json' assert { type: 'json' }
+import esjsSyntax from '@es-js/language-tools/esjs.tmLanguage.json' with { type: 'json' }
 
 const isDev = process.env.NODE_ENV === "development";
 

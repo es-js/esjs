@@ -1,6 +1,6 @@
 import { consola } from 'consola'
 import { colors } from 'consola/utils'
-import packageJson from './package.json' assert { type: 'json' }
+import packageJson from './package.json' with { type: 'json' }
 
 const version = packageJson.version || '0.0.0'
 
