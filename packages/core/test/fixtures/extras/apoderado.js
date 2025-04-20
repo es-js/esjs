@@ -1,1 +1,1 @@
-let apoderado = new Proxy()
+let apoderado = new Proxy({}, {})
