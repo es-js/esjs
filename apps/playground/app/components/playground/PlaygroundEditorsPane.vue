@@ -94,9 +94,13 @@ const activeFile = computed(() => files.getActiveFile())
 
       <ResizablePanel :max-size="80"
                       :default-size="testsPaneDefaultSize"
-                      class="pt-2">
+                      class="pt-2"
+                      :class="{
+                        'max-h-[40px]': settings.hideTests,
+                      }"
+      >
         <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900 rounded border dark:border-gray-800">
-          <div class="flex flex-row items-center space-x-2 flex-1">
+          <div class="flex flex-row items-center space-x-2 flex-1 max-h-[30px]">
             <AppTabButton
               icon="i-mdi-test-tube"
               :text="files.getFileNameWithExtension(FILE_TESTS)"
