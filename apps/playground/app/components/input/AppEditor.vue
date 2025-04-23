@@ -40,11 +40,11 @@ const decorations = ref([])
 async function onLoad(instance) {
   editorInstance = instance
 
-  const { useMonacoHelper } = await import('~/composables/useMonacoHelper')
-
-  monacoHelper = useMonacoHelper()
-
   if (props.name === 'code') {
+    const { useMonacoHelper } = await import('~/composables/useMonacoHelper')
+
+    monacoHelper = useMonacoHelper()
+
     await monacoHelper.setup()
   } else if (props.name === 'tests') {
     // ...
