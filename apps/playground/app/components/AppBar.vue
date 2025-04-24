@@ -7,16 +7,16 @@ import { useSettings } from '~/composables/useSettings'
 import { Button } from '@/components/ui/button'
 import { toast } from 'vue-sonner'
 
-const settings = useSettings()
+const { settings, setInfiniteLoopProtection } = useSettings()
 
 const grid = useGrid('tailwind')
 
 const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
 
 function setupInfiniteLoopProtection() {
-  settings.setInfiniteLoopProtection(!settings.settings.value.infiniteLoopProtection)
+  setInfiniteLoopProtection(!settings.value.infiniteLoopProtection)
 
-  if (settings.settings.value.infiniteLoopProtection) {
+  if (settings.value.infiniteLoopProtection) {
     toast.success('Protección de bucle infinito habilitada')
   } else {
     toast.error('Protección de bucle infinito deshabilitada. ¡Ten cuidado!')
@@ -27,10 +27,10 @@ function setupInfiniteLoopProtection() {
 <template>
   <NuxtScrollbar :options="{ suppressScrollY: true }" class="w-full h-10 px-2 flex items-center overflow-x-auto overflow-y-hidden">
     <div class="flex flex-row items-center space-x-2">
-      <AppMenu />
+      <AppMenu :class="{'hidden': settings.embed}" />
 
       <div class="flex flex-row items-center space-x-1">
-        <NuxtLink to="/">
+        <NuxtLink :to="settings.embed ? undefined : '/'">
           <Button
             variant="link"
             class="w-7 p-0"
@@ -56,7 +56,7 @@ function setupInfiniteLoopProtection() {
       </div>
 
       <div
-        v-if="!settings.settings.value.hideOptions"
+        v-if="!settings.hideOptions"
         class="flex flex-row items-center space-x-2"
       >
         <AppSeparator />
@@ -75,7 +75,7 @@ function setupInfiniteLoopProtection() {
             description="Habilita la protección contra bucles infinitos"
             icon-only
             color="gray"
-            :active="settings.settings.value.infiniteLoopProtection"
+            :active="settings.infiniteLoopProtection"
             @click="setupInfiniteLoopProtection"
           />
 
@@ -83,8 +83,9 @@ function setupInfiniteLoopProtection() {
         </div>
 
         <div
-          v-if="!settings.settings.value.hideOptions"
+          v-if="!settings.hideOptions"
           class="flex flex-row justify-end items-center space-x-2"
+          :class="{'hidden': settings.embed}"
         >
           <LoginButton />
 
