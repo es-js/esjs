@@ -23,7 +23,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'loaded'])
 
 const editor = useEditor()
 
@@ -51,6 +51,8 @@ async function onLoad(instance) {
   }
 
   updateTheme()
+
+  emit('loaded', instance)
 }
 
 onMounted(() => {
