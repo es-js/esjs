@@ -37,6 +37,8 @@ const testsPaneDefaultSize = computed(() => {
 const filesForTab0 = computed(() => files.files.value.filter(file => file.tab === 0))
 
 const activeFile = computed(() => files.getActiveFile())
+
+const codeEditorLoaded = ref(false)
 </script>
 
 <template>
@@ -85,6 +87,7 @@ const activeFile = computed(() => files.getActiveFile())
               :model-value="files.getActiveFileContent()"
               :readonly="activeFile.readonly"
               @update:model-value="files.setFileContent(activeFile.name, $event)"
+              @loaded="codeEditorLoaded = true"
             />
           </template>
         </AppContainer>
@@ -112,7 +115,7 @@ const activeFile = computed(() => files.getActiveFile())
             <div class="flex flex-grow" />
           </div>
           <AppEditor
-            v-if="!settings.hideTests"
+            v-if="!settings.hideTests && codeEditorLoaded"
             name="tests"
             :model-value="files.getFileContent(FILE_TESTS)"
             @update:model-value="files.setFileContent(FILE_TESTS, $event)"

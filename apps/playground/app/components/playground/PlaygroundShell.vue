@@ -17,6 +17,10 @@ const handleMessage = (event: MessageEvent) => {
   }
 }
 
+function shouldPreventClose() {
+  return import.meta.env.MODE !== 'development' && !settings.value.embed
+}
+
 onBeforeMount(async() => {
   share.setSettingsFromUrl()
 
@@ -24,7 +28,7 @@ onBeforeMount(async() => {
 })
 
 onMounted(() => {
-  if (import.meta.env.MODE !== 'development' && !settings.value.embed) {
+  if (shouldPreventClose()) {
     window.addEventListener('beforeunload', playground.handleWindowClose)
   }
   window.addEventListener('keyup', playground.handleWindowKeyup)
@@ -32,7 +36,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  if (import.meta.env.MODE !== 'development' && !settings.value.embed) {
+  if (shouldPreventClose()) {
     window.removeEventListener('beforeunload', playground.handleWindowClose)
   }
   window.removeEventListener('keyup', playground.handleWindowKeyup)
