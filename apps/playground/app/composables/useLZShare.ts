@@ -216,9 +216,6 @@ export const useLZShare = () => {
   }
 
   function setSettingsFromUrl() {
-    // if (window.location.pathname === '/')
-    //   return
-
     const {
       layout,
       hideOptions,
@@ -238,6 +235,7 @@ export const useLZShare = () => {
       embed,
       infiniteLoopProtection,
       version,
+      language
     } = useLZShare().decodeSharedUrl()
 
     settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
@@ -257,7 +255,7 @@ export const useLZShare = () => {
     settings.setEmbed(embed === 'true')
     settings.setInfiniteLoopProtection(infiniteLoopProtection === 'true')
 
-    useEditor().setLanguage(useLZShare().decodeSharedUrl().language === 'js' ? 'js' : 'esjs')
+    useEditor().setLanguage(language === 'js' ? 'js' : 'esjs')
   }
 
   async function loadCodeFromUrl() {
