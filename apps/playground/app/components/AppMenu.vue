@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import ExamplesModal from '~/components/examples/ExamplesDialogContent.vue';
-
 </script>
 
 <template>
