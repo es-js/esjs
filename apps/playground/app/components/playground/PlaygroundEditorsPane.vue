@@ -22,18 +22,6 @@ const files = useFiles()
 
 const wrapper = ref<HTMLElement | null>(null)
 
-const testsToolbarHeight = 34
-
-const testsPaneDefaultSize = computed(() => {
-  if (!settings.value.hideTests) {
-    return 50
-  }
-
-  const { height: wrapperHeight } = useElementSize(wrapper)
-
-  return Math.round((testsToolbarHeight / wrapperHeight.value) * 100)
-})
-
 const filesForTab0 = computed(() => files.files.value.filter(file => file.tab === 0))
 
 const activeFile = computed(() => files.getActiveFile())
@@ -43,7 +31,7 @@ const codeEditorLoaded = ref(false)
 
 <template>
   <div ref="wrapper" class="w-full h-full">
-    <ResizablePanelGroup :key="testsPaneDefaultSize" direction="vertical">
+    <ResizablePanelGroup direction="vertical">
       <ResizablePanel :min-size="20"
                       :max-size="settings.hideTests ? 100 : 80"
                       :class="{'pb-2': !settings.hideTests}">
@@ -96,7 +84,7 @@ const codeEditorLoaded = ref(false)
       <ResizableHandle v-if="!settings.hideTests" with-handle />
 
       <ResizablePanel :max-size="80"
-                      :default-size="testsPaneDefaultSize"
+                      :default-size="50"
                       class="pt-2"
                       :class="{
                         'max-h-[40px]': settings.hideTests,
