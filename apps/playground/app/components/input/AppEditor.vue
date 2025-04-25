@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useEventBus } from '@vueuse/core';
 import { ref } from 'vue'
 import { isDark } from '~/composables/dark'
 import { useEditor } from '~/composables/useEditor'
