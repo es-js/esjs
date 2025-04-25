@@ -96,6 +96,7 @@ const codeEditorLoaded = ref(false)
               icon="i-mdi-test-tube"
               :text="files.getFileNameWithExtension(FILE_TESTS)"
               :active="!settings.hideTests"
+              :disabled="settings.embed"
               class="h-full"
               @click="useSettings().setHideTests(!settings.hideTests)"
             />

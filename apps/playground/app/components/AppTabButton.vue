@@ -10,6 +10,7 @@ const props = defineProps({
     required: true,
   },
   active: Boolean,
+  disabled: Boolean,
 })
 
 const emit = defineEmits(['click'])
@@ -22,6 +23,7 @@ const emit = defineEmits(['click'])
       'border-indigo-700 dark:border-indigo-500': props.active,
       'border-transparent hover:border-gray-400 dark:hover:border-gray-700': !props.active,
     }"
+    :disabled="props.disabled"
     @click="emit('click')"
   >
     <UIcon
