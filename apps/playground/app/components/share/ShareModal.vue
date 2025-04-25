@@ -7,6 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const share = useLZShare()
 
+const { settings } = useSettings()
+
 function shareCode() {
   share.shareCode()
 }
@@ -38,7 +40,7 @@ function shareCode() {
             <TabsTrigger value="url">
               URL
             </TabsTrigger>
-            <TabsTrigger value="github">
+            <TabsTrigger v-if="!settings.embed" value="github">
               GitHub
             </TabsTrigger>
           </TabsList>
@@ -46,7 +48,7 @@ function shareCode() {
           <TabsContent value="url">
             <ShareUrlTab />
           </TabsContent>
-          <TabsContent value="github">
+          <TabsContent v-if="!settings.embed" value="github">
             <ShareGithubTab />
           </TabsContent>
         </Tabs>
