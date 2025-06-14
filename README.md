@@ -4,7 +4,7 @@
     <img src="https://es.js.org/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">EsJS</h3>
+  <h3 align="center">EsJS</h3>
 
   <p align="center">
     Lenguaje de programación con sintaxis en Español que compila a JavaScript.
@@ -15,6 +15,10 @@
     <a href="https://editor.esjs.dev/">Prueba en línea</a>
     ·
     <a href="https://github.com/es-js/esjs/issues/new?labels=bug">Reportar error</a>
+    <br />
+    <br />
+    <a href="https://vercel.com/oss"><img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" /></a>
+  </p>
 </div>
 
 # EsJS
