@@ -1,0 +1,3 @@
+mut myLista = crear ListaDePistasDeTexto()
+myLista.longitud;
+myLista.obtenerPistaPorId()

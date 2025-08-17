@@ -1,0 +1,4 @@
+mut myContexto = crear ContextoAudioSinConexion()
+myContexto.longitud;
+myContexto.suspender()
+myContexto.iniciarRendimiento()

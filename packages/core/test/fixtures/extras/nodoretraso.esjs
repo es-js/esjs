@@ -1,0 +1,4 @@
+NodoRetraso;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearRetraso()
+myNodo.tiempoDeRetraso;

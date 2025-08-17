@@ -1,0 +1,11 @@
+MapaParametroAudio;
+mut mycontextoAudio = crear ContextoAudio()
+mut myNodo = crear NodoDeTrabajoAudio(mycontextoAudio, 'mi-procesador')
+mut myParametros = myNodo.parametros;
+myParametros.tamaño;
+myParametros.entradas()
+myParametros.paraCada()
+myParametros.obtener()
+myParametros.tiene()
+myParametros.claves()
+myParametros.valores()

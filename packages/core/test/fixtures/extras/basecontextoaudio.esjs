@@ -1,0 +1,26 @@
+BaseContextoAudio;
+mut miAudioContext = crear ContextoAudio()
+miAudioContext.moduloDeAudio;
+miAudioContext.tiempoActual;
+miAudioContext.destino;
+miAudioContext.oyente;
+miAudioContext.frecuenciaDeMuestreo;
+miAudioContext.estado;
+miAudioContext.crearAnalizador()
+miAudioContext.crearFiltroBiquad()
+miAudioContext.crearBuffer()
+miAudioContext.crearFuenteBuffer()
+miAudioContext.crearFuenteConstante()
+miAudioContext.crearFusionadorDeCanales()
+miAudioContext.crearDivisorDeCanales()
+miAudioContext.crearConvolucionador()
+miAudioContext.crearRetraso()
+miAudioContext.crearCompresorDinamico()
+miAudioContext.crearGanancia()
+miAudioContext.crearFiltroIIR()
+miAudioContext.crearOscilador()
+miAudioContext.crearPaneador()
+miAudioContext.crearOndaPeriodica()
+miAudioContext.crearPaneadorEstereo()
+miAudioContext.crearMoldeadorDeOnda()
+miAudioContext.decodificarDatosDeAudio()
