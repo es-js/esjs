@@ -62,7 +62,7 @@ import * as listadepistasdetexto from './listadepistasdetexto'
 import * as listadepistasdevideo from './listadepistasdevideo'
 import * as pistadevideo from './pistadevideo'
 import * as pistadetexto from './pistadetexto'
-import * as listademarcadorespistadetexto from './listademarcadorespistadetexto'
+import * as listademarcadoresdepistadetexto from './listademarcadoresdepistadetexto'
 import * as tipos from './tipos'
 import { setToEsJS } from './utils'
 import * as ventana from './ventana'
@@ -132,7 +132,7 @@ export const plugins = [
   ['listadepistasdevideo', listadepistasdevideo],
   ['pistadevideo', pistadevideo],
   ['pistadetexto', pistadetexto],
-  ['listademarcadorespistadetexto', listademarcadorespistadetexto],
+  ['listademarcadoresdepistadetexto', listademarcadoresdepistadetexto],
   ['tipos', tipos],
   ['objetos', objetos],
 ]

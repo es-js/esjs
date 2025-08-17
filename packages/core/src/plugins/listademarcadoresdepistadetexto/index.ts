@@ -5,7 +5,7 @@ import {
     replaceInstanceof,
 } from '../utils'
 
-export const report = ()=> 'Converts listademarcadorespistadetexto to texttrackcuelist'
+export const report = ()=> 'Converts listademarcadoresdepistadetexto to texttrackcuelist'
 
 export const properties = new Map<string, string>([
     ['longitud', 'length']
