@@ -1,0 +1,26 @@
+{
+  "name": "@es-js/demo-escss",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@es-js/vite-plugin-escss": "workspace:^"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "prettier-plugin-escss": "workspace:^",
+    "vite": "^5.3.3"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-escss"
+    ],
+    "singleQuote": true,
+    "semi": false
+  }
+}

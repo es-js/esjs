@@ -11,6 +11,9 @@ importers:
       '@es-js/core':
         specifier: workspace:*
         version: link:../core
+      '@es-js/escss':
+        specifier: workspace:*
+        version: link:../escss
       '@es-js/eshtml':
         specifier: workspace:*
         version: link:../eshtml
