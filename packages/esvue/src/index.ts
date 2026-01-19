@@ -1,4 +1,5 @@
 import { compile as EsJSCompile } from '@es-js/core'
+import { compile as EsCSSCompile } from '@es-js/escss'
 import { compile as EsHTMLCompile } from '@es-js/eshtml'
 import { parser } from '@es-js/eshtml/parser'
 import { render } from '@es-js/eshtml/render'
@@ -28,13 +29,17 @@ export function compile(
 
     const tree = parser(html)
 
+    // Compile script block
     const script: any = tree.find((node: any) => node.tag === 'script')
-
-    if (!script) {
-      return html
+    if (script) {
+      compileScriptNode(script, options)
     }
 
-    compileScriptNode(script, options)
+    // Compile style block
+    const style: any = tree.find((node: any) => node.tag === 'style')
+    if (style) {
+      compileStyleNode(style, options)
+    }
 
     const rendered = render(tree)
 
@@ -64,6 +69,20 @@ function compileScriptNode(node: any, options: CompileOptions): any {
       delete node.attrs.setup
       node.attrs.configuracion = ''
     }
+  }
+
+  return node
+}
+
+function compileStyleNode(node: any, options: CompileOptions): any {
+  const content = node && node.content && node.content[0]
+
+  if (content && typeof content === 'string') {
+    // Compile CSS content
+    node.content[0] = EsCSSCompile(content, {
+      from: options.from === 'esvue' ? 'escss' : 'css',
+      to: options.to === 'esvue' ? 'escss' : 'css',
+    })
   }
 
   return node

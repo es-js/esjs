@@ -1,0 +1,16 @@
+{
+  "name": "@es-js/escss-generator",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Generator for EsCSS dictionaries",
+  "type": "module",
+  "scripts": {
+    "generate": "tsx src/index.ts",
+    "build": "tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.2"
+  }
+}
