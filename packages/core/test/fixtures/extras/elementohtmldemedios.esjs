@@ -32,7 +32,7 @@ myMedia.pistasDeTexto;
 myMedia.pistasDeVideo;
 myMedia.volumen;
 myMedia.agregarPistaDeTexto()
-myMedia.captuarFlujo()
+myMedia.capturarFlujo()
 myMedia.puedeReproducirTipo()
 myMedia.saltoRapido()
 myMedia.cargar()

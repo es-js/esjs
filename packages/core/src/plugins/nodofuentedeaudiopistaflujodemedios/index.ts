@@ -11,7 +11,7 @@ export function replace() {
   return {
     ...replaceInstanceof({
       from: 'NodoFuenteDeAudioPistaFlujoDeMedios',
-      to: 'MediaStreamAudioSourceNode',
+      to: 'MediaStreamTrackAudioSourceNode',
     }),
     ...replaceObjects({
       objects,

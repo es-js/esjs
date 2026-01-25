@@ -8,3 +8,4 @@ myNodo.loopStart;
 myNodo.loopEnd;
 myNodo.playbackRate;
 myNodo.start()
+myNodo.stop()

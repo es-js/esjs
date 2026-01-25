@@ -48,7 +48,7 @@ export const objects = new Map<string, string>([
 
 export const methods = new Map<string, string>([
   ['agregarPistaDeTexto', 'addTextTrack'],
-  ['captuarFlujo', 'captureStream'],
+  ['capturarFlujo', 'captureStream'],
   ['puedeReproducirTipo', 'canPlayType'],
   ['saltoRapido', 'fastSeek'],
   ['cargar', 'load'],

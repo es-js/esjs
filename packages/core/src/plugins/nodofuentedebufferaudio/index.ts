@@ -6,7 +6,7 @@ import {
 } from '../utils'
 
 export const report = () =>
-  'Converts nodofuentedebufferaudio to audiobuffersourcenode'
+  'Converts NodoFuenteDeBufferAudio to AudioBufferSourceNode'
 
 export const properties = new Map<string, string>([
   ['buffer', 'buffer'],
@@ -21,7 +21,10 @@ export const objects = new Map<string, string>([
   ['NodoFuenteDeBufferAudio', 'AudioBufferSourceNode'],
 ])
 
-export const methods = new Map<string, string>([['empezar', 'start']])
+export const methods = new Map<string, string>([
+  ['empezar', 'start'],
+  ['detener', 'stop'],
+])
 
 export function replace() {
   return {

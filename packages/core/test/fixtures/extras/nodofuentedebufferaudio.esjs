@@ -8,3 +8,4 @@ myNodo.bucleInicio;
 myNodo.bucleFin;
 myNodo.velocidadDeReproduccion;
 myNodo.empezar()
+myNodo.detener()

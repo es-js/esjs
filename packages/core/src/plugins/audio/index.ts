@@ -9,7 +9,7 @@ export const report = () => 'Converts audio to audio'
 export const properties = new Map<string, string>([
   ['bucle', 'loop'],
   ['controles', 'controls'],
-  ['listaControles', 'controlslist'],
+  ['listaControles', 'controlsList'],
   ['deshabilitarReproduccionRemota', 'disableRemotePlayback'],
   ['silenciado', 'muted'],
   ['precarga', 'preload'],
