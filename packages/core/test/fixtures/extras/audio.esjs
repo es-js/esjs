@@ -1,0 +1,9 @@
+mut miAudio = crear Audio("url")
+miAudio.bucle;
+miAudio.controles;
+miAudio.listaControles;
+miAudio.deshabilitarReproducirRemoto;
+miAudio.volApagado;
+miAudio.preCarga;
+miAudio.reproducir()
+miAudio.parar()

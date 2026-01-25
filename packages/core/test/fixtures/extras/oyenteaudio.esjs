@@ -1,0 +1,12 @@
+OyenteAudio;
+mut myContexto = crear ContextoAudio()
+mut myOyente = myContexto.oyente;
+myOyente.posicionX;
+myOyente.posicionY;
+myOyente.posicionZ;
+myOyente.adelanteX;
+myOyente.adelanteY;
+myOyente.adelanteZ;
+myOyente.arribaX;
+myOyente.arribaY;
+myOyente.arribaZ;

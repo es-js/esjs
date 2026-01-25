@@ -1,0 +1,26 @@
+BaseAudioContext;
+let miAudioContext = new AudioContext()
+miAudioContext.audioWorklet;
+miAudioContext.currentTime;
+miAudioContext.destination;
+miAudioContext.listener;
+miAudioContext.sampleRate;
+miAudioContext.state;
+miAudioContext.createAnalyser()
+miAudioContext.createBiquadFilter()
+miAudioContext.createBuffer()
+miAudioContext.createBufferSource()
+miAudioContext.createConstantSource()
+miAudioContext.createChannelMerger()
+miAudioContext.createChannelSplitter()
+miAudioContext.createConvolver()
+miAudioContext.createDelay()
+miAudioContext.createDynamicsCompressor()
+miAudioContext.createGain()
+miAudioContext.createIIRFilter()
+miAudioContext.createOscillator()
+miAudioContext.createPanner()
+miAudioContext.createPeriodicWave()
+miAudioContext.createStereoPanner()
+miAudioContext.createWaveShaper()
+miAudioContext.decodeAudioData()

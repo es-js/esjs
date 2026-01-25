@@ -1,0 +1,10 @@
+NodoFuenteDeBufferAudio;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearFuenteBuffer()
+myNodo.buffer;
+myNodo.desorientar;
+myNodo.bucle;
+myNodo.bucleInicio;
+myNodo.bucleFin;
+myNodo.velocidadDeReproduccion;
+myNodo.empezar()

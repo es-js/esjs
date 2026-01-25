@@ -1,0 +1,2 @@
+mut myProcesador = crear ProcesadorTrabajoDeAudio()
+myProcesador.puerto;

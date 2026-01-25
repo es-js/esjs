@@ -1,0 +1,12 @@
+NodoAnalizador;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearAnalizador()
+myNodo.fftTamaño;
+myNodo.frecuenciaBinariaCuenta;
+myNodo.suavizadoConstanteTiempo;
+myNodo.minimoDecibelios;
+myNodo.maximoDecibelios;
+myNodo.obtenerDatosDeTiempoFloat()
+myNodo.obtenerDatosDeTiempoByte()
+myNodo.obtenerDatosDeFrecuenciaFloat()
+myNodo.obtenerDatosDeFrecuenciaByte()

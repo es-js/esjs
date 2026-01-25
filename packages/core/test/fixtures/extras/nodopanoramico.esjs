@@ -1,0 +1,17 @@
+NodoPanoramico;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearPaneador()
+myNodo.conoAnguloInterior;
+myNodo.conoAnguloExterior;
+myNodo.conoGananciaExterior;
+myNodo.modeloDeDistancia;
+myNodo.distanciaMaxima;
+myNodo.orientacionX;
+myNodo.orientacionY;
+myNodo.orientacionZ;
+myNodo.modeloDePanoramizacion;
+myNodo.posicionX;
+myNodo.posicionY;
+myNodo.posicionZ;
+myNodo.distanciaDeReferencia;
+myNodo.distanciaDeRodado;

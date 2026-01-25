@@ -1,0 +1,13 @@
+mut miContextoAudio = crear ContextoAudio()
+miContextoAudio.latenciaBase;
+miContextoAudio.latenciaSalida;
+miContextoAudio.idDeSalida;
+miContextoAudio.cerrar()
+miContextoAudio.crearFuenteElementoDeMedios()
+miContextoAudio.crearFuenteFlujoDeMedio()
+miContextoAudio.crearDestinoFlujoDeMedios()
+miContextoAudio.crearFuentePistaFlujoDeMedios()
+miContextoAudio.obtenerMarcaTiempoDeSalida()
+miContextoAudio.resumir()
+miContextoAudio.establecerIdDeSalida()
+miContextoAudio.suspender()

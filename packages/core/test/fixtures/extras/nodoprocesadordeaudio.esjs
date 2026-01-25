@@ -1,0 +1,3 @@
+mut myNodo = crear NodoProcesadorDeAudio()
+myNodo.puerto;
+myNodo.parametros;

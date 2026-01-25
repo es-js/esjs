@@ -1,0 +1,9 @@
+NodoFiltroBiquad;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearFiltroBiquad()
+myNodo.frecuencia;
+myNodo.desorientar;
+myNodo.Q;
+myNodo.ganancia;
+myNodo.tipo;
+myNodo.obtenerFrecuenciaDeRespuesta()

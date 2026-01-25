@@ -1,0 +1,5 @@
+NodoMoldeadorDeOnda;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearMoldeadorDeOnda()
+myNodo.curva;
+myNodo.sobremuestreo;
