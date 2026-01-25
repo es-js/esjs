@@ -1,0 +1,7 @@
+mut myPista = crear PistaDeAudio()
+myPista.habilitada;
+myPista.id;
+myPista.tipo;
+myPista.etiqueta;
+myPista.idioma;
+myPista.bufferDeFuente;

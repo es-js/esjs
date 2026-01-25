@@ -1,0 +1,12 @@
+mut myPista = crear PistaDeTexto()
+myPista.marcadoresActivos;
+myPista.marcadores;
+myPista.tipoDeEnvioDePistaDeMetadatosEnBanda;
+myPista.id;
+myPista.tipo;
+myPista.etiqueta;
+myPista.idioma;
+myPista.modo;
+myPista.bufferDeFuente;
+myPista.agregarMarcador()
+myPista.eliminarMarcador()

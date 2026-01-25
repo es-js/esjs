@@ -1,0 +1,4 @@
+NodoFuenteDeAudioElementoDeMedios;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearFuenteElementoDeMedios()
+myNodo.elementoDeMedios;

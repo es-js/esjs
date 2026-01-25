@@ -1,0 +1,5 @@
+NodoFuenteDeAudioProgramable;
+mut myContexto = crear ContextoAudio()
+mut myNodoProgramable = myContexto.crearOscilador()
+myNodoProgramable.empezar()
+myNodoProgramable.detener()

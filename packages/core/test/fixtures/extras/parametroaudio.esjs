@@ -1,0 +1,14 @@
+ParametroAudio;
+mut myaudioContexto = crear ContextoAudio()
+mut mynodoGanancia = myaudioContexto.crearGanancia()
+mynodoGanancia.ganancia.valorPorDefecto;
+mynodoGanancia.ganancia.valorMaximo;
+mynodoGanancia.ganancia.valorMinimo;
+mynodoGanancia.ganancia.valor;
+mynodoGanancia.ganancia.establecerValorEnTiempo()
+mynodoGanancia.ganancia.rampaLinealAValorEnTiempo()
+mynodoGanancia.ganancia.rampaExponencialAValorEnTiempo()
+mynodoGanancia.ganancia.establecerObjetivoATiempo()
+mynodoGanancia.ganancia.establecerCurvaValorEnTiempo()
+mynodoGanancia.ganancia.cancelarProgramacionDeValores()
+mynodoGanancia.ganancia.cancelarYMantenerEnTiempo()
