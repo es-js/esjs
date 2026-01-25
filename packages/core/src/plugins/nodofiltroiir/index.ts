@@ -1,28 +1,30 @@
 import {
-    replaceExpressionMethods,
-    replaceObjects,
-    replaceInstanceof,
+  replaceExpressionMethods,
+  replaceObjects,
+  replaceInstanceof,
 } from '../utils'
 
-export const report = ()=> 'Converts nodofiltroiir to iirfilternode'
+export const report = () => 'Converts nodofiltroiir to iirfilternode'
 
-export const objects = new Map<string, string>([['NodoFiltroIIR', 'IIRFilterNode']])
-
-export const methods = new Map<string, string>([
-    ['obtenerFrecuenciaDeRespuesta', 'getFrequencyResponse']
+export const objects = new Map<string, string>([
+  ['NodoFiltroIIR', 'IIRFilterNode'],
 ])
 
-export function replace(){
-    return {
-        ...replaceExpressionMethods({
-            methods,
-        }),
-        ...replaceInstanceof({
-            from: 'NodoFiltroIIR',
-            to: 'IIRFilterNode',
-        }),
-        ...replaceObjects({
-            objects,
-        }),
-    };
+export const methods = new Map<string, string>([
+  ['obtenerFrecuenciaDeRespuesta', 'getFrequencyResponse'],
+])
+
+export function replace() {
+  return {
+    ...replaceExpressionMethods({
+      methods,
+    }),
+    ...replaceInstanceof({
+      from: 'NodoFiltroIIR',
+      to: 'IIRFilterNode',
+    }),
+    ...replaceObjects({
+      objects,
+    }),
+  }
 }

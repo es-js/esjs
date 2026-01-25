@@ -1,4 +1,4 @@
-NodoFuenteDeBufferAudio;
+tipoDe NodoFuenteDeBufferAudio;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.crearFuenteBuffer()
 myNodo.buffer;

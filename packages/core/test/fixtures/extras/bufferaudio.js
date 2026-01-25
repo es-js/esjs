@@ -1,4 +1,4 @@
-AudioBuffer;
+typeof AudioBuffer;
 let mycontextoAudio = new AudioContext()
 let myBuffer = mycontextoAudio.createBuffer()
 myBuffer.sampleRate;

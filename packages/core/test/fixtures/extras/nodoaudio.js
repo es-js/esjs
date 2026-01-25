@@ -1,4 +1,4 @@
-AudioNode;
+typeof AudioNode;
 let myaudioContexto = new AudioContext()
 let mynodoGanancia = myaudioContexto.createGain()
 mynodoGanancia.context;

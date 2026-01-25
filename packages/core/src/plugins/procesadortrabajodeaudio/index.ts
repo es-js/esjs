@@ -1,28 +1,29 @@
 import {
-    replaceObjects,
-    replaceObjectProperties,
-    replaceInstanceof,
+  replaceObjects,
+  replaceObjectProperties,
+  replaceInstanceof,
 } from '../utils'
 
-export const report = ()=> 'Converts procesadortrabajodeaudio to audioworkletprocessor'
+export const report = () =>
+  'Converts procesadortrabajodeaudio to audioworkletprocessor'
 
-export const properties = new Map<string, string>([
-    ['puerto', 'port'],
+export const properties = new Map<string, string>([['puerto', 'port']])
+
+export const objects = new Map<string, string>([
+  ['ProcesadorTrabajoDeAudio', 'AudioWorkletProcessor'],
 ])
 
-export const objects = new Map<string, string>([['ProcesadorTrabajoDeAudio', 'AudioWorkletProcessor']])
-
-export function replace(){
-    return {
-        ...replaceObjectProperties({
-            properties,
-        }),
-        ...replaceInstanceof({
-            from: 'ProcesadorTrabajoDeAudio',
-            to: 'AudioWorkletProcessor',
-        }),
-        ...replaceObjects({
-            objects,
-        }),
-    };
+export function replace() {
+  return {
+    ...replaceObjectProperties({
+      properties,
+    }),
+    ...replaceInstanceof({
+      from: 'ProcesadorTrabajoDeAudio',
+      to: 'AudioWorkletProcessor',
+    }),
+    ...replaceObjects({
+      objects,
+    }),
+  }
 }

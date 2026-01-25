@@ -1,4 +1,4 @@
-AudioParam;
+typeof AudioParam;
 let myaudioContexto = new AudioContext()
 let mynodoGanancia = myaudioContexto.createGain()
 mynodoGanancia.gain.defaultValue;

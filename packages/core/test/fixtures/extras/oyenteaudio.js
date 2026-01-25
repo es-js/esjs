@@ -1,4 +1,4 @@
-AudioListener;
+typeof AudioListener;
 let myContexto = new AudioContext()
 let myOyente = myContexto.listener;
 myOyente.positionX;

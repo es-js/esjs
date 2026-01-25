@@ -1,4 +1,4 @@
-BufferAudio;
+tipoDe BufferAudio;
 mut mycontextoAudio = crear ContextoAudio()
 mut myBuffer = mycontextoAudio.crearBuffer()
 myBuffer.frecuenciaDeMuestreo;

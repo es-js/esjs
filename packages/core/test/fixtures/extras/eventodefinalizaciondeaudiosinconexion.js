@@ -1,2 +1,2 @@
-let myEvento = new  OfflineAudioCompletionEvent()
+let myEvento = new OfflineAudioCompletionEvent()
 myEvento.renderedBuffer;

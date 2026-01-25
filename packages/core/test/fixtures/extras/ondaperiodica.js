@@ -1,1 +1,1 @@
-PeriodicWave;
+typeof PeriodicWave;

@@ -1,4 +1,4 @@
-BaseContextoAudio;
+tipoDe BaseContextoAudio;
 mut miAudioContext = crear ContextoAudio()
 miAudioContext.moduloDeAudio;
 miAudioContext.tiempoActual;

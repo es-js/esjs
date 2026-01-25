@@ -1,3 +1,4 @@
+tipoDe ReproduccionRemota;
 mut myRemoto = crear ReproduccionRemota()
 myRemoto.estado;
 myRemoto.observarDisponibilidad()

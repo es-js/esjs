@@ -1,28 +1,28 @@
 import {
-    replaceObjects,
-    replaceObjectProperties,
-    replaceInstanceof,
+  replaceObjects,
+  replaceObjectProperties,
+  replaceInstanceof,
 } from '../utils'
 
-export const report = ()=> 'Converts nodoretraso to delaynode'
+export const report = () => 'Converts nodoretraso to delaynode'
 
 export const properties = new Map<string, string>([
-    ['tiempoDeRetraso', 'delayTime']
+  ['tiempoDeRetraso', 'delayTime'],
 ])
 
 export const objects = new Map<string, string>([['NodoRetraso', 'DelayNode']])
 
-export function replace(){
-    return {
-        ...replaceObjectProperties({
-            properties,
-        }),
-        ...replaceInstanceof({
-            from: 'NodoRetraso',
-            to: 'DelayNode',
-        }),
-        ...replaceObjects({
-            objects,
-        }),
-    };
+export function replace() {
+  return {
+    ...replaceObjectProperties({
+      properties,
+    }),
+    ...replaceInstanceof({
+      from: 'NodoRetraso',
+      to: 'DelayNode',
+    }),
+    ...replaceObjects({
+      objects,
+    }),
+  }
 }

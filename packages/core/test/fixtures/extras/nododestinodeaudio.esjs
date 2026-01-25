@@ -1,4 +1,4 @@
-NodoDestinoDeAudio;
+tipoDe NodoDestinoDeAudio;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.destino;
 myNodo.maximoCanalesDeEntrada;

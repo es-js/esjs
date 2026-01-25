@@ -119,7 +119,10 @@ export const plugins = [
   ['procesadortrabajodeaudio', procesadortrabajodeaudio],
   ['ambitoglobaldeprocesadordeaudio', ambitoglobaldeprocesadordeaudio],
   ['contextoaudiosinconexion', contextoaudiosinconexion],
-  ['eventodefinalizaciondeaudiosinconexion', eventodefinalizaciondeaudiosinconexion],
+  [
+    'eventodefinalizaciondeaudiosinconexion',
+    eventodefinalizaciondeaudiosinconexion,
+  ],
   ['elementohtmldemedios', elementohtmldemedios],
   ['eventodemedioscifrados', eventodemedioscifrados],
   ['listadepistasdeaudio', listadepistasdeaudio],

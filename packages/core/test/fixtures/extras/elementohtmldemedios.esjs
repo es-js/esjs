@@ -22,7 +22,6 @@ myMedia.velocidadDeReproduccion;
 myMedia.reproducido;
 myMedia.precarga;
 myMedia.conservaElTono;
-myMedia.estadoPreparacion;
 myMedia.remoto;
 myMedia.buscable;
 myMedia.buscando;

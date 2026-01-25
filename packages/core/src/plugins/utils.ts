@@ -43,6 +43,21 @@ export function replaceObjectCall({
   }
 }
 
+export function replaceObjectIdentifier({
+  from,
+  to,
+}: {
+  from: string
+  to: string
+}) {
+  const a = toEsJS ? to : from
+  const b = toEsJS ? from : to
+
+  return {
+    [`typeof ${a}`]: `typeof ${b}`,
+  }
+}
+
 export function replaceObject({
   from,
   to,
@@ -56,6 +71,10 @@ export function replaceObject({
       to,
     }),
     ...replaceObjectCall({
+      from,
+      to,
+    }),
+    ...replaceObjectIdentifier({
       from,
       to,
     }),

@@ -1,4 +1,4 @@
-NodoMoldeadorDeOnda;
+tipoDe NodoMoldeadorDeOnda;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.crearMoldeadorDeOnda()
 myNodo.curva;

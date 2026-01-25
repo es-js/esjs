@@ -9,9 +9,7 @@ import {
 
 export const report = () => 'Converts Simbolo methods to JavaScript'
 
-export const methods = new Map<string, string>([
-  ['valorDe', 'valueOf'],
-])
+export const methods = new Map<string, string>([['valorDe', 'valueOf']])
 
 export const properties = new Map<string, string>([
   ['descripcion', 'description'],

@@ -1,4 +1,4 @@
-AudioBufferSourceNode;
+typeof AudioBufferSourceNode;
 let myContexto = new AudioContext()
 let myNodo = myContexto.createBufferSource()
 myNodo.buffer;
