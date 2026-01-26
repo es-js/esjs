@@ -1,0 +1,89 @@
+name: Release
+
+permissions:
+  id-token: write
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.1.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org/
+
+      - run: pnpm install
+
+      - name: Detect changed packages
+        id: changed-packages
+        run: |
+          CHANGED_PACKAGES=""
+          BASE_SHA="${GITHUB_BASE_REF:-HEAD~1}"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            BASE_SHA="${GITHUB_BEFORE:-HEAD~1}"
+          fi
+          
+          for PKG in ./packages/*; do
+            if [ -f "$PKG/package.json" ]; then
+              PKG_NAME=$(basename "$PKG")
+              if git diff "$BASE_SHA" HEAD -- "$PKG/package.json" 2>/dev/null | grep -q '"version"'; then
+                CHANGED_PACKAGES="$CHANGED_PACKAGES $PKG_NAME"
+              fi
+            fi
+          done
+          
+          if [ -n "$CHANGED_PACKAGES" ]; then
+            echo "packages<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate changelog
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: pnpm dlx changelogithub
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+#      - name: Build packages
+#        if: steps.changed-packages.outputs.has_changes == 'true'
+#        run: pnpm build
+#
+#      - name: Install dependencies
+#        if: steps.changed-packages.outputs.has_changes == 'true'
+#        run: pnpm -r install
+#
+#      - name: Publish changed packages
+#        if: steps.changed-packages.outputs.has_changes == 'true'
+#        run: |
+#          for PKG in ./packages/*; do
+#            if [ -f "$PKG/package.json" ]; then
+#              PKG_NAME=$(basename "$PKG")
+#              if echo "${{ steps.changed-packages.outputs.packages }}" | grep -q "$PKG_NAME"; then
+#                echo "⚡ Publishing $PKG_NAME"
+#                cd "$PKG"
+#                pnpm publish --no-git-checks --access public || true
+#                cd ../..
+#              fi
+#            fi
+#          done
+#        env:
+#          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+#          NPM_CONFIG_PROVENANCE: true
