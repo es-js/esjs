@@ -40,9 +40,11 @@ jobs:
           
           for PKG in ./packages/*; do
             if [ -f "$PKG/package.json" ]; then
-              PKG_NAME=$(basename "$PKG")
+              PKG_PATH=$(echo "$PKG" | sed 's|^\./||')
               if git diff "$BASE_SHA" HEAD -- "$PKG/package.json" 2>/dev/null | grep -q '"version"'; then
-                CHANGED_PACKAGES="$CHANGED_PACKAGES $PKG_NAME"
+                PKG_NAME=$(node -p "require('./$PKG_PATH/package.json').name")
+                PKG_VERSION=$(node -p "require('./$PKG_PATH/package.json').version")
+                CHANGED_PACKAGES="$CHANGED_PACKAGES $PKG_PATH|$PKG_NAME|$PKG_VERSION"
               fi
             fi
           done
@@ -61,29 +63,77 @@ jobs:
         run: pnpm dlx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        continue-on-error: true
 
-#      - name: Build packages
-#        if: steps.changed-packages.outputs.has_changes == 'true'
-#        run: pnpm build
-#
-#      - name: Install dependencies
-#        if: steps.changed-packages.outputs.has_changes == 'true'
-#        run: pnpm -r install
-#
-#      - name: Publish changed packages
-#        if: steps.changed-packages.outputs.has_changes == 'true'
-#        run: |
-#          for PKG in ./packages/*; do
-#            if [ -f "$PKG/package.json" ]; then
-#              PKG_NAME=$(basename "$PKG")
-#              if echo "${{ steps.changed-packages.outputs.packages }}" | grep -q "$PKG_NAME"; then
-#                echo "⚡ Publishing $PKG_NAME"
-#                cd "$PKG"
-#                pnpm publish --no-git-checks --access public || true
-#                cd ../..
-#              fi
-#            fi
-#          done
-#        env:
-#          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-#          NPM_CONFIG_PROVENANCE: true
+      - name: Build packages
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: pnpm build
+
+      - name: Install dependencies
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: pnpm -r install
+
+      - name: Publish changed packages and create releases
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: |
+          for PKG_INFO in ${{ steps.changed-packages.outputs.packages }}; do
+            PKG_PATH=$(echo "$PKG_INFO" | cut -d'|' -f1)
+            PKG_NAME=$(echo "$PKG_INFO" | cut -d'|' -f2)
+            PKG_VERSION=$(echo "$PKG_INFO" | cut -d'|' -f3)
+            
+            if [ -f "./$PKG_PATH/package.json" ]; then
+              echo "⚡ Processing $PKG_NAME v$PKG_VERSION"
+              
+              cd "./$PKG_PATH"
+              
+              echo "   Publishing to npm..."
+              pnpm publish --no-git-checks --access public || true
+              
+              echo "   Creating GitHub release..."
+              TAG_NAME="${PKG_NAME//\//-}@${PKG_VERSION}"
+              TAG_NAME="${TAG_NAME//@/@}"
+              
+              BASE_SHA="${GITHUB_BEFORE:-HEAD~1}"
+              COMMITS=$(git log --reverse --format=%H $BASE_SHA..HEAD -- . 2>/dev/null | head -50)
+              
+              RELEASE_NOTES="## Cambios\n\n"
+              if [ -n "$COMMITS" ]; then
+                RELEASE_NOTES+="### Commits\n\n"
+                for COMMIT in $COMMITS; do
+                  MSG=$(git log -1 --format=%s $COMMIT 2>/dev/null)
+                  AUTHOR=$(git log -1 --format=%an $COMMIT 2>/dev/null)
+                  RELEASE_NOTES+="- $MSG (@$AUTHOR)\n"
+                done
+              else
+                RELEASE_NOTES+="Release $PKG_NAME v$PKG_VERSION"
+              fi
+              
+              IS_PRERELEASE="false"
+              if echo "$PKG_VERSION" | grep -qE "(alpha|beta|rc)"; then
+                IS_PRERELEASE="true"
+              fi
+              
+              ESCAPED_NOTES=$(echo "$RELEASE_NOTES" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+              
+              curl -X POST \
+                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                -H "Content-Type: application/json" \
+                -d "{
+                  \"tag_name\": \"$TAG_NAME\",
+                  \"name\": \"$PKG_NAME v$PKG_VERSION\",
+                  \"body\": \"$ESCAPED_NOTES\",
+                  \"target_commitish\": \"${{ github.sha }}\",
+                  \"draft\": false,
+                  \"prerelease\": $IS_PRERELEASE
+                }" \
+                "https://api.github.com/repos/${{ github.repository }}/releases" \
+                || echo "Release may already exist"
+              
+              cd ../..
+            fi
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: true
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
