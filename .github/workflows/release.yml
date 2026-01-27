@@ -33,16 +33,84 @@ jobs:
         id: changed-packages
         run: |
           CHANGED_PACKAGES=""
-          BASE_SHA="${GITHUB_BASE_REF:-HEAD~1}"
-          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
-            BASE_SHA="${GITHUB_BEFORE:-HEAD~1}"
-          fi
           
           for PKG in ./packages/*; do
             if [ -f "$PKG/package.json" ]; then
-              PKG_NAME=$(basename "$PKG")
-              if git diff "$BASE_SHA" HEAD -- "$PKG/package.json" 2>/dev/null | grep -q '"version"'; then
-                CHANGED_PACKAGES="$CHANGED_PACKAGES $PKG_NAME"
+              PKG_PATH=$(echo "$PKG" | sed 's|^\./||')
+              PKG_NAME=$(node -p "require('./$PKG_PATH/package.json').name")
+              CURRENT_VERSION=$(node -p "require('./$PKG_PATH/package.json').version")
+              
+              LAST_RELEASE_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                "https://api.github.com/repos/${{ github.repository }}/releases?per_page=100" | \
+                node -e "
+                  const data = JSON.parse(require('fs').readFileSync(0, 'utf-8'));
+                  const pkgName = '$PKG_NAME';
+                  const tagPrefix = pkgName.replace(/[\/@]/g, '-') + '@';
+                  const releases = data.filter(r => r.tag_name.startsWith(tagPrefix));
+                  if (releases.length > 0) {
+                    console.log(releases[0].tag_name);
+                  }
+                " 2>/dev/null || echo "")
+              
+              OLD_VERSION=""
+              if [ -n "$LAST_RELEASE_TAG" ]; then
+                LAST_RELEASE_INFO=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  "https://api.github.com/repos/${{ github.repository }}/releases/tags/$LAST_RELEASE_TAG" 2>/dev/null || echo "")
+                
+                if [ -n "$LAST_RELEASE_INFO" ]; then
+                  LAST_RELEASE_COMMIT=$(echo "$LAST_RELEASE_INFO" | node -e "
+                    const data = JSON.parse(require('fs').readFileSync(0, 'utf-8'));
+                    console.log(data.target_commitish || '');
+                  " 2>/dev/null || echo "")
+                  
+                  if [ -n "$LAST_RELEASE_COMMIT" ]; then
+                    LAST_RELEASE_VERSION=$(git show "$LAST_RELEASE_COMMIT:$PKG_PATH/package.json" 2>/dev/null | grep '"version"' | head -1 | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "")
+                    
+                    if [ "$LAST_RELEASE_VERSION" == "$CURRENT_VERSION" ]; then
+                      PREVIOUS_COMMIT=$(git log --format=%H "$LAST_RELEASE_COMMIT^" -- "$PKG_PATH/package.json" | head -1)
+                      if [ -n "$PREVIOUS_COMMIT" ]; then
+                        OLD_VERSION=$(git show "$PREVIOUS_COMMIT:$PKG_PATH/package.json" 2>/dev/null | grep '"version"' | head -1 | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "")
+                      fi
+                    else
+                      OLD_VERSION="$LAST_RELEASE_VERSION"
+                    fi
+                  fi
+                fi
+              fi
+              
+              if [ -z "$OLD_VERSION" ]; then
+                LAST_RELEASE_COMMIT=$(git log --grep="release v" --format=%H -- "$PKG_PATH/package.json" | head -1)
+                if [ -z "$LAST_RELEASE_COMMIT" ]; then
+                  LAST_RELEASE_COMMIT=$(git log --grep="release" --format=%H -- "$PKG_PATH/package.json" | head -1)
+                fi
+                
+                if [ -n "$LAST_RELEASE_COMMIT" ]; then
+                  LAST_RELEASE_VERSION=$(git show "$LAST_RELEASE_COMMIT:$PKG_PATH/package.json" 2>/dev/null | grep '"version"' | head -1 | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "")
+                  
+                  if [ "$LAST_RELEASE_VERSION" == "$CURRENT_VERSION" ]; then
+                    PREVIOUS_COMMIT=$(git log --format=%H "$LAST_RELEASE_COMMIT^" -- "$PKG_PATH/package.json" | head -1)
+                    if [ -n "$PREVIOUS_COMMIT" ]; then
+                      OLD_VERSION=$(git show "$PREVIOUS_COMMIT:$PKG_PATH/package.json" 2>/dev/null | grep '"version"' | head -1 | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "")
+                    fi
+                  else
+                    OLD_VERSION="$LAST_RELEASE_VERSION"
+                  fi
+                fi
+              fi
+              
+              if [ -z "$OLD_VERSION" ]; then
+                FIRST_COMMIT=$(git log --reverse --format=%H -- "$PKG_PATH/package.json" | head -1)
+                if [ -n "$FIRST_COMMIT" ]; then
+                  FIRST_VERSION=$(git show "$FIRST_COMMIT:$PKG_PATH/package.json" 2>/dev/null | grep '"version"' | head -1 | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "")
+                  if [ -n "$FIRST_VERSION" ] && [ "$FIRST_VERSION" != "$CURRENT_VERSION" ]; then
+                    OLD_VERSION="$FIRST_VERSION"
+                  fi
+                fi
+              fi
+              
+              if [ -n "$OLD_VERSION" ] && [ "$OLD_VERSION" != "$CURRENT_VERSION" ]; then
+                CHANGED_PACKAGES="$CHANGED_PACKAGES $PKG_PATH|$PKG_NAME|$CURRENT_VERSION"
+                echo "✅ Detected version change in $PKG_NAME: $OLD_VERSION -> $CURRENT_VERSION"
               fi
             fi
           done
@@ -61,29 +129,149 @@ jobs:
         run: pnpm dlx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        continue-on-error: true
 
-#      - name: Build packages
-#        if: steps.changed-packages.outputs.has_changes == 'true'
-#        run: pnpm build
-#
-#      - name: Install dependencies
-#        if: steps.changed-packages.outputs.has_changes == 'true'
-#        run: pnpm -r install
-#
-#      - name: Publish changed packages
-#        if: steps.changed-packages.outputs.has_changes == 'true'
-#        run: |
-#          for PKG in ./packages/*; do
-#            if [ -f "$PKG/package.json" ]; then
-#              PKG_NAME=$(basename "$PKG")
-#              if echo "${{ steps.changed-packages.outputs.packages }}" | grep -q "$PKG_NAME"; then
-#                echo "⚡ Publishing $PKG_NAME"
-#                cd "$PKG"
-#                pnpm publish --no-git-checks --access public || true
-#                cd ../..
-#              fi
-#            fi
-#          done
-#        env:
-#          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-#          NPM_CONFIG_PROVENANCE: true
+      - name: Build packages
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: pnpm build
+
+      - name: Install dependencies
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: pnpm -r install
+
+      - name: Publish changed packages and create releases
+        if: steps.changed-packages.outputs.has_changes == 'true'
+        run: |
+          PACKAGES_LIST="${{ steps.changed-packages.outputs.packages }}"
+          
+          echo "$PACKAGES_LIST" | tr ' ' '\n' | while IFS= read -r PKG_INFO; do
+            if [ -z "$PKG_INFO" ]; then
+              continue
+            fi
+            
+            PKG_PATH=$(echo "$PKG_INFO" | cut -d'|' -f1)
+            PKG_NAME=$(echo "$PKG_INFO" | cut -d'|' -f2)
+            PKG_VERSION=$(echo "$PKG_INFO" | cut -d'|' -f3)
+            
+            if [ -f "./$PKG_PATH/package.json" ]; then
+              echo "⚡ Processing $PKG_NAME v$PKG_VERSION"
+              
+              echo "   Publishing to npm..."
+              cd "./$PKG_PATH"
+              pnpm publish --no-git-checks --access public || true
+              cd ../..
+              
+              echo "   Creating GitHub release..."
+              TAG_NAME="${PKG_NAME//\//-}@${PKG_VERSION}"
+              TAG_NAME="${TAG_NAME//@/@}"
+              
+              LAST_RELEASE_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                "https://api.github.com/repos/${{ github.repository }}/releases?per_page=100" | \
+                node -e "
+                  const data = JSON.parse(require('fs').readFileSync(0, 'utf-8'));
+                  const pkgName = '$PKG_NAME';
+                  const tagPrefix = pkgName.replace(/[\/@]/g, '-') + '@';
+                  const releases = data.filter(r => r.tag_name.startsWith(tagPrefix));
+                  if (releases.length > 0) {
+                    console.log(releases[0].tag_name);
+                  }
+                " 2>/dev/null || echo "")
+              
+              LAST_RELEASE_COMMIT=""
+              if [ -n "$LAST_RELEASE_TAG" ]; then
+                LAST_RELEASE_INFO=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  "https://api.github.com/repos/${{ github.repository }}/releases/tags/$LAST_RELEASE_TAG" 2>/dev/null || echo "")
+                
+                if [ -n "$LAST_RELEASE_INFO" ]; then
+                  LAST_RELEASE_COMMIT=$(echo "$LAST_RELEASE_INFO" | node -e "
+                    const data = JSON.parse(require('fs').readFileSync(0, 'utf-8'));
+                    console.log(data.target_commitish || '');
+                  " 2>/dev/null || echo "")
+                fi
+              fi
+              
+              if [ -z "$LAST_RELEASE_COMMIT" ]; then
+                LAST_RELEASE_COMMIT=$(git log --grep="release v" --format=%H -- "$PKG_PATH/package.json" | head -1)
+                if [ -z "$LAST_RELEASE_COMMIT" ]; then
+                  LAST_RELEASE_COMMIT=$(git log --grep="release" --format=%H -- "$PKG_PATH/package.json" | head -1)
+                fi
+              fi
+              
+              VERSION_CHANGE_COMMIT=$(git log --all --reverse --format=%H -- "$PKG_PATH/package.json" | while read commit; do
+                version=$(git show "$commit:$PKG_PATH/package.json" 2>/dev/null | grep '"version"' | head -1 | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "")
+                if [ "$version" == "$PKG_VERSION" ]; then
+                  echo "$commit"
+                  break
+                fi
+              done | head -1)
+              
+              if [ -z "$VERSION_CHANGE_COMMIT" ]; then
+                VERSION_CHANGE_COMMIT="${{ github.sha }}"
+              fi
+              
+              if [ -n "$LAST_RELEASE_COMMIT" ] && [ -n "$VERSION_CHANGE_COMMIT" ]; then
+                COMMITS=$(git log --reverse --format=%H ${LAST_RELEASE_COMMIT}..${VERSION_CHANGE_COMMIT} -- "$PKG_PATH" 2>/dev/null | head -50)
+                echo "   Found last release commit: $LAST_RELEASE_COMMIT"
+                echo "   Version change commit: $VERSION_CHANGE_COMMIT"
+                echo "   Commits since last release: $(echo "$COMMITS" | wc -l)"
+              elif [ -n "$LAST_RELEASE_COMMIT" ]; then
+                COMMITS=$(git log --reverse --format=%H ${LAST_RELEASE_COMMIT}..HEAD -- "$PKG_PATH" 2>/dev/null | head -50)
+                echo "   Found last release commit: $LAST_RELEASE_COMMIT"
+                echo "   Commits since last release: $(echo "$COMMITS" | wc -l)"
+              else
+                COMMITS=$(git log --reverse --format=%H HEAD~10..HEAD -- "$PKG_PATH" 2>/dev/null | head -50)
+                echo "   No previous release found, using last 10 commits"
+              fi
+              
+              RELEASE_NOTES_FILE=$(mktemp)
+              echo "## Cambios" > "$RELEASE_NOTES_FILE"
+              echo "" >> "$RELEASE_NOTES_FILE"
+              
+              if [ -n "$COMMITS" ]; then
+                echo "### Commits" >> "$RELEASE_NOTES_FILE"
+                echo "" >> "$RELEASE_NOTES_FILE"
+                for COMMIT in $COMMITS; do
+                  MSG=$(git log -1 --format=%s $COMMIT 2>/dev/null)
+                  AUTHOR=$(git log -1 --format=%an $COMMIT 2>/dev/null)
+                  echo "- $MSG (@$AUTHOR)" >> "$RELEASE_NOTES_FILE"
+                done
+              else
+                echo "Release $PKG_NAME v$PKG_VERSION" >> "$RELEASE_NOTES_FILE"
+              fi
+              
+              IS_PRERELEASE="false"
+              if echo "$PKG_VERSION" | grep -qE "(alpha|beta|rc)"; then
+                IS_PRERELEASE="true"
+              fi
+              
+              RELEASE_JSON=$(node -e "
+                const fs = require('fs');
+                const notes = fs.readFileSync('$RELEASE_NOTES_FILE', 'utf-8');
+                const body = JSON.stringify({
+                  tag_name: '$TAG_NAME',
+                  name: '$PKG_NAME v$PKG_VERSION',
+                  body: notes,
+                  target_commitish: '${{ github.sha }}',
+                  draft: false,
+                  prerelease: $IS_PRERELEASE
+                });
+                console.log(body);
+              ")
+              
+              rm -f "$RELEASE_NOTES_FILE"
+              
+              curl -X POST \
+                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                -H "Content-Type: application/json" \
+                -d "$RELEASE_JSON" \
+                "https://api.github.com/repos/${{ github.repository }}/releases" \
+                || echo "Release may already exist"
+              
+              cd ../..
+            fi
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: true
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
