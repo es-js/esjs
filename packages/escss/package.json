@@ -1,0 +1,67 @@
+{
+  "name": "@es-js/escss",
+  "version": "0.0.1-beta.1",
+  "description": "EsCSS: CSS en Español",
+  "scripts": {
+    "build": "unbuild",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/es-js/esjs.git",
+    "directory": "packages/escss"
+  },
+  "author": "Enzo Notario <hi@enzonotario.me>",
+  "license": "MIT",
+  "keywords": [
+    "esjs",
+    "escss",
+    "css",
+    "spanish"
+  ],
+  "devDependencies": {
+    "@es-js/core": "workspace:*",
+    "@types/node": "^20.14.9",
+    "postcss": "^8.4.38",
+    "typescript": "^5.5.2",
+    "unbuild": "^2.0.0",
+    "vite": "^5.3.2",
+    "vitest": "^2.1.5"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.mjs",
+      "require": "./dist/utils.cjs"
+    },
+    "./dictionaries": {
+      "types": "./dist/dictionaries.d.ts",
+      "import": "./dist/dictionaries.mjs",
+      "require": "./dist/dictionaries.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts",
+        "./dist/utils.d.ts",
+        "./dist/dictionaries.d.ts"
+      ]
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
+}

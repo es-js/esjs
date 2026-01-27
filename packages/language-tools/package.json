@@ -24,6 +24,7 @@
   ],
   "devDependencies": {
     "@es-js/core": "workspace:*",
+    "@es-js/escss": "workspace:*",
     "markdown-table": "^3.0.3",
     "vitest": "^2.1.5"
   },
@@ -36,6 +37,10 @@
       "import": "./dist/esvue.tmLanguage.json",
       "require": "./dist/esvue.tmLanguage.json"
     },
+    "./escss.tmLanguage.json": {
+      "import": "./dist/escss.tmLanguage.json",
+      "require": "./dist/escss.tmLanguage.json"
+    },
     "./esjs-language-configuration.json": {
       "import": "./dist/esjs-language-configuration.json",
       "require": "./dist/esjs-language-configuration.json"
@@ -43,6 +48,10 @@
     "./esvue-language-configuration.json": {
       "import": "./dist/esvue-language-configuration.json",
       "require": "./dist/esvue-language-configuration.json"
+    },
+    "./escss-language-configuration.json": {
+      "import": "./dist/escss-language-configuration.json",
+      "require": "./dist/escss-language-configuration.json"
     },
     "./esjs.code-snippets.json": {
       "import": "./dist/esjs.code-snippets.json",
