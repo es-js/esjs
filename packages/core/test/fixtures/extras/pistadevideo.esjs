@@ -1,7 +1,8 @@
+tipoDe PistaDeVideo;
 mut myPista = crear PistaDeVideo()
 myPista.seleccionado;
 myPista.id;
-myPista.tipo;
+myPista.clase;
 myPista.etiqueta;
 myPista.idioma;
 myPista.bufferDeFuente;

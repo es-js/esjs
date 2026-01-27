@@ -1,1 +1,1 @@
-ChannelSplitterNode;
+typeof ChannelSplitterNode;

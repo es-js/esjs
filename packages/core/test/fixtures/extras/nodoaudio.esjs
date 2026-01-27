@@ -1,11 +1,11 @@
-NodoAudio;
+tipoDe NodoAudio;
 mut myaudioContexto = crear ContextoAudio()
 mut mynodoGanancia = myaudioContexto.crearGanancia()
 mynodoGanancia.contexto;
 mynodoGanancia.numeroDeEntradas;
 mynodoGanancia.numeroDeSalidas;
-mynodoGanancia.recuentoDeCanales;
-mynodoGanancia.modoDeRecuentoDeCanales;
-mynodoGanancia.interpretacionDeCanal;
+mynodoGanancia.conteoDeCanales;
+mynodoGanancia.modoConteoDeCanales;
+mynodoGanancia.interpretacionCanal;
 mynodoGanancia.conectar()
 mynodoGanancia.desconectar()

@@ -1,4 +1,4 @@
-DynamicsCompressorNode;
+typeof DynamicsCompressorNode;
 let myContexto = new AudioContext()
 let myNodo = myContexto.createDynamicsCompressor()
 myNodo.threshold;

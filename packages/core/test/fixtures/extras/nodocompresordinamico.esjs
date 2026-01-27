@@ -1,4 +1,4 @@
-NodoCompresorDinamico;
+tipoDe NodoCompresorDinamico;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.crearCompresorDinamico()
 myNodo.umbral;

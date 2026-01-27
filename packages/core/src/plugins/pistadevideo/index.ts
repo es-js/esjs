@@ -1,33 +1,33 @@
 import {
-    replaceObjects,
-    replaceObjectProperties,
-    replaceInstanceof,
+  replaceObjects,
+  replaceObjectProperties,
+  replaceInstanceof,
 } from '../utils'
 
-export const report = ()=> 'Converts pistadevideo to videotrack'
+export const report = () => 'Converts pistadevideo to videotrack'
 
 export const properties = new Map<string, string>([
-    ['seleccionado', 'selected'],
-    ['id', 'id'],
-    ['tipo', 'kind'],
-    ['etiqueta', 'label'],
-    ['idioma', 'language'],
-    ['bufferDeFuente', 'sourceBuffer']
+  ['seleccionado', 'selected'],
+  ['id', 'id'],
+  ['clase', 'kind'],
+  ['etiqueta', 'label'],
+  ['idioma', 'language'],
+  ['bufferDeFuente', 'sourceBuffer'],
 ])
 
 export const objects = new Map<string, string>([['PistaDeVideo', 'VideoTrack']])
 
-export function replace(){
-    return {
-        ...replaceObjectProperties({
-            properties,
-        }),
-        ...replaceInstanceof({
-            from: 'PistaDeVideo',
-            to: 'VideoTrack',
-        }),
-        ...replaceObjects({
-            objects,
-        }),
-    };
+export function replace() {
+  return {
+    ...replaceObjectProperties({
+      properties,
+    }),
+    ...replaceInstanceof({
+      from: 'PistaDeVideo',
+      to: 'VideoTrack',
+    }),
+    ...replaceObjects({
+      objects,
+    }),
+  }
 }

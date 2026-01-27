@@ -3,7 +3,7 @@ myPista.marcadoresActivos;
 myPista.marcadores;
 myPista.tipoDeEnvioDePistaDeMetadatosEnBanda;
 myPista.id;
-myPista.tipo;
+myPista.clase;
 myPista.etiqueta;
 myPista.idioma;
 myPista.modo;

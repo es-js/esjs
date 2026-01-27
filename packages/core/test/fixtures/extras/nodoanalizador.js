@@ -1,4 +1,4 @@
-AnalyserNode;
+typeof AnalyserNode;
 let myContexto = new AudioContext()
 let myNodo = myContexto.createAnalyser()
 myNodo.fftSize;

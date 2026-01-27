@@ -1,4 +1,4 @@
-BiquadFilterNode;
+typeof BiquadFilterNode;
 let myContexto = new AudioContext()
 let myNodo = myContexto.createBiquadFilter()
 myNodo.frequency;

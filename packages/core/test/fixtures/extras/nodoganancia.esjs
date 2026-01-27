@@ -1,4 +1,4 @@
-NodoGanancia;
+tipoDe NodoGanancia;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.crearGanancia()
 myNodo.ganancia;

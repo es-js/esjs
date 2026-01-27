@@ -1,4 +1,4 @@
-NodoPanoramico;
+tipoDe NodoPanoramico;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.crearPaneador()
 myNodo.conoAnguloInterior;

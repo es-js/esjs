@@ -22,7 +22,6 @@ myMedia.playbackRate;
 myMedia.played;
 myMedia.preload;
 myMedia.preservesPitch;
-myMedia.readyState;
 myMedia.remote;
 myMedia.seekable;
 myMedia.seeking;

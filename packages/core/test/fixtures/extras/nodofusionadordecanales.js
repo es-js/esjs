@@ -1,1 +1,1 @@
-ChannelMergerNode;
+typeof ChannelMergerNode;

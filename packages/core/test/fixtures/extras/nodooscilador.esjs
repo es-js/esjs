@@ -1,4 +1,4 @@
-NodoOscilador;
+tipoDe NodoOscilador;
 mut myContexto = crear ContextoAudio()
 mut myNodoProgramable = myContexto.crearOscilador()
 myNodoProgramable.frecuencia;

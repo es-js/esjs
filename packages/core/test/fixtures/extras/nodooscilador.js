@@ -1,4 +1,4 @@
-OscillatorNode;
+typeof OscillatorNode;
 let myContexto = new AudioContext()
 let myNodoProgramable = myContexto.createOscillator()
 myNodoProgramable.frequency;

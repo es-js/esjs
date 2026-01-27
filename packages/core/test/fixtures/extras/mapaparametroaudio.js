@@ -1,4 +1,4 @@
-AudioParamMap;
+typeof AudioParamMap;
 let mycontextoAudio = new AudioContext()
 let myNodo = new AudioWorkletNode(mycontextoAudio, 'mi-procesador')
 let myParametros = myNodo.parameters;

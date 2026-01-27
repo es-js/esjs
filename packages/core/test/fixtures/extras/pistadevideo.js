@@ -1,3 +1,4 @@
+typeof VideoTrack;
 let myPista = new VideoTrack()
 myPista.selected;
 myPista.id;

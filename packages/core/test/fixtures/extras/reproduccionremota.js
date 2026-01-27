@@ -1,3 +1,4 @@
+typeof RemotePlayback;
 let myRemoto = new RemotePlayback()
 myRemoto.state;
 myRemoto.watchAvailability()

@@ -1,1 +1,1 @@
-MediaStreamAudioSourceNode;
+typeof MediaStreamTrackAudioSourceNode;

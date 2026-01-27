@@ -1,8 +1,8 @@
 let miAudio = new Audio("url")
 miAudio.loop;
 miAudio.controls;
-miAudio.controlslist;
-miAudio.disableremoteplayback;
+miAudio.controlsList;
+miAudio.disableRemotePlayback;
 miAudio.muted;
 miAudio.preload;
 miAudio.play()

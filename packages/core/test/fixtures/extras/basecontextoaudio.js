@@ -1,4 +1,4 @@
-BaseAudioContext;
+typeof BaseAudioContext;
 let miAudioContext = new AudioContext()
 miAudioContext.audioWorklet;
 miAudioContext.currentTime;

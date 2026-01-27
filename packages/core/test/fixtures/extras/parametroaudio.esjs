@@ -1,4 +1,4 @@
-ParametroAudio;
+tipoDe ParametroAudio;
 mut myaudioContexto = crear ContextoAudio()
 mut mynodoGanancia = myaudioContexto.crearGanancia()
 mynodoGanancia.ganancia.valorPorDefecto;

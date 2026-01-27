@@ -1,4 +1,4 @@
-NodoFiltroBiquad;
+tipoDe NodoFiltroBiquad;
 mut myContexto = crear ContextoAudio()
 mut myNodo = myContexto.crearFiltroBiquad()
 myNodo.frecuencia;

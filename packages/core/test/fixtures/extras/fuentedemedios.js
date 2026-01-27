@@ -1,1 +1,1 @@
-MediaSource;
+typeof MediaSource;

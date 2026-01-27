@@ -22,7 +22,6 @@ myMedia.velocidadDeReproduccion;
 myMedia.reproducido;
 myMedia.precarga;
 myMedia.conservaElTono;
-myMedia.estadoPreparacion;
 myMedia.remoto;
 myMedia.buscable;
 myMedia.buscando;
@@ -33,7 +32,7 @@ myMedia.pistasDeTexto;
 myMedia.pistasDeVideo;
 myMedia.volumen;
 myMedia.agregarPistaDeTexto()
-myMedia.captuarFlujo()
+myMedia.capturarFlujo()
 myMedia.puedeReproducirTipo()
 myMedia.saltoRapido()
 myMedia.cargar()
