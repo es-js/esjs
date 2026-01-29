@@ -8,19 +8,22 @@ import putout from '@putout/bundle'
 
 const { obfuscate } = javascriptObfuscator
 
-export default defineEventHandler(async(event) => {
+export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig(event)
+  const sandboxDevUrl = config.public.sandboxDevUrl as string | undefined
+
   const body = await zh.useSafeValidatedBody(event, z.object({
     code: z.string(),
   }))
 
-  const obfuscatedCode = await getObfuscatedCode(body?.data?.code ?? '')
+  const obfuscatedCode = await getObfuscatedCode(body?.data?.code ?? '', sandboxDevUrl)
 
   return {
     obfuscatedCode,
   }
 })
 
-async function getObfuscatedCode(code: string) {
+async function getObfuscatedCode(code: string, _sandboxDevUrl?: string) {
   const compiler = new EssucraseCompiler(putout)
 
   const compiledCode = processSandboxedCode(

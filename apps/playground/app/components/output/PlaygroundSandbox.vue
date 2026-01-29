@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createSandbox } from '@es-js/sandbox/render'
+import { createSandbox as createSandboxFromPackage } from '@es-js/sandbox/render'
 import { useEventBus } from '@vueuse/core'
 import debounce from 'just-debounce-it'
 import { onMounted, onUnmounted, watch } from 'vue'
@@ -7,6 +7,7 @@ import { isDark } from '~/composables/dark'
 import { useEditor } from '~/composables/useEditor'
 import { FILE_IMPORT_MAP, FILE_TESTS, useFiles } from '~/composables/useFiles'
 import { useLZShare } from '~/composables/useLZShare'
+import { useSandboxDevConfig } from '~/composables/useSandboxDevConfig'
 import { useSettings } from '~/composables/useSettings'
 import { PreviewProxy } from '~/utils/PreviewProxy'
 
@@ -60,12 +61,32 @@ async function init() {
     compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
 
+  const { sandboxBase, sandboxRuntimeUrl, sandboxStylesheets } = useSandboxDevConfig()
+  const createSandbox = sandboxBase
+    ? (await import(/* @vite-ignore */ `${sandboxBase}/src/render/index.ts`)).createSandbox
+    : createSandboxFromPackage
+
+  let importMap: string
+  try {
+    const importMapFromFile = JSON.parse(files.getFileContent(FILE_IMPORT_MAP) || '{}')
+    importMap = JSON.stringify({
+      ...importMapFromFile,
+      imports: {
+        ...importMapFromFile.imports,
+        '@es-js/sandbox/runtime': sandboxRuntimeUrl,
+      },
+    })
+  } catch {
+    importMap = files.getFileContent(FILE_IMPORT_MAP)
+  }
+
   sandbox = createSandbox('esjs-sandbox', {
     theme: isDark.value ? 'dark' : 'light',
     hidePreview: settingsStore.value.hidePreview,
     previewTab: useSettings().activePreviewTab.value,
     files: files.files.value,
-    importMap: files.getFileContent(FILE_IMPORT_MAP),
+    importMap,
+    ...(sandboxStylesheets && { stylesheets: sandboxStylesheets }),
     infiniteLoopProtection: settingsStore.value.infiniteLoopProtection,
     compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })

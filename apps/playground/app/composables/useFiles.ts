@@ -2,9 +2,21 @@ import { type CompileOptions } from '@es-js/core'
 import { type SandboxFileError } from '@es-js/sandbox/utils/processSandboxedFiles'
 import { type Ref, ref } from 'vue'
 import { useCompiler } from '~/composables/useCompiler'
+import { getSandboxUrls } from '~/utils/sandboxDev'
 import packageJson from '../../package.json'
 
-const sandboxVersion = packageJson.devDependencies['@es-js/sandbox']
+const cdnVersion = packageJson.devDependencies['@es-js/sandbox']
+
+function buildImportMapContent(sandboxRuntimeUrl: string) {
+  return `{
+  "imports": {
+    "@es-js/sandbox/runtime" : "${sandboxRuntimeUrl}",
+    "@es-js/" : "https://esm.run/@es-js/",
+    "npm/" : "https://cdn.jsdelivr.net/npm/"
+  }
+}
+`
+}
 
 export interface SandboxFile {
   name: string;
@@ -124,46 +136,47 @@ funcion tirarFuegosArtificiales() {
 principal()
 `
 
-const files: Ref<Files> = ref([
-  {
-    name: FILE_CODE,
-    content: INITIAL_CODE,
-    active: true,
-    activeDiff: true,
-    tab: 0,
-    icon: 'i-mdi-code-tags',
-    main: true,
-  },
-  {
-    name: FILE_TESTS,
-    content: '',
-    active: false,
-    activeDiff: false,
-    tab: 1,
-  },
-  {
-    name: FILE_IMPORT_MAP,
-    content: `{
-  "imports": {
-    "@es-js/sandbox/runtime" : "https://cdn.jsdelivr.net/npm/@es-js/sandbox@${sandboxVersion}/runtime/+esm",
-    "@es-js/" : "https://esm.run/@es-js/",
-    "npm/" : "https://cdn.jsdelivr.net/npm/"
-  }
-}
-`,
-    active: false,
-    activeDiff: false,
-    tab: 0,
-    icon: 'i-mdi-json',
-    readonly: true,
-  },
-])
-
+const files: Ref<Files> = ref([])
 const loading = ref(true)
-
 const compiler = useCompiler()
 
+function getInitialFiles(sandboxDevUrl: string | undefined): Files {
+  const { sandboxRuntimeUrl } = getSandboxUrls({ devUrl: sandboxDevUrl, cdnVersion })
+  return [
+    {
+      name: FILE_CODE,
+      content: INITIAL_CODE,
+      active: true,
+      activeDiff: true,
+      tab: 0,
+      icon: 'i-mdi-code-tags',
+      main: true,
+    },
+    {
+      name: FILE_TESTS,
+      content: '',
+      active: false,
+      activeDiff: false,
+      tab: 1,
+    },
+    {
+      name: FILE_IMPORT_MAP,
+      content: buildImportMapContent(sandboxRuntimeUrl),
+      active: false,
+      activeDiff: false,
+      tab: 0,
+      icon: 'i-mdi-json',
+      readonly: true,
+    },
+  ]
+}
+
 export const useFiles = () => {
+  if (files.value.length === 0) {
+    const config = useRuntimeConfig().public
+    const devUrl = (config.sandboxDevUrl as string) || undefined
+    files.value = getInitialFiles(devUrl)
+  }
   function setFileContent(name: string, content: string) {
     updateFile(name, { content })
   }

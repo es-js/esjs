@@ -9,7 +9,8 @@
     "release": "/bin/bash scripts/release.sh",
     "test": "pnpm --stream -r run test:run",
     "sherif": "pnpm dlx sherif@latest --fix",
-    "format": "pnpm biome format --write ."
+    "format": "pnpm biome format --write .",
+    "dev:playground": "pnpm --filter @es-js/sandbox dev & pnpm --filter @es-js/playground dev"
   },
   "author": "Enzo Notario <hi@enzonotario.me>",
   "license": "MIT",
