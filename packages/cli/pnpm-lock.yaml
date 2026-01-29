@@ -10,32 +10,32 @@ importers:
     dependencies:
       '@es-js/core':
         specifier: latest
-        version: 0.1.0-alpha.12
+        version: 0.1.1
       citty:
-        specifier: ^0.1.4
+        specifier: ^0.1.6
         version: 0.1.6
       consola:
-        specifier: ^3.2.3
-        version: 3.2.3
+        specifier: ^3.4.2
+        version: 3.4.2
 
 packages:
 
-  '@es-js/core@0.1.0-alpha.12':
-    resolution: {integrity: sha512-UB+baLhIasXVjRiNHfn3xvzWcQbNK6uVywIyYasP1dsPRs9hKz4TM7BiVSfOKtqox612Si73DT/xniw98TZe/Q==}
+  '@es-js/core@0.1.1':
+    resolution: {integrity: sha512-LxRv8Enu2+J2gI7lwLli38ePs84dWFiNlcLixw8cfoK70a4Awm7ONL2GgciimMvv0vrCR94rOjjSuJjYbpMqOg==}
 
   citty@0.1.6:
     resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
 
-  consola@3.2.3:
-    resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
+  consola@3.4.2:
+    resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
 snapshots:
 
-  '@es-js/core@0.1.0-alpha.12': {}
+  '@es-js/core@0.1.1': {}
 
   citty@0.1.6:
     dependencies:
-      consola: 3.2.3
+      consola: 3.4.2
 
-  consola@3.2.3: {}
+  consola@3.4.2: {}

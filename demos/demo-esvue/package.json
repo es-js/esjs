@@ -9,13 +9,13 @@
   },
   "dependencies": {
     "@es-js/vite-plugin-esvue": "workspace:^",
-    "vue": "^3.3.8"
+    "vue": "^3.5.27"
   },
   "devDependencies": {
-    "@types/node": "^20.9.0",
-    "@vitejs/plugin-vue": "^4.4.1",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
-    "vue-tsc": "^1.8.22"
+    "@types/node": "^20.19.30",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^4.5.14",
+    "vue-tsc": "^1.8.27"
   }
 }

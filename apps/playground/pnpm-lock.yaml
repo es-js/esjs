@@ -43,8 +43,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(magicast@0.3.5)(postcss@8.5.3)
       '@es-js/core':
-        specifier: 0.1.0-beta.17
-        version: 0.1.0-beta.17
+        specifier: 0.1.1
+        version: 0.1.1
       '@es-js/language-tools':
         specifier: ^0.1.1
         version: 0.1.1
@@ -320,8 +320,8 @@ packages:
   '@emnapi/wasi-threads@1.0.2':
     resolution: {integrity: sha512-5n3nTJblwRi8LlXkJ9eBzu+kZR8Yxcc7ubakyQTFzPMtIhFpUBRbsnc2Dv88IZDIbCDlBiWrknhB4Lsz7mg6BA==}
 
-  '@es-js/core@0.1.0-beta.17':
-    resolution: {integrity: sha512-6YT9bhzCi7keicHtCNYIQRoj7r1DtjBNkpTHrNOKc8qo0iEsaX6PFib9ML8s47c3PcJAsBtAWD3a3vPXunkAgg==}
+  '@es-js/core@0.1.1':
+    resolution: {integrity: sha512-LxRv8Enu2+J2gI7lwLli38ePs84dWFiNlcLixw8cfoK70a4Awm7ONL2GgciimMvv0vrCR94rOjjSuJjYbpMqOg==}
 
   '@es-js/language-tools@0.1.1':
     resolution: {integrity: sha512-oEMT+Ma2xSJhqqni6SWoeHjvbT0fTJppI8pXtyU7Ir+gD6f+J+5X1C8yQLJSF/ImX+aYh+QV0rt+ZdMdpwekUQ==}
@@ -6922,7 +6922,7 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@es-js/core@0.1.0-beta.17': {}
+  '@es-js/core@0.1.1': {}
 
   '@es-js/language-tools@0.1.1': {}
 

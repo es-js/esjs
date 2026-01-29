@@ -20,19 +20,19 @@
     "plugin"
   ],
   "dependencies": {
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "shelljs": "^0.8.5",
-    "vite": "^5.3.3"
+    "vite": "^5.4.21"
   },
   "devDependencies": {
     "@es-js/core": "workspace:*",
     "@es-js/eshtml": "workspace:*",
-    "@types/lodash": "^4.17.6",
-    "@types/node": "^20.9.0",
-    "@types/shelljs": "^0.8.15",
-    "typescript": "^5.2.2",
+    "@types/lodash": "^4.17.23",
+    "@types/node": "^20.19.30",
+    "@types/shelljs": "^0.8.17",
+    "typescript": "^5.9.3",
     "unbuild": "^2.0.0",
-    "vitest": "^2.0.1"
+    "vitest": "^2.1.9"
   },
   "type": "module",
   "exports": {

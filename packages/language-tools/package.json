@@ -24,8 +24,8 @@
   ],
   "devDependencies": {
     "@es-js/core": "workspace:*",
-    "markdown-table": "^3.0.3",
-    "vitest": "^2.1.5"
+    "markdown-table": "^3.0.4",
+    "vitest": "^2.1.9"
   },
   "exports": {
     "./esjs.tmLanguage.json": {

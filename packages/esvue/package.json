@@ -21,11 +21,11 @@
     "@es-js/core": "workspace:*",
     "@es-js/eshtml": "workspace:*",
     "@types/hast": "^3.0.4",
-    "@types/node": "^20.14.9",
-    "typescript": "^5.5.2",
+    "@types/node": "^20.19.30",
+    "typescript": "^5.9.3",
     "unbuild": "^2.0.0",
-    "vite": "^5.3.2",
-    "vitest": "^2.1.5"
+    "vite": "^5.4.21",
+    "vitest": "^2.1.9"
   },
   "type": "module",
   "exports": {

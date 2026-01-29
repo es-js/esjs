@@ -21,18 +21,18 @@
     "plugin"
   ],
   "dependencies": {
-    "vite": "^4.5.0"
+    "vite": "^4.5.14"
   },
   "devDependencies": {
     "@es-js/core": "workspace:*",
     "@es-js/eshtml": "workspace:*",
     "@es-js/esvue": "workspace:*",
     "@types/hast": "^3.0.4",
-    "@types/node": "^20.9.0",
-    "@vitejs/plugin-vue": "^4.4.1",
-    "typescript": "^5.2.2",
+    "@types/node": "^20.19.30",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "typescript": "^5.9.3",
     "unbuild": "^2.0.0",
-    "vitest": "^2.1.5"
+    "vitest": "^2.1.9"
   },
   "type": "module",
   "exports": {

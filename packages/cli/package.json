@@ -29,7 +29,7 @@
   "homepage": "https://github.com/es-js/esjs#readme",
   "dependencies": {
     "@es-js/core": "latest",
-    "citty": "^0.1.4",
-    "consola": "^3.2.3"
+    "citty": "^0.1.6",
+    "consola": "^3.4.2"
   }
 }

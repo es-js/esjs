@@ -21,11 +21,11 @@
   ],
   "devDependencies": {
     "@biomejs/biome": "1.7.2",
-    "bumpp": "^9.2.0",
-    "consola": "^3.2.3",
-    "globby": "^14.0.0",
-    "jiti": "^1.21.0",
-    "pathe": "^1.1.1"
+    "bumpp": "^9.11.1",
+    "consola": "^3.4.2",
+    "globby": "^14.1.0",
+    "jiti": "^1.21.7",
+    "pathe": "^1.1.2"
   },
   "private": true,
   "packageManager": "pnpm@9.1.1"
