@@ -1,6 +1,6 @@
 {
 	"name": "prettier-plugin-esvue",
-	"version": "0.0.1-beta.1",
+	"version": "0.0.1",
 	"license": "MIT",
 	"type": "module",
 	"main": "./dist/index.cjs",

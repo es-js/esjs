@@ -1,6 +1,6 @@
 {
   "name": "@es-js/eshtml",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1",
   "description": "EsHTML: HTML en Español",
   "scripts": {
     "build": "unbuild",
