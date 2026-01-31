@@ -104,6 +104,12 @@ Las contribuciones son lo que hacen que la comunidad de código abierto sea un l
 4. Haz un _push_ a la rama (`git push origin mejora/MiMejora`)
 5. Abre un _pull request_
 
+## Contribuidores
+
+<a href="https://github.com/es-js/esjs/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=es-js/esjs" />
+</a>
+
 ## Licencia
 
 EsJS está licenciado bajo la [Licencia MIT](LICENSE).
