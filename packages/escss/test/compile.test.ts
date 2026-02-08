@@ -143,6 +143,48 @@ describe('EsCSS Compiler', () => {
       expect(output).toContain('visibility: hidden')
     })
 
+    it('should transform properties with ñ (tamaño)', () => {
+      const input = `.elemento {
+  fuente-tamaño: 16px;
+  fondo-tamaño: cubrir;
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('font-size: 16px')
+      expect(output).toContain('background-size: cover')
+    })
+
+    it('should transform newly translated properties', () => {
+      const input = `.elemento {
+  fuente-variante: normal;
+  texto-decoracion-grosor: 2px;
+  transicion-propiedad: todo;
+  lista-estilo-tipo: disco;
+  vacio-celdas: oculto;
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('font-variant: normal')
+      expect(output).toContain('text-decoration-thickness: 2px')
+      expect(output).toContain('transition-property: all')
+      expect(output).toContain('list-style-type: disc')
+      expect(output).toContain('empty-cells: hidden')
+    })
+
+    it('should transform grid row properties', () => {
+      const input = `.elemento {
+  cuadricula-fila: 1;
+  fila-espacio: 10px;
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('grid-row: 1')
+      expect(output).toContain('row-gap: 10px')
+    })
+
     it('should transform color names', () => {
       const input = `.elemento {
   color: azul;
@@ -193,6 +235,18 @@ describe('EsCSS Compiler', () => {
       expect(output).toContain('@medios')
       expect(output).toContain('minimo-ancho')
     })
+
+    it('should transform properties to ñ tokens', () => {
+      const input = `.element {
+  font-size: 16px;
+  background-size: cover;
+}`
+
+      const output = compile(input, { from: 'css', to: 'escss' })
+
+      expect(output).toContain('fuente-tamaño: 16px')
+      expect(output).toContain('fondo-tamaño: cubrir')
+    })
   })
 
   describe('Edge cases', () => {
@@ -226,6 +280,20 @@ describe('EsCSS Compiler', () => {
       const output = compile(input, { from: 'css', to: 'css' })
 
       expect(output).toBe(input)
+    })
+
+    it('should handle ñ in media query properties', () => {
+      const input = `@medios (maximo-ancho: 768px) {
+  .elemento {
+    fuente-tamaño: 14px;
+  }
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('@media')
+      expect(output).toContain('max-width: 768px')
+      expect(output).toContain('font-size: 14px')
     })
 
     it('should handle empty input', () => {
