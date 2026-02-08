@@ -323,30 +323,14 @@ const dictionary: Map<string, string> = new Map([
  * Get the values dictionary.
  * @param inverted - If true, returns CSS -> EsCSS mapping, otherwise EsCSS -> CSS
  */
+let invertedDictionary: Map<string, string> | undefined
+
 export function getDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return dictionary
   }
-  return invertMap(dictionary)
-}
-
-/**
- * Transform a CSS value, handling multiple values and functions.
- */
-export function transformValue(
-  value: string,
-  dictionary: Map<string, string>
-): string {
-  // Split by spaces but preserve function contents
-  const parts = value.split(/\s+/)
-
-  return parts
-    .map((part) => {
-      // Check for direct match
-      if (dictionary.has(part)) {
-        return dictionary.get(part)!
-      }
-      return part
-    })
-    .join(' ')
+  if (!invertedDictionary) {
+    invertedDictionary = invertMap(dictionary)
+  }
+  return invertedDictionary
 }

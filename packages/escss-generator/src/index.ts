@@ -18,7 +18,7 @@ function ensureDir(dir: string): void {
   }
 }
 
-function generate(): void {
+export function generate(): void {
   console.log('Generating EsCSS dictionaries...')
 
   ensureDir(outputDir)
@@ -51,4 +51,6 @@ function generate(): void {
   console.log('Done! Generated files in:', outputDir)
 }
 
-generate()
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  generate()
+}

@@ -21,7 +21,7 @@ export function transformSelector(
   // Match element names at the start, after space, comma, >, +, ~ or [
   // Allow matches followed by : (pseudo-class) but not ( or [
   result = result.replace(
-    /(?<=^|[\s,>+~\[]|\))\b([a-zñ][a-zñ0-9-]*)\b(?![([])/gi,
+    /(?<=^|[\s,>+~]|\))(?<!\[)\b([a-zñ][a-zñ0-9-]*)\b(?![([\]=])/gi,
     (match, element) => {
       const transformed = selectorsDict.get(element.toLowerCase())
       return transformed || match

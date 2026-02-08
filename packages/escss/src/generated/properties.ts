@@ -169,7 +169,6 @@ const dictionary: Map<string, string> = new Map([
   ['desbordamiento', 'overflow'],
   ['desbordamiento-x', 'overflow-x'],
   ['desbordamiento-y', 'overflow-y'],
-  ['desbordamiento-envolver', 'overflow-wrap'],
   ['desplazar-comportamiento', 'scroll-behavior'],
   ['desplazar-margen', 'scroll-margin'],
   ['desplazar-margen-arriba', 'scroll-margin-top'],
@@ -245,7 +244,6 @@ const dictionary: Map<string, string> = new Map([
   ['columnas', 'columns'],
   ['columna-conteo', 'column-count'],
   ['columna-ancho', 'column-width'],
-  ['columna-espacio', 'column-gap'],
   ['columna-regla', 'column-rule'],
   ['columna-regla-ancho', 'column-rule-width'],
   ['columna-regla-estilo', 'column-rule-style'],
@@ -271,11 +269,16 @@ const dictionary: Map<string, string> = new Map([
  * Get the properties dictionary.
  * @param inverted - If true, returns CSS -> EsCSS mapping, otherwise EsCSS -> CSS
  */
+let invertedDictionary: Map<string, string> | undefined
+
 export function getDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return dictionary
   }
-  return invertMap(dictionary)
+  if (!invertedDictionary) {
+    invertedDictionary = invertMap(dictionary)
+  }
+  return invertedDictionary
 }
 
 /**
@@ -445,7 +448,6 @@ export const cssProperties = [
   'overflow',
   'overflow-x',
   'overflow-y',
-  'overflow-wrap',
   'scroll-behavior',
   'scroll-margin',
   'scroll-margin-top',
@@ -521,7 +523,6 @@ export const cssProperties = [
   'columns',
   'column-count',
   'column-width',
-  'column-gap',
   'column-rule',
   'column-rule-width',
   'column-rule-style',
@@ -710,7 +711,6 @@ export const escssProperties = [
   'desbordamiento',
   'desbordamiento-x',
   'desbordamiento-y',
-  'desbordamiento-envolver',
   'desplazar-comportamiento',
   'desplazar-margen',
   'desplazar-margen-arriba',
@@ -786,7 +786,6 @@ export const escssProperties = [
   'columnas',
   'columna-conteo',
   'columna-ancho',
-  'columna-espacio',
   'columna-regla',
   'columna-regla-ancho',
   'columna-regla-estilo',
