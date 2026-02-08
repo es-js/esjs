@@ -3,11 +3,12 @@ const axios = require('axios')
 
 const BASE_URL = 'https://unpkg.com/@es-js/language-tools@latest/dist/'
 
-const grammars = ['esjs.tmLanguage.json', 'esvue.tmLanguage.json']
+const grammars = ['esjs.tmLanguage.json', 'esvue.tmLanguage.json', 'escss.tmLanguage.json']
 
 const configurations = [
   'esjs-language-configuration.json',
   'esvue-language-configuration.json',
+  'escss-language-configuration.json',
 ]
 
 const snippets = ['esjs.code-snippets.json']

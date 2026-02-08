@@ -11,6 +11,9 @@ importers:
       '@es-js/core':
         specifier: workspace:*
         version: link:../core
+      '@es-js/escss':
+        specifier: workspace:*
+        version: link:../escss
       markdown-table:
         specifier: ^3.0.3
         version: 3.0.3

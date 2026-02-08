@@ -63,7 +63,8 @@
   "activationEvents": [
     "onStartupFinished",
     "onLanguage:esvue",
-    "onLanguage:esjs"
+    "onLanguage:esjs",
+    "onLanguage:escss"
   ],
   "contributes": {
     "languages": [
@@ -84,6 +85,21 @@
           ".esjs"
         ],
         "configuration": "./languages/esjs-language-configuration.json",
+        "icon": {
+          "dark": "./res/icon.png",
+          "light": "./res/icon.png"
+        }
+      },
+      {
+        "id": "escss",
+        "aliases": [
+          "EsCSS",
+          "escss"
+        ],
+        "extensions": [
+          ".escss"
+        ],
+        "configuration": "./languages/escss-language-configuration.json",
         "icon": {
           "dark": "./res/icon.png",
           "light": "./res/icon.png"
@@ -126,6 +142,11 @@
         "language": "esjs",
         "scopeName": "source.esjs",
         "path": "./syntaxes/esjs.tmLanguage.json"
+      },
+      {
+        "language": "escss",
+        "scopeName": "source.escss",
+        "path": "./syntaxes/escss.tmLanguage.json"
       }
     ],
     "semanticTokenScopes": [
