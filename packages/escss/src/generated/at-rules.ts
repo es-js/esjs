@@ -25,11 +25,16 @@ const dictionary: Map<string, string> = new Map([
  * Get the at-rules dictionary.
  * @param inverted - If true, returns CSS -> EsCSS mapping, otherwise EsCSS -> CSS
  */
+let invertedDictionary: Map<string, string> | undefined
+
 export function getDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return dictionary
   }
-  return invertMap(dictionary)
+  if (!invertedDictionary) {
+    invertedDictionary = invertMap(dictionary)
+  }
+  return invertedDictionary
 }
 
 /**

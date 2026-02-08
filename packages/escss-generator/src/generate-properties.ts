@@ -189,7 +189,6 @@ export const cssProperties = [
   'overflow',
   'overflow-x',
   'overflow-y',
-  'overflow-wrap',
   'scroll-behavior',
   'scroll-margin',
   'scroll-margin-top',
@@ -287,7 +286,6 @@ export const cssProperties = [
   'columns',
   'column-count',
   'column-width',
-  'column-gap',
   'column-rule',
   'column-rule-width',
   'column-rule-style',
@@ -320,7 +318,25 @@ export const cssProperties = [
  * Returns tuples of [css-property, escss-property]
  */
 export function generatePropertiesMapping(): [string, string][] {
-  return cssProperties.map((prop) => [prop, translateProperty(prop)])
+  const mappings = cssProperties.map((prop): [string, string] => [prop, translateProperty(prop)])
+
+  const seen = new Map<string, string[]>()
+  for (const [css, escss] of mappings) {
+    const existing = seen.get(escss)
+    if (existing) {
+      existing.push(css)
+    } else {
+      seen.set(escss, [css])
+    }
+  }
+
+  const duplicates = Array.from(seen.entries()).filter(([, cssNames]) => cssNames.length > 1)
+  if (duplicates.length > 0) {
+    const details = duplicates.map(([escss, cssNames]) => `  '${escss}' <- [${cssNames.join(', ')}]`).join('\n')
+    throw new Error(`Duplicate EsCSS property names detected:\n${details}`)
+  }
+
+  return mappings
 }
 
 /**
@@ -348,11 +364,16 @@ ${entries}
  * Get the properties dictionary.
  * @param inverted - If true, returns CSS -> EsCSS mapping, otherwise EsCSS -> CSS
  */
+let invertedDictionary: Map<string, string> | undefined
+
 export function getDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return dictionary
   }
-  return invertMap(dictionary)
+  if (!invertedDictionary) {
+    invertedDictionary = invertMap(dictionary)
+  }
+  return invertedDictionary
 }
 
 /**

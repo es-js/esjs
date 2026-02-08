@@ -41,11 +41,36 @@ function splitValuePreservingFunctions(value: string): string[] {
   const parts: string[] = []
   let current = ''
   let depth = 0
+  let quote: string | null = null
+  let escaped = false
 
   for (let i = 0; i < value.length; i++) {
     const char = value[i]
 
-    if (char === '(') {
+    if (escaped) {
+      current += char
+      escaped = false
+      continue
+    }
+
+    if (char === '\\') {
+      current += char
+      escaped = true
+      continue
+    }
+
+    if (quote) {
+      current += char
+      if (char === quote) {
+        quote = null
+      }
+      continue
+    }
+
+    if (char === '"' || char === '\'') {
+      quote = char
+      current += char
+    } else if (char === '(') {
       depth++
       current += char
     } else if (char === ')') {

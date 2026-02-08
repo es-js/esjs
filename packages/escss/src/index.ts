@@ -42,22 +42,19 @@ export function compile(
   content: string,
   options: CompileOptions = { from: 'escss', to: 'css' }
 ): string {
-  if (!options.from) {
-    options.from = 'escss'
-  }
-
-  if (!options.to) {
-    options.to = 'css'
+  const opts: Required<CompileOptions> = {
+    from: options.from ?? 'escss',
+    to: options.to ?? 'css',
   }
 
   // If from and to are the same, return the content as-is
-  if (options.from === options.to) {
+  if (opts.from === opts.to) {
     return content
   }
 
   try {
     const root = postcss.parse(content)
-    const toEsCSS = options.to === 'escss'
+    const toEsCSS = opts.to === 'escss'
 
     // Get dictionaries with correct direction
     // When toEsCSS is true: we need CSS -> EsCSS (inverted = true)

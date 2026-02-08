@@ -137,22 +137,32 @@ ${elementEntries}
  * Get the pseudo-classes dictionary.
  * @param inverted - If true, returns CSS -> EsCSS mapping, otherwise EsCSS -> CSS
  */
+let invertedPseudoClasses: Map<string, string> | undefined
+
 export function getPseudoClassesDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return pseudoClassesDictionary
   }
-  return invertMap(pseudoClassesDictionary)
+  if (!invertedPseudoClasses) {
+    invertedPseudoClasses = invertMap(pseudoClassesDictionary)
+  }
+  return invertedPseudoClasses
 }
 
 /**
  * Get the pseudo-elements dictionary.
  * @param inverted - If true, returns CSS -> EsCSS mapping, otherwise EsCSS -> CSS
  */
+let invertedPseudoElements: Map<string, string> | undefined
+
 export function getPseudoElementsDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return pseudoElementsDictionary
   }
-  return invertMap(pseudoElementsDictionary)
+  if (!invertedPseudoElements) {
+    invertedPseudoElements = invertMap(pseudoElementsDictionary)
+  }
+  return invertedPseudoElements
 }
 
 /**
