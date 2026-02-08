@@ -108,7 +108,7 @@ function transformMediaParams(
 ): string {
   // Match property: value pairs in media queries
   return params.replace(
-    /\(([a-z-]+)\s*:\s*([^)]+)\)/gi,
+    /\(([a-zñ-]+)\s*:\s*([^)]+)\)/gi,
     (match, property, value) => {
       const newProperty = propDict.get(property) || property
       const newValue = transformValue(value.trim(), valueDict)

@@ -16,7 +16,7 @@ export const cssWordTranslations = new Map<string, string>([
   ['height', 'alto'],
   ['min', 'minimo'],
   ['max', 'maximo'],
-  ['size', 'tamanio'],
+  ['size', 'tamaño'],
 
   // Spacing
   ['margin', 'margen'],
@@ -56,6 +56,9 @@ export const cssWordTranslations = new Map<string, string>([
   ['overflow', 'desbordamiento'],
   ['white', 'blanco'],
   ['space', 'espacio'],
+  ['variant', 'variante'],
+  ['stretch', 'estirar'],
+  ['thickness', 'grosor'],
 
   // Flexbox/Grid
   ['direction', 'direccion'],
@@ -73,6 +76,7 @@ export const cssWordTranslations = new Map<string, string>([
   ['area', 'area'],
   ['auto', 'auto'],
   ['flow', 'flujo'],
+  ['row', 'fila'],
 
   // Positioning
   ['top', 'arriba'],
@@ -100,6 +104,7 @@ export const cssWordTranslations = new Map<string, string>([
   ['keyframes', 'fotogramas'],
 
   // Visual
+  ['backdrop', 'trasfondo'],
   ['visibility', 'visibilidad'],
   ['clip', 'recorte'],
   ['path', 'ruta'],
@@ -119,8 +124,11 @@ export const cssWordTranslations = new Map<string, string>([
   ['table', 'tabla'],
   ['caption', 'titulo'],
   ['cell', 'celda'],
+  ['cells', 'celdas'],
+  ['empty', 'vacio'],
   ['collapse', 'colapsar'],
   ['layout', 'disposicion'],
+  ['side', 'lado'],
 
   // List
   ['list', 'lista'],
@@ -130,6 +138,13 @@ export const cssWordTranslations = new Map<string, string>([
   ['increment', 'incrementar'],
 
   // Other
+  ['type', 'tipo'],
+  ['source', 'origen'],
+  ['slice', 'segmento'],
+  ['outset', 'exterior'],
+  ['property', 'propiedad'],
+  ['span', 'extension'],
+  ['quotes', 'comillas'],
   ['object', 'objeto'],
   ['fit', 'ajuste'],
   ['aspect', 'aspecto'],
@@ -212,8 +227,6 @@ export const cssWordTranslations = new Map<string, string>([
   ['punctuation', 'puntuacion'],
   ['tab', 'tabulacion'],
   ['print', 'imprimir'],
-  ['orphans', 'huerfanos'],
-  ['widows', 'viudas'],
 ])
 
 /**
