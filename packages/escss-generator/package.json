@@ -5,7 +5,6 @@
   "description": "Generator for EsCSS dictionaries",
   "type": "module",
   "scripts": {
-    "generate": "tsx src/index.ts",
     "build": "tsx src/index.ts"
   },
   "devDependencies": {
