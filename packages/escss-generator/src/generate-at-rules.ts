@@ -17,10 +17,31 @@ export const cssAtRules = new Map<string, string>([
   ['starting-style', 'estilo-inicial'],
 ])
 
+function validateNoDuplicateAtRules(): void {
+  const seen = new Map<string, string[]>()
+  for (const [css, escss] of cssAtRules) {
+    const existing = seen.get(escss)
+    if (existing) {
+      existing.push(css)
+    } else {
+      seen.set(escss, [css])
+    }
+  }
+  const duplicates = Array.from(seen.entries()).filter(([, cssKeys]) => cssKeys.length > 1)
+  if (duplicates.length > 0) {
+    const details = duplicates
+      .map(([escss, cssKeys]) => `  '${escss}' <- [${cssKeys.join(', ')}]`)
+      .join('\n')
+    throw new Error(`Duplicate EsCSS at-rule names detected:\n${details}`)
+  }
+}
+
 /**
  * Generate TypeScript code for the at-rules dictionary.
  */
 export function generateAtRulesCode(): string {
+  validateNoDuplicateAtRules()
+
   const entries = Array.from(cssAtRules.entries())
     .map(([css, escss]) => `  ['${escss}', '${css}'],`)
     .join('\n')
