@@ -1,0 +1,3 @@
+mut myEvento = crear EventoDeMediosCifrados()
+myEvento.tipoDatoDeInicializacion;
+myEvento.datosDeInicializacion;

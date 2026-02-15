@@ -1,0 +1,5 @@
+tipoDe NodoConvolucionador;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearConvolucionador()
+myNodo.buffer;
+myNodo.normalizar;

@@ -28,6 +28,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      /** Base URL del servidor de desarrollo del sandbox (ej. http://localhost:4173). Si está definida, el playground carga runtime y estilos desde ahí. */
+      sandboxDevUrl: process.env.NUXT_PUBLIC_SANDBOX_DEV_URL || '',
     },
   },
 

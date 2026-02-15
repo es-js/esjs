@@ -1,0 +1,7 @@
+tipoDe NodoOscilador;
+mut myContexto = crear ContextoAudio()
+mut myNodoProgramable = myContexto.crearOscilador()
+myNodoProgramable.frecuencia;
+myNodoProgramable.desorientar;
+myNodoProgramable.tipo;
+myNodoProgramable.establecerOndaPeriodica()

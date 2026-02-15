@@ -1,0 +1,5 @@
+mut myProcesador = crear AmbitoGlobalDeProcesadorDeAudio()
+myProcesador.fotogramaActual;
+myProcesador.frecuenciaDeMuestreo;
+myProcesador.puerto;
+myProcesador.registrarProcesador()

@@ -1,0 +1,3 @@
+mut myLista = crear ListaDeMarcadoresDePistaDeTexto()
+myLista.longitud;
+myLista.obtenerMarcadorPorId()

@@ -15,5 +15,5 @@ export default defineBuildConfig({
     emitCJS: true,
     inlineDependencies: true,
   },
-  externals: ['@putout/bundle'],
+  externals: ['@putout/bundle', '@es-js/esbabel'],
 })

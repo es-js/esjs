@@ -1,0 +1,3 @@
+tipoDe NodoFiltroIIR;
+mut myNodo = crear NodoFiltroIIR()
+myNodo.obtenerFrecuenciaDeRespuesta()

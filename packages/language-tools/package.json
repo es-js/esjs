@@ -1,6 +1,6 @@
 {
   "name": "@es-js/language-tools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "src/generate-esjs-syntax.js",
   "type": "module",
@@ -25,8 +25,8 @@
   "devDependencies": {
     "@es-js/core": "workspace:*",
     "@es-js/escss": "workspace:*",
-    "markdown-table": "^3.0.3",
-    "vitest": "^2.1.5"
+    "markdown-table": "^3.0.4",
+    "vitest": "^2.1.9"
   },
   "exports": {
     "./esjs.tmLanguage.json": {

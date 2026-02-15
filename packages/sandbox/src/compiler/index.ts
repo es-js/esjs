@@ -47,7 +47,7 @@ function processFile(file: File, seen = new Set<File>()) {
   const importedFiles = new Set<string>()
   const importToIdMap = new Map<string, string>()
 
-  function defineImport(node: Node, source: string) {
+  function defineImport(node: { start?: number | null }, source: string) {
     const filename = source.replace(/^\.\/+/, '')
     if (!(filename in orchestrator.files))
       throw new Error(`File "${filename}" does not exist.`)
@@ -88,7 +88,7 @@ function processFile(file: File, seen = new Set<File>()) {
     if (node.type === 'ImportDeclaration') {
       const source = node.source.value
       if (source.startsWith('./')) {
-        const importId = defineImport(node, node.source.value)
+        const importId = defineImport(node, node.source!.value)
         for (const spec of node.specifiers) {
           if (spec.type === 'ImportSpecifier') {
             idToImportMap.set(
@@ -128,7 +128,7 @@ function processFile(file: File, seen = new Set<File>()) {
         magicString.remove(node.start!, node.declaration.start!)
       } else if (node.source) {
         // export { foo, bar } from './foo'
-        const importId = defineImport(node, node.source.value)
+        const importId = defineImport(node, node.source!.value)
         for (const spec of node.specifiers) {
           defineExport(
             (spec.exported as Identifier).name,
@@ -170,33 +170,37 @@ function processFile(file: File, seen = new Set<File>()) {
   // 3. convert references to import bindings
   for (const node of ast) {
     if (node.type === 'ImportDeclaration') continue
-    walkIdentifiers(node, (id, parent, parentStack) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- @babel/types version mismatch between @vue/compiler-sfc and vite-plugin-dts
+    walkIdentifiers(node as any, (id, parent, parentStack) => {
+      if (!parent) return
       const binding = idToImportMap.get(id.name)
       if (!binding) {
         return
       }
 
-      if (isStaticProperty(parent) && parent.shorthand) {
+      if (isStaticProperty(parent as any) && (parent as ObjectProperty).shorthand) {
         // let binding used in a property shorthand
         // { foo } -> { foo: __import_x__.foo }
         // skip for destructure patterns
         if (
           !(parent as any).inPattern ||
-          isInDestructureAssignment(parent, parentStack)
+          isInDestructureAssignment(parent as Node, parentStack as Node[])
         )
           magicString.appendLeft(id.end!, `: ${binding}`)
       } else if (
-        parent.type === 'ClassDeclaration' &&
-        id === parent.superClass
+        (parent as any).type === 'ClassDeclaration' &&
+        id === (parent as any).superClass
       ) {
         if (!declaredConst.has(id.name)) {
           declaredConst.add(id.name)
           // locate the top-most node containing the class declaration
           const topNode = parentStack[1]
-          magicString.prependRight(
-            topNode.start!,
-            `const ${id.name} = ${binding};\n`,
-          )
+          if (topNode?.start != null) {
+            magicString.prependRight(
+              topNode.start,
+              `const ${id.name} = ${binding};\n`,
+            )
+          }
         }
       } else {
         magicString.overwrite(id.start!, id.end!, binding)
@@ -205,7 +209,8 @@ function processFile(file: File, seen = new Set<File>()) {
   }
   // 4. convert dynamic imports
   ;(walk as any)(ast, {
-    enter(node: Node, parent: Node) {
+    enter(node: Node, parent: Node | null) {
+      if (!parent) return
       if (node.type === 'Import' && parent.type === 'CallExpression') {
         const arg = parent.arguments[0]
         if (arg.type === 'StringLiteral' && arg.value.startsWith('./')) {

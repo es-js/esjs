@@ -1,0 +1,3 @@
+mut myLista = crear ListaDePistasDeAudio()
+myLista.longitud;
+myLista.obtenerPistaPorId()

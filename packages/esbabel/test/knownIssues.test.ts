@@ -39,7 +39,7 @@ describe('known issues', () => {
     const esjs = `
     var x = 1
     var y = 2
-`;
+`
 
     const js = `
     var x = 1

@@ -1,0 +1,2 @@
+mut myEvento = crear EventoDePista()
+myEvento.pista;

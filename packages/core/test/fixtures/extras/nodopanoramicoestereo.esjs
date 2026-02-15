@@ -1,0 +1,4 @@
+tipoDe NodoPanoramicoEstereo;
+mut myContexto = crear ContextoAudio()
+mut myNodo = myContexto.crearPaneadorEstereo()
+myNodo.panoramica;
