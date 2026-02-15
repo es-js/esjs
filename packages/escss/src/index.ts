@@ -89,7 +89,7 @@ export function compile(
 
     return root.toString()
   } catch (error) {
-    console.error({ error })
+    console.error('EsCSS compilation error:', error)
     return content
   }
 }
@@ -105,7 +105,7 @@ function transformMediaParams(
 ): string {
   // Match property: value pairs in media queries
   return params.replace(
-    /\(([a-zñ-]+)\s*:\s*([^)]+)\)/gi,
+    /\(([\p{L}-]+)\s*:\s*([^)]+)\)/giu,
     (match, property, value) => {
       const newProperty = propDict.get(property) || property
       const newValue = transformValue(value.trim(), valueDict)
