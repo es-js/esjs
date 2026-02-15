@@ -3,7 +3,11 @@ const axios = require('axios')
 
 const BASE_URL = 'https://unpkg.com/@es-js/language-tools@latest/dist/'
 
-const grammars = ['esjs.tmLanguage.json', 'esvue.tmLanguage.json', 'escss.tmLanguage.json']
+const grammars = [
+  'esjs.tmLanguage.json',
+  'esvue.tmLanguage.json',
+  'escss.tmLanguage.json',
+]
 
 const configurations = [
   'esjs-language-configuration.json',
@@ -31,7 +35,6 @@ async function downloadFile(url: string, destination: string) {
     const data = response.data
     writeFileSync(destination, JSON.stringify(data))
   } catch (error) {
-    console.error(`Cant download ${url} to ${destination}`)
-    throw error
+    console.error(`Error downloading ${url}:`, error)
   }
 }
