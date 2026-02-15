@@ -57,7 +57,6 @@ export const cssWordTranslations = new Map<string, string>([
   ['white', 'blanco'],
   ['space', 'espacio'],
   ['variant', 'variante'],
-  ['stretch', 'estirar'],
   ['thickness', 'grosor'],
 
   // Flexbox/Grid
