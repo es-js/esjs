@@ -138,7 +138,7 @@ export const cssWordTranslations = new Map<string, string>([
 
   // Other
   ['type', 'tipo'],
-  ['source', 'origen'],
+  ['source', 'fuente'],
   ['slice', 'segmento'],
   ['outset', 'exterior'],
   ['property', 'propiedad'],
