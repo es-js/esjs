@@ -97,21 +97,58 @@ export function compile(
 /**
  * Transform media query parameters.
  * Handles properties like min-width, max-height, etc.
+ * Parses (property: value) pairs with a depth counter so nested parens
+ * (e.g. calc(100px + max(10px, 20px))) are preserved.
  */
 function transformMediaParams(
   params: string,
   propDict: Map<string, string>,
   valueDict: Map<string, string>
 ): string {
-  // Match property: value pairs in media queries
-  return params.replace(
-    /\(([\p{L}-]+)\s*:\s*([^)]+)\)/giu,
-    (match, property, value) => {
-      const newProperty = propDict.get(property) || property
-      const newValue = transformValue(value.trim(), valueDict)
-      return `(${newProperty}: ${newValue})`
+  const result: string[] = []
+  let i = 0
+
+  while (i < params.length) {
+    const openParen = params.indexOf('(', i)
+    if (openParen === -1) {
+      result.push(params.slice(i))
+      break
     }
-  )
+
+    result.push(params.slice(i, openParen + 1))
+    i = openParen + 1
+
+    const propMatch = params.slice(i).match(/^([\p{L}-]+)\s*:\s*/iu)
+    if (!propMatch) {
+      result.push(params[i])
+      i++
+      continue
+    }
+
+    const property = propMatch[1]
+    i += propMatch[0].length
+    const valueStart = i
+
+    let depth = 1
+    while (i < params.length && depth > 0) {
+      const char = params[i]
+      if (char === '(') depth++
+      else if (char === ')') depth--
+      i++
+    }
+
+    if (depth !== 0) {
+      result.push(params.slice(openParen + 1, i))
+      break
+    }
+
+    const value = params.slice(valueStart, i - 1).trim()
+    const newProperty = propDict.get(property) || property
+    const newValue = transformValue(value, valueDict)
+    result.push(`${newProperty}: ${newValue})`)
+  }
+
+  return result.join('')
 }
 
 // Re-export utilities and dictionaries for advanced usage
