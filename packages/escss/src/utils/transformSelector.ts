@@ -43,13 +43,8 @@ export function transformSelector(
   // Transform pseudo-classes (:hover, :focus, etc.)
   // Handle both functional pseudo-classes like :nth-child(n) and simple ones like :hover
   result = result.replace(
-    /:([a-zñ-]+)(?:\(([^)]*)\))?/gi,
+    /(?<!:):([a-zñ-]+)(?:\(([^)]*)\))?/gi,
     (match, pseudoClass, params) => {
-      // Skip if it's actually a pseudo-element (double colon)
-      if (match.startsWith('::')) {
-        return match
-      }
-
       const transformed = pseudoClassDict.get(pseudoClass.toLowerCase())
       if (transformed) {
         return params ? `:${transformed}(${params})` : `:${transformed}`
