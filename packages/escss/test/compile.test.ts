@@ -112,6 +112,52 @@ describe('EsCSS Compiler', () => {
       expect(output).toContain('width: 100%')
     })
 
+    it('should transform @media params with nested parentheses (e.g. calc())', () => {
+      const input = `@medios (minimo-ancho: calc(100px + 20px)) {
+  .caja { ancho: 100%; }
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('@media')
+      expect(output).toContain('min-width')
+      expect(output).toContain('calc(100px + 20px)')
+    })
+
+    it('should preserve full value in @media when value has nested parens (e.g. clamp)', () => {
+      const input = `@medios (minimo-ancho: clamp(100px, 50%, 100vw)) {
+  .caja { ancho: 100%; }
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('@media')
+      expect(output).toContain('min-width')
+      expect(output).toContain('clamp(100px, 50%, 100vw)')
+    })
+
+    it('should preserve @media value when function closes before end (e.g. max())', () => {
+      const input = `@medios (minimo-ancho: max(100px, 20rem)) {
+  .caja { ancho: 100%; }
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('max(100px, 20rem)')
+      expect(output).not.toContain('max(100px)),')
+    })
+
+    it('should preserve @media value with doubly nested parens (e.g. calc + max)', () => {
+      const input = `@medios (minimo-ancho: calc(100px + max(10px, 20px))) {
+  .caja { ancho: 100%; }
+}`
+
+      const output = compile(input, { from: 'escss', to: 'css' })
+
+      expect(output).toContain('calc(100px + max(10px, 20px))')
+      expect(output).not.toContain('max(10px)),')
+    })
+
     it('should transform @keyframes', () => {
       const input = `@fotogramas deslizar {
   from {
@@ -234,6 +280,52 @@ describe('EsCSS Compiler', () => {
 
       expect(output).toContain('@medios')
       expect(output).toContain('minimo-ancho')
+    })
+
+    it('should transform @media params with nested parentheses (e.g. calc())', () => {
+      const input = `@media (min-width: calc(100px + 20px)) {
+  .box { width: 100%; }
+}`
+
+      const output = compile(input, { from: 'css', to: 'escss' })
+
+      expect(output).toContain('@medios')
+      expect(output).toContain('minimo-ancho')
+      expect(output).toContain('calc(100px + 20px)')
+    })
+
+    it('should preserve full value in @media when value has nested parens (e.g. clamp)', () => {
+      const input = `@media (min-width: clamp(100px, 50%, 100vw)) {
+  .box { width: 100%; }
+}`
+
+      const output = compile(input, { from: 'css', to: 'escss' })
+
+      expect(output).toContain('@medios')
+      expect(output).toContain('minimo-ancho')
+      expect(output).toContain('clamp(100px, 50%, 100vw)')
+    })
+
+    it('should preserve @media value when function closes before end (e.g. max())', () => {
+      const input = `@media (min-width: max(100px, 20rem)) {
+  .box { width: 100%; }
+}`
+
+      const output = compile(input, { from: 'css', to: 'escss' })
+
+      expect(output).toContain('max(100px, 20rem)')
+      expect(output).not.toContain('max(100px)),')
+    })
+
+    it('should preserve @media value with doubly nested parens (e.g. calc + max)', () => {
+      const input = `@media (min-width: calc(100px + max(10px, 20px))) {
+  .box { width: 100%; }
+}`
+
+      const output = compile(input, { from: 'css', to: 'escss' })
+
+      expect(output).toContain('calc(100px + max(10px, 20px))')
+      expect(output).not.toContain('max(10px)),')
     })
 
     it('should transform properties to ñ tokens', () => {
