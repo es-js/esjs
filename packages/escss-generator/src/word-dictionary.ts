@@ -21,7 +21,7 @@ export const cssWordTranslations = new Map<string, string>([
   // Spacing
   ['margin', 'margen'],
   ['padding', 'relleno'],
-  ['gap', 'espacio'],
+  ['gap', 'brecha'],
 
   // Box Model
   ['border', 'borde'],
@@ -95,7 +95,7 @@ export const cssWordTranslations = new Map<string, string>([
   ['function', 'funcion'],
   ['iteration', 'iteracion'],
   ['count', 'conteo'],
-  ['fill', 'relleno'],
+  ['fill', 'rellenar'],
   ['mode', 'modo'],
   ['play', 'reproducir'],
   ['state', 'estado'],

@@ -222,7 +222,7 @@ describe('EsCSS Compiler', () => {
     it('should transform grid row properties', () => {
       const input = `.elemento {
   cuadricula-fila: 1;
-  fila-espacio: 10px;
+  fila-brecha: 10px;
 }`
 
       const output = compile(input, { from: 'escss', to: 'css' })
