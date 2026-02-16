@@ -227,7 +227,6 @@ export const cssValueTranslations = new Map<string, string>([
   ['pink', 'rosa'],
   ['brown', 'marron'],
   ['gray', 'gris'],
-  ['grey', 'gris'],
 
   // CSS Named Colors - Extended
   ['aqua', 'agua'],
@@ -272,7 +271,6 @@ export const cssValueTranslations = new Map<string, string>([
   ['darkorange', 'naranja-oscuro'],
   ['darkviolet', 'violeta-oscuro'],
   ['darkgray', 'gris-oscuro'],
-  ['darkgrey', 'gris-oscuro'],
   ['darkkhaki', 'caqui-oscuro'],
   ['darkolivegreen', 'verde-oliva-oscuro'],
   ['darkorchid', 'orquidea-oscuro'],
@@ -280,7 +278,6 @@ export const cssValueTranslations = new Map<string, string>([
   ['darkseagreen', 'verde-mar-oscuro'],
   ['darkslateblue', 'azul-pizarra-oscuro'],
   ['darkslategray', 'gris-pizarra-oscuro'],
-  ['darkslategrey', 'gris-pizarra-oscuro'],
   ['darkturquoise', 'turquesa-oscuro'],
   ['darkgoldenrod', 'oro-oscuro'],
 
@@ -291,13 +288,11 @@ export const cssValueTranslations = new Map<string, string>([
   ['lightpink', 'rosa-claro'],
   ['lightyellow', 'amarillo-claro'],
   ['lightgray', 'gris-claro'],
-  ['lightgrey', 'gris-claro'],
   ['lightcoral', 'coral-claro'],
   ['lightsalmon', 'salmon-claro'],
   ['lightseagreen', 'verde-mar-claro'],
   ['lightskyblue', 'azul-cielo-claro'],
   ['lightslategray', 'gris-pizarra-claro'],
-  ['lightslategrey', 'gris-pizarra-claro'],
   ['lightsteelblue', 'azul-acero-claro'],
   ['lightgoldenrodyellow', 'amarillo-oro-claro'],
 
@@ -315,7 +310,6 @@ export const cssValueTranslations = new Map<string, string>([
   ['deeppink', 'rosa-profundo'],
   ['deepskyblue', 'azul-cielo-profundo'],
   ['dimgray', 'gris-tenue'],
-  ['dimgrey', 'gris-tenue'],
   ['dodgerblue', 'azul-dodger'],
   ['firebrick', 'ladrillo'],
   ['floralwhite', 'blanco-floral'],
@@ -361,7 +355,6 @@ export const cssValueTranslations = new Map<string, string>([
   ['skyblue', 'azul-cielo'],
   ['slateblue', 'azul-pizarra'],
   ['slategray', 'gris-pizarra'],
-  ['slategrey', 'gris-pizarra'],
   ['springgreen', 'verde-primavera'],
   ['steelblue', 'azul-acero'],
   ['thistle', 'cardo'],
@@ -372,13 +365,16 @@ export const cssValueTranslations = new Map<string, string>([
   // Transparent
   ['transparent', 'transparente'],
   ['currentcolor', 'color-actual'],
-  ['currentColor', 'color-actual'],
 ])
+
+import { validateNoDuplicateEscssValues } from './validateNoDuplicateEscss'
 
 /**
  * Generate TypeScript code for the values dictionary.
  */
 export function generateValuesCode(): string {
+  validateNoDuplicateEscssValues(cssValueTranslations, 'value')
+
   const entries = Array.from(cssValueTranslations.entries())
     .map(([css, escss]) => `  ['${escss}', '${css}'],`)
     .join('\n')

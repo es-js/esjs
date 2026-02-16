@@ -101,10 +101,15 @@ export const cssPseudoElements = new Map<string, string>([
   ['target-text', 'texto-objetivo'],
 ])
 
+import { validateNoDuplicateEscssValues } from './validateNoDuplicateEscss'
+
 /**
  * Generate TypeScript code for the pseudo selectors dictionary.
  */
 export function generatePseudoCode(): string {
+  validateNoDuplicateEscssValues(cssPseudoClasses, 'pseudo-class')
+  validateNoDuplicateEscssValues(cssPseudoElements, 'pseudo-element')
+
   const classEntries = Array.from(cssPseudoClasses.entries())
     .map(([css, escss]) => `  ['${escss}', '${css}'],`)
     .join('\n')

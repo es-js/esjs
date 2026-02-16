@@ -95,10 +95,14 @@ export const cssElementTranslations = new Map<string, string>([
   ['output', 'salida'],
 ])
 
+import { validateNoDuplicateEscssValues } from './validateNoDuplicateEscss'
+
 /**
  * Generate TypeScript code for the selectors dictionary.
  */
 export function generateSelectorsCode(): string {
+  validateNoDuplicateEscssValues(cssElementTranslations, 'selector')
+
   const entries = Array.from(cssElementTranslations.entries())
     .map(([css, escss]) => `  ['${escss}', '${css}'],`)
     .join('\n')
