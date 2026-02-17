@@ -7,7 +7,7 @@
  */
 export function validateNoDuplicateEscssValues(
   map: Map<string, string>,
-  label: string
+  label: string,
 ): void {
   const seen = new Map<string, string[]>()
   for (const [css, escss] of map) {
@@ -18,7 +18,9 @@ export function validateNoDuplicateEscssValues(
       seen.set(escss, [css])
     }
   }
-  const duplicates = Array.from(seen.entries()).filter(([, cssKeys]) => cssKeys.length > 1)
+  const duplicates = Array.from(seen.entries()).filter(
+    ([, cssKeys]) => cssKeys.length > 1,
+  )
   if (duplicates.length > 0) {
     const details = duplicates
       .map(([escss, cssKeys]) => `  '${escss}' <- [${cssKeys.join(', ')}]`)

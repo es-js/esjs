@@ -5,7 +5,7 @@
  */
 export function transformValue(
   value: string,
-  dictionary: Map<string, string>
+  dictionary: Map<string, string>,
 ): string {
   // Handle simple direct match first
   const directMatch = dictionary.get(value)
@@ -67,7 +67,7 @@ function splitValuePreservingFunctions(value: string): string[] {
       continue
     }
 
-    if (char === '"' || char === '\'') {
+    if (char === '"' || char === "'") {
       quote = char
       current += char
     } else if (char === '(') {

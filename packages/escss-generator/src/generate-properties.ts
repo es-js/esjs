@@ -319,7 +319,10 @@ export const cssProperties = [
  * Returns tuples of [css-property, escss-property]
  */
 export function generatePropertiesMapping(): [string, string][] {
-  const mappings = cssProperties.map((prop): [string, string] => [prop, translateProperty(prop)])
+  const mappings = cssProperties.map((prop): [string, string] => [
+    prop,
+    translateProperty(prop),
+  ])
   validateNoDuplicateEscssValues(new Map(mappings), 'property')
   return mappings
 }

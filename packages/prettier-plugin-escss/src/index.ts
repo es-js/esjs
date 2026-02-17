@@ -55,7 +55,7 @@ const EsCSSPlugin = {
       print: async (
         path: AstPath<any>,
         options: ParserOptions<any>,
-        print: any
+        print: any,
       ) => {
         // Taken from: https://github.com/ony3000/prettier-plugin-classnames/blob/master/src/packages/v3-plugin/printers.ts
         // @ts-ignore
