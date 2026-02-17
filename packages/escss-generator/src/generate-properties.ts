@@ -1,3 +1,4 @@
+import { validateNoDuplicateEscssValues } from './validateNoDuplicateEscss'
 import { translateProperty } from './word-dictionary'
 
 /**
@@ -319,23 +320,7 @@ export const cssProperties = [
  */
 export function generatePropertiesMapping(): [string, string][] {
   const mappings = cssProperties.map((prop): [string, string] => [prop, translateProperty(prop)])
-
-  const seen = new Map<string, string[]>()
-  for (const [css, escss] of mappings) {
-    const existing = seen.get(escss)
-    if (existing) {
-      existing.push(css)
-    } else {
-      seen.set(escss, [css])
-    }
-  }
-
-  const duplicates = Array.from(seen.entries()).filter(([, cssNames]) => cssNames.length > 1)
-  if (duplicates.length > 0) {
-    const details = duplicates.map(([escss, cssNames]) => `  '${escss}' <- [${cssNames.join(', ')}]`).join('\n')
-    throw new Error(`Duplicate EsCSS property names detected:\n${details}`)
-  }
-
+  validateNoDuplicateEscssValues(new Map(mappings), 'property')
   return mappings
 }
 
