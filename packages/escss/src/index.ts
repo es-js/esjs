@@ -40,7 +40,7 @@ export interface CompileOptions {
  */
 export function compile(
   content: string,
-  options: CompileOptions = { from: 'escss', to: 'css' }
+  options: CompileOptions = { from: 'escss', to: 'css' },
 ): string {
   const opts: Required<CompileOptions> = {
     from: options.from ?? 'escss',
@@ -103,7 +103,7 @@ export function compile(
 function transformMediaParams(
   params: string,
   propDict: Map<string, string>,
-  valueDict: Map<string, string>
+  valueDict: Map<string, string>,
 ): string {
   const result: string[] = []
   let i = 0

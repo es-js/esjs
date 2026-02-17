@@ -94,10 +94,7 @@ const escssGrammar = {
         {
           begin: '\\\\{',
           end: '\\\\}',
-          patterns: [
-            { include: '#comment' },
-            { include: '#property' },
-          ],
+          patterns: [{ include: '#comment' }, { include: '#property' }],
         },
       ],
     },

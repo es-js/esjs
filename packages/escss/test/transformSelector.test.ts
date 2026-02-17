@@ -25,19 +25,27 @@ describe('transformSelector', () => {
     it('EsCSS → CSS: single-colon and double-colon remain distinct', () => {
       expect(transformSelector('a:encima', false)).toBe('a:hover')
       expect(transformSelector('a::antes', false)).toBe('a::before')
-      expect(transformSelector('a:encima::antes', false)).toBe('a:hover::before')
-      expect(transformSelector('a::antes:encima', false)).toBe('a::before:hover')
+      expect(transformSelector('a:encima::antes', false)).toBe(
+        'a:hover::before',
+      )
+      expect(transformSelector('a::antes:encima', false)).toBe(
+        'a::before:hover',
+      )
     })
   })
 
   describe('functional pseudo-classes (with params)', () => {
     it('transforms pseudo-class with params (CSS → EsCSS)', () => {
-      expect(transformSelector('span:nth-child(2n+1)', true)).toBe('span:hijo-n(2n+1)')
+      expect(transformSelector('span:nth-child(2n+1)', true)).toBe(
+        'span:hijo-n(2n+1)',
+      )
       expect(transformSelector('p:not(.foo)', true)).toBe('p:no(.foo)')
     })
 
     it('transforms pseudo-class with params (EsCSS → CSS)', () => {
-      expect(transformSelector('span:hijo-n(2n+1)', false)).toBe('span:nth-child(2n+1)')
+      expect(transformSelector('span:hijo-n(2n+1)', false)).toBe(
+        'span:nth-child(2n+1)',
+      )
       expect(transformSelector('p:no(.foo)', false)).toBe('p:not(.foo)')
     })
   })

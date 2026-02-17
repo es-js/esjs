@@ -7,10 +7,7 @@ import { getDictionary as getSelectorsDictionary } from '../generated/selectors'
 /**
  * Transform CSS selectors by converting element names, pseudo-classes and pseudo-elements.
  */
-export function transformSelector(
-  selector: string,
-  toEsCSS: boolean
-): string {
+export function transformSelector(selector: string, toEsCSS: boolean): string {
   const pseudoClassDict = getPseudoClassesDictionary(toEsCSS)
   const pseudoElementDict = getPseudoElementsDictionary(toEsCSS)
   const selectorsDict = getSelectorsDictionary(toEsCSS)
@@ -25,7 +22,7 @@ export function transformSelector(
     (match, element) => {
       const transformed = selectorsDict.get(element.toLowerCase())
       return transformed || match
-    }
+    },
   )
 
   // Transform pseudo-elements (::before, ::after, etc.)
@@ -37,7 +34,7 @@ export function transformSelector(
         return params ? `::${transformed}(${params})` : `::${transformed}`
       }
       return match
-    }
+    },
   )
 
   // Transform pseudo-classes (:hover, :focus, etc.)
@@ -50,7 +47,7 @@ export function transformSelector(
         return params ? `:${transformed}(${params})` : `:${transformed}`
       }
       return match
-    }
+    },
   )
 
   return result
