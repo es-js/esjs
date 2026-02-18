@@ -102,9 +102,7 @@ const pseudoElementsDictionary: Map<string, string> = new Map([
  */
 let invertedPseudoClasses: Map<string, string> | undefined
 
-export function getPseudoClassesDictionary(
-  inverted = false,
-): Map<string, string> {
+export function getPseudoClassesDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return pseudoClassesDictionary
   }
@@ -120,9 +118,7 @@ export function getPseudoClassesDictionary(
  */
 let invertedPseudoElements: Map<string, string> | undefined
 
-export function getPseudoElementsDictionary(
-  inverted = false,
-): Map<string, string> {
+export function getPseudoElementsDictionary(inverted = false): Map<string, string> {
   if (!inverted) {
     return pseudoElementsDictionary
   }
