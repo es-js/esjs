@@ -15,6 +15,8 @@ const PRETTIER_OPTIONS = {
   semi: false,
   tabWidth: 2,
   endOfLine: 'lf' as const,
+  /** Evita que Prettier rompa líneas de forma distinta según versión/entorno (p. ej. objetos en una vs varias líneas). */
+  printWidth: 120,
 }
 
 export async function formatWithPrettier(
