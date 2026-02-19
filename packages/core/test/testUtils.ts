@@ -37,9 +37,20 @@ function collapseBlankLines(code: string): string {
   return code.replace(/\n\n+/g, '\n').trim()
 }
 
+/**
+ * Quita el salto de línea tras `{` o `[` para que Prettier no preserve formato
+ * multilínea (en algunos entornos el compilador emite multilínea y en otros no).
+ */
+function forceSingleLineLiteralsBeforeFormat(code: string): string {
+  return code
+    .replace(/\{\s*\n\s*/g, '{ ')
+    .replace(/\[\s*\n\s*/g, '[ ')
+}
+
 /** Normaliza código JS para comparación estable entre entornos (evita fallos por tabs/espacios/semicolons/líneas en blanco). */
 export async function normalizeJsForCompare(code: string): Promise<string> {
-  const formatted = await formatWithPrettier(code, PRETTIER_OPTIONS)
+  const forced = forceSingleLineLiteralsBeforeFormat(code)
+  const formatted = await formatWithPrettier(forced, PRETTIER_OPTIONS)
   return collapseBlankLines(formatted)
 }
 
