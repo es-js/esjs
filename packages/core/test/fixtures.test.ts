@@ -83,7 +83,7 @@ const pluginsFixtures = Object.fromEntries(
 )
 
 beforeEach(() => {
-  fixtureKeys = Object.keys(esjsFixtures)
+  fixtureKeys = Object.keys(esjsFixtures).sort()
   expect(fixtureKeys.length).toBeGreaterThan(0)
 })
 

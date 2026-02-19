@@ -14,6 +14,7 @@ const PRETTIER_OPTIONS = {
   plugins: [parserBabel],
   semi: false,
   tabWidth: 2,
+  endOfLine: 'lf' as const,
 }
 
 export async function formatWithPrettier(
@@ -26,9 +27,18 @@ export async function formatWithPrettier(
   })
 }
 
-/** Normaliza código JS para comparación estable entre entornos (evita fallos por tabs/espacios/semicolons). */
+/**
+ * Colapsa líneas en blanco consecutivas para que la comparación no dependa
+ * de si Prettier inserta una o más líneas en blanco (varía por versión/entorno).
+ */
+function collapseBlankLines(code: string): string {
+  return code.replace(/\n\n+/g, '\n').trim()
+}
+
+/** Normaliza código JS para comparación estable entre entornos (evita fallos por tabs/espacios/semicolons/líneas en blanco). */
 export async function normalizeJsForCompare(code: string): Promise<string> {
-  return formatWithPrettier(code, PRETTIER_OPTIONS)
+  const formatted = await formatWithPrettier(code, PRETTIER_OPTIONS)
+  return collapseBlankLines(formatted)
 }
 
 export async function assertCompile(
