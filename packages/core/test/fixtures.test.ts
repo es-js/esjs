@@ -3,6 +3,7 @@ import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { compile } from '../src'
 import type { TestCompileOptions } from './testUtils'
+import { normalizeJsForCompare } from './testUtils'
 
 const esjsFixtures = import.meta.glob('./fixtures/keywords/*.esjs')
 const esjsFixturesExtras = import.meta.glob('./fixtures/extras/*.esjs')
@@ -119,9 +120,30 @@ async function testCompile(
       compiler: 'essucrase',
     })
 
+    const expected = options.reverse ? esjsCode : jsCode
+
+    if (options.reverse) {
+      return {
+        generated: await normalizeJsForCompare(
+          compile(generated, {
+            from: 'esjs',
+            to: 'js',
+            compiler: 'essucrase',
+          }),
+        ),
+        expected: await normalizeJsForCompare(
+          compile(expected, {
+            from: 'esjs',
+            to: 'js',
+            compiler: 'essucrase',
+          }),
+        ),
+      }
+    }
+
     return {
-      generated,
-      expected: options.reverse ? esjsCode : jsCode,
+      generated: await normalizeJsForCompare(generated),
+      expected: await normalizeJsForCompare(expected),
     }
   } catch (error) {
     console.error(`Error in ${fixture}`, error)

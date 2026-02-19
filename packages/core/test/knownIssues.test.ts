@@ -3,7 +3,7 @@ import { assertCompile, assertEsJSToJS, assertJSToESJS } from './testUtils'
 
 describe('known issues', () => {
   it('fixed: compiles variables named `escribir`', async () => {
-    assertCompile(
+    await assertCompile(
       `
       const escribir = 'prueba'
     `,
@@ -17,7 +17,7 @@ describe('known issues', () => {
   })
 
   it('fixed: does not compile variables named `get`', async () => {
-    assertCompile(
+    await assertCompile(
       `
       mut get = 'prueba'
     `,
@@ -31,7 +31,7 @@ describe('known issues', () => {
   })
 
   it('fixed: transpiles const/mut/var to const/let/var', async () => {
-    assertCompile(
+    await assertCompile(
       `
       const desde = 'a'
       var b = {
@@ -55,7 +55,7 @@ describe('known issues', () => {
   })
 
   it('fixed: number methods', async () => {
-    assertCompile(
+    await assertCompile(
       `
       consola.escribir(
         Numero.interpretarDecimal(Mate.aleatorio())
@@ -85,7 +85,7 @@ describe('known issues', () => {
   })
 
   it('fixed: Matriz tiene precedencia sobre Arreglo', async () => {
-    assertEsJSToJS(
+    await assertEsJSToJS(
       `
       const x = Arreglo([])
       const y = Arreglo(1, 2, 3)
@@ -105,7 +105,7 @@ describe('known issues', () => {
       },
     )
 
-    assertJSToESJS(
+    await assertJSToESJS(
       `
       const x = Array([])
       const y = Array(1, 2, 3)
@@ -127,7 +127,7 @@ describe('known issues', () => {
   })
 
   it('convierte tipos de Vue', async () => {
-    assertEsJSToJS(
+    await assertEsJSToJS(
       `
       const props = {
         a: Numero,
@@ -167,7 +167,7 @@ describe('known issues', () => {
       },
     )
 
-    assertJSToESJS(
+    await assertJSToESJS(
       `
       const props = {
         a: Number,
