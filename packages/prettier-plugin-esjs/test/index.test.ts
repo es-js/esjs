@@ -17,6 +17,8 @@ retornar "Hola mundo!"
           plugins: ['./dist/index.cjs'],
           filepath: 'prueba/codigo.esjs',
           parser: 'esjs',
+          tabWidth: 2,
+          singleQuote: false,
         },
       ),
     ).toBe(`funcion inicio() {
@@ -44,6 +46,8 @@ retornar "Hola mundo!"
           plugins: ['./dist/index.cjs'],
           filepath: 'prueba/codigo.esjs',
           parser: 'esjs',
+          tabWidth: 2,
+          singleQuote: false,
         },
       ),
     ).toBe(`funcion inicio() {
@@ -72,6 +76,8 @@ retornar "Hola mundo!"
           plugins: ['./dist/index.cjs'],
           filepath: 'prueba/codigo.esjs',
           parser: 'esjs',
+          tabWidth: 2,
+          singleQuote: false,
         },
       ),
     ).toBe(`funcion inicio() {
@@ -97,6 +103,8 @@ exportar   porDefecto   app
           plugins: ['./dist/index.cjs'],
           filepath: 'prueba/codigo.esjs',
           parser: 'esjs',
+          tabWidth: 2,
+          singleQuote: false,
         },
       ),
     ).toBe(`const app = crear Fecha();
