@@ -38,6 +38,23 @@ function collapseBlankLines(code: string): string {
 }
 
 /**
+ * Pone siempre los comentarios de fin de línea en una línea aparte, con la misma
+ * indentación. Así da igual si Prettier (según versión/entorno) deja "foo() // bar"
+ * o "foo()\n  // bar".
+ */
+function normalizeEolComments(code: string): string {
+  return code
+    .split('\n')
+    .map((line) => {
+      const match = line.match(/^(\s*)(.*)(\)|;)\s*\/\/(.*)$/)
+      if (!match) return line
+      const [, indent, rest, end, comment] = match
+      return `${indent}${rest}${end}\n${indent}//${comment}`
+    })
+    .join('\n')
+}
+
+/**
  * Quita el salto de línea tras `{` o `[` para que Prettier no preserve formato
  * multilínea (en algunos entornos el compilador emite multilínea y en otros no).
  */
@@ -47,11 +64,12 @@ function forceSingleLineLiteralsBeforeFormat(code: string): string {
     .replace(/\[\s*\n\s*/g, '[ ')
 }
 
-/** Normaliza código JS para comparación estable entre entornos (evita fallos por tabs/espacios/semicolons/líneas en blanco). */
+/** Normaliza código JS para comparación estable entre entornos (evita fallos por tabs/espacios/semicolons/líneas en blanco/comentarios). */
 export async function normalizeJsForCompare(code: string): Promise<string> {
   const forced = forceSingleLineLiteralsBeforeFormat(code)
   const formatted = await formatWithPrettier(forced, PRETTIER_OPTIONS)
-  return collapseBlankLines(formatted)
+  const collapsed = collapseBlankLines(formatted)
+  return normalizeEolComments(collapsed)
 }
 
 export async function assertCompile(
