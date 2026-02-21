@@ -1,0 +1,24 @@
+// Ejemplo EsJS: fecha/hora actual y contador de clics en la cuadrícula
+
+const fechaActualElemento = document.getElementById('fecha-actual')
+
+funcion actualizarFecha() {
+  fechaActualElemento.textContent = crear Fecha().aCadenaLocalizada()
+}
+
+actualizarFecha()
+establecerIntervalo(actualizarFecha, 1000)
+
+// Contador de clics por elemento
+mut clics = { 'el-1': 0, 'el-2': 0, 'el-3': 0, 'el-4': 0 }
+
+const ids = ['el-1', 'el-2', 'el-3', 'el-4']
+ids.paraCada((id) => {
+  const elemento = document.getElementById(id)
+  const spanClicks = elemento.querySelector('.clicks')
+
+  elemento.addEventListener('click', () => {
+    clics[id]++
+    spanClicks.textContent = clics[id]
+  })
+})

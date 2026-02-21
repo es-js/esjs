@@ -1,0 +1,45 @@
+<!TIPODOC eshtml>
+<eshtml idioma="es">
+  <cabecera>
+    <meta conjunto-caracteres="UTF-8">
+    <meta nombre="viewport" contenido="width=device-width, initial-scale=1.0">
+    <titulo>Demo EsCSS</titulo>
+    <recurso rel="stylesheet" referencia="./estilos.escss">
+  </cabecera>
+
+  <cuerpo>
+    <division clase="contenedor">
+      <t1 clase="titulo">EsCSS Demo</t1>
+      <parrafo clase="descripcion">
+        CSS con sintaxis en Español. Fecha y hora:
+        <negrita><segmento id="fecha-actual">—</segmento></negrita>
+      </parrafo>
+
+      <division clase="tarjeta">
+        <t2 clase="tarjeta-titulo">Tarjeta de Ejemplo</t2>
+        <parrafo clase="tarjeta-contenido">
+          Este es un ejemplo de EsCSS, donde puedes escribir CSS usando
+          propiedades en español.
+        </parrafo>
+        <enlace referencia="https://es.js.org/" objetivo="_blank" clase="boton">
+          Más información
+        </enlace>
+      </division>
+
+      <division clase="cuadricula">
+        <division clase="cuadricula-elemento" id="el-1">
+          Elemento 1 · <segmento clase="clicks">0</segmento> clics
+        </division>
+        <division clase="cuadricula-elemento" id="el-2">
+          Elemento 2 · <segmento clase="clicks">0</segmento> clics
+        </division>
+        <division clase="cuadricula-elemento" id="el-3">
+          Elemento 3 · <segmento clase="clicks">0</segmento> clics
+        </division>
+        <division clase="cuadricula-elemento" id="el-4">
+          Elemento 4 · <segmento clase="clicks">0</segmento> clics
+        </division>
+      </division>
+    </division>
+  </cuerpo>
+</eshtml>
