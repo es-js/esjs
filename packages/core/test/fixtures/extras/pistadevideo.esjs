@@ -1,5 +1,5 @@
 tipoDe PistaDeVideo;
-mut myPista = crear PistaDeVideo()
+mut myPista = crear PistaDeVideo();
 myPista.seleccionado;
 myPista.id;
 myPista.clase;

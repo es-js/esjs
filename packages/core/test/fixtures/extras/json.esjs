@@ -1,4 +1,7 @@
-const json = JSON.esJSONCrudo({ foo: 'bar' })
-const json2 = JSON.analizar(json)
-const json3 = JSON.JSONCrudo(json2)
-const json4 = JSON.aTexto(json3)
+const json = JSON.esJSONCrudo({
+    foo: 'bar',
+});
+
+const json2 = JSON.analizar(json);
+const json3 = JSON.JSONCrudo(json2);
+const json4 = JSON.aTexto(json3);

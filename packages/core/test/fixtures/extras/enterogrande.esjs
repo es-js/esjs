@@ -1,6 +1,6 @@
-mut myNum = EnteroGrande(1000)
-myNum.aCadenaLocalizada()
-myNum.aCadena()
-myNum.valorDe()
-EnteroGrande.comoEntero(64, myNum)
-EnteroGrande.comoEnteroSinSigno(64, myNum)
+mut myNum = EnteroGrande(1000);
+myNum.aCadenaLocalizada();
+myNum.aCadena();
+myNum.valorDe();
+EnteroGrande.comoEntero(64, myNum);
+EnteroGrande.comoEnteroSinSigno(64, myNum);

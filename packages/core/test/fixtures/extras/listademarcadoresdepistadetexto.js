@@ -1,3 +1,3 @@
-let myLista = new TextTrackCueList()
+let myLista = new TextTrackCueList();
 myLista.length;
-myLista.getCueById()
+myLista.getCueById();

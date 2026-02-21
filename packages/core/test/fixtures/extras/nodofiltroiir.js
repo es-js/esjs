@@ -1,3 +1,3 @@
 typeof IIRFilterNode;
-let myNodo = new IIRFilterNode()
-myNodo.getFrequencyResponse()
+let myNodo = new IIRFilterNode();
+myNodo.getFrequencyResponse();

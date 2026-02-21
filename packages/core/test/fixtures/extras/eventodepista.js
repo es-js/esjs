@@ -1,2 +1,2 @@
-let myEvento = new TrackEvent()
+let myEvento = new TrackEvent();
 myEvento.track;

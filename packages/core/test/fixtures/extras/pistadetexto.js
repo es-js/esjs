@@ -1,4 +1,4 @@
-let myPista = new TextTrack()
+let myPista = new TextTrack();
 myPista.activeCues;
 myPista.cues;
 myPista.inBandMetadataTrackDispatchType;
@@ -8,5 +8,5 @@ myPista.label;
 myPista.language;
 myPista.mode;
 myPista.sourceBuffer;
-myPista.addCue()
-myPista.removeCue()
+myPista.addCue();
+myPista.removeCue();

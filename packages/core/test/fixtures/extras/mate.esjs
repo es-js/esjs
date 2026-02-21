@@ -1,43 +1,43 @@
-const x = 2
-mut y = 3
+const x = 2;
+mut y = 3;
 
-Mate.absoluto(x)
-Mate.arcocoseno(x)
-Mate.arcocosenoHiperbolico(x)
-Mate.arcoseno(x)
-Mate.arcosenoHiperbolico(x)
-Mate.arcotangente(x)
-Mate.arcotangente2(x, y)
-Mate.arcotangenteHiperbolica(x)
-Mate.raizCubica(x)
-Mate.redondearHaciaArriba(x)
-Mate.cerosALaIzquierdaEn32Bits(x)
-Mate.coseno(x)
-Mate.cosenoHiperbolico(x)
-Mate.exponencial(x)
-Mate.exponencialMenos1(x)
-Mate.redondearHaciaAbajo(x)
-Mate.redondearAComaFlotante(x)
-Mate.hipotenusa(x, y)
-Mate.multiplicacionEntera(x, y)
-Mate.logaritmo(x)
-Mate.logaritmoBase10(x)
-Mate.logaritmoDe1Mas(x)
-Mate.logaritmoBase2(x)
-Mate.maximo(x, y)
-Mate.minimo(x, y)
-Mate.potencia(x, y)
-Mate.aleatorio()
-Mate.redondear(x)
-Mate.signo(x)
-Mate.seno(x)
-Mate.senoHiperbolico(x)
+Mate.absoluto(x);
+Mate.arcocoseno(x);
+Mate.arcocosenoHiperbolico(x);
+Mate.arcoseno(x);
+Mate.arcosenoHiperbolico(x);
+Mate.arcotangente(x);
+Mate.arcotangente2(x, y);
+Mate.arcotangenteHiperbolica(x);
+Mate.raizCubica(x);
+Mate.redondearHaciaArriba(x);
+Mate.cerosALaIzquierdaEn32Bits(x);
+Mate.coseno(x);
+Mate.cosenoHiperbolico(x);
+Mate.exponencial(x);
+Mate.exponencialMenos1(x);
+Mate.redondearHaciaAbajo(x);
+Mate.redondearAComaFlotante(x);
+Mate.hipotenusa(x, y);
+Mate.multiplicacionEntera(x, y);
+Mate.logaritmo(x);
+Mate.logaritmoBase10(x);
+Mate.logaritmoDe1Mas(x);
+Mate.logaritmoBase2(x);
+Mate.maximo(x, y);
+Mate.minimo(x, y);
+Mate.potencia(x, y);
+Mate.aleatorio();
+Mate.redondear(x);
+Mate.signo(x);
+Mate.seno(x);
+Mate.senoHiperbolico(x);
 
-const a = Mate.PI
-const b = Mate.E
-const c = Mate.LN2
-const d = Mate.LN10
-const e = Mate.LOG2E
-const f = Mate.LOG10E
-const g = Mate.RAIZ1_2
-const h = Mate.RAIZ2
+const a = Mate.PI;
+const b = Mate.E;
+const c = Mate.LN2;
+const d = Mate.LN10;
+const e = Mate.LOG2E;
+const f = Mate.LOG10E;
+const g = Mate.RAIZ1_2;
+const h = Mate.RAIZ2;

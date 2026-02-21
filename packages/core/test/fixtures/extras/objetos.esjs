@@ -6,7 +6,10 @@ const booleano = Booleano(verdadero);
 
 const objeto = crear Objeto({});
 
-const matriz = crear Matriz([[1, 2], [3, 4]]);
+const matriz = crear Matriz([
+    [1, 2],
+    [3, 4],
+]);
 
 const f = Funcion(() => {});
 
@@ -18,7 +21,9 @@ const error = Error('Error');
 
 const expReg = ExpReg(/ExpReg/);
 
-const mapa = crear Mapa([['clave', 'valor']]);
+const mapa = crear Mapa([
+    ['clave', 'valor'],
+]);
 
 const conjunto = crear Conjunto([1, 2, 3]);
 

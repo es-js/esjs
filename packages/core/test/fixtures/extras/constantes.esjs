@@ -1,13 +1,13 @@
-const x = falso
+const x = falso;
 
-const y = verdadero
+const y = verdadero;
 
-const n = nulo
+const n = nulo;
 
-const i = indefinido
+const i = indefinido;
 
-const I = Infinito
+const I = Infinito;
 
-const noNumero = NuN
+const noNumero = NuN;
 
-const aG = ambienteGlobal
+const aG = ambienteGlobal;

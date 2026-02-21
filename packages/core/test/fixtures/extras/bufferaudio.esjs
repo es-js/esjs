@@ -1,10 +1,11 @@
 tipoDe BufferAudio;
-mut mycontextoAudio = crear ContextoAudio()
-mut myBuffer = mycontextoAudio.crearBuffer()
+mut mycontextoAudio = crear ContextoAudio();
+mut myBuffer = mycontextoAudio.crearBuffer();
+
 myBuffer.frecuenciaDeMuestreo;
 myBuffer.longitud;
 myBuffer.duracion;
 myBuffer.numeroDeCanales;
-myBuffer.obtenerDatosDelCanal()
-myBuffer.copiarDeCanal()
-myBuffer.copiarAlCanal()
+myBuffer.obtenerDatosDelCanal();
+myBuffer.copiarDeCanal();
+myBuffer.copiarAlCanal();

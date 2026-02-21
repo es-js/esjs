@@ -1,6 +1,6 @@
 consola.escribir(tipoDe 2);
 
-consola.escribir(tipoDe "Martin Fierro");
+consola.escribir(tipoDe 'Martin Fierro');
 
 consola.escribir(tipoDe verdadero);
 

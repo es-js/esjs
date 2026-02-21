@@ -1,6 +1,7 @@
 typeof DynamicsCompressorNode;
-let myContexto = new AudioContext()
-let myNodo = myContexto.createDynamicsCompressor()
+let myContexto = new AudioContext();
+let myNodo = myContexto.createDynamicsCompressor();
+
 myNodo.threshold;
 myNodo.knee;
 myNodo.ratio;

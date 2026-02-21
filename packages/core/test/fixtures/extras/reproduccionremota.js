@@ -1,6 +1,6 @@
 typeof RemotePlayback;
-let myRemoto = new RemotePlayback()
+let myRemoto = new RemotePlayback();
 myRemoto.state;
-myRemoto.watchAvailability()
-myRemoto.cancelWatchAvailability()
-myRemoto.prompt()
+myRemoto.watchAvailability();
+myRemoto.cancelWatchAvailability();
+myRemoto.prompt();

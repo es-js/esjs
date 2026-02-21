@@ -3,10 +3,9 @@ clase Animal {
     constructor(nombre) {
         ambiente.nombre = nombre;
     }
-
     // Método de instancia
     hablar() {
-        consola.escribir(`${this.nombre} hace un sonido.`);
+        consola.escribir(`${ambiente.nombre} hace un sonido.`);
     }
 }
 
@@ -14,12 +13,10 @@ clase Perro extiende Animal {
     constructor(nombre) {
         super(nombre);
     }
-
     // Método de instancia sobrescrito
     hablar() {
-        consola.escribir(`${this.nombre} ladra.`);
+        consola.escribir(`${ambiente.nombre} ladra.`);
     }
-
     // Método estático
     static informacion() {
         consola.escribir('Los perros son animales domésticos.');
@@ -30,9 +27,10 @@ clase Perro extiende Animal {
 asincrono funcion funcionAsincrona() {
     intentar {
         esperar algunaOperacionAsincrona();
-    } capturar (error) {
+    } capturar(error) {
         consola.error('Error:', error);
-    } finalmente {
+    }
+ finalmente {
         consola.escribir('Operación asíncrona terminada.');
     }
 }
@@ -61,6 +59,7 @@ si (a < b) {
 }
 
 mut i = 0;
+
 mientras (i < 5) {
     consola.escribir('Iteración:', i);
     i++;
@@ -78,11 +77,11 @@ eliminar miArray[0];
 
 mut x = 5;
 mut y = 10;
+
 consola.escribir(x en miObjeto);
 
 mut z = crear Perro('Bobby');
 consola.escribir(z instanciaDe Perro);
-
 // Palabras reservadas
 mut valorNulo = nulo;
 mut valorVerdadero = verdadero;
@@ -127,7 +126,7 @@ mut asincronoValor = 'asíncrono';
 funcionAsincrona();
 
 funcion algunaOperacionAsincrona() {
-    retornar crear Promesa(resuelve => {
+    retornar crear Promesa((resuelve) => {
         establecerTemporizador(() => resuelve(), 1000);
     });
 }

@@ -18,11 +18,12 @@ describe('compile', () => {
     })
 
     expect(compiled).toBe(`function prueba() {
-  return {
-    hola: 'Hola, mundo!',
-    desde: 'EsJS',
-  };
-}`)
+    return {
+        hola: 'Hola, mundo!',
+        desde: 'EsJS',
+    };
+}
+`)
   })
 
   it('can compile code with EsBabel', () => {

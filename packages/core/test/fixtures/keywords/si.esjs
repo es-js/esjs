@@ -1,8 +1,9 @@
-const foo = 'bar'
-si ("bar" === foo) {
-  retornar verdadero
-} sino si ("foo" == foo) {
-  retornar verdadero
+const foo = 'bar';
+
+si ('bar' === foo) {
+    retornar verdadero;
+} sino si ('foo' == foo) {
+    retornar verdadero;
 } sino {
-  retornar falso
+    retornar falso;
 }

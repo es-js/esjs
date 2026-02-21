@@ -1,29 +1,31 @@
 const timeout = establecerTemporizador(() => {
-  consola.escribir('timeout')
-})
+    consola.escribir('timeout');
+});
 
 const interval = establecerIntervalo(() => {
-  consola.escribir('interval')
-})
+    consola.escribir('interval');
+});
 
-consola.escribir(esNuN('a'))
+consola.escribir(esNuN('a'));
 
-limpiarTemporizador(timeout)
+limpiarTemporizador(timeout);
 
-limpiarIntervalo(interval)
+limpiarIntervalo(interval);
 
-alerta('alert')
+alerta('alert');
 
-preguntar('prompt')
+preguntar('prompt');
 
-confirmar('confirm')
+confirmar('confirm');
 
-consultar('https://jsonplaceholder.typicode.com/todos/1').luego((respuesta) => { retornar respuesta.json() })
+consultar('https://jsonplaceholder.typicode.com/todos/1').luego((respuesta) => {
+    retornar respuesta.json();
+});
 
-consola.escribir(decodificarURI('https://jsonplaceholder.typicode.com/todos/1'))
+consola.escribir(decodificarURI('https://jsonplaceholder.typicode.com/todos/1'));
 
-consola.escribir(decodificarComponenteURI('https%3A%2F%2Fjsonplaceholder.typicode.com%2Ftodos%2F1'))
+consola.escribir(decodificarComponenteURI('https%3A%2F%2Fjsonplaceholder.typicode.com%2Ftodos%2F1'));
 
-consola.escribir(codificarURI('https://jsonplaceholder.typicode.com/todos/1'))
+consola.escribir(codificarURI('https://jsonplaceholder.typicode.com/todos/1'));
 
-consola.escribir(codificarComponenteURI('https://jsonplaceholder.typicode.com/todos/1'))
+consola.escribir(codificarComponenteURI('https://jsonplaceholder.typicode.com/todos/1'));

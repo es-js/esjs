@@ -97,10 +97,10 @@ x)
     const expected = `<!TIPODOC eshtml>
 <eshtml idioma="es">
   <cabecera>
-    <codigo>
-      mut x = Mate.aleatorio()
-      consola.escribir("¡Hola desde EsHTML! ", x)
-    </codigo>
+    <codigo>mut x = Mate.aleatorio();
+
+consola.escribir('¡Hola desde EsHTML! ', x);
+</codigo>
   </cabecera>
 
   <cuerpo>

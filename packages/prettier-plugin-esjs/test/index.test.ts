@@ -20,11 +20,11 @@ retornar "Hola mundo!"
         },
       ),
     ).toBe(`funcion inicio() {
-  si (Mate.aleatorio() < 0.5) {
-    retornar "Hola mundo";
-  } sino {
-    retornar "Hola mundo!";
-  }
+    si (Mate.aleatorio() < 0.5) {
+        retornar 'Hola mundo';
+    } sino {
+        retornar 'Hola mundo!';
+    }
 }
 `)
   })
@@ -47,11 +47,11 @@ retornar "Hola mundo!"
         },
       ),
     ).toBe(`funcion inicio() {
-  si (Mate.aleatorio() < 0.5) {
-    retornar "Hola mundo";
-  } sino {
-    retornar "Hola mundo!";
-  }
+    si (Mate.aleatorio() < 0.5) {
+        retornar 'Hola mundo';
+    } sino {
+        retornar 'Hola mundo!';
+    }
 }
 `)
   })
@@ -75,12 +75,12 @@ retornar "Hola mundo!"
         },
       ),
     ).toBe(`funcion inicio() {
-  // Comentario
-  si (Mate.aleatorio() < 0.5) {
-    retornar "Hola mundo";
-  } sino {
-    retornar "Hola mundo!";
-  }
+    // Comentario
+    si (Mate.aleatorio() < 0.5) {
+        retornar 'Hola mundo';
+    } sino {
+        retornar 'Hola mundo!';
+    }
 }
 `)
   })

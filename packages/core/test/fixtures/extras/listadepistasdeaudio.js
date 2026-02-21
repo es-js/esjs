@@ -1,3 +1,3 @@
-let myLista = new AudioTrackList()
+let myLista = new AudioTrackList();
 myLista.length;
-myLista.getTrackById()
+myLista.getTrackById();

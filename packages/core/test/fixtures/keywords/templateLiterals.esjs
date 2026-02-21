@@ -3,4 +3,4 @@ const template = html`<span class="text-center font-bold">
   "si (verdadero) {}"
   'sino (falso) {}'
   mientras (verdadero) {}
-</span>`
+</span>`;

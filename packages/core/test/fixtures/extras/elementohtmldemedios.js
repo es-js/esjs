@@ -1,4 +1,4 @@
-let myMedia = new HTMLMediaElement()
+let myMedia = new HTMLMediaElement();
 myMedia.audioTracks;
 myMedia.autoplay;
 myMedia.buffered;
@@ -31,12 +31,12 @@ myMedia.srcObject;
 myMedia.textTracks;
 myMedia.videoTracks;
 myMedia.volume;
-myMedia.addTextTrack()
-myMedia.captureStream()
-myMedia.canPlayType()
-myMedia.fastSeek()
-myMedia.load()
-myMedia.pause()
-myMedia.play()
-myMedia.setMediaKeys()
-myMedia.setSinkId()
+myMedia.addTextTrack();
+myMedia.captureStream();
+myMedia.canPlayType();
+myMedia.fastSeek();
+myMedia.load();
+myMedia.pause();
+myMedia.play();
+myMedia.setMediaKeys();
+myMedia.setSinkId();
