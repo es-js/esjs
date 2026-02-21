@@ -15,10 +15,9 @@ const mensaje =   ref('Hola mundo!')
 </plantilla>
 `
 
-    const expected = `<codigo configuracion="">
-importar { ref } desde "vue"
+    const expected = `<codigo configuracion="">importar {ref} desde 'vue';
 
-const mensaje = ref("Hola mundo!")
+const mensaje = ref('Hola mundo!');
 </codigo>
 
 <plantilla>
@@ -49,10 +48,9 @@ const mensaje = ref("Hola mundo!")
 </plantilla>
 `
 
-    const expected = `<codigo>
-importar { ref } desde "vue"
+    const expected = `<codigo>importar {ref} desde 'vue';
 
-const mensaje = ref("Hola mundo!")
+const mensaje = ref('Hola mundo!');
 </codigo>
 
 <plantilla>
