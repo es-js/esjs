@@ -33,6 +33,8 @@ const dictionary: Map<string, string> = new Map([
   ['visible', 'visible'],
   ['oculto', 'hidden'],
   ['colapsar', 'collapse'],
+  ['ocultar', 'hide'],
+  ['mostrar', 'show'],
   ['desplazar', 'scroll'],
   ['auto', 'auto'],
   ['fila', 'row'],

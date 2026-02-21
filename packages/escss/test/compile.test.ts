@@ -207,7 +207,7 @@ describe('EsCSS Compiler', () => {
   texto-decoracion-grosor: 2px;
   transicion-propiedad: todo;
   lista-estilo-tipo: disco;
-  vacio-celdas: oculto;
+  vacio-celdas: ocultar;
 }`
 
       const output = compile(input, { from: 'escss', to: 'css' })
@@ -216,7 +216,7 @@ describe('EsCSS Compiler', () => {
       expect(output).toContain('text-decoration-thickness: 2px')
       expect(output).toContain('transition-property: all')
       expect(output).toContain('list-style-type: disc')
-      expect(output).toContain('empty-cells: hidden')
+      expect(output).toContain('empty-cells: hide')
     })
 
     it('should transform grid row properties', () => {

@@ -35,6 +35,8 @@ export const cssValueTranslations = new Map<string, string>([
   ['visible', 'visible'],
   ['hidden', 'oculto'],
   ['collapse', 'colapsar'],
+  ['hide', 'ocultar'],
+  ['show', 'mostrar'],
 
   // Overflow values
   ['scroll', 'desplazar'],
