@@ -1,0 +1,109 @@
+/* EsCSS Demo - CSS con sintaxis en Español */
+
+* {
+  caja-dimensionamiento: caja-borde;
+  margen: 0;
+  relleno: 0;
+}
+
+cuerpo {
+  fuente-familia: sistema-ui, sans-serif;
+  linea-alto: 1.6;
+  fondo-color: humo-blanco;
+  color: gris-tenue;
+}
+
+.contenedor {
+  maximo-ancho: 1200px;
+  margen: 0 auto;
+  relleno: 2rem;
+}
+
+.titulo {
+  fuente-tamaño: 2.5rem;
+  fuente-peso: negrita;
+  margen-abajo: 0.5rem;
+  color: azul-real;
+}
+
+.descripcion {
+  fuente-tamaño: 1.25rem;
+  color: gris;
+  margen-abajo: 2rem;
+}
+
+/* Tarjeta con Flexbox */
+.tarjeta {
+  mostrar: flex;
+  flex-direccion: columna;
+  fondo-color: blanco;
+  borde-radio: 0.5rem;
+  relleno: 1.5rem;
+  caja-sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margen-abajo: 2rem;
+}
+
+.tarjeta-titulo {
+  fuente-tamaño: 1.5rem;
+  margen-abajo: 0.5rem;
+}
+
+.tarjeta-contenido {
+  color: gris;
+  margen-abajo: 1rem;
+}
+
+.boton {
+  mostrar: flex;
+  alinear-items: centro;
+  justificar-contenido: centro;
+  relleno: 0.75rem 1.5rem;
+  fondo-color: azul-real;
+  color: blanco;
+  borde: ninguno;
+  borde-radio: 0.25rem;
+  cursor: puntero;
+  fuente-tamaño: 1rem;
+  transicion: fondo-color 0.2s facilidad;
+  texto-decoracion: ninguno;
+}
+
+.boton:encima {
+  fondo-color: azul-medianoche;
+}
+
+/* Cuadrícula (Grid) */
+.cuadricula {
+  mostrar: cuadricula;
+  cuadricula-plantilla-columnas: repetir(auto-ajuste, minimo-maximo(200px, 1fr));
+  espacio: 1rem;
+}
+
+.cuadricula-elemento {
+  fondo-color: blanco;
+  relleno: 1.5rem;
+  texto-alinear: centro;
+  caja-sombra: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transicion: transformar 0.2s facilidad;
+}
+.cuadricula-elemento:primer-hijo {
+  borde-radio: 0.5rem 0.5rem 0 0;
+}
+.cuadricula-elemento:ultimo-hijo {
+  borde-radio: 0 0 0.5rem 0.5rem;
+}
+
+.cuadricula-elemento:encima {
+  fondo-color: humo-blanco;
+}
+
+/* Media queries */
+@medios (maximo-ancho: 768px) {
+  .titulo {
+    fuente-tamaño: 2rem;
+  }
+
+  .contenedor {
+    relleno: 1rem;
+  }
+}

@@ -178,7 +178,10 @@ function processFile(file: File, seen = new Set<File>()) {
         return
       }
 
-      if (isStaticProperty(parent as any) && (parent as ObjectProperty).shorthand) {
+      if (
+        isStaticProperty(parent as any) &&
+        (parent as ObjectProperty).shorthand
+      ) {
         // let binding used in a property shorthand
         // { foo } -> { foo: __import_x__.foo }
         // skip for destructure patterns
