@@ -1,6 +1,6 @@
 {
   "name": "@es-js/vite-plugin-escss",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1",
   "description": "Vite Plugin para EsCSS",
   "scripts": {
     "build": "unbuild",
