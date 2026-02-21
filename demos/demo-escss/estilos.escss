@@ -20,14 +20,14 @@ cuerpo {
 }
 
 .titulo {
-  fuente-tamanio: 2.5rem;
+  fuente-tamaño: 2.5rem;
   fuente-peso: negrita;
   margen-abajo: 0.5rem;
   color: azul-real;
 }
 
 .descripcion {
-  fuente-tamanio: 1.25rem;
+  fuente-tamaño: 1.25rem;
   color: gris;
   margen-abajo: 2rem;
 }
@@ -44,7 +44,7 @@ cuerpo {
 }
 
 .tarjeta-titulo {
-  fuente-tamanio: 1.5rem;
+  fuente-tamaño: 1.5rem;
   margen-abajo: 0.5rem;
 }
 
@@ -54,15 +54,18 @@ cuerpo {
 }
 
 .boton {
-  mostrar: enlinea-bloque;
+  mostrar: flex;
+  alinear-items: centro;
+  justificar-contenido: centro;
   relleno: 0.75rem 1.5rem;
   fondo-color: azul-real;
   color: blanco;
   borde: ninguno;
   borde-radio: 0.25rem;
   cursor: puntero;
-  fuente-tamanio: 1rem;
+  fuente-tamaño: 1rem;
   transicion: fondo-color 0.2s facilidad;
+  texto-decoracion: ninguno;
 }
 
 .boton:encima {
@@ -79,21 +82,25 @@ cuerpo {
 .cuadricula-elemento {
   fondo-color: blanco;
   relleno: 1.5rem;
-  borde-radio: 0.5rem;
   texto-alinear: centro;
   caja-sombra: 0 2px 4px rgba(0, 0, 0, 0.05);
   transicion: transformar 0.2s facilidad;
 }
+.cuadricula-elemento:primer-hijo {
+  borde-radio: 0.5rem 0.5rem 0 0;
+}
+.cuadricula-elemento:ultimo-hijo {
+  borde-radio: 0 0 0.5rem 0.5rem;
+}
 
 .cuadricula-elemento:encima {
-  transformar: trasladarY(-4px);
-  caja-sombra: 0 4px 12px rgba(0, 0, 0, 0.15);
+  fondo-color: humo-blanco;
 }
 
 /* Media queries */
 @medios (maximo-ancho: 768px) {
   .titulo {
-    fuente-tamanio: 2rem;
+    fuente-tamaño: 2rem;
   }
 
   .contenedor {
