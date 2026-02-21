@@ -3,7 +3,6 @@ class Animal {
     constructor(nombre) {
         this.nombre = nombre;
     }
-
     // Método de instancia
     hablar() {
         console.log(`${this.nombre} hace un sonido.`);
@@ -14,12 +13,10 @@ class Perro extends Animal {
     constructor(nombre) {
         super(nombre);
     }
-
     // Método de instancia sobrescrito
     hablar() {
         console.log(`${this.nombre} ladra.`);
     }
-
     // Método estático
     static informacion() {
         console.log('Los perros son animales domésticos.');
@@ -30,9 +27,10 @@ class Perro extends Animal {
 async function funcionAsincrona() {
     try {
         await algunaOperacionAsincrona();
-    } catch (error) {
+    } catch(error) {
         console.error('Error:', error);
-    } finally {
+    }
+ finally {
         console.log('Operación asíncrona terminada.');
     }
 }
@@ -61,6 +59,7 @@ if (a < b) {
 }
 
 let i = 0;
+
 while (i < 5) {
     console.log('Iteración:', i);
     i++;
@@ -78,11 +77,11 @@ delete miArray[0];
 
 let x = 5;
 let y = 10;
+
 console.log(x in miObjeto);
 
 let z = new Perro('Bobby');
 console.log(z instanceof Perro);
-
 // Palabras reservadas
 let valorNulo = null;
 let valorVerdadero = true;
@@ -127,7 +126,7 @@ let asincronoValor = 'asíncrono';
 funcionAsincrona();
 
 function algunaOperacionAsincrona() {
-    return new Promise(resuelve => {
+    return new Promise((resuelve) => {
         setTimeout(() => resuelve(), 1000);
     });
 }

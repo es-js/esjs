@@ -1,6 +1,6 @@
-let myNum = BigInt(1000)
-myNum.toLocaleString()
-myNum.toString()
-myNum.valueOf()
-BigInt.asIntN(64, myNum)
-BigInt.asUintN(64, myNum)
+let myNum = BigInt(1000);
+myNum.toLocaleString();
+myNum.toString();
+myNum.valueOf();
+BigInt.asIntN(64, myNum);
+BigInt.asUintN(64, myNum);

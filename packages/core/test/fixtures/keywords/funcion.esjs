@@ -1,14 +1,13 @@
 // Este comentario no debe ser transpilado ni ninguna de los siguientes Tokens: if else while
-
 /**
  * Tampoco este comentario.
  * if else while
  * @returns true
  */
 funcion inicio() {
-	retornar verdadero
+    retornar verdadero;
 }
 
-const app = { }
+const app = {};
 
-exportar porDefecto app
+exportar porDefecto app;

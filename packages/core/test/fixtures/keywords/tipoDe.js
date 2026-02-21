@@ -1,6 +1,6 @@
 console.log(typeof 2);
 
-console.log(typeof "Martin Fierro");
+console.log(typeof 'Martin Fierro');
 
 console.log(typeof true);
 

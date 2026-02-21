@@ -1,4 +1,4 @@
-mut myMedia = crear ElementoHTMLDeMedios()
+mut myMedia = crear ElementoHTMLDeMedios();
 myMedia.pistasDeAudio;
 myMedia.autoReproduccion;
 myMedia.almacenadoBuffer;
@@ -31,12 +31,12 @@ myMedia.objetoFuente;
 myMedia.pistasDeTexto;
 myMedia.pistasDeVideo;
 myMedia.volumen;
-myMedia.agregarPistaDeTexto()
-myMedia.capturarFlujo()
-myMedia.puedeReproducirTipo()
-myMedia.saltoRapido()
-myMedia.cargar()
-myMedia.pausar()
-myMedia.reproducir()
-myMedia.establecerClavesMultimedia()
-myMedia.establecerIdDeSalida()
+myMedia.agregarPistaDeTexto();
+myMedia.capturarFlujo();
+myMedia.puedeReproducirTipo();
+myMedia.saltoRapido();
+myMedia.cargar();
+myMedia.pausar();
+myMedia.reproducir();
+myMedia.establecerClavesMultimedia();
+myMedia.establecerIdDeSalida();

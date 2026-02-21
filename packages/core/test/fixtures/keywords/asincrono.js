@@ -1,14 +1,14 @@
 async function principal() {
-	return true
+    return true;
 }
 
 const objeto = {
-	miFuncion: async function () {
-		return true
-	},
-	miFuncionFlecha: async () => {
-		return true
-	},
-}
+    miFuncion: async function() {
+        return true;
+    },
+    miFuncionFlecha: async () => {
+        return true;
+    },
+};
 
-principal()
+principal();

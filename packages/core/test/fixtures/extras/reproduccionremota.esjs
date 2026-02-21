@@ -1,6 +1,6 @@
 tipoDe ReproduccionRemota;
-mut myRemoto = crear ReproduccionRemota()
+mut myRemoto = crear ReproduccionRemota();
 myRemoto.estado;
-myRemoto.observarDisponibilidad()
-myRemoto.cancelarObservacionDeDisponibilidad()
-myRemoto.preguntar()
+myRemoto.observarDisponibilidad();
+myRemoto.cancelarObservacionDeDisponibilidad();
+myRemoto.preguntar();

@@ -1,4 +1,4 @@
-let myPista = new AudioTrack()
+let myPista = new AudioTrack();
 myPista.enabled;
 myPista.id;
 myPista.kind;

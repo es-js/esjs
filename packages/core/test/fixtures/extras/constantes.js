@@ -1,13 +1,13 @@
-const x = false
+const x = false;
 
-const y = true
+const y = true;
 
-const n = null
+const n = null;
 
-const i = undefined
+const i = undefined;
 
-const I = Infinity
+const I = Infinity;
 
-const noNumero = NaN
+const noNumero = NaN;
 
-const aG = globalThis
+const aG = globalThis;

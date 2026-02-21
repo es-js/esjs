@@ -1,1 +1,1 @@
-const test = isNaN('a')
+const test = isNaN('a');

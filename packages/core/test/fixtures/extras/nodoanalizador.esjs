@@ -1,12 +1,13 @@
 tipoDe NodoAnalizador;
-mut myContexto = crear ContextoAudio()
-mut myNodo = myContexto.crearAnalizador()
+mut myContexto = crear ContextoAudio();
+mut myNodo = myContexto.crearAnalizador();
+
 myNodo.tamañoFft;
 myNodo.cantidadBinesFrecuencia;
 myNodo.constanteTiempoSuavizado;
 myNodo.decibeliosMinimos;
 myNodo.decibeliosMaximos;
-myNodo.obtenerDatosFlotantesDominioDeTiempo()
-myNodo.obtenerDatosByteDominioDeTiempo()
-myNodo.obtenerDatosFlotantesDeFrecuencia()
-myNodo.obtenerDatosByteDeFrecuencia()
+myNodo.obtenerDatosFlotantesDominioDeTiempo();
+myNodo.obtenerDatosByteDominioDeTiempo();
+myNodo.obtenerDatosFlotantesDeFrecuencia();
+myNodo.obtenerDatosByteDeFrecuencia();

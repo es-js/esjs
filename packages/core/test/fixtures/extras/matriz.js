@@ -1,23 +1,26 @@
-const matriz = Array.of([])
+const matriz = Array.of([]);
 
-matriz.push('test')
+matriz.push('test');
 
 if (matriz.includes('test')) {
-  matriz.pop()
+    matriz.pop();
 }
 
 matriz.length;
 
-matriz.find((item) => item === 'test')
+matriz.find((item) => item === 'test');
 
-Array.from([1, 2, 3])
+Array.from([1, 2, 3]);
 
-Array.fromAsync([1, 2, 3])
+Array.fromAsync([1, 2, 3]);
 
-Array.isArray([])
+Array.isArray([]);
 
-Array.of([1, 2, 3])
+Array.of([1, 2, 3]);
 
-const a = Array(5)
-const lista = []
-lista.filter((item) => item === 'test').map((item) => item + 'test')
+const a = Array(5);
+const lista = [];
+
+lista
+    .filter((item) => item === 'test')
+    .map((item) => item + 'test');

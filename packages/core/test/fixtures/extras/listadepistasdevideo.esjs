@@ -1,4 +1,4 @@
-mut myLista = crear ListaDePistasDeVideo()
+mut myLista = crear ListaDePistasDeVideo();
 myLista.longitud;
 myLista.indiceSeleccionado;
-myLista.obtenerPistaPorId()
+myLista.obtenerPistaPorId();

@@ -1,6 +1,7 @@
 tipoDe OyenteAudio;
-mut myContexto = crear ContextoAudio()
+mut myContexto = crear ContextoAudio();
 mut myOyente = myContexto.oyente;
+
 myOyente.posicionX;
 myOyente.posicionY;
 myOyente.posicionZ;

@@ -1,4 +1,4 @@
-mut myPista = crear PistaDeAudio()
+mut myPista = crear PistaDeAudio();
 myPista.habilitada;
 myPista.id;
 myPista.clase;

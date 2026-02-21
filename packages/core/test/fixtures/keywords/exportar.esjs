@@ -1,3 +1,3 @@
-exportar porDefecto funcion() {
-  retornar verdadero;
+exportar porDefecto funcion () {
+    retornar verdadero;
 }

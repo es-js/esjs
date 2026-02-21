@@ -1,2 +1,2 @@
-mut myEvento = crear EventoDePista()
+mut myEvento = crear EventoDePista();
 myEvento.pista;

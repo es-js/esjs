@@ -6,7 +6,10 @@ const booleano = Boolean(true);
 
 const objeto = new Object({});
 
-const matriz = new Array([[1, 2], [3, 4]]);
+const matriz = new Array([
+    [1, 2],
+    [3, 4],
+]);
 
 const f = Function(() => {});
 
@@ -18,7 +21,9 @@ const error = Error('Error');
 
 const expReg = RegExp(/ExpReg/);
 
-const mapa = new Map([['clave', 'valor']]);
+const mapa = new Map([
+    ['clave', 'valor'],
+]);
 
 const conjunto = new Set([1, 2, 3]);
 

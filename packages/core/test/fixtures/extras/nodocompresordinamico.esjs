@@ -1,6 +1,7 @@
 tipoDe NodoCompresorDinamico;
-mut myContexto = crear ContextoAudio()
-mut myNodo = myContexto.crearCompresorDinamico()
+mut myContexto = crear ContextoAudio();
+mut myNodo = myContexto.crearCompresorDinamico();
+
 myNodo.umbral;
 myNodo.rodilla;
 myNodo.relacion;

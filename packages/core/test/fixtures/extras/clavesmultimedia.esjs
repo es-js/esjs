@@ -1,4 +1,4 @@
-mut myClaves = crear ClavesMultimedia()
-myClaves.crearSesion()
-myClaves.obtenerEstadoParaPolitica()
-myClaves.establecerServidorCertificado()
+mut myClaves = crear ClavesMultimedia();
+myClaves.crearSesion();
+myClaves.obtenerEstadoParaPolitica();
+myClaves.establecerServidorCertificado();

@@ -1,4 +1,5 @@
 tipoDe NodoDestinoDeAudioFlujoDeMedios;
-mut myContexto = crear ContextoAudio()
-mut myNodo = myContexto.crearDestinoFlujoDeMedios()
+mut myContexto = crear ContextoAudio();
+mut myNodo = myContexto.crearDestinoFlujoDeMedios();
+
 myNodo.flujo;

@@ -1,12 +1,12 @@
-const foo = Symbol("foo")
+const foo = Symbol('foo');
 
-foo.valueOf() === "foo"
-foo.toString() === "foo"
+foo.valueOf() === 'foo';
+foo.toString() === 'foo';
 
 class Validador {
-  get [Symbol.toStringTag]() {
-    return 'Validador';
-  }
+    get [Symbol.toStringTag]() {
+        return 'Validador';
+    }
 }
 
 Symbol.iterator.description;
@@ -25,5 +25,5 @@ Symbol.toPrimitive;
 Symbol.toStringTag;
 Symbol.unscopables;
 
-let sym = Symbol.for("foo");
-Symbol.keyFor(sym) === "foo";
+let sym = Symbol.for('foo');
+Symbol.keyFor(sym) === 'foo';

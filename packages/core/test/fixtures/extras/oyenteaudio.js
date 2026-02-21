@@ -1,6 +1,7 @@
 typeof AudioListener;
-let myContexto = new AudioContext()
+let myContexto = new AudioContext();
 let myOyente = myContexto.listener;
+
 myOyente.positionX;
 myOyente.positionY;
 myOyente.positionZ;

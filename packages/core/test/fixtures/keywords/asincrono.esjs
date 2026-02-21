@@ -1,14 +1,14 @@
 asincrono funcion principal() {
-	retornar verdadero
+    retornar verdadero;
 }
 
 const objeto = {
-	miFuncion: asincrono funcion () {
-		retornar verdadero
-	},
-	miFuncionFlecha: asincrono () => {
-		retornar verdadero
-	},
-}
+    miFuncion: asincrono funcion() {
+        retornar verdadero;
+    },
+    miFuncionFlecha: asincrono () => {
+        retornar verdadero;
+    },
+};
 
-principal()
+principal();

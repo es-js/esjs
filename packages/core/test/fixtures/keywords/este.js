@@ -1,3 +1,3 @@
 function test() {
-  this.variable = 'hola';
+    this.variable = 'hola';
 }

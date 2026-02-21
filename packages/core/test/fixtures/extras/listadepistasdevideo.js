@@ -1,4 +1,4 @@
-let myLista = new VideoTrackList()
+let myLista = new VideoTrackList();
 myLista.length;
 myLista.selectedIndex;
-myLista.getTrackById()
+myLista.getTrackById();

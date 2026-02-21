@@ -1,23 +1,26 @@
-const matriz = Matriz.de([])
+const matriz = Matriz.de([]);
 
-matriz.agregar('test')
+matriz.agregar('test');
 
 si (matriz.incluye('test')) {
-  matriz.sacar()
+    matriz.sacar();
 }
 
 matriz.longitud;
 
-matriz.buscar((item) => item === 'test')
+matriz.buscar((item) => item === 'test');
 
-Matriz.desde([1, 2, 3])
+Matriz.desde([1, 2, 3]);
 
-Matriz.desdeAsincrono([1, 2, 3])
+Matriz.desdeAsincrono([1, 2, 3]);
 
-Matriz.esMatriz([])
+Matriz.esMatriz([]);
 
-Matriz.de([1, 2, 3])
+Matriz.de([1, 2, 3]);
 
-const a = Matriz(5)
-const lista = []
-lista.filtrar((item) => item === 'test').mapear((item) => item + 'test')
+const a = Matriz(5);
+const lista = [];
+
+lista
+    .filtrar((item) => item === 'test')
+    .mapear((item) => item + 'test');
