@@ -8,5 +8,5 @@ export default defineBuildConfig({
     emitCJS: true,
     inlineDependencies: true,
   },
-  externals: ['@es-js/core'],
+  externals: ['@es-js/core', 'postcss'],
 })
