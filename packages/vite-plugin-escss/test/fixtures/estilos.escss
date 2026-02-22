@@ -1,0 +1,4 @@
+.clase {
+  mostrar: flex;
+  fondo-color: blanco;
+}
