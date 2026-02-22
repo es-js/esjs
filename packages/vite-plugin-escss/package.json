@@ -1,10 +1,12 @@
 {
   "name": "@es-js/vite-plugin-escss",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vite Plugin para EsCSS",
   "scripts": {
     "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,8 @@
     "@es-js/escss": "workspace:*",
     "@types/node": "^20.14.9",
     "typescript": "^5.5.2",
-    "unbuild": "^2.0.0"
+    "unbuild": "^2.0.0",
+    "vitest": "^2.1.9"
   },
   "type": "module",
   "exports": {
