@@ -12,6 +12,7 @@ export default defineConfig({
         indice: {
           plantilla: 'indice.eshtml',
           entrada: 'fuente/indice.esjs',
+          archivo: 'index.html',
         },
       },
     }),

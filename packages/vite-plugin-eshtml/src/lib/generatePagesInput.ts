@@ -10,7 +10,7 @@ export function generatePagesInput(
   for (const pageName of Object.keys(options?.paginas || {})) {
     const page = getPage(options, pageName)
     if (page && !newInput[pageName]) {
-      const pagePath = `${pageName}.html`
+      const pagePath = page.archivo ?? `${pageName}.html`
       newInput[pageName] = pagePath
     }
   }
