@@ -26,6 +26,7 @@ const settings = ref({
   },
   embed: false,
   infiniteLoopProtection: false,
+  mode: 'esterminal' as 'esterminal' | 'eshtml',
 })
 
 const activePreview = computed((): 'terminal' | 'flowchart' | 'html' => {
@@ -141,6 +142,10 @@ export const useSettings = () => {
     settings.value.embed = embed
   }
 
+  function setMode(mode: 'esterminal' | 'eshtml') {
+    settings.value.mode = mode
+  }
+
   return {
     settings,
     setLayout,
@@ -164,6 +169,7 @@ export const useSettings = () => {
     setActivePreview,
     setActivePreviewTab,
     setEmbed,
+    setMode,
     activePreview,
     activePreviewTab,
   }

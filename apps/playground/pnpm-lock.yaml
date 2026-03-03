@@ -45,6 +45,12 @@ importers:
       '@es-js/core':
         specifier: 0.1.1
         version: 0.1.1
+      '@es-js/escss':
+        specifier: 0.0.2
+        version: 0.0.2
+      '@es-js/eshtml':
+        specifier: 0.0.1
+        version: 0.0.1
       '@es-js/language-tools':
         specifier: ^0.1.2
         version: 0.1.2
@@ -322,6 +328,12 @@ packages:
 
   '@es-js/core@0.1.1':
     resolution: {integrity: sha512-LxRv8Enu2+J2gI7lwLli38ePs84dWFiNlcLixw8cfoK70a4Awm7ONL2GgciimMvv0vrCR94rOjjSuJjYbpMqOg==}
+
+  '@es-js/escss@0.0.2':
+    resolution: {integrity: sha512-ILyuexHJEAf8cKLfTzchV31mr8qsIx60MpPGWyIX/eVWj//DNbi1zT/dr/Jr9h6vO/B/wJfgQb+hRlJdiPBbKQ==}
+
+  '@es-js/eshtml@0.0.1':
+    resolution: {integrity: sha512-h870ltJN4Ik7s6r6YaWNCKfxo0mmjxDpHsXu8gtqW2tjJyqt2+zOVg+B9dE50eYdwKptSu3QpofGS0EWO9OJ+Q==}
 
   '@es-js/language-tools@0.1.2':
     resolution: {integrity: sha512-54L4mLbQ5upQagW+JSydS+6Ai9JkZuUR1oHo5YZxZxiY7ARSOjAzJigTAcSMQNZHmwpllww2XGu1MgOybQNJbw==}
@@ -6923,6 +6935,12 @@ snapshots:
     optional: true
 
   '@es-js/core@0.1.1': {}
+
+  '@es-js/escss@0.0.2':
+    dependencies:
+      postcss: 8.5.3
+
+  '@es-js/eshtml@0.0.1': {}
 
   '@es-js/language-tools@0.1.2': {}
 

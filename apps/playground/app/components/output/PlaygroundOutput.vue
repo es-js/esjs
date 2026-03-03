@@ -1,13 +1,21 @@
 <script setup lang="ts">
+import PlaygroundHtmlPreview from '~/components/output/PlaygroundHtmlPreview.vue'
 import PlaygroundSandbox from '~/components/output/PlaygroundSandbox.vue'
+import { useSettings } from '~/composables/useSettings'
 
 const files = useFiles()
+const settings = useSettings().settings
 </script>
 
 <template>
   <div class="h-full">
+    <PlaygroundHtmlPreview
+      v-if="files.loading.value === false && settings.mode === 'eshtml'"
+      class="relative w-full h-full overflow-hidden"
+    />
+
     <PlaygroundSandbox
-      v-if="files.loading.value === false"
+      v-else-if="files.loading.value === false"
       class="relative w-full h-full overflow-hidden"
     />
 

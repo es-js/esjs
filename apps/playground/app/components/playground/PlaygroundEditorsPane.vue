@@ -6,7 +6,7 @@ import { useGrid } from 'vue-screen'
 import AppEditor from '~/components/input/AppEditor.vue'
 import LanguageSwitcher from '~/components/input/LanguageSwitcher.vue'
 import { useEditor } from '~/composables/useEditor'
-import { FILE_TESTS, useFiles } from '~/composables/useFiles'
+import { FILE_TESTS, type PlaygroundMode, useFiles } from '~/composables/useFiles'
 import { useSettings } from '~/composables/useSettings'
 import { useElementSize } from '@vueuse/core'
 
@@ -22,7 +22,13 @@ const files = useFiles()
 
 const wrapper = ref<HTMLElement | null>(null)
 
-const filesForTab0 = computed(() => files.files.value.filter(file => file.tab === 0))
+const activeMode = computed<PlaygroundMode>(() => settings.value.mode)
+
+const filesForTab0 = computed(() =>
+  files.files.value.filter(
+    file => file.tab === 0 && (!file.modes || file.modes.includes(activeMode.value)),
+  ),
+)
 
 const activeFile = computed(() => files.getActiveFile())
 
@@ -33,8 +39,8 @@ const codeEditorLoaded = ref(false)
   <div ref="wrapper" class="w-full h-full">
     <ResizablePanelGroup direction="vertical">
       <ResizablePanel :min-size="20"
-                      :max-size="settings.hideTests ? 100 : 80"
-                      :class="{'pb-2': !settings.hideTests}">
+                      :max-size="settings.hideTests || settings.mode === 'eshtml' ? 100 : 80"
+                      :class="{'pb-2': !settings.hideTests && !settings.mode === 'eshtml'}">
         <AppContainer>
           <template #title>
             <div class="flex flex-row items-center space-x-2">
@@ -81,14 +87,16 @@ const codeEditorLoaded = ref(false)
         </AppContainer>
       </ResizablePanel>
 
-      <ResizableHandle v-if="!settings.hideTests" with-handle />
+      <ResizableHandle v-if="!settings.hideTests && !settings.mode === 'eshtml'" with-handle />
 
-      <ResizablePanel :max-size="80"
-                      :default-size="50"
-                      class="pt-2"
-                      :class="{
-                        'max-h-[40px]': settings.hideTests,
-                      }"
+      <ResizablePanel
+        v-if="!settings.mode === 'eshtml'"
+        :max-size="80"
+        :default-size="50"
+        class="pt-2"
+        :class="{
+          'max-h-[40px]': settings.hideTests,
+        }"
       >
         <div class="h-full flex flex-col bg-gray-50 dark:bg-gray-900 rounded border dark:border-gray-800">
           <div class="flex flex-row items-center space-x-2 flex-1 max-h-[30px]">
