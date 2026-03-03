@@ -7,15 +7,45 @@ import {
 import { computed } from 'vue';
 import { useGrid } from 'vue-screen';
 import { useLZShare } from '~/composables/useLZShare';
+import { FILE_CODE, INITIAL_CODE, INITIAL_ESHTML_ESJS, useFiles } from '~/composables/useFiles';
 import { useSettings } from '~/composables/useSettings';
+import { useEditor } from '~/composables/useEditor';
 
 const share = useLZShare()
 
 const settings = useSettings()
 
+const files = useFiles()
+
+const editor = useEditor()
+
 const grid = useGrid('tailwind')
 
 const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
+
+async function switchMode(mode: 'esterminal' | 'eshtml') {
+  settings.setMode(mode)
+
+  const currentCode = files.getFileContent(FILE_CODE)
+  if (mode === 'eshtml' && currentCode === INITIAL_CODE) {
+    files.setFileContent(FILE_CODE, INITIAL_ESHTML_ESJS)
+  }
+  else if (mode === 'esterminal' && currentCode === INITIAL_ESHTML_ESJS) {
+    files.setFileContent(FILE_CODE, INITIAL_CODE)
+  }
+
+  // Recompilar para que file.compiled refleje el código actual
+  await files.compileFiles({
+    compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
+  })
+
+  const firstVisible = files.files.value.find(
+    f => f.tab === 0 && (!f.modes || f.modes.includes(mode)),
+  )
+  if (firstVisible) {
+    files.setActiveFile(firstVisible.name)
+  }
+}
 </script>
 
 <template>
@@ -83,6 +113,30 @@ const mdAndUp = computed(() => grid.md || grid.lg || grid.xl)
             :icon-only="!mdAndUp"
             :prevent-tooltip="mdAndUp"
             @click="settings.setHideOutput(!settings.settings.value.hideOutput)"
+          />
+        </div>
+
+        <AppSeparator horizontal />
+
+        <h2>Modo</h2>
+
+        <div class="grid grid-cols-2 gap-2">
+          <AppButton
+            text="EsJS + Terminal"
+            icon="i-mdi-console"
+            :active="settings.settings.value.mode === 'esterminal'"
+            :icon-only="!mdAndUp"
+            :prevent-tooltip="mdAndUp"
+            @click="switchMode('esterminal')"
+          />
+
+          <AppButton
+            text="EsHTML + EsCSS"
+            icon="i-mdi-web"
+            :active="settings.settings.value.mode === 'eshtml'"
+            :icon-only="!mdAndUp"
+            :prevent-tooltip="mdAndUp"
+            @click="switchMode('eshtml')"
           />
         </div>
 

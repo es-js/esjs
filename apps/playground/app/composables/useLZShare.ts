@@ -3,7 +3,7 @@ import { useClipboard, useDark } from '@vueuse/core'
 import { useEditor } from './useEditor'
 import { useSettings } from './useSettings'
 import { learnDomain } from '~/constants/app'
-import { FILE_CODE, FILE_TESTS, INITIAL_CODE, useFiles } from '~/composables/useFiles'
+import { FILE_CODE, FILE_ESCSS, FILE_ESHTML, FILE_TESTS, INITIAL_CODE, INITIAL_ESCSS, INITIAL_ESHTML, INITIAL_ESHTML_ESJS, useFiles } from '~/composables/useFiles'
 import { toast } from 'vue-sonner'
 
 const settings = useSettings()
@@ -38,8 +38,10 @@ export const useLZShare = () => {
   }
 
   function getSharedUrl(): URL {
-    const code = useFiles().getFileContent(FILE_CODE)
-    const testsCode = useFiles().getFileContent(FILE_TESTS)
+    const files = useFiles()
+    const code = files.getFileContent(FILE_CODE)
+    const testsCode = files.getFileContent(FILE_TESTS)
+    const esHtmlMode = settings.settings.value.mode === 'eshtml'
 
     const url = new URL('/', window.location.origin)
 
@@ -49,6 +51,28 @@ export const useLZShare = () => {
 
     if (testsCode) {
       url.searchParams.set('tests', compressToURL(testsCode))
+    }
+
+    if (esHtmlMode) {
+      url.searchParams.set('mode', 'eshtml')
+
+      const eshtmlContent = files.getFileContent(FILE_ESHTML)
+      if (eshtmlContent !== INITIAL_ESHTML) {
+        url.searchParams.set('eshtml', compressToURL(eshtmlContent))
+      }
+
+      const escssContent = files.getFileContent(FILE_ESCSS)
+      if (escssContent !== INITIAL_ESCSS) {
+        url.searchParams.set('escss', compressToURL(escssContent))
+      }
+
+      const codeForEshtml = files.getFileContent(FILE_CODE)
+      if (codeForEshtml !== INITIAL_ESHTML_ESJS) {
+        url.searchParams.set('code', compressToURL(codeForEshtml))
+      }
+      else {
+        url.searchParams.delete('code')
+      }
     }
 
     url.searchParams.set('layout', settings.settings.value.layout)
@@ -116,6 +140,9 @@ export const useLZShare = () => {
       embed: url.searchParams.get('embed'),
       infiniteLoopProtection: url.searchParams.get('infiniteLoopProtection'),
       version: determineVersion(url.searchParams.get('version') ?? '0.x.0'),
+      mode: url.searchParams.get('mode'),
+      eshtml: decompressFromURL(url.searchParams.get('eshtml') ?? ''),
+      escss: decompressFromURL(url.searchParams.get('escss') ?? ''),
     }
   }
 
@@ -234,8 +261,8 @@ export const useLZShare = () => {
       previewTab,
       embed,
       infiniteLoopProtection,
-      version,
-      language
+      language,
+      mode,
     } = useLZShare().decodeSharedUrl()
 
     settings.setLayout(layout === 'vertical' ? 'vertical' : 'horizontal')
@@ -254,35 +281,67 @@ export const useLZShare = () => {
     settings.setPreviewTab(previewTab)
     settings.setEmbed(embed === 'true')
     settings.setInfiniteLoopProtection(infiniteLoopProtection === 'true')
+    settings.setMode(mode === 'eshtml' ? 'eshtml' : 'esterminal')
 
     useEditor().setLanguage(language === 'js' ? 'js' : 'esjs')
   }
 
   async function loadCodeFromUrl() {
-    useFiles().setLoading(true)
+    const files = useFiles()
+    files.setLoading(true)
 
-    const code = await getCodeFromUrl()
-
+    const { eshtml, escss, mode } = decodeSharedUrl()
     const testsCode = getTestsCodeFromUrl()
 
+    const url = new URL(window.location.href)
+    const hasCodeParam = url.searchParams.has('code') && url.searchParams.get('code') !== ''
+    const hasGithubPath = url.pathname.includes('/github/')
+    const hasGistPath = url.pathname.includes('/gist/')
+    const hasCompressedPath = url.pathname.length > 6
+    const shouldFetchFromUrl = hasCodeParam || hasGithubPath || hasGistPath || hasCompressedPath
+
+    // Ejemplos (github/gist): actualmente esterminal; en el futuro quizás eshtml.
+    // Logo/inicial (/): modo esterminal.
+    const isExample = hasGithubPath || hasGistPath
+    const isInitial = !shouldFetchFromUrl
+    if (isExample || isInitial) {
+      settings.setMode('esterminal')
+    }
+
+    const effectiveMode = isExample || isInitial ? 'esterminal' : mode
+    const code = shouldFetchFromUrl
+      ? await getCodeFromUrl()
+      : effectiveMode === 'eshtml' ? INITIAL_ESHTML_ESJS : INITIAL_CODE
+
     if (useEditor().isLearnApp.value) {
-      useFiles().updateFile(FILE_CODE, {
-        content: '',
-      })
-      useFiles().updateFile(FILE_TESTS, {
-        content: '',
-      })
-    } else {
-      useFiles().updateFile(FILE_CODE, {
-        content: code,
-      })
-      useFiles().updateFile(FILE_TESTS, {
-        content: testsCode ?? '',
-      })
+      files.updateFile(FILE_CODE, { content: '' })
+      files.updateFile(FILE_TESTS, { content: '' })
+    }
+    else {
+      files.updateFile(FILE_CODE, { content: code })
+      files.updateFile(FILE_TESTS, { content: testsCode ?? '' })
+
+      if (effectiveMode === 'eshtml') {
+        if (eshtml) {
+          files.updateFile(FILE_ESHTML, { content: eshtml })
+        }
+        if (escss) {
+          files.updateFile(FILE_ESCSS, { content: escss })
+        }
+        const firstEsHtmlFile = files.files.value.find(
+          f => f.tab === 0 && f.modes?.includes('eshtml'),
+        )
+        if (firstEsHtmlFile) {
+          files.setActiveFile(firstEsHtmlFile.name)
+        }
+      }
+      else if (effectiveMode === 'esterminal') {
+        files.setActiveFile(FILE_CODE)
+      }
     }
 
     setTimeout(() => {
-      useFiles().setLoading(false)
+      files.setLoading(false)
     })
   }
 

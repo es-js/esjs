@@ -32,6 +32,16 @@ const files = useFiles()
 
 const bus = useEventBus(`editor_${props.name}`)
 
+const editorLanguage = computed(() => {
+  if (props.name !== 'code') return 'javascript'
+  const activeFile = files.files.value.find(f => f.active)
+  if (!activeFile) return 'javascript'
+  const ext = activeFile.name.split('.').slice(-1)[0]
+  if (ext === 'escss') return 'css'
+  if (ext === 'eshtml') return 'html'
+  return 'javascript'
+})
+
 let monacoHelper: any = null
 
 let editorInstance: any = null
@@ -201,7 +211,7 @@ watch(
       ...props.options,
       theme: isDark ? 'dark' : 'light',
     }"
-    lang="javascript"
+    :lang="editorLanguage"
     class="w-full h-full"
     @update:model-value="emit('update:modelValue', $event)"
     @load="onLoad"

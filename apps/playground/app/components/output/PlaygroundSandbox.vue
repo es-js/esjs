@@ -10,6 +10,7 @@ import { useLZShare } from '~/composables/useLZShare'
 import { useSandboxDevConfig } from '~/composables/useSandboxDevConfig'
 import { useSettings } from '~/composables/useSettings'
 import { PreviewProxy } from '~/utils/PreviewProxy'
+import PlaygroundPreviewShell from './PlaygroundPreviewShell.vue'
 
 const editor = useEditor()
 
@@ -39,6 +40,26 @@ onUnmounted(() => {
     proxy.destroy()
   }
 })
+
+function injectEscssCss() {
+  if (useSettings().settings.value.mode !== 'eshtml') return
+
+  const doc = sandbox?.contentDocument
+  if (!doc?.head) return
+
+  const css = files.files.value
+    .filter((f) => f.name.endsWith('.escss'))
+    .map((f) => f.compiledCss ?? '')
+    .join('\n')
+
+  let styleEl = doc.getElementById('escss-style') as HTMLStyleElement | null
+  if (!styleEl) {
+    styleEl = doc.createElement('style')
+    styleEl.id = 'escss-style'
+    doc.head.appendChild(styleEl)
+  }
+  styleEl.textContent = css
+}
 
 async function init() {
   if (proxy) {
@@ -90,6 +111,8 @@ async function init() {
     infiniteLoopProtection: settingsStore.value.infiniteLoopProtection,
     compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
+
+  sandbox.addEventListener('load', injectEscssCss)
 
   proxy = new PreviewProxy(sandbox, {
     on_error: (error: any) => {
@@ -172,6 +195,8 @@ async function updateSandbox() {
     infiniteLoopProtection: useSettings().settings.value.infiniteLoopProtection,
     compiler: editor.version.value === '0.x.0' ? 'essucrase' : 'esbabel',
   })
+
+  injectEscssCss()
 }
 
 function openInNewTab() {
@@ -227,43 +252,20 @@ watch(editor.version, () => {
 </script>
 
 <template>
-  <AppContainer class="w-full h-full">
-    <template #title>
-      <div v-if="!settingsStore.embed" class="flex flex-row items-center">
-        <AppButton
-          description="Refrescar"
-          icon="i-mdi-refresh"
-          variant="ghost"
-          size="2xs"
-          @click="refresh"
-        />
-
-        <AppButton
-          :icon="settingsStore.hidePreview ? 'i-mdi-eye-off' : 'i-mdi-eye'"
-          :description="settingsStore.hidePreview ? 'Mostrar vista previa' : 'Ocultar vista previa'"
-          variant="ghost"
-          @click="settings.setHidePreview(!settingsStore.hidePreview)"
-        />
-
-        <div class="flex flex-grow px-2">
-          <span class="h-5 flex flex-grow flex-row justify-center items-center text-center text-xs px-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full">
-            Resultado
-          </span>
-        </div>
-
-        <AppButton
-          description="Abrir en una nueva pestaña"
-          icon="i-mdi-open-in-new"
-          variant="ghost"
-          size="2xs"
-          @click="openInNewTab"
-        />
-      </div>
+  <PlaygroundPreviewShell @refresh="refresh">
+    <template #actions>
+      <AppButton
+        description="Abrir en una nueva pestaña"
+        icon="i-mdi-open-in-new"
+        variant="ghost"
+        size="2xs"
+        @click="openInNewTab"
+      />
     </template>
 
     <div
       id="esjs-sandbox"
       class="w-full h-full"
     />
-  </AppContainer>
+  </PlaygroundPreviewShell>
 </template>

@@ -25,6 +25,8 @@
     "@amoutonbrady/lz-string": "^0.1.0",
     "@davestewart/nuxt-scrollbar": "^1.0.0",
     "@es-js/core": "0.1.1",
+    "@es-js/escss": "0.0.2",
+    "@es-js/eshtml": "0.0.1",
     "@es-js/language-tools": "^0.1.2",
     "@es-js/sandbox": "0.0.20",
     "@fontsource/fira-mono": "^5.0.13",
