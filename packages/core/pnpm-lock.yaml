@@ -2149,7 +2149,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@putout/bundle@3.25.0': {}
+  '@putout/bundle@5.4.1': {}
 
   '@rollup/plugin-alias@5.1.1(rollup@3.29.5)':
     optionalDependencies:

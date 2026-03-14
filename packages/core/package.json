@@ -25,7 +25,7 @@
   "devDependencies": {
     "@es-js/compiler": "0.0.5",
     "@es-js/esbabel": "workspace:*",
-    "@putout/bundle": "^3.25.0",
+    "@putout/bundle": "^5.4.1",
     "@types/node": "^20.19.30",
     "@types/prettier": "^2.7.3",
     "prettier": "^2.8.8",
