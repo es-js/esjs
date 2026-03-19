@@ -2,7 +2,7 @@
 
 declare module 'espree'
 
-declare module 'https://esm.sh/@putout/bundle' {
+declare module 'https://esm.sh/@putout/bundle@3.25.0' {
   const putout: any
   export default putout
 }

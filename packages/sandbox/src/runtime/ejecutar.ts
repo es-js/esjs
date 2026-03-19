@@ -50,7 +50,7 @@ export function getOptions() {
 }
 
 export async function loadPutout() {
-  _options.putout = await import('https://esm.sh/@putout/bundle')
+  _options.putout = await import('https://esm.sh/@putout/bundle@3.25.0')
 }
 
 export async function init(options: EjecutarOptions): Promise<void> {
