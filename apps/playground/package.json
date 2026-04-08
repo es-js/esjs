@@ -28,7 +28,7 @@
     "@es-js/escss": "0.0.2",
     "@es-js/eshtml": "0.0.1",
     "@es-js/language-tools": "^0.1.2",
-    "@es-js/sandbox": "0.0.20",
+    "@es-js/sandbox": "0.0.21",
     "@fontsource/fira-mono": "^5.0.13",
     "@iconify-json/mdi": "^1.1.66",
     "@nuxt/content": "^2.12.1",
