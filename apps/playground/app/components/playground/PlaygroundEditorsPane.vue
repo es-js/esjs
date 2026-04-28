@@ -40,7 +40,7 @@ const codeEditorLoaded = ref(false)
     <ResizablePanelGroup direction="vertical">
       <ResizablePanel :min-size="20"
                       :max-size="settings.hideTests || settings.mode === 'eshtml' ? 100 : 80"
-                      :class="{'pb-2': !settings.hideTests && !settings.mode === 'eshtml'}">
+                      :class="{ 'pb-2': !settings.hideTests && settings.mode !== 'eshtml' }">
         <AppContainer>
           <template #title>
             <div class="flex flex-row items-center space-x-2">
@@ -87,10 +87,10 @@ const codeEditorLoaded = ref(false)
         </AppContainer>
       </ResizablePanel>
 
-      <ResizableHandle v-if="!settings.hideTests && !settings.mode === 'eshtml'" with-handle />
+      <ResizableHandle v-if="!settings.hideTests && settings.mode !== 'eshtml'" with-handle />
 
       <ResizablePanel
-        v-if="!settings.mode === 'eshtml'"
+        v-if="settings.mode !== 'eshtml'"
         :max-size="80"
         :default-size="50"
         class="pt-2"
