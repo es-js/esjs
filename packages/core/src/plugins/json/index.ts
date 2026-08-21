@@ -11,7 +11,7 @@ export const staticMethods = new Map<string, string>([
   ['aTexto', 'stringify'],
 ])
 
-export const objects = new Map<string, string>([['Fecha', 'Date']])
+export const objects = new Map<string, string>([['JSON', 'JSON']])
 
 export function replace() {
   return {
