@@ -22,6 +22,7 @@ const plugins = [
   'soporte',
   'json',
   'objetos',
+  'tipos',
   'documento',
   'enterogrande',
   'simbolo',
@@ -101,7 +102,7 @@ function readFixture(filepath: string) {
 }
 
 function normalizeLineEndings(code: string) {
-  return code.replaceAll(/(\r\n|\r)/g, '\n')
+  return code.replaceAll(/(\\r\\n|\\r)/g, '\\n')
 }
 
 async function testCompile(
