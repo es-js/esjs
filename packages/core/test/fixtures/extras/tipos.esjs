@@ -1,0 +1,17 @@
+const tipos = {
+    numero: Numero,
+    cadena: Cadena,
+    booleano: Booleano,
+    objeto: Objeto,
+    matriz: Matriz,
+    funcion: Funcion,
+    simbolo: Simbolo,
+    fecha: Fecha,
+    error: Error,
+    expReg: ExpReg,
+    mapa: Mapa,
+    conjunto: Conjunto,
+    apoderado: Apoderado,
+    enteroGrande: EnteroGrande,
+    documento: Documento,
+};

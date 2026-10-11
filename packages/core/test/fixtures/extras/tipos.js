@@ -1,0 +1,17 @@
+const tipos = {
+    numero: Number,
+    cadena: String,
+    booleano: Boolean,
+    objeto: Object,
+    matriz: Array,
+    funcion: Function,
+    simbolo: Symbol,
+    fecha: Date,
+    error: Error,
+    expReg: RegExp,
+    mapa: Map,
+    conjunto: Set,
+    apoderado: Proxy,
+    enteroGrande: BigInt,
+    documento: Document,
+};
