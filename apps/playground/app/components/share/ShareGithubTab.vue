@@ -4,7 +4,7 @@ import randomWords from 'random-spanish-words'
 import { z } from 'zod'
 import useAuth from '~/composables/useAuth'
 import { FILE_CODE, useFiles } from '~/composables/useFiles'
-import useOctokit from '~/composables/useOctokit'
+import useOctokit, { isGithubSessionExpired } from '~/composables/useOctokit'
 import { DialogClose } from '@/components/ui/dialog'
 import { toast } from 'vue-sonner'
 
@@ -19,6 +19,8 @@ const loadingLogin = ref(false)
 const projectCreated = ref(false)
 
 const projectUrl = ref('')
+
+const sessionExpired = ref(false)
 
 const form = ref()
 
@@ -47,6 +49,27 @@ const schema = z.object({
       'Ya existe un repositorio con ese nombre',
     ),
   private: z.boolean(),
+})
+
+async function handleSessionExpired() {
+  sessionExpired.value = true
+  await auth.logout()
+}
+
+// The Supabase session can stay active while the GitHub token is gone or
+// revoked, so check the token before the user fills the form.
+onMounted(async() => {
+  if (!user.value) {
+    return
+  }
+
+  try {
+    await useOctokit().rest.users.getAuthenticated()
+  } catch (e) {
+    if (isGithubSessionExpired(e)) {
+      await handleSessionExpired()
+    }
+  }
 })
 
 async function validate() {
@@ -131,9 +154,17 @@ Aplicación Web desarrollada en [EsJS](https://es.js.org/).`,
     projectUrl.value = repo.data.html_url
     projectCreated.value = true
     confettis()
-  } catch (e) {
+  } catch (e: any) {
+    if (isGithubSessionExpired(e)) {
+      await handleSessionExpired()
+      toast.error('Tu sesión de GitHub expiró', {
+        description: 'Por favor, inicia sesión nuevamente para crear el proyecto.',
+      })
+      return
+    }
+
     toast.error('Ups!', {
-      description: 'Ocurrió un error al crear el proyecto. Por favor, intenta de nuevo.',
+      description: `Ocurrió un error al crear el proyecto${e?.message ? `: ${e.message}` : ''}. Por favor, intenta de nuevo.`,
     })
   } finally {
     loading.value = false
@@ -180,7 +211,17 @@ function confettis() {
       </h3>
 
       <template v-if="!user">
-        <p class="text-sm text-gray-500 dark:text-gray-400">
+        <p
+          v-if="sessionExpired"
+          class="text-sm text-red-500 dark:text-red-400"
+        >
+          Tu sesión de GitHub expiró. Por favor, inicia sesión nuevamente para crear el proyecto.
+        </p>
+
+        <p
+          v-else
+          class="text-sm text-gray-500 dark:text-gray-400"
+        >
           Para crear un proyecto en GitHub, primero debes iniciar sesión con tu cuenta de GitHub
         </p>
 

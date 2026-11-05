@@ -15,7 +15,7 @@ export default function() {
   }
 
   function logout() {
-    supabase.auth.signOut()
+    return supabase.auth.signOut()
   }
 
   return {
